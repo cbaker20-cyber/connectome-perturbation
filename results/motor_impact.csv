@@ -1,0 +1,11 @@
+exp_name,motor_delta_hz,motor_neurons_affected,motor_neurons_inhibited,motor_neurons_disinhibited,strongest_effect
+perturb_sensory,-1119.6,23,23,0,-117.4
+perturb_central,-1117.3999999999999,23,23,0,-117.4
+perturb_descending,-200.40000000000003,24,19,5,-45.8
+perturb_ascending,-124.40000000000003,22,21,1,-11.0
+perturb_optic,-88.20000000000002,22,19,3,-13.600000000000009
+perturb_motor,-49.80000000000001,22,16,6,-10.0
+perturb_visual_projection,-27.000000000000032,19,12,7,-6.200000000000003
+perturb_group_A,-23.000000000000025,15,11,4,-6.6000000000000085
+perturb_group_B,-17.000000000000043,15,10,5,-5.800000000000011
+perturb_group_C,-11.40000000000003,20,12,8,-5.200000000000003
