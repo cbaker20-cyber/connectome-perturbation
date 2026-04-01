@@ -1,0 +1,8 @@
+group,n_silenced,total_delta_hz,n_neurons_affected
+optic,59373,-518.6,272
+central,28690,-7702.0,374
+sensory,8129,-10666.4,372
+ascending,1587,-1319.0000000000002,358
+descending,1086,-1466.4,338
+visual_projection,6335,-205.60000000000014,272
+motor,85,-57.59999999999991,329
