@@ -1,0 +1,7 @@
+cell_class,motor_delta_hz,inhibited,disinhibited,mean_delta,std_delta
+LO,-34.4,10,6,-1.49,3.22
+AN,-129.4,20,1,-5.62,3.87
+LOP>LO.ME,-20.6,10,5,-0.89,2.16
+LHCENT,-29.2,11,5,-1.27,2.38
+ME>LO,-14.8,11,5,-0.62,1.65
+Kenyon_Cell,-33.4,14,3,-1.45,2.07
