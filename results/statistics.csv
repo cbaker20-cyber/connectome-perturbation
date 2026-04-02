@@ -1,0 +1,11 @@
+label,exp_name,baseline_mean_hz,perturbed_mean_hz,delta_hz,pct_change,t_stat,p_value,significant
+LO,hq_LO,1126.6,1087.63,-38.97,-3.5,1.566,0.127,False
+AN,hq_AN,1126.6,992.63,-133.97,-11.9,5.386,0.0,True
+LOP>LO.ME,hq_LOP>LO.ME,1126.6,1101.43,-25.17,-2.2,1.085,0.286,False
+LHCENT,hq_LHCENT,1126.6,1092.77,-33.83,-3.0,1.445,0.1579,False
+ME>LO,hq_ME>LO,1126.6,1107.23,-19.37,-1.7,0.847,0.4033,False
+Kenyon_Cell,hq_Kenyon_Cell,1126.6,1088.63,-37.97,-3.4,1.668,0.1047,False
+descending,perturb_descending,1126.6,921.6,-205.0,-18.2,8.696,0.0,True
+sensory,perturb_sensory,1126.6,6.0,-1120.6,-99.5,31.765,0.0,True
+central,perturb_central,1126.6,4.6,-1122.0,-99.6,53.193,0.0,True
+ascending,perturb_ascending,1126.6,997.6,-129.0,-11.5,4.476,0.0021,True
