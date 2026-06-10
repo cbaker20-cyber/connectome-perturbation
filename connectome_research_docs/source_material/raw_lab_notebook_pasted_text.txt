@@ -1,0 +1,207 @@
+LAB NOTEBOOK: connectome perturbation project
+started: march 2026
+repo: github.com/cbaker20-cyber/connectome-perturbation
+machine: AMD Ryzen 7 8700F, 16GB RAM, RTX 5060, WSL2/Ubuntu
+
+
+
+entry 01: setup & first simulation
+date: march 20 2026
+
+what i was trying to do
+get the shiu et al. drosophila brain model running locally. this is a leaky integrate-and-fire simulation of the full adult fly brain — 127,400 neurons, ~50 million synaptic connections, built from the FlyWire connectome.
+the model is open source (github.com/philshiu/Drosophila_brain_model). it runs in Brian2, a python spiking neural network simulator. each neuron is basically a tiny RC circuit — membrane voltage leaks back to rest, and if enough synaptic input pushes it over threshold it fires and resets. simple model but biologically grounded because the connectivity is real.
+
+what i actually did
+installed WSL2 on windows PC, set up ubuntu, got python 3.12 + gcc + git working. created a github repo, cloned the shiu model, set up a virtual environment, installed Brian2 + dependencies.
+ran a test simulation: activated 10 sugar sensory neurons, let the network run for 500ms. result:
+spikes recorded: 2,422
+unique neurons that fired: 261
+elapsed time: 33 seconds
+that's a real signal propagating through a real connectome. worked first try (after fixing neuron ID mismatch — the IDs I guessed were wrong, pulled the correct ones from the example notebook).
+
+notes / observations
+Brian2 has a C++ code generation mode that's much faster than pure python. needed gcc for this. also needed to set WSL memory to 12GB via .wslconfig — default was only 7.7GB which caused OOM kills when running parallel trials.
+the model uses Poisson inputs to drive sensory neurons. this means spike timing is random each trial, which is biologically realistic but means you need multiple trials to average out noise. shiu paper used 30 trials. i'm starting with 5 for speed, will go to 30 for paper-quality results.
+
+
+
+entry 2: perturbation engine
+date: march 26 2026
+
+what i was trying to do
+build a systematic lesion framework on top of the shiu model. the model already has a silence() function that zeros out synaptic weights from target neurons. my job was to wrap this so i could silence arbitrary groups, run multiple conditions, and compare everything against a baseline.
+
+what i built
+three files:
+perturbation/baseline.py  — runs sugar activation with nothing silenced
+perturbation/analyze.py   — loads parquet results, computes firing rates
+perturbation/perturb.py   — sweeps over groups, calls baseline comparison
+
+the pipeline is basically: define neuron group → silence them → run sim → compare firing rates to baseline → record delta_hz and n_neurons_affected.
+tested on 3 random groups (10 neurons each). worked. baseline had 403 active neurons, perturbations affected 240-280 of them downstream. pipeline confirmed end-to-end.
+
+notes / observations
+the silence() function in the shiu model has a variable naming collision with Brian2 internals — generates a lot of WARNING messages about 'i' being an internal variable. suppressed with -W ignore flag. doesn't affect results.
+parallel trials (n_proc=-1) causes OOM on WSL with limited RAM. switched to n_proc=1 (sequential). slower but stable. 5 trials at 1000ms each takes about 2-3 minutes per condition.
+
+
+
+entry 003: FlyWire annotations & first real experiment
+date: march 30 2026
+
+what i was trying to do
+connect the simulation to real cell type labels. FlyWire published annotations for all 139,244 neurons including cell_class, super_class, cell_type, neurotransmitter, brain region. without this, silencing random neuron IDs means nothing biologically.
+
+what i did
+downloaded the annotation TSV from the flyconnectome github repo. joined it with the simulation neuron list. overlap:
+annotation neurons:  139,244
+simulation neurons:  127,400
+overlap:             106,216  (83.4% coverage)
+
+built cell_groups.py — a helper that takes a cell class name and returns the list of FlyWire IDs to pass to the perturbation engine.
+first real experiment: silenced all 1,086 descending neurons, measured effect on 85 motor neurons. result:
+most motor neurons: firing dropped (up to -86%)
+3 motor neurons:    firing INCREASED (up to +49%)
+
+key finding — disinhibition
+the 3 motor neurons that fired MORE when descending input was removed are being actively inhibited under normal conditions. removing that inhibition releases them. this is a disinhibition circuit — the descending neurons suppress these particular motor neurons during feeding.
+this is a real biological finding. it means not all descending control of motor output is excitatory — some of it is suppressive. activation-only experiments (like in the shiu paper) can't detect this. you need silencing.
+
+
+
+entry 004: super-class sweep
+date: march 30 2026
+
+what i did
+ran the perturbation sweep across all 7 super-classes: optic, central, sensory, ascending, descending, visual_projection, motor. 5 trials each. measured total motor neuron firing change.
+
+results
+sensory neurons:          -1,119.6 Hz  (23 motor neurons affected)
+central neurons:          -1,117.4 Hz  (23 motor neurons affected)
+descending neurons:         -200.4 Hz  (19 inhibited, 5 disinhibited)
+ascending neurons:          -124.4 Hz  (21 inhibited, 1 disinhibited)
+optic neurons:               -88.2 Hz  (19 inhibited, 3 disinhibited)
+motor neurons (feedback):    -49.8 Hz  (16 inhibited, 6 disinhibited)
+visual_projection:           -27.0 Hz  (12 inhibited, 7 disinhibited)
+
+key findings
+1. sensory and central tie for biggest absolute motor impact. they're the same circuit depth from the motor layer. makes sense…
+2. descending neurons punch above their weight. 1,086 neurons causing 200 Hz drop vs 59,373 optic neurons causing only 88 Hz. per neuron, descending input is ~40x more influential on motor output than optic input.
+3. visual projection neurons disinhibit more motor neurons than they inhibit (7 vs 12). visual input is suppressing motor output under normal conditions. maybe the fly doesn't move certain muscles while processing visual motion?
+4. ascending neurons barely disinhibit anything w/ nearly pure excitatory drive to motor output.
+
+generated figure: motor_impact_figure.png: two panel bar chart showing total delta Hz and inhibited/disinhibited breakdown per group. basically figure 1 of a paper.
+
+
+
+entry 005: cell class sweep (overnight)
+date: march 31-april 1 2026 
+
+what i did
+ran the sweep at cell_class level — 27 classes with >=20 neurons each. ran overnight. results saved progressively so interruptions don't lose work.
+
+notable results
+LO (lobula):       +21.0 Hz  — 14 disinhibited, only 3 inhibited  ← MOST INTERESTING
+AN (antennal):    -142.6 Hz  — 22 inhibited, 0 disinhibited       ← pure drive
+LOP>LO.ME:         -70.2 Hz  — only 182 neurons, very efficient
+ME>LO:             -79.2 Hz  — large group (18,637 neurons)
+LHCENT:             -1.0 Hz  — tiny (29 neurons), but 11 disinhibited vs 9 inhibited
+Kenyon_Cell:        -9.4 Hz  — mushroom body, 7 disinhibited
+
+key finding: LO disinhibition
+lobula neurons (visual processing) cause net POSITIVE motor firing when silenced. this is the strongest disinhibition signal in the entire dataset. lobula is actively suppressing motor output during visual processing. this is a concrete circuit-level prediction: there should be direct or indirect inhibitory projections from lobula to feeding motor neurons.
+this is testable experimentally — silence lobula neurons optogenetically and check if feeding motor output increases. that's a real prediction from the model.
+
+next steps
+running high-quality rerun (30 trials) on the 6 most interesting cell classes: LO, AN, LOP>LO.ME, LHCENT, ME>LO, Kenyon_Cell. this gives proper statistics for the paper.
+after that: grooming circuit comparison, dose-response sweep (partial silencing), cross-hemisphere analysis.
+
+
+
+ideas / questions to follow up
+
+— which specific motor neurons get disinhibited by LO silencing? are they the same ones every time, or variable across trials?
+— run same perturbations on grooming input neurons. compare which classes affect feeding vs grooming differently. overlapping vs separate control circuits.
+— partial silencing sweep: reduce synaptic weights to 75%, 50%, 25% instead of 0. maps dose-response relationship for each circuit layer.
+— cross-hemisphere: do left vs right hemisphere neurons have symmetric effects on motor output?
+— the LHCENT finding (29 neurons, disproportionately disinhibitory) is weird. worth looking into what LHCENT actually is anatomically.
+
+
+
+potential collaborators
+
+Philip Shiu —> first author on the model i'm running. built model.py. natural opener: 'i built a perturbation engine on your model and found X.'
+Kristin Scott (UC Berkeley) —> senior author on shiu paper. her lab does the feeding circuit work this directly extends. harder to reach but most relevant.
+Salil Bidaye (Max Planck) —> works on descending neuron control of motor output. directly relevant to the descending neuron findings.
+
+
+
+
+rough timeline
+
+weeks 1-2  (NOW):  infrastructure done, first sweep done, key findings identified
+weeks 3-4:         30-trial reruns, error bars, significance tests
+               :   grooming circuit comparison
+               :   reach out to shiu/scott with preliminary results
+weeks 5-8:         deeper dives on interesting findings
+               :   dose-response sweep
+               :   start writing methods
+weeks 9-12:        full draft, figures finalized, journal selection
+               :   target: eLife, PLOS Comp Bio, or J. Neuroscience
+entry 006: 30-trial validation rerun 
+date: april 2 2026
+what i did: reran the 6 most interesting cell classes from the screening sweep at 30 trials each to get proper statistics. the screening sweep used 5 trials which turned out to be insufficient.
+results
+cell_class    motor_delta_hz  inhibited  disinhibited  mean  std
+LO                     -34.4         10             6  -1.49  3.22
+AN                    -129.4         20             1  -5.62  3.87
+LOP>LO.ME              -20.6         10             5  -0.89  2.16
+LHCENT                 -29.2         11             5  -1.27  2.38
+ME>LO                  -14.8         11             5  -0.62  1.65
+Kenyon_Cell            -33.4         14             3  -1.45  2.07
+important/relevant finding: LO result flipped at 5 trials LO showed +21.0 Hz net motor effect (apparent disinhibition). at 30 trials it's -34.4 Hz (net inhibition). the 5-trial result was noise. this is why screening runs can't be trusted at face value — the signal was real but the sign was wrong.
+the disinhibition component of LO is still relevant. 6 motor neurons still show increased firing. it's just outnumbered by the inhibitory effect when you have enough trials to see it clearly.
+what held up: AN is the most robust finding. -129.4 Hz, 20 motor neurons inhibited, only 1 disinhibited, std of 3.87. consistent and large. antennal neurons are the dominant excitatory drive to feeding motor output.
+LHCENT is still interesting. 29 neurons, -29.2 Hz, std of 2.38 which is tight. small group with consistent outsized effect.
+disinhibition exists in every tested group. it's not a noise artifact — it persists at 30 trials across all conditions.
+methodological not: 5 trials is not enough for screening. the LO false positive would have sent the analysis in the wrong direction. for this model, 30 trials appears to be the minimum for reliable results. future sweeps should use 30 trials from the start, or run a two-stage design: 10-trial screen followed by 30-trial validation on candidates only.
+
+entry 007: statistical validation date: april 2 2026
+what i did ran two-sample t-tests comparing motor neuron total firing rate per trial between each perturbation condition and baseline. the test statistic is:
+t = (x̄₁ - x̄₂) / √(s₁²/n₁ + s₂²/n₂)
+
+where:
+  x̄₁ = mean total motor firing rate across baseline trials (Hz)
+  x̄₂ = mean total motor firing rate across perturbation trials (Hz)
+  s₁, s₂ = standard deviations of trial firing rates
+  n₁, n₂ = number of trials per condition
+null hypothesis: silencing a neuron group has no effect on total motor neuron firing rate. reject if p < 0.05.
+issue: underpowered baseline first run used 5 baseline trials vs 30 perturbation trials. unequal n inflates variance estimates and reduces power. reran baseline at 30 trials (n_proc=1, sequential). after rerun, AN correctly showed significance.
+results
+condition       delta_hz    t_stat    p_value    sig
+---------------------------------------------------------
+sensory         -1120.6     large     ~0.0000     *
+central         -1122.0     large     ~0.0000     *
+descending       -205.0     large     ~0.0000     *
+AN               -134.0     large     ~0.0000     *
+ascending        -129.0    -3.48      0.0021      *
+LO                -39.0    -1.60      0.1270      ns
+LHCENT            -33.8    -1.47      0.1579      ns
+Kenyon_Cell       -38.0    -1.67      0.1047      ns
+LOP>LO.ME         -25.2    -1.10      0.2860      ns
+ME>LO             -19.4    -0.85      0.4033      ns
+interpretation five conditions are statistically significant. the ns results are not necessarily false negatives — effect sizes are real but variance is high relative to trial count. back-of-envelope power calculation:
+to detect delta = 35 Hz with std ≈ 30 Hz at power = 0.80, alpha = 0.05:
+  n ≈ 2 * ((z_alpha/2 + z_beta) * sigma / delta)²
+  n ≈ 2 * ((1.96 + 0.84) * 30 / 35)²
+  n ≈ 2 * (2.80 * 0.857)²
+  n ≈ 2 * (2.4)²
+  n ≈ ~12 trials per condition minimum
+
+LHCENT and LO sit right at the edge of detectability with 30 trials.
+would need ~100 trials to reach significance at this effect size and variance.
+decision 5 significant findings is sufficient for a paper. ns results go in supplementary as trends. not worth running 100-trial reruns — compute cost is high and the story is already clear from the significant conditions.
+methodological note always match trial counts between baseline and perturbation conditions. unequal n causes underpowered comparisons even when effect sizes are large (AN had -134 Hz but showed ns with mismatched n).
+
+

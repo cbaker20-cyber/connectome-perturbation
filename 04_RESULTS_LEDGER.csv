@@ -1,0 +1,13 @@
+result_id,experiment_id,date,analysis_level,condition_or_group,metric,value,raw_p,fdr_q,status,interpretation,caveat,paper_location
+R001,E001,2026-03-20,setup,test_sugar,spikes_recorded,2422,,,completed,Model produced spiking output after sugar input,Prototype 500 ms run,methods/supplement
+R002,E001,2026-03-20,setup,test_sugar,unique_neurons_fired,261,,,completed,Signal propagated beyond input neurons,Prototype 500 ms run,methods/supplement
+R003,E003,2026-03-30,motor output,descending,motor neurons disinhibited,3,,,candidate validated phenomenon,Descending removal increased firing in a subset of motor neurons,Need exact output/validation table,results/disinhibition
+R004,E004,2026-03-30,super_class,sensory,motor_delta_hz,-1119.6,,,exploratory,Large motor-output reduction after sensory silencing,5 trials,screening figure
+R005,E004,2026-03-30,super_class,central,motor_delta_hz,-1117.4,,,exploratory,Large motor-output reduction after central silencing,5 trials,screening figure
+R006,E004,2026-03-30,super_class,descending,motor_delta_hz,-200.4,,,exploratory,Strong relative effect of descending neurons,5 trials,screening figure
+R007,E005,2026-03-31,cell_class,LO,motor_delta_hz,+21.0,,,revised,Initially looked like net disinhibition,Later flipped at 30 trials,do not headline
+R008,E006,2026-04-02,cell_class,LO,motor_delta_hz,-34.4,,,validated/revised,"Net effect is motor-output reduction, not net excitation",Some motor neurons still disinhibited,supplement/trend
+R009,E006,2026-04-02,cell_class,AN,motor_delta_hz,-129.4,,,validated,Strongest validated cell-class-level motor reduction among rerun set,Confirm exact q-value from statistics.csv,main result
+R010,E007,2026-04-02,statistics,ascending,motor_delta_hz,-129.0,0.0021,,validated in notebook,Ascending perturbation significant in raw notebook table,Use FDR q from statistics.py output,main/supplement
+R011,E007,2026-04-02,statistics,LO,motor_delta_hz,-39.0,0.1270,,not significant,Trend only,Do not claim significance,supplement
+R012,E007,2026-04-02,statistics,LHCENT,motor_delta_hz,-33.8,0.1579,,not significant,Interesting small-group trend,Do not claim significance,supplement
