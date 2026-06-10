@@ -1,0 +1,17 @@
+project_name: connectome-perturbation
+created: 2026-06-10
+status_labels:
+  - planned
+  - exploratory
+  - validated
+  - revised
+  - negative
+  - deprecated
+minimum_claim_standard:
+  require_matched_trial_counts: true
+  require_zero_spike_trial_retention: true
+  require_fdr_correction: true
+  exploratory_trial_count_label: "5-trial screen"
+  preferred_validation_trials: 30
+primary_readout: total motor population firing rate per trial
+motor_direction_threshold_hz: 0.5
