@@ -52,11 +52,22 @@ Missing or not yet confirmed:
 
 ## External research context
 
-The FlyWire Consortium published a complete adult Drosophila brain wiring diagram in Nature in 2024. Reporting on that publication describes more than 139,000 neurons and more than 50 million connections/synapses in the adult fruit fly brain. This makes FlyWire a plausible source family for a whole-brain perturbation project, but the repository does not yet identify FlyWire, hemibrain, BANC, neuPrint, Codex, or any other dataset as its actual source.
+The FlyWire Consortium published a complete adult Drosophila brain wiring diagram in Nature in 2024. The article reports a wiring diagram containing 5 x 10^7 chemical synapses between 139,255 neurons reconstructed from an adult female Drosophila melanogaster, with data products available for download, programmatic access, and interactive browsing. It identifies Codex as the primary browser portal and notes that the analyzed reconstruction is version 783.
 
-The earlier Janelia/Google hemibrain connectome, described in eLife in 2020, is another plausible source family for adult Drosophila connectome work. Hemibrain is not a complete whole-brain dataset, so results from hemibrain-style data should not be described as whole-brain without checking the actual source.
+The earlier Janelia/Google hemibrain connectome, described in eLife in 2020, is another plausible source family for adult Drosophila connectome work. The eLife article describes the hemibrain as a dense reconstruction of a portion of the central brain, with approximately 25,000 neurons and around 20 million chemical synapses. Hemibrain is not a complete whole-brain dataset, so results from hemibrain-style data should not be described as whole-brain without checking the actual source.
 
-FlyWire Codex is a likely interface to investigate if the project uses FlyWire-derived data, but this repository must document the exact dataset/version/export method before results can be interpreted.
+FlyWire Codex is a likely interface to investigate if the project uses FlyWire-derived data. Codex lists multiple datasets, including FAFB v783, BANC v626, MANC v1.2.1, MAOL v1.1, and MCNS v0.9, and includes tools for search, statistics, annotations, cell details, neuropils, 3D viewing, network graphs, pathways, and data download. This repository must document the exact dataset/version/export method before results can be interpreted.
+
+## Reference candidates checked
+
+These are candidates only. None is confirmed as the current repository dataset until a source link, script, notebook, or metadata file connects it to the project.
+
+| Candidate | Why it matters | What must be verified before use |
+|---|---|---|
+| FlyWire FAFB v783 / Dorkenwald et al., Nature 2024 | Whole adult female fly brain; matches `optic`, `central`, `sensory`, and `ascending` vocabulary better than a tiny partial graph might. | Exact export route, table schema, threshold, dataset version, neuron IDs, and whether the CSV was generated from FlyWire. |
+| FlyWire Codex | Browser and export interface for multiple connectome datasets. | Whether the project downloaded data from Codex and which dataset/export settings were used. |
+| Hemibrain / Scheffer et al., eLife 2020 | Widely used adult Drosophila central-brain resource. | Whether the analysis intentionally uses a partial central-brain connectome and how missing optic/VNC/ascending coverage is handled. |
+| BANC / adult brain-and-cord datasets | Potentially relevant if perturbations include sensory/ascending/descending pathways across brain and nerve cord. | Whether a BANC or CNS dataset file exists and whether labels align with the output groups. |
 
 ## Open questions
 
@@ -97,6 +108,7 @@ Without those, the existing summary CSV should be treated as an unexplained outp
 5. Locate or reconstruct the script that generated `results/perturbation_summary.csv`.
 6. Add a minimal validation test once a script or pure function exists.
 7. Add citations beside any biological or neuroscience interpretation.
+8. Add a dataset decision table comparing FlyWire FAFB v783, hemibrain, BANC, MANC, MAOL, and MCNS against the project’s intended perturbation scope.
 
 ## Risks
 
@@ -105,18 +117,20 @@ Without those, the existing summary CSV should be treated as an unexplained outp
 - Data-size risk: repository metadata indicates a large repository, but a full tracked-file audit has not yet been completed.
 - Dataset/version drift: connectome resources have multiple releases and derived tables; results must identify exact versions.
 - Model-validity risk: structural connectivity alone does not automatically imply activity, behavior, or causal neural function.
+- Scope mismatch: a central-brain-only dataset, a whole-brain dataset, and a brain-and-cord dataset answer different questions and should not be mixed without explicit justification.
 
 ## Reference candidates to evaluate
 
 These references are candidates for the README/background section once the project’s actual dataset is identified:
 
-- FlyWire Consortium / Dorkenwald et al., “Neuronal wiring diagram of an adult brain,” Nature, 2024.
-- Scheffer et al., “A connectome and analysis of the adult Drosophila central brain,” eLife, 2020.
+- Dorkenwald et al. / FlyWire Consortium, “Neuronal wiring diagram of an adult brain,” Nature, 2024. DOI: 10.1038/s41586-024-07558-y.
+- Scheffer et al., “A connectome and analysis of the adult Drosophila central brain,” eLife, 2020. DOI: 10.7554/eLife.57443.
 - FlyWire Codex / Codex Connectome Data Explorer.
 - neuPrint / Janelia FlyEM resources, if the project uses hemibrain-derived data.
 
-## Log entry
+## Log entries
 
 - Created this progress log as Task 1 scaffolding.
 - No code behavior changed.
 - No research result was interpreted as biologically meaningful because dataset provenance and methods are missing.
+- Added a more specific reference-candidate table and clarified that FlyWire FAFB v783, hemibrain, and brain-and-cord datasets are not interchangeable without explicit project evidence.
