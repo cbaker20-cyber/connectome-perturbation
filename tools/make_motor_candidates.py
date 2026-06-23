@@ -36,7 +36,14 @@ def main() -> None:
     motor_out.to_csv("metadata/all_motor_annotation_candidates.csv", index=False)
 
     text_cols = [c for c in cols if c != "root_id"]
-    text = motor[text_cols].astype(str).agg(" ".join, axis=1).str.lower()
+    if text_cols:
+        # Build one lowercase searchable annotation string per row.
+        # Avoid DataFrame.agg(" ".join) here because newer pandas / Python builds
+        # can still pass non-string scalar values through the row iterator.
+        text_frame = motor[text_cols].fillna("").astype(str)
+        text = text_frame.apply(lambda row: " ".join(row.values), axis=1).str.lower()
+    else:
+        text = pd.Series("", index=motor.index)
 
     feeding_pat = r"feed|feeding|probosc|pharyn|cibari|labell|ingest|mouth|sugar|taste"
     grooming_pat = r"groom|grooming|leg|tars|brush|clean|wing|eye|bristle"
