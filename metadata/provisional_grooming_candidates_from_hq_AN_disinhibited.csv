@@ -1,0 +1,3 @@
+root_id,baseline_hz,perturbed_hz,delta_hz,pct_change,super_class,cell_class,cell_type,hemibrain_type,ito_lee_hemilineage,side,nerve,flow,top_nt
+720575940622810153,40.6,41.4,0.7999999999999972,1.9704433497536877,motor,brain_motor_neuron,MN10,,putative_primary,left,PhN,efferent,acetylcholine
+720575940618165019,104.0,105.0,1.0,0.9615384615384616,motor,brain_motor_neuron,CB0700,,putative_primary,left,PhN,efferent,acetylcholine
