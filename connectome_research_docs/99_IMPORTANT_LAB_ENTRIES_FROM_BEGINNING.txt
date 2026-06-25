@@ -1,0 +1,195 @@
+Entry 01
+Date: 2026-06-10
+Entry: The project documentation system was established. The working folder was defined as C:\Users\Baker\Drosophila_Data\connectome_research_docs\, and the project adopted a strict living-lab-notebook protocol. From this point forward, major coding sessions, bug-fixing interactions, data-analysis outputs, and methodological decisions were to be recorded as structured research-log updates rather than treated as temporary chat output.
+
+Entry 02
+Date: 2026-06-10
+Entry: The four-file documentation protocol was defined. Each session would generate copy/paste-ready updates for 01_LIVING_RESEARCH_LOG.md, 03_EXPERIMENT_REGISTRY.csv, 04_RESULTS_LEDGER.csv, and 11_CLAIMS_REGISTER.csv. This converted the project from an informal coding workflow into a traceable research record with goals, commands, outcomes, interpretations, and claim status.
+
+Entry 03
+Date: 2026-06-10
+Entry: The project’s original scientific direction was identified as a Drosophila connectome perturbation study using sugar sensory stimulation, simulated network perturbations, downstream motor-output changes, and candidate neuron-group effects. The early hypothesis centered on whether ascending neurons, especially AN neurons, might produce behaviorally meaningful downstream motor changes.
+
+Entry 04
+Date: 2026-06-10
+Entry: The initial project was recognized as having real technical substance: FlyWire-scale connectivity data, Brian2-style neural simulations, perturbation scripts, motor-output readouts, graph/path analyses, and statistical outputs. However, the scientific narrative was still immature because it risked becoming a descriptive p-value project rather than a clearly innovative computational neuroscience contribution.
+
+Entry 05
+Date: 2026-06-23
+Entry: The simulator’s meaning was formally clarified. The current model is not a direct biological behavior assay. It is a simplified recurrent spiking simulation built from FlyWire-derived connectivity. Sugar neurons receive external Poisson drive, spikes propagate through delayed weighted synapses, and perturbations are implemented by removing outgoing synaptic influence from selected neurons.
+
+Entry 06
+Date: 2026-06-23
+Entry: The baseline sugar condition was defined as a sugar-driven simulation using 21 sugar sensory neurons, 150 Hz Poisson input, 1000 ms trials, and initially 5 trials during development runs. This made all early perturbation effects explicitly conditional on sugar input rather than evidence of global neuron importance.
+
+Entry 07
+Date: 2026-06-23
+Entry: The perturbation mechanism was reframed from “silencing” to “synaptic output lesion.” The perturbed neurons are not necessarily prevented from receiving input or spiking; rather, their outgoing synaptic weights are set to zero. This distinction is critical because the model tests downstream causal influence in the simulator, not direct optogenetic silencing or hyperpolarization.
+
+Entry 08
+Date: 2026-06-23
+Entry: The statistical pipeline was audited for zero-spike trial bias. The corrected logic preserves all trial IDs before filtering to selected neurons, then reindexes missing selected-neuron trials as 0 Hz. This prevents firing-rate estimates from being biased upward by silently dropping trials where the selected neurons did not spike.
+
+Entry 09
+Date: 2026-06-23
+Entry: Welch’s t-tests and Benjamini-Hochberg FDR correction were treated as necessary safeguards against raw p-value storytelling. This moved the project away from isolated significance claims and toward corrected, reproducible statistical interpretation.
+
+Entry 10
+Date: 2026-06-23
+Entry: The original AN-centered biological story was deprioritized. Global centrality, weighted degree, strength, source-to-motor path analyses, and broad null comparisons did not cleanly support the claim that AN neurons were uniquely enriched or globally central. This prevented the project from overclaiming “AN is special” without strong evidence.
+
+Entry 11
+Date: 2026-06-23
+Entry: Negative global graph results were reinterpreted as useful rather than disappointing. The lack of clean AN enrichment in standard graph metrics became evidence that ordinary static graph-theoretic importance does not necessarily predict simulated dynamic motor-output impact. This negative result became the seed of the stronger methodological project.
+
+Entry 12
+Date: 2026-06-23
+Entry: Source-to-motor path analysis was interpreted cautiously. The analysis tested whether AN neurons were overrepresented on directed weighted paths from sugar sensory neurons to motor-output neurons. The result did not provide a clean enrichment claim, reinforcing that broad sugar-to-all-motor paths and standard source-target centrality do not explain the observed perturbation effects by themselves.
+
+Entry 13
+Date: 2026-06-23
+Entry: Motor target curation through FlyWire annotation text was attempted and failed cleanly. The annotation-based approach found the motor neuron population but did not produce reliable feeding or grooming keyword hits. This prevented the project from honestly claiming validated feeding-versus-grooming motor target sets based on weak annotation labels.
+
+Entry 14
+Date: 2026-06-23
+Entry: Provisional hq_AN motor-response targets were created from simulation output. The hq_AN perturbation identified 19 inhibited motor candidates and 2 disinhibited motor candidates. These files were useful for method development, but they were explicitly labeled circular and exploratory because they were derived from the same perturbation being analyzed.
+
+Entry 15
+Date: 2026-06-23
+Entry: Behavioral Opponent Routing Analysis, or BORA, was introduced as a source-conditioned and target-conditioned structural metric. Instead of asking whether neurons are globally central, BORA asks whether a group is positioned between a source input and opponent motor-output targets. This improved the biological relevance of the graph analysis but was not treated as sufficient by itself.
+
+Entry 16
+Date: 2026-06-23
+Entry: The first BORA smoke test ran successfully on the FlyWire-scale graph using 21 sugar sources, provisional hq_AN-derived inhibited motor targets, provisional opponent-side motor targets, AN as the focus group, and central neurons as the null pool. The graph contained 127,400 nodes and 14,687,178 directed weighted edges, and all source and target IDs mapped correctly.
+
+Entry 17
+Date: 2026-06-23
+Entry: The initial BORA result was judged exploratory, not positive. Key BORA metrics such as source exposure, opponent selectivity, and signed BORA were not significant under the central null, while downstream feed, downstream groom, BORA absolute value, and gateway metrics were lower than the null. Total degree and strength were also lower than the null, indicating a confounded comparison.
+
+Entry 18
+Date: 2026-06-23
+Entry: An ascending non-AN null was attempted but failed because the annotation schema contained no neurons satisfying super_class == ascending and cell_class != AN. This was an important schema discovery: in the available annotations, the ascending super-class is essentially AN, so a true ascending non-AN comparison pool does not exist under that query.
+
+Entry 19
+Date: 2026-06-23
+Entry: A sensory-ascending non-AN null was tested but judged invalid for inference. The available null pool contained only about 78 neurons, causing degenerate null variance and extremely unstable z-scores. This run was recorded as a null-model diagnostic, not biological evidence.
+
+Entry 20
+Date: 2026-06-23
+Entry: A broad non-AN null was tested and treated as the most stable exploratory diagnostic. It used a large non-AN pool but still showed degree and strength imbalance between AN and null samples. The BORA-specific metrics were mostly not significant after correction, so no clean AN BORA enrichment claim was supported.
+
+Entry 21
+Date: 2026-06-23
+Entry: The project pivoted away from trying to rescue AN significance. The stronger problem became: complete connectomes exist, but standard graph metrics may fail to predict which neuron groups have large dynamic effects on motor output. This was the first major Regeneron-style transformation from descriptive biological claim to general methodological problem.
+
+Entry 22
+Date: 2026-06-23
+Entry: The project was reframed as a computation-vs-topology benchmark. The central question became whether static graph metrics, linear diffusion, routing metrics, and activity-weighted topology can predict nonlinear motor-output responses generated by the spiking simulation.
+
+Entry 23
+Date: 2026-06-23
+Entry: The Dynamic Leverage Residual concept was introduced. The important quantity is not just raw motor-output change caused by a perturbation, but the difference between observed simulated motor reallocation and the effect predicted by ordinary structural features such as cell count, degree, strength, centrality, diffusion, and routing.
+
+Entry 24
+Date: 2026-06-23
+Entry: The small-N plan was rejected. Testing only 10 to 15 broad neuron groups would be underpowered and statistically unstable given the number of structural predictors. The framework must scale to hundreds of cell types or structurally defined clusters so that cross-validation and predictive benchmarking are meaningful.
+
+Entry 25
+Date: 2026-06-23
+Entry: The simulator benchmark frame was formalized. The correct target variable is not direct biological behavior but nonlinear motor-output response generated by a simplified connectome-driven spiking model. This protected the project from overclaiming while preserving scientific value.
+
+Entry 26
+Date: 2026-06-23
+Entry: Model vulnerabilities were identified for future audit. The model is current-based rather than conductance-based, inhibitory input may permit unphysiological hyperpolarization, the reset rule includes a questionable w = 0 assignment, perturbation is output-lesion rather than true silencing, and early development runs use only 5 trials.
+
+Entry 27
+Date: 2026-06-23
+Entry: A conductance-based dynamics critique was incorporated into the design logic. The current-based LIF model may allow inhibition to act as an unbounded hyperpolarization sink. This does not invalidate development work but means final claims require voltage audits, model sensitivity checks, or a conductance/bounded-current comparison.
+
+Entry 28
+Date: 2026-06-23
+Entry: The linear diffusion baseline was declared mandatory. If an analytical linear propagation model can predict the spiking simulation’s motor outputs, then the nonlinear simulation adds little. The final benchmark must explicitly test where linear topology succeeds and where nonlinear spiking dynamics diverge.
+
+Entry 29
+Date: 2026-06-23
+Entry: The framework became context-conditional. The unit of analysis changed from perturbed cell type to input_context by perturbed_cell_type. This solved the sugar-isolation problem: a neuron group that has no effect under sugar drive should not be interpreted as globally unimportant.
+
+Entry 30
+Date: 2026-06-23
+Entry: The K=21 source-standardization plan was rejected. Twenty-one sugar neurons may represent a complete specialized submodality, while 21 visual projection neurons may represent a tiny diffuse sample. The improved source-context design uses biologically complete source sets when available and total-current-normalized source sets to distinguish source-system size from network architecture.
+
+Entry 31
+Date: 2026-06-23
+Entry: Exposure was redefined as a continuous, null-calibrated property. In a dense connectome, almost everything may be technically reachable through weak long paths, so simple path existence is not meaningful. The planned metric uses attenuated downstream flow from a source context through the directed weighted graph.
+
+Entry 32
+Date: 2026-06-23
+Entry: Matched random-source nulls were added to exposure analysis. Source exposure should be compared against null source ensembles matched on source count or total injected current, source modality or super-class when possible, source degree, and source strength. This prevents high-degree source sets from automatically appearing more biologically meaningful.
+
+Entry 33
+Date: 2026-06-23
+Entry: The five-tier exposure classification was created: robustly exposed, weakly exposed, out-of-context, tonic active, and ambiguous. This prevents negative perturbation results from being mislabeled as biological unimportance and separates unrecruited cell types from tonic or model-instability candidates.
+
+Entry 34
+Date: 2026-06-23
+Entry: Spontaneous baseline correction was reframed as a factorial interaction problem. Simple subtraction of spontaneous activity from driven activity is not valid as background removal in a nonlinear spiking network. Instead, spontaneous versus driven and intact versus lesioned conditions form a 2-by-2 factorial interaction design.
+
+Entry 35
+Date: 2026-06-23
+Entry: Baseline activity was upgraded from nuisance to state-dependent gating information. The key question is whether the effect of lesioning a cell type changes when the network is sensory-driven. A large interaction term indicates nonlinear context-dependent dynamic leverage rather than simple background-corrected activity.
+
+Entry 36
+Date: 2026-06-23
+Entry: The motor target space was reassessed. Treating the 110 motor neurons as an isotropic Euclidean vector is biologically crude because motor neurons may be coordinated into lower-dimensional synergies. Raw motor metrics remain safest as primary outcomes, while PCA and nonlinear manifolds should be used only as sensitivity analyses.
+
+Entry 37
+Date: 2026-06-23
+Entry: Context-specific PCA rules were defined. A fixed number of principal components was rejected. Each input context should select its own PC count using training-only data, permutation noise floors, Poisson-seed robustness, and inner cross-validation. The primary PCA cap should be five components, with sensitivity analyses from one to ten components.
+
+Entry 38
+Date: 2026-06-23
+Entry: Split-half reliability was renamed Poisson-seed robustness. Since the simulation is deterministic apart from stochastic Poisson input timing, low split-half reliability measures sensitivity to input spike jitter rather than biological unreliability. This terminology prevents overclaiming.
+
+Entry 39
+Date: 2026-06-23
+Entry: Random train/test splits were rejected due to topological autocorrelation. Cell types in a connectome are not independent observations. Structurally similar cell types can share inputs, outputs, and local wiring neighborhoods, causing random cross-validation to overestimate generalization.
+
+Entry 40
+Date: 2026-06-23
+Entry: Community-dropped cross-validation was added. Cell types should be connected into a similarity graph using input cosine similarity, output cosine similarity, and partner Jaccard overlap, then clustered into structural communities. Models should train on all but one community and test on the held-out community to evaluate true out-of-community generalization.
+
+Entry 41
+Date: 2026-06-23
+Entry: Predictor collinearity was identified as a major statistical threat. Cell count, removed edge weight, degree, strength, diffusion, motor reach, routing, and activity-weighted topology can share large amounts of variance. Ordinary regression coefficients are therefore unreliable for scientific interpretation.
+
+Entry 42
+Date: 2026-06-23
+Entry: Blocked model comparison and Shapley/commonality analysis were added. The predictive value of feature blocks should be evaluated using blocked delta R-squared, reverse-order sensitivity, Shapley value regression, commonality analysis, and permutation importance. This prevents one arbitrary block order from determining the conclusion.
+
+Entry 43
+Date: 2026-06-23
+Entry: The final methodological thesis was consolidated. The mature project is a context-conditional, community-validated benchmark for testing when static connectome topology, linear diffusion, activity-weighted routing, and nonlinear spiking dynamics agree or diverge in predicting motor-output vulnerability.
+
+Entry 44
+Date: 2026-06-23
+Entry: The immediate technical next step was defined as freezing current BORA results as exploratory diagnostics and implementing a stricter nearest-neighbor matched null with explicit balance diagnostics. Final BORA claims require matched nulls in which total degree and total strength are balanced before BORA-specific effects are interpreted.
+
+Entry 45
+Date: 2026-06-25
+Entry: A research-notebook and communication package was requested from the original pasted project text. The goal was to rewrite the material into readable form, create a notebook, prepare a shorter professor-facing document, create a textbook-style explainer for learning the project, and prepare talking points so the student could discuss the work with confidence.
+
+Entry 46
+Date: 2026-06-25
+Entry: The full 22-point project evolution was summarized in detail. The summary traced the project from an AN-centered perturbation hypothesis through simulator clarification, graph/path negative results, BORA diagnostics, dynamic leverage, context-conditional design, null-calibrated exposure, factorial interaction, community-dropped validation, and Shapley/commonality attribution.
+
+Entry 47
+Date: 2026-06-25
+Entry: A Scientific Justification and Literature Defense Portfolio was drafted conceptually around five modules: community-dropped cross-validation, graph metric collinearity and Shapley attribution, state-dependent factorial interaction, null-calibrated exposure, and raw-versus-manifold target representation. This portfolio became the methodological and discussion foundation for a high-level thesis or STS defense.
+
+Entry 48
+Date: 2026-06-25
+Entry: The first compiled lab-notebook update file was created, but it was too narrow because it dated all entries as 2026-06-23 and did not reflect the earlier 2026-06-10 documentation setup or later 2026-06-25 synthesis work. This was identified as an error in historical coverage.
+
+Entry 49
+Date: 2026-06-25
+Entry: The lab-entry compilation was corrected to include the project from the true beginning of the available conversation history, including the 2026-06-10 documentation protocol, the 2026-06-23 methodological development, and the 2026-06-25 synthesis and communication work.
