@@ -11,6 +11,11 @@ as the only analysis mode. Instead it writes:
 2. optional matched-size source files for pilot/debug runs;
 3. a manifest describing how each context was generated.
 
+Important: the sugar context is loaded from an explicit ID file and matched
+against the simulator completeness table, NOT against the annotations table.
+Some sugar IDs may be present in the simulator/connectivity but sparsely annotated.
+Filtering sugar through annotations can incorrectly shrink the source set.
+
 Example:
     python tools/create_source_contexts.py \
         --annotations flywire_annotations.tsv \
@@ -49,12 +54,15 @@ def write_ids(path: Path, ids: Iterable[int]) -> None:
     path.write_text("\n".join(str(x) for x in ids) + ("\n" if ids else ""))
 
 
-def load_annotations(annotations_path: Path, completeness_path: Path) -> pd.DataFrame:
+def load_completeness_ids(completeness_path: Path) -> set[int]:
+    comp = pd.read_csv(completeness_path, index_col=0)
+    return set(pd.to_numeric(pd.Series(comp.index), errors="coerce").dropna().astype("int64").map(int))
+
+
+def load_annotations(annotations_path: Path, sim_ids: set[int]) -> pd.DataFrame:
     ann = pd.read_csv(annotations_path, sep="\t", low_memory=False)
     if "root_id" not in ann.columns:
         raise ValueError("annotations file must contain root_id")
-    comp = pd.read_csv(completeness_path, index_col=0)
-    sim_ids = set(pd.to_numeric(pd.Series(comp.index), errors="coerce").dropna().astype("int64").map(int))
     ann = ann.copy()
     ann["root_id"] = pd.to_numeric(ann["root_id"], errors="coerce")
     ann = ann.dropna(subset=["root_id"])
@@ -65,6 +73,10 @@ def load_annotations(annotations_path: Path, completeness_path: Path) -> pd.Data
             ann[col] = ""
         ann[col] = ann[col].fillna("").astype(str)
     return ann
+
+
+def frame_from_ids(ids: list[int]) -> pd.DataFrame:
+    return pd.DataFrame({"root_id": sorted(set(int(x) for x in ids))})
 
 
 def select_contains(ann: pd.DataFrame, columns: list[str], patterns: list[str]) -> pd.DataFrame:
@@ -101,25 +113,29 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     rng = np.random.default_rng(args.seed)
 
-    ann = load_annotations(Path(args.annotations), Path(args.completeness))
-    sugar_ids = parse_id_file(args.sugar_ids)
-    sim_ids = set(ann["root_id"].map(int).tolist())
-    sugar_ids = [x for x in sugar_ids if x in sim_ids]
+    sim_ids = load_completeness_ids(Path(args.completeness))
+    ann = load_annotations(Path(args.annotations), sim_ids)
+    sugar_ids_raw = parse_id_file(args.sugar_ids)
+    sugar_ids = [x for x in sugar_ids_raw if x in sim_ids]
+    sugar_missing = [x for x in sugar_ids_raw if x not in sim_ids]
 
     context_frames: dict[str, pd.DataFrame] = {}
-    context_frames["sugar"] = ann[ann["root_id"].isin(sugar_ids)].copy()
+    context_frames["sugar"] = frame_from_ids(sugar_ids)
     context_frames["gustatory"] = select_contains(ann, ["cell_class", "cell_type", "hemibrain_type"], ["gustatory"])
     context_frames["mechanosensory"] = select_contains(ann, ["cell_class", "cell_type", "hemibrain_type"], ["mechanosensory"])
     context_frames["visual_projection"] = select_exact(ann, "super_class", "visual_projection")
     context_frames["sensory_ascending"] = select_exact(ann, "super_class", "sensory_ascending")
     context_frames["all_sensory"] = ann[ann["super_class"].str.lower().str.contains("sensory", na=False)].copy()
-    context_frames["no_input"] = ann.iloc[0:0].copy()
+    context_frames["no_input"] = frame_from_ids([])
 
     manifest_rows = []
     for name, frame in context_frames.items():
         ids = sorted(set(frame["root_id"].map(int).tolist()))
         complete_path = out / f"{name}_complete.txt"
         write_ids(complete_path, ids)
+        note = "biologically complete annotated source set; may be empty if annotation is unavailable"
+        if name == "sugar":
+            note = f"explicit sugar ID source set from {args.sugar_ids}; {len(sugar_missing)} IDs absent from completeness table"
         manifest_rows.append({
             "context_name": name,
             "mode": "complete",
@@ -127,7 +143,7 @@ def main() -> None:
             "n_ids": len(ids),
             "seed": "",
             "matched_k": "",
-            "notes": "biologically complete annotated source set; may be empty if annotation is unavailable",
+            "notes": note,
         })
 
         if name != "no_input":
@@ -149,6 +165,8 @@ def main() -> None:
     manifest.to_csv(manifest_path, index=False)
 
     print(f"Loaded {len(ann):,} annotated simulator neurons")
+    print(f"Completeness table neurons: {len(sim_ids):,}")
+    print(f"Sugar IDs from file: {len(sugar_ids_raw)} | found in completeness: {len(sugar_ids)} | missing: {len(sugar_missing)}")
     print(f"Wrote manifest: {manifest_path}")
     print(manifest[["context_name", "mode", "n_ids", "path"]].to_string(index=False))
 
