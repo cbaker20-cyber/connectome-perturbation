@@ -22,9 +22,9 @@ $LogDir = Join-Path $OutDir "logs"
 New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
-$Python = ".\.venv\Scripts\python.exe"
-if (-Not (Test-Path $Python)) {
-    $Python = "python"
+$PythonExe = ".\.venv\Scripts\python.exe"
+if (-Not (Test-Path $PythonExe)) {
+    $PythonExe = "python"
 }
 
 $Start = Get-Date
@@ -32,20 +32,21 @@ $Start = Get-Date
 
 function Run-Step {
     param(
-        [string]$Name,
-        [string[]]$Args
+        [string]$StepName,
+        [string[]]$StepArgs
     )
-    $LogPath = Join-Path $LogDir "$Name.log"
-    Write-Host "==== $Name ===="
+    $LogPath = Join-Path $LogDir "$StepName.log"
+    Write-Host "==== $StepName ===="
     Write-Host "Logging to $LogPath"
-    & $Python @Args 2>&1 | Tee-Object -FilePath $LogPath
+    Write-Host "Command: $PythonExe $($StepArgs -join ' ')"
+    & $PythonExe @StepArgs 2>&1 | Tee-Object -FilePath $LogPath
     if ($LASTEXITCODE -ne 0) {
-        throw "Step failed: $Name"
+        throw "Step failed: $StepName"
     }
 }
 
 # Make sure source contexts exist.
-Run-Step "01_create_source_contexts" @(
+Run-Step -StepName "01_create_source_contexts" -StepArgs @(
     "tools\create_source_contexts.py",
     "--annotations", "flywire_annotations.tsv",
     "--completeness", "Drosophila_brain_model\2023_03_23_completeness_630_final.csv",
@@ -58,7 +59,7 @@ Run-Step "01_create_source_contexts" @(
 # Big but bounded overnight sweep.
 # 5 contexts x up to 60 cell classes x 5 trials = a serious first benchmark.
 # If it is still running in the morning, leave it; it writes sweep_summary.csv incrementally.
-Run-Step "02_context_perturbation_sweep_matched_cell_class" @(
+Run-Step -StepName "02_context_perturbation_sweep_matched_cell_class" -StepArgs @(
     "tools\run_context_perturbation_sweep.py",
     "--annotations", "flywire_annotations.tsv",
     "--completeness", "Drosophila_brain_model\2023_03_23_completeness_630_final.csv",
