@@ -45,7 +45,9 @@ def parse_id_file(path: str | Path) -> list[int]:
     if not text:
         return []
     tokens = re.split(r"[\s,;]+", text)
-    return [int(float(tok)) for tok in tokens if tok]
+    # FlyWire root IDs are 18-digit integers. Never parse through float,
+    # because IEEE-754 floats silently corrupt the final digits.
+    return [int(tok) for tok in tokens if tok]
 
 
 def write_ids(path: Path, ids: Iterable[int]) -> None:
