@@ -1,0 +1,89 @@
+# Run Manifest Template
+# Copy this file for any result that may be interpreted biologically.
+
+run_id: ""
+run_date: "YYYY-MM-DD"
+project_status: "preliminary"
+operator: "Copeland Baker"
+repo:
+  repository: "cbaker20-cyber/connectome-perturbation"
+  branch: ""
+  commit: ""
+
+environment:
+  environment_file: "environment.yml"
+  python_version: ""
+  brian2_version: ""
+  numpy_version: ""
+  backend: "numpy or cython"
+  operating_system: ""
+
+inputs:
+  annotations:
+    local_path: "flywire_annotations.tsv"
+    role: "annotation table"
+    source_name: ""
+    release_or_materialization: ""
+    canonical_url_or_doi: ""
+    license_or_terms: ""
+    access_date: ""
+    byte_size: ""
+    sha256: ""
+    schema_notes: ""
+  completeness:
+    local_path: ""
+    source_name: ""
+    release_or_materialization: ""
+    sha256: ""
+  connectivity:
+    local_path: ""
+    source_name: ""
+    release_or_materialization: ""
+    sha256: ""
+  source_contexts:
+    manifest_path: "metadata/source_contexts/source_context_manifest.csv"
+    context_mode: "matched_size"
+    context_names: []
+    context_files: []
+
+configuration:
+  script: ""
+  command: |
+    
+  random_seed: ""
+  n_run: ""
+  t_run_ms: ""
+  n_proc: ""
+  group_by: ""
+  target_names: []
+  motor_set_definition: ""
+
+outputs:
+  output_dir: ""
+  primary_summary: ""
+  run_info: ""
+  logs: []
+  figures: []
+
+validation_checks:
+  source_id_integrity:
+    flywire_ids_parsed_directly_as_int: false
+    sugar_ids_found: ""
+    sugar_ids_expected: 21
+  artifact_policy_checked: false
+  documentation_validator_passed: false
+  sanity_checks: []
+
+interpretation:
+  claim_supported: ""
+  claim_weakened: ""
+  limitations:
+    - ""
+  next_step:
+    - ""
+
+lab_notebook_sync:
+  living_research_log_entry: ""
+  experiment_registry_row: ""
+  results_ledger_rows: []
+  claims_register_rows: []
