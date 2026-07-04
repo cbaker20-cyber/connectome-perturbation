@@ -1,0 +1,47 @@
+name: Research safety checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  safety:
+    name: ID parsing, artifact policy, documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Compile safety scripts
+        run: |
+          python -m py_compile tools/check_no_unsafe_id_parsing.py tools/check_repo_artifact_policy.py tools/validate_research_docs.py
+
+      - name: Block newly introduced unsafe FlyWire ID parsing
+        run: |
+          python tools/check_no_unsafe_id_parsing.py --changed-only --base-ref main | tee id_parsing_report.txt
+
+      - name: Repository artifact policy gate
+        run: |
+          python tools/check_repo_artifact_policy.py | tee artifact_policy_report.txt
+
+      - name: Validate living research docs
+        run: |
+          python tools/validate_research_docs.py | tee research_docs_report.txt
+
+      - name: Upload safety reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-safety-reports
+          path: |
+            id_parsing_report.txt
+            artifact_policy_report.txt
+            research_docs_report.txt
+          if-no-files-found: ignore
