@@ -16,4 +16,4 @@ jobs:
         run: |
           python tools/validate_research_docs.py
           python tools/check_repo_artifact_policy.py
-          python tools/check_no_unsafe_id_parsing.py --changed-only --base-ref main
+          python tools/check_no_unsafe_id_parsing.py --changed-only --base-ref sts-bora-framework-20260623
