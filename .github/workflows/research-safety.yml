@@ -25,7 +25,7 @@ jobs:
 
       - name: Block newly introduced unsafe FlyWire ID parsing
         run: |
-          python tools/check_no_unsafe_id_parsing.py --changed-only --base-ref main | tee id_parsing_report.txt
+          python tools/check_no_unsafe_id_parsing.py --changed-only --base-ref sts-bora-framework-20260623 | tee id_parsing_report.txt
 
       - name: Repository artifact policy gate
         run: |
