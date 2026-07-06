@@ -2,30 +2,12 @@
 """
 Run context-conditioned perturbation sweeps for the benchmark.
 
-This script runs intact baselines and synaptic-output-lesion perturbations for
-multiple source contexts and perturbation targets. It is resumable: existing
-parquet outputs are skipped unless --force is passed.
+This script runs intact baselines and synaptic-output perturbations for multiple
+source contexts and perturbation targets. It is resumable: existing parquet
+outputs are skipped unless --force is passed.
 
-Outputs:
-    results/context_perturbation_sweep/sweep_summary.csv
-    results/context_perturbation_sweep/sweep_run_info.csv
-    results/context_perturbation_sweep/*.parquet
-
-Example overnight run:
-    python tools/run_context_perturbation_sweep.py \
-        --annotations flywire_annotations.tsv \
-        --completeness Drosophila_brain_model/2023_03_23_completeness_630_final.csv \
-        --connectivity Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet \
-        --contexts metadata/source_contexts/source_context_manifest.csv \
-        --context-mode matched_size \
-        --context-names sugar,gustatory,mechanosensory,visual_projection,sensory_ascending \
-        --group-by cell_class \
-        --min-group-size 20 \
-        --max-targets 60 \
-        --n-run 5 \
-        --t-run-ms 1000 \
-        --n-proc 1 \
-        --output-dir results/context_perturbation_sweep
+FlyWire/root IDs are parsed directly from string/integer text. Do not coerce
+18-digit IDs through floats.
 """
 
 from __future__ import annotations
@@ -41,8 +23,6 @@ import numpy as np
 import pandas as pd
 from brian2 import ms
 
-# run_exp lives in model.py. User may have a project-root copy or a local
-# Drosophila_brain_model copy.
 sys.path.insert(0, str(Path.cwd()))
 sys.path.insert(0, str(Path.cwd() / "Drosophila_brain_model"))
 from model import run_exp, default_params  # type: ignore
@@ -55,28 +35,53 @@ def safe_name(text: str, max_len: int = 80) -> str:
     return text[:max_len] or "unnamed"
 
 
+def parse_root_id(value: object) -> int | None:
+    if value is None or pd.isna(value):
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    if re.fullmatch(r"\d+", text):
+        return int(text)
+    if re.fullmatch(r"\d+\.0", text):
+        return int(text[:-2])
+    return None
+
+
 def parse_id_file(path: str | Path) -> list[int]:
     p = Path(path)
     if not p.exists():
         return []
-    text = p.read_text().strip()
+    text = p.read_text(encoding="utf-8", errors="replace").strip()
     if not text:
         return []
-    toks = re.split(r"[\s,;]+", text)
-    # FlyWire/root IDs are often 18 digits. Never parse them through float.
-    return [int(t) for t in toks if t]
+    ids = []
+    for token in re.split(r"[\s,;]+", text):
+        rid = parse_root_id(token)
+        if rid is not None:
+            ids.append(rid)
+    return sorted(set(ids))
+
+
+def load_sim_ids(completeness: Path) -> set[int]:
+    comp = pd.read_csv(completeness, index_col=0)
+    ids = set()
+    for value in comp.index:
+        rid = parse_root_id(value)
+        if rid is not None:
+            ids.add(rid)
+    return ids
 
 
 def load_annotations(annotations: Path, completeness: Path) -> pd.DataFrame:
-    ann = pd.read_csv(annotations, sep="\t", low_memory=False)
+    ann = pd.read_csv(annotations, sep="\t", dtype={"root_id": "string"}, low_memory=False)
     if "root_id" not in ann.columns:
         raise ValueError("annotations must contain root_id")
-    comp = pd.read_csv(completeness, index_col=0)
-    sim_ids = set(pd.to_numeric(pd.Series(comp.index), errors="coerce").dropna().astype("int64").map(int))
+    sim_ids = load_sim_ids(completeness)
     ann = ann.copy()
-    ann["root_id"] = pd.to_numeric(ann["root_id"], errors="coerce")
+    ann["root_id"] = ann["root_id"].map(parse_root_id)
     ann = ann.dropna(subset=["root_id"])
-    ann["root_id"] = ann["root_id"].astype("int64").map(int)
+    ann["root_id"] = ann["root_id"].map(int)
     ann = ann[ann["root_id"].isin(sim_ids)].copy()
     for col in ["super_class", "cell_class", "cell_type", "top_nt"]:
         if col not in ann.columns:
@@ -214,9 +219,9 @@ def main() -> None:
 
         for idx, (target_name, target_ids) in enumerate(targets, start=1):
             target_safe = safe_name(target_name)
-            exp_name = f"ctx_{ctx_safe}__lesion_{args.group_by}_{target_safe}"
+            exp_name = f"ctx_{ctx_safe}__target_{args.group_by}_{target_safe}"
             exp_path = out / f"{exp_name}.parquet"
-            print(f"[{idx}/{len(targets)}] {context_name} | lesion {target_name} ({len(target_ids)} neurons)")
+            print(f"[{idx}/{len(targets)}] {context_name} | target {target_name} ({len(target_ids)} neurons)")
 
             run_exp(
                 exp_name=exp_name,
@@ -243,7 +248,7 @@ def main() -> None:
                 "n_source_ids": len(source_ids),
                 "perturbation_group_by": args.group_by,
                 "perturbation_target": target_name,
-                "n_lesioned": len(target_ids),
+                "n_perturbed": len(target_ids),
                 "baseline_exp_name": baseline_exp,
                 "perturbation_exp_name": exp_name,
                 "n_run": args.n_run,
