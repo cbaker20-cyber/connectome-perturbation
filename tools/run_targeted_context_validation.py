@@ -1,44 +1,12 @@
 #!/usr/bin/env python3
-"""
-Targeted Context Validation Runner.
+"""Targeted Context Validation Runner.
 
 Purpose:
     Run a small, explicit, hypothesis-driven Brian2 validation set instead of a
     broad brute-force sweep.
 
-This is the next step after the structural surrogate benchmark. It tests whether
-surrogate-prioritized context-target pairs produce actual motor-output changes
-in the nonlinear spiking model.
-
-Default validation design:
-    contexts: sensory_ascending, mechanosensory, gustatory, sugar
-    targets:  AN, brain_motor_neuron
-
-Interpretation:
-    - brain_motor_neuron is a positive-control / motor-proximal target.
-    - AN is the upstream biological candidate.
-    - Any result is preliminary until trial count is increased and seed robustness
-      is assessed.
-
-Outputs:
-    results/targeted_context_validation/sweep_summary.csv
-    results/targeted_context_validation/sweep_run_info.csv
-    results/targeted_context_validation/*.parquet
-
-Example:
-    python tools/run_targeted_context_validation.py \
-      --annotations flywire_annotations.tsv \
-      --completeness Drosophila_brain_model/2023_03_23_completeness_630_final.csv \
-      --connectivity Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet \
-      --contexts metadata/source_contexts/source_context_manifest.csv \
-      --context-mode matched_size \
-      --context-names sensory_ascending,mechanosensory,gustatory,sugar \
-      --target-names AN,brain_motor_neuron \
-      --group-by cell_class \
-      --n-run 3 \
-      --t-run-ms 1000 \
-      --n-proc 1 \
-      --output-dir results/targeted_context_validation
+This script parses FlyWire root IDs directly from strings. Do not convert these
+18-digit identifiers with pandas numeric coercion before integer conversion.
 """
 
 from __future__ import annotations
@@ -65,28 +33,53 @@ def safe_name(text: str, max_len: int = 80) -> str:
     return text[:max_len] or "unnamed"
 
 
+def parse_root_id(value: object) -> int | None:
+    if value is None or pd.isna(value):
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    if re.fullmatch(r"\d+", text):
+        return int(text)
+    if re.fullmatch(r"\d+\.0", text):
+        return int(text[:-2])
+    return None
+
+
 def parse_id_file(path: str | Path) -> list[int]:
     p = Path(path)
     if not p.exists():
         return []
-    text = p.read_text().strip()
+    text = p.read_text(encoding="utf-8", errors="replace").strip()
     if not text:
         return []
-    toks = re.split(r"[\s,;]+", text)
-    # FlyWire root IDs are 18-digit integers. Never parse through float.
-    return [int(t) for t in toks if t]
+    ids = []
+    for token in re.split(r"[\s,;]+", text):
+        rid = parse_root_id(token)
+        if rid is not None:
+            ids.append(rid)
+    return sorted(set(ids))
+
+
+def load_sim_ids(completeness: Path) -> set[int]:
+    comp = pd.read_csv(completeness, index_col=0)
+    ids = set()
+    for value in comp.index:
+        rid = parse_root_id(value)
+        if rid is not None:
+            ids.add(rid)
+    return ids
 
 
 def load_annotations(annotations: Path, completeness: Path) -> pd.DataFrame:
-    ann = pd.read_csv(annotations, sep="\t", low_memory=False)
+    ann = pd.read_csv(annotations, sep="\t", dtype={"root_id": "string"}, low_memory=False)
     if "root_id" not in ann.columns:
         raise ValueError("annotations must contain root_id")
-    comp = pd.read_csv(completeness, index_col=0)
-    sim_ids = set(pd.to_numeric(pd.Series(comp.index), errors="coerce").dropna().astype("int64").map(int))
+    sim_ids = load_sim_ids(completeness)
     ann = ann.copy()
-    ann["root_id"] = pd.to_numeric(ann["root_id"], errors="coerce")
+    ann["root_id"] = ann["root_id"].map(parse_root_id)
     ann = ann.dropna(subset=["root_id"])
-    ann["root_id"] = ann["root_id"].astype("int64").map(int)
+    ann["root_id"] = ann["root_id"].map(int)
     ann = ann[ann["root_id"].isin(sim_ids)].copy()
     for col in ["super_class", "cell_class", "cell_type", "top_nt"]:
         if col not in ann.columns:
@@ -100,10 +93,14 @@ def load_contexts(manifest_path: Path, mode: str, context_names: str) -> list[tu
     man = man[man["mode"].astype(str).eq(mode)].copy()
     wanted = [x.strip() for x in context_names.split(",") if x.strip()]
     man = man[man["context_name"].astype(str).isin(set(wanted))].copy()
+    found = set(man["context_name"].astype(str))
+    missing = [name for name in wanted if name not in found]
+    if missing:
+        raise ValueError(f"Requested context(s) not found in manifest: {', '.join(missing)}")
     order = {name: i for i, name in enumerate(wanted)}
     man["_order"] = man["context_name"].map(order)
     man = man.sort_values("_order")
-    contexts: list[tuple[str, list[int], str]] = []
+    contexts = []
     for row in man.itertuples(index=False):
         p = Path(str(row.path))
         ids = parse_id_file(p)
@@ -113,15 +110,20 @@ def load_contexts(manifest_path: Path, mode: str, context_names: str) -> list[tu
 
 def select_targets(ann: pd.DataFrame, group_by: str, target_names: str) -> list[tuple[str, list[int]]]:
     target_order = [x.strip() for x in target_names.split(",") if x.strip()]
+    if not target_order:
+        raise ValueError("At least one target name is required")
     a = ann.copy()
     a[group_by] = a[group_by].replace("", "unannotated")
-    targets: list[tuple[str, list[int]]] = []
+    targets = []
+    missing = []
     for target in target_order:
         ids = sorted(set(a.loc[a[group_by].astype(str).eq(target), "root_id"].map(int).tolist()))
         if not ids:
-            print(f"WARNING: target {target!r} has 0 IDs for group_by={group_by}; skipping")
+            missing.append(target)
             continue
         targets.append((target, ids))
+    if missing:
+        raise ValueError(f"Requested target(s) not found for group_by={group_by}: {', '.join(missing)}")
     return targets
 
 
@@ -168,13 +170,13 @@ def main() -> None:
     parser.add_argument("--connectivity", default="Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet")
     parser.add_argument("--contexts", default="metadata/source_contexts/source_context_manifest.csv")
     parser.add_argument("--context-mode", default="matched_size")
-    parser.add_argument("--context-names", default="sensory_ascending,mechanosensory,gustatory,sugar")
+    parser.add_argument("--context-names", default="sugar,gustatory")
     parser.add_argument("--group-by", default="cell_class", choices=["super_class", "cell_class", "cell_type"])
     parser.add_argument("--target-names", default="AN,brain_motor_neuron")
-    parser.add_argument("--n-run", type=int, default=3)
+    parser.add_argument("--n-run", type=int, default=30)
     parser.add_argument("--t-run-ms", type=float, default=1000.0)
     parser.add_argument("--n-proc", type=int, default=1)
-    parser.add_argument("--output-dir", default="results/targeted_context_validation")
+    parser.add_argument("--output-dir", default="results/high_trial_targeted_validation")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
@@ -201,45 +203,19 @@ def main() -> None:
     summary_rows = []
     for context_name, source_ids, source_path in contexts:
         if not source_ids and context_name != "no_input":
-            print(f"Skipping context {context_name}: no source IDs")
-            continue
+            raise ValueError(f"Context {context_name} has no source IDs")
         ctx_safe = safe_name(context_name)
         baseline_exp = f"ctx_{ctx_safe}_intact"
         baseline_path = out / f"{baseline_exp}.parquet"
         print(f"\n=== Context {context_name}: {len(source_ids)} sources ===")
-        run_exp(
-            exp_name=baseline_exp,
-            neu_exc=source_ids,
-            neu_slnc=[],
-            path_res=out,
-            path_comp=args.completeness,
-            path_con=args.connectivity,
-            params=params,
-            n_proc=args.n_proc,
-            force_overwrite=args.force,
-        )
+        run_exp(exp_name=baseline_exp, neu_exc=source_ids, neu_slnc=[], path_res=out, path_comp=args.completeness, path_con=args.connectivity, params=params, n_proc=args.n_proc, force_overwrite=args.force)
 
         for idx, (target_name, target_ids) in enumerate(targets, start=1):
             target_safe = safe_name(target_name)
-            exp_name = f"ctx_{ctx_safe}__lesion_{args.group_by}_{target_safe}"
+            exp_name = f"ctx_{ctx_safe}__target_{args.group_by}_{target_safe}"
             exp_path = out / f"{exp_name}.parquet"
-            print(f"[{idx}/{len(targets)}] {context_name} | lesion {target_name} ({len(target_ids)} neurons)")
-            run_exp(
-                exp_name=exp_name,
-                neu_exc=source_ids,
-                neu_slnc=target_ids,
-                path_res=out,
-                path_comp=args.completeness,
-                path_con=args.connectivity,
-                params=params,
-                n_proc=args.n_proc,
-                force_overwrite=args.force,
-            )
-            try:
-                mm = motor_metrics(baseline_path, exp_path, motor_ids, args.n_run, t_run_s)
-            except Exception as e:
-                print(f"  WARNING: motor metric failed for {exp_name}: {e}")
-                mm = {}
+            print(f"[{idx}/{len(targets)}] {context_name} | target {target_name} ({len(target_ids)} neurons)")
+            run_exp(exp_name=exp_name, neu_exc=source_ids, neu_slnc=target_ids, path_res=out, path_comp=args.completeness, path_con=args.connectivity, params=params, n_proc=args.n_proc, force_overwrite=args.force)
             row = {
                 "input_context": context_name,
                 "context_mode": args.context_mode,
@@ -247,17 +223,16 @@ def main() -> None:
                 "n_source_ids": len(source_ids),
                 "perturbation_group_by": args.group_by,
                 "perturbation_target": target_name,
-                "n_lesioned": len(target_ids),
+                "n_perturbed": len(target_ids),
                 "baseline_exp_name": baseline_exp,
                 "perturbation_exp_name": exp_name,
                 "n_run": args.n_run,
                 "t_run_s": t_run_s,
             }
-            row.update(mm)
+            row.update(motor_metrics(baseline_path, exp_path, motor_ids, args.n_run, t_run_s))
             summary_rows.append(row)
             pd.DataFrame(summary_rows).to_csv(out / "sweep_summary.csv", index=False)
 
-    elapsed = time() - start
     pd.DataFrame([{
         "annotations": args.annotations,
         "completeness": args.completeness,
@@ -271,11 +246,11 @@ def main() -> None:
         "t_run_ms": args.t_run_ms,
         "n_proc": args.n_proc,
         "output_dir": str(out),
-        "elapsed_s": elapsed,
+        "elapsed_s": time() - start,
         "n_summary_rows": len(summary_rows),
     }]).to_csv(out / "sweep_run_info.csv", index=False)
     print(f"\nDONE. Summary: {out / 'sweep_summary.csv'}")
-    print(f"Elapsed seconds: {elapsed:.1f}")
+    print(f"Elapsed seconds: {time() - start:.1f}")
 
 
 if __name__ == "__main__":
