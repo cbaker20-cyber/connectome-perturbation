@@ -49,7 +49,7 @@ Write-Host $CommandText
     --n-proc 1 `
     --output-dir $OutDir 2>&1 | Tee-Object -FilePath (Join-Path $LogDir "high_trial_validation.log")
 
-& $PythonExe tools\summarize_targeted_validation.py `
+& $PythonExe tools\rank_targeted_validation.py `
     --summary (Join-Path $OutDir "sweep_summary.csv") `
     --output-dir $OutDir
 
