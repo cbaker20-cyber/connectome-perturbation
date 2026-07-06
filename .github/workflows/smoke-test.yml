@@ -12,6 +12,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - name: Compile docs validator
+      - name: Compile lightweight Python tools
         run: |
-          python -m py_compile tools/validate_research_docs.py
+          python -m py_compile tools/validate_research_docs.py tools/check_no_unsafe_id_parsing.py tools/check_repo_artifact_policy.py tools/make_run_manifest.py tools/rank_targeted_validation.py
