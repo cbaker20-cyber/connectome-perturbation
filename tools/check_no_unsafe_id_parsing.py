@@ -13,6 +13,8 @@ SCAN_SUFFIXES = {'.py', '.ps1'}
 
 BAD_DIRECT = re.compile('int' + r'\s*\(\s*' + 'float' + r'\s*\(')
 BAD_CAST = re.compile('astype' + r'\s*\(\s*[\'\"]?float[^)]*\)\s*\.\s*astype\s*\(\s*[\'\"]?int', re.IGNORECASE)
+PANDAS_NUMERIC = re.compile(r'pd\.to_numeric\s*\(')
+ID_TEXT = re.compile(r'(root_id|flywire|FlyWire|source_id|target_id|neu_exc|neu_slnc)')
 
 
 def changed_files(base_ref: str | None) -> list[Path]:
@@ -52,6 +54,8 @@ def scan(path: Path) -> list[str]:
         stripped = line.strip()
         if BAD_DIRECT.search(stripped) or BAD_CAST.search(stripped):
             findings.append(f'{rel}:{line_no}: unsafe large-ID parser pattern: {stripped}')
+        if PANDAS_NUMERIC.search(stripped) and ID_TEXT.search(stripped):
+            findings.append(f'{rel}:{line_no}: pandas numeric coercion near ID text: {stripped}')
     return findings
 
 
