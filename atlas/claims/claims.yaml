@@ -1,0 +1,33 @@
+claims:
+  - id: C001
+    text: "The project can preserve large FlyWire-style neuron IDs without float rounding."
+    status: unsupported
+    allowed_language: "64-bit-safe ID validation"
+    evidence: []
+    missing_evidence:
+      - "unit test with 18-digit IDs"
+      - "validation report on real inputs"
+    forbidden_expansion: "Do not claim all data are valid until source manifests and checksums pass."
+
+  - id: C002
+    text: "Toy graph lesion scoring can recover a known critical neuron and edge."
+    status: unsupported
+    allowed_language: "toy-validated perturbation scoring"
+    evidence: []
+    missing_evidence:
+      - "toy graph fixture"
+      - "node lesion test"
+      - "edge lesion test"
+    forbidden_expansion: "Do not generalize toy graph success to the full connectome."
+
+  - id: C003
+    text: "Functional vulnerability differs from structural centrality."
+    status: speculative
+    allowed_language: "structural-vs-functional comparison under this model"
+    evidence: []
+    missing_evidence:
+      - "node/edge vulnerability scores"
+      - "degree/PageRank/betweenness baselines"
+      - "top-k overlap and correlation analysis"
+      - "degree-matched random controls"
+    forbidden_expansion: "Do not claim real biological causality."
