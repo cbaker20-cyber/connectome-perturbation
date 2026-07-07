@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FLY Perturbation Run Record",
+  "type": "object",
+  "required": [
+    "run_id",
+    "created_at",
+    "code_version",
+    "context",
+    "model",
+    "input_data",
+    "perturbation",
+    "metrics",
+    "outputs",
+    "validation_status"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "minLength": 1},
+    "code_version": {
+      "type": "object",
+      "required": ["commit"],
+      "properties": {
+        "commit": {"type": "string"},
+        "branch": {"type": "string"}
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["name", "input_neurons", "output_neurons"],
+      "properties": {
+        "name": {"type": "string"},
+        "input_neurons": {"type": "array", "items": {"type": "string"}},
+        "output_neurons": {"type": "array", "items": {"type": "string"}},
+        "description": {"type": "string"}
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["name", "parameters", "random_seed"],
+      "properties": {
+        "name": {"type": "string"},
+        "parameters": {"type": "object"},
+        "random_seed": {"type": ["integer", "string"]}
+      }
+    },
+    "input_data": {
+      "type": "object",
+      "required": ["manifest", "id_validation"],
+      "properties": {
+        "manifest": {"type": "string"},
+        "id_validation": {"type": "string"},
+        "checksums": {"type": "object"}
+      }
+    },
+    "perturbation": {
+      "type": "object",
+      "required": ["target_type", "targets"],
+      "properties": {
+        "target_type": {"enum": ["node", "edge", "node_set", "edge_set", "none"]},
+        "targets": {"type": "array", "items": {"type": "string"}},
+        "method": {"type": "string"}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["primary"],
+      "properties": {
+        "primary": {"type": "string"},
+        "values": {"type": "object"}
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "required": ["files"],
+      "properties": {
+        "files": {"type": "array", "items": {"type": "string"}},
+        "figure_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "validation_status": {
+      "enum": ["toy_validated", "exploratory", "blocked", "invalid", "validated"]
+    },
+    "notes": {"type": "string"}
+  }
+}
