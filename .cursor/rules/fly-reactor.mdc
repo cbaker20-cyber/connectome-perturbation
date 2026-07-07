@@ -1,0 +1,29 @@
+---
+description: FLY Reactor rules for safe research automation
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# FLY Reactor Rules
+
+Follow `AGENTS.md`, `ROADMAP.md`, and `RESEARCH_CLAIMS.md`.
+
+Do not optimize for speed. Optimize for validated progress.
+
+Before changing code:
+
+1. State the exact issue being solved.
+2. Identify files likely to change.
+3. Identify tests/checks to run.
+4. Identify scientific risks.
+
+After changing code:
+
+1. List files changed.
+2. List commands run.
+3. Report exact test output.
+4. State remaining uncertainty.
+5. Recommend next issue.
+
+Do not claim real biological behavior. Use model-predicted vulnerability language only.
