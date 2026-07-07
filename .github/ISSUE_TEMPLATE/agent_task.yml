@@ -1,0 +1,54 @@
+name: Agent Task
+description: A tightly scoped issue for the FLY automation agents.
+title: "[AGENT READY] "
+labels: []
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One concrete outcome. No vague improvement tasks.
+      placeholder: Implement 64-bit-safe neuron ID validation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: Definition of done
+      description: What must be true before the issue is complete?
+      placeholder: |
+        - Unit tests catch float-converted IDs.
+        - Validation report is saved.
+        - Existing behavior is unchanged.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: Required tests/checks
+      placeholder: |
+        pytest -q
+        python tools/validate_atlas.py
+    validations:
+      required: true
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk level
+      options:
+        - safe
+        - manual review required
+        - dangerous / do not automate
+    validations:
+      required: true
+
+  - type: textarea
+    id: forbidden
+    attributes:
+      label: Explicitly forbidden
+      placeholder: Do not change data files. Do not claim biological validation.
+    validations:
+      required: false
