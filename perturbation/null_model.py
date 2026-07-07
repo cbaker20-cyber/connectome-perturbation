@@ -87,7 +87,9 @@ def run_target_and_null(
 ) -> pd.DataFrame:
     """Run/load target perturbation and same-size random controls."""
 
+    params_override = None
     if n_run is not None:
+        params_override = {"n_run": int(n_run)}
         PARAMS["n_run"] = int(n_run)
 
     Path(PATH_RES).mkdir(exist_ok=True)
@@ -95,7 +97,7 @@ def run_target_and_null(
     rows: list[dict[str, float | int | str]] = []
 
     target_exp = f"null_target_{target_group_name}"
-    run_single_perturbation(target_ids, target_exp, force=force)
+    run_single_perturbation(target_ids, target_exp, force=force, params_override=params_override)
     target_scores = effect_scores(compare_to_baseline(target_exp), threshold_hz=threshold_hz)
     rows.append({
         "kind": "target",
@@ -111,7 +113,7 @@ def run_target_and_null(
 
     for idx, group in enumerate(random_groups, start=1):
         exp_name = f"null_{target_group_name}_same_size_{idx:04d}"
-        run_single_perturbation(group, exp_name, force=force)
+        run_single_perturbation(group, exp_name, force=force, params_override=params_override)
         scores = effect_scores(compare_to_baseline(exp_name), threshold_hz=threshold_hz)
         rows.append({
             "kind": "same_size_random",
