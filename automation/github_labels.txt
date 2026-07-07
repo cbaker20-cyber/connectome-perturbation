@@ -1,0 +1,17 @@
+agent:ready
+agent:working
+agent:blocked
+agent:review-needed
+agent:fix-ci
+priority:nuclear
+priority:high
+priority:normal
+type:science
+type:code
+type:test
+type:figure
+type:docs
+type:refactor
+risk:safe
+risk:manual
+risk:dangerous
