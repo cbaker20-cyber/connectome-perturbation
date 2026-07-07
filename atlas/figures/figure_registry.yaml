@@ -1,0 +1,35 @@
+figures:
+  - id: F001
+    title: "FLY Reactor pipeline"
+    status: planned
+    script: null
+    input_files: []
+    supports_claims: []
+    weakness: "Pipeline figure must be tied to tested modules."
+
+  - id: F002
+    title: "ID validation report"
+    status: planned
+    script: null
+    input_files: []
+    supports_claims:
+      - C001
+    weakness: "Must show real ID integrity checks."
+
+  - id: F003
+    title: "Toy graph lesion proof"
+    status: planned
+    script: null
+    input_files: []
+    supports_claims:
+      - C002
+    weakness: "Toy graph must include a misleading hub so the method proves more than degree ranking."
+
+  - id: F004
+    title: "Functional vulnerability versus graph centrality"
+    status: planned
+    script: null
+    input_files: []
+    supports_claims:
+      - C003
+    weakness: "Requires baselines and controls."
