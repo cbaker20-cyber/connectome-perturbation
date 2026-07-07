@@ -9,10 +9,19 @@ from brian2 import ms
 from analyze import compare_to_baseline
 from baseline import NEU_SUGAR, PATH_COMP, PATH_CON, PATH_RES, PARAMS
 
-def run_single_perturbation(neuron_ids, exp_name, force=False):
+
+def run_single_perturbation(neuron_ids, exp_name, force=False, params_override=None):
+    """Run one sugar-input perturbation experiment.
+
+    `params_override` exists so null-model runs can control n_run instead of
+    being silently pinned to the old exploratory default.
+    """
+
     Path(PATH_RES).mkdir(exist_ok=True)
     params = PARAMS.copy()
     params["n_run"] = 5
+    if params_override:
+        params.update(params_override)
     run_exp(
         exp_name=exp_name,
         neu_exc=NEU_SUGAR,
@@ -24,6 +33,7 @@ def run_single_perturbation(neuron_ids, exp_name, force=False):
         n_proc=1,
         force_overwrite=force
     )
+
 
 def run_perturbation_sweep(groups, force=False):
     results = []
@@ -45,6 +55,7 @@ def run_perturbation_sweep(groups, force=False):
     summary.to_csv(f"{PATH_RES}/perturbation_summary.csv")
     print(f"Summary saved to {PATH_RES}/perturbation_summary.csv")
     return summary
+
 
 if __name__ == "__main__":
     df = pd.read_csv("Drosophila_brain_model/2023_03_23_completeness_630_final.csv", index_col=0)
