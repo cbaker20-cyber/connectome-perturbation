@@ -114,11 +114,15 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
             continue
         missing = REQUIRED_INPUT_FIELDS - set(record)
         require(not missing, f"input {idx} missing fields: {sorted(missing)}", errors)
-        path = repo_root / record.get("path", "")
-        require(path.exists(), f"input path missing on disk: {record.get('path')}", errors)
+        path_value = record.get("path")
+        require(isinstance(path_value, str) and bool(path_value.strip()), f"input {idx} path must be a non-empty string", errors)
+        if not isinstance(path_value, str) or not path_value.strip():
+            continue
+        path = repo_root / path_value
+        require(path.exists(), f"input path missing on disk: {path_value}", errors)
         if path.exists():
-            require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {record.get('path')}", errors)
-            require(sha256_file(path) == record.get("sha256"), f"sha256 mismatch: {record.get('path')}", errors)
+            require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {path_value}", errors)
+            require(sha256_file(path) == record.get("sha256"), f"sha256 mismatch: {path_value}", errors)
         provenance = record.get("provenance", {})
         require(isinstance(provenance, dict), f"input {idx} provenance must be an object", errors)
         if not isinstance(provenance, dict):
