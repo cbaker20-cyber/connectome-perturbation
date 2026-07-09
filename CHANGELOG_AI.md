@@ -2,6 +2,13 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Conservative claim ledger
+
+- Added `docs/claim_ledger.md` to separate verified repository facts from assumptions, hypotheses, future work, and blocked claims.
+- Added promotion rules requiring rerunnable commands, manifests/checksums, passing tests, source citations, or committed experiment artifacts before project statements can be treated as verified.
+- Added report-writing guardrails so early project summaries do not overclaim biological significance before validated experiments exist.
+- Updated `TASKS.md` to mark the claim-ledger documentation task as started/completed for the current reproducibility PR.
+
 ## 2026-07-09 — Declared output artifact validation
 
 - Updated `tools/validate_reproducibility.py` so optional `output_manifest.outputs` records are validated when present.
