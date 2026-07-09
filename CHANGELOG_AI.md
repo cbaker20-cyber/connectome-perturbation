@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Config checksum validation
+
+- Updated `tools/write_output_manifest.py` to record `config_sha256` for the smoke config referenced by `config_path`.
+- Updated `tools/validate_reproducibility.py` to require `config_sha256` and reject output manifests whose recorded config checksum does not match the current config file contents.
+- Added regression coverage so a stale `output_manifest.json` cannot silently pass after `configs/smoke_run.yaml` changes.
+
 ## 2026-07-09 — Manifest validation hardening
 
 - Updated `tools/validate_reproducibility.py` so `data/input_manifest.json` must include top-level schema fields: `schema_version`, `generated_at_utc`, `input_count`, and `inputs`.
