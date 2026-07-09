@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import platform
@@ -36,6 +37,17 @@ def read_json(path: Path) -> dict | None:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str | None:
+    """Return a file checksum, or None when an optional metadata file is absent."""
+    if not path.exists():
+        return None
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(chunk_size), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/smoke_run.yaml")
@@ -46,6 +58,7 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = repo_root_from()
+    config_path = repo_root / args.config
     input_manifest_path = repo_root / args.input_manifest
     input_manifest = read_json(input_manifest_path)
     output_path = repo_root / args.output
@@ -57,6 +70,7 @@ def main() -> int:
         "command": " ".join(sys.argv),
         "repo_commit": git_commit(repo_root),
         "config_path": args.config,
+        "config_sha256": sha256_file(config_path),
         "input_manifest_path": args.input_manifest,
         "input_manifest_present": input_manifest is not None,
         "input_count": None if input_manifest is None else input_manifest.get("input_count"),
