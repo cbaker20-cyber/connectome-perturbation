@@ -8,7 +8,9 @@ Prioritized backlog for the connectome perturbation project.
 - [ ] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
 - [ ] Run `python tools/write_output_manifest.py --config configs/smoke_run.yaml --output output_manifest.json`.
 - [ ] Run `python tools/validate_reproducibility.py`.
-- [ ] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
+- [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
+  - `perturbation/baseline.py` now resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
+  - Remaining scripts still need the same treatment.
 - [ ] Decide whether materialization 630 or 783 is the canonical smoke target; document why.
 
 ## P1 — Scientific rigor
