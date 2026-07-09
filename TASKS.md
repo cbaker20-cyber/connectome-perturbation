@@ -9,8 +9,10 @@ Prioritized backlog for the connectome perturbation project.
 - [ ] Run `python tools/write_output_manifest.py --config configs/smoke_run.yaml --output output_manifest.json`.
 - [ ] Run `python tools/validate_reproducibility.py`.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
-  - `perturbation/baseline.py` now resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
-  - Remaining scripts still need the same treatment.
+  - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
+  - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
+  - `perturbation/analyze.py` now accepts a custom results directory so smoke runs are not silently compared against `results/`.
+  - Remaining older tools/scripts still need audit before production use.
 - [ ] Decide whether materialization 630 or 783 is the canonical smoke target; document why.
 
 ## P1 — Scientific rigor
@@ -39,5 +41,5 @@ Prioritized backlog for the connectome perturbation project.
 
 - Authoritative provenance for tracked data files is missing.
 - Existing result CSV is not tied to a command, config, seed, commit, or input checksums.
-- Path assumptions disagree with the current repository layout.
+- Some older scripts still contain historical path assumptions and need audit before use.
 - Open PRs already contain overlapping scaffolding; merge order should be reviewed before large refactors.
