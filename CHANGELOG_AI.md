@@ -2,6 +2,13 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Declared output artifact validation
+
+- Updated `tools/validate_reproducibility.py` so optional `output_manifest.outputs` records are validated when present.
+- Declared output artifact paths must now be repo-relative and stay inside the repository.
+- If a declared output record includes `sha256` or `size_bytes`, validation now checks those facts against the file on disk.
+- Added regression coverage for matching declared outputs, path escapes, and stale output digests.
+
 ## 2026-07-09 — Output writer malformed input-manifest hardening
 
 - Updated `tools/write_output_manifest.py` so malformed `input_manifest.inputs` values cannot crash metadata writing.
