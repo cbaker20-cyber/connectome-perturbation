@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 
@@ -100,3 +101,52 @@ def test_validate_reproducibility_rejects_absolute_config_path(tmp_path):
     validator.validate_output_manifest(repo_root, output_path, errors)
 
     assert any(error.startswith("output config_path must be repo-relative, not absolute:") for error in errors)
+
+
+def test_main_rejects_parent_directory_input_manifest_arg(tmp_path, monkeypatch, capsys):
+    validator = load_validator()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "validate_reproducibility.py",
+            "--repo-root",
+            str(repo_root),
+            "--input-manifest",
+            "../outside_input_manifest.json",
+            "--output-manifest",
+            "output_manifest.json",
+        ],
+    )
+
+    assert validator.main() == 1
+    captured = capsys.readouterr()
+
+    assert "--input-manifest must stay within the repository: ../outside_input_manifest.json" in captured.out
+
+
+def test_main_rejects_absolute_output_manifest_arg(tmp_path, monkeypatch, capsys):
+    validator = load_validator()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    outside_output = tmp_path / "outside_output_manifest.json"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "validate_reproducibility.py",
+            "--repo-root",
+            str(repo_root),
+            "--input-manifest",
+            "data/input_manifest.json",
+            "--output-manifest",
+            str(outside_output),
+        ],
+    )
+
+    assert validator.main() == 1
+    captured = capsys.readouterr()
+
+    assert "--output-manifest must be repo-relative, not absolute:" in captured.out
