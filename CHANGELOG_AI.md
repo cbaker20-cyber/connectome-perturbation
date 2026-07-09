@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Manifest validation hardening
+
+- Updated `tools/validate_reproducibility.py` so `data/input_manifest.json` must include top-level schema fields: `schema_version`, `generated_at_utc`, `input_count`, and `inputs`.
+- Added timezone-aware ISO-8601 validation for `input_manifest.generated_at_utc`, matching the existing output-manifest timestamp gate.
+- This prevents a stale or hand-edited input manifest without auditable generation time from passing the metadata smoke validator.
+
 ## 2026-07-09 — Perturbation manifest resolver wiring
 
 - Updated `perturbation/analyze.py` so `compare_to_baseline` and `load_firing_rates` accept a custom results directory instead of silently reading only `results/`.
