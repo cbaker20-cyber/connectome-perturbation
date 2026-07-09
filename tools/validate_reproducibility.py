@@ -81,6 +81,28 @@ def is_iso_datetime_with_timezone(value: Any) -> bool:
     return parsed.tzinfo is not None and parsed.utcoffset() is not None
 
 
+def repo_relative_path(repo_root: Path, path_value: str, label: str, errors: list[str]) -> Path | None:
+    """Resolve a manifest path only if it is relative and stays inside repo_root."""
+    if not isinstance(path_value, str) or not path_value.strip():
+        errors.append(f"{label} must be a non-empty string")
+        return None
+
+    candidate = Path(path_value)
+    if candidate.is_absolute():
+        errors.append(f"{label} must be repo-relative, not absolute: {path_value}")
+        return None
+
+    resolved_root = repo_root.resolve()
+    resolved_candidate = (resolved_root / candidate).resolve()
+    try:
+        resolved_candidate.relative_to(resolved_root)
+    except ValueError:
+        errors.append(f"{label} must stay within the repository: {path_value}")
+        return None
+
+    return resolved_candidate
+
+
 def load_json(path: Path, errors: list[str], label: str) -> dict[str, Any] | None:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -114,11 +136,10 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
             continue
         missing = REQUIRED_INPUT_FIELDS - set(record)
         require(not missing, f"input {idx} missing fields: {sorted(missing)}", errors)
-        path_value = record.get("path")
-        require(isinstance(path_value, str) and bool(path_value.strip()), f"input {idx} path must be a non-empty string", errors)
-        if not isinstance(path_value, str) or not path_value.strip():
+        path = repo_relative_path(repo_root, record.get("path"), f"input {idx} path", errors)
+        if path is None:
             continue
-        path = repo_root / path_value
+        path_value = record.get("path")
         require(path.exists(), f"input path missing on disk: {path_value}", errors)
         if path.exists():
             require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {path_value}", errors)
@@ -154,11 +175,10 @@ def expected_input_checksums(input_manifest: dict[str, Any] | None) -> list[dict
 
 
 def validate_config_checksum(repo_root: Path, manifest: dict[str, Any], errors: list[str]) -> None:
-    config_path_value = manifest.get("config_path")
-    require(isinstance(config_path_value, str) and bool(config_path_value.strip()), "output config_path must be a non-empty string", errors)
-    if not isinstance(config_path_value, str) or not config_path_value.strip():
+    config_path = repo_relative_path(repo_root, manifest.get("config_path"), "output config_path", errors)
+    if config_path is None:
         return
-    config_path = repo_root / config_path_value
+    config_path_value = manifest.get("config_path")
     require(config_path.exists(), f"output config_path missing on disk: {config_path_value}", errors)
     if config_path.exists():
         require(
