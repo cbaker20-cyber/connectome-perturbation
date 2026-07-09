@@ -188,7 +188,30 @@ def validate_config_checksum(repo_root: Path, manifest: dict[str, Any], errors: 
         )
 
 
-def validate_output_manifest(repo_root: Path, path: Path, errors: list[str], input_manifest: dict[str, Any] | None = None) -> None:
+def validate_input_manifest_reference(repo_root: Path, manifest: dict[str, Any], errors: list[str], input_manifest_path: Path | None = None) -> None:
+    """Validate the output manifest's pointer back to the input manifest.
+
+    An output manifest should not only copy input checksums; it should also name
+    the repo-relative input manifest it came from. This catches stale manifests
+    that were generated from one input manifest but validated against another.
+    """
+    recorded_path = repo_relative_path(repo_root, manifest.get("input_manifest_path"), "output input_manifest_path", errors)
+    if recorded_path is None or input_manifest_path is None:
+        return
+    require(
+        recorded_path == input_manifest_path.resolve(),
+        "output input_manifest_path does not match validated input manifest path",
+        errors,
+    )
+
+
+def validate_output_manifest(
+    repo_root: Path,
+    path: Path,
+    errors: list[str],
+    input_manifest: dict[str, Any] | None = None,
+    input_manifest_path: Path | None = None,
+) -> None:
     require(path.exists(), f"missing output manifest: {path}", errors)
     if not path.exists():
         return
@@ -205,6 +228,7 @@ def validate_output_manifest(repo_root: Path, path: Path, errors: list[str], inp
     require(manifest.get("claim_status") == "not_interpretable_as_neuroscience", "output manifest must preserve conservative claim status for smoke metadata", errors)
     require(isinstance(manifest.get("input_checksums", []), list), "output input_checksums must be a list", errors)
     validate_config_checksum(repo_root, manifest, errors)
+    validate_input_manifest_reference(repo_root, manifest, errors, input_manifest_path=input_manifest_path)
 
     expected_checksums = expected_input_checksums(input_manifest)
     if expected_checksums is not None:
@@ -239,8 +263,15 @@ def main() -> int:
 
     repo_root = Path(args.repo_root).resolve()
     errors: list[str] = []
-    input_manifest = validate_input_manifest(repo_root, repo_root / args.input_manifest, errors, require_provenance=args.require_provenance)
-    validate_output_manifest(repo_root, repo_root / args.output_manifest, errors, input_manifest=input_manifest)
+    input_manifest_path = repo_root / args.input_manifest
+    input_manifest = validate_input_manifest(repo_root, input_manifest_path, errors, require_provenance=args.require_provenance)
+    validate_output_manifest(
+        repo_root,
+        repo_root / args.output_manifest,
+        errors,
+        input_manifest=input_manifest,
+        input_manifest_path=input_manifest_path,
+    )
 
     if errors:
         print("Reproducibility validation failed:")
