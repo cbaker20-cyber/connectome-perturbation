@@ -77,8 +77,16 @@ def test_validate_reproducibility_accepts_metadata_only_manifests(tmp_path):
                 "sha256": tool.sha256_file(data_file),
                 "guessed_role": "unknown_input_like_file",
                 "provenance": {
+                    "dataset_name": None,
+                    "release_or_materialization": None,
                     "canonical_url_or_doi": None,
+                    "citation": None,
                     "license_or_terms": None,
+                    "access_date": None,
+                    "redistribution_status": "unknown",
+                    "schema_notes": None,
+                    "row_count": None,
+                    "preprocessing_notes": None,
                 },
             }
         ],
@@ -105,6 +113,47 @@ def test_validate_reproducibility_accepts_metadata_only_manifests(tmp_path):
     assert errors == []
 
 
+def test_validate_reproducibility_strict_provenance_rejects_unknown_fields(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    data_file = repo_root / "input.csv"
+    data_file.write_text("id\n1\n", encoding="utf-8")
+    input_manifest = {
+        "input_count": 1,
+        "inputs": [
+            {
+                "path": "input.csv",
+                "filename": "input.csv",
+                "extension": ".csv",
+                "size_bytes": data_file.stat().st_size,
+                "sha256": tool.sha256_file(data_file),
+                "guessed_role": "unknown_input_like_file",
+                "provenance": {
+                    "dataset_name": "FlyWire",
+                    "release_or_materialization": "630",
+                    "canonical_url_or_doi": None,
+                    "citation": "source-backed citation required",
+                    "license_or_terms": "unknown",
+                    "access_date": "2026-07-09",
+                    "redistribution_status": "unknown",
+                    "schema_notes": "source,target,weight",
+                    "row_count": 1,
+                    "preprocessing_notes": "none",
+                },
+            }
+        ],
+    }
+    manifest_path = repo_root / "input_manifest.json"
+    manifest_path.write_text(json.dumps(input_manifest), encoding="utf-8")
+
+    errors = []
+    tool.validate_input_manifest(repo_root, manifest_path, errors, require_provenance=True)
+
+    assert "input 0 provenance field `canonical_url_or_doi` is required for claim-ready validation" in errors
+    assert "input 0 provenance field `license_or_terms` is required for claim-ready validation" in errors
+    assert "input 0 provenance field `redistribution_status` is required for claim-ready validation" in errors
+
+
 def test_validate_reproducibility_reports_checksum_mismatch(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
@@ -121,8 +170,16 @@ def test_validate_reproducibility_reports_checksum_mismatch(tmp_path):
                 "sha256": "0" * 64,
                 "guessed_role": "unknown_input_like_file",
                 "provenance": {
+                    "dataset_name": None,
+                    "release_or_materialization": None,
                     "canonical_url_or_doi": None,
+                    "citation": None,
                     "license_or_terms": None,
+                    "access_date": None,
+                    "redistribution_status": "unknown",
+                    "schema_notes": None,
+                    "row_count": None,
+                    "preprocessing_notes": None,
                 },
             }
         ],
