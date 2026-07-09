@@ -2,6 +2,13 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Perturbation manifest resolver wiring
+
+- Updated `perturbation/analyze.py` so `compare_to_baseline` and `load_firing_rates` accept a custom results directory instead of silently reading only `results/`.
+- Updated `perturbation/perturb.py` so perturbation smoke sweeps resolve completeness/connectivity inputs through `data/input_manifest.json` using the same manifest IDs as baseline.
+- Removed the broken dependency on `PATH_COMP`, `PATH_CON`, and `PATH_RES` exports that no longer exist after baseline manifest migration.
+- Added CLI flags for manifest/input IDs/results directory/trial count so a smoke perturbation run can stay tied to manifest-resolved inputs.
+
 ## 2026-07-09 — Baseline manifest resolver wiring
 
 - Updated `perturbation/baseline.py` so the baseline sugar experiment resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename instead of directly hard-coding `Drosophila_brain_model/...` input paths.
