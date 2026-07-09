@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -67,10 +68,21 @@ def has_claim_ready_value(value: Any) -> bool:
     return True
 
 
+def is_iso_datetime_with_timezone(value: Any) -> bool:
+    """Return whether a value is an ISO-8601 datetime with timezone info."""
+    if not isinstance(value, str) or not value.strip():
+        return False
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return parsed.tzinfo is not None and parsed.utcoffset() is not None
+
+
 def load_json(path: Path, errors: list[str], label: str) -> dict[str, Any] | None:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
+    except JSONDecodeError as exc:
         errors.append(f"{label} is not valid JSON: {exc}")
         return None
     require(isinstance(value, dict), f"{label} must be a JSON object", errors)
@@ -137,6 +149,11 @@ def validate_output_manifest(path: Path, errors: list[str], input_manifest: dict
         return
     missing = REQUIRED_OUTPUT_FIELDS - set(manifest)
     require(not missing, f"output manifest missing fields: {sorted(missing)}", errors)
+    require(
+        is_iso_datetime_with_timezone(manifest.get("created_at_utc")),
+        "output created_at_utc must be an ISO-8601 datetime with timezone",
+        errors,
+    )
     require(manifest.get("claim_status") == "not_interpretable_as_neuroscience", "output manifest must preserve conservative claim status for smoke metadata", errors)
     require(isinstance(manifest.get("input_checksums", []), list), "output input_checksums must be a list", errors)
 
