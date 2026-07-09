@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Manifest path boundary validation
+
+- Updated `tools/validate_reproducibility.py` so manifest-controlled paths must be repo-relative and cannot be absolute paths or `..` escapes outside the repository.
+- Added regression tests for parent-directory input paths and absolute output config paths.
+- This keeps smoke/provenance validation from silently reading arbitrary local files when manifests are hand-edited or stale.
+
 ## 2026-07-09 — Config checksum validation
 
 - Updated `tools/write_output_manifest.py` to record `config_sha256` for the smoke config referenced by `config_path`.
