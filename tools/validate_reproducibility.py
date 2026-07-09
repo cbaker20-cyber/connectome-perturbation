@@ -188,6 +188,37 @@ def validate_config_checksum(repo_root: Path, manifest: dict[str, Any], errors: 
         )
 
 
+def validate_declared_outputs(repo_root: Path, manifest: dict[str, Any], errors: list[str]) -> None:
+    """Validate optional output artifact records in an output manifest.
+
+    Smoke manifests may legitimately have no produced artifacts yet. Once an
+    output record is declared, however, its path must be repo-relative and any
+    declared checksum/size facts must match the file on disk. This prevents a
+    manifest from becoming a hand-written claim about outputs that were not
+    produced by the reproducible run being validated.
+    """
+    outputs = manifest.get("outputs", [])
+    require(isinstance(outputs, list), "output outputs must be a list", errors)
+    if not isinstance(outputs, list):
+        return
+
+    for idx, record in enumerate(outputs):
+        require(isinstance(record, dict), f"output {idx} must be an object", errors)
+        if not isinstance(record, dict):
+            continue
+        output_path = repo_relative_path(repo_root, record.get("path"), f"output {idx} path", errors)
+        if output_path is None:
+            continue
+        path_value = record.get("path")
+        require(output_path.exists(), f"output path missing on disk: {path_value}", errors)
+        if not output_path.exists():
+            continue
+        if "size_bytes" in record:
+            require(output_path.stat().st_size == record.get("size_bytes"), f"output size mismatch: {path_value}", errors)
+        if "sha256" in record:
+            require(sha256_file(output_path) == record.get("sha256"), f"output sha256 mismatch: {path_value}", errors)
+
+
 def validate_input_manifest_reference(repo_root: Path, manifest: dict[str, Any], errors: list[str], input_manifest_path: Path | None = None) -> None:
     """Validate the output manifest's pointer back to the input manifest.
 
@@ -228,6 +259,7 @@ def validate_output_manifest(
     require(manifest.get("claim_status") == "not_interpretable_as_neuroscience", "output manifest must preserve conservative claim status for smoke metadata", errors)
     require(isinstance(manifest.get("input_checksums", []), list), "output input_checksums must be a list", errors)
     validate_config_checksum(repo_root, manifest, errors)
+    validate_declared_outputs(repo_root, manifest, errors)
     validate_input_manifest_reference(repo_root, manifest, errors, input_manifest_path=input_manifest_path)
 
     expected_checksums = expected_input_checksums(input_manifest)
