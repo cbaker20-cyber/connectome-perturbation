@@ -3,6 +3,10 @@ import json
 from pathlib import Path
 
 
+SCHEMA_VERSION = "0.1"
+AWARE_TIMESTAMP = "2026-07-09T00:00:00+00:00"
+
+
 def load_module(repo_root: Path, relative_path: str):
     module_path = repo_root / relative_path
     spec = importlib.util.spec_from_file_location(module_path.stem, module_path)
@@ -10,6 +14,58 @@ def load_module(repo_root: Path, relative_path: str):
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
+
+
+def metadata_input_manifest(tool, data_file: Path, sha256: str | None = None):
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "generated_at_utc": AWARE_TIMESTAMP,
+        "input_count": 1,
+        "inputs": [
+            {
+                "path": data_file.name,
+                "filename": data_file.name,
+                "extension": data_file.suffix,
+                "size_bytes": data_file.stat().st_size,
+                "sha256": sha256 or tool.sha256_file(data_file),
+                "guessed_role": "unknown_input_like_file",
+                "provenance": {
+                    "dataset_name": None,
+                    "release_or_materialization": None,
+                    "canonical_url_or_doi": None,
+                    "citation": None,
+                    "license_or_terms": None,
+                    "access_date": None,
+                    "redistribution_status": "unknown",
+                    "schema_notes": None,
+                    "row_count": None,
+                    "preprocessing_notes": None,
+                },
+            }
+        ],
+    }
+
+
+def metadata_output_manifest(input_manifest, data_file: Path, sha256: str | None = None):
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "created_at_utc": AWARE_TIMESTAMP,
+        "status": "metadata_only_smoke",
+        "command": "python tools/write_output_manifest.py",
+        "repo_commit": None,
+        "config_path": "configs/smoke_run.yaml",
+        "input_manifest_path": "data/input_manifest.json",
+        "input_manifest_present": True,
+        "input_count": 1,
+        "input_checksums": [
+            {
+                "path": data_file.name,
+                "sha256": sha256 or input_manifest["inputs"][0]["sha256"],
+                "size_bytes": data_file.stat().st_size,
+            }
+        ],
+        "claim_status": "not_interpretable_as_neuroscience",
+    }
 
 
 def test_build_input_manifest_records_checksums_and_roles(tmp_path):
@@ -66,44 +122,8 @@ def test_validate_reproducibility_accepts_metadata_only_manifests(tmp_path):
     repo_root = tmp_path
     data_file = repo_root / "input.csv"
     data_file.write_text("id\n1\n", encoding="utf-8")
-    input_manifest = {
-        "input_count": 1,
-        "inputs": [
-            {
-                "path": "input.csv",
-                "filename": "input.csv",
-                "extension": ".csv",
-                "size_bytes": data_file.stat().st_size,
-                "sha256": tool.sha256_file(data_file),
-                "guessed_role": "unknown_input_like_file",
-                "provenance": {
-                    "dataset_name": None,
-                    "release_or_materialization": None,
-                    "canonical_url_or_doi": None,
-                    "citation": None,
-                    "license_or_terms": None,
-                    "access_date": None,
-                    "redistribution_status": "unknown",
-                    "schema_notes": None,
-                    "row_count": None,
-                    "preprocessing_notes": None,
-                },
-            }
-        ],
-    }
-    output_manifest = {
-        "schema_version": "0.1",
-        "created_at_utc": "2026-07-09T00:00:00+00:00",
-        "status": "metadata_only_smoke",
-        "command": "python tools/write_output_manifest.py",
-        "repo_commit": None,
-        "config_path": "configs/smoke_run.yaml",
-        "input_manifest_path": "data/input_manifest.json",
-        "input_manifest_present": True,
-        "input_count": 1,
-        "input_checksums": [{"path": "input.csv", "sha256": input_manifest["inputs"][0]["sha256"], "size_bytes": data_file.stat().st_size}],
-        "claim_status": "not_interpretable_as_neuroscience",
-    }
+    input_manifest = metadata_input_manifest(tool, data_file)
+    output_manifest = metadata_output_manifest(input_manifest, data_file)
     (repo_root / "input_manifest.json").write_text(json.dumps(input_manifest), encoding="utf-8")
     (repo_root / "output_manifest.json").write_text(json.dumps(output_manifest), encoding="utf-8")
 
@@ -117,7 +137,7 @@ def test_validate_reproducibility_accepts_metadata_only_manifests(tmp_path):
 def test_validate_reproducibility_rejects_naive_output_timestamp(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     output_manifest = {
-        "schema_version": "0.1",
+        "schema_version": SCHEMA_VERSION,
         "created_at_utc": "2026-07-09T00:00:00",
         "status": "metadata_only_smoke",
         "command": "python tools/write_output_manifest.py",
@@ -137,36 +157,42 @@ def test_validate_reproducibility_rejects_naive_output_timestamp(tmp_path):
     assert "output created_at_utc must be an ISO-8601 datetime with timezone" in errors
 
 
+def test_validate_reproducibility_rejects_naive_input_timestamp(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    data_file = repo_root / "input.csv"
+    data_file.write_text("id\n1\n", encoding="utf-8")
+    input_manifest = metadata_input_manifest(tool, data_file)
+    input_manifest["generated_at_utc"] = "2026-07-09T00:00:00"
+    manifest_path = repo_root / "input_manifest.json"
+    manifest_path.write_text(json.dumps(input_manifest), encoding="utf-8")
+
+    errors = []
+    tool.validate_input_manifest(repo_root, manifest_path, errors)
+
+    assert "input generated_at_utc must be an ISO-8601 datetime with timezone" in errors
+
+
 def test_validate_reproducibility_strict_provenance_rejects_unknown_fields(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
     data_file = repo_root / "input.csv"
     data_file.write_text("id\n1\n", encoding="utf-8")
-    input_manifest = {
-        "input_count": 1,
-        "inputs": [
-            {
-                "path": "input.csv",
-                "filename": "input.csv",
-                "extension": ".csv",
-                "size_bytes": data_file.stat().st_size,
-                "sha256": tool.sha256_file(data_file),
-                "guessed_role": "unknown_input_like_file",
-                "provenance": {
-                    "dataset_name": "FlyWire",
-                    "release_or_materialization": "630",
-                    "canonical_url_or_doi": None,
-                    "citation": "source-backed citation required",
-                    "license_or_terms": "unknown",
-                    "access_date": "2026-07-09",
-                    "redistribution_status": "unknown",
-                    "schema_notes": "source,target,weight",
-                    "row_count": 1,
-                    "preprocessing_notes": "none",
-                },
-            }
-        ],
-    }
+    input_manifest = metadata_input_manifest(tool, data_file)
+    input_manifest["inputs"][0]["provenance"].update(
+        {
+            "dataset_name": "FlyWire",
+            "release_or_materialization": "630",
+            "canonical_url_or_doi": None,
+            "citation": "source-backed citation required",
+            "license_or_terms": "unknown",
+            "access_date": "2026-07-09",
+            "redistribution_status": "unknown",
+            "schema_notes": "source,target,weight",
+            "row_count": 1,
+            "preprocessing_notes": "none",
+        }
+    )
     manifest_path = repo_root / "input_manifest.json"
     manifest_path.write_text(json.dumps(input_manifest), encoding="utf-8")
 
@@ -183,31 +209,7 @@ def test_validate_reproducibility_reports_checksum_mismatch(tmp_path):
     repo_root = tmp_path
     data_file = repo_root / "input.csv"
     data_file.write_text("id\n1\n", encoding="utf-8")
-    manifest = {
-        "input_count": 1,
-        "inputs": [
-            {
-                "path": "input.csv",
-                "filename": "input.csv",
-                "extension": ".csv",
-                "size_bytes": data_file.stat().st_size,
-                "sha256": "0" * 64,
-                "guessed_role": "unknown_input_like_file",
-                "provenance": {
-                    "dataset_name": None,
-                    "release_or_materialization": None,
-                    "canonical_url_or_doi": None,
-                    "citation": None,
-                    "license_or_terms": None,
-                    "access_date": None,
-                    "redistribution_status": "unknown",
-                    "schema_notes": None,
-                    "row_count": None,
-                    "preprocessing_notes": None,
-                },
-            }
-        ],
-    }
+    manifest = metadata_input_manifest(tool, data_file, sha256="0" * 64)
     manifest_path = repo_root / "input_manifest.json"
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
 
@@ -222,44 +224,8 @@ def test_validate_reproducibility_rejects_stale_output_input_checksums(tmp_path)
     repo_root = tmp_path
     data_file = repo_root / "input.csv"
     data_file.write_text("id\n1\n", encoding="utf-8")
-    input_manifest = {
-        "input_count": 1,
-        "inputs": [
-            {
-                "path": "input.csv",
-                "filename": "input.csv",
-                "extension": ".csv",
-                "size_bytes": data_file.stat().st_size,
-                "sha256": tool.sha256_file(data_file),
-                "guessed_role": "unknown_input_like_file",
-                "provenance": {
-                    "dataset_name": None,
-                    "release_or_materialization": None,
-                    "canonical_url_or_doi": None,
-                    "citation": None,
-                    "license_or_terms": None,
-                    "access_date": None,
-                    "redistribution_status": "unknown",
-                    "schema_notes": None,
-                    "row_count": None,
-                    "preprocessing_notes": None,
-                },
-            }
-        ],
-    }
-    stale_output_manifest = {
-        "schema_version": "0.1",
-        "created_at_utc": "2026-07-09T00:00:00+00:00",
-        "status": "metadata_only_smoke",
-        "command": "python tools/write_output_manifest.py",
-        "repo_commit": None,
-        "config_path": "configs/smoke_run.yaml",
-        "input_manifest_path": "data/input_manifest.json",
-        "input_manifest_present": True,
-        "input_count": 1,
-        "input_checksums": [{"path": "input.csv", "sha256": "0" * 64, "size_bytes": data_file.stat().st_size}],
-        "claim_status": "not_interpretable_as_neuroscience",
-    }
+    input_manifest = metadata_input_manifest(tool, data_file)
+    stale_output_manifest = metadata_output_manifest(input_manifest, data_file, sha256="0" * 64)
     (repo_root / "input_manifest.json").write_text(json.dumps(input_manifest), encoding="utf-8")
     (repo_root / "output_manifest.json").write_text(json.dumps(stale_output_manifest), encoding="utf-8")
 
