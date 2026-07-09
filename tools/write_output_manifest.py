@@ -31,6 +31,24 @@ def git_commit(repo_root: Path) -> str | None:
         return None
 
 
+def repo_relative_path(repo_root: Path, path_value: str, label: str) -> Path:
+    """Resolve a CLI path only if it is relative and stays inside repo_root."""
+    if not isinstance(path_value, str) or not path_value.strip():
+        raise ValueError(f"{label} must be a non-empty string")
+
+    candidate = Path(path_value)
+    if candidate.is_absolute():
+        raise ValueError(f"{label} must be repo-relative, not absolute: {path_value}")
+
+    resolved_root = repo_root.resolve()
+    resolved_candidate = (resolved_root / candidate).resolve()
+    try:
+        resolved_candidate.relative_to(resolved_root)
+    except ValueError as exc:
+        raise ValueError(f"{label} must stay within the repository: {path_value}") from exc
+    return resolved_candidate
+
+
 def read_json(path: Path) -> dict | None:
     if not path.exists():
         return None
@@ -58,10 +76,15 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = repo_root_from()
-    config_path = repo_root / args.config
-    input_manifest_path = repo_root / args.input_manifest
+    try:
+        config_path = repo_relative_path(repo_root, args.config, "--config")
+        input_manifest_path = repo_relative_path(repo_root, args.input_manifest, "--input-manifest")
+        output_path = repo_relative_path(repo_root, args.output, "--output")
+    except ValueError as exc:
+        print(f"Output manifest write failed: {exc}", file=sys.stderr)
+        return 1
+
     input_manifest = read_json(input_manifest_path)
-    output_path = repo_root / args.output
 
     manifest = {
         "schema_version": "0.1",
