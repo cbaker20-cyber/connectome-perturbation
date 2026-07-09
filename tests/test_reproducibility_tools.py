@@ -232,6 +232,22 @@ def test_validate_reproducibility_reports_checksum_mismatch(tmp_path):
     assert "sha256 mismatch: input.csv" in errors
 
 
+def test_validate_reproducibility_rejects_non_string_input_path(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    data_file = repo_root / "input.csv"
+    data_file.write_text("id\n1\n", encoding="utf-8")
+    manifest = metadata_input_manifest(tool, data_file)
+    manifest["inputs"][0]["path"] = {"unexpected": "object"}
+    manifest_path = repo_root / "input_manifest.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    errors = []
+    tool.validate_input_manifest(repo_root, manifest_path, errors)
+
+    assert "input 0 path must be a non-empty string" in errors
+
+
 def test_validate_reproducibility_rejects_stale_output_input_checksums(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
