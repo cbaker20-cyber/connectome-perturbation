@@ -16,6 +16,14 @@ def load_module(repo_root: Path, relative_path: str):
     return module
 
 
+def write_smoke_config(repo_root: Path) -> Path:
+    config_dir = repo_root / "configs"
+    config_dir.mkdir(exist_ok=True)
+    config_path = config_dir / "smoke_run.yaml"
+    config_path.write_text("run_name: smoke\nrandom_seed: 42\nmode: metadata_only\n", encoding="utf-8")
+    return config_path
+
+
 def metadata_input_manifest(tool, data_file: Path, sha256: str | None = None):
     return {
         "schema_version": SCHEMA_VERSION,
@@ -46,7 +54,8 @@ def metadata_input_manifest(tool, data_file: Path, sha256: str | None = None):
     }
 
 
-def metadata_output_manifest(input_manifest, data_file: Path, sha256: str | None = None):
+def metadata_output_manifest(tool, repo_root: Path, input_manifest, data_file: Path, sha256: str | None = None):
+    config_path = write_smoke_config(repo_root)
     return {
         "schema_version": SCHEMA_VERSION,
         "created_at_utc": AWARE_TIMESTAMP,
@@ -54,6 +63,7 @@ def metadata_output_manifest(input_manifest, data_file: Path, sha256: str | None
         "command": "python tools/write_output_manifest.py",
         "repo_commit": None,
         "config_path": "configs/smoke_run.yaml",
+        "config_sha256": tool.sha256_file(config_path),
         "input_manifest_path": "data/input_manifest.json",
         "input_manifest_present": True,
         "input_count": 1,
@@ -123,19 +133,21 @@ def test_validate_reproducibility_accepts_metadata_only_manifests(tmp_path):
     data_file = repo_root / "input.csv"
     data_file.write_text("id\n1\n", encoding="utf-8")
     input_manifest = metadata_input_manifest(tool, data_file)
-    output_manifest = metadata_output_manifest(input_manifest, data_file)
+    output_manifest = metadata_output_manifest(tool, repo_root, input_manifest, data_file)
     (repo_root / "input_manifest.json").write_text(json.dumps(input_manifest), encoding="utf-8")
     (repo_root / "output_manifest.json").write_text(json.dumps(output_manifest), encoding="utf-8")
 
     errors = []
     validated_input_manifest = tool.validate_input_manifest(repo_root, repo_root / "input_manifest.json", errors)
-    tool.validate_output_manifest(repo_root / "output_manifest.json", errors, input_manifest=validated_input_manifest)
+    tool.validate_output_manifest(repo_root, repo_root / "output_manifest.json", errors, input_manifest=validated_input_manifest)
 
     assert errors == []
 
 
 def test_validate_reproducibility_rejects_naive_output_timestamp(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    write_smoke_config(repo_root)
     output_manifest = {
         "schema_version": SCHEMA_VERSION,
         "created_at_utc": "2026-07-09T00:00:00",
@@ -143,16 +155,17 @@ def test_validate_reproducibility_rejects_naive_output_timestamp(tmp_path):
         "command": "python tools/write_output_manifest.py",
         "repo_commit": None,
         "config_path": "configs/smoke_run.yaml",
+        "config_sha256": "0" * 64,
         "input_manifest_path": "data/input_manifest.json",
         "input_manifest_present": False,
         "input_checksums": [],
         "claim_status": "not_interpretable_as_neuroscience",
     }
-    output_path = tmp_path / "output_manifest.json"
+    output_path = repo_root / "output_manifest.json"
     output_path.write_text(json.dumps(output_manifest), encoding="utf-8")
 
     errors = []
-    tool.validate_output_manifest(output_path, errors)
+    tool.validate_output_manifest(repo_root, output_path, errors)
 
     assert "output created_at_utc must be an ISO-8601 datetime with timezone" in errors
 
@@ -225,12 +238,30 @@ def test_validate_reproducibility_rejects_stale_output_input_checksums(tmp_path)
     data_file = repo_root / "input.csv"
     data_file.write_text("id\n1\n", encoding="utf-8")
     input_manifest = metadata_input_manifest(tool, data_file)
-    stale_output_manifest = metadata_output_manifest(input_manifest, data_file, sha256="0" * 64)
+    stale_output_manifest = metadata_output_manifest(tool, repo_root, input_manifest, data_file, sha256="0" * 64)
     (repo_root / "input_manifest.json").write_text(json.dumps(input_manifest), encoding="utf-8")
     (repo_root / "output_manifest.json").write_text(json.dumps(stale_output_manifest), encoding="utf-8")
 
     errors = []
     validated_input_manifest = tool.validate_input_manifest(repo_root, repo_root / "input_manifest.json", errors)
-    tool.validate_output_manifest(repo_root / "output_manifest.json", errors, input_manifest=validated_input_manifest)
+    tool.validate_output_manifest(repo_root, repo_root / "output_manifest.json", errors, input_manifest=validated_input_manifest)
 
     assert "output input_checksums do not match validated input manifest" in errors
+
+
+def test_validate_reproducibility_rejects_stale_config_checksum(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    data_file = repo_root / "input.csv"
+    data_file.write_text("id\n1\n", encoding="utf-8")
+    input_manifest = metadata_input_manifest(tool, data_file)
+    output_manifest = metadata_output_manifest(tool, repo_root, input_manifest, data_file)
+    output_manifest["config_sha256"] = "0" * 64
+    (repo_root / "input_manifest.json").write_text(json.dumps(input_manifest), encoding="utf-8")
+    (repo_root / "output_manifest.json").write_text(json.dumps(output_manifest), encoding="utf-8")
+
+    errors = []
+    validated_input_manifest = tool.validate_input_manifest(repo_root, repo_root / "input_manifest.json", errors)
+    tool.validate_output_manifest(repo_root, repo_root / "output_manifest.json", errors, input_manifest=validated_input_manifest)
+
+    assert "output config_sha256 does not match config_path contents" in errors
