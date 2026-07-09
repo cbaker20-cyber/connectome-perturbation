@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Output writer malformed input-manifest hardening
+
+- Updated `tools/write_output_manifest.py` so malformed `input_manifest.inputs` values cannot crash metadata writing.
+- The writer now copies checksum records only from safely inspectable object records and leaves full schema rejection to `tools/validate_reproducibility.py`.
+- Added regression coverage for non-list `inputs`, non-object input records, and non-integer `input_count` values.
+
 ## 2026-07-09 — Output writer path boundary hardening
 
 - Updated `tools/write_output_manifest.py` so `--config`, `--input-manifest`, and `--output` must be repo-relative paths that stay inside the repository.
