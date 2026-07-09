@@ -67,15 +67,30 @@ def has_claim_ready_value(value: Any) -> bool:
     return True
 
 
-def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[str], require_provenance: bool = False) -> None:
+def load_json(path: Path, errors: list[str], label: str) -> dict[str, Any] | None:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"{label} is not valid JSON: {exc}")
+        return None
+    require(isinstance(value, dict), f"{label} must be a JSON object", errors)
+    return value if isinstance(value, dict) else None
+
+
+def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[str], require_provenance: bool = False) -> dict[str, Any] | None:
     require(manifest_path.exists(), f"missing input manifest: {manifest_path}", errors)
     if not manifest_path.exists():
-        return
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return None
+    manifest = load_json(manifest_path, errors, "input manifest")
+    if manifest is None:
+        return None
     inputs = manifest.get("inputs", [])
     require(isinstance(inputs, list), "input manifest `inputs` must be a list", errors)
     require(manifest.get("input_count") == len(inputs), "input_count does not match inputs length", errors)
     for idx, record in enumerate(inputs):
+        require(isinstance(record, dict), f"input {idx} must be an object", errors)
+        if not isinstance(record, dict):
+            continue
         missing = REQUIRED_INPUT_FIELDS - set(record)
         require(not missing, f"input {idx} missing fields: {sorted(missing)}", errors)
         path = repo_root / record.get("path", "")
@@ -96,17 +111,52 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
                     f"input {idx} provenance field `{field}` is required for claim-ready validation",
                     errors,
                 )
+    return manifest
 
 
-def validate_output_manifest(path: Path, errors: list[str]) -> None:
+def expected_input_checksums(input_manifest: dict[str, Any] | None) -> list[dict[str, Any]] | None:
+    if input_manifest is None:
+        return None
+    inputs = input_manifest.get("inputs")
+    if not isinstance(inputs, list):
+        return None
+    expected = []
+    for item in inputs:
+        if not isinstance(item, dict):
+            return None
+        expected.append({"path": item.get("path"), "sha256": item.get("sha256"), "size_bytes": item.get("size_bytes")})
+    return expected
+
+
+def validate_output_manifest(path: Path, errors: list[str], input_manifest: dict[str, Any] | None = None) -> None:
     require(path.exists(), f"missing output manifest: {path}", errors)
     if not path.exists():
         return
-    manifest = json.loads(path.read_text(encoding="utf-8"))
+    manifest = load_json(path, errors, "output manifest")
+    if manifest is None:
+        return
     missing = REQUIRED_OUTPUT_FIELDS - set(manifest)
     require(not missing, f"output manifest missing fields: {sorted(missing)}", errors)
     require(manifest.get("claim_status") == "not_interpretable_as_neuroscience", "output manifest must preserve conservative claim status for smoke metadata", errors)
     require(isinstance(manifest.get("input_checksums", []), list), "output input_checksums must be a list", errors)
+
+    expected_checksums = expected_input_checksums(input_manifest)
+    if expected_checksums is not None:
+        require(
+            manifest.get("input_manifest_present") is True,
+            "output manifest must record input_manifest_present=true when an input manifest was validated",
+            errors,
+        )
+        require(
+            manifest.get("input_count") == len(expected_checksums),
+            "output input_count does not match validated input manifest",
+            errors,
+        )
+        require(
+            manifest.get("input_checksums") == expected_checksums,
+            "output input_checksums do not match validated input manifest",
+            errors,
+        )
 
 
 def main() -> int:
@@ -123,8 +173,8 @@ def main() -> int:
 
     repo_root = Path(args.repo_root).resolve()
     errors: list[str] = []
-    validate_input_manifest(repo_root, repo_root / args.input_manifest, errors, require_provenance=args.require_provenance)
-    validate_output_manifest(repo_root / args.output_manifest, errors)
+    input_manifest = validate_input_manifest(repo_root, repo_root / args.input_manifest, errors, require_provenance=args.require_provenance)
+    validate_output_manifest(repo_root / args.output_manifest, errors, input_manifest=input_manifest)
 
     if errors:
         print("Reproducibility validation failed:")
