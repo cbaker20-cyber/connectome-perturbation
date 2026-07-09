@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import platform
 import subprocess
 import sys
@@ -52,7 +51,38 @@ def repo_relative_path(repo_root: Path, path_value: str, label: str) -> Path:
 def read_json(path: Path) -> dict | None:
     if not path.exists():
         return None
-    return json.loads(path.read_text(encoding="utf-8"))
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        return None
+    return value
+
+
+def input_manifest_checksums(input_manifest: dict | None) -> list[dict]:
+    """Return conservative input checksum records from a manifest-like object.
+
+    The writer should not crash on partially edited or stale manifests. Full
+    schema errors are the validator's job; this function only copies checksum
+    facts when the shape is safe enough to inspect.
+    """
+    if input_manifest is None:
+        return []
+    inputs = input_manifest.get("inputs")
+    if not isinstance(inputs, list):
+        return []
+
+    checksums = []
+    for item in inputs:
+        if not isinstance(item, dict):
+            continue
+        checksums.append({"path": item.get("path"), "sha256": item.get("sha256"), "size_bytes": item.get("size_bytes")})
+    return checksums
+
+
+def input_manifest_count(input_manifest: dict | None) -> int | None:
+    if input_manifest is None:
+        return None
+    count = input_manifest.get("input_count")
+    return count if isinstance(count, int) else None
 
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str | None:
@@ -96,11 +126,8 @@ def main() -> int:
         "config_sha256": sha256_file(config_path),
         "input_manifest_path": args.input_manifest,
         "input_manifest_present": input_manifest is not None,
-        "input_count": None if input_manifest is None else input_manifest.get("input_count"),
-        "input_checksums": [] if input_manifest is None else [
-            {"path": item.get("path"), "sha256": item.get("sha256"), "size_bytes": item.get("size_bytes")}
-            for item in input_manifest.get("inputs", [])
-        ],
+        "input_count": input_manifest_count(input_manifest),
+        "input_checksums": input_manifest_checksums(input_manifest),
         "environment": {
             "python": sys.version,
             "platform": platform.platform(),
