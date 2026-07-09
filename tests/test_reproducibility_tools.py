@@ -114,6 +114,29 @@ def test_validate_reproducibility_accepts_metadata_only_manifests(tmp_path):
     assert errors == []
 
 
+def test_validate_reproducibility_rejects_naive_output_timestamp(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    output_manifest = {
+        "schema_version": "0.1",
+        "created_at_utc": "2026-07-09T00:00:00",
+        "status": "metadata_only_smoke",
+        "command": "python tools/write_output_manifest.py",
+        "repo_commit": None,
+        "config_path": "configs/smoke_run.yaml",
+        "input_manifest_path": "data/input_manifest.json",
+        "input_manifest_present": False,
+        "input_checksums": [],
+        "claim_status": "not_interpretable_as_neuroscience",
+    }
+    output_path = tmp_path / "output_manifest.json"
+    output_path.write_text(json.dumps(output_manifest), encoding="utf-8")
+
+    errors = []
+    tool.validate_output_manifest(output_path, errors)
+
+    assert "output created_at_utc must be an ISO-8601 datetime with timezone" in errors
+
+
 def test_validate_reproducibility_strict_provenance_rejects_unknown_fields(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
