@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Baseline manifest resolver wiring
+
+- Updated `perturbation/baseline.py` so the baseline sugar experiment resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename instead of directly hard-coding `Drosophila_brain_model/...` input paths.
+- Added CLI flags for `--manifest`, `--completeness-id`, `--connectivity-id`, `--results-dir`, and `--force` so future smoke/validation runs can be tied to manifest records.
+- Updated `TASKS.md` to mark path-resolver migration as partially complete; remaining perturbation scripts still need migration.
+
 ## 2026-07-09 — Reproducibility spine branch
 
 - Added `AGENTS.md` with repository rules for AI/human contributors.
