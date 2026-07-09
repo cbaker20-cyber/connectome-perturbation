@@ -13,6 +13,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+REQUIRED_INPUT_MANIFEST_FIELDS = {"schema_version", "generated_at_utc", "input_count", "inputs"}
 REQUIRED_INPUT_FIELDS = {"path", "filename", "extension", "size_bytes", "sha256", "guessed_role", "provenance"}
 REQUIRED_OUTPUT_FIELDS = {
     "schema_version",
@@ -96,6 +97,13 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
     manifest = load_json(manifest_path, errors, "input manifest")
     if manifest is None:
         return None
+    missing_manifest_fields = REQUIRED_INPUT_MANIFEST_FIELDS - set(manifest)
+    require(not missing_manifest_fields, f"input manifest missing fields: {sorted(missing_manifest_fields)}", errors)
+    require(
+        is_iso_datetime_with_timezone(manifest.get("generated_at_utc")),
+        "input generated_at_utc must be an ISO-8601 datetime with timezone",
+        errors,
+    )
     inputs = manifest.get("inputs", [])
     require(isinstance(inputs, list), "input manifest `inputs` must be a list", errors)
     require(manifest.get("input_count") == len(inputs), "input_count does not match inputs length", errors)
