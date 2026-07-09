@@ -82,7 +82,7 @@ def is_iso_datetime_with_timezone(value: Any) -> bool:
 def load_json(path: Path, errors: list[str], label: str) -> dict[str, Any] | None:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
-    except JSONDecodeError as exc:
+    except json.JSONDecodeError as exc:
         errors.append(f"{label} is not valid JSON: {exc}")
         return None
     require(isinstance(value, dict), f"{label} must be a JSON object", errors)
