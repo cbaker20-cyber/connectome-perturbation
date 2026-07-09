@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Output manifest reference validation
+
+- Updated `tools/validate_reproducibility.py` so `output_manifest.json` validates its recorded `input_manifest_path` as a repo-relative path.
+- The CLI now passes the validated input-manifest path into output-manifest validation so stale outputs generated from a different manifest can be rejected.
+- Added regression tests for absolute output `input_manifest_path` values and mismatched validated input-manifest references.
+
 ## 2026-07-09 — Manifest path boundary validation
 
 - Updated `tools/validate_reproducibility.py` so manifest-controlled paths must be repo-relative and cannot be absolute paths or `..` escapes outside the repository.
