@@ -46,11 +46,11 @@ A run can be called a reproducible technical smoke only when:
 
 A run can be called a biologically interpretable experiment only when:
 
-1. Every input file has authoritative source URL, materialization/release, citation/DOI, access date, schema, row count, and license/terms.
+1. Every input file passes `python tools/validate_reproducibility.py --require-provenance` with authoritative source URL, materialization/release, citation/DOI, access date, schema, row count, and license/terms.
 2. Perturbation targets are defined before running, with a matching null/control family.
 3. The analysis reports graph-level outcomes first and only makes neuron/circuit claims when supported by source-backed annotations.
 4. Outputs include the exact input manifest checksums used for that run.
 
 ## Immediate next implementation task
 
-Add a `--require-provenance` option to `tools/validate_reproducibility.py` that fails if any input manifest row lacks source URL, release/materialization, citation/DOI, access date, row count, schema, or license/terms. Keep the default validator permissive so PR #17 remains useful before the real source rows are filled.
+Fill `data/input_manifest.json` from the exact files used locally, then replace placeholder provenance values with authoritative source/materialization/citation/license/schema/row-count fields. After that, run `python tools/validate_reproducibility.py --require-provenance` and treat failures as blockers to biological interpretation, not as blockers to metadata-only smoke testing.
