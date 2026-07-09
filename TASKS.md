@@ -35,7 +35,8 @@ Prioritized backlog for the connectome perturbation project.
 - [ ] Convert literature notes into a cited background section.
 - [ ] Add a figure/table plan with required manifest links for every figure.
 - [ ] Add a conservative project status page for mentors/judges.
-- [ ] Maintain a claim ledger that labels every statement as verified, assumed, hypothesis, or future work.
+- [x] Maintain a claim ledger that labels every statement as verified, assumed, hypothesis, future work, or blocked.
+  - Added `docs/claim_ledger.md` with promotion rules and report-writing guardrails.
 
 ## Current blockers
 
