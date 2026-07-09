@@ -2,6 +2,12 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Output writer path boundary hardening
+
+- Updated `tools/write_output_manifest.py` so `--config`, `--input-manifest`, and `--output` must be repo-relative paths that stay inside the repository.
+- Added regression coverage for absolute output paths and parent-directory output escapes.
+- This aligns output-manifest creation with the stricter validator boundary rules, preventing smoke commands from writing outside the repo or recording paths the validator would later reject.
+
 ## 2026-07-09 — Output manifest reference validation
 
 - Updated `tools/validate_reproducibility.py` so `output_manifest.json` validates its recorded `input_manifest_path` as a repo-relative path.
