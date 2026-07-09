@@ -35,3 +35,36 @@ def test_output_manifest_writer_rejects_parent_directory_escape(tmp_path):
         assert "--output must stay within the repository: ../outside_manifest.json" in str(exc)
     else:
         raise AssertionError("parent-directory output escape should be rejected")
+
+
+def test_output_manifest_writer_ignores_malformed_inputs_list():
+    writer = load_writer()
+
+    manifest = {"input_count": 2, "inputs": "not-a-list"}
+
+    assert writer.input_manifest_checksums(manifest) == []
+    assert writer.input_manifest_count(manifest) == 2
+
+
+def test_output_manifest_writer_skips_non_object_input_records():
+    writer = load_writer()
+
+    manifest = {
+        "input_count": 3,
+        "inputs": [
+            {"path": "data/a.csv", "sha256": "abc", "size_bytes": 12},
+            "not-an-object",
+            {"path": "data/b.csv", "sha256": "def", "size_bytes": 34},
+        ],
+    }
+
+    assert writer.input_manifest_checksums(manifest) == [
+        {"path": "data/a.csv", "sha256": "abc", "size_bytes": 12},
+        {"path": "data/b.csv", "sha256": "def", "size_bytes": 34},
+    ]
+
+
+def test_output_manifest_writer_ignores_non_integer_input_count():
+    writer = load_writer()
+
+    assert writer.input_manifest_count({"input_count": "3", "inputs": []}) is None
