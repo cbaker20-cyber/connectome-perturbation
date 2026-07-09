@@ -81,7 +81,7 @@ def is_iso_datetime_with_timezone(value: Any) -> bool:
     return parsed.tzinfo is not None and parsed.utcoffset() is not None
 
 
-def repo_relative_path(repo_root: Path, path_value: str, label: str, errors: list[str]) -> Path | None:
+def repo_relative_path(repo_root: Path, path_value: Any, label: str, errors: list[str]) -> Path | None:
     """Resolve a manifest path only if it is relative and stays inside repo_root."""
     if not isinstance(path_value, str) or not path_value.strip():
         errors.append(f"{label} must be a non-empty string")
@@ -263,15 +263,20 @@ def main() -> int:
 
     repo_root = Path(args.repo_root).resolve()
     errors: list[str] = []
-    input_manifest_path = repo_root / args.input_manifest
-    input_manifest = validate_input_manifest(repo_root, input_manifest_path, errors, require_provenance=args.require_provenance)
-    validate_output_manifest(
-        repo_root,
-        repo_root / args.output_manifest,
-        errors,
-        input_manifest=input_manifest,
-        input_manifest_path=input_manifest_path,
-    )
+    input_manifest_path = repo_relative_path(repo_root, args.input_manifest, "--input-manifest", errors)
+    output_manifest_path = repo_relative_path(repo_root, args.output_manifest, "--output-manifest", errors)
+
+    input_manifest = None
+    if input_manifest_path is not None:
+        input_manifest = validate_input_manifest(repo_root, input_manifest_path, errors, require_provenance=args.require_provenance)
+    if output_manifest_path is not None:
+        validate_output_manifest(
+            repo_root,
+            output_manifest_path,
+            errors,
+            input_manifest=input_manifest,
+            input_manifest_path=input_manifest_path,
+        )
 
     if errors:
         print("Reproducibility validation failed:")
