@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from typing import Any
 
 REQUIRED_INPUT_FIELDS = {"path", "filename", "extension", "size_bytes", "sha256", "guessed_role", "provenance"}
 REQUIRED_OUTPUT_FIELDS = {
@@ -24,6 +25,19 @@ REQUIRED_OUTPUT_FIELDS = {
     "input_checksums",
     "claim_status",
 }
+REQUIRED_PROVENANCE_FIELDS = {
+    "dataset_name",
+    "release_or_materialization",
+    "canonical_url_or_doi",
+    "citation",
+    "license_or_terms",
+    "access_date",
+    "redistribution_status",
+    "schema_notes",
+    "row_count",
+    "preprocessing_notes",
+}
+UNKNOWN_PROVENANCE_VALUES = {None, "", "unknown", "UNKNOWN", "Unknown"}
 
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
@@ -39,7 +53,21 @@ def require(condition: bool, message: str, errors: list[str]) -> None:
         errors.append(message)
 
 
-def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[str]) -> None:
+def has_claim_ready_value(value: Any) -> bool:
+    """Return whether a provenance field is filled enough for strict validation.
+
+    This is intentionally conservative. Free-text fields may later need stronger
+    schema-specific validation, but strict mode should at least block null,
+    blank, and explicitly unknown provenance before any biological claim.
+    """
+    if isinstance(value, str):
+        return value.strip() not in UNKNOWN_PROVENANCE_VALUES
+    if value in UNKNOWN_PROVENANCE_VALUES:
+        return False
+    return True
+
+
+def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[str], require_provenance: bool = False) -> None:
     require(manifest_path.exists(), f"missing input manifest: {manifest_path}", errors)
     if not manifest_path.exists():
         return
@@ -56,8 +84,18 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
             require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {record.get('path')}", errors)
             require(sha256_file(path) == record.get("sha256"), f"sha256 mismatch: {record.get('path')}", errors)
         provenance = record.get("provenance", {})
-        require("canonical_url_or_doi" in provenance, f"input {idx} missing provenance canonical_url_or_doi", errors)
-        require("license_or_terms" in provenance, f"input {idx} missing provenance license_or_terms", errors)
+        require(isinstance(provenance, dict), f"input {idx} provenance must be an object", errors)
+        if not isinstance(provenance, dict):
+            continue
+        provenance_missing = REQUIRED_PROVENANCE_FIELDS - set(provenance)
+        require(not provenance_missing, f"input {idx} missing provenance fields: {sorted(provenance_missing)}", errors)
+        if require_provenance:
+            for field in sorted(REQUIRED_PROVENANCE_FIELDS):
+                require(
+                    has_claim_ready_value(provenance.get(field)),
+                    f"input {idx} provenance field `{field}` is required for claim-ready validation",
+                    errors,
+                )
 
 
 def validate_output_manifest(path: Path, errors: list[str]) -> None:
@@ -76,11 +114,16 @@ def main() -> int:
     parser.add_argument("--repo-root", default=".")
     parser.add_argument("--input-manifest", default="data/input_manifest.json")
     parser.add_argument("--output-manifest", default="output_manifest.json")
+    parser.add_argument(
+        "--require-provenance",
+        action="store_true",
+        help="Fail unless every input has non-empty source, release, citation, license/terms, schema, row-count, and preprocessing provenance.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
     errors: list[str] = []
-    validate_input_manifest(repo_root, repo_root / args.input_manifest, errors)
+    validate_input_manifest(repo_root, repo_root / args.input_manifest, errors, require_provenance=args.require_provenance)
     validate_output_manifest(repo_root / args.output_manifest, errors)
 
     if errors:
