@@ -22,6 +22,7 @@ REQUIRED_OUTPUT_FIELDS = {
     "command",
     "repo_commit",
     "config_path",
+    "config_sha256",
     "input_manifest_path",
     "input_manifest_present",
     "input_checksums",
@@ -148,7 +149,22 @@ def expected_input_checksums(input_manifest: dict[str, Any] | None) -> list[dict
     return expected
 
 
-def validate_output_manifest(path: Path, errors: list[str], input_manifest: dict[str, Any] | None = None) -> None:
+def validate_config_checksum(repo_root: Path, manifest: dict[str, Any], errors: list[str]) -> None:
+    config_path_value = manifest.get("config_path")
+    require(isinstance(config_path_value, str) and bool(config_path_value.strip()), "output config_path must be a non-empty string", errors)
+    if not isinstance(config_path_value, str) or not config_path_value.strip():
+        return
+    config_path = repo_root / config_path_value
+    require(config_path.exists(), f"output config_path missing on disk: {config_path_value}", errors)
+    if config_path.exists():
+        require(
+            manifest.get("config_sha256") == sha256_file(config_path),
+            "output config_sha256 does not match config_path contents",
+            errors,
+        )
+
+
+def validate_output_manifest(repo_root: Path, path: Path, errors: list[str], input_manifest: dict[str, Any] | None = None) -> None:
     require(path.exists(), f"missing output manifest: {path}", errors)
     if not path.exists():
         return
@@ -164,6 +180,7 @@ def validate_output_manifest(path: Path, errors: list[str], input_manifest: dict
     )
     require(manifest.get("claim_status") == "not_interpretable_as_neuroscience", "output manifest must preserve conservative claim status for smoke metadata", errors)
     require(isinstance(manifest.get("input_checksums", []), list), "output input_checksums must be a list", errors)
+    validate_config_checksum(repo_root, manifest, errors)
 
     expected_checksums = expected_input_checksums(input_manifest)
     if expected_checksums is not None:
@@ -199,7 +216,7 @@ def main() -> int:
     repo_root = Path(args.repo_root).resolve()
     errors: list[str] = []
     input_manifest = validate_input_manifest(repo_root, repo_root / args.input_manifest, errors, require_provenance=args.require_provenance)
-    validate_output_manifest(repo_root / args.output_manifest, errors, input_manifest=input_manifest)
+    validate_output_manifest(repo_root, repo_root / args.output_manifest, errors, input_manifest=input_manifest)
 
     if errors:
         print("Reproducibility validation failed:")
