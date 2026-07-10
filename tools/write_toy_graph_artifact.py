@@ -12,6 +12,8 @@ import json
 import sys
 from pathlib import Path
 
+from connectome_analysis.graph_metrics import expected_graph_metrics
+
 TOY_NODES = ["sensory_a", "interneuron_b", "motor_c", "isolated_d"]
 TOY_EDGES = [
     {
@@ -50,64 +52,7 @@ def resolve_repo_relative_path(root: Path, raw_path: str) -> Path:
     return resolved
 
 
-def degree_maps(nodes: list[str], edges: list[dict[str, str]]) -> dict[str, dict[str, int]]:
-    in_degree = {node: 0 for node in nodes}
-    out_degree = {node: 0 for node in nodes}
-
-    for edge in edges:
-        source = edge["source"]
-        target = edge["target"]
-        out_degree[source] += 1
-        in_degree[target] += 1
-
-    return {"in_degree": in_degree, "out_degree": out_degree}
-
-
-def reachable_from(start: str, edges: list[dict[str, str]]) -> list[str]:
-    adjacency: dict[str, list[str]] = {node: [] for node in TOY_NODES}
-    for edge in edges:
-        adjacency[edge["source"]].append(edge["target"])
-
-    seen = {start}
-    stack = [start]
-    while stack:
-        node = stack.pop()
-        for target in adjacency[node]:
-            if target not in seen:
-                seen.add(target)
-                stack.append(target)
-
-    return sorted(seen)
-
-
-def weak_component_count(nodes: list[str], edges: list[dict[str, str]]) -> int:
-    adjacency: dict[str, set[str]] = {node: set() for node in nodes}
-    for edge in edges:
-        source = edge["source"]
-        target = edge["target"]
-        adjacency[source].add(target)
-        adjacency[target].add(source)
-
-    seen: set[str] = set()
-    components = 0
-    for node in nodes:
-        if node in seen:
-            continue
-        components += 1
-        stack = [node]
-        seen.add(node)
-        while stack:
-            current = stack.pop()
-            for neighbor in adjacency[current]:
-                if neighbor not in seen:
-                    seen.add(neighbor)
-                    stack.append(neighbor)
-
-    return components
-
-
 def toy_graph_payload() -> dict[str, object]:
-    degrees = degree_maps(TOY_NODES, TOY_EDGES)
     return {
         "artifact_type": "toy_graph_expected_outcomes",
         "claim_status": "not_interpretable_as_neuroscience",
@@ -123,14 +68,11 @@ def toy_graph_payload() -> dict[str, object]:
         ],
         "purpose": "Exercise deterministic graph-analysis artifact generation before real connectome experiments.",
         "schema_version": "0.1",
-        "expected_metrics": {
-            "edge_count": len(TOY_EDGES),
-            "in_degree": degrees["in_degree"],
-            "node_count": len(TOY_NODES),
-            "out_degree": degrees["out_degree"],
-            "reachable_from_sensory_a": reachable_from("sensory_a", TOY_EDGES),
-            "weak_component_count": weak_component_count(TOY_NODES, TOY_EDGES),
-        },
+        "expected_metrics": expected_graph_metrics(
+            TOY_NODES,
+            TOY_EDGES,
+            reachability_start="sensory_a",
+        ),
     }
 
 
