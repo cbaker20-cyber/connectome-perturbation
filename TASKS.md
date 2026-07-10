@@ -11,6 +11,10 @@ Prioritized backlog for the connectome perturbation project.
   - `python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json`
   - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/reproducibility_smoke_artifact.json`
   - `python tools/validate_reproducibility.py`
+- [ ] Run the toy graph artifact sequence:
+  - `python tools/write_toy_graph_artifact.py --output results/toy_graph_artifact.json`
+  - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/toy_graph_artifact.json`
+  - `python tools/validate_reproducibility.py`
 - [x] Validate declared output artifact metadata shape before treating output manifests as reproducible evidence.
   - Declared output paths must stay repo-relative.
   - Optional declared output `sha256` values must be canonical lowercase 64-character SHA-256 digests.
@@ -24,7 +28,10 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_smoke_artifact.py` writes `results/reproducibility_smoke_artifact.json` by default.
   - The artifact is deterministic metadata-only JSON with `claim_status: not_interpretable_as_neuroscience`.
   - README and `docs/output_artifact_validation_contract.md` now show the exact create → declare → validate sequence.
-- [ ] Replace the metadata-only smoke artifact with a tiny deterministic toy-fixture graph analysis artifact with known expected outcomes.
+- [x] Replace the metadata-only smoke artifact with a tiny deterministic toy-fixture graph analysis artifact with known expected outcomes.
+  - `tools/write_toy_graph_artifact.py` writes `results/toy_graph_artifact.json` by default.
+  - The artifact contains a four-node directed fixture graph with expected node count, edge count, degree maps, reachability, and weak component count.
+  - The artifact is explicitly marked `not_interpretable_as_neuroscience` so it validates analysis plumbing without making biological claims.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
   - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
   - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
@@ -37,8 +44,9 @@ Prioritized backlog for the connectome perturbation project.
 - [ ] Define perturbation classes before running experiments: neuron silencing, edge removal/reduction, hub removal, pathway interruption, and random matched controls.
 - [ ] Define metrics before running experiments: reachability, connected components, centrality changes, shortest-path disruption, motor-output proxy shifts, and null-model deltas.
 - [ ] Add permutation/random-control statistics and multiple-comparison correction.
+- [x] Add toy connectome fixtures with known expected outcomes.
+  - The current fixture artifact is intentionally synthetic and should be promoted into reusable graph-analysis tests before real connectome runs are interpreted.
 - [ ] Add schema checks for connectivity and completeness tables.
-- [ ] Add toy connectome fixtures with known expected outcomes.
 
 ## P2 — Architecture cleanup
 
@@ -59,6 +67,6 @@ Prioritized backlog for the connectome perturbation project.
 
 - Authoritative provenance for tracked data files is missing.
 - Existing result CSV is not tied to a command, config, seed, commit, or input checksums.
-- The current smoke artifact validates metadata plumbing only; it still needs to be replaced by a toy-fixture graph artifact before making any analysis claims.
+- The current toy graph artifact validates deterministic graph-analysis plumbing only; it is not evidence for any neuroscience claim.
 - Some older scripts still contain historical path assumptions and need audit before use.
 - Open PRs already contain overlapping scaffolding; merge order should be reviewed before large refactors.
