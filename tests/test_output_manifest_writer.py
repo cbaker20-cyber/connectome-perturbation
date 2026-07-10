@@ -68,3 +68,48 @@ def test_output_manifest_writer_ignores_non_integer_input_count():
     writer = load_writer()
 
     assert writer.input_manifest_count({"input_count": "3", "inputs": []}) is None
+
+
+def test_output_manifest_writer_records_artifact_digest_and_size(tmp_path):
+    writer = load_writer()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    artifact = repo_root / "results" / "summary.json"
+    artifact.parent.mkdir()
+    artifact.write_text('{"ok": true}\n', encoding="utf-8")
+
+    records = writer.output_artifact_records(repo_root, ["results/summary.json"])
+
+    assert records == [
+        {
+            "path": "results/summary.json",
+            "sha256": writer.sha256_file(artifact),
+            "size_bytes": artifact.stat().st_size,
+        }
+    ]
+
+
+def test_output_manifest_writer_rejects_missing_artifact(tmp_path):
+    writer = load_writer()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+
+    try:
+        writer.output_artifact_records(repo_root, ["results/missing.json"])
+    except ValueError as exc:
+        assert "--artifact must exist before it can be recorded: results/missing.json" in str(exc)
+    else:
+        raise AssertionError("missing artifacts should not be recorded")
+
+
+def test_output_manifest_writer_rejects_artifact_path_escape(tmp_path):
+    writer = load_writer()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+
+    try:
+        writer.output_artifact_records(repo_root, ["../outside.json"])
+    except ValueError as exc:
+        assert "--artifact must stay within the repository: ../outside.json" in str(exc)
+    else:
+        raise AssertionError("artifact path escapes should be rejected")
