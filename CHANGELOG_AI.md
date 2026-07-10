@@ -2,6 +2,14 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Toy graph expected-outcomes artifact
+
+- Added `tools/write_toy_graph_artifact.py` to create `results/toy_graph_artifact.json`, a deterministic synthetic graph artifact with known expected outcomes.
+- The fixture records a four-node directed graph plus expected node count, edge count, in-degree, out-degree, reachability, and weak-component count.
+- The artifact is explicitly marked `not_interpretable_as_neuroscience` so it can validate graph/provenance plumbing without being treated as biological evidence.
+- Added regression coverage in `tests/test_write_toy_graph_artifact.py` for conservative non-claim payload contents, expected metrics, deterministic JSON bytes, absolute output rejection, and parent-directory escape rejection.
+- Updated `TASKS.md` with the toy graph create → declare → validate command sequence and the remaining blocker: authoritative provenance for real inputs/results.
+
 ## 2026-07-09 — Deterministic smoke artifact path
 
 - Added `tools/write_smoke_artifact.py` to create `results/reproducibility_smoke_artifact.json`, a deterministic metadata-only artifact for testing output declaration and validation plumbing.
