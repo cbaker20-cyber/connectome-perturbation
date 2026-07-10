@@ -244,22 +244,42 @@ def validate_declared_outputs(repo_root: Path, manifest: dict[str, Any], errors:
     Smoke manifests may legitimately have no produced artifacts yet. Once an
     output record is declared, however, its path must be repo-relative and any
     declared checksum/size facts must be canonical and match the file on disk.
-    This prevents a manifest from becoming a hand-written claim about outputs
-    that were not produced by the reproducible run being validated.
+    Duplicate aliases and directories are rejected so each record identifies
+    exactly one produced file.
     """
     outputs = manifest.get("outputs", [])
     require(isinstance(outputs, list), "output outputs must be a list", errors)
     if not isinstance(outputs, list):
         return
 
+    seen_literals: dict[str, int] = {}
+    seen_resolved: dict[Path, int] = {}
     for idx, record in enumerate(outputs):
         require(isinstance(record, dict), f"output {idx} must be an object", errors)
         if not isinstance(record, dict):
             continue
-        output_path = repo_relative_path(repo_root, record.get("path"), f"output {idx} path", errors)
+
+        path_value = record.get("path")
+        if isinstance(path_value, str):
+            normalized_literal = Path(path_value).as_posix()
+            if normalized_literal in seen_literals:
+                errors.append(
+                    f"output {idx} duplicates manifest path from output {seen_literals[normalized_literal]}: {path_value}"
+                )
+            else:
+                seen_literals[normalized_literal] = idx
+
+        output_path = repo_relative_path(repo_root, path_value, f"output {idx} path", errors)
         if output_path is None:
             continue
-        path_value = record.get("path")
+
+        if output_path in seen_resolved:
+            errors.append(
+                f"output {idx} resolves to the same file as output {seen_resolved[output_path]}: {path_value}"
+            )
+        else:
+            seen_resolved[output_path] = idx
+
         if "size_bytes" in record:
             require(
                 isinstance(record.get("size_bytes"), int) and record.get("size_bytes") >= 0,
@@ -274,6 +294,9 @@ def validate_declared_outputs(repo_root: Path, manifest: dict[str, Any], errors:
             )
         require(output_path.exists(), f"output path missing on disk: {path_value}", errors)
         if not output_path.exists():
+            continue
+        require(output_path.is_file(), f"output path must be a file: {path_value}", errors)
+        if not output_path.is_file():
             continue
         if "size_bytes" in record:
             require(output_path.stat().st_size == record.get("size_bytes"), f"output size mismatch: {path_value}", errors)
