@@ -45,6 +45,12 @@ def base_output_manifest(repo_root: Path, tool) -> dict:
     }
 
 
+def write_output_manifest(repo_root: Path, manifest: dict) -> Path:
+    manifest_path = repo_root / "output_manifest.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    return manifest_path
+
+
 def test_validate_output_manifest_accepts_declared_output_with_matching_digest(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
@@ -59,8 +65,7 @@ def test_validate_output_manifest_accepts_declared_output_with_matching_digest(t
             "size_bytes": output_file.stat().st_size,
         }
     ]
-    manifest_path = repo_root / "output_manifest.json"
-    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
     tool.validate_output_manifest(repo_root, manifest_path, errors)
@@ -73,8 +78,7 @@ def test_validate_output_manifest_rejects_output_path_escape(tmp_path):
     repo_root = tmp_path
     manifest = base_output_manifest(repo_root, tool)
     manifest["outputs"] = [{"path": "../outside.csv", "sha256": "0" * 64}]
-    manifest_path = repo_root / "output_manifest.json"
-    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
     tool.validate_output_manifest(repo_root, manifest_path, errors)
@@ -96,10 +100,111 @@ def test_validate_output_manifest_rejects_stale_output_digest(tmp_path):
             "size_bytes": output_file.stat().st_size,
         }
     ]
-    manifest_path = repo_root / "output_manifest.json"
-    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
     tool.validate_output_manifest(repo_root, manifest_path, errors)
 
     assert "output sha256 mismatch: results/summary.json" in errors
+
+
+def test_validate_output_manifest_rejects_malformed_output_digest(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    output_file = repo_root / "results" / "summary.json"
+    output_file.parent.mkdir()
+    output_file.write_text('{"ok": true}\n', encoding="utf-8")
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [
+        {
+            "path": "results/summary.json",
+            "sha256": "not-a-digest",
+            "size_bytes": output_file.stat().st_size,
+        }
+    ]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output sha256 must be a 64-character lowercase hex digest: results/summary.json" in errors
+
+
+def test_validate_output_manifest_rejects_uppercase_output_digest(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    output_file = repo_root / "results" / "summary.json"
+    output_file.parent.mkdir()
+    output_file.write_text('{"ok": true}\n', encoding="utf-8")
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [
+        {
+            "path": "results/summary.json",
+            "sha256": tool.sha256_file(output_file).upper(),
+            "size_bytes": output_file.stat().st_size,
+        }
+    ]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output sha256 must be a 64-character lowercase hex digest: results/summary.json" in errors
+
+
+def test_validate_output_manifest_rejects_string_output_size(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    output_file = repo_root / "results" / "summary.json"
+    output_file.parent.mkdir()
+    output_file.write_text('{"ok": true}\n', encoding="utf-8")
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [
+        {
+            "path": "results/summary.json",
+            "sha256": tool.sha256_file(output_file),
+            "size_bytes": str(output_file.stat().st_size),
+        }
+    ]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output size_bytes must be a non-negative integer: results/summary.json" in errors
+
+
+def test_validate_output_manifest_rejects_negative_output_size(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    output_file = repo_root / "results" / "summary.json"
+    output_file.parent.mkdir()
+    output_file.write_text('{"ok": true}\n', encoding="utf-8")
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [
+        {
+            "path": "results/summary.json",
+            "sha256": tool.sha256_file(output_file),
+            "size_bytes": -1,
+        }
+    ]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output size_bytes must be a non-negative integer: results/summary.json" in errors
+
+
+def test_validate_output_manifest_reports_missing_output_and_malformed_digest(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [{"path": "results/missing.json", "sha256": "not-a-digest"}]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output sha256 must be a 64-character lowercase hex digest: results/missing.json" in errors
+    assert "output path missing on disk: results/missing.json" in errors
