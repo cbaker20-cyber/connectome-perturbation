@@ -13,6 +13,11 @@ Prioritized backlog for the connectome perturbation project.
   - Optional declared output `sha256` values must be canonical lowercase 64-character SHA-256 digests.
   - Optional declared output `size_bytes` values must be non-negative integers.
   - Declared output files, checksums, and sizes are compared against disk when present.
+- [x] Let the output-manifest writer record real output artifacts with fresh checksums.
+  - `tools/write_output_manifest.py --artifact <repo-relative-file>` records `path`, `sha256`, and `size_bytes` from disk.
+  - Missing artifacts, directories, absolute paths, and parent-directory escapes fail before the manifest is written.
+  - The writer intentionally requires explicit artifact paths so stale files are not auto-discovered and silently blessed.
+- [ ] Wire a deterministic smoke command to produce an artifact, write it with `--artifact`, and immediately validate it.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
   - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
   - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
@@ -47,5 +52,6 @@ Prioritized backlog for the connectome perturbation project.
 
 - Authoritative provenance for tracked data files is missing.
 - Existing result CSV is not tied to a command, config, seed, commit, or input checksums.
+- A deterministic smoke command still needs to be wired to produce and declare at least one validated artifact.
 - Some older scripts still contain historical path assumptions and need audit before use.
 - Open PRs already contain overlapping scaffolding; merge order should be reviewed before large refactors.
