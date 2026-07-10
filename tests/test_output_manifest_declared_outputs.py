@@ -208,3 +208,40 @@ def test_validate_output_manifest_reports_missing_output_and_malformed_digest(tm
 
     assert "output sha256 must be a 64-character lowercase hex digest: results/missing.json" in errors
     assert "output path missing on disk: results/missing.json" in errors
+
+
+def test_validate_output_manifest_rejects_duplicate_output_path(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    output_file = repo_root / "results" / "summary.json"
+    output_file.parent.mkdir()
+    output_file.write_text('{"ok": true}\n', encoding="utf-8")
+    record = {
+        "path": "results/summary.json",
+        "sha256": tool.sha256_file(output_file),
+        "size_bytes": output_file.stat().st_size,
+    }
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [record, dict(record)]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output 1 duplicates manifest path from output 0: results/summary.json" in errors
+    assert "output 1 resolves to the same file as output 0: results/summary.json" in errors
+
+
+def test_validate_output_manifest_rejects_directory_as_output(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    output_dir = repo_root / "results"
+    output_dir.mkdir()
+    manifest = base_output_manifest(repo_root, tool)
+    manifest["outputs"] = [{"path": "results"}]
+    manifest_path = write_output_manifest(repo_root, manifest)
+
+    errors = []
+    tool.validate_output_manifest(repo_root, manifest_path, errors)
+
+    assert "output path must be a file: results" in errors
