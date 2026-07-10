@@ -6,18 +6,37 @@ This note defines the strict validation boundary for `output_manifest.json` decl
 
 Implemented on the reproducibility branch:
 
+- `tools/write_smoke_artifact.py` creates a deterministic metadata-only artifact at `results/reproducibility_smoke_artifact.json` by default.
 - `tools/write_output_manifest.py` can record one or more real output artifacts with `--artifact <repo-relative-path>`.
 - Writer-created artifact records are populated from disk with `path`, `sha256`, and `size_bytes`.
 - The writer rejects missing artifacts, directories, absolute artifact paths, and parent-directory escapes before writing the manifest.
 - `tools/validate_reproducibility.py` validates declared output paths, existence, canonical metadata shape, and on-disk checksum/size matches.
+- `tests/test_write_smoke_artifact.py` covers deterministic smoke artifact payload/content and output path boundaries.
 - `tests/test_output_manifest_writer.py` covers artifact recording, missing artifacts, and artifact path escapes.
 - `tests/test_output_manifest_declared_outputs.py` covers matching declared outputs, path escapes, stale digests, malformed digests, uppercase digests, string sizes, negative sizes, and missing outputs with malformed digests.
 
 ## Scope
 
+`tools/write_smoke_artifact.py` creates a stable artifact for reproducibility plumbing only. It does not run Brian2, inspect connectome files, or make biological claims.
+
 `tools/write_output_manifest.py` records output artifacts only when explicitly named with `--artifact`. It does not discover files automatically, because automatic discovery can accidentally bless stale files from previous runs.
 
 `tools/validate_reproducibility.py` validates optional `output_manifest.outputs` records when they exist: paths must remain repo-relative, declared output files must exist, declared `sha256` / `size_bytes` metadata must have canonical shape, and declared metadata values must match disk.
+
+## End-to-end smoke sequence
+
+```bash
+python tools/build_input_manifest.py
+python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
+python tools/write_output_manifest.py \
+  --config configs/smoke_run.yaml \
+  --input-manifest data/input_manifest.json \
+  --output output_manifest.json \
+  --artifact results/reproducibility_smoke_artifact.json
+python tools/validate_reproducibility.py
+```
+
+This sequence should prove that the metadata plumbing can create an artifact, declare it, checksum it, and validate it. It still does not prove any neuroscience result.
 
 ## Writer contract
 
@@ -28,7 +47,7 @@ python tools/write_output_manifest.py \
   --config configs/smoke_run.yaml \
   --input-manifest data/input_manifest.json \
   --output output_manifest.json \
-  --artifact results/summary.json
+  --artifact results/reproducibility_smoke_artifact.json
 ```
 
 For every `--artifact` argument:
@@ -50,6 +69,12 @@ For every record in `output_manifest.outputs`:
 
 ## Regression cases covered
 
+Tests alongside `tests/test_write_smoke_artifact.py` cover:
+
+1. The smoke artifact payload is conservative and stable.
+2. The written JSON bytes are deterministic.
+3. Absolute and escaping output paths fail before writing.
+
 Tests alongside `tests/test_output_manifest_writer.py` cover:
 
 1. A declared artifact is recorded with fresh `sha256` and `size_bytes` metadata from disk.
@@ -66,4 +91,4 @@ Tests alongside `tests/test_output_manifest_declared_outputs.py` cover:
 
 ## Remaining next step
 
-The next hardening layer is wiring a real smoke/execution command to produce a small deterministic artifact, call `tools/write_output_manifest.py --artifact ...`, then immediately run `tools/validate_reproducibility.py` in one reproducible command.
+The next hardening layer is replacing the metadata-only smoke artifact with a tiny deterministic analysis artifact generated from toy fixtures with known expected graph outcomes.
