@@ -81,6 +81,11 @@ def is_iso_datetime_with_timezone(value: Any) -> bool:
     return parsed.tzinfo is not None and parsed.utcoffset() is not None
 
 
+def is_sha256_hex(value: Any) -> bool:
+    """Return whether a value is a canonical lowercase SHA-256 digest."""
+    return isinstance(value, str) and len(value) == 64 and all(char in "0123456789abcdef" for char in value)
+
+
 def repo_relative_path(repo_root: Path, path_value: Any, label: str, errors: list[str]) -> Path | None:
     """Resolve a manifest path only if it is relative and stays inside repo_root."""
     if not isinstance(path_value, str) or not path_value.strip():
@@ -193,9 +198,9 @@ def validate_declared_outputs(repo_root: Path, manifest: dict[str, Any], errors:
 
     Smoke manifests may legitimately have no produced artifacts yet. Once an
     output record is declared, however, its path must be repo-relative and any
-    declared checksum/size facts must match the file on disk. This prevents a
-    manifest from becoming a hand-written claim about outputs that were not
-    produced by the reproducible run being validated.
+    declared checksum/size facts must be canonical and match the file on disk.
+    This prevents a manifest from becoming a hand-written claim about outputs
+    that were not produced by the reproducible run being validated.
     """
     outputs = manifest.get("outputs", [])
     require(isinstance(outputs, list), "output outputs must be a list", errors)
@@ -210,6 +215,18 @@ def validate_declared_outputs(repo_root: Path, manifest: dict[str, Any], errors:
         if output_path is None:
             continue
         path_value = record.get("path")
+        if "size_bytes" in record:
+            require(
+                isinstance(record.get("size_bytes"), int) and record.get("size_bytes") >= 0,
+                f"output size_bytes must be a non-negative integer: {path_value}",
+                errors,
+            )
+        if "sha256" in record:
+            require(
+                is_sha256_hex(record.get("sha256")),
+                f"output sha256 must be a 64-character lowercase hex digest: {path_value}",
+                errors,
+            )
         require(output_path.exists(), f"output path missing on disk: {path_value}", errors)
         if not output_path.exists():
             continue
