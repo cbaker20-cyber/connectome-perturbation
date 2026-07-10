@@ -14,9 +14,17 @@ def load_resolver():
     return module
 
 
+def make_repo(tmp_path: Path) -> Path:
+    """Create an explicit repository-root fixture for repo_root_from()."""
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    (repo_root / "README.md").write_text("fixture repository\n", encoding="utf-8")
+    return repo_root
+
+
 def write_manifest(repo_root: Path, record_path: str) -> Path:
     manifest_path = repo_root / "data/input_manifest.json"
-    manifest_path.parent.mkdir(parents=True)
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(
         json.dumps(
             {
@@ -37,8 +45,7 @@ def write_manifest(repo_root: Path, record_path: str) -> Path:
 
 def test_resolve_input_rejects_manifest_record_outside_repo(tmp_path):
     resolver = load_resolver()
-    repo_root = tmp_path / "repo"
-    repo_root.mkdir()
+    repo_root = make_repo(tmp_path)
     outside = tmp_path / "outside.csv"
     outside.write_text("source,target\n1,2\n", encoding="utf-8")
     write_manifest(repo_root, "../outside.csv")
@@ -49,8 +56,7 @@ def test_resolve_input_rejects_manifest_record_outside_repo(tmp_path):
 
 def test_resolve_input_rejects_fallback_outside_repo(tmp_path):
     resolver = load_resolver()
-    repo_root = tmp_path / "repo"
-    repo_root.mkdir()
+    repo_root = make_repo(tmp_path)
     outside = tmp_path / "outside.csv"
     outside.write_text("source,target\n1,2\n", encoding="utf-8")
     write_manifest(repo_root, "data/missing.csv")
@@ -61,8 +67,7 @@ def test_resolve_input_rejects_fallback_outside_repo(tmp_path):
 
 def test_resolve_input_accepts_repo_relative_manifest_record(tmp_path):
     resolver = load_resolver()
-    repo_root = tmp_path / "repo"
-    repo_root.mkdir()
+    repo_root = make_repo(tmp_path)
     data_file = repo_root / "data/edges.csv"
     data_file.parent.mkdir(parents=True)
     data_file.write_text("source,target\n1,2\n", encoding="utf-8")
