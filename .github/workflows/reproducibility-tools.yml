@@ -25,7 +25,11 @@ jobs:
           python -m pip install pytest
 
       - name: Run reproducibility tool tests
-        run: python -m pytest tests/test_reproducibility_tools.py -q
+        run: |
+          python -m pytest \
+            tests/test_reproducibility_tools.py \
+            tests/test_manifest_counts.py \
+            -q
 
       - name: Compile metadata tooling
         run: |
