@@ -8,6 +8,11 @@ Prioritized backlog for the connectome perturbation project.
 - [ ] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
 - [ ] Run `python tools/write_output_manifest.py --config configs/smoke_run.yaml --output output_manifest.json`.
 - [ ] Run `python tools/validate_reproducibility.py`.
+- [x] Validate declared output artifact metadata shape before treating output manifests as reproducible evidence.
+  - Declared output paths must stay repo-relative.
+  - Optional declared output `sha256` values must be canonical lowercase 64-character SHA-256 digests.
+  - Optional declared output `size_bytes` values must be non-negative integers.
+  - Declared output files, checksums, and sizes are compared against disk when present.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
   - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
   - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
