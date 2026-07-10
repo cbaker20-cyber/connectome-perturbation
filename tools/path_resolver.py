@@ -20,14 +20,27 @@ def load_manifest(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def require_repo_path(root: Path, candidate: Path, label: str) -> Path:
+    """Return a resolved path only when it stays inside ``root``."""
+    resolved_root = root.resolve()
+    resolved_candidate = candidate.resolve()
+    try:
+        resolved_candidate.relative_to(resolved_root)
+    except ValueError as exc:
+        raise ValueError(
+            f"{label} must stay within the repository: {candidate}"
+        ) from exc
+    return resolved_candidate
+
+
 def resolve_input(identifier: str, manifest_path: str | Path = "data/input_manifest.json", repo_root: Path | None = None) -> Path:
     """Resolve an input by exact path, filename, role, or materialization.
 
-    The resolver refuses ambiguous matches so scripts cannot silently pick the
-    wrong materialization.
+    The resolver refuses ambiguous matches and paths outside the repository so
+    scripts cannot silently pick the wrong materialization or external file.
     """
     root = repo_root_from(repo_root)
-    manifest_file = (root / manifest_path).resolve()
+    manifest_file = require_repo_path(root, root / manifest_path, "manifest path")
     manifest = load_manifest(manifest_file)
     matches = []
     for record in manifest.get("inputs", []):
@@ -40,14 +53,14 @@ def resolve_input(identifier: str, manifest_path: str | Path = "data/input_manif
         if identifier in values:
             matches.append(record)
     if not matches:
-        candidate = (root / identifier).resolve()
+        candidate = require_repo_path(root, root / identifier, "input path")
         if candidate.exists():
             return candidate
         raise FileNotFoundError(f"No manifest entry or file found for {identifier!r}")
     if len(matches) > 1:
         choices = ", ".join(record["path"] for record in matches)
         raise ValueError(f"Ambiguous input identifier {identifier!r}; matches: {choices}")
-    return (root / matches[0]["path"]).resolve()
+    return require_repo_path(root, root / matches[0]["path"], "manifest input path")
 
 
 def main() -> int:
