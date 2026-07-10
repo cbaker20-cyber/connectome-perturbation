@@ -38,20 +38,26 @@ The documentation validator does not validate the model or its scientific output
 
 ## Metadata-first smoke command
 
-This command builds a local input manifest, writes a conservative output manifest, and validates metadata plumbing. It does **not** validate a neuroscience result.
+This command builds a local input manifest, writes a deterministic metadata-only smoke artifact, records that artifact in the output manifest, and validates metadata plumbing. It does **not** validate a neuroscience result.
 
 ```bash
 python tools/build_input_manifest.py
-python tools/write_output_manifest.py --config configs/smoke_run.yaml --output output_manifest.json
+python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
+python tools/write_output_manifest.py \
+  --config configs/smoke_run.yaml \
+  --input-manifest data/input_manifest.json \
+  --output output_manifest.json \
+  --artifact results/reproducibility_smoke_artifact.json
 python tools/validate_reproducibility.py
 ```
 
 Expected artifacts:
 
 - `data/input_manifest.json`: local filenames, sizes, SHA-256 checksums, guessed roles/materializations, and empty provenance fields.
-- `output_manifest.json`: command/config/commit/environment/input-checksum metadata with `claim_status` set to `not_interpretable_as_neuroscience`.
+- `results/reproducibility_smoke_artifact.json`: deterministic metadata-only artifact used to exercise output declaration and checksum validation.
+- `output_manifest.json`: command/config/commit/environment/input-checksum/output-artifact metadata with `claim_status` set to `not_interpretable_as_neuroscience`.
 
-Do not use either file as evidence for a biological conclusion until authoritative provenance and an actual validated run are attached.
+Do not use any of these files as evidence for a biological conclusion until authoritative provenance and an actual validated run are attached.
 
 ## Current blockers
 
