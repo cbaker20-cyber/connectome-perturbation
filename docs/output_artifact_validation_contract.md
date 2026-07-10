@@ -6,14 +6,39 @@ This note defines the strict validation boundary for `output_manifest.json` decl
 
 Implemented on the reproducibility branch:
 
+- `tools/write_output_manifest.py` can record one or more real output artifacts with `--artifact <repo-relative-path>`.
+- Writer-created artifact records are populated from disk with `path`, `sha256`, and `size_bytes`.
+- The writer rejects missing artifacts, directories, absolute artifact paths, and parent-directory escapes before writing the manifest.
 - `tools/validate_reproducibility.py` validates declared output paths, existence, canonical metadata shape, and on-disk checksum/size matches.
+- `tests/test_output_manifest_writer.py` covers artifact recording, missing artifacts, and artifact path escapes.
 - `tests/test_output_manifest_declared_outputs.py` covers matching declared outputs, path escapes, stale digests, malformed digests, uppercase digests, string sizes, negative sizes, and missing outputs with malformed digests.
 
 ## Scope
 
+`tools/write_output_manifest.py` records output artifacts only when explicitly named with `--artifact`. It does not discover files automatically, because automatic discovery can accidentally bless stale files from previous runs.
+
 `tools/validate_reproducibility.py` validates optional `output_manifest.outputs` records when they exist: paths must remain repo-relative, declared output files must exist, declared `sha256` / `size_bytes` metadata must have canonical shape, and declared metadata values must match disk.
 
-## Contract
+## Writer contract
+
+Use one `--artifact` flag for each file produced by a smoke or experiment command:
+
+```bash
+python tools/write_output_manifest.py \
+  --config configs/smoke_run.yaml \
+  --input-manifest data/input_manifest.json \
+  --output output_manifest.json \
+  --artifact results/summary.json
+```
+
+For every `--artifact` argument:
+
+- The path must be a non-empty repo-relative string and must not escape the repository.
+- The path must already exist before the manifest is written.
+- The path must be a regular file, not a directory.
+- The writer computes `sha256` and `size_bytes` from the file currently on disk.
+
+## Validator contract
 
 For every record in `output_manifest.outputs`:
 
@@ -25,6 +50,12 @@ For every record in `output_manifest.outputs`:
 
 ## Regression cases covered
 
+Tests alongside `tests/test_output_manifest_writer.py` cover:
+
+1. A declared artifact is recorded with fresh `sha256` and `size_bytes` metadata from disk.
+2. A missing `--artifact` path fails before manifest writing.
+3. An escaping `--artifact ../outside.json` path fails before manifest writing.
+
 Tests alongside `tests/test_output_manifest_declared_outputs.py` cover:
 
 1. A declared output with `sha256: "not-a-digest"` fails with `output sha256 must be a 64-character lowercase hex digest: results/summary.json`.
@@ -35,4 +66,4 @@ Tests alongside `tests/test_output_manifest_declared_outputs.py` cover:
 
 ## Remaining next step
 
-The next hardening layer is wiring declared-output generation into the actual smoke/execution command, so real pipeline outputs are written, checksummed, recorded in `output_manifest.json`, and immediately validated in one reproducible command.
+The next hardening layer is wiring a real smoke/execution command to produce a small deterministic artifact, call `tools/write_output_manifest.py --artifact ...`, then immediately run `tools/validate_reproducibility.py` in one reproducible command.
