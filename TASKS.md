@@ -32,6 +32,10 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_toy_graph_artifact.py` writes `results/toy_graph_artifact.json` by default.
   - The artifact contains a four-node directed fixture graph with expected node count, edge count, degree maps, reachability, and weak component count.
   - The artifact is explicitly marked `not_interpretable_as_neuroscience` so it validates analysis plumbing without making biological claims.
+- [x] Promote toy graph expected-outcomes logic into reusable graph-analysis fixtures.
+  - `connectome_analysis/graph_metrics.py` now owns degree, reachability, weak-component, and expected-metric helpers.
+  - `tools/write_toy_graph_artifact.py` uses the shared helper instead of carrying one-off metric code.
+  - `tests/test_graph_metrics.py` pins fixture metrics and rejects unknown edge endpoints before real-data integration.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
   - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
   - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
@@ -45,7 +49,8 @@ Prioritized backlog for the connectome perturbation project.
 - [ ] Define metrics before running experiments: reachability, connected components, centrality changes, shortest-path disruption, motor-output proxy shifts, and null-model deltas.
 - [ ] Add permutation/random-control statistics and multiple-comparison correction.
 - [x] Add toy connectome fixtures with known expected outcomes.
-  - The current fixture artifact is intentionally synthetic and should be promoted into reusable graph-analysis tests before real connectome runs are interpreted.
+  - The current fixture artifact is intentionally synthetic and now uses reusable graph-metric helpers before real connectome runs are interpreted.
+- [ ] Use reusable graph-metric helpers to test baseline/perturbation metric code on toy fixtures before real connectome inputs.
 - [ ] Add schema checks for connectivity and completeness tables.
 
 ## P2 — Architecture cleanup
