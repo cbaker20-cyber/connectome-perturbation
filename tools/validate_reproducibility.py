@@ -134,21 +134,66 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
     )
     inputs = manifest.get("inputs", [])
     require(isinstance(inputs, list), "input manifest `inputs` must be a list", errors)
+    if not isinstance(inputs, list):
+        return manifest
     require(manifest.get("input_count") == len(inputs), "input_count does not match inputs length", errors)
+
+    seen_literals: dict[str, int] = {}
+    seen_resolved: dict[Path, int] = {}
     for idx, record in enumerate(inputs):
         require(isinstance(record, dict), f"input {idx} must be an object", errors)
         if not isinstance(record, dict):
             continue
         missing = REQUIRED_INPUT_FIELDS - set(record)
         require(not missing, f"input {idx} missing fields: {sorted(missing)}", errors)
-        path = repo_relative_path(repo_root, record.get("path"), f"input {idx} path", errors)
+
+        path_value = record.get("path")
+        if isinstance(path_value, str):
+            normalized_literal = Path(path_value).as_posix()
+            if normalized_literal in seen_literals:
+                errors.append(
+                    f"input {idx} duplicates manifest path from input {seen_literals[normalized_literal]}: {path_value}"
+                )
+            else:
+                seen_literals[normalized_literal] = idx
+
+        path = repo_relative_path(repo_root, path_value, f"input {idx} path", errors)
         if path is None:
             continue
-        path_value = record.get("path")
+
+        if path in seen_resolved:
+            errors.append(
+                f"input {idx} resolves to the same file as input {seen_resolved[path]}: {path_value}"
+            )
+        else:
+            seen_resolved[path] = idx
+
+        expected_filename = Path(path_value).name if isinstance(path_value, str) else None
+        expected_extension = Path(path_value).suffix if isinstance(path_value, str) else None
+        require(
+            isinstance(record.get("filename"), str) and record.get("filename") == expected_filename,
+            f"input {idx} filename does not match path: {path_value}",
+            errors,
+        )
+        require(
+            isinstance(record.get("extension"), str) and record.get("extension") == expected_extension,
+            f"input {idx} extension does not match path: {path_value}",
+            errors,
+        )
+        valid_size = isinstance(record.get("size_bytes"), int) and record.get("size_bytes") >= 0
+        require(valid_size, f"input {idx} size_bytes must be a non-negative integer: {path_value}", errors)
+        valid_sha = is_sha256_hex(record.get("sha256"))
+        require(valid_sha, f"input {idx} sha256 must be a 64-character lowercase hex digest: {path_value}", errors)
+
         require(path.exists(), f"input path missing on disk: {path_value}", errors)
         if path.exists():
-            require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {path_value}", errors)
-            require(sha256_file(path) == record.get("sha256"), f"sha256 mismatch: {path_value}", errors)
+            require(path.is_file(), f"input path must be a file: {path_value}", errors)
+            if path.is_file():
+                if valid_size:
+                    require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {path_value}", errors)
+                if valid_sha:
+                    require(sha256_file(path) == record.get("sha256"), f"sha256 mismatch: {path_value}", errors)
+
         provenance = record.get("provenance", {})
         require(isinstance(provenance, dict), f"input {idx} provenance must be an object", errors)
         if not isinstance(provenance, dict):
