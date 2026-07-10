@@ -30,6 +30,7 @@ jobs:
             tests/test_reproducibility_tools.py \
             tests/test_manifest_counts.py \
             tests/test_path_resolver_boundaries.py \
+            tests/test_input_manifest_record_validation.py \
             -q
 
       - name: Compile metadata tooling
