@@ -2,6 +2,13 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Deterministic smoke artifact path
+
+- Added `tools/write_smoke_artifact.py` to create `results/reproducibility_smoke_artifact.json`, a deterministic metadata-only artifact for testing output declaration and validation plumbing.
+- Added regression coverage in `tests/test_write_smoke_artifact.py` for conservative payload contents, deterministic JSON bytes, absolute output rejection, and parent-directory escape rejection.
+- Updated the README smoke command so the reproducibility path now creates an artifact, records it with `tools/write_output_manifest.py --artifact`, and validates it with `tools/validate_reproducibility.py`.
+- Updated `docs/output_artifact_validation_contract.md` and `TASKS.md` to mark the create → declare → validate metadata smoke path as implemented and name the next target: a toy-fixture graph artifact with known expected outcomes.
+
 ## 2026-07-09 — Output artifact writer support
 
 - Updated `tools/write_output_manifest.py` so smoke/reproduction runs can record real output files with repeated `--artifact <repo-relative-file>` flags.
