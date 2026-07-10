@@ -2,6 +2,13 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Declared output metadata shape hardening
+
+- Updated `tools/validate_reproducibility.py` so declared `output_manifest.outputs` metadata must use canonical types before disk comparison.
+- Declared output `sha256` values, when present, must now be lowercase 64-character hexadecimal SHA-256 digests.
+- Declared output `size_bytes` values, when present, must now be non-negative integers rather than stringified or negative values.
+- Added regression coverage for malformed digests, uppercase digests, string sizes, negative sizes, and missing outputs with malformed digests.
+
 ## 2026-07-09 — Conservative claim ledger
 
 - Added `docs/claim_ledger.md` to separate verified repository facts from assumptions, hypotheses, future work, and blocked claims.
