@@ -2,6 +2,14 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Reusable graph metric fixtures
+
+- Added `connectome_analysis/graph_metrics.py` with pure helpers for directed degree maps, reachability, weak component counts, and expected metric bundles.
+- Added `connectome_analysis/__init__.py` so the analysis helpers are importable by tools and tests.
+- Updated `tools/write_toy_graph_artifact.py` to use the shared graph metric helper instead of carrying one-off metric code inside the artifact writer.
+- Added `tests/test_graph_metrics.py` to pin the toy fixture metrics and reject unknown edge endpoints before graph logic is used on real connectome inputs.
+- Updated `TASKS.md` to mark toy graph metric extraction complete and name the next target: testing baseline/perturbation metric code against toy fixtures before interpreting real connectome results.
+
 ## 2026-07-09 — Toy graph expected-outcomes artifact
 
 - Added `tools/write_toy_graph_artifact.py` to create `results/toy_graph_artifact.json`, a deterministic synthetic graph artifact with known expected outcomes.
