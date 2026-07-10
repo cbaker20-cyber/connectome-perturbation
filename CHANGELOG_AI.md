@@ -2,6 +2,14 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-09 — Output artifact writer support
+
+- Updated `tools/write_output_manifest.py` so smoke/reproduction runs can record real output files with repeated `--artifact <repo-relative-file>` flags.
+- Writer-created output records now include `path`, `sha256`, and `size_bytes` computed from the artifact currently on disk.
+- The writer now rejects missing artifacts, directories, absolute artifact paths, and parent-directory escapes before writing `output_manifest.json`.
+- Added regression coverage for artifact recording, missing artifacts, and artifact path escapes.
+- Updated `docs/output_artifact_validation_contract.md` and `TASKS.md` to make the next step explicit: wire a deterministic smoke command to produce, record, and validate an artifact in one reproducible path.
+
 ## 2026-07-09 — Declared output metadata shape hardening
 
 - Updated `tools/validate_reproducibility.py` so declared `output_manifest.outputs` metadata must use canonical types before disk comparison.
