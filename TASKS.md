@@ -6,8 +6,11 @@ Prioritized backlog for the connectome perturbation project.
 
 - [ ] Run `python tools/build_input_manifest.py` and review `data/input_manifest.json`.
 - [ ] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
-- [ ] Run `python tools/write_output_manifest.py --config configs/smoke_run.yaml --output output_manifest.json`.
-- [ ] Run `python tools/validate_reproducibility.py`.
+- [ ] Run the artifact-producing metadata smoke sequence:
+  - `python tools/build_input_manifest.py`
+  - `python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json`
+  - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/reproducibility_smoke_artifact.json`
+  - `python tools/validate_reproducibility.py`
 - [x] Validate declared output artifact metadata shape before treating output manifests as reproducible evidence.
   - Declared output paths must stay repo-relative.
   - Optional declared output `sha256` values must be canonical lowercase 64-character SHA-256 digests.
@@ -17,7 +20,11 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_output_manifest.py --artifact <repo-relative-file>` records `path`, `sha256`, and `size_bytes` from disk.
   - Missing artifacts, directories, absolute paths, and parent-directory escapes fail before the manifest is written.
   - The writer intentionally requires explicit artifact paths so stale files are not auto-discovered and silently blessed.
-- [ ] Wire a deterministic smoke command to produce an artifact, write it with `--artifact`, and immediately validate it.
+- [x] Wire a deterministic smoke command to produce an artifact, write it with `--artifact`, and immediately validate it.
+  - `tools/write_smoke_artifact.py` writes `results/reproducibility_smoke_artifact.json` by default.
+  - The artifact is deterministic metadata-only JSON with `claim_status: not_interpretable_as_neuroscience`.
+  - README and `docs/output_artifact_validation_contract.md` now show the exact create → declare → validate sequence.
+- [ ] Replace the metadata-only smoke artifact with a tiny deterministic toy-fixture graph analysis artifact with known expected outcomes.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
   - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
   - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
@@ -52,6 +59,6 @@ Prioritized backlog for the connectome perturbation project.
 
 - Authoritative provenance for tracked data files is missing.
 - Existing result CSV is not tied to a command, config, seed, commit, or input checksums.
-- A deterministic smoke command still needs to be wired to produce and declare at least one validated artifact.
+- The current smoke artifact validates metadata plumbing only; it still needs to be replaced by a toy-fixture graph artifact before making any analysis claims.
 - Some older scripts still contain historical path assumptions and need audit before use.
 - Open PRs already contain overlapping scaffolding; merge order should be reviewed before large refactors.
