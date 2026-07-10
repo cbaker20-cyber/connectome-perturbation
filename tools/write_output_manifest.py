@@ -96,11 +96,41 @@ def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str | None:
     return digest.hexdigest()
 
 
+def output_artifact_records(repo_root: Path, artifact_paths: list[str]) -> list[dict]:
+    """Return manifest records for declared output artifacts.
+
+    A writer-created output declaration should be stronger than a hand-authored
+    placeholder: every declared artifact must already exist, be a regular file,
+    stay inside the repository, and get fresh checksum/size metadata from disk.
+    """
+    records = []
+    for artifact_path in artifact_paths:
+        resolved = repo_relative_path(repo_root, artifact_path, "--artifact")
+        if not resolved.exists():
+            raise ValueError(f"--artifact must exist before it can be recorded: {artifact_path}")
+        if not resolved.is_file():
+            raise ValueError(f"--artifact must be a regular file: {artifact_path}")
+        records.append(
+            {
+                "path": artifact_path,
+                "sha256": sha256_file(resolved),
+                "size_bytes": resolved.stat().st_size,
+            }
+        )
+    return records
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/smoke_run.yaml")
     parser.add_argument("--input-manifest", default="data/input_manifest.json")
     parser.add_argument("--output", default="output_manifest.json")
+    parser.add_argument(
+        "--artifact",
+        action="append",
+        default=[],
+        help="Repo-relative output artifact to record with sha256 and size metadata. May be supplied more than once.",
+    )
     parser.add_argument("--status", default="metadata_only_smoke")
     parser.add_argument("--note", action="append", default=[])
     args = parser.parse_args()
@@ -110,6 +140,7 @@ def main() -> int:
         config_path = repo_relative_path(repo_root, args.config, "--config")
         input_manifest_path = repo_relative_path(repo_root, args.input_manifest, "--input-manifest")
         output_path = repo_relative_path(repo_root, args.output, "--output")
+        outputs = output_artifact_records(repo_root, args.artifact)
     except ValueError as exc:
         print(f"Output manifest write failed: {exc}", file=sys.stderr)
         return 1
@@ -133,7 +164,7 @@ def main() -> int:
             "platform": platform.platform(),
             "executable": sys.executable,
         },
-        "outputs": [],
+        "outputs": outputs,
         "notes": args.note or [
             "This manifest records metadata plumbing only unless paired with a real simulation log and validated outputs."
         ],
