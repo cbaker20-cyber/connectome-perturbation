@@ -29,6 +29,7 @@ jobs:
           python -m pytest \
             tests/test_reproducibility_tools.py \
             tests/test_manifest_counts.py \
+            tests/test_path_resolver_boundaries.py \
             -q
 
       - name: Compile metadata tooling
