@@ -217,6 +217,36 @@ def test_validate_reproducibility_strict_provenance_rejects_unknown_fields(tmp_p
     assert "input 0 provenance field `redistribution_status` is required for claim-ready validation" in errors
 
 
+def test_validate_reproducibility_strict_provenance_accepts_complete_record(tmp_path):
+    tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
+    repo_root = tmp_path
+    data_file = repo_root / "input.csv"
+    data_file.write_text("source,target,weight\n1,2,3\n", encoding="utf-8")
+    input_manifest = metadata_input_manifest(tool, data_file)
+    input_manifest["inputs"][0]["provenance"].update(
+        {
+            "dataset_name": "FlyWire connectome",
+            "release_or_materialization": "630",
+            "canonical_url_or_doi": "https://codex.flywire.ai/",
+            "citation": "Authoritative citation recorded with the acquired dataset",
+            "license_or_terms": "Terms recorded at acquisition",
+            "access_date": "2026-07-10",
+            "redistribution_status": "not_redistributed",
+            "schema_notes": "source,target,weight",
+            "row_count": 1,
+            "preprocessing_notes": "No preprocessing in fixture",
+        }
+    )
+    manifest_path = repo_root / "input_manifest.json"
+    manifest_path.write_text(json.dumps(input_manifest), encoding="utf-8")
+
+    errors = []
+    validated = tool.validate_input_manifest(repo_root, manifest_path, errors, require_provenance=True)
+
+    assert validated == input_manifest
+    assert errors == []
+
+
 def test_validate_reproducibility_reports_checksum_mismatch(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
