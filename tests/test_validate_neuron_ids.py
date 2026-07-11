@@ -1,8 +1,15 @@
 import json
+from pathlib import Path
 
 import pytest
 
-from tools.validate_neuron_ids import deterministic_json, validate_neuron_id, validate_records
+from tools.validate_neuron_ids import (
+    deterministic_json,
+    resolve_io_paths,
+    resolve_repository_path,
+    validate_neuron_id,
+    validate_records,
+)
 
 
 @pytest.mark.parametrize(
@@ -51,3 +58,53 @@ def test_report_is_deterministic_and_machine_readable():
     assert first == second
     assert first.endswith("\n")
     assert json.loads(first) == report
+
+
+def test_repository_path_accepts_file_inside_root(tmp_path):
+    source = tmp_path / "input.json"
+    source.write_text("[]", encoding="utf-8")
+
+    assert resolve_repository_path(source, tmp_path, must_exist=True) == source.resolve()
+
+
+def test_repository_path_rejects_outside_root(tmp_path):
+    root = tmp_path / "repo"
+    root.mkdir()
+    outside = tmp_path / "outside.json"
+    outside.write_text("[]", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="escapes repository root"):
+        resolve_repository_path(outside, root, must_exist=True)
+
+
+def test_report_path_outside_root_is_rejected(tmp_path):
+    root = tmp_path / "repo"
+    root.mkdir()
+    source = root / "input.json"
+    source.write_text("[]", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="escapes repository root"):
+        resolve_io_paths(source, tmp_path / "report.json", root)
+
+
+def test_report_must_not_alias_input(tmp_path):
+    source = tmp_path / "input.json"
+    source.write_text("[]", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="must not resolve to the input path"):
+        resolve_io_paths(source, Path(tmp_path / "." / "input.json"), tmp_path)
+
+
+def test_symlink_escape_is_rejected_when_supported(tmp_path):
+    root = tmp_path / "repo"
+    root.mkdir()
+    outside = tmp_path / "outside.json"
+    outside.write_text("[]", encoding="utf-8")
+    link = root / "linked.json"
+    try:
+        link.symlink_to(outside)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks are not supported in this environment")
+
+    with pytest.raises(ValueError, match="escapes repository root"):
+        resolve_repository_path(link, root, must_exist=True)
