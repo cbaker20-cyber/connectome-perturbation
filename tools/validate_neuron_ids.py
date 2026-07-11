@@ -17,6 +17,7 @@ from typing import Any, Iterable
 SCHEMA_VERSION = "1.0"
 VALIDATOR_VERSION = "0.1.0"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
 def validate_neuron_id(value: Any) -> str | None:
@@ -89,6 +90,42 @@ def deterministic_json(value: dict[str, Any]) -> str:
     return json.dumps(value, indent=2, sort_keys=True, ensure_ascii=True) + "\n"
 
 
+def resolve_repository_path(
+    path: Path,
+    repository_root: Path = REPOSITORY_ROOT,
+    *,
+    must_exist: bool,
+) -> Path:
+    """Resolve ``path`` and reject traversal or symlink escape from the repo."""
+    root = repository_root.resolve(strict=True)
+    candidate = path.resolve(strict=must_exist)
+    try:
+        candidate.relative_to(root)
+    except ValueError as exc:
+        raise ValueError(f"path escapes repository root: {path}") from exc
+    return candidate
+
+
+def resolve_io_paths(
+    input_path: Path,
+    report_path: Path | None,
+    repository_root: Path = REPOSITORY_ROOT,
+) -> tuple[Path, Path | None]:
+    """Resolve safe input/output paths and prevent source-file overwrite."""
+    resolved_input = resolve_repository_path(
+        input_path, repository_root, must_exist=True
+    )
+    if report_path is None:
+        return resolved_input, None
+
+    resolved_report = resolve_repository_path(
+        report_path, repository_root, must_exist=False
+    )
+    if resolved_report == resolved_input:
+        raise ValueError("report path must not resolve to the input path")
+    return resolved_input, resolved_report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path)
@@ -96,12 +133,17 @@ def main() -> int:
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
 
-    records = load_records(args.input)
+    try:
+        input_path, report_path = resolve_io_paths(args.input, args.report)
+        records = load_records(input_path)
+    except (OSError, ValueError) as exc:
+        parser.error(str(exc))
+
     report = validate_records(records, args.column)
     rendered = deterministic_json(report)
-    if args.report:
-        args.report.parent.mkdir(parents=True, exist_ok=True)
-        args.report.write_text(rendered, encoding="utf-8")
+    if report_path:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
     return 0 if report["status"] == "valid" else 1
