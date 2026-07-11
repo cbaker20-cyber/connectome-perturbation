@@ -1,0 +1,17 @@
+# Tiny metadata-first smoke configuration.
+# This file is intentionally conservative: it should be safe to use before any expensive simulation.
+
+run_name: smoke_reproducibility_metadata
+random_seed: 42
+selected_materialization: null  # Fill after provenance review: likely 630 or 783.
+mode: metadata_only
+max_runtime_seconds: 60
+max_neurons: 10
+max_edges: 100
+input_manifest: data/input_manifest.json
+output_manifest: output_manifest.json
+results_dir: results/smoke
+notes:
+  - This config does not validate biological output.
+  - Its first purpose is to prove manifest/path/output-metadata plumbing works from a clean checkout.
+  - Do not use this config for claims or figures.

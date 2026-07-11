@@ -15,6 +15,7 @@ Nothing in `results/perturbation_summary.csv` should be treated as validated neu
 - `docs/progress-log.md`: conservative status log.
 - `docs/data-policy.md`: rules for datasets, outputs, privacy, and manifests.
 - `docs/environment-plan.md`: evidence-based setup plan and current run blockers.
+- `AGENTS.md`, `TASKS.md`, and `CHANGELOG_AI.md`: agent rules, active backlog, and AI-assisted project memory.
 
 ## Data and provenance status
 
@@ -29,15 +30,39 @@ The concise environment file records Python 3.10, Brian2 2.5.1, NumPy, pandas, j
 ```bash
 conda env create -f environment.yml
 conda activate brian2
+python -c "import brian2, numpy, pandas, pyarrow; print('imports ok')"
 python tools/validate_research_docs.py
 ```
 
 The documentation validator does not validate the model or its scientific outputs. Do not start a full simulation until the paths and input manifest described in `docs/environment-plan.md` are resolved.
 
+## Metadata-first smoke command
+
+This command builds a local input manifest, writes a deterministic metadata-only smoke artifact, records that artifact in the output manifest, and validates metadata plumbing. It does **not** validate a neuroscience result.
+
+```bash
+python tools/build_input_manifest.py
+python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
+python tools/write_output_manifest.py \
+  --config configs/smoke_run.yaml \
+  --input-manifest data/input_manifest.json \
+  --output output_manifest.json \
+  --artifact results/reproducibility_smoke_artifact.json
+python tools/validate_reproducibility.py
+```
+
+Expected artifacts:
+
+- `data/input_manifest.json`: local filenames, sizes, SHA-256 checksums, guessed roles/materializations, and empty provenance fields.
+- `results/reproducibility_smoke_artifact.json`: deterministic metadata-only artifact used to exercise output declaration and checksum validation.
+- `output_manifest.json`: command/config/commit/environment/input-checksum/output-artifact metadata with `claim_status` set to `not_interpretable_as_neuroscience`.
+
+Do not use any of these files as evidence for a biological conclusion until authoritative provenance and an actual validated run are attached.
+
 ## Current blockers
 
 1. No authoritative source manifest for the tracked dataset and annotation files.
-2. No checksums or schema/version record tying inputs to an experiment.
+2. No completed schema/version record tying inputs to an experiment.
 3. Hard-coded paths do not consistently match the repository layout.
 4. No single reproduction command or frozen run configuration for the tracked summary.
 5. No validation record connecting `perturbation_summary.csv` to raw outputs.
@@ -45,4 +70,4 @@ The documentation validator does not validate the model or its scientific output
 
 ## Safe next step
 
-Create a non-sensitive input manifest, reconcile paths without moving or deleting data, and reproduce one tiny documented smoke run before interpreting any output. See `docs/data-policy.md` and `docs/environment-plan.md`.
+Create a non-sensitive input manifest, reconcile paths without moving or deleting data, and reproduce one tiny documented smoke run before interpreting any output. See `docs/data-policy.md`, `docs/environment-plan.md`, `AGENTS.md`, and `TASKS.md`.

@@ -1,0 +1,45 @@
+name: Reproducibility Tools
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproducibility-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+
+      - name: Run reproducibility tool tests
+        run: |
+          python -m pytest \
+            tests/test_reproducibility_tools.py \
+            tests/test_manifest_counts.py \
+            tests/test_path_resolver_boundaries.py \
+            tests/test_input_manifest_record_validation.py \
+            -q
+
+      - name: Compile metadata tooling
+        run: |
+          python -m py_compile \
+            tools/build_input_manifest.py \
+            tools/path_resolver.py \
+            tools/write_output_manifest.py \
+            tools/validate_reproducibility.py \
+            perturbation/analyze.py \
+            perturbation/baseline.py \
+            perturbation/perturb.py
