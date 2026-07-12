@@ -14,19 +14,15 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
 
-SCHEMA_VERSION = "1.0"
-VALIDATOR_VERSION = "0.2.0"
+SCHEMA_VERSION = "1.1"
+VALIDATOR_VERSION = "0.3.0"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 _MISSING = object()
 
 
 def validate_neuron_id(value: Any) -> str | None:
-    """Return a machine-readable reason code, or ``None`` when valid.
-
-    IDs are intentionally treated as opaque decimal strings. Numeric coercion
-    is forbidden even when a value could be converted losslessly.
-    """
+    """Return a machine-readable reason code, or ``None`` when valid."""
     if value is None or value == "":
         return "missing_value"
     if not isinstance(value, str):
@@ -46,16 +42,7 @@ def classify_neuron_id(
     original_text: Any = _MISSING,
     provenance_original_text_available: Any = _MISSING,
 ) -> str:
-    """Classify representation and optional original-text provenance.
-
-    Comparison is deliberately byte-for-byte at the Python string level. The
-    function never converts an identifier with ``int`` or ``float``.
-
-    Absent provenance metadata is distinct from an explicit statement that
-    original text was unavailable. Explicitly unavailable original text yields
-    ``unverified_precision``; malformed or contradictory provenance yields
-    ``invalid_provenance``.
-    """
+    """Classify representation and optional original-text provenance."""
     reason = validate_neuron_id(candidate)
     if reason == "non_string":
         return "invalid_type"
@@ -88,32 +75,70 @@ def classify_neuron_id(
     return "valid_exact_string"
 
 
-def validate_records(records: Iterable[dict[str, Any]], column: str) -> dict[str, Any]:
-    """Validate one named column and return a deterministic summary."""
+def parse_availability(value: Any) -> Any:
+    """Decode provenance availability without touching identifier values.
+
+    JSON booleans are accepted directly. CSV text must be exactly ``true`` or
+    ``false`` (case-insensitive); blanks and all other values are malformed.
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lowered = value.lower()
+        if lowered == "true":
+            return True
+        if lowered == "false":
+            return False
+    return _MISSING
+
+
+def validate_records(
+    records: Iterable[dict[str, Any]],
+    column: str,
+    *,
+    original_text_column: str | None = None,
+    availability_column: str | None = None,
+) -> dict[str, Any]:
+    """Validate records and return a deterministic aggregate report."""
     total = 0
-    valid = 0
-    reasons: Counter[str] = Counter()
+    statuses: Counter[str] = Counter()
+
     for record in records:
         total += 1
         if column not in record:
-            reasons["missing_column"] += 1
+            statuses["missing_column"] += 1
             continue
-        reason = validate_neuron_id(record[column])
-        if reason is None:
-            valid += 1
-        else:
-            reasons[reason] += 1
 
+        kwargs: dict[str, Any] = {}
+        if original_text_column is not None and original_text_column in record:
+            kwargs["original_text"] = record[original_text_column]
+
+        if availability_column is not None:
+            if availability_column not in record:
+                statuses["invalid_provenance"] += 1
+                continue
+            parsed = parse_availability(record[availability_column])
+            if parsed is _MISSING:
+                statuses["invalid_provenance"] += 1
+                continue
+            kwargs["provenance_original_text_available"] = parsed
+
+        status = classify_neuron_id(record[column], **kwargs)
+        statuses[status] += 1
+
+    valid = statuses.get("valid_exact_string", 0)
     invalid = total - valid
     return {
         "schema_version": SCHEMA_VERSION,
         "validator_version": VALIDATOR_VERSION,
         "claim_status": CLAIM_STATUS,
         "column": column,
+        "original_text_column": original_text_column,
+        "availability_column": availability_column,
         "record_count": total,
         "valid_count": valid,
         "invalid_count": invalid,
-        "reason_counts": dict(sorted(reasons.items())),
+        "status_counts": dict(sorted(statuses.items())),
         "status": "valid" if invalid == 0 else "invalid",
     }
 
@@ -179,6 +204,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path)
     parser.add_argument("--column", required=True)
+    parser.add_argument("--original-text-column")
+    parser.add_argument("--availability-column")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
 
@@ -188,7 +215,12 @@ def main() -> int:
     except (OSError, ValueError) as exc:
         parser.error(str(exc))
 
-    report = validate_records(records, args.column)
+    report = validate_records(
+        records,
+        args.column,
+        original_text_column=args.original_text_column,
+        availability_column=args.availability_column,
+    )
     rendered = deterministic_json(report)
     if report_path:
         report_path.parent.mkdir(parents=True, exist_ok=True)
