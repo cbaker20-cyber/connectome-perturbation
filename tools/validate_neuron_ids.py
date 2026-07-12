@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 SCHEMA_VERSION = "1.1"
-VALIDATOR_VERSION = "0.3.0"
+VALIDATOR_VERSION = "0.3.1"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 _MISSING = object()
@@ -110,18 +110,26 @@ def validate_records(
             continue
 
         kwargs: dict[str, Any] = {}
-        if original_text_column is not None and original_text_column in record:
+        original_text_missing = (
+            original_text_column is not None and original_text_column not in record
+        )
+        if original_text_column is not None and not original_text_missing:
             kwargs["original_text"] = record[original_text_column]
 
+        parsed_availability: Any = _MISSING
         if availability_column is not None:
             if availability_column not in record:
                 statuses["invalid_provenance"] += 1
                 continue
-            parsed = parse_availability(record[availability_column])
-            if parsed is _MISSING:
+            parsed_availability = parse_availability(record[availability_column])
+            if parsed_availability is _MISSING:
                 statuses["invalid_provenance"] += 1
                 continue
-            kwargs["provenance_original_text_available"] = parsed
+            kwargs["provenance_original_text_available"] = parsed_availability
+
+        if original_text_missing and parsed_availability is not False:
+            statuses["invalid_provenance"] += 1
+            continue
 
         status = classify_neuron_id(record[column], **kwargs)
         statuses[status] += 1
