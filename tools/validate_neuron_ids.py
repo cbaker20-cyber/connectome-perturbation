@@ -26,10 +26,10 @@ def validate_neuron_id(value: Any) -> str | None:
     IDs are intentionally treated as opaque decimal strings. Numeric coercion
     is forbidden even when a value could be converted losslessly.
     """
+    if value is None or value == "":
+        return "missing_value"
     if not isinstance(value, str):
         return "non_string"
-    if value == "":
-        return "empty"
     if value != value.strip():
         return "surrounding_whitespace"
     if value[0] in "+-":
