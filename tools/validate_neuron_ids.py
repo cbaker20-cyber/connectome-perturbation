@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 SCHEMA_VERSION = "1.1"
-VALIDATOR_VERSION = "0.3.1"
+VALIDATOR_VERSION = "0.3.2"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 _MISSING = object()
@@ -200,21 +200,19 @@ def resolve_io_paths(
     if report_path is None:
         return resolved_input, None
 
-    resolved_report = resolve_repository_path(
-        report_path, repository_root, must_exist=False
-    )
-    if resolved_report == resolved_input:
-        raise ValueError("report path must not resolve to the input path")
-
     validation_root = (
         repository_root.resolve(strict=True) / "results" / "validation"
     ).resolve(strict=False)
+    resolved_report = report_path.resolve(strict=False)
     try:
         resolved_report.relative_to(validation_root)
     except ValueError as exc:
         raise ValueError(
             "report path must resolve under results/validation"
         ) from exc
+
+    if resolved_report == resolved_input:
+        raise ValueError("report path must not resolve to the input path")
     return resolved_input, resolved_report
 
 
