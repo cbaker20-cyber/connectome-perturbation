@@ -11,6 +11,8 @@ from tools.validate_neuron_ids import (
     validate_records,
 )
 
+FIXTURE_PATH = Path(__file__).parent / "fixtures" / "neuron_id_validation_cases.json"
+
 
 @pytest.mark.parametrize(
     "value",
@@ -25,7 +27,8 @@ def test_exact_decimal_strings_are_accepted(value):
     [
         (9007199254740993, "non_string"),
         (9007199254740992.0, "non_string"),
-        ("", "empty"),
+        (None, "missing_value"),
+        ("", "missing_value"),
         (" 123", "surrounding_whitespace"),
         ("123 ", "surrounding_whitespace"),
         ("+123", "signed"),
@@ -37,6 +40,51 @@ def test_exact_decimal_strings_are_accepted(value):
 )
 def test_unsafe_representations_are_rejected(value, reason):
     assert validate_neuron_id(value) == reason
+
+
+def test_merged_conformance_fixture_matches_supported_validator_scope():
+    fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+    supported_statuses = {
+        "valid_exact_string",
+        "invalid_type",
+        "invalid_format",
+        "missing_value",
+    }
+    format_reasons = {"surrounding_whitespace", "signed", "non_decimal"}
+
+    exercised = 0
+    for case in fixture["cases"]:
+        expected_status = case["expected_status"]
+        if expected_status not in supported_statuses:
+            continue
+
+        candidate = case["candidate"]
+        reason = validate_neuron_id(candidate)
+        exercised += 1
+
+        if expected_status == "valid_exact_string":
+            assert reason is None, case["name"]
+            if "expected_preserved_value" in case:
+                assert candidate == case["expected_preserved_value"], case["name"]
+        elif expected_status == "invalid_type":
+            assert reason == "non_string", case["name"]
+        elif expected_status == "invalid_format":
+            assert reason in format_reasons, case["name"]
+        else:
+            assert reason == "missing_value", case["name"]
+
+    assert exercised > 0
+
+
+def test_fixture_keeps_precision_provenance_cases_explicitly_pending():
+    fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+    pending = {
+        case["expected_status"]
+        for case in fixture["cases"]
+        if case["expected_status"] in {"suspected_precision_loss", "unverified_precision"}
+    }
+
+    assert pending == {"suspected_precision_loss", "unverified_precision"}
 
 
 def test_report_is_deterministic_and_machine_readable():
