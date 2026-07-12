@@ -278,11 +278,13 @@ def test_validation_tree_symlink_escape_is_rejected_when_supported(tmp_path):
 
 
 def test_report_must_not_alias_input(tmp_path):
-    source = tmp_path / "input.json"
+    root = tmp_path / "repo"
+    source = root / "results" / "validation" / "input.json"
+    source.parent.mkdir(parents=True)
     source.write_text("[]", encoding="utf-8")
 
     with pytest.raises(ValueError, match="must not resolve to the input path"):
-        resolve_io_paths(source, Path(tmp_path / "." / "input.json"), tmp_path)
+        resolve_io_paths(source, Path(source.parent / "." / source.name), root)
 
 
 def test_symlink_escape_is_rejected_when_supported(tmp_path):
