@@ -38,7 +38,7 @@ Prioritized backlog for the connectome perturbation project.
   - `tests/test_graph_metrics.py` pins fixture metrics and rejects unknown edge endpoints before real-data integration.
 - [~] Add 64-bit-safe neuron/root ID validation without numeric coercion.
   - PR #23 adds strict decimal-string validation, deterministic aggregate reports, repository-boundary/source-overwrite protection, and explicit original-text provenance states.
-  - Synthetic fixture and focused test coverage are present; the exact final PR head must pass GitHub Actions before merge.
+  - GitHub Actions run `29199342883` passed on exact implementation head `b9091a0910c7cdfea8bbebc8c49a0135b9cea536`; PR review and merge remain outstanding.
   - Real tracked inputs have not been validated, and passing format checks would not establish dataset provenance or biological identity.
 - [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
   - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
