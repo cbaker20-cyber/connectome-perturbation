@@ -193,7 +193,7 @@ def resolve_io_paths(
     report_path: Path | None,
     repository_root: Path = REPOSITORY_ROOT,
 ) -> tuple[Path, Path | None]:
-    """Resolve safe input/output paths and prevent source-file overwrite."""
+    """Resolve safe I/O paths and confine reports to the validation output tree."""
     resolved_input = resolve_repository_path(
         input_path, repository_root, must_exist=True
     )
@@ -205,6 +205,16 @@ def resolve_io_paths(
     )
     if resolved_report == resolved_input:
         raise ValueError("report path must not resolve to the input path")
+
+    validation_root = (
+        repository_root.resolve(strict=True) / "results" / "validation"
+    ).resolve(strict=False)
+    try:
+        resolved_report.relative_to(validation_root)
+    except ValueError as exc:
+        raise ValueError(
+            "report path must resolve under results/validation"
+        ) from exc
     return resolved_input, resolved_report
 
 
