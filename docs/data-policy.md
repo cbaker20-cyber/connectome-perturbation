@@ -36,6 +36,14 @@ The two tracked copies of `source_material/raw_lab_notebook_pasted_text.txt` req
 - Small aggregate outputs only when a manifest ties them to inputs, code, parameters, and validation.
 - Dataset manifests containing public metadata, checksums, and source links, but not access tokens or private URLs.
 
+## Neuron and root identifier safety
+
+Neuron/root IDs are opaque identifiers, not numeric measurements. Preserve them as exact decimal strings from ingestion through reports. Do not parse them through floating-point types, normalize away leading zeroes, accept scientific notation, or silently coerce integer-valued fields into strings after parsing.
+
+`tools/validate_neuron_ids.py` checks this representation contract without modifying the source file. Optional original-text provenance must be compared byte-for-byte as strings. A differing valid original value is classified as `suspected_precision_loss`; explicitly unavailable original text is `unverified_precision`; malformed or contradictory provenance is invalid. Reports must remain inside the repository and must not overwrite their input.
+
+A passing identifier report demonstrates only representation integrity for the checked file and column under the declared provenance evidence. It does not establish authoritative dataset provenance, materialization membership, correct biological identity, or any neuroscience conclusion. Real tracked datasets remain unverified until a committed validator version is run against reviewed local inputs and the resulting report is reviewed with the input manifest.
+
 ## Required input manifest fields
 
 Before an input is used for a reported run, record:
