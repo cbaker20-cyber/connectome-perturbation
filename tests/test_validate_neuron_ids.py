@@ -277,6 +277,24 @@ def test_validation_tree_symlink_escape_is_rejected_when_supported(tmp_path):
         resolve_io_paths(source, link / "report.json", root)
 
 
+def test_validation_root_symlink_escape_is_rejected_when_supported(tmp_path):
+    root = tmp_path / "repo"
+    results = root / "results"
+    results.mkdir(parents=True)
+    source = root / "input.json"
+    source.write_text("[]", encoding="utf-8")
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    validation_root = results / "validation"
+    try:
+        validation_root.symlink_to(outside, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlinks are not supported in this environment")
+
+    with pytest.raises(ValueError, match="inside repository root"):
+        resolve_io_paths(source, validation_root / "report.json", root)
+
+
 def test_report_must_not_alias_input(tmp_path):
     root = tmp_path / "repo"
     source = root / "results" / "validation" / "input.json"
