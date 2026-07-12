@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 SCHEMA_VERSION = "1.1"
-VALIDATOR_VERSION = "0.3.2"
+VALIDATOR_VERSION = "0.3.3"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 _MISSING = object()
@@ -194,15 +194,23 @@ def resolve_io_paths(
     repository_root: Path = REPOSITORY_ROOT,
 ) -> tuple[Path, Path | None]:
     """Resolve safe I/O paths and confine reports to the validation output tree."""
+    resolved_repository_root = repository_root.resolve(strict=True)
     resolved_input = resolve_repository_path(
-        input_path, repository_root, must_exist=True
+        input_path, resolved_repository_root, must_exist=True
     )
     if report_path is None:
         return resolved_input, None
 
     validation_root = (
-        repository_root.resolve(strict=True) / "results" / "validation"
+        resolved_repository_root / "results" / "validation"
     ).resolve(strict=False)
+    try:
+        validation_root.relative_to(resolved_repository_root)
+    except ValueError as exc:
+        raise ValueError(
+            "results/validation must resolve inside repository root"
+        ) from exc
+
     resolved_report = report_path.resolve(strict=False)
     try:
         resolved_report.relative_to(validation_root)
