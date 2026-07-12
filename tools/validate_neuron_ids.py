@@ -15,9 +15,10 @@ from pathlib import Path
 from typing import Any, Iterable
 
 SCHEMA_VERSION = "1.0"
-VALIDATOR_VERSION = "0.1.0"
+VALIDATOR_VERSION = "0.2.0"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+_MISSING = object()
 
 
 def validate_neuron_id(value: Any) -> str | None:
@@ -37,6 +38,54 @@ def validate_neuron_id(value: Any) -> str | None:
     if not value.isascii() or not value.isdecimal():
         return "non_decimal"
     return None
+
+
+def classify_neuron_id(
+    candidate: Any,
+    *,
+    original_text: Any = _MISSING,
+    provenance_original_text_available: Any = _MISSING,
+) -> str:
+    """Classify representation and optional original-text provenance.
+
+    Comparison is deliberately byte-for-byte at the Python string level. The
+    function never converts an identifier with ``int`` or ``float``.
+
+    Absent provenance metadata is distinct from an explicit statement that
+    original text was unavailable. Explicitly unavailable original text yields
+    ``unverified_precision``; malformed or contradictory provenance yields
+    ``invalid_provenance``.
+    """
+    reason = validate_neuron_id(candidate)
+    if reason == "non_string":
+        return "invalid_type"
+    if reason == "missing_value":
+        return "missing_value"
+    if reason is not None:
+        return "invalid_format"
+
+    availability_supplied = provenance_original_text_available is not _MISSING
+    original_supplied = original_text is not _MISSING
+
+    if availability_supplied and not isinstance(
+        provenance_original_text_available, bool
+    ):
+        return "invalid_provenance"
+
+    if original_supplied:
+        if provenance_original_text_available is False:
+            return "invalid_provenance"
+        if validate_neuron_id(original_text) is not None:
+            return "invalid_provenance"
+        if candidate != original_text:
+            return "suspected_precision_loss"
+        return "valid_exact_string"
+
+    if provenance_original_text_available is True:
+        return "invalid_provenance"
+    if provenance_original_text_available is False:
+        return "unverified_precision"
+    return "valid_exact_string"
 
 
 def validate_records(records: Iterable[dict[str, Any]], column: str) -> dict[str, Any]:
