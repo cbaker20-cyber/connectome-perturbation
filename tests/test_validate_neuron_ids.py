@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from tools.validate_neuron_ids import (
+    classify_neuron_id,
     deterministic_json,
     resolve_io_paths,
     resolve_repository_path,
@@ -42,49 +43,82 @@ def test_unsafe_representations_are_rejected(value, reason):
     assert validate_neuron_id(value) == reason
 
 
-def test_merged_conformance_fixture_matches_supported_validator_scope():
+def test_merged_conformance_fixture_matches_validator_scope():
     fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    supported_statuses = {
-        "valid_exact_string",
-        "invalid_type",
-        "invalid_format",
-        "missing_value",
-    }
-    format_reasons = {"surrounding_whitespace", "signed", "non_decimal"}
 
-    exercised = 0
     for case in fixture["cases"]:
-        expected_status = case["expected_status"]
-        if expected_status not in supported_statuses:
-            continue
+        kwargs = {}
+        if "original_text" in case:
+            kwargs["original_text"] = case["original_text"]
+        if "provenance_original_text_available" in case:
+            kwargs["provenance_original_text_available"] = case[
+                "provenance_original_text_available"
+            ]
 
-        candidate = case["candidate"]
-        reason = validate_neuron_id(candidate)
-        exercised += 1
-
-        if expected_status == "valid_exact_string":
-            assert reason is None, case["name"]
-            if "expected_preserved_value" in case:
-                assert candidate == case["expected_preserved_value"], case["name"]
-        elif expected_status == "invalid_type":
-            assert reason == "non_string", case["name"]
-        elif expected_status == "invalid_format":
-            assert reason in format_reasons, case["name"]
-        else:
-            assert reason == "missing_value", case["name"]
-
-    assert exercised > 0
+        actual = classify_neuron_id(case["candidate"], **kwargs)
+        assert actual == case["expected_status"], case["name"]
+        if "expected_preserved_value" in case:
+            assert case["candidate"] == case["expected_preserved_value"], case["name"]
 
 
-def test_fixture_keeps_precision_provenance_cases_explicitly_pending():
-    fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    pending = {
-        case["expected_status"]
-        for case in fixture["cases"]
-        if case["expected_status"] in {"suspected_precision_loss", "unverified_precision"}
-    }
+@pytest.mark.parametrize(
+    "original_text",
+    [None, "", 9007199254740993, " 123", "+123", "12A3"],
+)
+def test_malformed_original_text_is_invalid_provenance(original_text):
+    assert (
+        classify_neuron_id("9007199254740993", original_text=original_text)
+        == "invalid_provenance"
+    )
 
-    assert pending == {"suspected_precision_loss", "unverified_precision"}
+
+def test_absent_provenance_is_not_reported_as_unverified():
+    assert classify_neuron_id("9007199254740993") == "valid_exact_string"
+
+
+def test_explicit_unavailable_original_is_unverified():
+    assert (
+        classify_neuron_id(
+            "9007199254740993", provenance_original_text_available=False
+        )
+        == "unverified_precision"
+    )
+
+
+def test_available_flag_without_original_is_invalid_provenance():
+    assert (
+        classify_neuron_id(
+            "9007199254740993", provenance_original_text_available=True
+        )
+        == "invalid_provenance"
+    )
+
+
+def test_unavailable_flag_with_original_is_invalid_provenance():
+    assert (
+        classify_neuron_id(
+            "9007199254740993",
+            original_text="9007199254740993",
+            provenance_original_text_available=False,
+        )
+        == "invalid_provenance"
+    )
+
+
+def test_non_boolean_availability_is_invalid_provenance():
+    assert (
+        classify_neuron_id(
+            "9007199254740993", provenance_original_text_available="false"
+        )
+        == "invalid_provenance"
+    )
+
+
+def test_original_text_comparison_preserves_leading_zeroes():
+    assert (
+        classify_neuron_id("00123", original_text="000123")
+        == "suspected_precision_loss"
+    )
 
 
 def test_report_is_deterministic_and_machine_readable():
