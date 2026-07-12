@@ -232,7 +232,7 @@ def test_report_path_outside_root_is_rejected(tmp_path):
     source = root / "input.json"
     source.write_text("[]", encoding="utf-8")
 
-    with pytest.raises(ValueError, match="escapes repository root"):
+    with pytest.raises(ValueError, match="under results/validation"):
         resolve_io_paths(source, tmp_path / "report.json", root)
 
 
