@@ -35,9 +35,10 @@ def test_known_answer_and_exact_string_id_preservation():
         decay=1.0,
         seed=7,
     )
+    assert record["schema_version"] == "atlas-run-record/v0"
     assert record["input_ids"] == ["9007199254740993"]
     assert record["claim_status"] == "not_interpretable_as_neuroscience"
-    assert "Atlas schema compatibility is not asserted" in record["limitations"][2]
+    assert "repository-local" in record["limitations"][2]
 
 
 def test_output_order_is_stable():
