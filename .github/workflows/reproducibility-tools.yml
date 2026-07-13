@@ -36,6 +36,7 @@ jobs:
             tests/test_validate_neuron_ids_provenance_columns.py \
             tests/test_write_toy_graph_artifact.py \
             tests/test_toy_signal.py \
+            tests/test_validate_atlas.py \
             -q
 
       - name: Compile metadata tooling
@@ -46,6 +47,7 @@ jobs:
             tools/write_output_manifest.py \
             tools/validate_reproducibility.py \
             tools/validate_neuron_ids.py \
+            tools/validate_atlas.py \
             tools/write_toy_graph_artifact.py \
             connectome_analysis/graph_metrics.py \
             connectome_analysis/toy_signal.py \
