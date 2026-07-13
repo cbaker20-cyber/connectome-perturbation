@@ -2,6 +2,14 @@
 
 AI-maintained project changelog. Human review is still required before scientific interpretation.
 
+## 2026-07-12 — Neuron ID representation validator
+
+- Added a dependency-light validator and CLI that treats neuron/root IDs as exact decimal strings and rejects numeric, signed, whitespace-padded, decimal, scientific-notation, empty, and non-decimal representations.
+- Added string-only original-text provenance classification for exact, suspected precision-loss, explicitly unverified, and invalid provenance states without integer or floating-point coercion.
+- Added deterministic aggregate reports with validator/schema versions and `claim_status: not_interpretable_as_neuroscience`.
+- Added repository-boundary, traversal, symlink-escape, and source-overwrite protections for input/report paths.
+- Added synthetic conformance and focused tests, plus README and data-policy documentation. No real tracked dataset was validated and no biological claim follows from this work.
+
 ## 2026-07-09 — Reusable graph metric fixtures
 
 - Added `connectome_analysis/graph_metrics.py` with pure helpers for directed degree maps, reachability, weak component counts, and expected metric bundles.

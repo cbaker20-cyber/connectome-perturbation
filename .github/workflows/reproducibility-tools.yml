@@ -31,6 +31,9 @@ jobs:
             tests/test_manifest_counts.py \
             tests/test_path_resolver_boundaries.py \
             tests/test_input_manifest_record_validation.py \
+            tests/test_validate_neuron_ids.py \
+            tests/test_validate_neuron_ids_csv_headers.py \
+            tests/test_validate_neuron_ids_provenance_columns.py \
             -q
 
       - name: Compile metadata tooling
@@ -40,6 +43,7 @@ jobs:
             tools/path_resolver.py \
             tools/write_output_manifest.py \
             tools/validate_reproducibility.py \
+            tools/validate_neuron_ids.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
             perturbation/perturb.py
