@@ -59,6 +59,31 @@ Expected artifacts:
 
 Do not use any of these files as evidence for a biological conclusion until authoritative provenance and an actual validated run are attached.
 
+## Neuron ID representation validator
+
+`tools/validate_neuron_ids.py` checks identifier representation without converting IDs to integers or floating-point values. Inputs and reports must resolve inside the repository, and the report may not overwrite the source input. A successful result establishes only compliance with this syntax and declared original-text provenance contract; it does not establish dataset provenance, neuron identity, materialization membership, biological validity, perturbation effects, or any neuroscience conclusion.
+
+For CSV input, provide the identifier column and, when available, explicit original-text provenance columns:
+
+```bash
+python tools/validate_neuron_ids.py data/example_ids.csv \
+  --column neuron_id \
+  --original-text-column neuron_id_original_text \
+  --availability-column original_text_available \
+  --report results/example_ids.validation.json
+```
+
+CSV availability values must be `true` or `false` (case-insensitive). For JSON input, the top level must be either a list of objects or an object containing a `records` list; availability values must be JSON booleans:
+
+```bash
+python tools/validate_neuron_ids.py data/example_ids.json \
+  --column neuron_id \
+  --original-text-column neuron_id_original_text \
+  --availability-column original_text_available
+```
+
+The command prints deterministic JSON when `--report` is omitted. It exits with status `0` only when every record is classified `valid_exact_string`; all missing, malformed, unverifiable, or suspected precision-loss records produce an invalid aggregate result and exit status `1`. The report includes sorted status counts, validator and schema versions, the selected column names, and `claim_status: not_interpretable_as_neuroscience`.
+
 ## Current blockers
 
 1. No authoritative source manifest for the tracked dataset and annotation files.
