@@ -34,6 +34,7 @@ jobs:
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
             tests/test_validate_neuron_ids_provenance_columns.py \
+            tests/test_write_toy_graph_artifact.py \
             -q
 
       - name: Compile metadata tooling
@@ -44,6 +45,8 @@ jobs:
             tools/write_output_manifest.py \
             tools/validate_reproducibility.py \
             tools/validate_neuron_ids.py \
+            tools/write_toy_graph_artifact.py \
+            connectome_analysis/graph_metrics.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
             perturbation/perturb.py
