@@ -92,10 +92,11 @@ def build_toy_signal_run_record(
     decay: float,
     seed: int,
 ) -> dict[str, object]:
-    """Build a deterministic provenance record without claiming Atlas validity."""
+    """Build a deterministic repository-local synthetic run record."""
     if len(output_ids) != len(output_vector):
         raise ValueError("output_ids and output_vector must have the same length")
     return {
+        "schema_version": "atlas-run-record/v0",
         "artifact_type": "toy_signal_run_record",
         "claim_status": "not_interpretable_as_neuroscience",
         "model": "deterministic_synchronous_weighted_propagation",
@@ -106,6 +107,6 @@ def build_toy_signal_run_record(
         "limitations": [
             "Synthetic graph fixture only.",
             "Output values are not neural activity or behavior.",
-            "Atlas schema compatibility is not asserted until a repository schema validator exists.",
+            "Validation covers only the repository-local atlas-run-record/v0 representation contract.",
         ],
     }
