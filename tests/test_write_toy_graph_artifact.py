@@ -48,6 +48,37 @@ def test_toy_graph_payload_has_known_expected_outcomes():
     }
 
 
+def test_lesion_fixture_preserves_exact_string_ids_and_expected_roles():
+    tool = load_tool()
+    fixture = tool.toy_graph_payload()["lesion_fixture"]
+
+    assert fixture["source"] == "9007199254740993"
+    assert isinstance(fixture["source"], str)
+    assert all(isinstance(node, str) for node in fixture["nodes"])
+    assert fixture["expected_critical_node"] == "critical_relay"
+    assert fixture["expected_critical_edge"] == ["critical_relay", "toy_output"]
+    assert fixture["expected_misleading_hub"] == "structural_hub"
+
+
+def test_known_critical_node_outranks_misleading_structural_hub():
+    tool = load_tool()
+    scores = tool.toy_lesion_scores()
+
+    assert scores["baseline_target_reachable"] is True
+    assert scores["out_degree"]["structural_hub"] > scores["out_degree"]["critical_relay"]
+    assert scores["node_scores"]["critical_relay"] > scores["node_scores"]["structural_hub"]
+
+
+def test_known_critical_edge_outranks_noncritical_edges():
+    tool = load_tool()
+    edge_scores = tool.toy_lesion_scores()["edge_scores"]
+
+    critical_key = "critical_relay->toy_output"
+    assert edge_scores[critical_key] == 1
+    assert edge_scores[critical_key] > edge_scores["9007199254740993->structural_hub"]
+    assert edge_scores[critical_key] > edge_scores["structural_hub->dead_end_a"]
+
+
 def test_write_toy_graph_artifact_is_deterministic(tmp_path, monkeypatch):
     tool = load_tool()
     fake_repo = tmp_path / "repo"
