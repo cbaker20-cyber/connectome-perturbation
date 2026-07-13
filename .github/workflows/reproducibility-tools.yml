@@ -32,6 +32,8 @@ jobs:
             tests/test_path_resolver_boundaries.py \
             tests/test_input_manifest_record_validation.py \
             tests/test_validate_neuron_ids.py \
+            tests/test_validate_neuron_ids_csv_headers.py \
+            tests/test_validate_neuron_ids_provenance_columns.py \
             -q
 
       - name: Compile metadata tooling
