@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 SCHEMA_VERSION = "1.1"
-VALIDATOR_VERSION = "0.3.3"
+VALIDATOR_VERSION = "0.3.4"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 _MISSING = object()
@@ -156,7 +156,17 @@ def load_records(path: Path) -> list[dict[str, Any]]:
     suffix = path.suffix.lower()
     if suffix == ".csv":
         with path.open("r", encoding="utf-8", newline="") as handle:
-            return list(csv.DictReader(handle))
+            reader = csv.DictReader(handle)
+            fieldnames = reader.fieldnames
+            if fieldnames is None:
+                raise ValueError("CSV input must include a header row")
+            duplicate_headers = sorted(
+                name for name, count in Counter(fieldnames).items() if count > 1
+            )
+            if duplicate_headers:
+                rendered = ", ".join(repr(name) for name in duplicate_headers)
+                raise ValueError(f"CSV header contains duplicate column names: {rendered}")
+            return list(reader)
     if suffix == ".json":
         value = json.loads(path.read_text(encoding="utf-8"))
         if isinstance(value, dict):
