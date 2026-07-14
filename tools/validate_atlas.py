@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 from typing import NoReturn
 
@@ -47,6 +48,31 @@ CONNECTION_ROW_FIELDS = {
     "percent_output_change",
     "cosine_distance",
 }
+
+VULNERABILITY_MATRIX_FIELDS = {
+    "schema_version",
+    "artifact_type",
+    "claim_status",
+    "matrix_id",
+    "score_name",
+    "context_ids",
+    "target_ids",
+    "values",
+    "source_artifacts",
+    "limitations",
+}
+
+VULNERABILITY_SOURCE_FIELDS = {
+    "context_id",
+    "schema_version",
+    "artifact_id",
+    "artifact_sha256",
+    "target_axis",
+}
+
+SUPPORTED_VULNERABILITY_SCORES = {"percent_output_change", "cosine_distance"}
+SUPPORTED_VULNERABILITY_SOURCE_SCHEMAS = {"atlas-node-lesion-table/v0"}
+SHA256_PATTERN = re.compile(r"[0-9a-f]{64}\Z")
 
 
 def _fail(message: str) -> NoReturn:
@@ -215,6 +241,66 @@ def validate_connection_lesion_table(record: dict[str, object]) -> None:
     _validate_limitations(record["limitations"])
 
 
+def validate_vulnerability_signature_matrix(record: dict[str, object]) -> None:
+    """Raise ValueError when a record violates the repository-local matrix v0 schema."""
+    _validate_exact_fields(record, VULNERABILITY_MATRIX_FIELDS, field="record")
+
+    fixed_values = {
+        "schema_version": "atlas-vulnerability-signature-matrix/v0",
+        "artifact_type": "synthetic_vulnerability_signature_matrix",
+        "claim_status": "not_interpretable_as_neuroscience",
+    }
+    for field, expected in fixed_values.items():
+        if record[field] != expected:
+            _fail(f"{field} must equal {expected!r}")
+
+    if not isinstance(record["matrix_id"], str) or not record["matrix_id"]:
+        _fail("matrix_id must be a non-empty string")
+    if record["score_name"] not in SUPPORTED_VULNERABILITY_SCORES:
+        _fail("score_name must be a supported non-negative lesion metric")
+
+    context_ids = _validate_id_list(record["context_ids"], field="context_ids")
+    target_ids = _validate_id_list(record["target_ids"], field="target_ids")
+    if not context_ids or not target_ids:
+        _fail("context_ids and target_ids must be non-empty")
+
+    values = record["values"]
+    if not isinstance(values, list) or len(values) != len(context_ids):
+        _fail("values must contain exactly one row per context_id")
+    for row_index, row in enumerate(values):
+        if not isinstance(row, list) or len(row) != len(target_ids):
+            _fail(f"values[{row_index}] must contain exactly one value per target_id")
+        if any(not _is_finite_number(value) or float(value) < 0 for value in row):
+            _fail(f"values[{row_index}] must contain only non-negative finite numbers")
+
+    sources = record["source_artifacts"]
+    if not isinstance(sources, list) or len(sources) != len(context_ids):
+        _fail("source_artifacts must contain exactly one entry per context_id")
+    seen_artifacts: set[str] = set()
+    for index, (context_id, source) in enumerate(zip(context_ids, sources, strict=True)):
+        if not isinstance(source, dict):
+            _fail(f"source_artifacts[{index}] must be an object")
+        _validate_exact_fields(source, VULNERABILITY_SOURCE_FIELDS, field=f"source_artifacts[{index}]")
+        if source["context_id"] != context_id:
+            _fail(f"source_artifacts[{index}].context_id must match context_ids order")
+        if source["schema_version"] not in SUPPORTED_VULNERABILITY_SOURCE_SCHEMAS:
+            _fail(f"source_artifacts[{index}].schema_version is unsupported")
+        artifact_id = source["artifact_id"]
+        if not isinstance(artifact_id, str) or not artifact_id:
+            _fail(f"source_artifacts[{index}].artifact_id must be a non-empty string")
+        if artifact_id in seen_artifacts:
+            _fail("source_artifacts must not contain duplicate artifact_id values")
+        seen_artifacts.add(artifact_id)
+        digest = source["artifact_sha256"]
+        if not isinstance(digest, str) or SHA256_PATTERN.fullmatch(digest) is None:
+            _fail(f"source_artifacts[{index}].artifact_sha256 must be lowercase SHA-256 hex")
+        source_axis = _validate_id_list(source["target_axis"], field=f"source_artifacts[{index}].target_axis")
+        if source_axis != target_ids:
+            _fail(f"source_artifacts[{index}].target_axis must exactly match target_ids order")
+
+    _validate_limitations(record["limitations"])
+
+
 def validate_record(record: object) -> None:
     """Dispatch validation by repository-local schema_version."""
     if not isinstance(record, dict):
@@ -224,6 +310,8 @@ def validate_record(record: object) -> None:
         validate_run_record(record)
     elif schema_version == "atlas-connection-lesion-table/v0":
         validate_connection_lesion_table(record)
+    elif schema_version == "atlas-vulnerability-signature-matrix/v0":
+        validate_vulnerability_signature_matrix(record)
     else:
         _fail("unsupported schema_version")
 
