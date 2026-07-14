@@ -37,6 +37,7 @@ jobs:
             tests/test_write_toy_graph_artifact.py \
             tests/test_toy_signal.py \
             tests/test_node_lesion.py \
+            tests/test_connection_lesion.py \
             tests/test_validate_atlas.py \
             -q
 
@@ -53,6 +54,7 @@ jobs:
             connectome_analysis/graph_metrics.py \
             connectome_analysis/toy_signal.py \
             connectome_analysis/node_lesion.py \
+            connectome_analysis/connection_lesion.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
             perturbation/perturb.py
