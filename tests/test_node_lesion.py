@@ -74,6 +74,14 @@ def test_scoring_is_deterministic_and_does_not_mutate_inputs():
     assert (nodes, edges, inputs, outputs, targets) == before
 
 
+def test_cosine_distance_stays_within_mathematical_bounds_at_roundoff_edges():
+    same_direction = compare_output_vectors([5.0, 1.0], [4.0, 0.8])
+    opposite_direction = compare_output_vectors([5.0, 1.0], [-5.0, -1.0])
+
+    assert same_direction["cosine_distance"] == 0.0
+    assert opposite_direction["cosine_distance"] == 2.0
+
+
 @pytest.mark.parametrize(
     ("targets", "message"),
     [

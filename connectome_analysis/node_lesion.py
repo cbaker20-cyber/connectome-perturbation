@@ -34,7 +34,8 @@ def compare_output_vectors(
     """Return contract-defined percent change and cosine distance.
 
     Zero L1 baseline magnitude or a zero vector norm is rejected rather than
-    assigned an undocumented sentinel value.
+    assigned an undocumented sentinel value. Cosine similarity is clamped to
+    its mathematical range to absorb floating-point roundoff at the boundaries.
     """
     baseline_values = _finite_vector(baseline, name="baseline")
     perturbed_values = _finite_vector(perturbed, name="perturbed")
@@ -54,10 +55,11 @@ def compare_output_vectors(
         abs(perturbed - base)
         for base, perturbed in zip(baseline_values, perturbed_values, strict=True)
     ) / baseline_l1
-    cosine_distance = 1.0 - sum(
+    cosine_similarity = sum(
         base * perturbed
         for base, perturbed in zip(baseline_values, perturbed_values, strict=True)
     ) / (baseline_norm * perturbed_norm)
+    cosine_distance = 1.0 - max(-1.0, min(1.0, cosine_similarity))
 
     if not math.isfinite(percent_change) or not math.isfinite(cosine_distance):
         raise ValueError("comparison metrics must be finite")
