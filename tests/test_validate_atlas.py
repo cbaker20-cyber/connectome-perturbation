@@ -4,6 +4,7 @@ import pytest
 
 from connectome_analysis.connection_lesion import score_connection_lesions
 from connectome_analysis.toy_signal import build_toy_signal_run_record
+from connectome_analysis.vulnerability_matrix import build_vulnerability_signature_matrix
 from tools.validate_atlas import validate_record
 
 
@@ -54,6 +55,34 @@ def valid_connection_table():
         decay=1.0,
         seed=7,
         graph_id="validator-known-answer-v0",
+    )
+
+
+def valid_node_source(artifact_id, first, second):
+    return {
+        "artifact_id": artifact_id,
+        "record": {
+            "schema_version": "atlas-node-lesion-table/v0",
+            "artifact_type": "synthetic_node_lesion_scores",
+            "claim_status": "not_interpretable_as_neuroscience",
+            "rows": [
+                {"target_id": "critical_relay", "percent_output_change": first, "cosine_distance": 0.5},
+                {"target_id": "9007199254740993", "percent_output_change": second, "cosine_distance": 0.1},
+            ],
+        },
+    }
+
+
+def valid_vulnerability_matrix():
+    return build_vulnerability_signature_matrix(
+        [
+            valid_node_source("toy-a", 100.0, 10.0),
+            valid_node_source("toy-b", 5.0, 25.0),
+        ],
+        context_ids=["toy_context_a", "toy_context_b"],
+        target_ids=["critical_relay", "9007199254740993"],
+        score_name="percent_output_change",
+        matrix_id="validator-vulnerability-matrix-v0",
     )
 
 
@@ -115,3 +144,40 @@ def test_rejects_invalid_connection_lesion_tables(mutate, message):
 
     with pytest.raises(ValueError, match=message):
         validate_record(table)
+
+
+def test_accepts_vulnerability_matrix_and_preserves_axes():
+    matrix = valid_vulnerability_matrix()
+
+    validate_record(matrix)
+
+    assert matrix["context_ids"] == ["toy_context_a", "toy_context_b"]
+    assert matrix["target_ids"] == ["critical_relay", "9007199254740993"]
+    assert matrix["values"] == [[100.0, 10.0], [5.0, 25.0]]
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    [
+        (lambda matrix: matrix.pop("claim_status"), "missing required fields"),
+        (lambda matrix: matrix.__setitem__("score_name", "signed_effect"), "supported non-negative"),
+        (lambda matrix: matrix.__setitem__("context_ids", [9007199254740993, "toy_context_b"]), "non-empty strings"),
+        (lambda matrix: matrix["values"].pop(), "one row per context_id"),
+        (lambda matrix: matrix["values"][0].pop(), "one value per target_id"),
+        (lambda matrix: matrix["values"][0].__setitem__(0, float("nan")), "non-negative finite"),
+        (lambda matrix: matrix["values"][0].__setitem__(0, -1.0), "non-negative finite"),
+        (lambda matrix: matrix["source_artifacts"].pop(), "one entry per context_id"),
+        (lambda matrix: matrix["source_artifacts"][0].__setitem__("context_id", "wrong"), "must match context_ids order"),
+        (lambda matrix: matrix["source_artifacts"][0].__setitem__("schema_version", "external/v1"), "is unsupported"),
+        (lambda matrix: matrix["source_artifacts"][0].__setitem__("artifact_sha256", "ABC"), "lowercase SHA-256 hex"),
+        (lambda matrix: matrix["source_artifacts"][0]["target_axis"].reverse(), "exactly match target_ids order"),
+        (lambda matrix: matrix["source_artifacts"][1].__setitem__("artifact_id", "toy-a"), "duplicate artifact_id"),
+        (lambda matrix: matrix.__setitem__("limitations", []), "limitations must be"),
+    ],
+)
+def test_rejects_invalid_vulnerability_matrices(mutate, message):
+    matrix = copy.deepcopy(valid_vulnerability_matrix())
+    mutate(matrix)
+
+    with pytest.raises(ValueError, match=message):
+        validate_record(matrix)
