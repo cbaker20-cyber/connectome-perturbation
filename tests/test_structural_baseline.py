@@ -1,8 +1,13 @@
+import json
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
 from connectome_analysis.structural_baseline import build_structural_baseline_table
+
+
+EXAMPLES = Path(__file__).resolve().parents[1] / "examples"
 
 
 def test_known_answer_counts_parallel_edges_and_self_loops():
@@ -48,6 +53,20 @@ def test_known_answer_counts_parallel_edges_and_self_loops():
     assert nodes == original_nodes
     assert edges == original_edges
     assert build_structural_baseline_table(nodes, edges) == artifact
+
+
+def test_checked_in_known_answer_rebuilds_exactly_from_input_fixture():
+    with (EXAMPLES / "structural-baseline-known-answer-input.json").open(encoding="utf-8") as handle:
+        fixture = json.load(handle)
+    with (EXAMPLES / "structural-baseline-known-answer.json").open(encoding="utf-8") as handle:
+        expected = json.load(handle)
+
+    rebuilt = build_structural_baseline_table(fixture["nodes"], fixture["edges"])
+
+    assert rebuilt == expected
+    assert json.dumps(rebuilt, sort_keys=True, separators=(",", ":")) == json.dumps(
+        expected, sort_keys=True, separators=(",", ":")
+    )
 
 
 @pytest.mark.parametrize(
