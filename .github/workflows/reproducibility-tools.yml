@@ -36,6 +36,7 @@ jobs:
             tests/test_validate_neuron_ids_provenance_columns.py \
             tests/test_write_toy_graph_artifact.py \
             tests/test_toy_signal.py \
+            tests/test_node_lesion.py \
             tests/test_validate_atlas.py \
             -q
 
@@ -51,6 +52,7 @@ jobs:
             tools/write_toy_graph_artifact.py \
             connectome_analysis/graph_metrics.py \
             connectome_analysis/toy_signal.py \
+            connectome_analysis/node_lesion.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
             perturbation/perturb.py
