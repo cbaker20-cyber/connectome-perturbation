@@ -70,6 +70,33 @@ VULNERABILITY_SOURCE_FIELDS = {
     "target_axis",
 }
 
+STRUCTURAL_TABLE_FIELDS = {
+    "schema_version",
+    "artifact_type",
+    "claim_status",
+    "node_ids",
+    "metrics",
+    "rows",
+    "limitations",
+}
+
+STRUCTURAL_ROW_FIELDS = {
+    "node_id",
+    "in_degree",
+    "out_degree",
+    "weighted_in_degree",
+    "weighted_out_degree",
+    "weighted_degree",
+}
+
+STRUCTURAL_METRICS = [
+    "in_degree",
+    "out_degree",
+    "weighted_in_degree",
+    "weighted_out_degree",
+    "weighted_degree",
+]
+
 SUPPORTED_VULNERABILITY_SCORES = {"percent_output_change", "cosine_distance"}
 SUPPORTED_VULNERABILITY_SOURCE_SCHEMAS = {"atlas-node-lesion-table/v0"}
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}\Z")
@@ -301,6 +328,50 @@ def validate_vulnerability_signature_matrix(record: dict[str, object]) -> None:
     _validate_limitations(record["limitations"])
 
 
+def validate_structural_baseline_table(record: dict[str, object]) -> None:
+    """Raise ValueError when a record violates atlas-structural-baseline-table/v0."""
+    _validate_exact_fields(record, STRUCTURAL_TABLE_FIELDS, field="record")
+
+    fixed_values = {
+        "schema_version": "atlas-structural-baseline-table/v0",
+        "artifact_type": "synthetic_structural_baseline_table",
+        "claim_status": "not_interpretable_as_neuroscience",
+    }
+    for field, expected in fixed_values.items():
+        if record[field] != expected:
+            _fail(f"{field} must equal {expected!r}")
+
+    node_ids = _validate_id_list(record["node_ids"], field="node_ids")
+    if not node_ids:
+        _fail("node_ids must be non-empty")
+    if record["metrics"] != STRUCTURAL_METRICS:
+        _fail("metrics must exactly match the structural baseline metric order")
+
+    rows = record["rows"]
+    if not isinstance(rows, list) or len(rows) != len(node_ids):
+        _fail("rows must contain exactly one entry per node_id")
+
+    for index, (node_id, row) in enumerate(zip(node_ids, rows, strict=True)):
+        if not isinstance(row, dict):
+            _fail(f"rows[{index}] must be an object")
+        _validate_exact_fields(row, STRUCTURAL_ROW_FIELDS, field=f"rows[{index}]")
+        if row["node_id"] != node_id:
+            _fail(f"rows[{index}].node_id must match node_ids order")
+        for field in ("in_degree", "out_degree"):
+            value = row[field]
+            if not _is_integer(value) or value < 0:
+                _fail(f"rows[{index}].{field} must be a non-negative integer")
+        for field in ("weighted_in_degree", "weighted_out_degree", "weighted_degree"):
+            value = row[field]
+            if not _is_finite_number(value) or float(value) < 0:
+                _fail(f"rows[{index}].{field} must be a non-negative finite number")
+        expected_weighted_degree = float(row["weighted_in_degree"]) + float(row["weighted_out_degree"])
+        if not math.isclose(float(row["weighted_degree"]), expected_weighted_degree, rel_tol=1e-12, abs_tol=1e-12):
+            _fail(f"rows[{index}].weighted_degree must equal weighted_in_degree plus weighted_out_degree")
+
+    _validate_limitations(record["limitations"])
+
+
 def validate_record(record: object) -> None:
     """Dispatch validation by repository-local schema_version."""
     if not isinstance(record, dict):
@@ -312,6 +383,8 @@ def validate_record(record: object) -> None:
         validate_connection_lesion_table(record)
     elif schema_version == "atlas-vulnerability-signature-matrix/v0":
         validate_vulnerability_signature_matrix(record)
+    elif schema_version == "atlas-structural-baseline-table/v0":
+        validate_structural_baseline_table(record)
     else:
         _fail("unsupported schema_version")
 
