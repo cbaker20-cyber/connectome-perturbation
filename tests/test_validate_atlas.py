@@ -7,10 +7,25 @@ from connectome_analysis.toy_signal import build_toy_signal_run_record
 from tools.validate_atlas import validate_record
 
 
-NODES = ["input", "relay", "output"]
+NODES = [
+    "9007199254740993",
+    "critical_relay",
+    "structural_hub",
+    "backup",
+    "dead_end_a",
+    "dead_end_b",
+    "toy_output_a",
+    "toy_output_b",
+]
 EDGES = [
-    {"source": "input", "target": "relay", "weight": 2.0},
-    {"source": "relay", "target": "output", "weight": 1.0},
+    {"source": "9007199254740993", "target": "critical_relay", "weight": 4.0},
+    {"source": "critical_relay", "target": "toy_output_a", "weight": 1.0},
+    {"source": "9007199254740993", "target": "backup", "weight": 1.0},
+    {"source": "backup", "target": "toy_output_a", "weight": 1.0},
+    {"source": "9007199254740993", "target": "toy_output_b", "weight": 1.0},
+    {"source": "9007199254740993", "target": "structural_hub", "weight": 1.0},
+    {"source": "structural_hub", "target": "dead_end_a", "weight": 1.0},
+    {"source": "structural_hub", "target": "dead_end_b", "weight": 1.0},
 ]
 
 
@@ -29,9 +44,12 @@ def valid_connection_table():
     return score_connection_lesions(
         NODES,
         EDGES,
-        {"input": 1.0},
-        ["output"],
-        [("relay", "output"), ("input", "relay")],
+        {"9007199254740993": 1.0},
+        ["toy_output_a", "toy_output_b"],
+        [
+            ("structural_hub", "dead_end_a"),
+            ("critical_relay", "toy_output_a"),
+        ],
         steps=2,
         decay=1.0,
         seed=7,
