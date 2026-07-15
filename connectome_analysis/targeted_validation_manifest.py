@@ -7,9 +7,11 @@ claiming that an experiment has run.
 
 from __future__ import annotations
 
+import hashlib
 import math
 import re
 from collections.abc import Mapping, Sequence
+from pathlib import Path
 
 SCHEMA_VERSION = "atlas-targeted-validation-run-manifest/v0"
 CLAIM_STATUS = "not_interpretable_as_neuroscience"
@@ -184,3 +186,53 @@ def validate_targeted_validation_manifest(manifest: object) -> None:
         raise ValueError("limitations must be a non-empty array")
     for index, limitation in enumerate(limitations):
         _require_nonempty_string(limitation, f"limitations[{index}]")
+
+
+def verify_targeted_validation_files(manifest: object, run_directory: str | Path) -> None:
+    """Verify manifest-declared input and output bytes under one run directory.
+
+    This checks path containment, regular-file status, byte size, and SHA-256 digest.
+    It does not parse result contents, execute simulations, or support neuroscience
+    interpretation.
+    """
+
+    validate_targeted_validation_manifest(manifest)
+    assert isinstance(manifest, Mapping)
+
+    root = Path(run_directory).resolve(strict=True)
+    if not root.is_dir():
+        raise ValueError("run_directory must be an existing directory")
+
+    for field in ("inputs", "outputs"):
+        for index, record in enumerate(manifest[field]):
+            context = f"{field}[{index}]"
+            relative_path = Path(record["path"])
+            if relative_path.is_absolute():
+                raise ValueError(f"{context}.path must be relative to run_directory")
+
+            candidate = root / relative_path
+            try:
+                resolved = candidate.resolve(strict=True)
+            except FileNotFoundError as exc:
+                raise ValueError(f"{context}.path does not exist: {record['path']!r}") from exc
+
+            if not resolved.is_relative_to(root):
+                raise ValueError(f"{context}.path escapes run_directory")
+            if candidate.is_symlink() or not resolved.is_file():
+                raise ValueError(f"{context}.path must identify a regular non-symlink file")
+
+            size_bytes = resolved.stat().st_size
+            if size_bytes != record["size_bytes"]:
+                raise ValueError(
+                    f"{context}.size_bytes mismatch: manifest={record['size_bytes']} actual={size_bytes}"
+                )
+
+            digest = hashlib.sha256()
+            with resolved.open("rb") as handle:
+                for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                    digest.update(chunk)
+            actual_sha256 = digest.hexdigest()
+            if actual_sha256 != record["sha256"]:
+                raise ValueError(
+                    f"{context}.sha256 mismatch: manifest={record['sha256']} actual={actual_sha256}"
+                )
