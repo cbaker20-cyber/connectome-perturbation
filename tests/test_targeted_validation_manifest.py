@@ -1,4 +1,5 @@
 import copy
+import hashlib
 
 import pytest
 
@@ -6,6 +7,7 @@ from connectome_analysis.targeted_validation_manifest import (
     CLAIM_STATUS,
     SCHEMA_VERSION,
     validate_targeted_validation_manifest,
+    verify_targeted_validation_files,
 )
 
 
@@ -44,6 +46,17 @@ def valid_manifest():
     }
 
 
+def _write_manifest_files(tmp_path, manifest):
+    for field in ("inputs", "outputs"):
+        for index, record in enumerate(manifest[field]):
+            path = tmp_path / record["path"]
+            path.parent.mkdir(parents=True, exist_ok=True)
+            payload = f"{field}-{index}\n".encode()
+            path.write_bytes(payload)
+            record["size_bytes"] = len(payload)
+            record["sha256"] = hashlib.sha256(payload).hexdigest()
+
+
 def test_accepts_complete_four_cell_manifest():
     validate_targeted_validation_manifest(valid_manifest())
 
@@ -75,3 +88,68 @@ def test_rejects_incomplete_or_corrupt_manifests(mutate, message):
 
     with pytest.raises(ValueError, match=message):
         validate_targeted_validation_manifest(manifest)
+
+
+def test_verifies_declared_file_sizes_and_digests(tmp_path):
+    manifest = valid_manifest()
+    _write_manifest_files(tmp_path, manifest)
+
+    verify_targeted_validation_files(manifest, tmp_path)
+
+
+def test_rejects_missing_declared_file(tmp_path):
+    manifest = valid_manifest()
+    _write_manifest_files(tmp_path, manifest)
+    (tmp_path / manifest["outputs"][0]["path"]).unlink()
+
+    with pytest.raises(ValueError, match="does not exist"):
+        verify_targeted_validation_files(manifest, tmp_path)
+
+
+def test_rejects_size_mismatch(tmp_path):
+    manifest = valid_manifest()
+    _write_manifest_files(tmp_path, manifest)
+    manifest["outputs"][0]["size_bytes"] += 1
+
+    with pytest.raises(ValueError, match="size_bytes mismatch"):
+        verify_targeted_validation_files(manifest, tmp_path)
+
+
+def test_rejects_digest_mismatch(tmp_path):
+    manifest = valid_manifest()
+    _write_manifest_files(tmp_path, manifest)
+    manifest["outputs"][0]["sha256"] = "0" * 64
+
+    with pytest.raises(ValueError, match="sha256 mismatch"):
+        verify_targeted_validation_files(manifest, tmp_path)
+
+
+def test_rejects_path_escape(tmp_path):
+    manifest = valid_manifest()
+    _write_manifest_files(tmp_path, manifest)
+    outside = tmp_path.parent / "outside-input.csv"
+    outside.write_text("outside\n", encoding="utf-8")
+    manifest["inputs"][0] = {
+        "path": "../outside-input.csv",
+        "size_bytes": outside.stat().st_size,
+        "sha256": hashlib.sha256(outside.read_bytes()).hexdigest(),
+    }
+
+    with pytest.raises(ValueError, match="escapes run_directory"):
+        verify_targeted_validation_files(manifest, tmp_path)
+
+
+def test_rejects_symlinked_declared_file(tmp_path):
+    manifest = valid_manifest()
+    _write_manifest_files(tmp_path, manifest)
+    declared = tmp_path / manifest["outputs"][0]["path"]
+    target = tmp_path / "real-output.csv"
+    target.write_bytes(declared.read_bytes())
+    declared.unlink()
+    try:
+        declared.symlink_to(target)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlink creation is unavailable on this platform")
+
+    with pytest.raises(ValueError, match="non-symlink"):
+        verify_targeted_validation_files(manifest, tmp_path)
