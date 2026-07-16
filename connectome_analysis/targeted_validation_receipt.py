@@ -10,7 +10,7 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping, Sequence
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from connectome_analysis.targeted_validation_csv import parse_targeted_validation_summary_csv
 from connectome_analysis.targeted_validation_manifest import (
@@ -50,6 +50,21 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 _GIT_COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
+def _validate_receipt_summary_path(value: object) -> None:
+    """Require one canonical repository-relative POSIX artifact path."""
+
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError("receipt summary_path must be a non-empty string")
+    if "\\" in value:
+        raise ValueError("receipt summary_path must use POSIX separators")
+
+    path = PurePosixPath(value)
+    if path.is_absolute():
+        raise ValueError("receipt summary_path must be relative")
+    if value != path.as_posix() or any(part in {".", ".."} for part in path.parts):
+        raise ValueError("receipt summary_path must be normalized and non-escaping")
+
+
 def validate_targeted_validation_receipt(receipt: object) -> None:
     """Validate a stored receipt's schema and provenance completeness.
 
@@ -70,18 +85,21 @@ def validate_targeted_validation_receipt(receipt: object) -> None:
     if receipt["manifest_schema_version"] != SCHEMA_VERSION:
         raise ValueError("receipt manifest_schema_version mismatch")
 
-    for field in ("run_id", "summary_path"):
-        if not isinstance(receipt[field], str) or not receipt[field].strip():
-            raise ValueError(f"receipt {field} must be a non-empty string")
+    if not isinstance(receipt["run_id"], str) or not receipt["run_id"].strip():
+        raise ValueError("receipt run_id must be a non-empty string")
+    _validate_receipt_summary_path(receipt["summary_path"])
     if not isinstance(receipt["git_commit"], str) or not _GIT_COMMIT_RE.fullmatch(receipt["git_commit"]):
         raise ValueError("receipt git_commit must be a lowercase 40-character hex SHA")
     if not isinstance(receipt["summary_sha256"], str) or not _SHA256_RE.fullmatch(receipt["summary_sha256"]):
         raise ValueError("receipt summary_sha256 must be a lowercase 64-character hex digest")
 
-    for field in ("summary_size_bytes", "row_count"):
-        value = receipt[field]
-        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
-            raise ValueError(f"receipt {field} must be a non-negative integer")
+    summary_size_bytes = receipt["summary_size_bytes"]
+    if isinstance(summary_size_bytes, bool) or not isinstance(summary_size_bytes, int) or summary_size_bytes <= 0:
+        raise ValueError("receipt summary_size_bytes must be a positive integer")
+
+    row_count = receipt["row_count"]
+    if isinstance(row_count, bool) or not isinstance(row_count, int) or row_count != 4:
+        raise ValueError("receipt row_count must equal 4 for four_cell_semantics")
 
     numeric_fields = receipt["numeric_fields"]
     if not isinstance(numeric_fields, list) or not numeric_fields:
