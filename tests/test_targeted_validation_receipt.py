@@ -1,9 +1,12 @@
 import hashlib
+import json
 
 import pytest
 
 from connectome_analysis.targeted_validation_receipt import (
     RECEIPT_SCHEMA_VERSION,
+    serialize_targeted_validation_receipt,
+    validate_targeted_validation_receipt,
     validate_targeted_validation_run,
 )
 
@@ -70,14 +73,16 @@ def _staged_run(tmp_path):
     return manifest
 
 
-def test_returns_receipt_only_after_all_gates_pass(tmp_path):
-    manifest = _staged_run(tmp_path)
-
-    receipt = validate_targeted_validation_run(
-        manifest,
+def _receipt(tmp_path):
+    return validate_targeted_validation_run(
+        _staged_run(tmp_path),
         tmp_path,
         numeric_fields=NUMERIC_FIELDS,
     )
+
+
+def test_returns_receipt_only_after_all_gates_pass(tmp_path):
+    receipt = _receipt(tmp_path)
 
     assert receipt["schema_version"] == RECEIPT_SCHEMA_VERSION
     assert receipt["claim_status"] == "not_interpretable_as_neuroscience"
@@ -93,6 +98,75 @@ def test_returns_receipt_only_after_all_gates_pass(tmp_path):
         "summary_artifact_binding",
         "four_cell_semantics",
     ]
+
+
+def test_serialization_is_canonical_and_round_trips(tmp_path):
+    receipt = _receipt(tmp_path)
+
+    serialized = serialize_targeted_validation_receipt(receipt)
+
+    assert serialized.endswith(b"\n")
+    assert serialized == serialize_targeted_validation_receipt(json.loads(serialized))
+    assert serialized == (
+        json.dumps(receipt, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n"
+    ).encode("utf-8")
+
+
+def test_stored_receipt_rejects_missing_provenance(tmp_path):
+    receipt = _receipt(tmp_path)
+    del receipt["git_commit"]
+
+    with pytest.raises(ValueError, match="receipt keys mismatch"):
+        validate_targeted_validation_receipt(receipt)
+
+
+def test_stored_receipt_rejects_unknown_schema(tmp_path):
+    receipt = _receipt(tmp_path)
+    receipt["schema_version"] = "future-or-unknown"
+
+    with pytest.raises(ValueError, match="unsupported receipt schema_version"):
+        serialize_targeted_validation_receipt(receipt)
+
+
+def test_stored_receipt_rejects_changed_gate_claim(tmp_path):
+    receipt = _receipt(tmp_path)
+    receipt["validated_gates"] = ["manifest_contract"]
+
+    with pytest.raises(ValueError, match="validated_gates mismatch"):
+        validate_targeted_validation_receipt(receipt)
+
+
+def test_stored_receipt_rejects_non_four_cell_row_count(tmp_path):
+    receipt = _receipt(tmp_path)
+    receipt["row_count"] = 3
+
+    with pytest.raises(ValueError, match="row_count must equal 4"):
+        validate_targeted_validation_receipt(receipt)
+
+
+def test_stored_receipt_rejects_empty_summary_artifact(tmp_path):
+    receipt = _receipt(tmp_path)
+    receipt["summary_size_bytes"] = 0
+
+    with pytest.raises(ValueError, match="summary_size_bytes must be a positive integer"):
+        validate_targeted_validation_receipt(receipt)
+
+
+@pytest.mark.parametrize(
+    "summary_path",
+    [
+        "/tmp/sweep_summary.csv",
+        "../sweep_summary.csv",
+        "results/../sweep_summary.csv",
+        "results\\sweep_summary.csv",
+    ],
+)
+def test_stored_receipt_rejects_unsafe_or_ambiguous_summary_path(tmp_path, summary_path):
+    receipt = _receipt(tmp_path)
+    receipt["summary_path"] = summary_path
+
+    with pytest.raises(ValueError, match="summary_path"):
+        validate_targeted_validation_receipt(receipt)
 
 
 def test_fails_before_receipt_when_declared_bytes_change(tmp_path):
