@@ -136,6 +136,39 @@ def test_stored_receipt_rejects_changed_gate_claim(tmp_path):
         validate_targeted_validation_receipt(receipt)
 
 
+def test_stored_receipt_rejects_non_four_cell_row_count(tmp_path):
+    receipt = _receipt(tmp_path)
+    receipt["row_count"] = 3
+
+    with pytest.raises(ValueError, match="row_count must equal 4"):
+        validate_targeted_validation_receipt(receipt)
+
+
+def test_stored_receipt_rejects_empty_summary_artifact(tmp_path):
+    receipt = _receipt(tmp_path)
+    receipt["summary_size_bytes"] = 0
+
+    with pytest.raises(ValueError, match="summary_size_bytes must be a positive integer"):
+        validate_targeted_validation_receipt(receipt)
+
+
+@pytest.mark.parametrize(
+    "summary_path",
+    [
+        "/tmp/sweep_summary.csv",
+        "../sweep_summary.csv",
+        "results/../sweep_summary.csv",
+        "results\\sweep_summary.csv",
+    ],
+)
+def test_stored_receipt_rejects_unsafe_or_ambiguous_summary_path(tmp_path, summary_path):
+    receipt = _receipt(tmp_path)
+    receipt["summary_path"] = summary_path
+
+    with pytest.raises(ValueError, match="summary_path"):
+        validate_targeted_validation_receipt(receipt)
+
+
 def test_fails_before_receipt_when_declared_bytes_change(tmp_path):
     manifest = _staged_run(tmp_path)
     (tmp_path / "sweep_summary.csv").write_bytes(SUMMARY + b"\n")
