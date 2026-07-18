@@ -42,3 +42,5 @@ A changed input manifest therefore requires regeneration of the output manifest.
 ## Validation follow-up
 
 The validator should reject duplicate resolved input paths, malformed checksum/size facts, basename or extension drift, and symlink aliases. Each rejection should have a focused regression test before the rule is relied on as a merge gate.
+
+Materialization selection is documented in `docs/materialization-policy.md`. Scripts should pass exact filenames or call `resolve_materialization_inputs()`; bare role or materialization identifiers such as `connectivity_table` or `630` are ambiguous when both 630 and 783 tables are present.

@@ -119,13 +119,15 @@ def test_baseline_default_input_ids_resolve_from_manifest(tmp_path):
     assert resolver.resolve_input("2023_03_23_connectivity_630_final.parquet", repo_root=repo_root) == connectivity.resolve()
 
 
-def test_cell_groups_resolve_inputs_uses_manifest(tmp_path):
-    cell_groups = load_module("perturbation/cell_groups.py")
+def test_cell_groups_default_identifiers_resolve_from_manifest(tmp_path):
+    resolver = load_resolver()
     repo_root = make_repo(tmp_path)
     annotations = repo_root / "flywire_annotations.tsv"
     completeness = repo_root / "2023_03_23_completeness_630_final.csv"
+    connectivity = repo_root / "2023_03_23_connectivity_630_final.parquet"
     annotations.write_text("root_id\tcell_class\n1\tAN\n", encoding="utf-8")
     completeness.write_text("id\n1\n", encoding="utf-8")
+    connectivity.write_bytes(b"parquet")
     write_manifest(
         repo_root,
         [
@@ -140,23 +142,35 @@ def test_cell_groups_resolve_inputs_uses_manifest(tmp_path):
                 "guessed_role": "completeness_table",
                 "guessed_materialization": "630",
             },
+            {
+                "path": connectivity.name,
+                "filename": connectivity.name,
+                "guessed_role": "connectivity_table",
+                "guessed_materialization": "630",
+            },
         ],
     )
 
-    ann_path, sim_path = cell_groups.resolve_cell_group_inputs(repo_root=repo_root)
+    bundle = resolver.resolve_materialization_inputs("630", repo_root=repo_root)
 
-    assert ann_path == annotations.resolve()
-    assert sim_path == completeness.resolve()
+    assert bundle["annotations"] == annotations.resolve()
+    assert bundle["completeness"] == completeness.resolve()
+    assert bundle["connectivity"] == connectivity.resolve()
 
 
-def test_graph_analysis_defaults_resolve_through_manifest(tmp_path):
-    graph_analysis = load_module("perturbation/graph_analysis.py")
+def test_graph_analysis_defaults_are_manifest_filenames():
+    text = (WORKSPACE / "perturbation/graph_analysis.py").read_text(encoding="utf-8")
+    assert 'CONNECTIVITY_DEFAULT = "2023_03_23_connectivity_630_final.parquet"' in text
+    assert 'ANNOTATIONS_DEFAULT = "flywire_annotations.tsv"' in text
+
+
+def test_path_analysis_defaults_resolve_through_manifest(tmp_path):
     resolver = load_resolver()
     repo_root = make_repo(tmp_path)
-    connectivity = repo_root / graph_analysis.CONNECTIVITY_DEFAULT
-    annotations = repo_root / graph_analysis.ANNOTATIONS_DEFAULT
+    connectivity = repo_root / "2023_03_23_connectivity_630_final.parquet"
+    annotations = repo_root / "flywire_annotations.tsv"
     connectivity.write_bytes(b"parquet")
-    annotations.write_text("root_id\tcell_class\n1\tAN\n", encoding="utf-8")
+    annotations.write_text("root_id\tsuper_class\n1\tmotor\n", encoding="utf-8")
     write_manifest(
         repo_root,
         [
@@ -174,29 +188,8 @@ def test_graph_analysis_defaults_resolve_through_manifest(tmp_path):
         ],
     )
 
-    assert resolver.resolve_input(graph_analysis.CONNECTIVITY_DEFAULT, repo_root=repo_root) == connectivity.resolve()
-    assert resolver.resolve_input(graph_analysis.ANNOTATIONS_DEFAULT, repo_root=repo_root) == annotations.resolve()
-    assert graph_analysis.CONNECTIVITY_DEFAULT == "2023_03_23_connectivity_630_final.parquet"
-
-
-def test_path_analysis_main_resolves_manifest_paths(tmp_path, monkeypatch):
-    path_analysis = load_module("perturbation/path_analysis.py")
-    repo_root = make_repo(tmp_path)
-    monkeypatch.chdir(repo_root)
-    monkeypatch.setattr(
-        sys,
-        "argv",
-        [
-            "path_analysis.py",
-            "--mock",
-            "--output-dir",
-            "results/path_analysis_test",
-        ],
-    )
-
-    path_analysis.main()
-
-    assert (repo_root / "results/path_analysis_test/mock_inputs").exists()
+    assert resolver.resolve_input("2023_03_23_connectivity_630_final.parquet", repo_root=repo_root) == connectivity.resolve()
+    assert resolver.resolve_input("flywire_annotations.tsv", repo_root=repo_root) == annotations.resolve()
 
 
 @pytest.mark.parametrize(

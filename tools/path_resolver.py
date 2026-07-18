@@ -10,6 +10,18 @@ from pathlib import Path
 
 LEGACY_DATA_DIR = "Drosophila_brain_model"
 DEFAULT_MANIFEST_PATH = "data/input_manifest.json"
+SMOKE_MATERIALIZATION = "630"
+ANNOTATIONS_INPUT = "flywire_annotations.tsv"
+MATERIALIZATION_FILENAMES: dict[str, dict[str, str]] = {
+    "630": {
+        "completeness": "2023_03_23_completeness_630_final.csv",
+        "connectivity": "2023_03_23_connectivity_630_final.parquet",
+    },
+    "783": {
+        "completeness": "Completeness_783.csv",
+        "connectivity": "Connectivity_783.parquet",
+    },
+}
 
 
 def repo_root_from(start: Path | None = None) -> Path:
@@ -148,6 +160,53 @@ def resolve_existing_path(
         return resolve_input(str(path), manifest_path=manifest_path, repo_root=repo_root)
     except (FileNotFoundError, ValueError) as exc:
         raise FileNotFoundError(f"Could not find {description}: {path}") from exc
+
+
+def materialization_filenames(materialization: str) -> dict[str, str]:
+    """Return the tracked completeness/connectivity filenames for a materialization."""
+    try:
+        filenames = MATERIALIZATION_FILENAMES[materialization]
+    except KeyError as exc:
+        known = ", ".join(sorted(MATERIALIZATION_FILENAMES))
+        raise ValueError(
+            f"Unknown materialization {materialization!r}; expected one of: {known}"
+        ) from exc
+    return dict(filenames)
+
+
+def resolve_materialization_inputs(
+    materialization: str = SMOKE_MATERIALIZATION,
+    *,
+    manifest_path: str | Path = DEFAULT_MANIFEST_PATH,
+    repo_root: Path | None = None,
+    include_annotations: bool = True,
+) -> dict[str, Path]:
+    """Resolve the standard input bundle for one connectome materialization.
+
+    Scripts should pass exact filenames or call this helper instead of querying
+  by bare materialization ID through :func:`resolve_input`, because multiple
+    manifest rows can share the same ``guessed_materialization`` value.
+    """
+    filenames = materialization_filenames(materialization)
+    resolved = {
+        "completeness": resolve_input(
+            filenames["completeness"],
+            manifest_path=manifest_path,
+            repo_root=repo_root,
+        ),
+        "connectivity": resolve_input(
+            filenames["connectivity"],
+            manifest_path=manifest_path,
+            repo_root=repo_root,
+        ),
+    }
+    if include_annotations:
+        resolved["annotations"] = resolve_input(
+            ANNOTATIONS_INPUT,
+            manifest_path=manifest_path,
+            repo_root=repo_root,
+        )
+    return resolved
 
 
 def main() -> int:

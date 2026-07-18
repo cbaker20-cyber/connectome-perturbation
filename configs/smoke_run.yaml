@@ -3,7 +3,11 @@
 
 run_name: smoke_reproducibility_metadata
 random_seed: 42
-selected_materialization: null  # Fill after provenance review: likely 630 or 783.
+selected_materialization: "630"
+selected_inputs:
+  completeness: 2023_03_23_completeness_630_final.csv
+  connectivity: 2023_03_23_connectivity_630_final.parquet
+  annotations: flywire_annotations.tsv
 mode: metadata_only
 max_runtime_seconds: 60
 max_neurons: 10

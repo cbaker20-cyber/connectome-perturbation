@@ -26,7 +26,7 @@ These commands only establish an environment and validate documentation structur
 
 ## Blockers before a model run
 
-1. Materialization-style 630 and 783 files coexist; the canonical smoke target is not yet documented.
+1. Materialization **630** is the documented canonical smoke/default target; materialization **783** requires explicit config and must not be mixed with 630 outputs.
 2. Authoritative source provenance (URL/DOI, citation, license, schema, row counts) is still missing from `data/input_manifest.json`.
 3. No frozen run configuration ties parameters, random seeds, trial counts, neuron groups, and outputs together.
 4. The tracked `perturbation_summary.csv` has no attached command or execution log.

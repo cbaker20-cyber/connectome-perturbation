@@ -48,7 +48,10 @@ Prioritized backlog for the connectome perturbation project.
   - `perturbation/statistics.py`, `perturbation/motor_analysis.py`, `perturbation/sweep_cell_class.py`, and `test_run.py` no longer insert `Drosophila_brain_model` on `sys.path`.
   - `tools/path_resolver.py` preserves backwards compatibility via legacy `Drosophila_brain_model/<basename>` fallback when a manifest entry is absent.
   - `tests/test_perturbation_path_migration.py` covers resolver legacy fallback and each migrated script.
-- [ ] Decide whether materialization 630 or 783 is the canonical smoke target; document why.
+- [x] Decide whether materialization 630 or 783 is the canonical smoke target; document why.
+  - `docs/materialization-policy.md` records materialization **630** as the canonical smoke/default target based on current script defaults and `configs/smoke_run.yaml`.
+  - `tools/path_resolver.py` exposes `SMOKE_MATERIALIZATION`, `MATERIALIZATION_FILENAMES`, and `resolve_materialization_inputs()`; bare materialization identifiers remain ambiguous and are rejected.
+  - `tests/test_materialization_policy.py` guards the policy doc, smoke config, resolver bundle behavior, and ambiguity rules.
 
 ## P1 — Scientific rigor
 

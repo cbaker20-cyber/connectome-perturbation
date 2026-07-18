@@ -15,6 +15,7 @@ Nothing in `results/perturbation_summary.csv` should be treated as validated neu
 - `docs/progress-log.md`: conservative status log.
 - `docs/data-policy.md`: rules for datasets, outputs, privacy, and manifests.
 - `docs/environment-plan.md`: evidence-based setup plan and current run blockers.
+- `docs/materialization-policy.md`: 630 vs 783 inventory, canonical smoke target, resolver rules, and expected input manifests.
 - `AGENTS.md`, `TASKS.md`, and `CHANGELOG_AI.md`: agent rules, active backlog, and AI-assisted project memory.
 
 ## Data and provenance status
