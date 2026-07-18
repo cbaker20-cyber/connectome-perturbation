@@ -4,7 +4,9 @@ Prioritized backlog for the connectome perturbation project.
 
 ## P0 — Reproducibility spine
 
-- [ ] Run `python tools/build_input_manifest.py` and review `data/input_manifest.json`.
+- [x] Run `python tools/build_input_manifest.py` and review `data/input_manifest.json`.
+  - Committed manifest records five tracked connectome-like inputs (630/783 completeness and connectivity tables plus `flywire_annotations.tsv`) with SHA-256 checksums, guessed roles/materializations, and explicit `validation_status: checksum_recorded_provenance_missing`.
+  - Project registry/ledger CSVs are excluded from the builder so they are not mistaken for simulation inputs.
 - [ ] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
 - [ ] Run the artifact-producing metadata smoke sequence:
   - `python tools/build_input_manifest.py`

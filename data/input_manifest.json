@@ -1,0 +1,119 @@
+{
+  "generated_at_utc": "2026-07-18T18:09:17.913174+00:00",
+  "input_count": 5,
+  "inputs": [
+    {
+      "extension": ".csv",
+      "filename": "2023_03_23_completeness_630_final.csv",
+      "guessed_materialization": "630",
+      "guessed_role": "completeness_table",
+      "path": "2023_03_23_completeness_630_final.csv",
+      "provenance": {
+        "access_date": null,
+        "canonical_url_or_doi": null,
+        "citation": null,
+        "dataset_name": null,
+        "license_or_terms": null,
+        "preprocessing_notes": null,
+        "redistribution_status": "unknown",
+        "release_or_materialization": "630",
+        "row_count": null,
+        "schema_notes": null
+      },
+      "sha256": "e6b71e17671a9bdb05f55e4bc6774640a1418cb7a05125e0fc994ad40f9bfdfb",
+      "size_bytes": 3057611,
+      "validation_status": "checksum_recorded_provenance_missing"
+    },
+    {
+      "extension": ".parquet",
+      "filename": "2023_03_23_connectivity_630_final.parquet",
+      "guessed_materialization": "630",
+      "guessed_role": "connectivity_table",
+      "path": "2023_03_23_connectivity_630_final.parquet",
+      "provenance": {
+        "access_date": null,
+        "canonical_url_or_doi": null,
+        "citation": null,
+        "dataset_name": null,
+        "license_or_terms": null,
+        "preprocessing_notes": null,
+        "redistribution_status": "unknown",
+        "release_or_materialization": "630",
+        "row_count": null,
+        "schema_notes": null
+      },
+      "sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+      "size_bytes": 86630944,
+      "validation_status": "checksum_recorded_provenance_missing"
+    },
+    {
+      "extension": ".csv",
+      "filename": "Completeness_783.csv",
+      "guessed_materialization": "783",
+      "guessed_role": "completeness_table",
+      "path": "Completeness_783.csv",
+      "provenance": {
+        "access_date": null,
+        "canonical_url_or_doi": null,
+        "citation": null,
+        "dataset_name": null,
+        "license_or_terms": null,
+        "preprocessing_notes": null,
+        "redistribution_status": "unknown",
+        "release_or_materialization": "783",
+        "row_count": null,
+        "schema_notes": null
+      },
+      "sha256": "bbb847a4cc2caaa7a16349722d220c087317b946d148d4d592d94d250617a311",
+      "size_bytes": 3327347,
+      "validation_status": "checksum_recorded_provenance_missing"
+    },
+    {
+      "extension": ".parquet",
+      "filename": "Connectivity_783.parquet",
+      "guessed_materialization": "783",
+      "guessed_role": "connectivity_table",
+      "path": "Connectivity_783.parquet",
+      "provenance": {
+        "access_date": null,
+        "canonical_url_or_doi": null,
+        "citation": null,
+        "dataset_name": null,
+        "license_or_terms": null,
+        "preprocessing_notes": null,
+        "redistribution_status": "unknown",
+        "release_or_materialization": "783",
+        "row_count": null,
+        "schema_notes": null
+      },
+      "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+      "size_bytes": 100804642,
+      "validation_status": "checksum_recorded_provenance_missing"
+    },
+    {
+      "extension": ".tsv",
+      "filename": "flywire_annotations.tsv",
+      "guessed_materialization": null,
+      "guessed_role": "annotation_table",
+      "path": "flywire_annotations.tsv",
+      "provenance": {
+        "access_date": null,
+        "canonical_url_or_doi": null,
+        "citation": null,
+        "dataset_name": null,
+        "license_or_terms": null,
+        "preprocessing_notes": null,
+        "redistribution_status": "unknown",
+        "release_or_materialization": null,
+        "row_count": null,
+        "schema_notes": null
+      },
+      "sha256": "533db093e12d8de350fd20875a967f8f74acace633ff22118eefff550d5dcbc1",
+      "size_bytes": 32638576,
+      "validation_status": "checksum_recorded_provenance_missing"
+    }
+  ],
+  "purpose": "Record local input-like file facts; provenance fields require source-backed completion.",
+  "repo_root": ".",
+  "schema_version": "0.1"
+}

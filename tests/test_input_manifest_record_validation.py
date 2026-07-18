@@ -91,3 +91,40 @@ def test_rejects_normalized_aliases_to_same_file(tmp_path):
     errors = validate(tool, tmp_path, manifest)
 
     assert "input 1 resolves to the same file as input 0: data/../data/input.csv" in errors
+
+
+def test_accepts_two_distinct_valid_inputs(tmp_path):
+    tool = load_validator()
+    first = tmp_path / "alpha.csv"
+    second = tmp_path / "beta.csv"
+    first.write_text("id\n1\n", encoding="utf-8")
+    second.write_text("id\n2\n", encoding="utf-8")
+    manifest = {
+        "schema_version": "0.1",
+        "generated_at_utc": "2026-07-10T00:00:00+00:00",
+        "input_count": 2,
+        "inputs": [
+            {
+                "path": "alpha.csv",
+                "filename": "alpha.csv",
+                "extension": ".csv",
+                "size_bytes": first.stat().st_size,
+                "sha256": tool.sha256_file(first),
+                "guessed_role": "unknown_input_like_file",
+                "provenance": {field: None for field in tool.REQUIRED_PROVENANCE_FIELDS},
+            },
+            {
+                "path": "beta.csv",
+                "filename": "beta.csv",
+                "extension": ".csv",
+                "size_bytes": second.stat().st_size,
+                "sha256": tool.sha256_file(second),
+                "guessed_role": "unknown_input_like_file",
+                "provenance": {field: None for field in tool.REQUIRED_PROVENANCE_FIELDS},
+            },
+        ],
+    }
+
+    errors = validate(tool, tmp_path, manifest)
+
+    assert errors == []
