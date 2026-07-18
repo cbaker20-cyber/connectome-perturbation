@@ -51,6 +51,18 @@ def write_output_manifest(repo_root: Path, manifest: dict) -> Path:
     return manifest_path
 
 
+def apply_outputs(manifest: dict, outputs: list[dict]) -> dict:
+    manifest["outputs"] = outputs
+    if outputs:
+        manifest["repo_commit"] = "deadbeef"
+        manifest.setdefault("run_config", {"random_seed": 42})
+        manifest.setdefault(
+            "environment",
+            {"python": "3.11", "platform": "linux", "executable": "/usr/bin/python3"},
+        )
+    return manifest
+
+
 def test_validate_output_manifest_accepts_declared_output_with_matching_digest(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
@@ -58,13 +70,16 @@ def test_validate_output_manifest_accepts_declared_output_with_matching_digest(t
     output_file.parent.mkdir()
     output_file.write_text('{"ok": true}\n', encoding="utf-8")
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [
-        {
-            "path": "results/summary.json",
-            "sha256": tool.sha256_file(output_file),
-            "size_bytes": output_file.stat().st_size,
-        }
-    ]
+    apply_outputs(
+        manifest,
+        [
+            {
+                "path": "results/summary.json",
+                "sha256": tool.sha256_file(output_file),
+                "size_bytes": output_file.stat().st_size,
+            }
+        ],
+    )
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -77,7 +92,7 @@ def test_validate_output_manifest_rejects_output_path_escape(tmp_path):
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [{"path": "../outside.csv", "sha256": "0" * 64}]
+    apply_outputs(manifest, [{"path": "../outside.csv", "sha256": "0" * 64}])
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -93,13 +108,16 @@ def test_validate_output_manifest_rejects_stale_output_digest(tmp_path):
     output_file.parent.mkdir()
     output_file.write_text('{"ok": true}\n', encoding="utf-8")
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [
-        {
-            "path": "results/summary.json",
-            "sha256": "0" * 64,
-            "size_bytes": output_file.stat().st_size,
-        }
-    ]
+    apply_outputs(
+        manifest,
+        [
+            {
+                "path": "results/summary.json",
+                "sha256": "0" * 64,
+                "size_bytes": output_file.stat().st_size,
+            }
+        ],
+    )
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -115,13 +133,16 @@ def test_validate_output_manifest_rejects_malformed_output_digest(tmp_path):
     output_file.parent.mkdir()
     output_file.write_text('{"ok": true}\n', encoding="utf-8")
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [
-        {
-            "path": "results/summary.json",
-            "sha256": "not-a-digest",
-            "size_bytes": output_file.stat().st_size,
-        }
-    ]
+    apply_outputs(
+        manifest,
+        [
+            {
+                "path": "results/summary.json",
+                "sha256": "not-a-digest",
+                "size_bytes": output_file.stat().st_size,
+            }
+        ],
+    )
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -137,13 +158,16 @@ def test_validate_output_manifest_rejects_uppercase_output_digest(tmp_path):
     output_file.parent.mkdir()
     output_file.write_text('{"ok": true}\n', encoding="utf-8")
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [
-        {
-            "path": "results/summary.json",
-            "sha256": tool.sha256_file(output_file).upper(),
-            "size_bytes": output_file.stat().st_size,
-        }
-    ]
+    apply_outputs(
+        manifest,
+        [
+            {
+                "path": "results/summary.json",
+                "sha256": tool.sha256_file(output_file).upper(),
+                "size_bytes": output_file.stat().st_size,
+            }
+        ],
+    )
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -159,13 +183,16 @@ def test_validate_output_manifest_rejects_string_output_size(tmp_path):
     output_file.parent.mkdir()
     output_file.write_text('{"ok": true}\n', encoding="utf-8")
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [
-        {
-            "path": "results/summary.json",
-            "sha256": tool.sha256_file(output_file),
-            "size_bytes": str(output_file.stat().st_size),
-        }
-    ]
+    apply_outputs(
+        manifest,
+        [
+            {
+                "path": "results/summary.json",
+                "sha256": tool.sha256_file(output_file),
+                "size_bytes": str(output_file.stat().st_size),
+            }
+        ],
+    )
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -181,13 +208,16 @@ def test_validate_output_manifest_rejects_negative_output_size(tmp_path):
     output_file.parent.mkdir()
     output_file.write_text('{"ok": true}\n', encoding="utf-8")
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [
-        {
-            "path": "results/summary.json",
-            "sha256": tool.sha256_file(output_file),
-            "size_bytes": -1,
-        }
-    ]
+    apply_outputs(
+        manifest,
+        [
+            {
+                "path": "results/summary.json",
+                "sha256": tool.sha256_file(output_file),
+                "size_bytes": -1,
+            }
+        ],
+    )
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -200,7 +230,7 @@ def test_validate_output_manifest_reports_missing_output_and_malformed_digest(tm
     tool = load_module(Path.cwd(), "tools/validate_reproducibility.py")
     repo_root = tmp_path
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [{"path": "results/missing.json", "sha256": "not-a-digest"}]
+    apply_outputs(manifest, [{"path": "results/missing.json", "sha256": "not-a-digest"}])
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -222,7 +252,7 @@ def test_validate_output_manifest_rejects_duplicate_output_path(tmp_path):
         "size_bytes": output_file.stat().st_size,
     }
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [record, dict(record)]
+    apply_outputs(manifest, [record, dict(record)])
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []
@@ -238,7 +268,7 @@ def test_validate_output_manifest_rejects_directory_as_output(tmp_path):
     output_dir = repo_root / "results"
     output_dir.mkdir()
     manifest = base_output_manifest(repo_root, tool)
-    manifest["outputs"] = [{"path": "results"}]
+    apply_outputs(manifest, [{"path": "results"}])
     manifest_path = write_output_manifest(repo_root, manifest)
 
     errors = []

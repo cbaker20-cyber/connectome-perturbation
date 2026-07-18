@@ -14,6 +14,8 @@ Implemented on the reproducibility branch:
 - Writer-created artifact records are populated from disk with `path`, `sha256`, and `size_bytes`.
 - The writer rejects missing artifacts, directories, absolute artifact paths, and parent-directory escapes before writing the manifest.
 - `tools/validate_reproducibility.py` validates declared output paths, existence, canonical metadata shape, and on-disk checksum/size matches.
+- When `outputs` is non-empty, the validator also requires `environment`, `repo_commit`, and `run_config` fields that match the referenced config file (`random_seed`, `selected_materialization`, `selected_inputs`).
+- `tools/write_output_manifest.py` copies `run_config` from the referenced YAML config into every output manifest.
 - `tests/test_write_smoke_artifact.py` covers deterministic metadata-only smoke artifact payload/content and output path boundaries.
 - `tests/test_write_toy_graph_artifact.py` covers deterministic toy graph payload/content, expected metrics, and output path boundaries.
 - `tests/test_output_manifest_writer.py` covers artifact recording, missing artifacts, and artifact path escapes.
@@ -39,10 +41,13 @@ python tools/write_output_manifest.py \
   --input-manifest data/input_manifest.json \
   --output output_manifest.json \
   --artifact results/reproducibility_smoke_artifact.json
-python tools/validate_reproducibility.py
+python tools/validate_reproducibility.py \
+  --input-manifest data/input_manifest.json \
+  --output-manifest output_manifest.json \
+  --smoke-config configs/smoke_run.yaml
 ```
 
-This sequence proves that the metadata plumbing can create an artifact, declare it, checksum it, and validate it. It still does not prove any neuroscience result.
+This sequence proves that the metadata plumbing can create an artifact, declare it, checksum it, bind run configuration and environment metadata, and validate end-to-end. GitHub Actions runs this sequence on every pull request. It still does not prove any neuroscience result.
 
 ## Toy graph artifact sequence
 
@@ -117,6 +122,25 @@ Tests alongside `tests/test_output_manifest_declared_outputs.py` cover:
 4. A declared output with `size_bytes: -1` fails because sizes must be non-negative.
 5. A missing declared output path with malformed `sha256` reports both the missing-path error and the malformed-digest error.
 
+## Run-config binding contract
+
+When `output_manifest.outputs` contains at least one artifact record:
+
+- `run_config` must be an object copied from the referenced config file.
+- `run_config.random_seed`, `run_config.selected_materialization`, and `run_config.selected_inputs` must match the on-disk config at `config_path`.
+- `repo_commit` must be a non-empty string (typically `git rev-parse HEAD` at write time).
+- `environment` must include non-empty `python`, `platform`, and `executable` strings.
+
+Metadata-only manifests with empty `outputs` may omit strict run-config binding checks.
+
+## Regression cases for run-config binding
+
+Tests in `tests/test_output_manifest_run_config.py` cover:
+
+1. `load_run_config_snapshot()` copies seed, materialization, and selected inputs from YAML.
+2. A hand-built manifest with declared outputs passes full input + output validation when run_config matches config.
+3. A stale `run_config.random_seed` is rejected.
+
 ## Remaining next step
 
-The next hardening layer is turning the toy graph expected-outcomes logic into reusable graph-analysis fixtures, then using those fixtures to test baseline/perturbation metric code before running on real connectome inputs.
+Fill authoritative provenance in `data/input_manifest.json` and enable `--require-provenance` in CI before any biological claim.

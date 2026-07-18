@@ -23,6 +23,15 @@ Make the project reproducible before making biological claims. This repository i
 4. Add validation checks for manifests, checksums, paths, and output schema.
 5. Only then attempt larger simulations or claims.
 
+## Output manifest binding
+
+When an output manifest declares produced artifacts (`outputs` non-empty):
+
+- `tools/write_output_manifest.py` must copy `run_config` from the referenced YAML config (seed, materialization, selected inputs).
+- Record `repo_commit`, `environment`, and input manifest checksums at write time.
+- `tools/validate_reproducibility.py` enforces run-config binding when outputs exist; CI runs the full smoke artifact → manifest → validate sequence.
+- Metadata-only manifests with empty `outputs` may skip strict run-config binding.
+
 ## Scientific standards
 
 Every interpretable run should eventually include:

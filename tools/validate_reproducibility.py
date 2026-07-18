@@ -321,6 +321,54 @@ def validate_input_manifest_reference(repo_root: Path, manifest: dict[str, Any],
     )
 
 
+def validate_environment_record(manifest: dict[str, Any], errors: list[str], *, require_for_outputs: bool = False) -> None:
+    outputs = manifest.get("outputs", [])
+    if require_for_outputs and not outputs:
+        return
+    environment = manifest.get("environment")
+    require(isinstance(environment, dict), "output manifest environment must be an object", errors)
+    if not isinstance(environment, dict):
+        return
+    for key in ("python", "platform", "executable"):
+        require(isinstance(environment.get(key), str) and environment.get(key).strip(), f"output environment.{key} must be a non-empty string", errors)
+
+
+def validate_run_config_binding(repo_root: Path, manifest: dict[str, Any], errors: list[str]) -> None:
+    """Ensure output manifest run_config matches the referenced config file."""
+    outputs = manifest.get("outputs", [])
+    if not isinstance(outputs, list) or not outputs:
+        return
+
+    run_config = manifest.get("run_config")
+    require(isinstance(run_config, dict), "output manifest run_config must be an object when outputs are declared", errors)
+    if not isinstance(run_config, dict):
+        return
+
+    config_path = repo_relative_path(repo_root, manifest.get("config_path"), "output config_path", errors)
+    if config_path is None or not config_path.exists():
+        return
+
+    expected = load_smoke_config(config_path)
+    if expected is None:
+        errors.append("output config must be a YAML mapping to validate run_config binding")
+        return
+
+    for key in ("random_seed", "selected_materialization", "selected_inputs"):
+        if key not in expected:
+            continue
+        require(
+            run_config.get(key) == expected.get(key),
+            f"output run_config.{key} does not match config file contents",
+            errors,
+        )
+
+    require(
+        isinstance(manifest.get("repo_commit"), str) and manifest.get("repo_commit").strip(),
+        "output manifest repo_commit must be recorded when outputs are declared",
+        errors,
+    )
+
+
 def validate_output_manifest(
     repo_root: Path,
     path: Path,
@@ -346,6 +394,8 @@ def validate_output_manifest(
     validate_config_checksum(repo_root, manifest, errors)
     validate_declared_outputs(repo_root, manifest, errors)
     validate_input_manifest_reference(repo_root, manifest, errors, input_manifest_path=input_manifest_path)
+    validate_environment_record(manifest, errors, require_for_outputs=True)
+    validate_run_config_binding(repo_root, manifest, errors)
 
     expected_checksums = expected_input_checksums(input_manifest)
     if expected_checksums is not None:

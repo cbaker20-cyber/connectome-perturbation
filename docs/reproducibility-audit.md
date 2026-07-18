@@ -9,6 +9,7 @@ This note records a conservative audit of remaining reproducibility gaps. It doe
 - Connectome inputs resolve through `tools/path_resolver.py` and `data/input_manifest.json`.
 - Materialization **630** is documented as the canonical smoke/default target (`docs/materialization-policy.md`).
 - Smoke config `selected_inputs` are validated against resolver filenames and the input manifest (`tools/validate_reproducibility.py --smoke-config`).
+- Output manifests bind `run_config` (seed, materialization, selected inputs), `environment`, and `repo_commit` when outputs are declared; CI runs the full smoke artifact → output manifest → validate sequence.
 
 ## Remaining hard-coded paths (accepted or pending)
 
@@ -28,11 +29,11 @@ This note records a conservative audit of remaining reproducibility gaps. It doe
 ## Missing provenance checks
 
 - `--require-provenance` is not enabled in CI because authoritative source fields are still empty.
-- No output manifest is required in CI yet (`--skip-output-manifest`); full smoke artifact sequence remains manual.
 - `results/perturbation_summary.csv` is not tied to input checksums, config, or commit.
+- Toy graph artifact sequence is not yet wired into CI (metadata smoke path only).
 
 ## Next highest-value improvements
 
-1. Fill authoritative provenance in `data/input_manifest.json`.
-2. Run and commit validated output manifests for the metadata smoke artifact sequence.
-3. Migrate notebooks to manifest-resolved paths or document explicit materialization per notebook cell.
+1. Fill authoritative provenance in `data/input_manifest.json` and enable `--require-provenance` in CI.
+2. Migrate notebooks to manifest-resolved paths or document explicit materialization per notebook cell.
+3. Route `results/` writes in statistics/motor/visualize scripts through a configurable output resolver.

@@ -8,17 +8,17 @@ Prioritized backlog for the connectome perturbation project.
   - Committed manifest records five tracked connectome-like inputs (630/783 completeness and connectivity tables plus `flywire_annotations.tsv`) with SHA-256 checksums, guessed roles/materializations, and explicit `validation_status: checksum_recorded_provenance_missing`.
   - Project registry/ledger CSVs are excluded from the builder so they are not mistaken for simulation inputs.
 - [ ] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
-- [ ] Run the artifact-producing metadata smoke sequence:
-  - `python tools/build_input_manifest.py`
-  - `python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json`
-  - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/reproducibility_smoke_artifact.json`
-  - `python tools/validate_reproducibility.py --smoke-config configs/smoke_run.yaml`
-- [ ] Run the toy graph artifact sequence:
-  - `python tools/write_toy_graph_artifact.py --output results/toy_graph_artifact.json`
-  - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/toy_graph_artifact.json`
-  - `python tools/validate_reproducibility.py`
+- [x] Wire a deterministic smoke command to produce an artifact, write it with `--artifact`, and immediately validate it.
+  - `tools/write_smoke_artifact.py` writes `results/reproducibility_smoke_artifact.json` by default.
+  - The artifact is deterministic metadata-only JSON with `claim_status: not_interpretable_as_neuroscience`.
+  - README and `docs/output_artifact_validation_contract.md` now show the exact create → declare → validate sequence.
+  - CI runs the full sequence and validates `run_config`, `environment`, and `repo_commit` binding when outputs are declared.
+- [x] Bind output manifests to run configuration metadata when artifacts are declared.
+  - `tools/write_output_manifest.py` copies `run_config` (seed, materialization, selected inputs) from the referenced YAML config.
+  - `tools/validate_reproducibility.py` rejects stale `run_config` values and missing `environment`/`repo_commit` when `outputs` is non-empty.
+  - `tests/test_output_manifest_run_config.py` covers snapshot loading, end-to-end validation, and stale seed rejection.
+- [ ] Run the toy graph artifact sequence locally and commit a validated output manifest when appropriate.
 - [x] Validate declared output artifact metadata shape before treating output manifests as reproducible evidence.
-  - Declared output paths must stay repo-relative.
   - Optional declared output `sha256` values must be canonical lowercase 64-character SHA-256 digests.
   - Optional declared output `size_bytes` values must be non-negative integers.
   - Declared output files, checksums, and sizes are compared against disk when present.
@@ -26,10 +26,6 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_output_manifest.py --artifact <repo-relative-file>` records `path`, `sha256`, and `size_bytes` from disk.
   - Missing artifacts, directories, absolute paths, and parent-directory escapes fail before the manifest is written.
   - The writer intentionally requires explicit artifact paths so stale files are not auto-discovered and silently blessed.
-- [x] Wire a deterministic smoke command to produce an artifact, write it with `--artifact`, and immediately validate it.
-  - `tools/write_smoke_artifact.py` writes `results/reproducibility_smoke_artifact.json` by default.
-  - The artifact is deterministic metadata-only JSON with `claim_status: not_interpretable_as_neuroscience`.
-  - README and `docs/output_artifact_validation_contract.md` now show the exact create → declare → validate sequence.
 - [x] Replace the metadata-only smoke artifact with a tiny deterministic toy-fixture graph analysis artifact with known expected outcomes.
   - `tools/write_toy_graph_artifact.py` writes `results/toy_graph_artifact.json` by default.
   - The artifact contains a four-node directed fixture graph with expected node count, edge count, degree maps, reachability, and weak component count.

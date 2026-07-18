@@ -85,6 +85,25 @@ def input_manifest_count(input_manifest: dict | None) -> int | None:
     return count if isinstance(count, int) else None
 
 
+def load_run_config_snapshot(config_path: Path) -> dict:
+    """Return reproducibility metadata copied from a YAML run config."""
+    try:
+        import yaml
+    except ImportError:
+        return {}
+    loaded = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    if not isinstance(loaded, dict):
+        return {}
+    snapshot: dict = {}
+    if "random_seed" in loaded:
+        snapshot["random_seed"] = loaded["random_seed"]
+    if "selected_materialization" in loaded:
+        snapshot["selected_materialization"] = loaded["selected_materialization"]
+    if isinstance(loaded.get("selected_inputs"), dict):
+        snapshot["selected_inputs"] = loaded["selected_inputs"]
+    return snapshot
+
+
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str | None:
     """Return a file checksum, or None when an optional metadata file is absent."""
     if not path.exists():
@@ -146,6 +165,7 @@ def main() -> int:
         return 1
 
     input_manifest = read_json(input_manifest_path)
+    run_config = load_run_config_snapshot(config_path)
 
     manifest = {
         "schema_version": "0.1",
@@ -159,6 +179,7 @@ def main() -> int:
         "input_manifest_present": input_manifest is not None,
         "input_count": input_manifest_count(input_manifest),
         "input_checksums": input_manifest_checksums(input_manifest),
+        "run_config": run_config,
         "environment": {
             "python": sys.version,
             "platform": platform.platform(),
