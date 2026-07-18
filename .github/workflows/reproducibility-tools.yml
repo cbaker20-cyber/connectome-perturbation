@@ -35,6 +35,7 @@ jobs:
             tests/test_materialization_policy.py \
             tests/test_validate_smoke_config.py \
             tests/test_output_manifest_run_config.py \
+            tests/test_validate_research_docs.py \
             tests/test_input_manifest_record_validation.py \
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
@@ -52,6 +53,10 @@ jobs:
             --input-manifest data/input_manifest.json \
             --smoke-config configs/smoke_run.yaml \
             --skip-output-manifest
+
+      - name: Validate research documentation pack
+        run: |
+          python tools/validate_research_docs.py
 
       - name: Validate smoke output provenance end-to-end
         run: |
@@ -73,6 +78,7 @@ jobs:
             tools/path_resolver.py \
             tools/write_output_manifest.py \
             tools/validate_reproducibility.py \
+            tools/validate_research_docs.py \
             tools/validate_neuron_ids.py \
             tools/validate_atlas.py \
             tools/write_toy_graph_artifact.py \

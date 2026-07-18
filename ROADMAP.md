@@ -12,12 +12,14 @@ Last updated: 2026-07-18
 | P0 | Route perturbation scripts through `tools/path_resolver.py` | done (#47) |
 | P0 | Document materialization 630 vs 783; canonical smoke target | done (#48) |
 | P0 | Validate `configs/smoke_run.yaml` in CI | done (#49) |
-| P0 | Bind output manifests to run config, environment, commit when outputs declared | done (this branch) |
+| P0 | Bind output manifests to run config, environment, commit when outputs declared | done (#50) |
+| P0 | Validate research documentation pack in CI | done (this branch) |
 
 ## P0 — Next reproducibility spine
 
 1. **Authoritative input provenance** — Fill dataset name, release, URL/DOI, citation, license, access date, and schema notes in `data/input_manifest.json`; enable `--require-provenance` in CI.
-2. **Notebook path migration** — Route `example.ipynb` and `figures.ipynb` through the resolver or document per-cell materialization.
+2. **Experiment registry binding** — Connect `03_EXPERIMENT_REGISTRY.csv` entries to `output_manifest.json` and commit hash.
+3. **Notebook path migration** — Route `example.ipynb` and `figures.ipynb` through the resolver or document per-cell materialization.
 3. **Results output resolver** — Replace hard-coded `results/` paths in statistics/motor/visualize scripts with a configurable output root.
 4. **Toy graph CI sequence** — Add the toy graph artifact → output manifest → validate path to CI alongside the metadata smoke path.
 

@@ -17,6 +17,10 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_output_manifest.py` copies `run_config` (seed, materialization, selected inputs) from the referenced YAML config.
   - `tools/validate_reproducibility.py` rejects stale `run_config` values and missing `environment`/`repo_commit` when `outputs` is non-empty.
   - `tests/test_output_manifest_run_config.py` covers snapshot loading, end-to-end validation, and stale seed rejection.
+- [x] Validate the canonical research documentation pack in CI.
+  - `tools/validate_research_docs.py` checks required files, experiment ↔ claim ↔ result cross-references, duplicate IDs, and resolvable evidence paths.
+  - `docs/research_document_mapping.md` maps each research document to repository enforcement.
+  - `tests/test_validate_research_docs.py` covers valid metadata, missing references, malformed evidence, duplicates, and wildcard skips.
 - [ ] Run the toy graph artifact sequence locally and commit a validated output manifest when appropriate.
 - [x] Validate declared output artifact metadata shape before treating output manifests as reproducible evidence.
   - Optional declared output `sha256` values must be canonical lowercase 64-character SHA-256 digests.

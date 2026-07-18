@@ -32,6 +32,14 @@ When an output manifest declares produced artifacts (`outputs` non-empty):
 - `tools/validate_reproducibility.py` enforces run-config binding when outputs exist; CI runs the full smoke artifact → manifest → validate sequence.
 - Metadata-only manifests with empty `outputs` may skip strict run-config binding.
 
+## Research documentation pack
+
+The canonical research specification lives at the **repository root** (`03_EXPERIMENT_REGISTRY.csv`, `11_CLAIMS_REGISTER.csv`, `09_REPRODUCIBILITY_CHECKLIST.md`, etc.). See `docs/research_document_mapping.md` for the full mapping.
+
+- Run `python tools/validate_research_docs.py` before claiming registry/ledger/claims consistency.
+- CI validates the research documentation pack on every pull request.
+- Prefer editing root-level research files; `connectome_research_docs/` is a legacy mirror.
+
 ## Scientific standards
 
 Every interpretable run should eventually include:
