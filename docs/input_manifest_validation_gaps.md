@@ -1,39 +1,37 @@
 # Input manifest validation gaps
 
-This note records validation rules that are required before the input manifest can be treated as a reliable identity boundary. It does not assert that current datasets satisfy them.
+This note records validation rules for the input manifest identity contract. Rules marked **implemented** are enforced by `tools/validate_reproducibility.py` and covered by focused tests in CI.
 
-## Current guarantees
+## Implemented guarantees
 
-`tools/validate_reproducibility.py` currently checks that each input path is repo-relative, remains inside the repository after resolution, exists, and matches the recorded byte size and SHA-256 digest. It also checks manifest counts and the presence of provenance fields.
+`tools/validate_reproducibility.py` currently checks that each input path is repo-relative, remains inside the repository after resolution, exists, and matches the recorded byte size and SHA-256 digest. It also checks manifest counts, the presence of provenance fields, basename/extension alignment, canonical lowercase SHA-256 digests, non-negative integer sizes, duplicate literal paths, and duplicate resolved paths (including `.` / `..` normalization).
 
-## Remaining high-priority rules
+Focused regression tests live in:
 
-The validator should reject a record when any of the following is true:
+- `tests/test_input_manifest_record_validation.py`
+- `tests/test_build_input_manifest.py`
+- `tests/test_manifest_path_boundaries.py`
 
-1. `filename` is not exactly `Path(path).name`.
-2. `extension` is not exactly `Path(path).suffix`.
-3. `sha256` is not a canonical 64-character lowercase hexadecimal digest, even when the file is missing or inaccessible.
-4. `size_bytes` is not a non-negative integer.
-5. Two records resolve to the same canonical file, including through `.` / `..` normalization or symlink aliases.
-6. Two records reuse the same manifest path with conflicting checksum, size, role, materialization, or provenance facts.
+## Remaining follow-ups
 
-These checks prevent misleading manifests in which checksum facts are attached to the wrong filename, duplicate aliases inflate `input_count`, or malformed metadata survives until a later run.
+1. **Symlink alias detection (platform-dependent):** reject two manifest rows that resolve to the same file through symlinks. Add tests only where the CI platform supports symlink creation.
+2. **Conflicting facts on duplicate paths:** if the same manifest path appears twice with mismatched checksum, size, role, materialization, or provenance, reject before merge. Today duplicate paths are rejected outright; a merge-time overlay tool may need stricter conflict reporting.
+3. **Claim-ready provenance:** `python tools/validate_reproducibility.py --require-provenance` should gate biological interpretation once source-backed fields are filled in `data/input_manifest.json`.
 
-## Minimal regression matrix
+## Regression matrix (implemented)
 
-Add focused tests that prove rejection of:
+The following rejection cases are covered:
 
 - a valid file recorded with a different `filename`;
 - `.csv` content recorded with a mismatched `extension` field;
 - uppercase, short, or non-hex SHA-256 strings;
 - negative, floating-point, boolean, or string `size_bytes` values;
 - duplicate literal paths;
-- distinct relative paths that resolve to the same canonical file.
-
-Also retain one acceptance test with two distinct, valid repo-relative files so duplicate detection cannot accidentally reject normal multi-input manifests.
+- distinct relative paths that resolve to the same canonical file;
+- acceptance with two distinct, valid repo-relative files.
 
 ## Implementation constraint
 
-Canonical-path duplicate detection must occur after repository-boundary resolution and before checksum comparison. Error messages should identify both record indexes and the original manifest paths. Symlink behavior should be tested only where the test platform supports symlink creation; literal and normalized duplicate-path tests must remain platform-independent.
+Canonical-path duplicate detection occurs after repository-boundary resolution and before checksum comparison. Error messages identify both record indexes and the original manifest paths.
 
-Until these rules are implemented and pass GitHub Actions, the manifest should be described as checksum-bearing metadata, not as a complete dataset identity contract.
+The committed `data/input_manifest.json` is validated in CI with `python tools/validate_reproducibility.py --skip-output-manifest`. Until authoritative provenance is filled, the manifest should be described as checksum-bearing metadata, not as a complete dataset identity contract for biological claims.
