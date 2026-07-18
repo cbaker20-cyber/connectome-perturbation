@@ -376,6 +376,11 @@ def main() -> int:
         action="store_true",
         help="Fail unless every input has non-empty source, release, citation, license/terms, schema, row-count, and preprocessing provenance.",
     )
+    parser.add_argument(
+        "--skip-output-manifest",
+        action="store_true",
+        help="Validate only the input manifest; do not require an output manifest.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -386,7 +391,7 @@ def main() -> int:
     input_manifest = None
     if input_manifest_path is not None:
         input_manifest = validate_input_manifest(repo_root, input_manifest_path, errors, require_provenance=args.require_provenance)
-    if output_manifest_path is not None:
+    if output_manifest_path is not None and not args.skip_output_manifest:
         validate_output_manifest(
             repo_root,
             output_manifest_path,

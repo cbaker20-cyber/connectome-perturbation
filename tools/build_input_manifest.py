@@ -31,6 +31,15 @@ EXCLUDED_PARTS = {
     "results",
 }
 
+# Project-maintained ledgers/registries are not connectome inputs.
+EXCLUDED_FILENAMES = frozenset(
+    {
+        "03_EXPERIMENT_REGISTRY.csv",
+        "04_RESULTS_LEDGER.csv",
+        "11_CLAIMS_REGISTER.csv",
+    }
+)
+
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
     digest = hashlib.sha256()
@@ -63,6 +72,8 @@ def guess_role(path: Path) -> str:
 
 
 def should_include(path: Path) -> bool:
+    if path.name in EXCLUDED_FILENAMES:
+        return False
     if any(part in EXCLUDED_PARTS for part in path.parts):
         return False
     if not path.is_file():
@@ -122,7 +133,7 @@ def main() -> int:
     manifest = {
         "schema_version": "0.1",
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "repo_root": str(repo_root),
+        "repo_root": ".",
         "purpose": "Record local input-like file facts; provenance fields require source-backed completion.",
         "input_count": len(records),
         "inputs": records,

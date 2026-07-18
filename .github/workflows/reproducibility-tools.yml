@@ -28,6 +28,7 @@ jobs:
         run: |
           python -m pytest \
             tests/test_reproducibility_tools.py \
+            tests/test_build_input_manifest.py \
             tests/test_manifest_counts.py \
             tests/test_path_resolver_boundaries.py \
             tests/test_input_manifest_record_validation.py \
@@ -40,6 +41,12 @@ jobs:
             tests/test_connection_lesion.py \
             tests/test_validate_atlas.py \
             -q
+
+      - name: Validate committed input manifest
+        run: |
+          python tools/validate_reproducibility.py \
+            --input-manifest data/input_manifest.json \
+            --skip-output-manifest
 
       - name: Compile metadata tooling
         run: |

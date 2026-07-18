@@ -1,6 +1,6 @@
 # 00 Project State
 
-Last updated: 2026-06-10
+Last updated: 2026-07-18
 
 ## One-sentence project summary
 
@@ -34,7 +34,9 @@ The strongest validated direction is not “visual lobula disinhibition is the h
 
 ## Immediate next updates to make in the repo
 
-- Add this `docs/` folder to the GitHub repo.
+- ~~Add this `docs/` folder to the GitHub repo.~~ (done)
+- Commit `data/input_manifest.json` with SHA-256 checksums for tracked connectome inputs. (done; authoritative provenance fields still missing)
 - Save exact `results/statistics.csv`, `results/motor_impact.csv`, and any graph null outputs into a versioned `results_manifest.csv`.
 - Add commit hashes to experiment registry entries after each code run.
 - Create a `config/experiment_configs/` folder so every run has a frozen YAML config.
+- Fill source-backed provenance fields in `data/input_manifest.json` before any biological claim.
