@@ -111,6 +111,17 @@ python tools/validate_reproducibility.py \
 
 Claim-ready runs additionally require non-empty provenance via `--require-provenance`. Checksums alone do not establish source authority.
 
+Validate smoke config alignment with:
+
+```bash
+python tools/validate_reproducibility.py \
+  --input-manifest data/input_manifest.json \
+  --smoke-config configs/smoke_run.yaml \
+  --skip-output-manifest
+```
+
+Remaining audit notes live in `docs/reproducibility-audit.md`.
+
 ## Switching to materialization 783
 
 To run against 783 without changing resolver code:

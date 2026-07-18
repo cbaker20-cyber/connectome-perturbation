@@ -366,6 +366,89 @@ def validate_output_manifest(
         )
 
 
+def load_smoke_config(path: Path) -> dict[str, Any] | None:
+    try:
+        import yaml
+    except ImportError:
+        return None
+    loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    return loaded if isinstance(loaded, dict) else None
+
+
+def validate_smoke_config(
+    repo_root: Path,
+    config_path: Path,
+    errors: list[str],
+    input_manifest: dict[str, Any] | None = None,
+) -> None:
+    """Validate smoke config materialization and selected input filenames.
+
+    Ensures ``configs/smoke_run.yaml`` stays aligned with
+    ``tools/path_resolver.MATERIALIZATION_FILENAMES`` and the committed input
+    manifest. This is metadata plumbing only; it does not validate biology.
+    """
+    require(config_path.exists(), f"missing smoke config: {config_path}", errors)
+    if not config_path.exists():
+        return
+
+    config = load_smoke_config(config_path)
+    if config is None:
+        require(False, "smoke config must be a YAML mapping; install PyYAML to validate", errors)
+        return
+
+    materialization = config.get("selected_materialization")
+    selected_inputs = config.get("selected_inputs")
+    require(
+        isinstance(materialization, str) and materialization.strip(),
+        "smoke config selected_materialization must be a non-empty string",
+        errors,
+    )
+    require(isinstance(selected_inputs, dict), "smoke config selected_inputs must be a mapping", errors)
+    if not isinstance(selected_inputs, dict):
+        return
+
+    from importlib.util import module_from_spec, spec_from_file_location
+
+    resolver_path = Path(__file__).resolve().parent / "path_resolver.py"
+    spec = spec_from_file_location("path_resolver", resolver_path)
+    if spec is None or spec.loader is None:
+        errors.append("could not load path_resolver for smoke config validation")
+        return
+    path_resolver = module_from_spec(spec)
+    spec.loader.exec_module(path_resolver)
+    ANNOTATIONS_INPUT = path_resolver.ANNOTATIONS_INPUT
+    materialization_filenames = path_resolver.materialization_filenames
+
+    try:
+        expected_tables = materialization_filenames(materialization)
+    except ValueError as exc:
+        errors.append(str(exc))
+        return
+
+    expected_inputs = {
+        "completeness": expected_tables["completeness"],
+        "connectivity": expected_tables["connectivity"],
+        "annotations": ANNOTATIONS_INPUT,
+    }
+    for key, expected_path in expected_inputs.items():
+        actual = selected_inputs.get(key)
+        require(
+            actual == expected_path,
+            f"smoke config selected_inputs[{key!r}] must be {expected_path!r}, got {actual!r}",
+            errors,
+        )
+
+    if input_manifest is None:
+        return
+    manifest_paths = {
+        record.get("path")
+        for record in input_manifest.get("inputs", [])
+        if isinstance(record, dict)
+    }
+    for path in expected_inputs.values():
+        require(path in manifest_paths, f"smoke config input missing from input manifest: {path}", errors)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", default=".")
@@ -381,16 +464,24 @@ def main() -> int:
         action="store_true",
         help="Validate only the input manifest; do not require an output manifest.",
     )
+    parser.add_argument(
+        "--smoke-config",
+        default="configs/smoke_run.yaml",
+        help="Validate smoke config materialization and selected_inputs against the resolver and input manifest.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
     errors: list[str] = []
     input_manifest_path = repo_relative_path(repo_root, args.input_manifest, "--input-manifest", errors)
     output_manifest_path = repo_relative_path(repo_root, args.output_manifest, "--output-manifest", errors)
+    smoke_config_path = repo_relative_path(repo_root, args.smoke_config, "--smoke-config", errors)
 
     input_manifest = None
     if input_manifest_path is not None:
         input_manifest = validate_input_manifest(repo_root, input_manifest_path, errors, require_provenance=args.require_provenance)
+    if smoke_config_path is not None:
+        validate_smoke_config(repo_root, smoke_config_path, errors, input_manifest=input_manifest)
     if output_manifest_path is not None and not args.skip_output_manifest:
         validate_output_manifest(
             repo_root,

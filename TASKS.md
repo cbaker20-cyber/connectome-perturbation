@@ -12,7 +12,7 @@ Prioritized backlog for the connectome perturbation project.
   - `python tools/build_input_manifest.py`
   - `python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json`
   - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/reproducibility_smoke_artifact.json`
-  - `python tools/validate_reproducibility.py`
+  - `python tools/validate_reproducibility.py --smoke-config configs/smoke_run.yaml`
 - [ ] Run the toy graph artifact sequence:
   - `python tools/write_toy_graph_artifact.py --output results/toy_graph_artifact.json`
   - `python tools/write_output_manifest.py --config configs/smoke_run.yaml --input-manifest data/input_manifest.json --output output_manifest.json --artifact results/toy_graph_artifact.json`
