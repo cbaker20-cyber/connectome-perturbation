@@ -7,7 +7,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-sys.path.insert(0, "Drosophila_brain_model")
+from tools.path_resolver import ensure_repo_on_path
+
+ensure_repo_on_path(Path(__file__))
 sys.path.insert(0, "perturbation")
 
 from model import run_exp  # type: ignore  # noqa: E402

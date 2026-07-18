@@ -1,11 +1,15 @@
 import sys
-sys.path.insert(0, "Drosophila_brain_model")
+from pathlib import Path
+
+from tools.path_resolver import ensure_repo_on_path
+
+ensure_repo_on_path(Path(__file__))
 sys.path.insert(0, "perturbation")
+
 import pandas as pd
 import numpy as np
 from analyze import compare_to_baseline
 from cell_groups import get_group
-from pathlib import Path
 
 def motor_impact(exp_name, motor_ids):
     result = compare_to_baseline(exp_name)

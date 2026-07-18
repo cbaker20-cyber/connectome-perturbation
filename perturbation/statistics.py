@@ -6,7 +6,9 @@ import pandas as pd
 from scipy import stats
 from statsmodels.stats.multitest import multipletests
 
-sys.path.insert(0, "Drosophila_brain_model")
+from tools.path_resolver import ensure_repo_on_path
+
+ensure_repo_on_path(Path(__file__))
 sys.path.insert(0, "perturbation")
 
 from cell_groups import get_group

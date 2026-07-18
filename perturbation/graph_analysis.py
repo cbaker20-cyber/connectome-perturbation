@@ -13,14 +13,14 @@ Purpose
 
 Default expected files
 ----------------------
-Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet
+2023_03_23_connectivity_630_final.parquet
 flywire_annotations.tsv
 
 Example usage
 -------------
 # Real data, AN class, central-neuron degree-matched null:
 python perturbation/graph_analysis.py \
-    --connectivity Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet \
+    --connectivity 2023_03_23_connectivity_630_final.parquet \
     --annotations flywire_annotations.tsv \
     --target-col cell_class \
     --target-value AN \
@@ -45,11 +45,11 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 
+from tools.path_resolver import DEFAULT_MANIFEST_PATH, resolve_input
 
-CONNECTIVITY_DEFAULT = Path(
-    "Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet"
-)
-ANNOTATIONS_DEFAULT = Path("flywire_annotations.tsv")
+
+CONNECTIVITY_DEFAULT = "2023_03_23_connectivity_630_final.parquet"
+ANNOTATIONS_DEFAULT = "flywire_annotations.tsv"
 RESULTS_DEFAULT = Path("results/graph_analysis")
 
 
@@ -706,15 +706,23 @@ def run_graph_analysis(args: argparse.Namespace) -> None:
             seed=args.seed,
         )
     else:
-        print(f"Loading connectivity from {args.connectivity}")
+        connectivity_path = resolve_input(
+            args.connectivity,
+            manifest_path=args.manifest,
+        )
+        annotations_path = resolve_input(
+            args.annotations,
+            manifest_path=args.manifest,
+        )
+        print(f"Loading connectivity from {connectivity_path}")
         edges, schema = load_connectivity(
-            path=Path(args.connectivity),
+            path=connectivity_path,
             pre_col=args.pre_col,
             post_col=args.post_col,
             weight_col=args.weight_col,
         )
-        print(f"Loading annotations from {args.annotations}")
-        annotations = load_annotations(Path(args.annotations))
+        print(f"Loading annotations from {annotations_path}")
+        annotations = load_annotations(annotations_path)
 
     print(
         f"Connectivity schema: pre={schema.pre_col!r}, "
@@ -830,8 +838,9 @@ def parse_args() -> argparse.Namespace:
         description="Graph-theory analysis for Drosophila connectome perturbations."
     )
 
-    parser.add_argument("--connectivity", default=str(CONNECTIVITY_DEFAULT))
-    parser.add_argument("--annotations", default=str(ANNOTATIONS_DEFAULT))
+    parser.add_argument("--connectivity", default=CONNECTIVITY_DEFAULT)
+    parser.add_argument("--annotations", default=ANNOTATIONS_DEFAULT)
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST_PATH)
     parser.add_argument("--output-dir", default=str(RESULTS_DEFAULT))
 
     parser.add_argument("--pre-col", default=None)

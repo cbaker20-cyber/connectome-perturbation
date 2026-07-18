@@ -42,11 +42,12 @@ Prioritized backlog for the connectome perturbation project.
   - PR #23 adds strict decimal-string validation, deterministic aggregate reports, repository-boundary/source-overwrite protection, and explicit original-text provenance states.
   - GitHub Actions run `29199342883` passed on exact implementation head `b9091a0910c7cdfea8bbebc8c49a0135b9cea536`; PR review and merge remain outstanding.
   - Real tracked inputs have not been validated, and passing format checks would not establish dataset provenance or biological identity.
-- [~] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
-  - `perturbation/baseline.py` resolves the 630 completeness/connectivity files through `data/input_manifest.json` by exact filename.
-  - `perturbation/perturb.py` now resolves the same inputs through the manifest and no longer imports removed baseline path constants.
-  - `perturbation/analyze.py` now accepts a custom results directory so smoke runs are not silently compared against `results/`.
-  - Remaining older tools/scripts still need audit before production use.
+- [x] Route baseline and perturbation scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths.
+  - `perturbation/baseline.py`, `perturbation/perturb.py`, and `perturbation/analyze.py` resolve 630 completeness/connectivity through `data/input_manifest.json` by exact filename.
+  - `perturbation/cell_groups.py`, `perturbation/graph_analysis.py`, and `perturbation/path_analysis.py` now resolve annotations and connectome tables through the shared resolver.
+  - `perturbation/statistics.py`, `perturbation/motor_analysis.py`, `perturbation/sweep_cell_class.py`, and `test_run.py` no longer insert `Drosophila_brain_model` on `sys.path`.
+  - `tools/path_resolver.py` preserves backwards compatibility via legacy `Drosophila_brain_model/<basename>` fallback when a manifest entry is absent.
+  - `tests/test_perturbation_path_migration.py` covers resolver legacy fallback and each migrated script.
 - [ ] Decide whether materialization 630 or 783 is the canonical smoke target; document why.
 
 ## P1 — Scientific rigor

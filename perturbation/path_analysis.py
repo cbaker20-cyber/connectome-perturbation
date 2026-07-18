@@ -44,6 +44,8 @@ import numpy as np
 import pandas as pd
 from statsmodels.stats.multitest import multipletests
 
+from tools.path_resolver import DEFAULT_MANIFEST_PATH, resolve_existing_path, resolve_input
+
 
 # Sugar sensory neurons used by the original baseline sugar simulation.
 # These are preferred over an annotation string such as "Sugar_Sensory", which
@@ -158,37 +160,6 @@ def infer_edge_schema(
         )
 
     return EdgeSchema(pre_col=pre, post_col=post, weight_col=weight)
-
-
-def resolve_existing_path(path: str | Path, description: str = "file") -> Path:
-    """
-    Resolve paths without requiring a hard-coded Drosophila_brain_model prefix.
-    """
-    p = Path(path).expanduser()
-    if p.exists():
-        return p.resolve()
-
-    script_dir = Path(__file__).resolve().parent
-    project_root = script_dir.parent
-
-    candidates = [
-        Path.cwd() / p,
-        script_dir / p,
-        project_root / p,
-        project_root / "Drosophila_brain_model" / p.name,
-        project_root / "data" / p.name,
-        Path.cwd() / "Drosophila_brain_model" / p.name,
-        Path.cwd() / "data" / p.name,
-    ]
-
-    for candidate in candidates:
-        if candidate.exists():
-            return candidate.resolve()
-
-    raise FileNotFoundError(
-        f"Could not find {description}: {path}. Tried: "
-        + "; ".join(str(c) for c in candidates)
-    )
 
 
 def as_int_set(values: Iterable) -> set[int]:
@@ -608,6 +579,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Task-specific source-to-target pathway analysis.")
     parser.add_argument("--connectivity", default="2023_03_23_connectivity_630_final.parquet")
     parser.add_argument("--annotations", default="flywire_annotations.tsv")
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST_PATH)
     parser.add_argument("--output-dir", default="results/path_analysis")
 
     parser.add_argument("--pre-col", default=None)
@@ -657,8 +629,16 @@ def main() -> None:
         args.target_super_class = "motor"
         print(f"Running mock analysis with {con_path} and {ann_path}")
 
-    con_path = resolve_existing_path(args.connectivity, "connectivity file")
-    ann_path = resolve_existing_path(args.annotations, "annotations file")
+    con_path = resolve_existing_path(
+        args.connectivity,
+        "connectivity file",
+        manifest_path=args.manifest,
+    )
+    ann_path = resolve_existing_path(
+        args.annotations,
+        "annotations file",
+        manifest_path=args.manifest,
+    )
 
     print("Loading annotations...")
     annotations = load_annotations(ann_path)

@@ -26,12 +26,13 @@ These commands only establish an environment and validate documentation structur
 
 ## Blockers before a model run
 
-1. `perturbation/baseline.py`, `perturbation/perturb.py`, and other scripts refer to paths under `Drosophila_brain_model/`, while the corresponding filenames are at the repository root.
-2. The exact input version for each proposed run is not selected: materialization-style 630 and 783 files coexist.
-3. No authoritative source manifest, checksums, or schema validation is committed.
-4. No frozen run configuration ties parameters, random seeds, trial counts, neuron groups, and outputs together.
-5. The tracked `perturbation_summary.csv` has no attached command or execution log.
-6. Full simulations may be expensive; resource expectations and a tiny smoke configuration are not documented.
+1. Materialization-style 630 and 783 files coexist; the canonical smoke target is not yet documented.
+2. Authoritative source provenance (URL/DOI, citation, license, schema, row counts) is still missing from `data/input_manifest.json`.
+3. No frozen run configuration ties parameters, random seeds, trial counts, neuron groups, and outputs together.
+4. The tracked `perturbation_summary.csv` has no attached command or execution log.
+5. Full simulations may be expensive; resource expectations and a tiny smoke configuration are not documented.
+
+Perturbation scripts now resolve connectome inputs through `data/input_manifest.json` via `tools/path_resolver.py`, with a legacy `Drosophila_brain_model/<basename>` fallback for older checkouts.
 
 Do not fix these blockers by guessing which dataset or path is canonical.
 

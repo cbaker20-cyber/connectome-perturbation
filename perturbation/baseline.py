@@ -15,7 +15,9 @@ from pathlib import Path
 from brian2 import ms
 
 from model import default_params, run_exp
-from tools.path_resolver import resolve_input
+from tools.path_resolver import ensure_repo_on_path, resolve_input
+
+ensure_repo_on_path(Path(__file__))
 
 PARAMS = default_params.copy()
 PARAMS["n_run"] = 5
@@ -54,6 +56,7 @@ def resolve_baseline_inputs(
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     manifest_path: str = "data/input_manifest.json",
+    repo_root: Path | None = None,
 ) -> tuple[Path, Path]:
     """Resolve baseline input files from the manifest.
 
@@ -62,8 +65,8 @@ def resolve_baseline_inputs(
     and the resolver refuses ambiguous identifiers.
     """
 
-    path_comp = resolve_input(completeness_id, manifest_path=manifest_path)
-    path_con = resolve_input(connectivity_id, manifest_path=manifest_path)
+    path_comp = resolve_input(completeness_id, manifest_path=manifest_path, repo_root=repo_root)
+    path_con = resolve_input(connectivity_id, manifest_path=manifest_path, repo_root=repo_root)
     return path_comp, path_con
 
 

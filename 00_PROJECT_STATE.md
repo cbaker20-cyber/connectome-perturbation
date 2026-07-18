@@ -36,6 +36,7 @@ The strongest validated direction is not “visual lobula disinhibition is the h
 
 - ~~Add this `docs/` folder to the GitHub repo.~~ (done)
 - Commit `data/input_manifest.json` with SHA-256 checksums for tracked connectome inputs. (done; authoritative provenance fields still missing)
+- Route all perturbation analysis scripts through `tools/path_resolver.py` instead of hard-coded `Drosophila_brain_model/` paths. (done; legacy subdirectory fallback retained)
 - Save exact `results/statistics.csv`, `results/motor_impact.csv`, and any graph null outputs into a versioned `results_manifest.csv`.
 - Add commit hashes to experiment registry entries after each code run.
 - Create a `config/experiment_configs/` folder so every run has a frozen YAML config.

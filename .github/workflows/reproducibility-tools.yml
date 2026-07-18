@@ -31,6 +31,7 @@ jobs:
             tests/test_build_input_manifest.py \
             tests/test_manifest_counts.py \
             tests/test_path_resolver_boundaries.py \
+            tests/test_perturbation_path_migration.py \
             tests/test_input_manifest_record_validation.py \
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
@@ -64,4 +65,10 @@ jobs:
             connectome_analysis/connection_lesion.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
-            perturbation/perturb.py
+            perturbation/cell_groups.py \
+            perturbation/graph_analysis.py \
+            perturbation/motor_analysis.py \
+            perturbation/path_analysis.py \
+            perturbation/perturb.py \
+            perturbation/statistics.py \
+            perturbation/sweep_cell_class.py

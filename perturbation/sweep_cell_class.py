@@ -1,11 +1,16 @@
 import sys
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
-import warnings
-warnings.filterwarnings("ignore")
-import pandas as pd
-import numpy as np
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import warnings
+
+from tools.path_resolver import ensure_repo_on_path
+
+ensure_repo_on_path(Path(__file__))
+sys.path.insert(0, "perturbation")
+
+warnings.filterwarnings("ignore")
 from cell_groups import get_group, load_annotated_sim_neurons
 from perturb import run_single_perturbation
 from analyze import compare_to_baseline
