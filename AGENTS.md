@@ -42,3 +42,21 @@ Separate verified facts, assumptions, hypotheses, and future ideas.
 ## Safe automation behavior
 
 When blocked, document the blocker and pivot to another reproducibility or documentation task. Do not fabricate missing provenance.
+
+## Cursor Cloud specific instructions
+
+The Python dependency environment is provisioned by the startup update script; do not reinstall it.
+
+### Environments and how to run things
+
+- Python dependencies live in a Conda env named `brian2` (Python 3.10) under `~/miniconda3`. Activate it with `source ~/miniconda3/etc/profile.d/conda.sh && conda activate brian2` before running anything.
+- Two tiers coexist (see `README.md`): the lightweight reproducibility tooling and tests (`tools/`, `tests/`, `connectome_analysis/`; stdlib + `pytest`), and the heavier Brian2 simulation (`model.py`, `perturbation/`).
+- Run tests with `python -m pytest tests/ -q`. The authoritative green subset is listed in `.github/workflows/reproducibility-tools.yml`.
+- The metadata-first smoke sequence and the doc validator (`tools/validate_research_docs.py`) commands are documented in `README.md`.
+
+### Non-obvious caveats
+
+- Brian2 2.5.1 imports `pkg_resources`, so `setuptools<81` must be installed (the update script does this); setuptools >= 81 removes `pkg_resources` and breaks the import. `pytest` is also pip-installed because neither it nor `setuptools` are pinned in `environment.yml`.
+- There is no C compiler/Cython in the env, so Brian2 prints a warning and falls back to the slower numpy code-generation target. Simulations still run correctly, just slower.
+- `test_run.py` and several `perturbation/` scripts reference a `Drosophila_brain_model/` directory that does not exist; the actual connectome inputs are at the repo root (e.g. `2023_03_23_completeness_630_final.csv`, `2023_03_23_connectivity_630_final.parquet`). Point `path_comp`/`path_con` at the repo-root files to run a simulation. A single 200 ms, 1-trial sugar run over the 630 materialization (127,400 neurons, ~14.7M synapses) finishes in a few seconds and writes a spike-table parquet.
+- `tests/test_targeted_validation_receipt.py::test_rejects_summary_path_not_declared_as_the_parsed_artifact` currently fails on `main` (an assertion/message mismatch unrelated to the environment); the CI subset itself is green.
