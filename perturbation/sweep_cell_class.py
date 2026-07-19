@@ -27,7 +27,8 @@ def run_cell_class_sweep(min_neurons=20, force=False):
 
     results = []
     for i, cc in enumerate(classes):
-        exp_name = f"cc_{cc.replace("/", ".").replace(" ", "_")}"
+        safe_cc = cc.replace("/", ".").replace(" ", "_")
+        exp_name = f"cc_{safe_cc}"
         print(f"[{i+1}/{len(classes)}] {cc} ({counts[cc]} neurons)")
 
         ids = ann[ann["cell_class"] == cc]["root_id"].tolist()
