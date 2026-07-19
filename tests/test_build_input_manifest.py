@@ -89,5 +89,5 @@ def test_committed_input_manifest_passes_metadata_validation():
         "flywire_annotations.tsv",
     }
     for record in manifest["inputs"]:
-        assert record["validation_status"] == "checksum_recorded_provenance_missing"
-        assert record["provenance"]["redistribution_status"] == "unknown"
+        assert record["validation_status"] == "provenance_complete"
+        assert record["provenance"]["redistribution_status"] == "repository_tracked_under_upstream_license"

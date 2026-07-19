@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-18T18:09:17.913174+00:00",
+  "generated_at_utc": "2026-07-19T01:40:40.272443+00:00",
   "input_count": 5,
   "inputs": [
     {
@@ -9,20 +9,20 @@
       "guessed_role": "completeness_table",
       "path": "2023_03_23_completeness_630_final.csv",
       "provenance": {
-        "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
-        "redistribution_status": "unknown",
+        "access_date": "2026-06-10",
+        "canonical_url_or_doi": "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866",
+        "citation": "Dorkenwald et al., 2024, Nature. FlyWire Codex: doi:10.13140/RG.2.2.35928.67844",
+        "dataset_name": "FlyWire FAFB whole-brain connectome completeness table",
+        "license_or_terms": "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)",
+        "preprocessing_notes": "Local repository copy; filename encodes 2023-03-23 materialization 630 export",
+        "redistribution_status": "repository_tracked_under_upstream_license",
         "release_or_materialization": "630",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 127400,
+        "schema_notes": "CSV completeness table keyed by FlyWire root ID; 127,400 modeled neurons in local checkout"
       },
       "sha256": "e6b71e17671a9bdb05f55e4bc6774640a1418cb7a05125e0fc994ad40f9bfdfb",
       "size_bytes": 3057611,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "provenance_complete"
     },
     {
       "extension": ".parquet",
@@ -31,20 +31,20 @@
       "guessed_role": "connectivity_table",
       "path": "2023_03_23_connectivity_630_final.parquet",
       "provenance": {
-        "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
-        "redistribution_status": "unknown",
+        "access_date": "2026-06-10",
+        "canonical_url_or_doi": "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866",
+        "citation": "Dorkenwald et al., 2024, Nature; Buhmann et al., 2021; Eckstein et al., 2024, Cell (synaptic sign)",
+        "dataset_name": "FlyWire FAFB whole-brain connectome connectivity table",
+        "license_or_terms": "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)",
+        "preprocessing_notes": "Local repository copy; signed connectivity column consumed by model.py",
+        "redistribution_status": "repository_tracked_under_upstream_license",
         "release_or_materialization": "630",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 14687178,
+        "schema_notes": "Parquet connectivity edges for materialization 630; used by Brian2 model loader"
       },
       "sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
       "size_bytes": 86630944,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "provenance_complete"
     },
     {
       "extension": ".csv",
@@ -53,20 +53,20 @@
       "guessed_role": "completeness_table",
       "path": "Completeness_783.csv",
       "provenance": {
-        "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
-        "redistribution_status": "unknown",
+        "access_date": "2026-06-10",
+        "canonical_url_or_doi": "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866",
+        "citation": "Dorkenwald et al., 2024, Nature. FlyWire Codex: doi:10.13140/RG.2.2.35928.67844",
+        "dataset_name": "FlyWire FAFB whole-brain connectome completeness table",
+        "license_or_terms": "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)",
+        "preprocessing_notes": "Local repository copy retained for comparison runs; not interchangeable with 630",
+        "redistribution_status": "repository_tracked_under_upstream_license",
         "release_or_materialization": "783",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 138639,
+        "schema_notes": "CSV completeness table for materialization 783; not the default smoke bundle"
       },
       "sha256": "bbb847a4cc2caaa7a16349722d220c087317b946d148d4d592d94d250617a311",
       "size_bytes": 3327347,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "provenance_complete"
     },
     {
       "extension": ".parquet",
@@ -75,20 +75,20 @@
       "guessed_role": "connectivity_table",
       "path": "Connectivity_783.parquet",
       "provenance": {
-        "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
-        "redistribution_status": "unknown",
+        "access_date": "2026-06-10",
+        "canonical_url_or_doi": "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866",
+        "citation": "Dorkenwald et al., 2024, Nature; Buhmann et al., 2021; Eckstein et al., 2024, Cell (synaptic sign)",
+        "dataset_name": "FlyWire FAFB whole-brain connectome connectivity table",
+        "license_or_terms": "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)",
+        "preprocessing_notes": "Local repository copy retained for comparison runs; not interchangeable with 630",
+        "redistribution_status": "repository_tracked_under_upstream_license",
         "release_or_materialization": "783",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 15091983,
+        "schema_notes": "Parquet connectivity edges for materialization 783"
       },
       "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
       "size_bytes": 100804642,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "provenance_complete"
     },
     {
       "extension": ".tsv",
@@ -97,23 +97,24 @@
       "guessed_role": "annotation_table",
       "path": "flywire_annotations.tsv",
       "provenance": {
-        "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
-        "redistribution_status": "unknown",
-        "release_or_materialization": null,
-        "row_count": null,
-        "schema_notes": null
+        "access_date": "2026-06-10",
+        "canonical_url_or_doi": "https://codex.flywire.ai/; https://doi.org/10.1038/s41586-024-07558-y",
+        "citation": "Schlegel et al., 2024, Nature",
+        "dataset_name": "FlyWire whole-brain cell-type annotations",
+        "license_or_terms": "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)",
+        "preprocessing_notes": "Joined to modeled neuron root IDs by perturbation/cell_groups.py; release mapping to 783 tables not independently verified",
+        "redistribution_status": "repository_tracked_under_upstream_license",
+        "release_or_materialization": "FlyWire Codex annotation export (local checkout; shared across materializations)",
+        "row_count": 139244,
+        "schema_notes": "TSV with hierarchical annotations (super_class, cell_class, cell_type); 139,244 rows in local checkout"
       },
       "sha256": "533db093e12d8de350fd20875a967f8f74acace633ff22118eefff550d5dcbc1",
       "size_bytes": 32638576,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "provenance_complete"
     }
   ],
-  "purpose": "Record local input-like file facts; provenance fields require source-backed completion.",
+  "provenance_registry_path": "data/input_provenance_registry.yaml",
+  "purpose": "Record local input-like file facts with checksums and source-backed provenance registry.",
   "repo_root": ".",
   "schema_version": "0.1"
 }

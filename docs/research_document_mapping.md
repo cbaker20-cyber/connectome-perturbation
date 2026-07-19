@@ -16,7 +16,7 @@ This document maps the **Research Documentation Pack** (canonical specification)
 | `05_CODE_CHANGELOG.md` | Code/method changes | Root markdown | Human review |
 | `06_DECISION_LOG.md` | Why major choices were made | Root markdown | Required-file check |
 | `07_ISSUES_AND_CAVEATS.md` | Reviewer-proof guardrails | Root markdown | Required-file check |
-| `08_DATA_PROVENANCE.md` | Dataset versioning requirements | Root markdown + `data/input_manifest.json` | `tools/validate_reproducibility.py` (checksums); provenance fields still manual |
+| `08_DATA_PROVENANCE.md` | Dataset versioning requirements | Root markdown + `data/input_manifest.json` + `data/input_provenance_registry.yaml` | `tools/validate_reproducibility.py` (`--require-provenance` in CI) |
 | `09_REPRODUCIBILITY_CHECKLIST.md` | Pre-submission rerun checklist | Root markdown | Partially automated via CI smoke path; full checklist still manual |
 | `10_PUBLICATION_NARRATIVE_TRACKER.md` | Paper/competition framing | Root markdown | Human review |
 | `11_CLAIMS_REGISTER.csv` | Claims ↔ evidence ↔ status | Root CSV | `tools/validate_research_docs.py` |
@@ -84,15 +84,15 @@ This document maps the **Research Documentation Pack** (canonical specification)
 **Implemented:**
 
 - `data/input_manifest.json` with SHA-256 checksums for five connectome inputs.
+- `data/input_provenance_registry.yaml` with source-backed DOI/URL, license, access date, row counts, and materialization IDs.
 - `docs/materialization-policy.md` for materialization 630 vs 783.
-- `tools/validate_reproducibility.py` validates checksums and smoke config alignment.
+- `tools/validate_reproducibility.py` validates checksums, smoke config alignment, and claim-ready provenance via `--require-provenance` (enabled in CI).
 
 **Not yet implemented:**
 
-- Authoritative dataset name, DOI, license, and access date in manifest provenance fields.
-- `--require-provenance` in CI.
+- Binding experiment registry entries to output manifests.
 
-**Enforced by:** `tools/validate_reproducibility.py`, `tools/build_input_manifest.py`.
+**Enforced by:** `tools/validate_reproducibility.py`, `tools/build_input_manifest.py`, `data/input_provenance_registry.yaml`.
 
 ### `09_REPRODUCIBILITY_CHECKLIST.md`
 

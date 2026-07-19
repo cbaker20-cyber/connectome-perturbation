@@ -16,7 +16,7 @@ Focused regression tests live in:
 
 1. **Symlink alias detection (platform-dependent):** reject two manifest rows that resolve to the same file through symlinks. Add tests only where the CI platform supports symlink creation.
 2. **Conflicting facts on duplicate paths:** if the same manifest path appears twice with mismatched checksum, size, role, materialization, or provenance, reject before merge. Today duplicate paths are rejected outright; a merge-time overlay tool may need stricter conflict reporting.
-3. **Claim-ready provenance:** `python tools/validate_reproducibility.py --require-provenance` should gate biological interpretation once source-backed fields are filled in `data/input_manifest.json`.
+3. **Claim-ready provenance:** `python tools/validate_reproducibility.py --require-provenance` gates biological interpretation. CI enables this flag for the committed `data/input_manifest.json`. Authoritative values live in `data/input_provenance_registry.yaml`.
 
 ## Regression matrix (implemented)
 
@@ -34,4 +34,4 @@ The following rejection cases are covered:
 
 Canonical-path duplicate detection occurs after repository-boundary resolution and before checksum comparison. Error messages identify both record indexes and the original manifest paths.
 
-The committed `data/input_manifest.json` is validated in CI with `python tools/validate_reproducibility.py --skip-output-manifest`. Until authoritative provenance is filled, the manifest should be described as checksum-bearing metadata, not as a complete dataset identity contract for biological claims.
+The committed `data/input_manifest.json` is validated in CI with `python tools/validate_reproducibility.py --require-provenance --skip-output-manifest`. Authoritative provenance is maintained in `data/input_provenance_registry.yaml` and merged at build time.

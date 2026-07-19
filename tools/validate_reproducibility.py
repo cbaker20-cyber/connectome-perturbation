@@ -41,6 +41,7 @@ REQUIRED_PROVENANCE_FIELDS = {
     "preprocessing_notes",
 }
 UNKNOWN_PROVENANCE_VALUES = {None, "", "unknown", "UNKNOWN", "Unknown"}
+PROVENANCE_COMPLETE_STATUS = "provenance_complete"
 
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
@@ -84,6 +85,24 @@ def is_iso_datetime_with_timezone(value: Any) -> bool:
 def is_sha256_hex(value: Any) -> bool:
     """Return whether a value is a canonical lowercase SHA-256 digest."""
     return isinstance(value, str) and len(value) == 64 and all(char in "0123456789abcdef" for char in value)
+
+
+def is_iso_date(value: Any) -> bool:
+    """Return whether a value is an ISO-8601 calendar date (YYYY-MM-DD)."""
+    if not isinstance(value, str) or not value.strip():
+        return False
+    try:
+        datetime.fromisoformat(value.strip())
+    except ValueError:
+        return False
+    return len(value.strip()) == 10 and value[4] == "-" and value[7] == "-"
+
+
+def is_valid_url_or_doi(value: Any) -> bool:
+    if not isinstance(value, str) or not value.strip():
+        return False
+    lowered = value.strip().lower()
+    return lowered.startswith("http://") or lowered.startswith("https://") or lowered.startswith("doi:")
 
 
 def repo_relative_path(repo_root: Path, path_value: Any, label: str, errors: list[str]) -> Path | None:
@@ -207,6 +226,29 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
                     f"input {idx} provenance field `{field}` is required for claim-ready validation",
                     errors,
                 )
+            access_date = provenance.get("access_date")
+            require(
+                is_iso_date(access_date),
+                f"input {idx} provenance access_date must be ISO-8601 YYYY-MM-DD: {path_value}",
+                errors,
+            )
+            url_or_doi = provenance.get("canonical_url_or_doi")
+            require(
+                is_valid_url_or_doi(url_or_doi),
+                f"input {idx} provenance canonical_url_or_doi must be an http(s) URL or doi: URI: {path_value}",
+                errors,
+            )
+            row_count = provenance.get("row_count")
+            require(
+                isinstance(row_count, int) and row_count >= 0,
+                f"input {idx} provenance row_count must be a non-negative integer: {path_value}",
+                errors,
+            )
+            require(
+                record.get("validation_status") == PROVENANCE_COMPLETE_STATUS,
+                f"input {idx} validation_status must be {PROVENANCE_COMPLETE_STATUS!r} when --require-provenance is set: {path_value}",
+                errors,
+            )
     return manifest
 
 

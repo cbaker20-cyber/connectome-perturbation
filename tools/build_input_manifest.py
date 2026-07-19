@@ -40,6 +40,71 @@ EXCLUDED_FILENAMES = frozenset(
     }
 )
 
+DEFAULT_PROVENANCE_REGISTRY = "data/input_provenance_registry.yaml"
+PROVENANCE_COMPLETE_STATUS = "provenance_complete"
+PROVENANCE_MISSING_STATUS = "checksum_recorded_provenance_missing"
+
+
+def load_provenance_registry(path: Path) -> dict[str, dict[str, Any]]:
+    """Load authoritative provenance keyed by repo-relative input path."""
+    if not path.exists():
+        return {}
+    try:
+        import yaml
+    except ImportError:
+        return {}
+    loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(loaded, dict):
+        return {}
+    inputs = loaded.get("inputs")
+    if not isinstance(inputs, dict):
+        return {}
+    registry: dict[str, dict[str, Any]] = {}
+    for key, value in inputs.items():
+        if isinstance(key, str) and isinstance(value, dict):
+            registry[key] = value
+    return registry
+
+
+def provenance_is_complete(provenance: dict[str, Any]) -> bool:
+    required = (
+        "dataset_name",
+        "release_or_materialization",
+        "canonical_url_or_doi",
+        "citation",
+        "license_or_terms",
+        "access_date",
+        "redistribution_status",
+        "schema_notes",
+        "row_count",
+        "preprocessing_notes",
+    )
+    unknown = {None, "", "unknown", "UNKNOWN", "Unknown"}
+    for field in required:
+        value = provenance.get(field)
+        if value in unknown:
+            return False
+        if isinstance(value, str) and value.strip() in unknown:
+            return False
+    return isinstance(provenance.get("row_count"), int) and provenance["row_count"] >= 0
+
+
+def merge_provenance(record: dict[str, Any], registry: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    path = record.get("path")
+    if not isinstance(path, str):
+        return record
+    override = registry.get(path)
+    if not override:
+        record["validation_status"] = PROVENANCE_MISSING_STATUS
+        return record
+    provenance = dict(record.get("provenance") or {})
+    provenance.update(override)
+    record["provenance"] = provenance
+    record["validation_status"] = (
+        PROVENANCE_COMPLETE_STATUS if provenance_is_complete(provenance) else PROVENANCE_MISSING_STATUS
+    )
+    return record
+
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
     digest = hashlib.sha256()
@@ -90,10 +155,10 @@ def iter_input_like_files(repo_root: Path, patterns: tuple[str, ...]) -> list[Pa
     return sorted(files, key=lambda p: p.as_posix())
 
 
-def build_record(path: Path, repo_root: Path) -> dict[str, Any]:
+def build_record(path: Path, repo_root: Path, registry: dict[str, dict[str, Any]]) -> dict[str, Any]:
     rel = path.relative_to(repo_root).as_posix()
     stat = path.stat()
-    return {
+    record = {
         "path": rel,
         "filename": path.name,
         "extension": path.suffix.lower(),
@@ -113,14 +178,20 @@ def build_record(path: Path, repo_root: Path) -> dict[str, Any]:
             "row_count": None,
             "preprocessing_notes": None,
         },
-        "validation_status": "checksum_recorded_provenance_missing",
+        "validation_status": PROVENANCE_MISSING_STATUS,
     }
+    return merge_provenance(record, registry)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", default=".", help="Repository root directory")
     parser.add_argument("--output", default="data/input_manifest.json", help="Manifest path to write")
+    parser.add_argument(
+        "--provenance-registry",
+        default=DEFAULT_PROVENANCE_REGISTRY,
+        help="YAML registry with authoritative provenance keyed by input path",
+    )
     parser.add_argument("--pattern", action="append", help="Additional glob pattern to include")
     args = parser.parse_args()
 
@@ -128,13 +199,15 @@ def main() -> int:
     patterns = DEFAULT_PATTERNS + tuple(args.pattern or ())
     output = (repo_root / args.output).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
+    registry = load_provenance_registry((repo_root / args.provenance_registry).resolve())
 
-    records = [build_record(path, repo_root) for path in iter_input_like_files(repo_root, patterns)]
+    records = [build_record(path, repo_root, registry) for path in iter_input_like_files(repo_root, patterns)]
     manifest = {
         "schema_version": "0.1",
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "repo_root": ".",
-        "purpose": "Record local input-like file facts; provenance fields require source-backed completion.",
+        "purpose": "Record local input-like file facts with checksums and source-backed provenance registry.",
+        "provenance_registry_path": args.provenance_registry,
         "input_count": len(records),
         "inputs": records,
     }

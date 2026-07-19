@@ -84,7 +84,7 @@ def test_build_input_manifest_records_checksums_and_roles(tmp_path):
     data_file = repo_root / "connections_630_connectivity.csv"
     data_file.write_text("source,target,weight\n1,2,3\n", encoding="utf-8")
 
-    record = tool.build_record(data_file, repo_root)
+    record = tool.build_record(data_file, repo_root, {})
 
     assert record["path"] == "connections_630_connectivity.csv"
     assert record["filename"] == "connections_630_connectivity.csv"
@@ -237,6 +237,7 @@ def test_validate_reproducibility_strict_provenance_accepts_complete_record(tmp_
             "preprocessing_notes": "No preprocessing in fixture",
         }
     )
+    input_manifest["inputs"][0]["validation_status"] = tool.PROVENANCE_COMPLETE_STATUS
     manifest_path = repo_root / "input_manifest.json"
     manifest_path.write_text(json.dumps(input_manifest), encoding="utf-8")
 

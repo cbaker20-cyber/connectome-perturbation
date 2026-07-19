@@ -29,12 +29,11 @@ This note records a conservative audit of remaining reproducibility gaps. It doe
 
 ## Missing provenance checks
 
-- `--require-provenance` is not enabled in CI because authoritative source fields are still empty.
 - `results/perturbation_summary.csv` is not tied to input checksums, config, or commit.
 - Toy graph artifact sequence is not yet wired into CI (metadata smoke path only).
 
 ## Next highest-value improvements
 
-1. Fill authoritative provenance in `data/input_manifest.json` and enable `--require-provenance` in CI.
-2. Bind experiment registry entries to output manifests and commit hash.
+1. Bind experiment registry entries to output manifests and commit hash.
+2. Enforce `docs_config.yaml` `minimum_claim_standard` against experiment rows.
 3. Migrate notebooks to manifest-resolved paths or document explicit materialization per notebook cell.

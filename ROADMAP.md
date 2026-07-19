@@ -15,10 +15,12 @@ Last updated: 2026-07-18
 | P0 | Bind output manifests to run config, environment, commit when outputs declared | done (#50) |
 | P0 | Validate research documentation pack in CI | done (this branch) |
 
+| P0 | Authoritative input provenance in registry + CI `--require-provenance` | done (this branch) |
+
 ## P0 — Next reproducibility spine
 
-1. **Authoritative input provenance** — Fill dataset name, release, URL/DOI, citation, license, access date, and schema notes in `data/input_manifest.json`; enable `--require-provenance` in CI.
-2. **Experiment registry binding** — Connect `03_EXPERIMENT_REGISTRY.csv` entries to `output_manifest.json` and commit hash.
+1. **Experiment registry binding** — Connect `03_EXPERIMENT_REGISTRY.csv` entries to `output_manifest.json` and commit hash.
+2. **Enforce minimum_claim_standard** — Validate experiment rows against `docs_config.yaml` trial-count and FDR rules.
 3. **Notebook path migration** — Route `example.ipynb` and `figures.ipynb` through the resolver or document per-cell materialization.
 3. **Results output resolver** — Replace hard-coded `results/` paths in statistics/motor/visualize scripts with a configurable output root.
 4. **Toy graph CI sequence** — Add the toy graph artifact → output manifest → validate path to CI alongside the metadata smoke path.
@@ -37,6 +39,5 @@ Last updated: 2026-07-18
 
 ## Blockers (do not bypass)
 
-- Authoritative provenance fields are empty; biological claims remain blocked.
-- `results/perturbation_summary.csv` and legacy notebook outputs are not bound to manifests.
+- Experiment registry entries and legacy notebook outputs are not yet bound to output manifests.
 - `baseline.py` (5 trials) vs `model.py` (30 trials) trial-count mismatch must be stated per output.

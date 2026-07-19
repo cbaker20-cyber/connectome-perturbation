@@ -15,6 +15,14 @@ Make the project reproducible before making biological claims. This repository i
 - Preserve existing exploratory work unless replacing it with a clearly simpler, tested path.
 - Record important assumptions, blockers, and decisions in repository files, not only in chat.
 
+## Input provenance
+
+Authoritative dataset metadata lives in `data/input_provenance_registry.yaml` and is merged into `data/input_manifest.json` by `tools/build_input_manifest.py`.
+
+- Every tracked connectome input should have `validation_status: provenance_complete` before biological claims.
+- CI runs `python tools/validate_reproducibility.py --require-provenance` on the committed input manifest.
+- Update the YAML registry (not hand-edited JSON) when releases, licenses, URLs/DOIs, or row counts change; then regenerate the manifest.
+
 ## Current engineering priorities
 
 1. Build and validate an input manifest for existing input-like files.

@@ -7,7 +7,10 @@ Prioritized backlog for the connectome perturbation project.
 - [x] Run `python tools/build_input_manifest.py` and review `data/input_manifest.json`.
   - Committed manifest records five tracked connectome-like inputs (630/783 completeness and connectivity tables plus `flywire_annotations.tsv`) with SHA-256 checksums, guessed roles/materializations, and explicit `validation_status: checksum_recorded_provenance_missing`.
   - Project registry/ledger CSVs are excluded from the builder so they are not mistaken for simulation inputs.
-- [ ] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
+- [x] Fill authoritative provenance fields for every input-like file: dataset name, materialization, URL/DOI, citation, license, access date, schema notes, and redistribution status.
+  - `data/input_provenance_registry.yaml` is the source-backed registry; `tools/build_input_manifest.py` merges it into `data/input_manifest.json`.
+  - CI enforces `--require-provenance` (access date, URL/DOI, row count, `validation_status: provenance_complete`).
+  - `tests/test_input_provenance_registry.py` covers complete/missing/malformed provenance and backwards compatibility without the flag.
 - [x] Wire a deterministic smoke command to produce an artifact, write it with `--artifact`, and immediately validate it.
   - `tools/write_smoke_artifact.py` writes `results/reproducibility_smoke_artifact.json` by default.
   - The artifact is deterministic metadata-only JSON with `claim_status: not_interpretable_as_neuroscience`.

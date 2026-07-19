@@ -109,7 +109,7 @@ python tools/validate_reproducibility.py \
   --skip-output-manifest
 ```
 
-Claim-ready runs additionally require non-empty provenance via `--require-provenance`. Checksums alone do not establish source authority.
+Claim-ready runs additionally require non-empty provenance via `--require-provenance`. Maintain authoritative values in `data/input_provenance_registry.yaml` and regenerate with `python tools/build_input_manifest.py`.
 
 Validate smoke config alignment with:
 
@@ -132,6 +132,5 @@ To run against 783 without changing resolver code:
 
 ## Open blockers
 
-- Authoritative download URL/DOI, license, access date, schema, and row counts are still missing from provenance fields.
 - `flywire_annotations.tsv` is shared across materializations in this checkout; its exact release mapping to 783 tables is not verified here.
 - Notebooks (`example.ipynb`, `figures.ipynb`) still embed inline paths and should be updated separately.

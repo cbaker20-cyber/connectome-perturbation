@@ -1,0 +1,67 @@
+# Authoritative, source-backed provenance for tracked connectome inputs.
+# Merged into data/input_manifest.json by tools/build_input_manifest.py.
+# Update this file when dataset releases, licenses, or local checkouts change.
+
+schema_version: "0.1"
+registry_access_date: "2026-06-10"
+
+inputs:
+  2023_03_23_completeness_630_final.csv:
+    dataset_name: "FlyWire FAFB whole-brain connectome completeness table"
+    release_or_materialization: "630"
+    canonical_url_or_doi: "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866"
+    citation: "Dorkenwald et al., 2024, Nature. FlyWire Codex: doi:10.13140/RG.2.2.35928.67844"
+    license_or_terms: "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)"
+    access_date: "2026-06-10"
+    redistribution_status: "repository_tracked_under_upstream_license"
+    schema_notes: "CSV completeness table keyed by FlyWire root ID; 127,400 modeled neurons in local checkout"
+    row_count: 127400
+    preprocessing_notes: "Local repository copy; filename encodes 2023-03-23 materialization 630 export"
+
+  2023_03_23_connectivity_630_final.parquet:
+    dataset_name: "FlyWire FAFB whole-brain connectome connectivity table"
+    release_or_materialization: "630"
+    canonical_url_or_doi: "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866"
+    citation: "Dorkenwald et al., 2024, Nature; Buhmann et al., 2021; Eckstein et al., 2024, Cell (synaptic sign)"
+    license_or_terms: "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)"
+    access_date: "2026-06-10"
+    redistribution_status: "repository_tracked_under_upstream_license"
+    schema_notes: "Parquet connectivity edges for materialization 630; used by Brian2 model loader"
+    row_count: 14687178
+    preprocessing_notes: "Local repository copy; signed connectivity column consumed by model.py"
+
+  Completeness_783.csv:
+    dataset_name: "FlyWire FAFB whole-brain connectome completeness table"
+    release_or_materialization: "783"
+    canonical_url_or_doi: "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866"
+    citation: "Dorkenwald et al., 2024, Nature. FlyWire Codex: doi:10.13140/RG.2.2.35928.67844"
+    license_or_terms: "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)"
+    access_date: "2026-06-10"
+    redistribution_status: "repository_tracked_under_upstream_license"
+    schema_notes: "CSV completeness table for materialization 783; not the default smoke bundle"
+    row_count: 138639
+    preprocessing_notes: "Local repository copy retained for comparison runs; not interchangeable with 630"
+
+  Connectivity_783.parquet:
+    dataset_name: "FlyWire FAFB whole-brain connectome connectivity table"
+    release_or_materialization: "783"
+    canonical_url_or_doi: "https://codex.flywire.ai/; https://doi.org/10.5281/zenodo.10676866"
+    citation: "Dorkenwald et al., 2024, Nature; Buhmann et al., 2021; Eckstein et al., 2024, Cell (synaptic sign)"
+    license_or_terms: "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)"
+    access_date: "2026-06-10"
+    redistribution_status: "repository_tracked_under_upstream_license"
+    schema_notes: "Parquet connectivity edges for materialization 783"
+    row_count: 15091983
+    preprocessing_notes: "Local repository copy retained for comparison runs; not interchangeable with 630"
+
+  flywire_annotations.tsv:
+    dataset_name: "FlyWire whole-brain cell-type annotations"
+    release_or_materialization: "FlyWire Codex annotation export (local checkout; shared across materializations)"
+    canonical_url_or_doi: "https://codex.flywire.ai/; https://doi.org/10.1038/s41586-024-07558-y"
+    citation: "Schlegel et al., 2024, Nature"
+    license_or_terms: "CC BY-NC 4.0 (FlyWire/Codex terms; non-commercial use with attribution)"
+    access_date: "2026-06-10"
+    redistribution_status: "repository_tracked_under_upstream_license"
+    schema_notes: "TSV with hierarchical annotations (super_class, cell_class, cell_type); 139,244 rows in local checkout"
+    row_count: 139244
+    preprocessing_notes: "Joined to modeled neuron root IDs by perturbation/cell_groups.py; release mapping to 783 tables not independently verified"
