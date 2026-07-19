@@ -1,0 +1,87 @@
+# Standardized benchmark registry for quantitative comparison reporting.
+# Metadata and reference metrics only; does not rerun simulations.
+
+schema_version: "0.1"
+evaluation_config_path: configs/benchmark_evaluation.yaml
+
+benchmarks:
+  BM001:
+    name: metadata_smoke_provenance
+    description: Metadata-only smoke artifact validates provenance plumbing.
+    claim_tier: infrastructure
+    comparison:
+      reproducibility:
+        reference_output: results/reproducibility_smoke_artifact.json
+        required: true
+      metrics:
+        - name: reproducibility_validation_pass
+          expected: 1
+          description: Smoke artifact exists with expected schema version.
+          thresholds:
+            absolute_error_max: 0
+            relative_error_max: 0
+          confidence_interval: null
+
+  BM002:
+    name: toy_graph_deterministic_fixture
+    description: Synthetic four-node graph artifact with pinned expected metrics.
+    claim_tier: infrastructure
+    comparison:
+      reproducibility:
+        reference_output: results/toy_graph_artifact.json
+        required: false
+      metrics:
+        - name: node_count
+          expected: 4
+          thresholds:
+            absolute_error_max: 0
+            relative_error_max: 0
+          confidence_interval: null
+        - name: edge_count
+          expected: 3
+          thresholds:
+            absolute_error_max: 0
+            relative_error_max: 0
+          confidence_interval: null
+        - name: weak_component_count
+          expected: 2
+          thresholds:
+            absolute_error_max: 0
+            relative_error_max: 0
+          confidence_interval: null
+
+  BM003:
+    name: motor_statistics_reference_panel
+    description: Reference panel for validated motor-rate perturbation statistics (E007).
+    claim_tier: validated
+    experiment_id: E007
+    comparison:
+      reproducibility:
+        reference_output: results/statistics.csv
+        required: true
+        sha256: 763123935e919f053d102443f614817eb9c4ced059a310af5a072b9f82e81bff
+      metrics:
+        - name: ascending_delta_hz
+          source_column: delta_hz
+          row_match:
+            label: ascending
+          expected: -129.0
+          thresholds:
+            absolute_error_max: 0.01
+            relative_error_max: 0.001
+          confidence_interval: null
+        - name: lo_delta_hz
+          source_column: delta_hz
+          row_match:
+            label: LO
+          expected: -38.97
+          thresholds:
+            absolute_error_max: 0.01
+            relative_error_max: 0.001
+          confidence_interval: null
+        - name: row_count
+          expected: 10
+          thresholds:
+            absolute_error_max: 0
+            relative_error_max: 0
+          confidence_interval: null

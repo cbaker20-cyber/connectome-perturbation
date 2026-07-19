@@ -1,0 +1,28 @@
+# Global evaluation configuration for quantitative benchmark comparison reports.
+
+schema_version: "0.1"
+
+metric_thresholds:
+  default:
+    absolute_error_max: 0.0
+    relative_error_max: 0.0
+  reference_panel:
+    absolute_error_max: 0.01
+    relative_error_max: 0.001
+
+claim_tier_requirements:
+  infrastructure:
+    interpretable_as_neuroscience: false
+    require_reference_output: false
+  validated:
+    interpretable_as_neuroscience: true
+    require_reference_output: true
+
+reporting:
+  format_version: "0.1"
+  include_reproducibility_status: true
+  status_labels:
+    pass: pass
+    fail: fail
+    skipped: skipped
+    not_applicable: not_applicable

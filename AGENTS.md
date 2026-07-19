@@ -23,6 +23,15 @@ Make the project reproducible before making biological claims. This repository i
 4. Add validation checks for manifests, checksums, paths, and output schema.
 5. Only then attempt larger simulations or claims.
 
+## Benchmark comparison reports
+
+Quantitative benchmark comparison reports live in `data/benchmark_registry.yaml` with thresholds in `configs/benchmark_evaluation.yaml`.
+
+- Run `python tools/report_benchmark_comparison.py --fail-on-regression` to write `benchmark_comparison_report.json`.
+- Each benchmark reports expected vs observed metrics, absolute/relative error, thresholds, and reproducibility status.
+- CI generates smoke/toy artifacts and validates comparison reports on every pull request.
+- See `docs/benchmark_comparison_reports.md`.
+
 ## Scientific standards
 
 Every interpretable run should eventually include:

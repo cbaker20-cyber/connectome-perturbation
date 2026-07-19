@@ -22,7 +22,7 @@ jobs:
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pytest
+          python -m pip install pytest pyyaml
 
       - name: Run reproducibility tool tests
         run: |
@@ -32,6 +32,7 @@ jobs:
             tests/test_manifest_counts.py \
             tests/test_path_resolver_boundaries.py \
             tests/test_input_manifest_record_validation.py \
+            tests/test_benchmark_comparison.py \
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
             tests/test_validate_neuron_ids_provenance_columns.py \
@@ -48,6 +49,12 @@ jobs:
             --input-manifest data/input_manifest.json \
             --skip-output-manifest
 
+      - name: Generate benchmark artifacts and comparison report
+        run: |
+          python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
+          PYTHONPATH=. python tools/write_toy_graph_artifact.py --output results/toy_graph_artifact.json
+          python tools/report_benchmark_comparison.py --fail-on-regression
+
       - name: Compile metadata tooling
         run: |
           python -m py_compile \
@@ -55,6 +62,8 @@ jobs:
             tools/path_resolver.py \
             tools/write_output_manifest.py \
             tools/validate_reproducibility.py \
+            tools/benchmark_comparison.py \
+            tools/report_benchmark_comparison.py \
             tools/validate_neuron_ids.py \
             tools/validate_atlas.py \
             tools/write_toy_graph_artifact.py \
