@@ -16,7 +16,8 @@ Last updated: 2026-07-18
 | P0 | Validate research documentation pack in CI | done (this branch) |
 
 | P0 | Authoritative input provenance in registry + CI `--require-provenance` | done (#52) |
-| P0 | Bind experiment registry entries to output manifests | done (this branch) |
+| P0 | Bind experiment registry entries to output manifests | done (#53) |
+| P0 | Standardized benchmark and evaluation framework | done (this branch) |
 
 ## P0 — Next reproducibility spine
 

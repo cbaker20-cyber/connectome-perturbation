@@ -25,6 +25,11 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_output_manifest.py` copies `experiment_id` from config or `--experiment-id`.
   - `tools/validate_reproducibility.py` validates registry cross-references; CI uses `--require-experiment-binding`.
   - `tests/test_experiment_registry_binding.py` covers matching outputs, unknown IDs, mismatches, and backwards compatibility.
+- [x] Standardized benchmark and evaluation framework for perturbation experiments.
+  - `data/benchmark_registry.yaml` registers BM001 (smoke), BM002 (toy graph), BM003 (motor statistics reference).
+  - `configs/benchmark_evaluation.yaml` defines claim-tier evaluation requirements.
+  - `tools/validate_benchmarks.py` and `tools/report_benchmark_evaluation.py` validate and report benchmark status.
+  - `tests/test_validate_benchmarks.py` covers registration, dataset integrity, checksum failures, and backwards compatibility.
 - [x] Validate the canonical research documentation pack in CI.
   - `tools/validate_research_docs.py` checks required files, experiment ↔ claim ↔ result cross-references, duplicate IDs, and resolvable evidence paths.
   - `docs/research_document_mapping.md` maps each research document to repository enforcement.

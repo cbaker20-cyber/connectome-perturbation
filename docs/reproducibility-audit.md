@@ -13,6 +13,7 @@ This note records a conservative audit of remaining reproducibility gaps. It doe
 - Research documentation pack validated in CI: experiment ↔ claim ↔ result cross-references, duplicate ID detection, resolvable evidence paths (`tools/validate_research_docs.py`).
 - Authoritative input provenance in `data/input_provenance_registry.yaml` with CI `--require-provenance`.
 - Output manifests bind to experiment registry via `experiment_id`; smoke run E010 validated with `--require-experiment-binding` in CI.
+- Benchmark registry (`data/benchmark_registry.yaml`) validates dataset integrity, reference output checksums, and claim-tier evaluation requirements in CI.
 
 ## Remaining hard-coded paths (accepted or pending)
 
@@ -36,6 +37,6 @@ This note records a conservative audit of remaining reproducibility gaps. It doe
 
 ## Next highest-value improvements
 
-1. Enforce `docs_config.yaml` `minimum_claim_standard` against experiment rows.
-2. Bind legacy experiment outputs (E001–E009) to output manifests when rerunning.
+1. Enforce `docs_config.yaml` `minimum_claim_standard` against experiment registry rows.
+2. Register legacy experiments E001–E009 as benchmarks when outputs are rebound.
 3. Migrate notebooks to manifest-resolved paths or document explicit materialization per notebook cell.

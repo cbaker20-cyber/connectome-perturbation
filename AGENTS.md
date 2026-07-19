@@ -49,6 +49,14 @@ The canonical research specification lives at the **repository root** (`03_EXPER
 - CI validates the research documentation pack on every pull request.
 - Prefer editing root-level research files; `connectome_research_docs/` is a legacy mirror.
 
+## Benchmark evaluation framework
+
+Standardized perturbation benchmarks live in `data/benchmark_registry.yaml` with evaluation rules in `configs/benchmark_evaluation.yaml`.
+
+- Run `python tools/validate_benchmarks.py` to verify benchmark metadata, dataset integrity, and reference output checksums.
+- Run `python tools/report_benchmark_evaluation.py` to write `benchmark_evaluation_report.json`.
+- CI validates the benchmark registry on every pull request. See `docs/benchmark_evaluation_framework.md`.
+
 ## Scientific standards
 
 Every interpretable run should eventually include:

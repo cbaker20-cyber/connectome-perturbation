@@ -1,0 +1,81 @@
+# Standardized benchmark registry for perturbation experiment evaluation.
+# Metadata only: does not rerun simulations or change biological conclusions.
+
+schema_version: "0.1"
+evaluation_config_path: configs/benchmark_evaluation.yaml
+experiment_registry_path: 03_EXPERIMENT_REGISTRY.csv
+input_manifest_path: data/input_manifest.json
+results_ledger_path: 04_RESULTS_LEDGER.csv
+
+benchmarks:
+  BM001:
+    name: metadata_smoke_provenance
+    description: Metadata-only smoke path validating manifest, config, and output provenance plumbing.
+    claim_tier: infrastructure
+    experiment_id: E010
+    dataset:
+      materialization: "630"
+      required_inputs:
+        - 2023_03_23_completeness_630_final.csv
+        - 2023_03_23_connectivity_630_final.parquet
+        - flywire_annotations.tsv
+    evaluation:
+      primary_metric: reproducibility_validation_pass
+      reporting_fields:
+        - claim_status
+        - repo_commit
+        - input_checksums
+    reference_outputs:
+      - path: results/reproducibility_smoke_artifact.json
+        required: true
+
+  BM002:
+    name: toy_graph_deterministic_fixture
+    description: Synthetic four-node graph artifact with pinned expected metrics for analysis plumbing.
+    claim_tier: infrastructure
+    experiment_id: null
+    dataset:
+      materialization: null
+      required_inputs: []
+    evaluation:
+      primary_metric: expected_graph_metrics_match
+      expected_outcomes:
+        node_count: 4
+        edge_count: 3
+        weak_component_count: 2
+      reporting_fields:
+        - claim_status
+        - expected_metrics
+    reference_outputs:
+      - path: results/toy_graph_artifact.json
+        required: false
+
+  BM003:
+    name: motor_statistics_reference_panel
+    description: Reference panel for validated total-motor-rate perturbation statistics (E007).
+    claim_tier: validated
+    experiment_id: E007
+    dataset:
+      materialization: "630"
+      required_inputs:
+        - 2023_03_23_completeness_630_final.csv
+        - 2023_03_23_connectivity_630_final.parquet
+        - flywire_annotations.tsv
+    evaluation:
+      primary_metric: total_motor_population_firing_rate_per_trial
+      secondary_metrics:
+        - delta_hz
+        - p_value
+        - significant
+      minimum_trials: 30
+      require_matched_trials: true
+      require_fdr_reporting: true
+      require_zero_spike_retention: true
+      reference_results_ledger_ids:
+        - R010
+        - R011
+        - R012
+    reference_outputs:
+      - path: results/statistics.csv
+        required: true
+        sha256: 763123935e919f053d102443f614817eb9c4ced059a310af5a072b9f82e81bff

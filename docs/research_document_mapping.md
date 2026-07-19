@@ -152,6 +152,8 @@ This document maps the **Research Documentation Pack** (canonical specification)
 |---|---|
 | `tools/validate_research_docs.py` | Validates registry, ledger, claims cross-references |
 | `tools/validate_reproducibility.py` | Validates input/output manifests per `08_DATA_PROVENANCE` |
+| `data/benchmark_registry.yaml` | Standardized perturbation benchmarks (BM001–BM003) |
+| `tools/validate_benchmarks.py` | Benchmark metadata, dataset integrity, reference output validation |
 | `configs/smoke_run.yaml` | Smoke materialization per `08_DATA_PROVENANCE` |
 | `.github/workflows/reproducibility-tools.yml` | CI for manifests + research docs |
 | `ROADMAP.md` | Prioritized gaps derived from this mapping |

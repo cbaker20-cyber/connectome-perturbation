@@ -1,0 +1,40 @@
+# Global evaluation configuration for benchmark reporting and validation.
+# Aligns with docs_config.yaml minimum_claim_standard without changing methods.
+
+schema_version: "0.1"
+docs_config_path: docs_config.yaml
+
+claim_tier_requirements:
+  infrastructure:
+    interpretable_as_neuroscience: false
+    require_provenance: false
+    require_reference_output: false
+    minimum_trials: 0
+    require_matched_trials: false
+    require_fdr_reporting: false
+    require_zero_spike_retention: false
+  exploratory:
+    interpretable_as_neuroscience: true
+    require_provenance: true
+    require_reference_output: true
+    minimum_trials: 5
+    require_matched_trials: false
+    require_fdr_reporting: false
+    require_zero_spike_retention: true
+  validated:
+    interpretable_as_neuroscience: true
+    require_provenance: true
+    require_reference_output: true
+    minimum_trials: 30
+    require_matched_trials: true
+    require_fdr_reporting: true
+    require_zero_spike_retention: true
+
+reporting:
+  format_version: "0.1"
+  include_dataset_checksums: true
+  include_reference_output_checksums: true
+  status_labels:
+    pass: pass
+    fail: fail
+    skipped: skipped

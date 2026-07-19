@@ -41,4 +41,5 @@ The strongest validated direction is not “visual lobula disinhibition is the h
 - Validate `configs/smoke_run.yaml` against resolver filenames and the input manifest in CI. (done via `tools/validate_reproducibility.py --smoke-config`)
 - Bind declared output manifests to run config, environment, commit, and input checksums; validate end-to-end in CI. (done via `run_config` binding and smoke output provenance step)
 - Validate the canonical research documentation pack (experiment registry, results ledger, claims register cross-references) in CI. (done via `tools/validate_research_docs.py`; see `docs/research_document_mapping.md`)
+- Standardized benchmark registry and evaluation framework for perturbation experiments. (done via `data/benchmark_registry.yaml`, `tools/validate_benchmarks.py`; see `docs/benchmark_evaluation_framework.md`)
 - Fill source-backed provenance fields in `data/input_manifest.json` before any biological claim. (done via `data/input_provenance_registry.yaml`; CI enforces `--require-provenance`)

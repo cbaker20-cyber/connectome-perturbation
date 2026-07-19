@@ -38,6 +38,7 @@ jobs:
             tests/test_validate_research_docs.py \
             tests/test_input_provenance_registry.py \
             tests/test_experiment_registry_binding.py \
+            tests/test_validate_benchmarks.py \
             tests/test_input_manifest_record_validation.py \
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
@@ -60,6 +61,10 @@ jobs:
       - name: Validate research documentation pack
         run: |
           python tools/validate_research_docs.py
+
+      - name: Validate benchmark registry and evaluation framework
+        run: |
+          python tools/validate_benchmarks.py
 
       - name: Validate smoke output provenance end-to-end
         run: |
@@ -84,6 +89,7 @@ jobs:
             tools/write_output_manifest.py \
             tools/validate_reproducibility.py \
             tools/validate_research_docs.py \
+            tools/validate_benchmarks.py \
             tools/validate_neuron_ids.py \
             tools/validate_atlas.py \
             tools/write_toy_graph_artifact.py \
