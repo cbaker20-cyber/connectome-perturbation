@@ -23,6 +23,15 @@ Make the project reproducible before making biological claims. This repository i
 4. Add validation checks for manifests, checksums, paths, and output schema.
 5. Only then attempt larger simulations or claims.
 
+## Minimum claim standard
+
+`docs_config.yaml` defines trial-count, FDR, and zero-spike retention requirements for interpretable claims.
+
+- Run `python tools/validate_research_docs.py` before claiming registry consistency.
+- CI enforces `minimum_claim_standard` against `03_EXPERIMENT_REGISTRY.csv` and `04_RESULTS_LEDGER.csv`.
+- See `docs/minimum_claim_standard.md` for the full rule set.
+- Use `--skip-minimum-claim-standard` only for legacy fixtures in tests.
+
 ## Scientific standards
 
 Every interpretable run should eventually include:
