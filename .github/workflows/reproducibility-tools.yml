@@ -24,6 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pytest pyyaml
 
+      - name: Generate benchmark artifacts
+        run: |
+          python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
+          PYTHONPATH=. python tools/write_toy_graph_artifact.py --output results/toy_graph_artifact.json
+
       - name: Run reproducibility tool tests
         run: |
           python -m pytest \
@@ -49,10 +54,8 @@ jobs:
             --input-manifest data/input_manifest.json \
             --skip-output-manifest
 
-      - name: Generate benchmark artifacts and comparison report
+      - name: Validate benchmark comparison report
         run: |
-          python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
-          PYTHONPATH=. python tools/write_toy_graph_artifact.py --output results/toy_graph_artifact.json
           python tools/report_benchmark_comparison.py --fail-on-regression
 
       - name: Compile metadata tooling

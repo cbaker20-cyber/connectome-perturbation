@@ -44,6 +44,17 @@ def write_minimal_registry(repo_root: Path, benchmarks: dict) -> None:
 def test_committed_registry_generates_quantitative_comparison_report():
     module = load_comparison_module()
     repo_root = Path.cwd()
+
+    smoke_artifact = repo_root / "results/reproducibility_smoke_artifact.json"
+    if not smoke_artifact.is_file():
+        import subprocess
+        import sys
+
+        subprocess.run(
+            [sys.executable, "tools/write_smoke_artifact.py", "--output", str(smoke_artifact.relative_to(repo_root))],
+            check=True,
+        )
+
     report = module.build_benchmark_comparison_report(
         repo_root,
         registry_path=repo_root / "data/benchmark_registry.yaml",
