@@ -1,4 +1,5 @@
 import importlib.util
+import shutil
 from pathlib import Path
 
 import pytest
@@ -70,6 +71,7 @@ def test_validate_smoke_config_requires_manifest_paths(tmp_path):
         (Path.cwd() / "configs/smoke_run.yaml").read_text(encoding="utf-8"),
         encoding="utf-8",
     )
+    shutil.copy(Path.cwd() / "03_EXPERIMENT_REGISTRY.csv", repo_root / "03_EXPERIMENT_REGISTRY.csv")
     input_manifest = {"inputs": [{"path": "2023_03_23_completeness_630_final.csv"}]}
 
     errors: list[str] = []

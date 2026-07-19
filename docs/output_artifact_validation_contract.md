@@ -15,6 +15,7 @@ Implemented on the reproducibility branch:
 - The writer rejects missing artifacts, directories, absolute artifact paths, and parent-directory escapes before writing the manifest.
 - `tools/validate_reproducibility.py` validates declared output paths, existence, canonical metadata shape, and on-disk checksum/size matches.
 - When `outputs` is non-empty, the validator also requires `environment`, `repo_commit`, and `run_config` fields that match the referenced config file (`random_seed`, `selected_materialization`, `selected_inputs`).
+- When `experiment_id` is recorded, declared outputs must match resolvable `primary_output` paths in `03_EXPERIMENT_REGISTRY.csv`. CI smoke runs use `--require-experiment-binding`.
 - `tools/write_output_manifest.py` copies `run_config` from the referenced YAML config into every output manifest.
 - `tests/test_write_smoke_artifact.py` covers deterministic metadata-only smoke artifact payload/content and output path boundaries.
 - `tests/test_write_toy_graph_artifact.py` covers deterministic toy graph payload/content, expected metrics, and output path boundaries.

@@ -37,6 +37,7 @@ jobs:
             tests/test_output_manifest_run_config.py \
             tests/test_validate_research_docs.py \
             tests/test_input_provenance_registry.py \
+            tests/test_experiment_registry_binding.py \
             tests/test_input_manifest_record_validation.py \
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
@@ -72,7 +73,8 @@ jobs:
             --input-manifest data/input_manifest.json \
             --output-manifest output_manifest.json \
             --smoke-config configs/smoke_run.yaml \
-            --require-provenance
+            --require-provenance \
+            --require-experiment-binding
 
       - name: Compile metadata tooling
         run: |

@@ -37,7 +37,8 @@ When an output manifest declares produced artifacts (`outputs` non-empty):
 
 - `tools/write_output_manifest.py` must copy `run_config` from the referenced YAML config (seed, materialization, selected inputs).
 - Record `repo_commit`, `environment`, and input manifest checksums at write time.
-- `tools/validate_reproducibility.py` enforces run-config binding when outputs exist; CI runs the full smoke artifact → manifest → validate sequence.
+- Record `experiment_id` and `experiment_registry_path` when the run config or `--experiment-id` supplies them.
+- `tools/validate_reproducibility.py` enforces run-config binding when outputs exist; use `--require-experiment-binding` for registry cross-checks in CI.
 - Metadata-only manifests with empty `outputs` may skip strict run-config binding.
 
 ## Research documentation pack

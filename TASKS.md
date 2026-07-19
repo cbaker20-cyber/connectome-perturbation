@@ -20,6 +20,11 @@ Prioritized backlog for the connectome perturbation project.
   - `tools/write_output_manifest.py` copies `run_config` (seed, materialization, selected inputs) from the referenced YAML config.
   - `tools/validate_reproducibility.py` rejects stale `run_config` values and missing `environment`/`repo_commit` when `outputs` is non-empty.
   - `tests/test_output_manifest_run_config.py` covers snapshot loading, end-to-end validation, and stale seed rejection.
+- [x] Bind output manifests to experiment registry entries when artifacts are declared.
+  - `configs/smoke_run.yaml` records `experiment_id: E010` for the metadata smoke path.
+  - `tools/write_output_manifest.py` copies `experiment_id` from config or `--experiment-id`.
+  - `tools/validate_reproducibility.py` validates registry cross-references; CI uses `--require-experiment-binding`.
+  - `tests/test_experiment_registry_binding.py` covers matching outputs, unknown IDs, mismatches, and backwards compatibility.
 - [x] Validate the canonical research documentation pack in CI.
   - `tools/validate_research_docs.py` checks required files, experiment ↔ claim ↔ result cross-references, duplicate IDs, and resolvable evidence paths.
   - `docs/research_document_mapping.md` maps each research document to repository enforcement.

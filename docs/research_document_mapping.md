@@ -31,15 +31,15 @@ This document maps the **Research Documentation Pack** (canonical specification)
 
 **Implemented:**
 
-- Nine experiments (E001–E009) recorded with scripts, trial counts, and `claim_ids`.
 - Cross-reference validation: `claim_ids` must exist in `11_CLAIMS_REGISTER.csv`.
-- Duplicate `experiment_id` detection.
-- Validated experiments with non-wildcard `primary_output` can be checked against on-disk files (optional strict mode).
+- Results ledger → experiment registry foreign keys.
+- Output manifest binding: when `experiment_id` is recorded, declared artifacts must match resolvable `primary_output` paths in `03_EXPERIMENT_REGISTRY.csv`.
+- Smoke metadata experiment **E010** gates CI via `configs/smoke_run.yaml` and `--require-experiment-binding`.
 
 **Not yet implemented:**
 
-- Automatic binding to `output_manifest.json` or git commit hash per experiment.
-- CI enforcement of validated `primary_output` existence (wildcards like `results/hq_*.parquet` remain manual).
+- Automatic binding for legacy experiments E001–E009 (wildcard `primary_output` paths remain manual).
+- Commit hash field on experiment registry rows (recorded on output manifest only).
 
 **Enforced by:** `tools/validate_research_docs.py`, CI step `Validate research documentation pack`.
 

@@ -7,11 +7,14 @@ This script intentionally checks metadata plumbing, not neuroscience results.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+
+DEFAULT_EXPERIMENT_REGISTRY = "03_EXPERIMENT_REGISTRY.csv"
 
 REQUIRED_INPUT_MANIFEST_FIELDS = {"schema_version", "generated_at_utc", "input_count", "inputs"}
 REQUIRED_INPUT_FIELDS = {"path", "filename", "extension", "size_bytes", "sha256", "guessed_role", "provenance"}
@@ -417,6 +420,8 @@ def validate_output_manifest(
     errors: list[str],
     input_manifest: dict[str, Any] | None = None,
     input_manifest_path: Path | None = None,
+    *,
+    require_experiment_binding: bool = False,
 ) -> None:
     require(path.exists(), f"missing output manifest: {path}", errors)
     if not path.exists():
@@ -438,6 +443,12 @@ def validate_output_manifest(
     validate_input_manifest_reference(repo_root, manifest, errors, input_manifest_path=input_manifest_path)
     validate_environment_record(manifest, errors, require_for_outputs=True)
     validate_run_config_binding(repo_root, manifest, errors)
+    validate_experiment_registry_binding(
+        repo_root,
+        manifest,
+        errors,
+        require_binding=require_experiment_binding,
+    )
 
     expected_checksums = expected_input_checksums(input_manifest)
     if expected_checksums is not None:
@@ -454,6 +465,98 @@ def validate_output_manifest(
         require(
             manifest.get("input_checksums") == expected_checksums,
             "output input_checksums do not match validated input manifest",
+            errors,
+        )
+
+
+def read_experiment_registry(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
+
+
+def parse_primary_output_paths(primary_output: Any) -> list[str]:
+    if not isinstance(primary_output, str) or not primary_output.strip():
+        return []
+    return [part.strip() for part in primary_output.split(";") if part.strip()]
+
+
+def resolvable_primary_output_paths(primary_output: Any) -> list[str]:
+    return [path for path in parse_primary_output_paths(primary_output) if "*" not in path]
+
+
+def load_experiment_registry(repo_root: Path, registry_path: Path, errors: list[str]) -> dict[str, dict[str, str]]:
+    require(registry_path.exists(), f"missing experiment registry: {registry_path}", errors)
+    if not registry_path.exists():
+        return {}
+    rows = read_experiment_registry(registry_path)
+    by_id: dict[str, dict[str, str]] = {}
+    for row in rows:
+        experiment_id = (row.get("experiment_id") or "").strip()
+        if not experiment_id:
+            continue
+        if experiment_id in by_id:
+            errors.append(f"duplicate experiment_id in registry: {experiment_id}")
+        by_id[experiment_id] = row
+    return by_id
+
+
+def validate_experiment_registry_binding(
+    repo_root: Path,
+    manifest: dict[str, Any],
+    errors: list[str],
+    *,
+    require_binding: bool = False,
+) -> None:
+    """Ensure output manifest experiment_id matches the experiment registry and declared outputs."""
+    outputs = manifest.get("outputs", [])
+    if not isinstance(outputs, list) or not outputs:
+        return
+
+    experiment_id = manifest.get("experiment_id")
+    if require_binding:
+        require(
+            isinstance(experiment_id, str) and experiment_id.strip(),
+            "output manifest experiment_id must be recorded when outputs are declared and experiment binding is required",
+            errors,
+        )
+    if not isinstance(experiment_id, str) or not experiment_id.strip():
+        return
+
+    registry_literal = manifest.get("experiment_registry_path") or DEFAULT_EXPERIMENT_REGISTRY
+    registry_path = repo_relative_path(
+        repo_root,
+        registry_literal,
+        "output experiment_registry_path",
+        errors,
+    )
+    if registry_path is None:
+        return
+
+    experiments = load_experiment_registry(repo_root, registry_path, errors)
+    experiment = experiments.get(experiment_id)
+    require(experiment is not None, f"output manifest experiment_id not found in registry: {experiment_id}", errors)
+    if experiment is None:
+        return
+
+    declared_paths = {
+        record.get("path")
+        for record in outputs
+        if isinstance(record, dict) and isinstance(record.get("path"), str)
+    }
+    expected_paths = set(resolvable_primary_output_paths(experiment.get("primary_output")))
+    if not expected_paths:
+        return
+
+    for path in sorted(declared_paths):
+        require(
+            path in expected_paths,
+            f"output manifest declares artifact not listed in experiment {experiment_id} primary_output: {path}",
+            errors,
+        )
+    for path in sorted(expected_paths):
+        require(
+            path in declared_paths,
+            f"output manifest missing experiment {experiment_id} primary_output artifact: {path}",
             errors,
         )
 
@@ -540,6 +643,18 @@ def validate_smoke_config(
     for path in expected_inputs.values():
         require(path in manifest_paths, f"smoke config input missing from input manifest: {path}", errors)
 
+    experiment_id = config.get("experiment_id")
+    if isinstance(experiment_id, str) and experiment_id.strip():
+        registry_literal = config.get("experiment_registry_path") or DEFAULT_EXPERIMENT_REGISTRY
+        registry_path = repo_relative_path(repo_root, registry_literal, "smoke config experiment_registry_path", errors)
+        if registry_path is not None:
+            experiments = load_experiment_registry(repo_root, registry_path, errors)
+            require(
+                experiment_id in experiments,
+                f"smoke config experiment_id not found in registry: {experiment_id}",
+                errors,
+            )
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -561,6 +676,11 @@ def main() -> int:
         default="configs/smoke_run.yaml",
         help="Validate smoke config materialization and selected_inputs against the resolver and input manifest.",
     )
+    parser.add_argument(
+        "--require-experiment-binding",
+        action="store_true",
+        help="Require output manifests with declared artifacts to record experiment_id and match the experiment registry.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -581,6 +701,7 @@ def main() -> int:
             errors,
             input_manifest=input_manifest,
             input_manifest_path=input_manifest_path,
+            require_experiment_binding=args.require_experiment_binding,
         )
 
     if errors:

@@ -2,6 +2,8 @@
 # This file is intentionally conservative: it should be safe to use before any expensive simulation.
 
 run_name: smoke_reproducibility_metadata
+experiment_id: E010
+experiment_registry_path: 03_EXPERIMENT_REGISTRY.csv
 random_seed: 42
 selected_materialization: "630"
 selected_inputs:

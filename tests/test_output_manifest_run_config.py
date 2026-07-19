@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -74,6 +75,7 @@ def test_end_to_end_smoke_output_manifest_passes_validation(tmp_path):
     config_dir.mkdir()
     config_path = config_dir / "smoke_run.yaml"
     config_path.write_text((Path.cwd() / "configs/smoke_run.yaml").read_text(encoding="utf-8"), encoding="utf-8")
+    shutil.copy(Path.cwd() / "03_EXPERIMENT_REGISTRY.csv", repo_root / "03_EXPERIMENT_REGISTRY.csv")
     data_dir = repo_root / "data"
     data_dir.mkdir()
     input_manifest_path = data_dir / "input_manifest.json"
@@ -101,6 +103,8 @@ def test_end_to_end_smoke_output_manifest_passes_validation(tmp_path):
         "input_count": 5,
         "input_checksums": writer.input_manifest_checksums(json.loads(input_manifest_path.read_text())),
         "run_config": writer.load_run_config_snapshot(config_path),
+        "experiment_id": "E010",
+        "experiment_registry_path": "03_EXPERIMENT_REGISTRY.csv",
         "environment": {"python": "3.11", "platform": "linux", "executable": "/usr/bin/python3"},
         "outputs": writer.output_artifact_records(repo_root, ["results/reproducibility_smoke_artifact.json"]),
         "claim_status": "not_interpretable_as_neuroscience",

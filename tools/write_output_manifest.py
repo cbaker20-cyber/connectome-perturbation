@@ -101,7 +101,14 @@ def load_run_config_snapshot(config_path: Path) -> dict:
         snapshot["selected_materialization"] = loaded["selected_materialization"]
     if isinstance(loaded.get("selected_inputs"), dict):
         snapshot["selected_inputs"] = loaded["selected_inputs"]
+    if isinstance(loaded.get("experiment_id"), str) and loaded["experiment_id"].strip():
+        snapshot["experiment_id"] = loaded["experiment_id"].strip()
+    if isinstance(loaded.get("experiment_registry_path"), str) and loaded["experiment_registry_path"].strip():
+        snapshot["experiment_registry_path"] = loaded["experiment_registry_path"].strip()
     return snapshot
+
+
+DEFAULT_EXPERIMENT_REGISTRY = "03_EXPERIMENT_REGISTRY.csv"
 
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str | None:
@@ -151,6 +158,16 @@ def main() -> int:
         help="Repo-relative output artifact to record with sha256 and size metadata. May be supplied more than once.",
     )
     parser.add_argument("--status", default="metadata_only_smoke")
+    parser.add_argument(
+        "--experiment-id",
+        default=None,
+        help="Experiment registry ID (overrides experiment_id from config when set).",
+    )
+    parser.add_argument(
+        "--experiment-registry",
+        default=None,
+        help="Repo-relative experiment registry CSV (defaults to config or 03_EXPERIMENT_REGISTRY.csv).",
+    )
     parser.add_argument("--note", action="append", default=[])
     args = parser.parse_args()
 
@@ -166,6 +183,10 @@ def main() -> int:
 
     input_manifest = read_json(input_manifest_path)
     run_config = load_run_config_snapshot(config_path)
+    experiment_id = args.experiment_id or run_config.get("experiment_id")
+    experiment_registry_path = (
+        args.experiment_registry or run_config.get("experiment_registry_path") or DEFAULT_EXPERIMENT_REGISTRY
+    )
 
     manifest = {
         "schema_version": "0.1",
@@ -191,6 +212,9 @@ def main() -> int:
         ],
         "claim_status": "not_interpretable_as_neuroscience",
     }
+    if experiment_id:
+        manifest["experiment_id"] = experiment_id
+        manifest["experiment_registry_path"] = experiment_registry_path
 
     output_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"Wrote {output_path}")
