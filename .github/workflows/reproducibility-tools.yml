@@ -22,7 +22,7 @@ jobs:
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pytest
+          python -m pip install pytest numpy
 
       - name: Run reproducibility tool tests
         run: |
@@ -40,6 +40,7 @@ jobs:
             tests/test_node_lesion.py \
             tests/test_connection_lesion.py \
             tests/test_validate_atlas.py \
+            tests/test_math_surrogates.py \
             -q
 
       - name: Validate committed input manifest
@@ -62,6 +63,8 @@ jobs:
             connectome_analysis/toy_signal.py \
             connectome_analysis/node_lesion.py \
             connectome_analysis/connection_lesion.py \
+            connectome_analysis/graph_surrogates.py \
+            connectome_analysis/bora_routing.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
             perturbation/perturb.py
