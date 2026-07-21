@@ -15,11 +15,17 @@ exists.
 
 from __future__ import annotations
 
+import argparse
 import csv
+import sys
 from pathlib import Path
 from typing import Sequence
 
 import numpy as np
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from connectome_analysis.graph_surrogates import (
     CLAIM_STATUS,
@@ -308,6 +314,36 @@ def resolve_annotations_path(
 build_W_from_edges = load_dense_signed_adjacency_from_edges
 
 
-if __name__ == "__main__":
-    path = write_bora_routing_scores_csv()
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--permutations",
+        type=int,
+        default=1000,
+        help="Number of degree-matched null permutations (default: 1000)",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=58,
+        help="RNG seed for the null (default: 58)",
+    )
+    parser.add_argument(
+        "--output",
+        default="results/bora_routing_scores.csv",
+        help="Repo-relative CSV output path",
+    )
+    args = parser.parse_args(argv)
+    if args.permutations < 1:
+        parser.error("--permutations must be >= 1")
+    path = write_bora_routing_scores_csv(
+        args.output,
+        n_permutations=args.permutations,
+        seed=args.seed,
+    )
     print(path)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
