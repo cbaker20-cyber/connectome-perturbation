@@ -1,0 +1,6 @@
+motor_id,sugar_hz,jo_hz,delta_hz,abs_delta_hz,dvi,abs_dvi,context_bias,claim_status,fixture_seed
+motor_jo_biased,0.0,10.0,-10.0,10.0,-0.9999999999999,0.9999999999999,jo,not_interpretable_as_neuroscience,60
+motor_sugar_biased,10.0,0.0,10.0,10.0,0.9999999999999,0.9999999999999,sugar,not_interpretable_as_neuroscience,60
+motor_mixed,8.0,2.0,6.0,6.0,0.59999999999994,0.59999999999994,sugar,not_interpretable_as_neuroscience,60
+9007199254740993,4.0,1.0,3.0,3.0,0.59999999999988,0.59999999999988,sugar,not_interpretable_as_neuroscience,60
+motor_balanced,5.0,5.0,0.0,0.0,0.0,0.0,balanced,not_interpretable_as_neuroscience,60

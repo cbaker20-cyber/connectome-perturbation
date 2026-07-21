@@ -41,6 +41,7 @@ jobs:
             tests/test_connection_lesion.py \
             tests/test_validate_atlas.py \
             tests/test_math_surrogates.py \
+            tests/test_context_comparison.py \
             -q
 
       - name: Validate committed input manifest
@@ -65,6 +66,7 @@ jobs:
             connectome_analysis/connection_lesion.py \
             connectome_analysis/graph_surrogates.py \
             connectome_analysis/bora_routing.py \
+            connectome_analysis/context_comparison.py \
             perturbation/analyze.py \
             perturbation/baseline.py \
             perturbation/perturb.py
