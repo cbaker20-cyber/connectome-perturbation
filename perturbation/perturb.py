@@ -25,8 +25,9 @@ from baseline import (  # noqa: E402
     DEFAULT_MANIFEST_PATH,
     DEFAULT_RESULTS_DIR,
     NEU_SUGAR,
-    PARAMS,
+    build_run_params,
     resolve_baseline_inputs,
+    resolve_results_dir,
 )
 from model import run_exp  # noqa: E402
 
@@ -39,8 +40,11 @@ def run_single_perturbation(
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     results_dir: str = DEFAULT_RESULTS_DIR,
-    n_run: int = 5,
-) -> None:
+    n_run: int | None = None,
+    t_run_ms: float | None = None,
+    random_seed: int | None = None,
+    n_proc: int = 1,
+) -> Path | None:
     """Run one sugar-input perturbation with manifest-resolved inputs."""
 
     path_comp, path_con = resolve_baseline_inputs(
@@ -49,13 +53,10 @@ def run_single_perturbation(
         manifest_path=manifest_path,
         repo_root=Path(__file__),
     )
-    results_path = Path(results_dir)
-    if not results_path.is_absolute():
-        results_path = _REPO_ROOT / results_path
+    results_path = resolve_results_dir(results_dir)
     results_path.mkdir(parents=True, exist_ok=True)
-    params = PARAMS.copy()
-    params["n_run"] = n_run
-    run_exp(
+    params = build_run_params(n_run=n_run, t_run_ms=t_run_ms, random_seed=random_seed)
+    return run_exp(
         exp_name=exp_name,
         neu_exc=NEU_SUGAR,
         neu_slnc=neuron_ids,
@@ -63,7 +64,7 @@ def run_single_perturbation(
         path_comp=str(path_comp),
         path_con=str(path_con),
         params=params,
-        n_proc=1,
+        n_proc=n_proc,
         force_overwrite=force,
     )
 
@@ -75,13 +76,14 @@ def run_perturbation_sweep(
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     results_dir: str = DEFAULT_RESULTS_DIR,
-    n_run: int = 5,
+    n_run: int | None = None,
+    t_run_ms: float | None = None,
+    random_seed: int | None = None,
+    n_proc: int = 1,
 ) -> pd.DataFrame:
-    """Run a small perturbation sweep and compare each result to the baseline."""
+    """Run a perturbation sweep and compare each result to the baseline."""
 
-    results_path = Path(results_dir)
-    if not results_path.is_absolute():
-        results_path = _REPO_ROOT / results_path
+    results_path = resolve_results_dir(results_dir)
 
     results = []
     for group_name, neuron_ids in groups.items():
@@ -96,6 +98,9 @@ def run_perturbation_sweep(
             connectivity_id=connectivity_id,
             results_dir=str(results_path),
             n_run=n_run,
+            t_run_ms=t_run_ms,
+            random_seed=random_seed,
+            n_proc=n_proc,
         )
         comparison = compare_to_baseline(exp_name, path_res=results_path)
         total_delta = comparison["delta_hz"].sum()
@@ -145,6 +150,33 @@ def build_demo_groups(
     }
 
 
+def build_sugar_ground_truth_groups(
+    manifest_path: str,
+    completeness_id: str,
+    connectivity_id: str,
+    seed: int,
+    group_size: int | None = None,
+) -> dict[str, list[int]]:
+    """Build sugar-self positive control plus two size-matched non-sugar controls."""
+
+    size = int(group_size) if group_size is not None else len(NEU_SUGAR)
+    path_comp, _ = resolve_baseline_inputs(
+        completeness_id=completeness_id,
+        connectivity_id=connectivity_id,
+        manifest_path=manifest_path,
+        repo_root=Path(__file__),
+    )
+    df = pd.read_csv(path_comp, index_col=0)
+    all_ids = [int(x) for x in df.index.tolist()]
+    candidates = [i for i in all_ids if i not in set(NEU_SUGAR)]
+    rng = np.random.default_rng(seed)
+    return {
+        "sugar_self": list(NEU_SUGAR),
+        "control_A": rng.choice(candidates, size, replace=False).astype(int).tolist(),
+        "control_B": rng.choice(candidates, size, replace=False).astype(int).tolist(),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Run a small manifest-resolved perturbation smoke sweep."
@@ -153,19 +185,35 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--completeness-id", default=DEFAULT_COMPLETENESS_ID)
     parser.add_argument("--connectivity-id", default=DEFAULT_CONNECTIVITY_ID)
     parser.add_argument("--results-dir", default=DEFAULT_RESULTS_DIR)
-    parser.add_argument("--n-run", type=int, default=5)
-    parser.add_argument("--group-size", type=int, default=10)
+    parser.add_argument("--n-run", type=int, default=None)
+    parser.add_argument("--t-run-ms", type=float, default=None)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--group-size", type=int, default=10)
+    parser.add_argument("--n-proc", type=int, default=1)
     parser.add_argument("--force", action="store_true")
+    parser.add_argument(
+        "--ground-truth-groups",
+        action="store_true",
+        help="Use sugar-self + size-matched controls instead of demo groups",
+    )
     args = parser.parse_args(argv)
 
-    groups = build_demo_groups(
-        manifest_path=args.manifest,
-        completeness_id=args.completeness_id,
-        connectivity_id=args.connectivity_id,
-        seed=args.seed,
-        group_size=args.group_size,
-    )
+    if args.ground_truth_groups:
+        groups = build_sugar_ground_truth_groups(
+            manifest_path=args.manifest,
+            completeness_id=args.completeness_id,
+            connectivity_id=args.connectivity_id,
+            seed=args.seed,
+            group_size=args.group_size,
+        )
+    else:
+        groups = build_demo_groups(
+            manifest_path=args.manifest,
+            completeness_id=args.completeness_id,
+            connectivity_id=args.connectivity_id,
+            seed=args.seed,
+            group_size=args.group_size,
+        )
     summary = run_perturbation_sweep(
         groups,
         force=args.force,
@@ -174,6 +222,9 @@ def main(argv: list[str] | None = None) -> int:
         connectivity_id=args.connectivity_id,
         results_dir=args.results_dir,
         n_run=args.n_run,
+        t_run_ms=args.t_run_ms,
+        random_seed=args.seed,
+        n_proc=args.n_proc,
     )
     print(summary)
     return 0

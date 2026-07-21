@@ -32,6 +32,7 @@ DEFAULT_COMPLETENESS_ID = "2023_03_23_completeness_630_final.csv"
 DEFAULT_CONNECTIVITY_ID = "2023_03_23_connectivity_630_final.parquet"
 DEFAULT_RESULTS_DIR = "results"
 DEFAULT_MANIFEST_PATH = "data/input_manifest.json"
+DEFAULT_EXP_NAME = "baseline_sugar"
 
 NEU_SUGAR = [
     720575940624963786,
@@ -83,37 +84,66 @@ def resolve_baseline_inputs(
     return path_comp, path_con
 
 
+def resolve_results_dir(results_dir: str | Path, repo_root: Path | None = None) -> Path:
+    """Resolve a results directory through the repository root when relative."""
+    root = repo_root if repo_root is not None else _REPO_ROOT
+    path = Path(results_dir)
+    if path.is_absolute():
+        return path
+    return (root / path).resolve()
+
+
+def build_run_params(
+    n_run: int | None = None,
+    t_run_ms: float | None = None,
+    random_seed: int | None = None,
+) -> dict:
+    """Return Brian2 params for a sugar baseline/perturbation run."""
+    params = PARAMS.copy()
+    if n_run is not None:
+        params["n_run"] = int(n_run)
+    if t_run_ms is not None:
+        params["t_run"] = float(t_run_ms) * ms
+    if random_seed is not None:
+        params["random_seed"] = int(random_seed)
+    return params
+
+
 def run_baseline(
     force: bool = False,
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     manifest_path: str = DEFAULT_MANIFEST_PATH,
     results_dir: str = DEFAULT_RESULTS_DIR,
-) -> None:
+    n_run: int | None = None,
+    t_run_ms: float | None = None,
+    random_seed: int | None = None,
+    exp_name: str = DEFAULT_EXP_NAME,
+    n_proc: int = 1,
+) -> Path | None:
     path_comp, path_con = resolve_baseline_inputs(
         completeness_id=completeness_id,
         connectivity_id=connectivity_id,
         manifest_path=manifest_path,
         repo_root=Path(__file__),
     )
-    results_path = Path(results_dir)
-    if not results_path.is_absolute():
-        results_path = _REPO_ROOT / results_path
+    results_path = resolve_results_dir(results_dir)
     results_path.mkdir(parents=True, exist_ok=True)
+    params = build_run_params(n_run=n_run, t_run_ms=t_run_ms, random_seed=random_seed)
     print("Running baseline simulation with manifest-resolved inputs...")
     print(f"Completeness: {path_comp}")
     print(f"Connectivity: {path_con}")
-    run_exp(
-        exp_name="baseline_sugar",
+    print(f"n_run={params['n_run']} seed={params.get('random_seed')}")
+    return run_exp(
+        exp_name=exp_name,
         neu_exc=NEU_SUGAR,
         path_res=str(results_path),
         path_comp=str(path_comp),
         path_con=str(path_con),
-        params=PARAMS,
-        n_proc=1,
+        params=params,
+        n_proc=n_proc,
         force_overwrite=force,
     )
-    print("Baseline done.")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -131,6 +161,11 @@ def main(argv: list[str] | None = None) -> int:
         help="Manifest identifier for connectivity table",
     )
     parser.add_argument("--results-dir", default=DEFAULT_RESULTS_DIR, help="Directory for run outputs")
+    parser.add_argument("--n-run", type=int, default=None, help="Trial count (default: PARAMS n_run)")
+    parser.add_argument("--t-run-ms", type=float, default=None, help="Trial duration in ms")
+    parser.add_argument("--seed", type=int, default=None, help="Random seed for Poisson trials")
+    parser.add_argument("--exp-name", default=DEFAULT_EXP_NAME, help="Output experiment name")
+    parser.add_argument("--n-proc", type=int, default=1, help="Parallel workers (1 recommended)")
     args = parser.parse_args(argv)
     run_baseline(
         force=args.force,
@@ -138,6 +173,11 @@ def main(argv: list[str] | None = None) -> int:
         connectivity_id=args.connectivity_id,
         manifest_path=args.manifest,
         results_dir=args.results_dir,
+        n_run=args.n_run,
+        t_run_ms=args.t_run_ms,
+        random_seed=args.seed,
+        exp_name=args.exp_name,
+        n_proc=args.n_proc,
     )
     return 0
 

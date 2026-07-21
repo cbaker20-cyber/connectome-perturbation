@@ -121,9 +121,11 @@ def silence(slnc, syn):
         Synapses with modified weights
     '''
 
-    for i in slnc:
-        syn.w[' {} == i'.format(i)] = 0*mV
-    
+    # Index by pre-synaptic neuron id. Avoid string expressions that collide
+    # with Brian2's reserved synapse index name ``i`` in the run namespace.
+    for pre_idx in slnc:
+        syn.w[pre_idx, :] = 0 * mV
+
     return syn
 
 def create_model(path_comp, path_con, params):
@@ -293,6 +295,23 @@ def run_trial(exc, exc2, slnc, path_comp, path_con, params):
     return spk_trn
 
 
+def apply_run_seed(seed):
+    '''Seed NumPy and Brian2 RNGs for reproducible Poisson trials.
+
+    Parameters
+    ----------
+    seed : int or None
+        Global seed. When None, leave RNGs unchanged.
+    '''
+    if seed is None:
+        return
+    import numpy as np
+    from brian2 import seed as brian_seed
+
+    np.random.seed(int(seed))
+    brian_seed(int(seed))
+
+
 def run_exp(exp_name, neu_exc, path_res, path_comp, path_con,
             params=default_params, neu_slnc=[], neu_exc2=[], 
             n_proc=-1, force_overwrite=False):
@@ -315,7 +334,8 @@ def run_exp(exp_name, neu_exc, path_res, path_comp, path_con,
         path_con: str
             path to "connectivity" dataframe
         params : dict
-            Constants and equations that are used to construct the brian2 network model
+            Constants and equations that are used to construct the brian2 network model.
+            Optional key ``random_seed`` seeds NumPy/Brian2 before trials.
         neu_slnc : list (optional)
             contains custom names or flywire IDs of neurons to be silenced
         neu_exc2 : list (optional)
@@ -349,7 +369,11 @@ def run_exp(exp_name, neu_exc, path_res, path_comp, path_con,
     print('    Excited neurons: {}'.format(len(neu_exc + neu_exc2)))
     if neu_slnc:
         print('    Silenced neurons: {}'.format(len(neu_slnc)))
-    
+    if params.get('random_seed') is not None:
+        print('    Random seed:    {}'.format(params.get('random_seed')))
+
+    apply_run_seed(params.get('random_seed'))
+
     # start parallel calculation
     n_run = params['n_run']
     start = time() 
@@ -371,3 +395,4 @@ def run_exp(exp_name, neu_exc, path_res, path_comp, path_con,
 
     # store spike data
     df.to_parquet(path_save, compression='brotli')
+    return path_save

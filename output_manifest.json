@@ -1,0 +1,94 @@
+{
+  "claim_status": "simulation_bound_pending_independent_validation",
+  "command": "tools/run_sugar_ground_truth.py --config configs/sugar_ground_truth_30trial.yaml --force",
+  "config_path": "configs/sugar_ground_truth_30trial.yaml",
+  "config_sha256": "18872477eea5cbbfc095dd03a0bfcff0e54b935ad4beb7587be900beb0955cc4",
+  "experiment_id": "E010_sugar_ground_truth",
+  "input_checksums": [
+    {
+      "path": "2023_03_23_completeness_630_final.csv",
+      "sha256": "e6b71e17671a9bdb05f55e4bc6774640a1418cb7a05125e0fc994ad40f9bfdfb",
+      "size_bytes": 3057611
+    },
+    {
+      "path": "2023_03_23_connectivity_630_final.parquet",
+      "sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+      "size_bytes": 86630944
+    },
+    {
+      "path": "Completeness_783.csv",
+      "sha256": "bbb847a4cc2caaa7a16349722d220c087317b946d148d4d592d94d250617a311",
+      "size_bytes": 3327347
+    },
+    {
+      "path": "Connectivity_783.parquet",
+      "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+      "size_bytes": 100804642
+    },
+    {
+      "path": "flywire_annotations.tsv",
+      "sha256": "533db093e12d8de350fd20875a967f8f74acace633ff22118eefff550d5dcbc1",
+      "size_bytes": 32638576
+    }
+  ],
+  "input_manifest_path": "data/input_manifest.json",
+  "input_manifest_present": true,
+  "notes": [
+    "Poisson drive targets the 21 right sugar gustatory neurons in NEU_SUGAR.",
+    "Zero-spike trials are retained in trial-rate statistics.",
+    "Welch t-tests with Benjamini-Hochberg FDR are exported as p_value and p_value_fdr.",
+    "Do not treat control_A/B as annotated biological classes."
+  ],
+  "outputs": [
+    {
+      "path": "results/sugar_ground_truth/baseline_sugar.parquet",
+      "sha256": "b182ff0822ca8bfffe3ec45714ca80a0a90cf6159df16965007d5111a82c4540",
+      "size_bytes": 796454
+    },
+    {
+      "path": "results/sugar_ground_truth/perturbation_groups.json",
+      "sha256": "b907fc7b40fdf46afa2670380531dda0e3aa8647d02b33e6304284c508dcce5e",
+      "size_bytes": 1705
+    },
+    {
+      "path": "results/sugar_ground_truth/perturb_sugar_self.parquet",
+      "sha256": "31687ab52b597fb15133582377c06a5ee09f3c4714b220a830a80d0666a99ea5",
+      "size_bytes": 197561
+    },
+    {
+      "path": "results/sugar_ground_truth/perturb_control_A.parquet",
+      "sha256": "23ba7f3ea699afe77e3865e03ec7669ce7b3d7475dcec4a61b5ab2381c20a0ca",
+      "size_bytes": 796589
+    },
+    {
+      "path": "results/sugar_ground_truth/perturb_control_B.parquet",
+      "sha256": "139af36009b78fcff2b2cea7446e678f8105866ce4fa072a324c134f08190955",
+      "size_bytes": 796589
+    },
+    {
+      "path": "results/sugar_ground_truth/perturbation_summary.csv",
+      "sha256": "2bb3073ae7d9fa89d1b40f72e58f6fdb0e88d03100e23ddee4660e107b1e42db",
+      "size_bytes": 127
+    },
+    {
+      "path": "results/sugar_ground_truth/statistics.csv",
+      "sha256": "23242d77a1af5cd38161cb0e362f010daff3531c89ad5bd7410301292dc5e88e",
+      "size_bytes": 494
+    }
+  ],
+  "repo_commit": "5614b83ec70ec1d7a2fdaca38b11a96994e26bdb",
+  "run_config": {
+    "codegen_target": "numpy",
+    "completeness_id": "2023_03_23_completeness_630_final.csv",
+    "connectivity_id": "2023_03_23_connectivity_630_final.parquet",
+    "n_proc": 1,
+    "n_run": 30,
+    "poisson_rate_hz": 150,
+    "random_seed": 47,
+    "selected_materialization": "630",
+    "t_run_ms": 1000
+  },
+  "run_name": "sugar_ground_truth_30trial",
+  "schema_version": "0.1",
+  "status": "sugar_ground_truth_complete"
+}

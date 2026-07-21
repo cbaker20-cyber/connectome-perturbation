@@ -1,0 +1,4 @@
+group,n_silenced,total_delta_hz,n_neurons_affected
+sugar_self,21,-10513.966666666665,373
+control_A,21,0.0,0
+control_B,21,0.0,0

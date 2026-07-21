@@ -11,3 +11,7 @@ R009,E006,2026-04-02,cell_class,AN,motor_delta_hz,-129.4,,,validated,Strongest v
 R010,E007,2026-04-02,statistics,ascending,motor_delta_hz,-129.0,0.0021,,validated in notebook,Ascending perturbation significant in raw notebook table,Use FDR q from statistics.py output,main/supplement
 R011,E007,2026-04-02,statistics,LO,motor_delta_hz,-39.0,0.1270,,not significant,Trend only,Do not claim significance,supplement
 R012,E007,2026-04-02,statistics,LHCENT,motor_delta_hz,-33.8,0.1579,,not significant,Interesting small-group trend,Do not claim significance,supplement
+R013,E010,2026-07-21,motor output,baseline_sugar,motor_mean_hz,1087.3667,,,completed,30-trial sugar drive ground truth,Bound parquet+manifest,methods
+R014,E010,2026-07-21,statistics,sugar_self,motor_hz,-1087.3667,0.0,0.0,validated in this run,Silencing driven sugar neurons abolishes motor output under sugar context,Positive control,main/supplement
+R015,E010,2026-07-21,statistics,control_A,delta_hz,0.0,1.0,1.0,null control,Size-matched non-sugar silence; no motor change,Not a cell-class claim,supplement
+R016,E010,2026-07-21,statistics,control_B,delta_hz,0.0,1.0,1.0,null control,Size-matched non-sugar silence; no motor change,Not a cell-class claim,supplement

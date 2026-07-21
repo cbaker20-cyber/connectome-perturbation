@@ -1,0 +1,4 @@
+label,exp_name,baseline_mean_hz,perturbed_mean_hz,delta_hz,pct_change,t_stat,p_value,p_value_raw,p_value_fdr,n_baseline_trials,n_perturbed_trials,significant_uncorrected,significant_fdr,significant
+sugar_self,perturb_sugar_self,1087.3667,0.0,-1087.3667,-100.0,123.9456,0.0,0.0,0.0,30,30,True,True,True
+control_A,perturb_control_A,1087.3667,1087.3667,0.0,0.0,0.0,1.0,1.0,1.0,30,30,False,False,False
+control_B,perturb_control_B,1087.3667,1087.3667,0.0,0.0,0.0,1.0,1.0,1.0,30,30,False,False,False

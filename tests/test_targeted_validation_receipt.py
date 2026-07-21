@@ -184,7 +184,12 @@ def test_fails_before_receipt_when_declared_bytes_change(tmp_path):
 def test_rejects_summary_path_not_declared_as_the_parsed_artifact(tmp_path):
     manifest = _staged_run(tmp_path)
 
-    with pytest.raises(ValueError, match="exactly one manifest output record"):
+    # sweep_run_info.csv is a declared output but not a valid summary schema.
+    # Fail-closed validation must reject it before issuing a receipt.
+    with pytest.raises(
+        ValueError,
+        match="summary CSV header must equal|exactly one manifest output record",
+    ):
         validate_targeted_validation_run(
             manifest,
             tmp_path,

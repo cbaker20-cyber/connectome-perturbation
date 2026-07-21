@@ -32,6 +32,7 @@ jobs:
             tests/test_manifest_counts.py \
             tests/test_path_resolver_boundaries.py \
             tests/test_ceo047_path_migration.py \
+            tests/test_ceo007_sugar_ground_truth.py \
             tests/test_input_manifest_record_validation.py \
             tests/test_validate_neuron_ids.py \
             tests/test_validate_neuron_ids_csv_headers.py \
@@ -41,6 +42,7 @@ jobs:
             tests/test_node_lesion.py \
             tests/test_connection_lesion.py \
             tests/test_validate_atlas.py \
+            -m "not brian2" \
             -q
 
       - name: Validate committed input manifest
@@ -59,6 +61,7 @@ jobs:
             tools/validate_neuron_ids.py \
             tools/validate_atlas.py \
             tools/write_toy_graph_artifact.py \
+            tools/run_sugar_ground_truth.py \
             connectome_analysis/graph_metrics.py \
             connectome_analysis/toy_signal.py \
             connectome_analysis/node_lesion.py \

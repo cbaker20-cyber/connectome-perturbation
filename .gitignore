@@ -1,4 +1,7 @@
 venv/
-results/
-__pycache__/
+results/*
 !results/perturbation_summary.csv
+!results/sugar_ground_truth/
+!results/sugar_ground_truth/**
+!output_manifest.json
+__pycache__/

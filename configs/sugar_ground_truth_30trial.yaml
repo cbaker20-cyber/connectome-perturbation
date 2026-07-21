@@ -1,0 +1,32 @@
+# CEO-007: 30-trial sugar stimulation ground-truth configuration.
+# Drives the 21 right sugar gustatory neurons under Poisson input.
+# This is a biological-validation run config, not a metadata-only smoke file.
+
+run_name: sugar_ground_truth_30trial
+experiment_id: E010_sugar_ground_truth
+random_seed: 47
+selected_materialization: "630"
+mode: brian2_simulation
+n_run: 30
+t_run_ms: 1000
+n_proc: 1
+codegen_target: numpy
+poisson_rate_hz: 150
+completeness_id: 2023_03_23_completeness_630_final.csv
+connectivity_id: 2023_03_23_connectivity_630_final.parquet
+input_manifest: data/input_manifest.json
+output_manifest: output_manifest.json
+results_dir: results/sugar_ground_truth
+baseline_exp_name: baseline_sugar
+# Size-matched silencing conditions under the same sugar drive enable FDR export.
+# sugar_self is a positive control (silence the driven sugar neurons).
+# control_A/B are deterministic non-sugar size-matched silences (not cell-class claims).
+perturbation_group_size: 21
+control_seed: 47
+statistics_output: statistics.csv
+claim_status: simulation_bound_pending_independent_validation
+notes:
+  - Poisson drive targets the 21 right sugar gustatory neurons in NEU_SUGAR.
+  - Zero-spike trials are retained in trial-rate statistics.
+  - Welch t-tests with Benjamini-Hochberg FDR are exported as p_value and p_value_fdr.
+  - Do not treat control_A/B as annotated biological classes.
