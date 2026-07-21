@@ -1,3 +1,5 @@
+"""Manifest-resolved sugar-input perturbation sweeps."""
+
 from __future__ import annotations
 
 import argparse
@@ -7,26 +9,33 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
+# Bootstrap: make the repository root importable before loading the resolver.
+_BOOTSTRAP_ROOT = Path(__file__).resolve().parents[1]
+if str(_BOOTSTRAP_ROOT) not in sys.path:
+    sys.path.insert(0, str(_BOOTSTRAP_ROOT))
 
-from model import run_exp  # type: ignore  # noqa: E402
+from tools.path_resolver import ensure_repo_on_path
+
+_REPO_ROOT = ensure_repo_on_path(Path(__file__))
+
 from analyze import compare_to_baseline  # noqa: E402
 from baseline import (  # noqa: E402
     DEFAULT_COMPLETENESS_ID,
     DEFAULT_CONNECTIVITY_ID,
+    DEFAULT_MANIFEST_PATH,
     DEFAULT_RESULTS_DIR,
     NEU_SUGAR,
     PARAMS,
     resolve_baseline_inputs,
 )
+from model import run_exp  # noqa: E402
 
 
 def run_single_perturbation(
     neuron_ids: list[int],
     exp_name: str,
     force: bool = False,
-    manifest_path: str = "data/input_manifest.json",
+    manifest_path: str = DEFAULT_MANIFEST_PATH,
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     results_dir: str = DEFAULT_RESULTS_DIR,
@@ -38,15 +47,19 @@ def run_single_perturbation(
         completeness_id=completeness_id,
         connectivity_id=connectivity_id,
         manifest_path=manifest_path,
+        repo_root=Path(__file__),
     )
-    Path(results_dir).mkdir(parents=True, exist_ok=True)
+    results_path = Path(results_dir)
+    if not results_path.is_absolute():
+        results_path = _REPO_ROOT / results_path
+    results_path.mkdir(parents=True, exist_ok=True)
     params = PARAMS.copy()
     params["n_run"] = n_run
     run_exp(
         exp_name=exp_name,
         neu_exc=NEU_SUGAR,
         neu_slnc=neuron_ids,
-        path_res=results_dir,
+        path_res=str(results_path),
         path_comp=str(path_comp),
         path_con=str(path_con),
         params=params,
@@ -58,13 +71,17 @@ def run_single_perturbation(
 def run_perturbation_sweep(
     groups: dict[str, list[int]],
     force: bool = False,
-    manifest_path: str = "data/input_manifest.json",
+    manifest_path: str = DEFAULT_MANIFEST_PATH,
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     results_dir: str = DEFAULT_RESULTS_DIR,
     n_run: int = 5,
 ) -> pd.DataFrame:
     """Run a small perturbation sweep and compare each result to the baseline."""
+
+    results_path = Path(results_dir)
+    if not results_path.is_absolute():
+        results_path = _REPO_ROOT / results_path
 
     results = []
     for group_name, neuron_ids in groups.items():
@@ -77,10 +94,10 @@ def run_perturbation_sweep(
             manifest_path=manifest_path,
             completeness_id=completeness_id,
             connectivity_id=connectivity_id,
-            results_dir=results_dir,
+            results_dir=str(results_path),
             n_run=n_run,
         )
-        comparison = compare_to_baseline(exp_name, path_res=results_dir)
+        comparison = compare_to_baseline(exp_name, path_res=results_path)
         total_delta = comparison["delta_hz"].sum()
         n_affected = (comparison["delta_hz"].abs() > 0.5).sum()
         results.append(
@@ -91,9 +108,12 @@ def run_perturbation_sweep(
                 "n_neurons_affected": n_affected,
             }
         )
-        print(f"    Total firing change: {total_delta:.1f} Hz | Neurons affected: {n_affected}")
+        print(
+            f"    Total firing change: {total_delta:.1f} Hz | "
+            f"Neurons affected: {n_affected}"
+        )
     summary = pd.DataFrame(results).set_index("group")
-    summary_path = Path(results_dir) / "perturbation_summary.csv"
+    summary_path = results_path / "perturbation_summary.csv"
     summary.to_csv(summary_path)
     print(f"Summary saved to {summary_path}")
     return summary
@@ -106,12 +126,13 @@ def build_demo_groups(
     seed: int,
     group_size: int,
 ) -> dict[str, list[int]]:
-    """Build deterministic toy-sized random groups from the manifest-resolved completeness table."""
+    """Build deterministic toy-sized random groups from the completeness table."""
 
     path_comp, _ = resolve_baseline_inputs(
         completeness_id=completeness_id,
         connectivity_id=connectivity_id,
         manifest_path=manifest_path,
+        repo_root=Path(__file__),
     )
     df = pd.read_csv(path_comp, index_col=0)
     all_ids = [int(x) for x in df.index.tolist()]
@@ -125,8 +146,10 @@ def build_demo_groups(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Run a small manifest-resolved perturbation smoke sweep.")
-    parser.add_argument("--manifest", default="data/input_manifest.json")
+    parser = argparse.ArgumentParser(
+        description="Run a small manifest-resolved perturbation smoke sweep."
+    )
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST_PATH)
     parser.add_argument("--completeness-id", default=DEFAULT_COMPLETENESS_ID)
     parser.add_argument("--connectivity-id", default=DEFAULT_CONNECTIVITY_ID)
     parser.add_argument("--results-dir", default=DEFAULT_RESULTS_DIR)

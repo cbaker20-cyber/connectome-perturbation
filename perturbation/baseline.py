@@ -1,9 +1,8 @@
 """Run the baseline sugar stimulation experiment.
 
-This entry point now resolves input data through ``data/input_manifest.json`` by
-filename by default. That keeps the legacy experiment runnable while forcing the
-next validation step to depend on a manifest/checksum record instead of hidden
-hard-coded data assumptions.
+This entry point resolves input data through ``data/input_manifest.json`` by
+filename via ``tools.path_resolver.resolve_input``. Scripts remain runnable
+from any working directory.
 """
 
 from __future__ import annotations
@@ -12,10 +11,18 @@ import argparse
 import sys
 from pathlib import Path
 
-from brian2 import ms
+# Bootstrap: make the repository root importable before loading the resolver.
+_BOOTSTRAP_ROOT = Path(__file__).resolve().parents[1]
+if str(_BOOTSTRAP_ROOT) not in sys.path:
+    sys.path.insert(0, str(_BOOTSTRAP_ROOT))
 
-from model import default_params, run_exp
-from tools.path_resolver import resolve_input
+from tools.path_resolver import ensure_repo_on_path, resolve_input
+
+_REPO_ROOT = ensure_repo_on_path(Path(__file__))
+
+from brian2 import ms  # noqa: E402
+
+from model import default_params, run_exp  # noqa: E402
 
 PARAMS = default_params.copy()
 PARAMS["n_run"] = 5
@@ -24,6 +31,7 @@ PARAMS["t_run"] = 1000 * ms
 DEFAULT_COMPLETENESS_ID = "2023_03_23_completeness_630_final.csv"
 DEFAULT_CONNECTIVITY_ID = "2023_03_23_connectivity_630_final.parquet"
 DEFAULT_RESULTS_DIR = "results"
+DEFAULT_MANIFEST_PATH = "data/input_manifest.json"
 
 NEU_SUGAR = [
     720575940624963786,
@@ -53,17 +61,25 @@ NEU_SUGAR = [
 def resolve_baseline_inputs(
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
-    manifest_path: str = "data/input_manifest.json",
+    manifest_path: str = DEFAULT_MANIFEST_PATH,
+    repo_root: Path | None = None,
 ) -> tuple[Path, Path]:
     """Resolve baseline input files from the manifest.
 
     The defaults intentionally use exact filenames rather than vague roles,
     because the manifest can contain multiple connectivity/completeness tables
     and the resolver refuses ambiguous identifiers.
-    """
 
-    path_comp = resolve_input(completeness_id, manifest_path=manifest_path)
-    path_con = resolve_input(connectivity_id, manifest_path=manifest_path)
+    ``repo_root`` defaults to this file's repository so resolution does not
+    depend on the caller's current working directory.
+    """
+    root = repo_root if repo_root is not None else Path(__file__)
+    path_comp = resolve_input(
+        completeness_id, manifest_path=manifest_path, repo_root=root
+    )
+    path_con = resolve_input(
+        connectivity_id, manifest_path=manifest_path, repo_root=root
+    )
     return path_comp, path_con
 
 
@@ -71,22 +87,26 @@ def run_baseline(
     force: bool = False,
     completeness_id: str = DEFAULT_COMPLETENESS_ID,
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
-    manifest_path: str = "data/input_manifest.json",
+    manifest_path: str = DEFAULT_MANIFEST_PATH,
     results_dir: str = DEFAULT_RESULTS_DIR,
 ) -> None:
     path_comp, path_con = resolve_baseline_inputs(
         completeness_id=completeness_id,
         connectivity_id=connectivity_id,
         manifest_path=manifest_path,
+        repo_root=Path(__file__),
     )
-    Path(results_dir).mkdir(exist_ok=True)
+    results_path = Path(results_dir)
+    if not results_path.is_absolute():
+        results_path = _REPO_ROOT / results_path
+    results_path.mkdir(parents=True, exist_ok=True)
     print("Running baseline simulation with manifest-resolved inputs...")
     print(f"Completeness: {path_comp}")
     print(f"Connectivity: {path_con}")
     run_exp(
         exp_name="baseline_sugar",
         neu_exc=NEU_SUGAR,
-        path_res=results_dir,
+        path_res=str(results_path),
         path_comp=str(path_comp),
         path_con=str(path_con),
         params=PARAMS,
@@ -99,9 +119,17 @@ def run_baseline(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--force", action="store_true", help="Overwrite existing baseline outputs")
-    parser.add_argument("--manifest", default="data/input_manifest.json", help="Input manifest path")
-    parser.add_argument("--completeness-id", default=DEFAULT_COMPLETENESS_ID, help="Manifest identifier for completeness table")
-    parser.add_argument("--connectivity-id", default=DEFAULT_CONNECTIVITY_ID, help="Manifest identifier for connectivity table")
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST_PATH, help="Input manifest path")
+    parser.add_argument(
+        "--completeness-id",
+        default=DEFAULT_COMPLETENESS_ID,
+        help="Manifest identifier for completeness table",
+    )
+    parser.add_argument(
+        "--connectivity-id",
+        default=DEFAULT_CONNECTIVITY_ID,
+        help="Manifest identifier for connectivity table",
+    )
     parser.add_argument("--results-dir", default=DEFAULT_RESULTS_DIR, help="Directory for run outputs")
     args = parser.parse_args(argv)
     run_baseline(

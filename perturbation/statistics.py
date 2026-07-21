@@ -1,3 +1,7 @@
+"""Trial-level motor-rate statistics with raw and FDR-corrected p-values."""
+
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 
@@ -6,13 +10,18 @@ import pandas as pd
 from scipy import stats
 from statsmodels.stats.multitest import multipletests
 
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
+# Bootstrap: make the repository root importable before loading the resolver.
+_BOOTSTRAP_ROOT = Path(__file__).resolve().parents[1]
+if str(_BOOTSTRAP_ROOT) not in sys.path:
+    sys.path.insert(0, str(_BOOTSTRAP_ROOT))
 
-from cell_groups import get_group
+from tools.path_resolver import ensure_repo_on_path, repo_root_from
 
+_REPO_ROOT = ensure_repo_on_path(Path(__file__))
 
-PATH_RES = Path("results")
+from cell_groups import get_group  # noqa: E402
+
+PATH_RES = "results"
 BASELINE_NAME = "baseline_sugar"
 T_RUN = 1.0
 ALPHA = 0.05
@@ -30,6 +39,34 @@ TARGETS = [
     ("perturb_ascending", "ascending"),
 ]
 
+# Explicit export schema: raw p_value and FDR q-value must both be present.
+EXPORT_COLUMNS = [
+    "exp_name",
+    "baseline_mean_hz",
+    "perturbed_mean_hz",
+    "delta_hz",
+    "pct_change",
+    "t_stat",
+    "p_value",
+    "p_value_raw",
+    "p_value_fdr",
+    "n_baseline_trials",
+    "n_perturbed_trials",
+    "significant_uncorrected",
+    "significant_fdr",
+    "significant",
+]
+
+
+def _resolve_results_dir(path_res: str | Path | None = None) -> Path:
+    """Resolve a results directory relative to the repository when needed."""
+    if path_res is None:
+        path_res = PATH_RES
+    path = Path(path_res)
+    if path.is_absolute():
+        return path
+    return repo_root_from(Path(__file__)) / path
+
 
 def load_spike_table(exp_name, path_res=PATH_RES):
     """
@@ -39,7 +76,7 @@ def load_spike_table(exp_name, path_res=PATH_RES):
         - trial
         - flywire_id
     """
-    path = Path(path_res) / f"{exp_name}.parquet"
+    path = _resolve_results_dir(path_res) / f"{exp_name}.parquet"
 
     if not path.exists():
         raise FileNotFoundError(f"Missing result file: {path}")
@@ -164,16 +201,18 @@ def apply_fdr_correction(df, alpha=ALPHA, p_col="p_value_raw"):
     """
     Apply Benjamini-Hochberg FDR correction across all valid p-values.
 
-    Adds:
-        - p_value_fdr
+    Adds / preserves:
+        - p_value_raw (unchanged)
+        - p_value       (raw p-value alias for CEO-047 / downstream consumers)
+        - p_value_fdr   (Benjamini-Hochberg q-value)
         - significant_uncorrected
         - significant_fdr
-        - significant
-
-    The old `significant` column is kept for compatibility, but now it means
-    FDR-corrected significance, not raw p < 0.05.
+        - significant   (FDR-corrected; kept for older plotting scripts)
     """
     df = df.copy()
+
+    if p_col not in df.columns:
+        raise KeyError(f"Missing p-value column for FDR correction: {p_col}")
 
     df["p_value_fdr"] = np.nan
     df["significant_uncorrected"] = False
@@ -193,9 +232,9 @@ def apply_fdr_correction(df, alpha=ALPHA, p_col="p_value_raw"):
         df.loc[valid, "p_value_fdr"] = q_values
         df.loc[valid, "significant_fdr"] = reject
 
-    # Backward-compatible columns for old plotting/figure scripts.
+    # CEO-047: export raw p as ``p_value`` and FDR q as ``p_value_fdr``.
+    df["p_value"] = df[p_col]
     df["significant"] = df["significant_fdr"]
-    df["p_value"] = df["p_value_fdr"]
 
     return df
 
@@ -207,14 +246,19 @@ def run_statistics(
     t_run=T_RUN,
     path_res=PATH_RES,
     output_name="statistics.csv",
+    motor_ids=None,
 ):
     """
-    Run all configured perturbation comparisons and save results/statistics.csv.
+    Run all configured perturbation comparisons and save statistics.csv.
+
+    The exported table always includes both ``p_value`` (raw) and
+    ``p_value_fdr`` (Benjamini-Hochberg q-value).
     """
-    path_res = Path(path_res)
+    path_res = _resolve_results_dir(path_res)
 
     rows = []
-    motor_ids = get_group(super_class="motor")
+    if motor_ids is None:
+        motor_ids = get_group(super_class="motor")
 
     for exp_name, label in targets:
         try:
@@ -251,14 +295,23 @@ def run_statistics(
         "delta_hz",
         "pct_change",
         "t_stat",
+        "p_value",
         "p_value_raw",
         "p_value_fdr",
-        "p_value",
     ]
 
     for col in round_cols:
         if col in save_df.columns:
             save_df[col] = save_df[col].round(4)
+
+    # Guarantee both raw and FDR columns are present in the exported schema.
+    for required in ("p_value", "p_value_fdr"):
+        if required not in save_df.columns:
+            raise RuntimeError(f"statistics export missing required column: {required}")
+
+    ordered = [col for col in EXPORT_COLUMNS if col in save_df.columns]
+    remaining = [col for col in save_df.columns if col not in ordered]
+    save_df = save_df[ordered + remaining]
 
     path_res.mkdir(parents=True, exist_ok=True)
 
@@ -271,7 +324,7 @@ def run_statistics(
         print(
             f"{label:20s}  "
             f"delta={row['delta_hz']:8.1f} Hz  "
-            f"raw p={row['p_value_raw']:.4g}  "
+            f"raw p={row['p_value']:.4g}  "
             f"FDR q={row['p_value_fdr']:.4g}  "
             f"{sig}"
         )
