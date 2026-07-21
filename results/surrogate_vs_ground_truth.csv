@@ -1,0 +1,6 @@
+comparison,predicted_metric,actual_metric,n_pairs,paired_keys,spearman_rs,pearson_r,claim_status,motor_delta_hz_sum,motor_drop_hz_sum
+path_attenuation_vs_motor_drop,path_attenuation_ratio,motor_drop_hz_sum,0,,,,not_interpretable_as_neuroscience,,
+modal_controllability_vs_motor_drop,modal_controllability,motor_drop_hz_sum,0,,,,not_interpretable_as_neuroscience,,
+ground_truth_condition,,motor_delta_hz_sum,2,perturb_control_A,,,not_interpretable_as_neuroscience,0.0,0.0
+ground_truth_condition,,motor_delta_hz_sum,2,perturb_control_B,,,not_interpretable_as_neuroscience,0.0,0.0
+ground_truth_condition,,motor_delta_hz_sum,2,perturb_sugar_self,,,not_interpretable_as_neuroscience,0.0,0.0

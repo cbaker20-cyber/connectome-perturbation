@@ -1,11 +1,13 @@
 venv/
 results/*
+__pycache__/
 !results/perturbation_summary.csv
 !results/sugar_ground_truth/
 !results/sugar_ground_truth/**
 !results/surrogate_correlations.csv
+!results/surrogate_vs_ground_truth.csv
 !results/bora_routing_scores.csv
 !results/disinhibition_motifs.csv
 !results/an_betweenness_control.csv
+!results/sugar_vs_jo_context_shift.csv
 !output_manifest.json
-__pycache__/
