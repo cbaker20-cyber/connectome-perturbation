@@ -31,8 +31,13 @@ def run_single_perturbation(
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     results_dir: str = DEFAULT_RESULTS_DIR,
     n_run: int = 5,
+    neu_exc: list[int] | None = None,
 ) -> None:
-    """Run one sugar-input perturbation with manifest-resolved inputs."""
+    """Run one sensory-input perturbation with manifest-resolved inputs.
+
+    ``neu_exc`` defaults to the sugar sensory set so legacy callers keep working.
+    Dual-context sweeps (e.g. Johnston's Organ) pass an alternate excitation list.
+    """
 
     path_comp, path_con = resolve_baseline_inputs(
         completeness_id=completeness_id,
@@ -44,7 +49,7 @@ def run_single_perturbation(
     params["n_run"] = n_run
     run_exp(
         exp_name=exp_name,
-        neu_exc=NEU_SUGAR,
+        neu_exc=list(NEU_SUGAR if neu_exc is None else neu_exc),
         neu_slnc=neuron_ids,
         path_res=results_dir,
         path_comp=str(path_comp),
@@ -63,6 +68,8 @@ def run_perturbation_sweep(
     connectivity_id: str = DEFAULT_CONNECTIVITY_ID,
     results_dir: str = DEFAULT_RESULTS_DIR,
     n_run: int = 5,
+    neu_exc: list[int] | None = None,
+    baseline_name: str = "baseline_sugar",
 ) -> pd.DataFrame:
     """Run a small perturbation sweep and compare each result to the baseline."""
 
@@ -79,8 +86,13 @@ def run_perturbation_sweep(
             connectivity_id=connectivity_id,
             results_dir=results_dir,
             n_run=n_run,
+            neu_exc=neu_exc,
         )
-        comparison = compare_to_baseline(exp_name, path_res=results_dir)
+        comparison = compare_to_baseline(
+            exp_name,
+            baseline_name=baseline_name,
+            path_res=results_dir,
+        )
         total_delta = comparison["delta_hz"].sum()
         n_affected = (comparison["delta_hz"].abs() > 0.5).sum()
         results.append(
