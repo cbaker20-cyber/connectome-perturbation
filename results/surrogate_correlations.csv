@@ -1,0 +1,11 @@
+metric,value,node_or_group,paired_metric,spearman_rho,claim_status,fixture_seed
+modal_controllability_mean,0.9398980392739821,all,,,not_interpretable_as_neuroscience,57
+path_attenuation_ratio,0.7800805289728192,gate_feeding_biased,,,not_interpretable_as_neuroscience,57
+path_attenuation_ratio,0.2010017371983237,gate_grooming_biased,,,not_interpretable_as_neuroscience,57
+surrogate_correlation,0.14285714285714285,all,modal_controllability_vs_motor_outstrength_proxy,0.14285714285714285,not_interpretable_as_neuroscience,57
+modal_controllability,0.0,0,,,not_interpretable_as_neuroscience,57
+modal_controllability,0.20293910380513958,1,,,not_interpretable_as_neuroscience,57
+modal_controllability,0.17105275321218044,2,,,not_interpretable_as_neuroscience,57
+modal_controllability,1.483624520345385,3,,,not_interpretable_as_neuroscience,57
+modal_controllability,1.8522393036831017,4,,,not_interpretable_as_neuroscience,57
+modal_controllability,1.9295325545980861,5,,,not_interpretable_as_neuroscience,57
