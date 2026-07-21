@@ -1,4 +1,8 @@
 venv/
-results/
+results/*
 __pycache__/
 !results/perturbation_summary.csv
+!results/surrogate_correlations.csv
+!results/bora_routing_scores.csv
+!results/disinhibition_motifs.csv
+!results/an_betweenness_control.csv

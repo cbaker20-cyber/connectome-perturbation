@@ -1,0 +1,48 @@
+{
+  "schema_version": "atlas-structural-baseline-table/v0",
+  "artifact_type": "synthetic_structural_baseline_table",
+  "claim_status": "not_interpretable_as_neuroscience",
+  "node_ids": [
+    "9007199254740993",
+    "b",
+    "c"
+  ],
+  "metrics": [
+    "in_degree",
+    "out_degree",
+    "weighted_in_degree",
+    "weighted_out_degree",
+    "weighted_degree"
+  ],
+  "rows": [
+    {
+      "node_id": "9007199254740993",
+      "in_degree": 1,
+      "out_degree": 2,
+      "weighted_in_degree": 1.0,
+      "weighted_out_degree": 5.5,
+      "weighted_degree": 6.5
+    },
+    {
+      "node_id": "b",
+      "in_degree": 3,
+      "out_degree": 1,
+      "weighted_in_degree": 9.5,
+      "weighted_out_degree": 4.0,
+      "weighted_degree": 13.5
+    },
+    {
+      "node_id": "c",
+      "in_degree": 0,
+      "out_degree": 1,
+      "weighted_in_degree": 0.0,
+      "weighted_out_degree": 1.0,
+      "weighted_degree": 1.0
+    }
+  ],
+  "limitations": [
+    "Degree statistics describe only the supplied synthetic edge table.",
+    "High degree is not equivalent to functional importance or biological vulnerability.",
+    "This artifact does not establish neural dynamics, behavior, mechanism, or causality."
+  ]
+}

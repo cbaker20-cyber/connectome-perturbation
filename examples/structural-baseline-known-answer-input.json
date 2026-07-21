@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    "9007199254740993",
+    "b",
+    "c"
+  ],
+  "edges": [
+    {"source": "9007199254740993", "target": "b", "weight": 2},
+    {"source": "9007199254740993", "target": "b", "weight": 3.5},
+    {"source": "b", "target": "b", "weight": 4},
+    {"source": "c", "target": "9007199254740993", "weight": 1}
+  ]
+}

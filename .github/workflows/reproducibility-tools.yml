@@ -1,0 +1,70 @@
+name: Reproducibility Tools
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproducibility-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest numpy
+
+      - name: Run reproducibility tool tests
+        run: |
+          python -m pytest \
+            tests/test_reproducibility_tools.py \
+            tests/test_build_input_manifest.py \
+            tests/test_manifest_counts.py \
+            tests/test_path_resolver_boundaries.py \
+            tests/test_input_manifest_record_validation.py \
+            tests/test_validate_neuron_ids.py \
+            tests/test_validate_neuron_ids_csv_headers.py \
+            tests/test_validate_neuron_ids_provenance_columns.py \
+            tests/test_write_toy_graph_artifact.py \
+            tests/test_toy_signal.py \
+            tests/test_node_lesion.py \
+            tests/test_connection_lesion.py \
+            tests/test_validate_atlas.py \
+            tests/test_math_surrogates.py \
+            -q
+
+      - name: Validate committed input manifest
+        run: |
+          python tools/validate_reproducibility.py \
+            --input-manifest data/input_manifest.json \
+            --skip-output-manifest
+
+      - name: Compile metadata tooling
+        run: |
+          python -m py_compile \
+            tools/build_input_manifest.py \
+            tools/path_resolver.py \
+            tools/write_output_manifest.py \
+            tools/validate_reproducibility.py \
+            tools/validate_neuron_ids.py \
+            tools/validate_atlas.py \
+            tools/write_toy_graph_artifact.py \
+            connectome_analysis/graph_metrics.py \
+            connectome_analysis/toy_signal.py \
+            connectome_analysis/node_lesion.py \
+            connectome_analysis/connection_lesion.py \
+            connectome_analysis/graph_surrogates.py \
+            connectome_analysis/bora_routing.py \
+            perturbation/analyze.py \
+            perturbation/baseline.py \
+            perturbation/perturb.py
