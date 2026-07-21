@@ -91,3 +91,12 @@ Use this file for anything that changes how results are produced or interpreted.
 **Files/area:** `path_analysis.py`, `analyze_graph_outputs.py`  
 **Change:** Added task-specific source-to-target pathway analysis and degree-matched null logic.  
 **Scientific consequence:** Prevents overclaiming global graph centrality. Supports a more mature story: perturbation effects are functional and may depend on task-specific pathways rather than whole-brain centrality alone.
+
+---
+
+## M011 — BORA CLI permutations + pip requirements mirror
+
+**Date:** 2026-07-21  
+**Files/area:** `connectome_analysis/bora_routing.py`, `requirements.txt`  
+**Change:** Added `--permutations` / `--seed` / `--output` CLI to BORA routing so overnight null bootstraps are invokable without editing defaults. Added a pip `requirements.txt` mirroring core `environment.yml` deps (plus scipy/PyYAML) for env repair when conda is unavailable.  
+**Scientific consequence:** Enables fixed-seed, larger null draws for structural BORA scores only. Outputs remain `not_interpretable_as_neuroscience` until full provenance is attached.

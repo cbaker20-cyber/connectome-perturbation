@@ -1,0 +1,11 @@
+# Pip-installable mirror of environment.yml core deps for CI/smoke paths.
+# Prefer conda env from environment.yml for Brian2-heavy overnight runs.
+brian2==2.5.1
+numpy==1.24.*
+pandas
+joblib
+pyarrow
+scipy
+PyYAML
+pytest
+setuptools<81
