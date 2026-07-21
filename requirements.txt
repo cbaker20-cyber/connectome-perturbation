@@ -1,6 +1,8 @@
 # Pip-installable mirror of environment.yml core deps for CI/smoke paths.
 # Prefer conda env from environment.yml for Brian2-heavy overnight runs.
 brian2==2.5.1
+# Brian2 2.5.1 imports Cython.Utils.get_cython_cache_dir (removed in Cython 3.x).
+Cython>=0.29,<3.0
 numpy==1.24.*
 pandas
 joblib

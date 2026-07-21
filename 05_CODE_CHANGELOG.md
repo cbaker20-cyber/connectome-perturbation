@@ -98,5 +98,5 @@ Use this file for anything that changes how results are produced or interpreted.
 
 **Date:** 2026-07-21  
 **Files/area:** `connectome_analysis/bora_routing.py`, `requirements.txt`  
-**Change:** Added `--permutations` / `--seed` / `--output` CLI to BORA routing so overnight null bootstraps are invokable without editing defaults. Added a pip `requirements.txt` mirroring core `environment.yml` deps (plus scipy/PyYAML) for env repair when conda is unavailable.  
-**Scientific consequence:** Enables fixed-seed, larger null draws for structural BORA scores only. Outputs remain `not_interpretable_as_neuroscience` until full provenance is attached.
+**Change:** Added `--permutations` / `--seed` / `--output` CLI to BORA routing so overnight null bootstraps are invokable without editing defaults. Added a pip `requirements.txt` mirroring core `environment.yml` deps (plus scipy/PyYAML) for env repair when conda is unavailable. Pinned `Cython>=0.29,<3.0` because Brian2 2.5.1 needs `Cython.Utils.get_cython_cache_dir` (removed in Cython 3.x); without this pin Brian2 silently falls back to numpy codegen.  
+**Scientific consequence:** Enables fixed-seed, larger null draws for structural BORA scores only. Restores Cython codegen for overnight JO Brian2 sweeps so 30-trial runs remain computationally feasible. Outputs remain `not_interpretable_as_neuroscience` until full provenance is attached.
