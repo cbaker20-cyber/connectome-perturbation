@@ -1,0 +1,90 @@
+{
+  "schema_version": "1",
+  "contract": "docs/neuron-id-validation-contract.md",
+  "claim_boundary": "These cases test identifier representation only; they do not validate dataset identity, neuron identity, materialization membership, biological interpretation, or neuroscience claims.",
+  "cases": [
+    {
+      "name": "valid_above_js_safe_integer",
+      "candidate": "9007199254740993",
+      "expected_status": "valid_exact_string"
+    },
+    {
+      "name": "valid_larger_decimal_string",
+      "candidate": "720575940621039145",
+      "expected_status": "valid_exact_string"
+    },
+    {
+      "name": "valid_leading_zeroes_preserved",
+      "candidate": "000123",
+      "expected_status": "valid_exact_string",
+      "expected_preserved_value": "000123"
+    },
+    {
+      "name": "invalid_json_integer",
+      "candidate": 9007199254740993,
+      "expected_status": "invalid_type"
+    },
+    {
+      "name": "invalid_float",
+      "candidate": 9007199254740992.0,
+      "expected_status": "invalid_type"
+    },
+    {
+      "name": "invalid_scientific_notation_string",
+      "candidate": "9.007199254740993e15",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "invalid_decimal_string",
+      "candidate": "9007199254740993.0",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "invalid_positive_sign",
+      "candidate": "+123",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "invalid_negative_sign",
+      "candidate": "-123",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "invalid_leading_whitespace",
+      "candidate": " 123",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "invalid_trailing_whitespace",
+      "candidate": "123 ",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "missing_empty_string",
+      "candidate": "",
+      "expected_status": "missing_value"
+    },
+    {
+      "name": "missing_null",
+      "candidate": null,
+      "expected_status": "missing_value"
+    },
+    {
+      "name": "invalid_non_decimal_characters",
+      "candidate": "12A3",
+      "expected_status": "invalid_format"
+    },
+    {
+      "name": "suspected_precision_loss_with_original_text",
+      "candidate": "9007199254740992",
+      "original_text": "9007199254740993",
+      "expected_status": "suspected_precision_loss"
+    },
+    {
+      "name": "syntactically_valid_but_precision_unverified_without_original",
+      "candidate": "9007199254740992",
+      "provenance_original_text_available": false,
+      "expected_status": "unverified_precision"
+    }
+  ]
+}
