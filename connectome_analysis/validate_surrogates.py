@@ -97,6 +97,18 @@ def extract_provenance(manifest: dict[str, Any]) -> tuple[str, int]:
     return commit_sha, int(seed)
 
 
+def resolve_baseline_exp_name(manifest: dict[str, Any], *, fallback: str = "baseline_jo") -> str:
+    """Read baseline parquet stem from an output manifest (top-level or simulation)."""
+    name = manifest.get("baseline_exp_name")
+    if name:
+        return str(name)
+    sim = manifest.get("simulation") or {}
+    name = sim.get("baseline_exp_name")
+    if name:
+        return str(name)
+    return fallback
+
+
 def load_spike_table(parquet_id: str, *, repo_root: Path | None = None) -> pd.DataFrame:
     path = resolve_repo_input(parquet_id, repo_root=repo_root)
     df = pd.read_parquet(path)
@@ -107,24 +119,55 @@ def load_spike_table(parquet_id: str, *, repo_root: Path | None = None) -> pd.Da
     return df
 
 
+def mean_neuron_rates_hz(
+    spikes: pd.DataFrame,
+    neuron_ids: Sequence[int],
+    *,
+    t_run_s: float = 1.0,
+) -> pd.Series:
+    """Per-neuron mean firing rate (Hz) across that table's available trials.
+
+    For each neuron ``i`` and trial ``t``::
+
+        r_{i,t} = spikes_{i,t} / duration_sec
+
+    then ``r̄_i = mean_t(r_{i,t})`` over trials present in ``spikes``. Trials with
+    no spikes for a neuron contribute 0. Neurons in ``neuron_ids`` that never
+    spike still receive a 0 Hz entry so readout sets stay aligned.
+    """
+    if t_run_s <= 0:
+        raise ValueError("t_run_s must be positive")
+    ids = [int(x) for x in neuron_ids]
+    index = pd.Index(ids, name="flywire_id")
+    if not ids:
+        return pd.Series(dtype=float, index=index)
+    if spikes.empty:
+        return pd.Series(0.0, index=index)
+
+    trials = pd.unique(spikes["trial"])
+    if len(trials) == 0:
+        return pd.Series(0.0, index=index)
+
+    selected = spikes[spikes["flywire_id"].isin(ids)]
+    counts = (
+        selected.groupby(["flywire_id", "trial"]).size().astype(float)
+        if not selected.empty
+        else pd.Series(dtype=float)
+    )
+    full_index = pd.MultiIndex.from_product([ids, trials], names=["flywire_id", "trial"])
+    counts = counts.reindex(full_index, fill_value=0.0)
+    per_trial_hz = counts / float(t_run_s)
+    return per_trial_hz.groupby(level="flywire_id").mean().reindex(index, fill_value=0.0)
+
+
 def motor_population_rate_hz(
     spikes: pd.DataFrame,
     motor_ids: Sequence[int],
     *,
     t_run_s: float = 1.0,
 ) -> float:
-    """Mean-over-trials total motor population rate (Hz)."""
-    if t_run_s <= 0:
-        raise ValueError("t_run_s must be positive")
-    if spikes.empty:
-        return 0.0
-    motor_set = {int(x) for x in motor_ids}
-    n_trials = int(spikes["trial"].nunique())
-    if n_trials <= 0:
-        return 0.0
-    selected = spikes[spikes["flywire_id"].isin(motor_set)]
-    n_spikes = int(len(selected))
-    return float(n_spikes) / (float(n_trials) * float(t_run_s))
+    """Sum of per-neuron mean rates over the motor readout set (Hz)."""
+    return float(mean_neuron_rates_hz(spikes, motor_ids, t_run_s=t_run_s).sum())
 
 
 def motor_delta_hz(
@@ -134,10 +177,20 @@ def motor_delta_hz(
     *,
     t_run_s: float = 1.0,
 ) -> float:
-    """Motor population ΔHz = rate_perturbed − rate_baseline."""
-    return motor_population_rate_hz(perturbed, motor_ids, t_run_s=t_run_s) - motor_population_rate_hz(
-        baseline, motor_ids, t_run_s=t_run_s
-    )
+    """Motor readout ΔHz via per-neuron mean rates (CEO-072).
+
+    1. ``r_{i,t} = spikes_{i,t} / duration_sec``
+    2. ``r̄_i`` = mean over available trials in each condition
+    3. ``Δr_i = r̄_i^(c) - r̄_i^(0)``
+    4. ``ΔHz(c) = sum_{i in M} Δr_i`` (signed; matches ``motor_analysis.motor_impact``)
+
+    Each condition uses its own trial set, so mismatched parquet trial counts no
+    longer share one inconsistent population denominator.
+    """
+    base_rates = mean_neuron_rates_hz(baseline, motor_ids, t_run_s=t_run_s)
+    pert_rates = mean_neuron_rates_hz(perturbed, motor_ids, t_run_s=t_run_s)
+    delta = pert_rates.reindex(base_rates.index, fill_value=0.0) - base_rates
+    return float(delta.sum())
 
 
 def load_connectivity_edges(connectivity_id: str, *, repo_root: Path | None = None) -> pd.DataFrame:
@@ -395,16 +448,18 @@ def validate_surrogates(
     commit_sha, random_seed = extract_provenance(manifest)
     sim = manifest.get("simulation") or {}
     t_run_s = float(sim.get("t_run_ms", 1000)) / 1000.0
+    resolved_baseline = resolve_baseline_exp_name(manifest, fallback=baseline_name)
 
     LOGGER.info(
-        "validate_surrogates: dir=%s commit_sha=%s random_seed=%s claim_status=%s",
+        "validate_surrogates: dir=%s baseline=%s commit_sha=%s random_seed=%s claim_status=%s",
         results_dir_id,
+        resolved_baseline,
         commit_sha,
         random_seed,
         CLAIM_STATUS,
     )
 
-    baseline = load_spike_table(f"{results_dir_id}/{baseline_name}.parquet", repo_root=root)
+    baseline = load_spike_table(f"{results_dir_id}/{resolved_baseline}.parquet", repo_root=root)
     groups, jo_ids, motor_ids = select_groups_and_jo_ids(
         annotations_id=annotations_id,
         completeness_id=completeness_id,
