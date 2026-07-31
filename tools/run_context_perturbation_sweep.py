@@ -14,8 +14,8 @@ Outputs:
 Example overnight run:
     python tools/run_context_perturbation_sweep.py \
         --annotations flywire_annotations.tsv \
-        --completeness Drosophila_brain_model/2023_03_23_completeness_630_final.csv \
-        --connectivity Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet \
+        --completeness 2023_03_23_completeness_630_final.csv \
+        --connectivity 2023_03_23_connectivity_630_final.parquet \
         --contexts metadata/source_contexts/source_context_manifest.csv \
         --context-mode matched_size \
         --context-names sugar,gustatory,mechanosensory,visual_projection,sensory_ascending \
@@ -41,11 +41,16 @@ import numpy as np
 import pandas as pd
 from brian2 import ms
 
-# run_exp lives in model.py. User may have a project-root copy or a local
-# Drosophila_brain_model copy.
+from tools.path_resolver import resolve_input
+
+# run_exp lives in model.py at the repository root.
 sys.path.insert(0, str(Path.cwd()))
-sys.path.insert(0, str(Path.cwd() / "Drosophila_brain_model"))
 from model import run_exp, default_params  # type: ignore
+
+DEFAULT_ANNOTATIONS_ID = "flywire_annotations.tsv"
+DEFAULT_COMPLETENESS_ID = "2023_03_23_completeness_630_final.csv"
+DEFAULT_CONNECTIVITY_ID = "2023_03_23_connectivity_630_final.parquet"
+DEFAULT_MANIFEST = "data/input_manifest.json"
 
 
 def safe_name(text: str, max_len: int = 80) -> str:
@@ -63,7 +68,7 @@ def parse_id_file(path: str | Path) -> list[int]:
     if not text:
         return []
     toks = re.split(r"[\s,;]+", text)
-    return [int(float(t)) for t in toks if t]
+    return [int(t) for t in toks if t]
 
 
 def load_annotations(annotations: Path, completeness: Path) -> pd.DataFrame:
@@ -151,9 +156,10 @@ def motor_metrics(baseline_path: Path, perturb_path: Path, motor_ids: list[int],
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run context-conditioned perturbation sweep.")
-    parser.add_argument("--annotations", default="flywire_annotations.tsv")
-    parser.add_argument("--completeness", default="Drosophila_brain_model/2023_03_23_completeness_630_final.csv")
-    parser.add_argument("--connectivity", default="Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet")
+    parser.add_argument("--annotations", default=DEFAULT_ANNOTATIONS_ID)
+    parser.add_argument("--completeness", default=DEFAULT_COMPLETENESS_ID)
+    parser.add_argument("--connectivity", default=DEFAULT_CONNECTIVITY_ID)
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
     parser.add_argument("--contexts", default="metadata/source_contexts/source_context_manifest.csv")
     parser.add_argument("--context-mode", default="matched_size")
     parser.add_argument("--context-names", default="sugar,gustatory,mechanosensory,visual_projection,sensory_ascending")
@@ -171,7 +177,11 @@ def main() -> None:
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
 
-    ann = load_annotations(Path(args.annotations), Path(args.completeness))
+    annotations_path = resolve_input(args.annotations, manifest_path=args.manifest)
+    completeness_path = resolve_input(args.completeness, manifest_path=args.manifest)
+    connectivity_path = resolve_input(args.connectivity, manifest_path=args.manifest)
+
+    ann = load_annotations(annotations_path, completeness_path)
     contexts = load_contexts(Path(args.contexts), args.context_mode, args.context_names)
     targets = select_targets(ann, args.group_by, args.min_group_size, args.max_targets)
     motor_ids = get_motor_ids(ann)
@@ -180,6 +190,8 @@ def main() -> None:
     print(f"Contexts: {len(contexts)}")
     print(f"Perturbation targets: {len(targets)} ({args.group_by}, min_group_size={args.min_group_size})")
     print(f"Motor neurons: {len(motor_ids)}")
+    print(f"Resolved completeness: {completeness_path}")
+    print(f"Resolved connectivity: {connectivity_path}")
     print(f"Output dir: {out}")
 
     params = default_params.copy()
@@ -204,8 +216,8 @@ def main() -> None:
             neu_exc=source_ids,
             neu_slnc=[],
             path_res=out,
-            path_comp=args.completeness,
-            path_con=args.connectivity,
+            path_comp=str(completeness_path),
+            path_con=str(connectivity_path),
             params=params,
             n_proc=args.n_proc,
             force_overwrite=args.force,
@@ -222,8 +234,8 @@ def main() -> None:
                 neu_exc=source_ids,
                 neu_slnc=target_ids,
                 path_res=out,
-                path_comp=args.completeness,
-                path_con=args.connectivity,
+                path_comp=str(completeness_path),
+                path_con=str(connectivity_path),
                 params=params,
                 n_proc=args.n_proc,
                 force_overwrite=args.force,
@@ -254,9 +266,9 @@ def main() -> None:
 
     elapsed = time() - start
     run_info_rows.append({
-        "annotations": args.annotations,
-        "completeness": args.completeness,
-        "connectivity": args.connectivity,
+        "annotations": str(annotations_path),
+        "completeness": str(completeness_path),
+        "connectivity": str(connectivity_path),
         "contexts": args.contexts,
         "context_mode": args.context_mode,
         "context_names": args.context_names,

@@ -7,8 +7,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+_PERTURBATION_DIR = Path(__file__).resolve().parent
+if str(_PERTURBATION_DIR) not in sys.path:
+    sys.path.insert(0, str(_PERTURBATION_DIR))
 
 from model import run_exp  # type: ignore  # noqa: E402
 from analyze import compare_to_baseline  # noqa: E402

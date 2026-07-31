@@ -75,7 +75,7 @@ def parse_id_file(path: str | Path) -> list[int]:
     if not text:
         return []
     toks = re.split(r"[\s,;]+", text)
-    return [int(float(t)) for t in toks if t]
+    return [int(t) for t in toks if t]
 
 
 def load_annotations(path: Path) -> pd.DataFrame:

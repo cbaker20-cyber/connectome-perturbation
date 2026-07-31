@@ -35,6 +35,7 @@ from __future__ import annotations
 import argparse
 import math
 import re
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Optional
@@ -161,23 +162,32 @@ def infer_edge_schema(
 
 
 def resolve_existing_path(path: str | Path, description: str = "file") -> Path:
-    """
-    Resolve paths without requiring a hard-coded Drosophila_brain_model prefix.
-    """
+    """Resolve paths via ``tools.path_resolver``, then local fallbacks."""
     p = Path(path).expanduser()
     if p.exists():
         return p.resolve()
 
     script_dir = Path(__file__).resolve().parent
     project_root = script_dir.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+
+    try:
+        from tools.path_resolver import resolve_input
+
+        for identifier in (str(path), p.name):
+            try:
+                return resolve_input(identifier).resolve()
+            except (FileNotFoundError, ValueError):
+                continue
+    except ImportError:
+        pass
 
     candidates = [
         Path.cwd() / p,
         script_dir / p,
         project_root / p,
-        project_root / "Drosophila_brain_model" / p.name,
         project_root / "data" / p.name,
-        Path.cwd() / "Drosophila_brain_model" / p.name,
         Path.cwd() / "data" / p.name,
     ]
 
