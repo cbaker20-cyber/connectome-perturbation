@@ -19,7 +19,7 @@ Filtering sugar through annotations can incorrectly shrink the source set.
 Example:
     python tools/create_source_contexts.py \
         --annotations flywire_annotations.tsv \
-        --completeness Drosophila_brain_model/2023_03_23_completeness_630_final.csv \
+        --completeness 2023_03_23_completeness_630_final.csv \
         --sugar-ids metadata/sugar_ids_21.txt \
         --output-dir metadata/source_contexts \
         --matched-k 21 \
@@ -35,6 +35,12 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
+
+from tools.path_resolver import resolve_input
+
+DEFAULT_ANNOTATIONS_ID = "flywire_annotations.tsv"
+DEFAULT_COMPLETENESS_ID = "2023_03_23_completeness_630_final.csv"
+DEFAULT_MANIFEST = "data/input_manifest.json"
 
 
 def parse_id_file(path: str | Path) -> list[int]:
@@ -103,8 +109,9 @@ def matched_sample(ids: list[int], k: int, rng: np.random.Generator) -> list[int
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Create source-context ID files.")
-    parser.add_argument("--annotations", default="flywire_annotations.tsv")
-    parser.add_argument("--completeness", default="Drosophila_brain_model/2023_03_23_completeness_630_final.csv")
+    parser.add_argument("--annotations", default=DEFAULT_ANNOTATIONS_ID)
+    parser.add_argument("--completeness", default=DEFAULT_COMPLETENESS_ID)
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
     parser.add_argument("--sugar-ids", default="metadata/sugar_ids_21.txt")
     parser.add_argument("--output-dir", default="metadata/source_contexts")
     parser.add_argument("--matched-k", type=int, default=21)
@@ -115,8 +122,10 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     rng = np.random.default_rng(args.seed)
 
-    sim_ids = load_completeness_ids(Path(args.completeness))
-    ann = load_annotations(Path(args.annotations), sim_ids)
+    annotations_path = resolve_input(args.annotations, manifest_path=args.manifest)
+    completeness_path = resolve_input(args.completeness, manifest_path=args.manifest)
+    sim_ids = load_completeness_ids(completeness_path)
+    ann = load_annotations(annotations_path, sim_ids)
     sugar_ids_raw = parse_id_file(args.sugar_ids)
     sugar_ids = [x for x in sugar_ids_raw if x in sim_ids]
     sugar_missing = [x for x in sugar_ids_raw if x not in sim_ids]

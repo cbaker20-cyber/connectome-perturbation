@@ -33,7 +33,10 @@ def _staged_run(tmp_path):
     files = {
         "inputs/source_ids.txt": b"synthetic input fixture\n",
         "sweep_summary.csv": SUMMARY,
-        "sweep_run_info.csv": b"key,value\nfixture,true\n",
+        "sweep_run_info.csv": (
+            b"source,target,n_run,t_run_ms,mean_score\n"
+            b"sugar,AN,50,1000,0.0\n"
+        ),
         "ranked_targeted_validation.csv": b"rank,fixture\n1,true\n",
         "targeted_validation_readable_summary.txt": b"synthetic validation fixture\n",
         "logs/run.log": b"synthetic test log\n",
@@ -183,11 +186,17 @@ def test_fails_before_receipt_when_declared_bytes_change(tmp_path):
 
 def test_rejects_summary_path_not_declared_as_the_parsed_artifact(tmp_path):
     manifest = _staged_run(tmp_path)
+    # Valid summary header so CSV parsing succeeds; path is intentionally undeclared.
+    undeclared = (
+        b"source,target,n_run,t_run_ms,mean_score\n"
+        b"sugar,AN,50,1000,1.0\n"
+    )
+    (tmp_path / "undeclared_summary.csv").write_bytes(undeclared)
 
     with pytest.raises(ValueError, match="exactly one manifest output record"):
         validate_targeted_validation_run(
             manifest,
             tmp_path,
-            summary_path="sweep_run_info.csv",
+            summary_path="undeclared_summary.csv",
             numeric_fields=NUMERIC_FIELDS,
         )

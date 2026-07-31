@@ -92,6 +92,12 @@ def _allowed_jo_cell_types(selection: dict[str, Any]) -> set[str]:
     return allowed
 
 
+def _normalize_root_id(value: Any) -> str:
+    """Normalize FlyWire root IDs as strings to avoid int32 truncation on Windows."""
+
+    return str(value).strip()
+
+
 def select_jo_neurons(
     annotations: pd.DataFrame,
     sim_ids: set[int],
@@ -106,12 +112,13 @@ def select_jo_neurons(
     """
 
     selection = sensory_input.get("selection") or {}
-    curated = [int(x) for x in sensory_input["root_ids"]]
+    curated = [_normalize_root_id(x) for x in sensory_input["root_ids"]]
     allowed_types = _allowed_jo_cell_types(selection)
+    sim_ids_str = {_normalize_root_id(x) for x in sim_ids}
 
     ann = annotations.copy()
-    ann["root_id"] = ann["root_id"].astype("int64")
-    mask = ann["root_id"].isin(sim_ids)
+    ann["root_id"] = ann["root_id"].map(_normalize_root_id)
+    mask = ann["root_id"].isin(sim_ids_str)
     if selection.get("super_class"):
         mask &= ann["super_class"] == selection["super_class"]
     if selection.get("cell_class"):
@@ -121,8 +128,8 @@ def select_jo_neurons(
     if allowed_types:
         mask &= ann["cell_type"].isin(allowed_types)
 
-    labeled = set(ann.loc[mask, "root_id"].astype(int).tolist())
-    missing_sim = [i for i in curated if i not in sim_ids]
+    labeled = set(ann.loc[mask, "root_id"].tolist())
+    missing_sim = [i for i in curated if i not in sim_ids_str]
     if missing_sim:
         raise ValueError(
             f"{len(missing_sim)} curated JO root_ids are absent from the completeness table "
@@ -137,9 +144,9 @@ def select_jo_neurons(
                 f"{len(unlabeled)} curated JO root_ids fail annotation filters "
                 f"(examples: {unlabeled[:5]})"
             )
-        return curated
+        return [int(x) for x in curated]
 
-    return sorted(labeled)
+    return sorted(int(x) for x in labeled)
 
 
 def select_perturbation_groups(
@@ -151,10 +158,11 @@ def select_perturbation_groups(
 ) -> dict[str, list[int]]:
     """Select silencing groups from FlyWire annotations intersected with sim neurons."""
 
-    exclude_ids = exclude_ids or set()
+    exclude_ids_str = {_normalize_root_id(x) for x in (exclude_ids or set())}
+    sim_ids_str = {_normalize_root_id(x) for x in sim_ids}
     ann = annotations.copy()
-    ann["root_id"] = ann["root_id"].astype("int64")
-    ann = ann[ann["root_id"].isin(sim_ids)]
+    ann["root_id"] = ann["root_id"].map(_normalize_root_id)
+    ann = ann[ann["root_id"].isin(sim_ids_str)]
 
     groups: dict[str, list[int]] = {}
     for spec in group_specs:
@@ -163,8 +171,11 @@ def select_perturbation_groups(
         value = spec["value"]
         if by not in ann.columns:
             raise ValueError(f"Unknown annotation column for group {name!r}: {by}")
-        ids = ann.loc[ann[by] == value, "root_id"].astype(int).tolist()
-        ids = [i for i in ids if i not in exclude_ids]
+        ids = [
+            int(i)
+            for i in ann.loc[ann[by] == value, "root_id"].tolist()
+            if i not in exclude_ids_str
+        ]
         if not ids:
             raise ValueError(f"Perturbation group {name!r} matched zero simulated neurons")
         groups[name] = ids
@@ -409,6 +420,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--skip-baseline", action="store_true", help="Skip baseline_jo when running the sweep")
     parser.add_argument("--force", action="store_true", help="Overwrite existing parquet outputs")
+    parser.add_argument(
+        "--n-trials",
+        type=int,
+        default=None,
+        help="Override config simulation.n_run (trial count) for this execution",
+    )
     args = parser.parse_args(argv)
 
     repo_root = repo_root_from()
@@ -416,6 +433,11 @@ def main(argv: list[str] | None = None) -> int:
     if config_path.is_absolute():
         raise ValueError("--config must be repo-relative")
     config = load_config(repo_root / config_path)
+    if args.n_trials is not None:
+        if args.n_trials < 1:
+            raise ValueError("--n-trials must be a positive integer")
+        config["simulation"]["n_run"] = int(args.n_trials)
+        print(f"Overriding simulation.n_run -> {args.n_trials}")
 
     jo_ids, groups, resolved = prepare_jo_sweep(config, repo_root=repo_root)
     print(f"Resolved annotations: {resolved['annotations']}")

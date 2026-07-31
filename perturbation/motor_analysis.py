@@ -1,11 +1,20 @@
+from __future__ import annotations
+
 import sys
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
-import pandas as pd
+from pathlib import Path
+
 import numpy as np
+import pandas as pd
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+_PERTURBATION_DIR = Path(__file__).resolve().parent
+if str(_PERTURBATION_DIR) not in sys.path:
+    sys.path.insert(0, str(_PERTURBATION_DIR))
+
 from analyze import compare_to_baseline
 from cell_groups import get_group
-from pathlib import Path
 
 def motor_impact(exp_name, motor_ids):
     result = compare_to_baseline(exp_name)

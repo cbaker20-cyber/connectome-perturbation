@@ -43,12 +43,29 @@ REQUIRED_PROVENANCE_FIELDS = {
 UNKNOWN_PROVENANCE_VALUES = {None, "", "unknown", "UNKNOWN", "Unknown"}
 
 
+# Text inputs are hashed after CRLF→LF normalization so Windows checkouts match
+# manifests produced on LF-only systems (git autocrlf).
+_TEXT_HASH_SUFFIXES = frozenset({".csv", ".tsv", ".txt", ".json", ".yaml", ".yml", ".md"})
+
+
+def canonical_file_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    if path.suffix.lower() in _TEXT_HASH_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return data
+
+
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
+    data = canonical_file_bytes(path)
     digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(chunk_size), b""):
-            digest.update(chunk)
+    view = memoryview(data)
+    for start in range(0, len(data), chunk_size):
+        digest.update(view[start : start + chunk_size])
     return digest.hexdigest()
+
+
+def canonical_file_size(path: Path) -> int:
+    return len(canonical_file_bytes(path))
 
 
 def require(condition: bool, message: str, errors: list[str]) -> None:
@@ -190,7 +207,13 @@ def validate_input_manifest(repo_root: Path, manifest_path: Path, errors: list[s
             require(path.is_file(), f"input path must be a file: {path_value}", errors)
             if path.is_file():
                 if valid_size:
-                    require(path.stat().st_size == record.get("size_bytes"), f"size mismatch: {path_value}", errors)
+                    declared_size = record.get("size_bytes")
+                    require(
+                        declared_size
+                        in (path.stat().st_size, canonical_file_size(path)),
+                        f"size mismatch: {path_value}",
+                        errors,
+                    )
                 if valid_sha:
                     require(sha256_file(path) == record.get("sha256"), f"sha256 mismatch: {path_value}", errors)
 

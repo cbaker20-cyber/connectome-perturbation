@@ -1,4 +1,4 @@
-"""Unit tests for connectome_analysis.validate_surrogates (CEO-071B Task A)."""
+"""Unit tests for connectome_analysis.validate_surrogates (CEO-071B Task A / CEO-072)."""
 
 from __future__ import annotations
 
@@ -11,8 +11,10 @@ from connectome_analysis.validate_surrogates import (
     dynamic_leverage_residual,
     extract_provenance,
     fit_structural_prediction,
+    mean_neuron_rates_hz,
     motor_delta_hz,
     motor_population_rate_hz,
+    resolve_baseline_exp_name,
 )
 
 
@@ -34,15 +36,36 @@ def test_extract_provenance_truncates_commit_and_reads_seed():
     assert seed == 42
 
 
+def test_resolve_baseline_exp_name_from_manifest_layers():
+    assert resolve_baseline_exp_name({"baseline_exp_name": "baseline_sugar"}) == "baseline_sugar"
+    assert resolve_baseline_exp_name({"simulation": {"baseline_exp_name": "baseline_sugar"}}) == "baseline_sugar"
+    assert resolve_baseline_exp_name({}) == "baseline_jo"
+    assert resolve_baseline_exp_name({}, fallback="baseline_custom") == "baseline_custom"
+
+
+def test_mean_neuron_rates_per_trial_then_mean():
+    # Neuron 1: trial0 → 2 spikes, trial1 → 0 → rates [2, 0] → mean 1.0 Hz
+    # Neuron 2: trial0 → 0, trial1 → 1 → rates [0, 1] → mean 0.5 Hz
+    spikes = pd.DataFrame(
+        {
+            "trial": [0, 0, 1],
+            "flywire_id": [1, 1, 2],
+        }
+    )
+    rates = mean_neuron_rates_hz(spikes, [1, 2], t_run_s=1.0)
+    assert rates.loc[1] == pytest.approx(1.0)
+    assert rates.loc[2] == pytest.approx(0.5)
+
+
 def test_motor_population_rate_and_delta_hz():
-    # Baseline: 2 trials, 2 motor spikes total → rate = 2 / (2 * 1s) = 1.0 Hz
+    # Baseline: neuron1 mean 0.5, neuron2 mean 0.5 → pop 1.0 Hz
     baseline = pd.DataFrame(
         {
             "trial": [0, 0, 1, 1],
             "flywire_id": [1, 2, 99, 99],
         }
     )
-    # Perturbed: 2 trials, 8 motor spikes → rate = 4.0 Hz; delta = +3.0
+    # Perturbed: each motor neuron fires twice per trial → mean 2.0 each → pop 4.0; delta +3.0
     perturbed = pd.DataFrame(
         {
             "trial": [0, 0, 0, 0, 1, 1, 1, 1],
@@ -53,6 +76,25 @@ def test_motor_population_rate_and_delta_hz():
     assert motor_population_rate_hz(baseline, motors, t_run_s=1.0) == pytest.approx(1.0)
     assert motor_population_rate_hz(perturbed, motors, t_run_s=1.0) == pytest.approx(4.0)
     assert motor_delta_hz(baseline, perturbed, motors, t_run_s=1.0) == pytest.approx(3.0)
+
+
+def test_motor_delta_hz_independent_trial_counts_per_condition():
+    # Baseline: 3 trials, neuron1 fires once each → r̄=1.0; neuron2 silent → 0.0
+    baseline = pd.DataFrame(
+        {
+            "trial": [0, 1, 2],
+            "flywire_id": [1, 1, 1],
+        }
+    )
+    # Perturbed: only 2 trials, neuron1 fires twice each → r̄=2.0; neuron2 once each → 1.0
+    # Δ = (2-1) + (1-0) = +2.0  (does not divide by mismatched n_trials at population level)
+    perturbed = pd.DataFrame(
+        {
+            "trial": [0, 0, 0, 1, 1, 1],
+            "flywire_id": [1, 1, 2, 1, 1, 2],
+        }
+    )
+    assert motor_delta_hz(baseline, perturbed, [1, 2], t_run_s=1.0) == pytest.approx(2.0)
 
 
 def test_dynamic_leverage_residual_definition():

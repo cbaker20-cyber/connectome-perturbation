@@ -19,7 +19,7 @@ Example:
   python tools/id_space_audit.py \
     --connectivity 2023_03_23_connectivity_630_final.parquet \
     --annotations flywire_annotations.tsv \
-    --completeness Drosophila_brain_model/2023_03_23_completeness_630_final.csv \
+    --completeness 2023_03_23_completeness_630_final.csv \
     --contexts metadata/source_contexts/source_context_manifest.csv \
     --output-dir results/id_space_audit
 """
@@ -33,6 +33,13 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
+
+from tools.path_resolver import resolve_input
+
+DEFAULT_ANNOTATIONS_ID = "flywire_annotations.tsv"
+DEFAULT_COMPLETENESS_ID = "2023_03_23_completeness_630_final.csv"
+DEFAULT_CONNECTIVITY_ID = "2023_03_23_connectivity_630_final.parquet"
+DEFAULT_MANIFEST = "data/input_manifest.json"
 
 
 def numeric_set_from_series(s: pd.Series) -> set[int]:
@@ -55,7 +62,7 @@ def parse_id_file(path: str | Path) -> list[int]:
         if not tok:
             continue
         try:
-            out.append(int(float(tok)))
+            out.append(int(tok))
         except ValueError:
             pass
     return out
@@ -144,9 +151,10 @@ def overlap_record(space_name: str, ids: set[int], reference_name: str, ref: set
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Diagnose ID-space overlap across connectome project files.")
-    parser.add_argument("--connectivity", default="2023_03_23_connectivity_630_final.parquet")
-    parser.add_argument("--annotations", default="flywire_annotations.tsv")
-    parser.add_argument("--completeness", default="Drosophila_brain_model/2023_03_23_completeness_630_final.csv")
+    parser.add_argument("--connectivity", default=DEFAULT_CONNECTIVITY_ID)
+    parser.add_argument("--annotations", default=DEFAULT_ANNOTATIONS_ID)
+    parser.add_argument("--completeness", default=DEFAULT_COMPLETENESS_ID)
+    parser.add_argument("--manifest", default=DEFAULT_MANIFEST)
     parser.add_argument("--contexts", default="metadata/source_contexts/source_context_manifest.csv")
     parser.add_argument("--output-dir", default="results/id_space_audit")
     args = parser.parse_args()
@@ -154,16 +162,20 @@ def main() -> None:
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
 
+    annotations_path = resolve_input(args.annotations, manifest_path=args.manifest)
+    completeness_path = resolve_input(args.completeness, manifest_path=args.manifest)
+    connectivity_path = resolve_input(args.connectivity, manifest_path=args.manifest)
+
     print("Loading annotations...")
-    ann, ann_ids = load_annotations(Path(args.annotations))
+    ann, ann_ids = load_annotations(annotations_path)
     print(f"Annotation root IDs: {len(ann_ids):,}")
 
     print("Loading completeness candidate spaces...")
-    comp_spaces = load_completeness_candidate_sets(Path(args.completeness))
+    comp_spaces = load_completeness_candidate_sets(completeness_path)
     print(f"Completeness candidate spaces: {len(comp_spaces)}")
 
     print("Loading connectivity candidate spaces...")
-    con_spaces = load_connectivity_candidate_sets(Path(args.connectivity))
+    con_spaces = load_connectivity_candidate_sets(connectivity_path)
     print(f"Connectivity candidate spaces: {len(con_spaces)}")
 
     print("Loading source contexts...")
