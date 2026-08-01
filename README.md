@@ -15,7 +15,7 @@ Nothing in `results/perturbation_summary.csv` should be treated as validated neu
 - `docs/progress-log.md`: conservative status log.
 - `docs/data-policy.md`: rules for datasets, outputs, privacy, and manifests.
 - `docs/environment-plan.md`: evidence-based setup plan and current run blockers.
-- `AGENTS.md`, `TASKS.md`, and `CHANGELOG_AI.md`: agent rules, active backlog, and AI-assisted project memory.
+- `TASKS.md`: active project backlog for reproducibility and analysis work.
 
 ## Data and provenance status
 
@@ -95,4 +95,4 @@ The command prints deterministic JSON when `--report` is omitted. It exits with 
 
 ## Safe next step
 
-Create a non-sensitive input manifest, reconcile paths without moving or deleting data, and reproduce one tiny documented smoke run before interpreting any output. See `docs/data-policy.md`, `docs/environment-plan.md`, `AGENTS.md`, and `TASKS.md`.
+Create a non-sensitive input manifest, reconcile paths without moving or deleting data, and reproduce one tiny documented smoke run before interpreting any output. See `docs/data-policy.md`, `docs/environment-plan.md`, and `TASKS.md`.

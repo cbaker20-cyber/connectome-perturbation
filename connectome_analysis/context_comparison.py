@@ -1,4 +1,4 @@
-"""Differential Vulnerability Index across sugar vs JO sensory contexts (CEO-071B).
+"""Differential Vulnerability Index across sugar vs JO sensory contexts.
 
 Computes motor-population ΔHz for shared silenced target classes under both
 sensory drives, forms the signed DVI ratio, assigns dominant context, and
@@ -38,7 +38,7 @@ EPS = 1e-6
 NEUTRAL_ABS_DVI = 0.1
 TARGET_CLASSES = ["AN", "descending", "LO", "Kenyon_Cell", "motor"]
 
-# CEO-071B required output schema (exactly 15 columns).
+# Required output schema (exactly 15 columns).
 OUTPUT_COLUMNS = [
     "target_class",
     "delta_hz_sugar",
@@ -149,7 +149,7 @@ def compare_contexts(
     epsilon: float = EPS,
     repo_root: Path | None = None,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
-    """Run CEO-071B Task B and return ``(table, metrics)``."""
+    """Run dual-context DVI comparison and return ``(table, metrics)``."""
     root = repo_root_from(repo_root)
     sugar_dir_id = sugar_dir_id.replace("\\", "/").rstrip("/")
     jo_dir_id = jo_dir_id.replace("\\", "/").rstrip("/")

@@ -1,4 +1,4 @@
-"""Unit tests for connectome_analysis.validate_surrogates (CEO-071B Task A / CEO-072)."""
+"""Unit tests for connectome_analysis.validate_surrogates."""
 
 from __future__ import annotations
 
