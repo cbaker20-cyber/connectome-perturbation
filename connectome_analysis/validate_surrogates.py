@@ -1,4 +1,4 @@
-"""Validate structural surrogates against JO ground-truth motor ΔHz drops (CEO-071B).
+"""Validate structural surrogates against JO ground-truth motor ΔHz drops.
 
 Computes per-target motor population firing-rate change from Parquet spike tables,
 structural surrogates (mean modal controllability and path attenuation ratio) on a
@@ -45,7 +45,7 @@ EPS = 1e-12
 
 TARGET_CLASSES = ["AN", "descending", "LO", "Kenyon_Cell", "motor"]
 
-# CEO-071B required output schema (exactly 13 columns).
+# Required output schema (exactly 13 columns).
 OUTPUT_COLUMNS = [
     "target_class",
     "n_silenced",
@@ -177,7 +177,7 @@ def motor_delta_hz(
     *,
     t_run_s: float = 1.0,
 ) -> float:
-    """Motor readout ΔHz via per-neuron mean rates (CEO-072).
+    """Motor readout ΔHz via per-neuron mean rates.
 
     1. ``r_{i,t} = spikes_{i,t} / duration_sec``
     2. ``r̄_i`` = mean over available trials in each condition
@@ -439,7 +439,7 @@ def validate_surrogates(
     targets: Sequence[str] | None = None,
     repo_root: Path | None = None,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
-    """Run CEO-071B Task A and return ``(table, metrics)``."""
+    """Run surrogate-vs-ground-truth validation and return ``(table, metrics)``."""
     root = repo_root_from(repo_root)
     results_dir_id = results_dir_id.replace("\\", "/").rstrip("/")
     targets = list(targets or TARGET_CLASSES)

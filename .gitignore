@@ -1,6 +1,41 @@
+# Virtual environments
 venv/
-results/*
+.venv/
+
+# Python caches
 __pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE / agent tooling (never commit)
+.cursor/
+.cursorrules
+.codex/
+.kimi/
+.kimi-work/
+.grok/
+.claude/
+.idea/
+.vscode/
+*.swp
+*~
+
+# Backups and scratch
+*.bak
+*.backup
+*.tmp
+*.temp
+*_backup_*
+
+# Local logs (keep directory structure free of agent/run noise)
+logs/
+*.log
+
+# Results: ignore by default; keep selected validated tracked outputs
+results/*
 !results/perturbation_summary.csv
 !results/surrogate_correlations.csv
 !results/surrogate_vs_ground_truth.csv
@@ -8,3 +43,8 @@ __pycache__/
 !results/disinhibition_motifs.csv
 !results/an_betweenness_control.csv
 !results/sugar_vs_jo_context_shift.csv
+
+# OS noise
+.DS_Store
+Thumbs.db
+Desktop.ini

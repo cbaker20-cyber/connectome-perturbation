@@ -1,4 +1,4 @@
-"""Unit tests for connectome_analysis.context_comparison (CEO-071B Task B)."""
+"""Unit tests for connectome_analysis.context_comparison."""
 
 from __future__ import annotations
 
