@@ -104,7 +104,7 @@ def test_prepare_jo_sweep_uses_path_resolver(jo_sweep, config):
     assert resolved["annotations"].name == "flywire_annotations.tsv"
     assert resolved["completeness"].name == "2023_03_23_completeness_630_final.csv"
     assert resolved["connectivity"].name == "2023_03_23_connectivity_630_final.parquet"
-    assert str(resolved["results_dir"]).endswith("results/jo_ground_truth")
+    assert resolved["results_dir"].as_posix().endswith("results/jo_ground_truth")
     assert "AN" in groups
 
 

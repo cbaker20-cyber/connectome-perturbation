@@ -1,15 +1,25 @@
+from __future__ import annotations
+
 import sys
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
 import warnings
-warnings.filterwarnings("ignore")
-import pandas as pd
-import numpy as np
 from pathlib import Path
-from cell_groups import get_group, load_annotated_sim_neurons
-from perturb import run_single_perturbation
+
+import numpy as np
+import pandas as pd
+
+warnings.filterwarnings("ignore")
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+_PERTURBATION_DIR = Path(__file__).resolve().parent
+if str(_PERTURBATION_DIR) not in sys.path:
+    sys.path.insert(0, str(_PERTURBATION_DIR))
+
 from analyze import compare_to_baseline
+from cell_groups import get_group, load_annotated_sim_neurons
 from motor_analysis import motor_impact
+from perturb import run_single_perturbation
 
 def run_cell_class_sweep(min_neurons=20, force=False):
     ann = load_annotated_sim_neurons()

@@ -89,7 +89,7 @@ def test_build_input_manifest_records_checksums_and_roles(tmp_path):
     assert record["path"] == "connections_630_connectivity.csv"
     assert record["filename"] == "connections_630_connectivity.csv"
     assert record["extension"] == ".csv"
-    assert record["size_bytes"] == data_file.stat().st_size
+    assert record["size_bytes"] == len(tool.canonical_file_bytes(data_file))
     assert record["sha256"] == tool.sha256_file(data_file)
     assert record["guessed_role"] == "connectivity_table"
     assert record["guessed_materialization"] == "630"

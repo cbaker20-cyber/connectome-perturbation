@@ -1,0 +1,14 @@
+context_name,mode,path,n_ids,seed,matched_k,notes
+sugar,complete,metadata\source_contexts\sugar_complete.txt,21,,,explicit sugar ID source set from metadata\sugar_ids_21.txt; 0 IDs absent from completeness table
+sugar,matched_size,metadata\source_contexts\sugar_matchedK21_seed13.txt,21,13,21,"matched-size exploratory source set for pilot/debug runs, not final biological-complete mode"
+gustatory,complete,metadata\source_contexts\gustatory_complete.txt,389,,,biologically complete annotated source set; may be empty if annotation is unavailable
+gustatory,matched_size,metadata\source_contexts\gustatory_matchedK21_seed13.txt,21,13,21,"matched-size exploratory source set for pilot/debug runs, not final biological-complete mode"
+mechanosensory,complete,metadata\source_contexts\mechanosensory_complete.txt,2624,,,biologically complete annotated source set; may be empty if annotation is unavailable
+mechanosensory,matched_size,metadata\source_contexts\mechanosensory_matchedK21_seed13.txt,21,13,21,"matched-size exploratory source set for pilot/debug runs, not final biological-complete mode"
+visual_projection,complete,metadata\source_contexts\visual_projection_complete.txt,6335,,,biologically complete annotated source set; may be empty if annotation is unavailable
+visual_projection,matched_size,metadata\source_contexts\visual_projection_matchedK21_seed13.txt,21,13,21,"matched-size exploratory source set for pilot/debug runs, not final biological-complete mode"
+sensory_ascending,complete,metadata\source_contexts\sensory_ascending_complete.txt,569,,,biologically complete annotated source set; may be empty if annotation is unavailable
+sensory_ascending,matched_size,metadata\source_contexts\sensory_ascending_matchedK21_seed13.txt,21,13,21,"matched-size exploratory source set for pilot/debug runs, not final biological-complete mode"
+all_sensory,complete,metadata\source_contexts\all_sensory_complete.txt,8698,,,biologically complete annotated source set; may be empty if annotation is unavailable
+all_sensory,matched_size,metadata\source_contexts\all_sensory_matchedK21_seed13.txt,21,13,21,"matched-size exploratory source set for pilot/debug runs, not final biological-complete mode"
+no_input,complete,metadata\source_contexts\no_input_complete.txt,0,,,biologically complete annotated source set; may be empty if annotation is unavailable

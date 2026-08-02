@@ -1,270 +1,277 @@
-"""Compare motor firing profiles across Sugar vs Johnston's Organ (JO) contexts.
+"""Differential Vulnerability Index across sugar vs JO sensory contexts (CEO-071B).
 
-Computes a node-wise Differential Vulnerability Index (DVI) for motor targets:
+Computes motor-population ΔHz for shared silenced target classes under both
+sensory drives, forms the signed DVI ratio, assigns dominant context, and
+reports Spearman rank correlation of the two effect profiles.
 
-    DVI_i = (r_i^{sugar} - r_i^{JO}) / (r_i^{sugar} + r_i^{JO} + eps)
-
-Positive DVI indicates sugar-biased motor activity; negative indicates JO /
-grooming bias. Absolute DVI quantifies context-shift magnitude independent of
-sign.
-
-Default exports use a fixed-seed synthetic fixture so CI and smoke paths do not
-require Brian2 baseline Parquets. Real baselines may be supplied explicitly;
-outputs remain ``not_interpretable_as_neuroscience`` until a full provenance
-chain (manifest, seed, commit, validation) is attached.
+Claim status: not_interpretable_as_neuroscience.
 """
 
 from __future__ import annotations
 
-import csv
-import math
-from collections.abc import Mapping, Sequence
+import argparse
+import json
+import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
-from tools.path_resolver import repo_root_from, require_repo_path, resolve_input
+import numpy as np
+import pandas as pd
+from scipy import stats
 
-CLAIM_STATUS = "not_interpretable_as_neuroscience"
+from connectome_analysis.graph_surrogates import CLAIM_STATUS
+from connectome_analysis.validate_surrogates import (
+    extract_provenance,
+    load_spike_table,
+    motor_delta_hz,
+    select_groups_and_jo_ids,
+)
+from tools.path_resolver import require_repo_path, resolve_input, repo_root_from
+
+LOGGER = logging.getLogger(__name__)
+
+DEFAULT_SUGAR_DIR = "results/sugar_ground_truth"
+DEFAULT_JO_DIR = "results/jo_ground_truth"
 DEFAULT_OUTPUT = "results/sugar_vs_jo_context_shift.csv"
-DVI_EPSILON = 1e-12
-CONTEXT_BIAS_THRESHOLD = 1e-9
+DEFAULT_MANIFEST = "data/input_manifest.json"
+EPS = 1e-6
+NEUTRAL_ABS_DVI = 0.1
+TARGET_CLASSES = ["AN", "descending", "LO", "Kenyon_Cell", "motor"]
+
+# CEO-071B required output schema (exactly 15 columns).
+OUTPUT_COLUMNS = [
+    "target_class",
+    "delta_hz_sugar",
+    "delta_hz_jo",
+    "dvi",
+    "abs_dvi",
+    "dominant_context",
+    "n_silenced_sugar",
+    "n_silenced_jo",
+    "spearman_rs",
+    "spearman_p",
+    "commit_sha",
+    "random_seed",
+    "claim_status",
+    "epsilon",
+    "n_shared_targets",
+]
 
 
-def differential_vulnerability_index(
-    sugar_hz: float,
-    jo_hz: float,
+def _setup_logging() -> None:
+    if not logging.getLogger().handlers:
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+        )
+
+
+def resolve_repo_input(identifier: str, *, manifest_path: str = DEFAULT_MANIFEST, repo_root: Path | None = None) -> Path:
+    return resolve_input(identifier, manifest_path=manifest_path, repo_root=repo_root)
+
+
+def load_output_manifest(results_dir_id: str, *, repo_root: Path | None = None) -> dict[str, Any]:
+    path = resolve_repo_input(f"{results_dir_id.rstrip('/')}/output_manifest.json", repo_root=repo_root)
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def compute_dvi(delta_sugar: float, delta_jo: float, *, epsilon: float = EPS) -> float:
+    """DVI(c) = (Δ_sugar − Δ_JO) / (Δ_sugar + Δ_JO + ε)."""
+    return float((delta_sugar - delta_jo) / (delta_sugar + delta_jo + epsilon))
+
+
+def assign_dominant_context(dvi: float, *, neutral_abs: float = NEUTRAL_ABS_DVI) -> str:
+    """Return sugar / jo / neutral from signed DVI."""
+    if not np.isfinite(dvi):
+        return "neutral"
+    if abs(dvi) < neutral_abs:
+        return "neutral"
+    if dvi > 0:
+        return "sugar"
+    if dvi < 0:
+        return "jo"
+    return "neutral"
+
+
+def detect_baseline_name(results_dir_id: str, *, repo_root: Path | None = None) -> str:
+    """Infer baseline parquet stem from output_manifest or directory contents."""
+    root = repo_root_from(repo_root)
+    results_dir_id = results_dir_id.replace("\\", "/").rstrip("/")
+    try:
+        manifest = load_output_manifest(results_dir_id, repo_root=root)
+        sim = manifest.get("simulation") or {}
+        name = sim.get("baseline_exp_name")
+        if name:
+            return str(name)
+    except FileNotFoundError:
+        pass
+    directory = resolve_repo_input(results_dir_id, repo_root=root)
+    baselines = sorted(directory.glob("baseline_*.parquet"))
+    if not baselines:
+        raise FileNotFoundError(f"No baseline_*.parquet under {directory}")
+    return baselines[0].stem
+
+
+def context_motor_deltas(
+    results_dir_id: str,
+    targets: Sequence[str],
+    motor_ids: Sequence[int],
     *,
-    epsilon: float = DVI_EPSILON,
-) -> float:
-    """Return signed DVI for one motor node.
-
-    ``DVI = (sugar_hz - jo_hz) / (sugar_hz + jo_hz + epsilon)``.
-
-    Both rates must be finite and non-negative. The result lies in
-    ``(-1, 1)`` for finite non-negative inputs when ``epsilon > 0``.
-    """
-    if isinstance(sugar_hz, bool) or isinstance(jo_hz, bool):
-        raise TypeError("rates must be numeric, not bool")
-    sugar = float(sugar_hz)
-    jo = float(jo_hz)
-    if not math.isfinite(sugar) or not math.isfinite(jo):
-        raise ValueError("rates must be finite")
-    if sugar < 0.0 or jo < 0.0:
-        raise ValueError("rates must be non-negative")
-    if not math.isfinite(epsilon) or epsilon <= 0.0:
-        raise ValueError("epsilon must be a positive finite number")
-    return (sugar - jo) / (sugar + jo + epsilon)
-
-
-def _as_nonneg_rate_map(rates: Mapping[Any, Any], *, label: str) -> dict[str, float]:
-    if not rates:
-        raise ValueError(f"{label} must be a non-empty mapping")
+    t_run_s: float,
+    repo_root: Path | None = None,
+) -> dict[str, float]:
+    results_dir_id = results_dir_id.replace("\\", "/").rstrip("/")
+    baseline_name = detect_baseline_name(results_dir_id, repo_root=repo_root)
+    baseline = load_spike_table(f"{results_dir_id}/{baseline_name}.parquet", repo_root=repo_root)
     out: dict[str, float] = {}
-    for key, value in rates.items():
-        motor_id = str(key)
-        if not motor_id:
-            raise ValueError(f"{label} keys must be non-empty stringifiable IDs")
-        if isinstance(value, bool) or not isinstance(value, (int, float)):
-            raise ValueError(f"{label}[{motor_id!r}] must be a finite number")
-        number = float(value)
-        if not math.isfinite(number) or number < 0.0:
-            raise ValueError(f"{label}[{motor_id!r}] must be non-negative and finite")
-        if motor_id in out:
-            raise ValueError(f"{label} contains duplicate motor_id {motor_id!r}")
-        out[motor_id] = number
+    for name in targets:
+        perturb = load_spike_table(f"{results_dir_id}/perturb_{name}.parquet", repo_root=repo_root)
+        out[str(name)] = motor_delta_hz(baseline, perturb, motor_ids, t_run_s=t_run_s)
     return out
 
 
-def _context_bias_label(dvi: float, *, threshold: float = CONTEXT_BIAS_THRESHOLD) -> str:
-    if dvi > threshold:
-        return "sugar"
-    if dvi < -threshold:
-        return "jo"
-    return "balanced"
+def load_n_silenced_from_summary(results_dir_id: str, *, repo_root: Path | None = None) -> dict[str, int]:
+    path = resolve_repo_input(
+        f"{results_dir_id.rstrip('/')}/perturbation_summary.csv",
+        repo_root=repo_root,
+    )
+    df = pd.read_csv(path)
+    if "group" not in df.columns:
+        df = df.rename_axis("group").reset_index()
+    return {str(r.group): int(r.n_silenced) for r in df.itertuples(index=False)}
 
 
-def compare_motor_context_profiles(
-    sugar_rates: Mapping[Any, Any],
-    jo_rates: Mapping[Any, Any],
-    motor_ids: Sequence[Any] | None = None,
+def compare_contexts(
+    sugar_dir_id: str = DEFAULT_SUGAR_DIR,
+    jo_dir_id: str = DEFAULT_JO_DIR,
     *,
-    epsilon: float = DVI_EPSILON,
-) -> list[dict[str, object]]:
-    """Build node-wise Sugar vs JO comparison rows for motor targets.
+    targets: Sequence[str] | None = None,
+    epsilon: float = EPS,
+    repo_root: Path | None = None,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Run CEO-071B Task B and return ``(table, metrics)``."""
+    root = repo_root_from(repo_root)
+    sugar_dir_id = sugar_dir_id.replace("\\", "/").rstrip("/")
+    jo_dir_id = jo_dir_id.replace("\\", "/").rstrip("/")
+    targets = list(targets or TARGET_CLASSES)
 
-    When ``motor_ids`` is omitted, the union of both rate maps is used (sorted
-    for determinism). Missing rates default to ``0.0`` so silent motors in one
-    context remain visible in the shift table.
-    """
-    sugar = _as_nonneg_rate_map(sugar_rates, label="sugar_rates")
-    jo = _as_nonneg_rate_map(jo_rates, label="jo_rates")
+    jo_manifest = load_output_manifest(jo_dir_id, repo_root=root)
+    sugar_manifest = load_output_manifest(sugar_dir_id, repo_root=root)
+    commit_sha, random_seed = extract_provenance(jo_manifest)
+    if not commit_sha:
+        commit_sha, _ = extract_provenance(sugar_manifest)
+    if random_seed is None:
+        _, random_seed = extract_provenance(sugar_manifest)
 
-    if motor_ids is None:
-        ids = sorted(set(sugar) | set(jo))
+    jo_sim = jo_manifest.get("simulation") or {}
+    sugar_sim = sugar_manifest.get("simulation") or {}
+    t_run_jo = float(jo_sim.get("t_run_ms", 1000)) / 1000.0
+    t_run_sugar = float(sugar_sim.get("t_run_ms", 1000)) / 1000.0
+
+    LOGGER.info(
+        "context_comparison: sugar=%s jo=%s commit_sha=%s random_seed=%s",
+        sugar_dir_id,
+        jo_dir_id,
+        commit_sha,
+        random_seed,
+    )
+
+    _, _, motor_ids = select_groups_and_jo_ids(repo_root=root)
+    sugar_deltas = context_motor_deltas(
+        sugar_dir_id, targets, motor_ids, t_run_s=t_run_sugar, repo_root=root
+    )
+    jo_deltas = context_motor_deltas(
+        jo_dir_id, targets, motor_ids, t_run_s=t_run_jo, repo_root=root
+    )
+    n_sugar = load_n_silenced_from_summary(sugar_dir_id, repo_root=root)
+    n_jo = load_n_silenced_from_summary(jo_dir_id, repo_root=root)
+
+    shared = [t for t in targets if t in sugar_deltas and t in jo_deltas]
+    if not shared:
+        raise ValueError("No shared target classes between sugar and JO contexts")
+
+    delta_sugar_vals = [sugar_deltas[t] for t in shared]
+    delta_jo_vals = [jo_deltas[t] for t in shared]
+    if len(shared) >= 3:
+        rs, p = stats.spearmanr(delta_sugar_vals, delta_jo_vals)
+        spearman_rs, spearman_p = float(rs), float(p)
     else:
-        ids = [str(mid) for mid in motor_ids]
-        if not ids:
-            raise ValueError("motor_ids must be non-empty when provided")
-        if any(not mid for mid in ids):
-            raise ValueError("motor_ids must contain only non-empty IDs")
-        if len(set(ids)) != len(ids):
-            raise ValueError("motor_ids must not contain duplicates")
+        spearman_rs = spearman_p = float("nan")
 
-    rows: list[dict[str, object]] = []
-    for motor_id in ids:
-        sugar_hz = sugar.get(motor_id, 0.0)
-        jo_hz = jo.get(motor_id, 0.0)
-        dvi = differential_vulnerability_index(sugar_hz, jo_hz, epsilon=epsilon)
-        delta = sugar_hz - jo_hz
+    rows: list[dict[str, Any]] = []
+    for name in shared:
+        ds = float(sugar_deltas[name])
+        dj = float(jo_deltas[name])
+        dvi = compute_dvi(ds, dj, epsilon=epsilon)
         rows.append(
             {
-                "motor_id": motor_id,
-                "sugar_hz": sugar_hz,
-                "jo_hz": jo_hz,
-                "delta_hz": delta,
-                "abs_delta_hz": abs(delta),
+                "target_class": name,
+                "delta_hz_sugar": ds,
+                "delta_hz_jo": dj,
                 "dvi": dvi,
                 "abs_dvi": abs(dvi),
-                "context_bias": _context_bias_label(dvi),
+                "dominant_context": assign_dominant_context(dvi),
+                "n_silenced_sugar": int(n_sugar.get(name, 0)),
+                "n_silenced_jo": int(n_jo.get(name, 0)),
+                "spearman_rs": spearman_rs,
+                "spearman_p": spearman_p,
+                "commit_sha": commit_sha,
+                "random_seed": int(random_seed),
                 "claim_status": CLAIM_STATUS,
+                "epsilon": float(epsilon),
+                "n_shared_targets": int(len(shared)),
             }
         )
-    return rows
 
-
-def build_synthetic_context_shift_fixture(*, seed: int = 60) -> dict[str, object]:
-    """Return a fixed known-answer Sugar/JO motor rate fixture.
-
-    Motor targets encode sugar-biased, JO-biased, balanced, and mixed profiles
-    so DVI ranking is independently checkable without Brian2 outputs.
-    """
-    # seed retained for provenance / CSV metadata; rates are intentionally fixed.
-    _ = int(seed)
-    sugar_rates = {
-        "motor_sugar_biased": 10.0,
-        "motor_jo_biased": 0.0,
-        "motor_balanced": 5.0,
-        "motor_mixed": 8.0,
-        "9007199254740993": 4.0,  # 64-bit-safe string ID sentinel
-    }
-    jo_rates = {
-        "motor_sugar_biased": 0.0,
-        "motor_jo_biased": 10.0,
-        "motor_balanced": 5.0,
-        "motor_mixed": 2.0,
-        "9007199254740993": 1.0,
-    }
-    motor_ids = [
-        "motor_sugar_biased",
-        "motor_jo_biased",
-        "motor_balanced",
-        "motor_mixed",
-        "9007199254740993",
-    ]
-    return {
-        "seed": int(seed),
-        "context_ids": ["sugar", "jo"],
-        "motor_ids": motor_ids,
-        "sugar_rates": sugar_rates,
-        "jo_rates": jo_rates,
+    table = pd.DataFrame(rows).sort_values("abs_dvi", ascending=False).reset_index(drop=True)
+    table = table[OUTPUT_COLUMNS]
+    metrics: dict[str, Any] = {
         "claim_status": CLAIM_STATUS,
+        "n_shared_targets": int(len(shared)),
+        "spearman_rs": spearman_rs,
+        "spearman_p": spearman_p,
+        "commit_sha": commit_sha,
+        "random_seed": int(random_seed),
+        "max_abs_dvi_group": str(table.iloc[0]["target_class"]) if len(table) else "",
+        "max_abs_dvi": float(table.iloc[0]["abs_dvi"]) if len(table) else float("nan"),
     }
+    return table, metrics
 
 
-def compute_sugar_vs_jo_context_shift_rows(
-    fixture: Mapping[str, object] | None = None,
-    *,
-    epsilon: float = DVI_EPSILON,
-) -> list[dict[str, object]]:
-    """Compute context-shift rows from a fixture (synthetic by default)."""
-    data = dict(fixture) if fixture is not None else build_synthetic_context_shift_fixture()
-    sugar_rates = data["sugar_rates"]
-    jo_rates = data["jo_rates"]
-    motor_ids = data.get("motor_ids")
-    if not isinstance(sugar_rates, Mapping) or not isinstance(jo_rates, Mapping):
-        raise ValueError("fixture must provide sugar_rates and jo_rates mappings")
-    ids: Sequence[Any] | None
-    if motor_ids is None:
-        ids = None
-    elif isinstance(motor_ids, Sequence) and not isinstance(motor_ids, (str, bytes)):
-        ids = motor_ids
-    else:
-        raise ValueError("fixture motor_ids must be a sequence of IDs")
+def main(argv: list[str] | None = None) -> int:
+    _setup_logging()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--sugar-dir", default=DEFAULT_SUGAR_DIR)
+    parser.add_argument("--jo-dir", default=DEFAULT_JO_DIR)
+    parser.add_argument("--output", default=DEFAULT_OUTPUT)
+    parser.add_argument("--epsilon", type=float, default=EPS)
+    args = parser.parse_args(argv)
 
-    rows = compare_motor_context_profiles(
-        sugar_rates,
-        jo_rates,
-        ids,
-        epsilon=epsilon,
+    root = repo_root_from()
+    table, metrics = compare_contexts(
+        args.sugar_dir,
+        args.jo_dir,
+        epsilon=args.epsilon,
+        repo_root=root,
     )
-    fixture_seed = data.get("seed")
-    for row in rows:
-        row["fixture_seed"] = int(fixture_seed) if fixture_seed is not None else ""
-    # Rank by descending absolute DVI, then motor_id for determinism.
-    rows.sort(key=lambda r: (-float(r["abs_dvi"]), str(r["motor_id"])))  # type: ignore[arg-type]
-    return rows
+    out_path = require_repo_path(root, root / args.output, "context comparison output")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    table.to_csv(out_path, index=False)
 
-
-def write_sugar_vs_jo_context_shift_csv(
-    output_path: str | Path = DEFAULT_OUTPUT,
-    *,
-    repo_root: Path | None = None,
-    fixture: Mapping[str, object] | None = None,
-    epsilon: float = DVI_EPSILON,
-) -> Path:
-    """Write Sugar vs JO motor context-shift table under the repository root."""
-    root = repo_root_from(repo_root)
-    out = require_repo_path(root, root / Path(output_path), "context shift output")
-    out.parent.mkdir(parents=True, exist_ok=True)
-    rows = compute_sugar_vs_jo_context_shift_rows(fixture, epsilon=epsilon)
-    fieldnames = [
-        "motor_id",
-        "sugar_hz",
-        "jo_hz",
-        "delta_hz",
-        "abs_delta_hz",
-        "dvi",
-        "abs_dvi",
-        "context_bias",
-        "claim_status",
-        "fixture_seed",
-    ]
-    with out.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-    return out
-
-
-def resolve_annotations_path(
-    identifier: str = "flywire_annotations.tsv",
-    *,
-    repo_root: Path | None = None,
-) -> Path:
-    """Resolve annotation inputs through ``tools.path_resolver``."""
-    return resolve_input(identifier, repo_root=repo_root)
-
-
-def resolve_baseline_path(
-    path: str | Path,
-    *,
-    repo_root: Path | None = None,
-) -> Path:
-    """Resolve a repo-relative baseline spike path and require it stay in-repo."""
-    root = repo_root_from(repo_root)
-    return require_repo_path(root, root / Path(path), "baseline spike path")
-
-
-def resolve_context_shift_output_path(
-    path: str | Path = DEFAULT_OUTPUT,
-    *,
-    repo_root: Path | None = None,
-) -> Path:
-    """Resolve the context-shift CSV output path through the path resolver."""
-    root = repo_root_from(repo_root)
-    return require_repo_path(root, root / Path(path), "context shift output")
+    LOGGER.info("Wrote %s", out_path)
+    print(f"Wrote {out_path}")
+    print(f"claim_status: {metrics['claim_status']}")
+    print(f"commit_sha: {metrics['commit_sha']} random_seed: {metrics['random_seed']}")
+    print(
+        f"Spearman sugar vs JO rankings: r_s={metrics['spearman_rs']:.4f}, "
+        f"p={metrics['spearman_p']:.4g}"
+    )
+    print(
+        f"Max |DVI| group={metrics['max_abs_dvi_group']!r} "
+        f"(|DVI|={metrics['max_abs_dvi']:.4f})"
+    )
+    return 0
 
 
 if __name__ == "__main__":
-    path = write_sugar_vs_jo_context_shift_csv()
-    print(path)
+    raise SystemExit(main())
