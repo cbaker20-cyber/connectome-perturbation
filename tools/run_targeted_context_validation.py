@@ -28,8 +28,8 @@ Outputs:
 Example:
     python tools/run_targeted_context_validation.py \
       --annotations flywire_annotations.tsv \
-      --completeness Drosophila_brain_model/2023_03_23_completeness_630_final.csv \
-      --connectivity Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet \
+      --completeness 2023_03_23_completeness_630_final.csv \
+      --connectivity 2023_03_23_connectivity_630_final.parquet \
       --contexts metadata/source_contexts/source_context_manifest.csv \
       --context-mode matched_size \
       --context-names sensory_ascending,mechanosensory,gustatory,sugar \
@@ -54,7 +54,7 @@ import pandas as pd
 from brian2 import ms
 
 sys.path.insert(0, str(Path.cwd()))
-sys.path.insert(0, str(Path.cwd() / "Drosophila_brain_model"))
+sys.path.insert(0, str(Path.cwd() / ""))
 from model import run_exp, default_params  # type: ignore
 
 
@@ -164,8 +164,8 @@ def motor_metrics(baseline_path: Path, perturb_path: Path, motor_ids: list[int],
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run targeted context-conditioned Brian2 validation.")
     parser.add_argument("--annotations", default="flywire_annotations.tsv")
-    parser.add_argument("--completeness", default="Drosophila_brain_model/2023_03_23_completeness_630_final.csv")
-    parser.add_argument("--connectivity", default="Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet")
+    parser.add_argument("--completeness", default="2023_03_23_completeness_630_final.csv")
+    parser.add_argument("--connectivity", default="2023_03_23_connectivity_630_final.parquet")
     parser.add_argument("--contexts", default="metadata/source_contexts/source_context_manifest.csv")
     parser.add_argument("--context-mode", default="matched_size")
     parser.add_argument("--context-names", default="sensory_ascending,mechanosensory,gustatory,sugar")

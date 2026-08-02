@@ -21,7 +21,7 @@ Nothing in `results/perturbation_summary.csv` should be treated as validated neu
 
 The repository currently tracks files named for materializations 630 and 783, plus `flywire_annotations.tsv`. Those names and existing project notes suggest a FlyWire-related origin, but filenames are not provenance. The repo still needs authoritative download URLs or DOIs, release/version identifiers, licenses, access dates, checksums, schemas, and a mapping from each experiment to the exact files used.
 
-There is code in `perturbation/perturb.py` that writes a file named `results/perturbation_summary.csv`. However, the tracked summary is not bound to a run manifest, configuration, log, input checksums, or commit. Several scripts also refer to a `Drosophila_brain_model/` directory that is not present in the current layout. These are blockers to claiming reproduction.
+There is code in `perturbation/perturb.py` that writes a file named `results/perturbation_summary.csv`. However, the tracked summary is not bound to a run manifest, configuration, log, input checksums, or commit. Several scripts also refer to a `` directory that is not present in the current layout. These are blockers to claiming reproduction.
 
 ## Environment
 

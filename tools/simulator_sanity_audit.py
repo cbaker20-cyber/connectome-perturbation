@@ -18,11 +18,11 @@ from pathlib import Path
 
 def main() -> None:
     model_path = Path("model.py")
-    alt_model_path = Path("Drosophila_brain_model/model.py")
+    alt_model_path = Path("model.py")
     if not model_path.exists() and alt_model_path.exists():
         model_path = alt_model_path
     if not model_path.exists():
-        raise FileNotFoundError("Could not find model.py in repo root or Drosophila_brain_model/model.py")
+        raise FileNotFoundError("Could not find model.py in repo root or model.py")
 
     text = model_path.read_text()
     reset_lines = [line.strip() for line in text.splitlines() if "eq_rst" in line or "v = v_rst" in line]
