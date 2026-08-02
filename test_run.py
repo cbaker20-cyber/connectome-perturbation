@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, 'Drosophila_brain_model')
+sys.path.insert(0, '')
 
 from pathlib import Path
 from model import run_exp, default_params
@@ -9,8 +9,8 @@ params = default_params.copy()
 params['n_run'] = 1
 params['t_run'] = 500 * ms
 
-path_comp = 'Drosophila_brain_model/2023_03_23_completeness_630_final.csv'
-path_con  = 'Drosophila_brain_model/2023_03_23_connectivity_630_final.parquet'
+path_comp = '2023_03_23_completeness_630_final.csv'
+path_con  = '2023_03_23_connectivity_630_final.parquet'
 path_res  = 'results'
 
 Path(path_res).mkdir(exist_ok=True)
