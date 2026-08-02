@@ -41,11 +41,24 @@ EXCLUDED_FILENAMES = frozenset(
 )
 
 
+# Text inputs are hashed after CRLF→LF normalization so Windows checkouts match
+# manifests produced on LF-only systems (git autocrlf).
+_TEXT_HASH_SUFFIXES = frozenset({".csv", ".tsv", ".txt", ".json", ".yaml", ".yml", ".md"})
+
+
+def canonical_file_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    if path.suffix.lower() in _TEXT_HASH_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return data
+
+
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
+    data = canonical_file_bytes(path)
     digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(chunk_size), b""):
-            digest.update(chunk)
+    view = memoryview(data)
+    for start in range(0, len(data), chunk_size):
+        digest.update(view[start : start + chunk_size])
     return digest.hexdigest()
 
 
@@ -92,12 +105,12 @@ def iter_input_like_files(repo_root: Path, patterns: tuple[str, ...]) -> list[Pa
 
 def build_record(path: Path, repo_root: Path) -> dict[str, Any]:
     rel = path.relative_to(repo_root).as_posix()
-    stat = path.stat()
+    payload = canonical_file_bytes(path)
     return {
         "path": rel,
         "filename": path.name,
         "extension": path.suffix.lower(),
-        "size_bytes": stat.st_size,
+        "size_bytes": len(payload),
         "sha256": sha256_file(path),
         "guessed_role": guess_role(path),
         "guessed_materialization": guess_materialization(path),

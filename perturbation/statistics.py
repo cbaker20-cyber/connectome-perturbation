@@ -6,8 +6,12 @@ import pandas as pd
 from scipy import stats
 from statsmodels.stats.multitest import multipletests
 
-sys.path.insert(0, "Drosophila_brain_model")
-sys.path.insert(0, "perturbation")
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+_PERTURBATION_DIR = Path(__file__).resolve().parent
+if str(_PERTURBATION_DIR) not in sys.path:
+    sys.path.insert(0, str(_PERTURBATION_DIR))
 
 from cell_groups import get_group
 

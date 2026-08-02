@@ -1,3 +1,5 @@
+﻿from brian2 import prefs
+prefs.codegen.target = 'numpy'  # avoid Windows blocking Brian2 Cython DLLs
 import pandas as pd
 from textwrap import dedent
 
@@ -24,7 +26,7 @@ default_params = {
     'v_th'      : -45 * mV,               # threshold for spiking
     't_mbr'     :  20 * ms,               # membrane time scale (capacitance * resistance = .002 * uF * 10. * Mohm)
 
-    # Jürgensen et al https://doi.org/10.1088/2634-4386/ac3ba6
+    # JÃ¼rgensen et al https://doi.org/10.1088/2634-4386/ac3ba6
     'tau'       : 5 * ms,                 # time constant 
 
     # Lazar et al https://doi.org/10.7554/eLife.62362
@@ -121,8 +123,11 @@ def silence(slnc, syn):
         Synapses with modified weights
     '''
 
-    for i in slnc:
-        syn.w[' {} == i'.format(i)] = 0*mV
+    for brian_idx in slnc:
+        # Use Brian2's internal synapse index variable `i` explicitly in the
+        # string expression. Avoid a Python local variable named `i`, which
+        # causes repeated Brian2 namespace-resolution warnings.
+        syn.w['i == {}'.format(brian_idx)] = 0*mV
     
     return syn
 
@@ -371,3 +376,5 @@ def run_exp(exp_name, neu_exc, path_res, path_comp, path_con,
 
     # store spike data
     df.to_parquet(path_save, compression='brotli')
+
+
