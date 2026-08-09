@@ -1,0 +1,11 @@
+group,perm_index,delta_hz,n_silenced,n_trials_per_sim,seed
+Kenyon_Cell,1,1.8,5095,5,42
+Kenyon_Cell,2,3.2,5095,5,42
+Kenyon_Cell,3,3.6,5095,5,42
+Kenyon_Cell,4,3.2,5095,5,42
+Kenyon_Cell,5,2.0,5095,5,42
+Kenyon_Cell,6,3.8,5095,5,42
+Kenyon_Cell,7,0.8,5095,5,42
+Kenyon_Cell,8,1.8,5095,5,42
+Kenyon_Cell,9,2.6,5095,5,42
+Kenyon_Cell,10,2.2,5095,5,42
