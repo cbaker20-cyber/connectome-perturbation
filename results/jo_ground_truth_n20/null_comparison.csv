@@ -1,6 +1,6 @@
 group,distance_n_silenced,distance_observed_delta_hz,distance_null_mean,distance_null_std,distance_z_score,distance_empirical_p_one_sided,distance_empirical_p_two_sided,distance_n_permutations,distance_n_trials_per_sim,distance_seed
-AN,2078.0,-12.6,-3.33,5.619,-1.65,0.1818,0.1818,10.0,5.0,42.0
-descending,1086.0,-5.85,-1.51,9.723,-0.446,0.4545,0.7273,10.0,5.0,42.0
-LO,,,,,,,,,,
-Kenyon_Cell,,,,,,,,,,
+AN,,,,,,,,,,
+descending,,,,,,,,,,
+LO,1106.0,-0.5,0.45,1.716,-0.554,0.3636,0.8182,10.0,5.0,42.0
+Kenyon_Cell,5095.0,0.35,-0.41,1.605,0.474,0.4545,0.9091,10.0,5.0,42.0
 motor,,,,,,,,,,
