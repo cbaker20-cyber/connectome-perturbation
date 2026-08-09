@@ -1,0 +1,2 @@
+group,distance_n_silenced,distance_observed_delta_hz,distance_null_mean,distance_null_std,distance_z_score,distance_empirical_p_one_sided,distance_empirical_p_two_sided,distance_n_permutations,distance_n_trials_per_sim,distance_seed
+motor,85,-0.7,-1.05,,,1.0,1.0,1,5,42
