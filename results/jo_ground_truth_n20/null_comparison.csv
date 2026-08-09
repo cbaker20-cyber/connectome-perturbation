@@ -1,2 +1,6 @@
 group,distance_n_silenced,distance_observed_delta_hz,distance_null_mean,distance_null_std,distance_z_score,distance_empirical_p_one_sided,distance_empirical_p_two_sided,distance_n_permutations,distance_n_trials_per_sim,distance_seed
-motor,85,-0.7,-1.05,,,1.0,1.0,1,5,42
+AN,2078.0,-12.6,-3.33,5.619,-1.65,0.1818,0.1818,10.0,5.0,42.0
+descending,1086.0,-5.85,-1.51,9.723,-0.446,0.4545,0.7273,10.0,5.0,42.0
+LO,,,,,,,,,,
+Kenyon_Cell,,,,,,,,,,
+motor,,,,,,,,,,
