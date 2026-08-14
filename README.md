@@ -2,6 +2,8 @@
 
 This repository contains Python/Brian2 simulation code, perturbation and graph-analysis scripts, notebooks, research notes, and several tracked connectome-like data files. Its present status is **provenance and reproducibility triage**: the repository has substantially more material than the old one-line README showed, but it does not yet provide a verified end-to-end path from an authoritative data release to a reproducible result.
 
+> **New readers:** see **`MASTER_GUIDE.md`** for the single consolidated reference — model and parameters, methods, all verified results (n=5 and n=20), the null models and controls, provenance status, the AI-content registry, and an interview answer bank.
+
 Nothing in `results/perturbation_summary.csv` should be treated as validated neuroscience. The file is an existing project artifact whose exact input manifest, run configuration, commit, and validation record are not attached.
 
 ## Repository map
