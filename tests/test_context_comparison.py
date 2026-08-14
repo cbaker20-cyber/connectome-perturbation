@@ -25,7 +25,7 @@ def test_output_schema_has_exactly_15_columns():
     assert "epsilon" in OUTPUT_COLUMNS
 
 
-def test_compute_dvi_matches_ceo071b_formula():
+def test_compute_dvi_formula():
     sugar = -100.0
     jo = -40.0
     expected = (sugar - jo) / (sugar + jo + EPS)
