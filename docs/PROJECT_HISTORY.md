@@ -39,7 +39,7 @@ As the scientific claims grew more complex, the repository faced data realities:
 
 To explain *why* ANs and other projections possessed such leverage, the project introduced formal graph-theoretic mathematical models.
 
-* **Graph Math Surrogates (`178e4bc`):** Introduced analytical surrogates bypassing raw simulation costs, focusing on **modal controllability**, **path attenuation**, and the **BORA** (Biological Operations Reference Architecture) framework.
+* **Graph Math Surrogates (`178e4bc`):** Introduced analytical surrogates bypassing raw simulation costs, focusing on **modal controllability**, **path attenuation**, and the **BORA** (Behavioral Opponent Routing Analysis) framework.
 * **Disinhibition Motifs & AN Betweenness (`9c96e5c`):** Added specific search tools to isolate disinhibition motifs, deploying path-betweenness centrality controls tailored for Ascending Neurons.
 * **Ground-Truth Sweeps (`b4e6ad1`):** Added a Johnston's Organ (JO) 30-trial ground-truth sweep runner to serve as a baseline for the surrogate metrics.
 

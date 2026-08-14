@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-18T18:09:17.913174+00:00",
+  "generated_at_utc": "2026-08-14T03:11:33+00:00",
   "input_count": 5,
   "inputs": [
     {
@@ -10,19 +10,19 @@
       "path": "2023_03_23_completeness_630_final.csv",
       "provenance": {
         "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
+        "canonical_url_or_doi": "https://doi.org/10.1038/s41586-024-07558-y",
+        "citation": "Dorkenwald, S., Matsliah, A., Sterling, A.R. et al. Neuronal wiring diagram of an adult brain. Nature 634, 124-138 (2024). doi:10.1038/s41586-024-07558-y.",
+        "dataset_name": "FlyWire FAFB whole-brain connectome - neuron completeness table (materialization 630)",
+        "license_or_terms": "Paper published open access under CC BY 4.0 per publisher record. Redistribution terms of this specific local file unconfirmed.",
+        "preprocessing_notes": "Used as the simulated-neuron list by the active pipeline. Local 630 materialization is dated 2023-03-23 in the filename; the exact source URL of this 630 materialization is not authoritatively documented in the repo (the public 783 archive is Zenodo record 10676866). Access date not recorded - fill before claim-ready validation.",
         "redistribution_status": "unknown",
         "release_or_materialization": "630",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 127400,
+        "schema_notes": "Columns: Unnamed: 0 (root ID index), Completed (completeness score). 127,400 rows = one per simulated neuron; matches the model's 127,400-neuron count."
       },
       "sha256": "e6b71e17671a9bdb05f55e4bc6774640a1418cb7a05125e0fc994ad40f9bfdfb",
       "size_bytes": 3057611,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "checksum_recorded_provenance_partial"
     },
     {
       "extension": ".parquet",
@@ -32,19 +32,19 @@
       "path": "2023_03_23_connectivity_630_final.parquet",
       "provenance": {
         "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
+        "canonical_url_or_doi": "https://doi.org/10.1038/s41586-024-07558-y",
+        "citation": "Dorkenwald, S., Matsliah, A., Sterling, A.R. et al. Neuronal wiring diagram of an adult brain. Nature 634, 124-138 (2024). doi:10.1038/s41586-024-07558-y. Synapse-level connectivity; the public 783 release is archived by the FlyWire Consortium on Zenodo (record 10676866).",
+        "dataset_name": "FlyWire FAFB whole-brain connectome - connectivity table (materialization 630)",
+        "license_or_terms": "Paper published open access under CC BY 4.0 per publisher record; Zenodo connectivity archive is marked open access. Redistribution terms of this specific local file unconfirmed.",
+        "preprocessing_notes": "The model reads synaptic sign from the signed column `Excitatory x Connectivity` (neurotransmitter-informed, per Eckstein et al. 2024 predictions). Local 630 materialization is dated 2023-03-23 in the filename; exact source URL not authoritatively documented in the repo. Access date not recorded.",
         "redistribution_status": "unknown",
         "release_or_materialization": "630",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 14687178,
+        "schema_notes": "14,687,178 rows (synapse/edge-level). Columns: Presynaptic_ID, Postsynaptic_ID, Presynaptic_Index, Postsynaptic_Index, Connectivity, Excitatory, Excitatory x Connectivity, __index_level_0__."
       },
       "sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
       "size_bytes": 86630944,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "checksum_recorded_provenance_partial"
     },
     {
       "extension": ".csv",
@@ -54,19 +54,19 @@
       "path": "Completeness_783.csv",
       "provenance": {
         "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
+        "canonical_url_or_doi": "https://zenodo.org/records/10676866",
+        "citation": "FlyWire Consortium. FlyWire Whole-brain Connectome Connectivity Data. Zenodo (2024). doi:10.5281/zenodo.10676866. See also Dorkenwald et al. 2024, Nature 634:124-138.",
+        "dataset_name": "FlyWire FAFB whole-brain connectome - neuron completeness table (materialization 783)",
+        "license_or_terms": "Zenodo record marked open access; confirm the record's license page before redistribution.",
+        "preprocessing_notes": "Present locally as the newer materialization; not the primary input of the active pipeline (630 is). Switching to 783 requires rerunning annotation overlap, group counts, baselines, perturbations, and statistics. Access date not recorded.",
         "redistribution_status": "unknown",
         "release_or_materialization": "783",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 138639,
+        "schema_notes": "Columns: Unnamed: 0 (root ID index), Completed (completeness score). 138,639 rows."
       },
       "sha256": "bbb847a4cc2caaa7a16349722d220c087317b946d148d4d592d94d250617a311",
       "size_bytes": 3327347,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "checksum_recorded_provenance_partial"
     },
     {
       "extension": ".parquet",
@@ -76,19 +76,19 @@
       "path": "Connectivity_783.parquet",
       "provenance": {
         "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
+        "canonical_url_or_doi": "https://zenodo.org/records/10676866",
+        "citation": "FlyWire Consortium. FlyWire Whole-brain Connectome Connectivity Data. Zenodo (2024). doi:10.5281/zenodo.10676866. See also Dorkenwald et al. 2024, Nature 634:124-138.",
+        "dataset_name": "FlyWire FAFB whole-brain connectome - connectivity table (materialization 783)",
+        "license_or_terms": "Zenodo record marked open access; confirm the record's license page before redistribution.",
+        "preprocessing_notes": "Present locally as the newer materialization; not the primary input of the active pipeline (630 is). Access date not recorded.",
         "redistribution_status": "unknown",
         "release_or_materialization": "783",
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 15091983,
+        "schema_notes": "15,091,983 rows (synapse/edge-level). Columns: Presynaptic_ID, Postsynaptic_ID, Presynaptic_Index, Postsynaptic_Index, Connectivity, Excitatory, Excitatory x Connectivity, __index_level_0__."
       },
       "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
       "size_bytes": 100804642,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "checksum_recorded_provenance_partial"
     },
     {
       "extension": ".tsv",
@@ -98,19 +98,19 @@
       "path": "flywire_annotations.tsv",
       "provenance": {
         "access_date": null,
-        "canonical_url_or_doi": null,
-        "citation": null,
-        "dataset_name": null,
-        "license_or_terms": null,
-        "preprocessing_notes": null,
+        "canonical_url_or_doi": "https://github.com/flyconnectome/flywire_annotations",
+        "citation": "Schlegel, P., Yin, Y., Bates, A.S. et al. Whole-brain annotation and multi-connectome cell typing of Drosophila. Nature 634, 139-152 (2024). doi:10.1038/s41586-024-07686-5. Annotation tables are distributed via the flyconnectome/flywire_annotations repository.",
+        "dataset_name": "FlyWire neuron annotations (hierarchical cell-type annotations)",
+        "license_or_terms": "Nature paper open access under CC BY 4.0 per publisher record; confirm the annotation repository's license before redistribution.",
+        "preprocessing_notes": "Joined to modeled neurons on root_id, super_class, cell_class, cell_type, and side by cell_groups.py and the select_* helpers in scripts/run_jo_sweep.py. Annotation release/version to confirm: local row count is 139,244, which differs from the ~139,255 neurons reported in the literature - a release/version difference; do not mix counts without stating the file version. Access date not recorded.",
         "redistribution_status": "unknown",
         "release_or_materialization": null,
-        "row_count": null,
-        "schema_notes": null
+        "row_count": 139244,
+        "schema_notes": "139,244 rows. Columns: supervoxel_id, root_id, pos_x, pos_y, pos_z, soma_x, soma_y, soma_z, nucleus_id, flow, super_class, cell_class, cell_sub_class, supertype, cell_type, hemibrain_type, ito_lee_hemilineage, hartenstein_hemilineage, top_nt, top_nt_conf, known_nt, known_nt_source, side, nerve, vfb_id, fbbt_id, status, dimorphism, matching_notes, fru_dsx, synonyms."
       },
       "sha256": "533db093e12d8de350fd20875a967f8f74acace633ff22118eefff550d5dcbc1",
       "size_bytes": 32638576,
-      "validation_status": "checksum_recorded_provenance_missing"
+      "validation_status": "checksum_recorded_provenance_partial"
     }
   ],
   "purpose": "Record local input-like file facts; provenance fields require source-backed completion.",

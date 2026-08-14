@@ -89,5 +89,10 @@ def test_committed_input_manifest_passes_metadata_validation():
         "flywire_annotations.tsv",
     }
     for record in manifest["inputs"]:
-        assert record["validation_status"] == "checksum_recorded_provenance_missing"
+        # The committed manifest has source-backed provenance filled in for all
+        # verifiable fields (citation, DOI, license, row count, schema); only
+        # access_date and redistribution_status remain unknown/pending.
+        assert record["validation_status"] == "checksum_recorded_provenance_partial"
         assert record["provenance"]["redistribution_status"] == "unknown"
+        assert record["provenance"]["row_count"] is not None
+        assert record["provenance"]["canonical_url_or_doi"] is not None
