@@ -13,9 +13,9 @@ Nothing in `results/perturbation_summary.csv` should be treated as validated neu
 - `analyze_graph_outputs.py`: command-line checks and summaries for graph-analysis outputs.
 - `example.ipynb` and `figures.ipynb`: notebooks that reference materialization-630-style input filenames.
 - `environment.yml` and `environment_full.yml`: a concise Conda environment and a historical expanded environment export.
-- `00_PROJECT_STATE.md` through `12_LITERATURE_AND_SOURCE_NOTES.md`: project-maintained research records. Their claims still require links to source data, run artifacts, and independent validation.
-- `docs/progress-log.md`: conservative status log.
+- `00_PROJECT_STATE.md` through `16_NEXT_STEPS_EXECUTION_PLAN.md`: project-maintained research records. Their claims still require links to source data, run artifacts, and independent validation.
 - `docs/data-policy.md`: rules for datasets, outputs, privacy, and manifests.
+- `docs/claim_ledger.md` and the `docs/*-contract.md` specs: the reproducibility/validation contracts.
 - `docs/environment-plan.md`: evidence-based setup plan and current run blockers.
 - `TASKS.md`: active project backlog for reproducibility and analysis work.
 
