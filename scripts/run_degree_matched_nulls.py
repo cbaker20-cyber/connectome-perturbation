@@ -193,15 +193,16 @@ def run_degree_matched_nulls(
     *,
     groups_to_test: list[str] | None = None,
     n_perms: int = DEFAULT_N_PERMS,
-    n_trials: int = DEFAULT_N_TRIALS,
+    n_trials: int | None = None,
     seed: int = DEFAULT_SEED,
     n_bins: int = DEFAULT_N_BINS,
+    config_path: str = DEFAULT_CONFIG,
 ) -> pd.DataFrame:
     """Run the degree-matched dynamical null test for the requested groups."""
     import yaml
 
     root = repo_root_from()
-    config = yaml.safe_load((root / DEFAULT_CONFIG).read_text(encoding="utf-8"))
+    config = yaml.safe_load((root / config_path).read_text(encoding="utf-8"))
     jo_ids, groups, resolved = prepare_jo_sweep(config, repo_root=root)
     results_dir = resolved["results_dir"]
 
@@ -217,7 +218,19 @@ def run_degree_matched_nulls(
     stats_path = results_dir / "statistics.csv"
     if not stats_path.exists():
         raise FileNotFoundError(f"Missing {stats_path}; run the JO sweep first")
-    observed_deltas = pd.read_csv(stats_path, index_col=0)["delta_hz"].to_dict()
+    stats_df = pd.read_csv(stats_path, index_col=0)
+    observed_deltas = stats_df["delta_hz"].to_dict()
+    observed_n_trials = int(stats_df["n_baseline_trials"].iloc[0]) if "n_baseline_trials" in stats_df else None
+    if n_trials is None:
+        if observed_n_trials is None:
+            raise ValueError("statistics.csv has no n_baseline_trials column; pass --n-trials explicitly.")
+        n_trials = observed_n_trials
+        print(f"Auto-matching null n_trials to observed sweep: {n_trials}")
+    elif observed_n_trials is not None and n_trials != observed_n_trials:
+        raise ValueError(
+            f"n_trials={n_trials} != observed n_baseline_trials={observed_n_trials}. "
+            f"Pass --n-trials {observed_n_trials} or the comparison isn't fair."
+        )
 
     if groups_to_test:
         wanted = {g.lower() for g in groups_to_test}
@@ -247,7 +260,20 @@ def run_degree_matched_nulls(
 
         null_deltas = []
         perm_records = []
-        for perm_i in range(n_perms):
+        perms_csv = results_dir / f"jo_degree_matched_nulls_{group_name}_perms.csv"
+        start_perm = 0
+        if perms_csv.exists():
+            try:
+                existing_df = pd.read_csv(perms_csv)
+                if not existing_df.empty and "n_trials_per_sim" in existing_df.columns and existing_df["n_trials_per_sim"].iloc[0] == n_trials:
+                    null_deltas = existing_df["delta_hz"].tolist()
+                    perm_records = existing_df.to_dict(orient="records")
+                    start_perm = len(perm_records)
+                    print(f"  Resuming from perm {start_perm + 1} (found {start_perm} existing records for {group_name})")
+            except Exception as e:
+                print(f"  Warning: Could not read {perms_csv}: {e}")
+
+        for perm_i in range(start_perm, n_perms):
             t0 = time.time()
             null_sample = degree_matched_sample(rng, target_bins, null_pool_bins, null_pool, len(group_ids))
             null_rates = run_silencing_trial_rates(
@@ -268,17 +294,22 @@ def run_degree_matched_nulls(
             })
             print(f"  perm {perm_i + 1}/{n_perms}: dHz={null_delta:.2f} ({time.time() - t0:.0f}s)", flush=True)
 
-        pd.DataFrame(perm_records).to_csv(
-            results_dir / f"jo_degree_matched_nulls_{group_name}_perms.csv", index=False)
+            pd.DataFrame(perm_records).to_csv(perms_csv, index=False)
 
         # Empirical p-values: how many null deltas are at least as extreme as observed.
+        MIN_PERMS_FOR_P_VALUE = 10
         null_arr = np.array(null_deltas)
-        null_mean = float(np.mean(null_arr))
+        if len(null_arr) < MIN_PERMS_FOR_P_VALUE:
+            print(f"  WARNING: only {len(null_arr)} perms for {group_name} — below floor, no p-value reported.")
+        null_mean = float(np.mean(null_arr)) if len(null_arr) else float("nan")
         null_std = float(np.std(null_arr, ddof=1)) if len(null_arr) > 1 else float("nan")
-        n_extreme = int(np.sum(null_arr <= obs_delta)) if obs_delta < 0 else int(np.sum(null_arr >= obs_delta))
-        n_extreme_two = int(np.sum(np.abs(null_arr) >= abs(obs_delta)))
-        p_one = (n_extreme + 1) / (len(null_arr) + 1)
-        p_two = (n_extreme_two + 1) / (len(null_arr) + 1)
+        if len(null_arr) >= MIN_PERMS_FOR_P_VALUE:
+            n_extreme = int(np.sum(null_arr <= obs_delta)) if obs_delta < 0 else int(np.sum(null_arr >= obs_delta))
+            n_extreme_two = int(np.sum(np.abs(null_arr) >= abs(obs_delta)))
+            p_one = (n_extreme + 1) / (len(null_arr) + 1)
+            p_two = (n_extreme_two + 1) / (len(null_arr) + 1)
+        else:
+            p_one = p_two = float("nan")
         z_score = (obs_delta - null_mean) / null_std if null_std > 0 else float("nan")
 
         all_results.append({
@@ -312,15 +343,23 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--n-perms", type=int, default=DEFAULT_N_PERMS,
                         help=f"Null permutations per group (default: {DEFAULT_N_PERMS})")
-    parser.add_argument("--n-trials", type=int, default=DEFAULT_N_TRIALS,
-                        help=f"Brian2 trials per simulation (default: {DEFAULT_N_TRIALS})")
+    parser.add_argument("--n-trials", type=int, default=None,
+                        help="Brian2 trials per null sim (default: auto-match observed sweep)")
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED,
                         help=f"Random seed (default: {DEFAULT_SEED})")
     parser.add_argument("--n-bins", type=int, default=DEFAULT_N_BINS,
                         help=f"Degree bins for matching (default: {DEFAULT_N_BINS})")
     parser.add_argument("--groups", nargs="+", default=None,
                         help="Groups to test (default: all): AN descending LO Kenyon_Cell motor")
-    return parser.parse_args(argv)
+    parser.add_argument("positional_groups", nargs="*", default=None,
+                        help="Positional fallback for groups")
+    parser.add_argument("--config", type=str, default=DEFAULT_CONFIG,
+                        help=f"Config file to use (default: {DEFAULT_CONFIG})")
+    
+    args = parser.parse_args(argv)
+    if args.positional_groups and not args.groups:
+        args.groups = args.positional_groups
+    return args
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -331,6 +370,7 @@ def main(argv: list[str] | None = None) -> int:
         n_trials=args.n_trials,
         seed=args.seed,
         n_bins=args.n_bins,
+        config_path=args.config,
     )
     return 0
 
