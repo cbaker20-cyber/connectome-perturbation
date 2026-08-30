@@ -305,7 +305,10 @@ def run_degree_matched_nulls(
         null_std = float(np.std(null_arr, ddof=1)) if len(null_arr) > 1 else float("nan")
         if len(null_arr) >= MIN_PERMS_FOR_P_VALUE:
             n_extreme = int(np.sum(null_arr <= obs_delta)) if obs_delta < 0 else int(np.sum(null_arr >= obs_delta))
-            n_extreme_two = int(np.sum(np.abs(null_arr) >= abs(obs_delta)))
+            # Two-sided: distance from the null distribution's OWN mean, not from zero.
+            # (Fixed 2026-08-23 — the prior version compared |null| to |obs_delta| directly,
+            # which is only correct when null_mean happens to be ~0. See AUDIT_LOG.md, entry 2.)
+            n_extreme_two = int(np.sum(np.abs(null_arr - null_mean) >= abs(obs_delta - null_mean)))
             p_one = (n_extreme + 1) / (len(null_arr) + 1)
             p_two = (n_extreme_two + 1) / (len(null_arr) + 1)
         else:
@@ -351,15 +354,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
                         help=f"Degree bins for matching (default: {DEFAULT_N_BINS})")
     parser.add_argument("--groups", nargs="+", default=None,
                         help="Groups to test (default: all): AN descending LO Kenyon_Cell motor")
-    parser.add_argument("positional_groups", nargs="*", default=None,
-                        help="Positional fallback for groups")
     parser.add_argument("--config", type=str, default=DEFAULT_CONFIG,
                         help=f"Config file to use (default: {DEFAULT_CONFIG})")
-    
-    args = parser.parse_args(argv)
-    if args.positional_groups and not args.groups:
-        args.groups = args.positional_groups
-    return args
+    return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
