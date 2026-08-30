@@ -1,6 +1,0 @@
-label,exp_name,baseline_mean_hz,perturbed_mean_hz,delta_hz,pct_change,t_stat,p_value_raw,n_baseline_trials,n_perturbed_trials,p_value_fdr,significant_uncorrected,significant_fdr,significant,p_value
-AN,perturb_AN,72.05,59.45,-12.6,-17.4879,18.9556,0.0,20,20,0.0,True,True,True,0.0
-descending,perturb_descending,72.05,66.2,-5.85,-8.1194,7.517,0.0,20,20,0.0,True,True,True,0.0
-LO,perturb_LO,72.05,71.55,-0.5,-0.694,0.5847,0.5623,20,20,0.6465,False,False,False,0.6465
-Kenyon_Cell,perturb_Kenyon_Cell,72.05,72.4,0.35,0.4858,-0.4624,0.6465,20,20,0.6465,False,False,False,0.6465
-motor,perturb_motor,72.05,71.35,-0.7,-0.9715,0.7938,0.4325,20,20,0.6465,False,False,False,0.6465
