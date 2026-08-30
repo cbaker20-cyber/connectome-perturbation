@@ -272,44 +272,73 @@ def select_groups_and_jo_ids(
     return groups, list(jo_ids), list(motor_ids)
 
 
+def _weighted_sample_without_replacement(candidates: list[int], weights: np.ndarray,
+                                          k: int, rng: np.random.Generator) -> list[int]:
+    """Sample k items from candidates without replacement, probability proportional to weights."""
+    k = min(k, len(candidates))
+    if k <= 0:
+        return []
+    w = np.asarray(weights, dtype=float)
+    w = np.clip(w, 1e-9, None)  # avoid zero/negative weights breaking the sampler
+    p = w / w.sum()
+    idx = rng.choice(len(candidates), size=k, replace=False, p=p)
+    return [candidates[i] for i in idx]
+
 def build_capped_subgraph(
     edges: pd.DataFrame,
     focus_ids: Sequence[int],
     *,
     always_keep: Sequence[int] | None = None,
-    max_nodes: int = DEFAULT_MAX_SUBGRAPH_NODES,
+    max_nodes: int = 5000,
     seed: int = 42,
 ) -> tuple[np.ndarray, dict[int, int]]:
-    """Build control-theoretic ``W`` and id→index map for a capped neighborhood."""
     focus = [int(x) for x in focus_ids]
     keep = {int(x) for x in (always_keep or [])}
     focus_set = set(focus) | keep
     if not focus_set:
         raise ValueError("focus_ids/always_keep must be non-empty")
 
+    rng = np.random.default_rng(seed)
     incident = edges[edges["pre"].isin(focus_set) | edges["post"].isin(focus_set)]
-    nodes = sorted(set(incident["pre"].tolist()) | set(incident["post"].tolist()) | focus_set)
-    if len(nodes) > max_nodes:
-        rng = np.random.default_rng(seed)
-        neighbors = [n for n in nodes if n not in focus_set]
-        keep_n = max(0, max_nodes - len(focus_set))
-        if keep_n <= 0:
-            # Prefer focus IDs; truncate deterministically.
-            nodes = sorted(focus_set)[:max_nodes]
-        else:
-            chosen = rng.choice(neighbors, size=min(keep_n, len(neighbors)), replace=False)
-            nodes = sorted(set(focus_set) | {int(x) for x in chosen})
+
+    # Total synaptic strength (sum |weight|) touching the focus set, per node --
+    # used as the sampling weight in both branches below, so selection reflects
+    # real connectivity instead of numeric ID order or uniform randomness.
+    abs_w = incident["weight"].abs()
+    strength_pre = incident.groupby("pre")["weight"].apply(lambda s: s.abs().sum())
+    strength_post = incident.groupby("post")["weight"].apply(lambda s: s.abs().sum())
+    strength = strength_pre.add(strength_post, fill_value=0.0)
+
+    if len(focus_set) > max_nodes:
+        # Focus group itself exceeds the cap: keep the highest-connectivity
+        # members of the group by real synaptic strength, not by ID sort.
+        focus_strength = strength.reindex(list(focus_set)).fillna(0.0)
+        chosen_focus = _weighted_sample_without_replacement(
+            list(focus_strength.index), focus_strength.to_numpy(), max_nodes, rng
+        )
+        nodes = sorted(set(chosen_focus))
+    else:
+        available = max_nodes - len(focus_set)
+        neighbor_nodes = (set(incident["pre"]) | set(incident["post"])) - focus_set
+        neighbor_list = list(neighbor_nodes)
+        neighbor_strength = strength.reindex(neighbor_list).fillna(0.0)
+        chosen_neighbors = _weighted_sample_without_replacement(
+            neighbor_list, neighbor_strength.to_numpy(), available, rng
+        )
+        nodes = sorted(focus_set | set(chosen_neighbors))
 
     index = {node: i for i, node in enumerate(nodes)}
-    local_edges: list[tuple[int, int, float]] = []
-    for pre, post, weight in incident[["pre", "post", "weight"]].itertuples(index=False):
-        if int(pre) in index and int(post) in index:
-            local_edges.append((index[int(pre)], index[int(post)], float(weight)))
+    node_set = set(nodes)
+    local_edges = [
+        (index[int(pre)], index[int(post)], float(weight))
+        for pre, post, weight in incident[["pre", "post", "weight"]].itertuples(index=False)
+        if int(pre) in node_set and int(post) in node_set
+    ]
+    n = len(nodes)
     if not local_edges:
-        n = len(nodes)
         return np.zeros((n, n), dtype=float), index
 
-    W = load_dense_signed_adjacency_from_edges(local_edges, n_nodes=len(nodes))
+    W = load_dense_signed_adjacency_from_edges(local_edges, n_nodes=n)
     radius = float(np.max(np.abs(np.linalg.eigvals(W)))) if W.size else 0.0
     if radius > 0.9:
         W = W * (0.85 / radius)

@@ -1,5 +1,6 @@
-﻿from brian2 import prefs
-prefs.codegen.target = 'numpy'  # avoid Windows blocking Brian2 Cython DLLs
+from brian2 import prefs
+prefs.codegen.target = 'numpy'
+
 import pandas as pd
 from textwrap import dedent
 
@@ -291,7 +292,16 @@ def run_trial(exc, exc2, slnc, path_comp, path_con, params):
 
     # run simulation
     net.run(duration=params['t_run'])
-
+    # --- device reset to stop cross-run build/run time creep ---
+    try:
+        from brian2 import get_device
+        _dev = get_device()
+        if type(_dev).__name__.lower().startswith(("cppstandalone", "genn")):
+            _dev.reinit()
+            _dev.activate(build_on_run=True)
+    except Exception as _reinit_err:
+        print(f"    [device reinit warning] {_reinit_err}")
+    # ------------------------------------------------------------
     # spike times 
     spk_trn = get_spk_trn(spk_mon)
 

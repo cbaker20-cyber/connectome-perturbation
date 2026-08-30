@@ -24,8 +24,10 @@ def aggregate_perms(perms_df, stats_df, prefix="distance"):
         # p-values
         less_count = np.sum(delta_hz_null <= obs)
         greater_count = np.sum(delta_hz_null >= obs)
-        p_one_sided = min(less_count, greater_count) / n_perms
-        p_two_sided = min(1.0, p_one_sided * 2)
+        p_one_sided = (min(less_count, greater_count) + 1) / (n_perms + 1)
+        
+        n_extreme_two = np.sum(np.abs(delta_hz_null - null_mean) >= abs(obs - null_mean))
+        p_two_sided = (n_extreme_two + 1) / (n_perms + 1)
         
         records.append({
             f"group": grp,

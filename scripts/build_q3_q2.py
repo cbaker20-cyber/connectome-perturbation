@@ -8,16 +8,11 @@ def build_effect_sizes(stats_path, out_path):
         return
         
     df = pd.read_csv(stats_path)
-    # Effect size pack: mean ΔHz, CI or SD across trials if available, |ΔHz|, percent change vs baseline
     effect_df = pd.DataFrame()
     effect_df["group"] = df["label"]
     effect_df["mean_delta_hz"] = df["delta_hz"]
     effect_df["abs_delta_hz"] = df["delta_hz"].abs()
     effect_df["percent_change"] = df["pct_change"]
-    # We don't have SD pre-computed in statistics.csv, but we have t_stat and n_trials.
-    # t = mean_delta / (sd / sqrt(n)) => sd = (mean_delta / t) * sqrt(n)
-    # wait, it's a 2-sample t-test, so standard error of difference.
-    # Let's just output what we have clearly.
     
     out_path.parent.mkdir(parents=True, exist_ok=True)
     effect_df.to_csv(out_path, index=False)
@@ -27,22 +22,26 @@ def build_null_comparison():
     degree = Path("results/jo_ground_truth_n20/jo_degree_matched_nulls.csv")
     dist = Path("results/jo_ground_truth_n20/jo_distance_matched_nulls.csv")
     
-    if not degree.exists() and not dist.exists():
-        print("No null results to combine.")
-        return
-        
+    groups = ["AN", "descending", "LO", "Kenyon_Cell", "motor"]
+    
     df_deg = pd.read_csv(degree) if degree.exists() else pd.DataFrame(columns=["group"])
     df_dist = pd.read_csv(dist) if dist.exists() else pd.DataFrame(columns=["group"])
     
-    df_deg = df_deg.add_prefix("degree_")
-    df_deg = df_deg.rename(columns={"degree_group": "group"})
+    # Just in case degree table is empty but we want to show all groups
+    df_all = pd.DataFrame({"group": groups})
     
-    df_dist = df_dist.add_prefix("distance_")
-    df_dist = df_dist.rename(columns={"distance_group": "group"})
+    if not df_deg.empty:
+        df_deg = df_deg.add_prefix("degree_")
+        df_deg = df_deg.rename(columns={"degree_group": "group"})
+        df_all = pd.merge(df_all, df_deg, on="group", how="left")
     
-    merged = pd.merge(df_deg, df_dist, on="group", how="outer")
+    if not df_dist.empty:
+        df_dist = df_dist.add_prefix("distance_")
+        df_dist = df_dist.rename(columns={"distance_group": "group"})
+        df_all = pd.merge(df_all, df_dist, on="group", how="left")
+        
     out = Path("results/jo_ground_truth_n20/null_comparison.csv")
-    merged.to_csv(out, index=False)
+    df_all.to_csv(out, index=False)
     print(f"Wrote {out}")
 
 def main():

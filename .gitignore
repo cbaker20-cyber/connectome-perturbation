@@ -48,3 +48,15 @@ results/*
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Freebuff app state (never commit)
+.freebuff/
+
+# Generated Brian2/GeNN build output
+GeNNworkspace/
+
+# Large data archives / extracted intermediates
+Drosophila_Nulls_Minimal.zip
+kaggle_upload.zip
+files.zip
+unzipped_files/
