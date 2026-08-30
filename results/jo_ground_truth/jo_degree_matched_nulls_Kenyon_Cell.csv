@@ -1,2 +1,0 @@
-group,n_silenced,observed_delta_hz,null_mean,null_std,z_score,empirical_p_one_sided,empirical_p_two_sided,n_permutations,n_trials_per_sim,seed
-Kenyon_Cell,5095,3.4,2.5,0.949,0.949,0.2727,0.3636,10,5,42

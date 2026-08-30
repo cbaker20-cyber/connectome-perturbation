@@ -11,11 +11,11 @@ __pycache__/
 .ruff_cache/
 
 # IDE / agent tooling (never commit)
-.[c]ursor/
-.[c]ursorrules
+.cursor/
+.cursorrules
 .codex/
-.[k]imi/
-.[k]imi-work/
+.kimi/
+.kimi-work/
 .grok/
 .claude/
 .idea/
@@ -30,33 +30,24 @@ __pycache__/
 *.temp
 *_backup_*
 
-# Local logs (keep directory structure free of agent/run noise)
+# Local logs
 logs/
 *.log
 
-# Results: ignore by default; keep selected validated tracked outputs
-results/*
-!results/perturbation_summary.csv
-!results/surrogate_correlations.csv
-!results/surrogate_vs_ground_truth.csv
-!results/bora_routing_scores.csv
-!results/disinhibition_motifs.csv
-!results/an_betweenness_control.csv
-!results/sugar_vs_jo_context_shift.csv
+# Simulation outputs — regenerate, do not treat as provenance
+results/
 
 # OS noise
 .DS_Store
 Thumbs.db
 Desktop.ini
 
-# Freebuff app state (never commit)
+# Local app state
 .freebuff/
 
 # Generated Brian2/GeNN build output
 GeNNworkspace/
 
-# Large data archives / extracted intermediates
-Drosophila_Nulls_Minimal.zip
-kaggle_upload.zip
-files.zip
+# Large archives
+*.zip
 unzipped_files/

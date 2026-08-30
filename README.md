@@ -1,100 +1,65 @@
-# Connectome Perturbation
+# Connectome perturbation
 
-This repository contains Python/Brian2 simulation code, perturbation and graph-analysis scripts, notebooks, research notes, and several tracked connectome-like data files. Its present status is **provenance and reproducibility triage**: the repository has substantially more material than the old one-line README showed, but it does not yet provide a verified end-to-end path from an authoritative data release to a reproducible result.
+Whole-brain *Drosophila* LIF simulation (Brian2) on FlyWire connectivity, with
+**output-lesioning** and a motor-population readout.
 
-> **New readers:** see **`MASTER_GUIDE.md`** for the single consolidated reference — model and parameters, methods, all verified results (n=5 and n=20), the null models and controls, provenance status, the AI-content registry, and an interview answer bank.
+This repository was reset on 2026-08-30: AI-generated research-management
+docs, presentation files, and historical result dumps were removed. The
+scientific engine (`model.py`, `perturbation/`, connectome tables) is what
+remains.
 
-Nothing in `results/perturbation_summary.csv` should be treated as validated neuroscience. The file is an existing project artifact whose exact input manifest, run configuration, commit, and validation record are not attached.
+## Question
 
-## Repository map
+**Does the sign of motor ΔHz after a lesion follow the sign of outgoing
+synapses, or only the nonlinear dynamics (and the sensory context)?**
 
-- `model.py` and `utils.py`: Brian2 model and result helpers.
-- `perturbation/`: baseline, perturbation, statistics, motor, graph, and pathway analysis scripts.
-- `analyze_graph_outputs.py`: command-line checks and summaries for graph-analysis outputs.
-- `example.ipynb` and `figures.ipynb`: notebooks that reference materialization-630-style input filenames.
-- `environment.yml` and `environment_full.yml`: a concise Conda environment and a historical expanded environment export.
-- `00_PROJECT_STATE.md` through `16_NEXT_STEPS_EXECUTION_PLAN.md`: project-maintained research records. Their claims still require links to source data, run artifacts, and independent validation.
-- `docs/data-policy.md`: rules for datasets, outputs, privacy, and manifests.
-- `docs/claim_ledger.md` and the `docs/*-contract.md` specs: the reproducibility/validation contracts.
-- `docs/environment-plan.md`: evidence-based setup plan and current run blockers.
-- `TASKS.md`: active project backlog for reproducibility and analysis work.
+Competing accounts, and why the question is still open, are in
+[`docs/RESEARCH_QUESTION.md`](docs/RESEARCH_QUESTION.md). That file does not
+pick a winner. [`docs/EPISTEMIC_RULES.md`](docs/EPISTEMIC_RULES.md) is the
+rule set for not turning a default or a highly-ranked paper into “the truth.”
 
-## Data and provenance status
+Infrastructure map: [`docs/INFRASTRUCTURE.md`](docs/INFRASTRUCTURE.md).
+Code-backed methods: [`docs/METHODS.md`](docs/METHODS.md).
 
-The repository currently tracks files named for materializations 630 and 783, plus `flywire_annotations.tsv`. Those names and existing project notes suggest a FlyWire-related origin, but filenames are not provenance. The repo still needs authoritative download URLs or DOIs, release/version identifiers, licenses, access dates, checksums, schemas, and a mapping from each experiment to the exact files used.
-
-There is code in `perturbation/perturb.py` that writes a file named `results/perturbation_summary.csv`. However, the tracked summary is not bound to a run manifest, configuration, log, input checksums, or commit. Several scripts also refer to a `` directory that is not present in the current layout. These are blockers to claiming reproduction.
-
-## Environment
-
-The concise environment file records Python 3.10, Brian2 2.5.1, NumPy, pandas, joblib, PyArrow, Jupyter, and IPython kernel support.
+## Setup
 
 ```bash
 conda env create -f environment.yml
 conda activate brian2
-python -c "import brian2, numpy, pandas, pyarrow; print('imports ok')"
-python tools/validate_research_docs.py
 ```
 
-The documentation validator does not validate the model or its scientific outputs. Do not start a full simulation until the paths and input manifest described in `docs/environment-plan.md` are resolved.
+`requirements.txt` pins `Cython<3`, which Brian2 2.5.1 needs.
 
-## Metadata-first smoke command
-
-This command builds a local input manifest, writes a deterministic metadata-only smoke artifact, records that artifact in the output manifest, and validates metadata plumbing. It does **not** validate a neuroscience result.
+## First experiment (screen, not a claim)
 
 ```bash
-python tools/build_input_manifest.py
-python tools/write_smoke_artifact.py --output results/reproducibility_smoke_artifact.json
-python tools/write_output_manifest.py \
-  --config configs/smoke_run.yaml \
-  --input-manifest data/input_manifest.json \
-  --output output_manifest.json \
-  --artifact results/reproducibility_smoke_artifact.json
-python tools/validate_reproducibility.py
+python perturbation/cell_groups.py
+python scripts/run_ei_lesion_screen.py --dry-run
+python scripts/run_ei_lesion_screen.py --nt-map classical_fast --n-run 5
+python scripts/run_ei_lesion_screen.py --nt-map shiu_2024 --n-run 5
 ```
 
-Expected artifacts:
+`--dry-run` prints group sizes under each transmitter map. A real run writes
+parquet spike tables under `results/` (gitignored).
 
-- `data/input_manifest.json`: local filenames, sizes, SHA-256 checksums, guessed roles/materializations, and empty provenance fields.
-- `results/reproducibility_smoke_artifact.json`: deterministic metadata-only artifact used to exercise output declaration and checksum validation.
-- `output_manifest.json`: command/config/commit/environment/input-checksum/output-artifact metadata with `claim_status` set to `not_interpretable_as_neuroscience`.
+## What the model does, in one paragraph
 
-Do not use any of these files as evidence for a biological conclusion until authoritative provenance and an actual validated run are attached.
+Neurons come from a completeness table. Synapses come from a connectivity
+table. Weight is `Excitatory × Connectivity × 0.275 mV`. Sensory neurons
+receive Poisson input. A lesion sets that cell’s **outgoing** weights to zero.
+Spikes are recorded; motor neurons (`super_class == motor`) are the readout.
+Parameters follow Shiu et al. 2024; this project’s addition is the lesion
+engine, annotation join, polarity maps, statistics, and nulls.
 
-## Neuron ID representation validator
+## Data
 
-`tools/validate_neuron_ids.py` checks identifier representation without converting IDs to integers or floating-point values. Inputs and reports must resolve inside the repository, and the report may not overwrite the source input. A successful result establishes only compliance with this syntax and declared original-text provenance contract; it does not establish dataset provenance, neuron identity, materialization membership, biological validity, perturbation effects, or any neuroscience conclusion.
+Tracked locally: materializations **630** and **783**, plus
+`flywire_annotations.tsv`. They are different releases. Checksums live in
+`data/input_manifest.json`. Provenance is partial (no access date). Do not
+treat a filename as a DOI.
 
-For CSV input, provide the identifier column and, when available, explicit original-text provenance columns:
+## Regeneron / STS
 
-```bash
-python tools/validate_neuron_ids.py data/example_ids.csv \
-  --column neuron_id \
-  --original-text-column neuron_id_original_text \
-  --availability-column original_text_available \
-  --report results/example_ids.validation.json
-```
-
-CSV availability values must be `true` or `false` (case-insensitive). For JSON input, the top level must be either a list of objects or an object containing a `records` list; availability values must be JSON booleans:
-
-```bash
-python tools/validate_neuron_ids.py data/example_ids.json \
-  --column neuron_id \
-  --original-text-column neuron_id_original_text \
-  --availability-column original_text_available
-```
-
-The command prints deterministic JSON when `--report` is omitted. It exits with status `0` only when every record is classified `valid_exact_string`; all missing, malformed, unverifiable, or suspected precision-loss records produce an invalid aggregate result and exit status `1`. The report includes sorted status counts, validator and schema versions, the selected column names, and `claim_status: not_interpretable_as_neuroscience`.
-
-## Current blockers
-
-1. No authoritative source manifest for the tracked dataset and annotation files.
-2. No completed schema/version record tying inputs to an experiment.
-3. Hard-coded paths do not consistently match the repository layout.
-4. No single reproduction command or frozen run configuration for the tracked summary.
-5. No validation record connecting `perturbation_summary.csv` to raw outputs.
-6. Existing research notes contain project claims that have not been independently verified in this repository review.
-
-## Safe next step
-
-Create a non-sensitive input manifest, reconcile paths without moving or deleting data, and reproduce one tiny documented smoke run before interpreting any output. See `docs/data-policy.md`, `docs/environment-plan.md`, and `TASKS.md`.
+Use this repo for code, methods, and numbers. Write the Research Report and
+the reference list yourself. Disclose AI assistance. Do not paste model prose
+into the report.

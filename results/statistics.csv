@@ -1,2 +1,0 @@
-label,exp_name,baseline_mean_hz,perturbed_mean_hz,delta_hz,pct_change,t_stat,p_value_raw,n_baseline_trials,n_perturbed_trials,p_value_fdr,significant_uncorrected,significant_fdr,significant,p_value
-AN,hq_AN,1068.2,958.8,-109.4,-10.2415,3.419,0.01,5,5,0.01,True,True,True,0.01

@@ -1,6 +1,0 @@
-group,delta_hz_jo_n20,delta_hz_sugar,fdr_jo,fdr_sugar,null_p_jo,null_p_sugar,notes
-AN,-12.6,-103.0,0.0,0.0103,0.0952,0.381,null_p_jo is from n=5 sweep
-descending,-5.85,-222.0,0.0,0.0003,0.1905,0.3333,null_p_jo is from n=5 sweep
-LO,-0.5,-27.8,0.6465,0.3417,0.1905,0.7143,null_p_jo is from n=5 sweep
-Kenyon_Cell,0.35,29.4,0.6465,0.3417,0.2727,0.1905,null_p_jo is from n=5 sweep
-motor,-0.7,-40.4,0.6465,0.4037,0.1905,0.2381,null_p_jo is from n=5 sweep
