@@ -7,8 +7,8 @@ Whole-brain *Drosophila* LIF simulation (Brian2) on FlyWire connectivity, with
 
 This is the scientific engine for a simulation-based test of a narrow question
 about signed whole-brain connectivity in the adult fly brain. It is not a
-literature survey, not a graph-analytics repo, and not an AI research-management
-workspace. The repo holds:
+literature survey or a general-purpose graph-analytics repository. The repo
+holds:
 
 - a Brian2 leaky integrate-and-fire (LIF) simulator configured on FlyWire
   connectivity (`model.py`);
@@ -22,10 +22,9 @@ workspace. The repo holds:
 - the docs that state the question, the competing accounts, and the epistemic
   rules (`docs/`);
 
-The tracked tree was reset on 2026-08-30 to remove AI-generated research-
-management docs, presentation files, historical result dumps, and provisional
-labels that were not evidence. Those files remain recoverable in git history if
-needed; they are not part of the current scientific argument.
+The tracked tree contains the current scientific core and reproducibility
+support. Files that are not part of the current scientific argument are not
+included in the active project tree.
 
 ## The data (FlyWire, adult *Drosophila*)
 

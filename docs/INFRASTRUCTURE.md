@@ -80,10 +80,6 @@ contracts, or comparisons against simulated ΔHz. They do not constitute a
 second biological brain model. Keep `claim_status` and the provenance fields
 when using them.
 
-The exploratory AN source-target control and signed-motif code remain separate
-from claim-ready simulation results; neither proves that AN is a unique
-controller or that a motif exists in vivo.
-
 ## Archives
 
 `archive/early_support/` contains the original smoke-test notebook, helper
@@ -93,9 +89,7 @@ project lineage is not erased, but they are not current entry points.
 
 ## Removed from the active repository
 
-The cleaned tree removes the abandoned structural-routing program and its
-provisional feeding/grooming target curation, presentation builders and notes,
-AI/agent task-management documents, duplicate research-document workspaces,
-and stale generated result dumps. The abandoned route is documented only as a
-methodological dead end in `docs/PROJECT_HISTORY.md`; none of its outputs is
-evidence.
+The cleaned tree removes abandoned structural-routing code, provisional target
+curation, duplicate workspaces, and stale generated result dumps. The abandoned
+route is documented only as a methodological dead end in
+`docs/PROJECT_HISTORY.md`; none of its outputs is evidence.
