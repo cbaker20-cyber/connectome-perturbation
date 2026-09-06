@@ -16,10 +16,12 @@ def test_both_maps_exist_and_disagree_on_glutamate():
 
 
 def test_known_nt_preferred_over_top_nt():
+    # known_nt wins when top_nt is unmapped under the map; a contradictory
+    # top_nt is reported as "conflicting" (see test below), not overridden.
     ann = pd.DataFrame(
         {
             "known_nt": ["acetylcholine", None],
-            "top_nt": ["gaba", "gaba"],
+            "top_nt": ["glutamate", "gaba"],
         }
     )
     labels = transmitter_polarity(ann, nt_map="classical_fast")

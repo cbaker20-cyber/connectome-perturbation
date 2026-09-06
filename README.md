@@ -14,8 +14,8 @@ workspace. The repo holds:
   connectivity (`model.py`);
 - an output-lesioning perturbation engine with a motor-population readout
   (`perturbation/`);
-- static graph / structural controls meant to be compared against the dynamical
-  lesion results, not promoted to a second "brain" (`connectome_analysis/`);
+- structural predictors and comparison utilities meant to be tested against the
+  dynamical lesion results, not promoted to a second "brain" (`connectome_analysis/`);
 - reproducibility plumbing: manifest-resolved input paths, output manifests,
   checksums, and provenance records (`tools/`, `data/input_manifest.json`,
   `configs/`);
@@ -216,9 +216,9 @@ or a highly-ranked paper into "the truth."
 - `model.py` — Brian2 LIF simulator
 - `perturbation/` — lesion engine, baseline, cell groups, statistics, readout,
   static graph metrics
-- `connectome_analysis/` — structural controls (betweenness, surrogates,
-  disinhibition motifs, connectivity lesions, vulnerability matrices) on a toy
-  deterministic propagator, not Brian2
+- `connectome_analysis/` — structural predictors, lesion comparisons, and
+  deterministic software checks; these are not Brian2 simulations or biological
+  proof
 - `scripts/` — run entries for the first experiment, the EI lesion screen, the
   JO and sugar ground-truth sweeps, and the degree/distance-matched nulls
 - `tools/` — path resolution, output-manifest writing, reproducibility checks
@@ -228,6 +228,7 @@ or a highly-ranked paper into "the truth."
 
 ## Files that are not part of the argument
 
+- `archive/` — historical support and exploratory code; not active entry points
 - `results/` — simulation outputs; regenerate, do not treat as provenance
   (gitignored)
 - `.freebuff/` — local app state (gitignored)
