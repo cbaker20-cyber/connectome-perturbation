@@ -47,13 +47,13 @@ The LO sign reversal is an important methodological lesson: a five-trial screen 
 
 The data/model import was substantive. The duplicated document system, copied notes, templates, and management files added clutter rather than a second scientific result. The current active tree retains the data, model, perturbation code, and useful reproducibility components, while older support files are clearly archived or removed.
 
-### 2026-06-19 to 2026-06-25 — planning expansion and abandoned BORA route
+### 2026-06-19 to 2026-06-25 — planning expansion and an abandoned structural-routing route
 
 - `bb4853a`, `5366942`, `2648f2e` — planning/provenance notes and task-management scaffolding.
-- `79f4dff` through `31811f7` — feeding/grooming candidate curation and the BORA/novel-architecture route.
+- `79f4dff` through `31811f7` — feeding/grooming candidate curation and an abandoned structural-routing route.
 - `65974ce` through `17b0121` — scope plans, literature framing, execution plans, and pasted early lab notes.
 
-The BORA branch tried to infer feeding-versus-grooming routing from structural connectivity and provisional target lists. It did not produce a validated result relevant to the project’s current E/I lesion question. Candidate motor labels were provisional and partly circular, so the BORA implementation, fixtures, target templates, and candidate-curation machinery are deliberately removed rather than presented as negative or positive biological evidence.
+That branch tried to infer feeding-versus-grooming routing from structural connectivity and provisional target lists. It did not produce a validated result relevant to the project’s current E/I lesion question. Candidate motor labels were provisional and partly circular, so that implementation, its fixtures, target templates, and candidate-curation machinery are deliberately removed rather than presented as negative or positive biological evidence.
 
 The early notes remain useful as a record of how the project developed, especially the five-trial mistake and the later correction. AI-generated or copied narrative is not treated as a source; only facts recoverable from commits, code, data, and cited papers are retained here.
 
@@ -77,13 +77,13 @@ The empty Copilot checkpoint commits (`6a7263c`, `d8c291f`) produced no project 
 
 ### 2026-07-21 to 2026-07-24 — structural controls and second context
 
-- `178e4bc` — added generic matrix helpers for modal controllability, attenuated path flow, and rank correlations.
-- `9c96e5c` — added exploratory disinhibition-motif and AN source-target betweenness controls.
+- `178e4bc` — added generic matrix helpers for modal controllability, attenuated path flow, and rank correlations; the abandoned routing-specific portion was removed.
+- `9c96e5c` — added exploratory disinhibition-motif and AN source-target betweenness controls; these are retained only in the structural archive.
 - `b4e6ad1` — added the JO 30-trial ground-truth runner and configuration.
 - `f5ed148`, `d672e6b`, and `7e135f8` — added structural-versus-dynamical comparison and sugar-versus-JO context comparison code.
 - `da3040c` — corrected pipeline issues involving baseline resolution, degree matching, rate deltas, and path resolution.
 
-The generic structural math and the JO/context infrastructure are relevant to the structure-versus-dynamics direction and are retained. Structural fixtures and proxy tables are not biological validation. The AN betweenness and motif analyses remain exploratory controls unless independently recomputed and audited; they are never evidence that AN is a unique dynamical controller.
+The generic structural math and the JO/context infrastructure are relevant to the structure-versus-dynamics direction and are retained. Structural fixtures and proxy tables are not biological validation. The archived AN source-target and motif analyses are exploratory controls unless independently recomputed and audited; they are never evidence that AN is a unique dynamical controller.
 
 ### 2026-07-31 to 2026-08-02 — mixed workspace and cleanup
 
@@ -108,7 +108,7 @@ The subgraph correction matters because an earlier structural comparison produce
 ### 2026-09-05 — documentation and cleanup
 
 - `8504553` — rewrote the README as a project description with code-backed methods, provenance, literature context, and claim limits.
-- This cleanup removes the remaining BORA program and presentation-facing clutter, archives useful historical support scripts rather than deleting them, repairs stale CI paths, and preserves this timeline.
+- This cleanup removes the remaining abandoned structural-routing program and presentation-facing clutter, archives useful historical support scripts rather than deleting them, repairs stale CI paths, and preserves this timeline.
 
 ## What survives as the scientific spine
 
@@ -126,4 +126,4 @@ The subgraph correction matters because an earlier structural comparison produce
 - Distinguish a simulation output, a structural proxy, a software test, and a biological claim.
 - State what was wrong in the first conclusion: the screen used too few trials, the early statistics were not FDR-controlled, and the LO direction did not survive replication.
 - Do not claim that the project measured behavior or proved a feeding/grooming circuit.
-- Disclose AI assistance as required, while keeping the report’s scientific prose and interpretation the student’s own work.
+- Disclose AI assistance as required, while keeping the report’s scientific prose and interpretation the student’s own work. Retained code is included because it has a tangible, checked role—not because of its editing tool.
