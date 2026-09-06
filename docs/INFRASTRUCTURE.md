@@ -93,8 +93,9 @@ project lineage is not erased, but they are not current entry points.
 
 ## Removed from the active repository
 
-The cleaned tree removes the abandoned BORA/novel-architecture program and its
+The cleaned tree removes the abandoned structural-routing program and its
 provisional feeding/grooming target curation, presentation builders and notes,
 AI/agent task-management documents, duplicate research-document workspaces,
 and stale generated result dumps. The abandoned route is documented only as a
-methodological dead end in `docs/PROJECT_HISTORY.md`; no BORA output is evidence.
+methodological dead end in `docs/PROJECT_HISTORY.md`; none of its outputs is
+evidence.
