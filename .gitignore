@@ -22,6 +22,10 @@ __pycache__/
 *.tmp
 *.temp
 *_backup_*
+tmp/
+
+# Generated research documents and visual QA renders; source notes are in docs/pcdr.
+exports/
 
 # Local logs
 logs/

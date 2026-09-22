@@ -96,6 +96,10 @@ def degree_matched_sample(
     sample_size: int,
 ) -> list[int]:
     """Draw a random set matching the target group's degree-bin proportions."""
+    if sample_size <= 0 or target_bins.empty or target_bins.isna().any():
+        raise ValueError("sample size and target bins must be nonempty")
+    if len(pool_ids) != len(pool_bins) or len(set(pool_ids)) != len(pool_ids):
+        raise ValueError("control pool must contain distinct IDs with aligned bins")
     target_counts = target_bins.value_counts().sort_index()
     proportions = target_counts / target_counts.sum()
     desired = np.floor(proportions * sample_size).astype(int)
@@ -111,9 +115,9 @@ def degree_matched_sample(
             continue
         mask = (pool_bins == bin_id).values if isinstance(pool_bins, pd.Series) else (pool_bins == bin_id)
         candidates = pool_ids[mask]
-        if len(candidates) == 0:
-            candidates = pool_ids  # fallback
-        chosen = rng.choice(candidates, size=int(n), replace=len(candidates) < n)
+        if len(candidates) < n:
+            raise ValueError(f"insufficient distinct controls in degree bin {bin_id}")
+        chosen = rng.choice(candidates, size=int(n), replace=False)
         sampled.extend(int(x) for x in chosen)
 
     # Trim or pad to exact size
@@ -126,10 +130,10 @@ def degree_matched_sample(
 # Brian2 simulation helpers
 # ---------------------------------------------------------------------------
 
-def motor_rates_hz(spike_table: pd.DataFrame, motor_ids: Sequence[int], *, t_run_s: float = 1.0) -> np.ndarray:
+def motor_rates_hz(spike_table: pd.DataFrame, motor_ids: Sequence[int], *, t_run_s: float = 1.0, trial_ids=None) -> np.ndarray:
     """Per-trial total motor firing rate (Hz) from a spike table."""
     motor_set = set(motor_ids)
-    trials = sorted(spike_table["trial"].unique())
+    trials = list(trial_ids) if trial_ids is not None else sorted(spike_table["trial"].unique())
     counts = spike_table[spike_table["flywire_id"].isin(motor_set)].groupby("trial").size()
     return counts.reindex(trials, fill_value=0).astype(float).values / t_run_s
 
@@ -172,7 +176,7 @@ def run_silencing_trial_rates(
     )
 
     try:
-        return motor_rates_hz(pd.read_parquet(out_path), motor_ids, t_run_s=t_run_s)
+        return motor_rates_hz(pd.read_parquet(out_path), motor_ids, t_run_s=t_run_s, trial_ids=range(n_trials))
     finally:
         out_path.unlink(missing_ok=True)
 
