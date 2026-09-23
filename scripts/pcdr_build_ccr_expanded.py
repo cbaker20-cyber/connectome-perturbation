@@ -27,6 +27,7 @@ def main():
     for cell in nb['cells']:
         text=''.join(cell['source'])
         replacements={
+            ' Code and notebook were prepared with Codex assistance.':'',
             '4 cores, 16000 MB RAM, 4 hours':'32 cores, 128000 MB RAM, 8 hours',
             'at most two simulation processes':'up to 24 single-threaded simulation processes, selected by a measured concurrency ramp',
             '350 descriptive trials covering five weight settings and seven conditions, using ten shared seeds':'3,390 descriptive trials: nine joint weight settings and seven conditions with 30 shared seeds, plus 50 additional individual mode-cell lesions in the default network',
