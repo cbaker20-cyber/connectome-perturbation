@@ -101,7 +101,7 @@ def build(out,expanded=False):
     for folder in ['eigencircuits','perturbation','tools']:
         files.update((ROOT/folder).rglob('*.py'))
     files.update(ROOT/x for x in DATA)
-    for optional in ['LICENSE','data/input_manifest.json','docs/pcdr/CCR_RUNBOOK.md']:
+    for optional in ['LICENSE','data/input_manifest.json']:
         if (ROOT/optional).exists(): files.add(ROOT/optional)
     for source in sorted(files):
         if '__pycache__' in source.parts: continue
