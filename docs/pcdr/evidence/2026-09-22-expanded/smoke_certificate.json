@@ -1,0 +1,35 @@
+{
+  "finished_utc": "2026-09-23T01:19:54.977849+00:00",
+  "passed": true,
+  "location": "local",
+  "interpretation": "Technical smoke only; no scientific confirmation or scheduler fault-tolerance claim.",
+  "jobs_sha256": "3ec707682bed68567f80876c8f5fdfbb1cd61d777e752a2e299a4ca23a7c33c2",
+  "neurons": 127400,
+  "trials": {
+    "baseline": {
+      "wall_seconds": 15.785247299994808,
+      "peak_rss_bytes": 2843209728,
+      "spike_count": 13793,
+      "mn9_hz": 87.0
+    },
+    "replay": {
+      "wall_seconds": 15.619757600012235,
+      "peak_rss_bytes": 2843901952,
+      "spike_count": 13793,
+      "mn9_hz": 87.0
+    },
+    "no_input": {
+      "wall_seconds": 14.09478039998794,
+      "peak_rss_bytes": 2834702336,
+      "spike_count": 0,
+      "mn9_hz": 0.0
+    },
+    "lesion": {
+      "wall_seconds": 15.654058900021482,
+      "peak_rss_bytes": 2834472960,
+      "spike_count": 13570,
+      "mn9_hz": 76.0
+    }
+  },
+  "output_bytes": 4225664
+}

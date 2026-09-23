@@ -13,8 +13,13 @@ from scripts.pcdr_bounded_process import run_bounded
 
 
 def main():
-    package=ROOT/'exports/ccr_notebook_20260922_final'
-    output=ROOT/'results/pcdr/ccr_notebook_validation_20260922_final'
+    import argparse
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--package',default=str(ROOT/'exports/ccr_notebook_20260922_final'))
+    parser.add_argument('--output',default=str(ROOT/'results/pcdr/ccr_notebook_validation_20260922_final'))
+    args=parser.parse_args()
+    package=Path(args.package).resolve()
+    output=Path(args.output).resolve()
     output.mkdir(parents=True,exist_ok=False)
     archive=package/'Connectome_CCR_Notebook.zip'
     record=read(package/'archive.json')

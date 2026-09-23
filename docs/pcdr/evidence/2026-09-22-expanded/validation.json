@@ -1,0 +1,27 @@
+{
+  "finished_utc": "2026-09-23T01:19:56.463907+00:00",
+  "passed": true,
+  "archive": {
+    "archive": "Connectome_CCR_Notebook.zip",
+    "sha256": "194777b3d3fb9f225c468b973d5eb2406f0baae7dd43ea81bd860e4c1e32ba60",
+    "bytes": 95173796,
+    "manifest_sha256": "3ac4b9bdbfe7f9098c9ab13398994bd71ec5fd3fa2598b257f634d153dd87ef7"
+  },
+  "source_manifest_sha256": "3ac4b9bdbfe7f9098c9ab13398994bd71ec5fd3fa2598b257f634d153dd87ef7",
+  "smoke_certificate_sha256": "ea7a43f1ca0f79adc8355fc108fcf4511228f2a46f027a7d99f045a6c1f59d2b",
+  "checks": [
+    "exact archive extraction",
+    "missing all rejected",
+    "missing last rejected",
+    "complete resume leaves hashes and mtimes unchanged",
+    "foreign lock rejected and retained",
+    "four real simulations verified",
+    "corrupted copied output rejected"
+  ],
+  "not_tested": [
+    "CCR access",
+    "Linux package installation",
+    "Slurm submission/cancellation/requeue",
+    "scientific confirmation"
+  ]
+}

@@ -17,11 +17,12 @@ VARIANTS=[{'name':name,'weight_scale':w,'inhibitory_scale':i,'strong_fraction':N
                            ('inhibition_080',1.,.8),('inhibition_120',1.,1.2)]]
 
 
-def planned_jobs(conditions):
+def planned_jobs(conditions,variants=None,seeds=None):
     jobs=[]
-    for variant in VARIANTS:
-        for seed in range(631401,631411):
+    for variant in (VARIANTS if variants is None else variants):
+        for seed in (range(631401,631411) if seeds is None else seeds):
             for condition in conditions:
+                if condition.get('default_only') and variant['name']!='default':continue
                 jobs.append({'index':len(jobs),'condition':condition['name'],'seed':seed,
                              'lesion_ids':sorted(condition['ids']),'context':'sugar','variant':variant,
                              'trial_id':f"{variant['name']}_{condition['name']}_{seed}"})
@@ -34,7 +35,7 @@ def prepare(study,smoke):
     verify(); collect(smoke)
     design=read(ROOT/'sensitivity_design.json')
     names=[c['name'] for c in design['conditions']]
-    if names!=['baseline','mode','mode_without_mn9','mn9_only','motor_003','motor_004','motor_005']:
+    if names[:7]!=['baseline','mode','mode_without_mn9','mn9_only','motor_003','motor_004','motor_005'] or len(set(names))!=len(names):
         raise ValueError('Unexpected conditions')
     ids=set(neuron_ids()); sensory=set(sugar_ids())
     conditions=design['conditions']; byname={c['name']:set(c['ids']) for c in conditions}
@@ -43,11 +44,15 @@ def prepare(study,smoke):
     for c in conditions:
         if len(c['ids'])!=len(set(c['ids'])) or not set(c['ids'])<=ids or set(c['ids'])&sensory:
             raise ValueError('Invalid membership')
+    variants=design.get('network_variants',VARIANTS)
+    seeds=design['seeds']
+    jobs=planned_jobs(conditions,variants,seeds)
+    if len(jobs)!=design['trials']:raise ValueError('Design job count mismatch')
     study=Path(study); study.mkdir(parents=True,exist_ok=False)
     write(study/'jobs.json',{'created_utc':utc(),'claim_status':'post_pilot_descriptive_sensitivity',
         'transfer_sha256':digest(ROOT/'transfer_manifest.json'),'provenance':provenance(),
         'smoke_certificate_sha256':digest(Path(smoke)/'smoke_certificate.json'),
-        'design':design,'variants':VARIANTS,'conditions':conditions,'jobs':planned_jobs(conditions)})
+        'design':design,'variants':variants,'conditions':conditions,'jobs':jobs})
 
 
 def validated(directory,job,plan):
@@ -82,8 +87,11 @@ def worker(study,index):
 
 
 def run(study,workers=2,hours=3):
-    if workers not in [1,2] or not 0<hours<=3: raise ValueError('Use 1-2 workers and at most 3 hours')
+    if not 1<=workers<=24 or not 0<hours<=7: raise ValueError('Use 1-24 workers and at most 7 hours')
     study=Path(study).resolve(); plan=load_plan(study)
+    if workers>2:
+        from scripts.pcdr_ccr_capacity import check_certificate
+        check_certificate(study,workers)
     lock=study/'controller.lock'
     with lock.open('x') as stream: stream.write(str(os.getpid()))
     end=time.monotonic()+hours*3600
@@ -132,6 +140,7 @@ def collect(study):
             return [study/'trials'/j['trial_id'] for j in plan['jobs']
                     if j['condition']==name and j['variant']==variant]
         for condition in plan['conditions'][1:]:
+            if condition.get('default_only') and variant['name']!='default':continue
             delta,seeds=paired_deltas(paths('baseline'),paths(condition['name']),ids)
             support=[lookup[rid] for rid in condition['ids']]
             row={'variant':variant['name'],'condition':condition['name'],'n_pairs':len(seeds),
