@@ -37,3 +37,5 @@ PDF export uses `pcdr_build_motor_record_pdf.py` with pypdf and reportlab and re
 Code and documentation were prepared with Codex assistance. Git commits use Copeland Baker's configured author identity; that does not replace the assistance record or imply the notes are a student-authored STS submission.
 
 Latest continuation: [preliminary closeout](PRELIMINARY_CLOSEOUT_20260922.md), [OnDemand notebook guide](CCR_NOTEBOOK_GUIDE.md), and [frozen descriptive follow-up](CCR_SENSITIVITY_DESIGN.json). The 350 follow-up trials are prepared, not run; confirmation remains unresolved.
+
+The user requested a more substantial CCR workload. Use [the expanded notebook guide](CCR_EXPANDED_GUIDE.md) and [expanded design](CCR_EXPANDED_DESIGN.json): 3390 trials, 32 requested cores, 128000 MB, 8 hours, measured concurrency up to 24. The original smaller package is retained as history.

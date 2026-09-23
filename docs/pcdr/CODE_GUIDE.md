@@ -217,3 +217,7 @@ Completed pilot verification: scripts/pcdr_verify_optimized.py checks 35 frozen 
 - `tests/test_pcdr_ccr_transfer.py`: checks rejection behavior, resume preservation, the 350-job pairing, notebook code syntax, optional dependency recording and a known-answer sensitivity collection fixture.
 
 These scripts and the notebook were created with Codex assistance. They prepare research computations and records; they do not establish a biological mechanism. See CCR_NOTEBOOK_GUIDE.md for operation and PRELIMINARY_CLOSEOUT_20260922.md for results and limits.
+
+## Expanded CCR package
+
+`pcdr_build_ccr_expanded.py` records a separate amendment and creates the larger notebook. It preserves the original design. `pcdr_ccr_sensitivity.py` now takes variants and seeds from the frozen design, restricts the extra individual-cell conditions to the default network, and requires a capacity certificate above two workers. `pcdr_ccr_capacity.py` benchmarks real pending jobs under allocated CPU/memory limits and chooses concurrency using throughput only. Completed calibration jobs are preserved. The capacity certificate is rejected after the study or Slurm allocation changes. Tests in test_pcdr_ccr_expanded.py verify the job grid, complete single-cell coverage and allocation safeguards with fixtures; actual CCR scaling remains untested.

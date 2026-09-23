@@ -1,0 +1,12 @@
+{
+  "created_utc": "2026-09-23T01:18:30.509111+00:00",
+  "archive": {
+    "archive": "Connectome_CCR_Notebook.zip",
+    "sha256": "194777b3d3fb9f225c468b973d5eb2406f0baae7dd43ea81bd860e4c1e32ba60",
+    "bytes": 95173796,
+    "manifest_sha256": "3ac4b9bdbfe7f9098c9ab13398994bd71ec5fd3fa2598b257f634d153dd87ef7"
+  },
+  "controller_sha256": "759fee0fdedb6a681b34e8ae38f5824b1d8bee0bc84a443fb0664f91cb244549",
+  "procedure": "Extract archive, verify, initialize technical Git snapshot, prepare fresh smoke plan. Reject missing jobs. Run 0-2, reject missing job 3, resume job 0 and verify unchanged outputs, reject lock collision, run job 3 and collect. Corrupt a disposable copy and require collection rejection; original remains unchanged.",
+  "limits": "Each command has a 180-second external deadline. Four whole-brain trials, seed 631301; no inference or Slurm claim. Existing local environment, not a fresh Linux installation."
+}

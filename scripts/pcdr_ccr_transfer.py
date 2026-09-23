@@ -92,11 +92,12 @@ def verify(root=ROOT):
     return manifest
 
 
-def build(out):
+def build(out,expanded=False):
     out=Path(out).resolve(); out.mkdir(parents=True,exist_ok=False)
     snapshot=out/'connectome'; snapshot.mkdir()
     files={ROOT/'model.py', ROOT/'scripts/pcdr_ccr_transfer.py', ROOT/'scripts/pcdr_ccr_smoke.sh',
            ROOT/'scripts/pcdr_ccr_sensitivity.py',ROOT/'scripts/pcdr_bounded_process.py'}
+    if expanded:files.add(ROOT/'scripts/pcdr_ccr_capacity.py')
     for folder in ['eigencircuits','perturbation','tools']:
         files.update((ROOT/folder).rglob('*.py'))
     files.update(ROOT/x for x in DATA)
@@ -106,9 +107,12 @@ def build(out):
         if '__pycache__' in source.parts: continue
         dest=snapshot/source.relative_to(ROOT)
         dest.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(source,dest)
-    for source,dest in [('notebooks/CCR_Preliminary_Followup.ipynb','CCR_Preliminary_Followup.ipynb'),
-                        ('docs/pcdr/CCR_NOTEBOOK_GUIDE.md','START_HERE.md'),
-                        ('docs/pcdr/CCR_SENSITIVITY_DESIGN.json','sensitivity_design.json')]:
+    notebook='CCR_Expanded_Study.ipynb' if expanded else 'CCR_Preliminary_Followup.ipynb'
+    guide='CCR_EXPANDED_GUIDE.md' if expanded else 'CCR_NOTEBOOK_GUIDE.md'
+    design='CCR_EXPANDED_DESIGN.json' if expanded else 'CCR_SENSITIVITY_DESIGN.json'
+    for source,dest in [('notebooks/'+notebook,notebook),
+                        ('docs/pcdr/'+guide,'START_HERE.md'),
+                        ('docs/pcdr/'+design,'sensitivity_design.json')]:
         shutil.copyfile(ROOT/source,snapshot/dest)
     versions=package_versions()
     dependencies=dependency_versions()
@@ -124,9 +128,9 @@ def build(out):
               'source_status':subprocess.check_output(['git','status','--short'],cwd=ROOT,text=True),
               'python':sys.version,'packages':versions,'dependency_versions':dependencies,
               'purpose':'Exact-byte deployment snapshot. New environment and smoke plan are recorded on the destination. No confirmation study or submission authorization certificate.',
-              'editable_files':{name:digest(snapshot/name) for name in ['CCR_Preliminary_Followup.ipynb','ccr_config.example.sh']},
+              'editable_files':{name:digest(snapshot/name) for name in [notebook,'ccr_config.example.sh']},
               'files':{p.relative_to(snapshot).as_posix():digest(p) for p in sorted(snapshot.rglob('*'))
-                       if p.is_file() and p.name not in ['CCR_Preliminary_Followup.ipynb','ccr_config.example.sh']}}
+                       if p.is_file() and p.name not in [notebook,'ccr_config.example.sh']}}
     write(snapshot/'transfer_manifest.json',manifest)
     verify(snapshot)
     archive=out/'Connectome_CCR_Notebook.zip'
@@ -259,10 +263,11 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action',choices=['build','verify','initialize','prepare','worker','collect'])
     parser.add_argument('--out'); parser.add_argument('--study'); parser.add_argument('--index',type=int)
+    parser.add_argument('--expanded',action='store_true')
     args=parser.parse_args()
     if args.action=='build':
         if not args.out: parser.error('--out required')
-        build(args.out)
+        build(args.out,args.expanded)
     elif args.action=='verify': print(json.dumps({'verified_files':len(verify()['files'])}))
     elif args.action=='initialize': initialize()
     else:

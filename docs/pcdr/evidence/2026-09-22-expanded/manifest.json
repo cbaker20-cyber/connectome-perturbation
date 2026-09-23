@@ -1,0 +1,27 @@
+[
+  {
+    "file": "protocol.json",
+    "source": "results/pcdr/ccr_expanded_validation_20260922/protocol.json",
+    "sha256": "c5970828b168d5ff590b3193f6b5bbbbbe4770526a516c6182a4ba46b3c9c6c8"
+  },
+  {
+    "file": "executions.json",
+    "source": "results/pcdr/ccr_expanded_validation_20260922/executions.json",
+    "sha256": "2067d8c9cfb3a76fa0161656972927cc913766d44fe2a899ba2c566fc0e7e732"
+  },
+  {
+    "file": "validation.json",
+    "source": "results/pcdr/ccr_expanded_validation_20260922/validation.json",
+    "sha256": "38013ac855c6124c9ea5190cbec5408f4d38a4a592a2479ad0f14f87466b96e4"
+  },
+  {
+    "file": "smoke_certificate.json",
+    "source": "results/pcdr/ccr_expanded_validation_20260922/smoke_certificate.json",
+    "sha256": "ea7a43f1ca0f79adc8355fc108fcf4511228f2a46f027a7d99f045a6c1f59d2b"
+  },
+  {
+    "file": "archive.json",
+    "source": "exports/ccr_expanded_20260922/archive.json",
+    "sha256": "41d7ed562bd805480033c2c81fa9f44e546b8eb8a87736927da42e3b3c84c65d"
+  }
+]
