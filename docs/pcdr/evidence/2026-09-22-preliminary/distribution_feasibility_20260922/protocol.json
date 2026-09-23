@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-09-23T00:53:12.017297+00:00",
+  "timing": "Specified after observing the motor-composition pilot imbalance; prospective for this baseline-only diagnostic, not the original preregistration.",
+  "fixed": "Same 51 targets, full eligible pool, input/target exclusions and exact sign/recruitment/motor strata. Same six log1p features.",
+  "guard": "For each feature require abs(mean difference)<=0.099 sqrt(target population variance/2), and 0.505<=Q<=2 where Q is mean squared deviation from target mean divided by target variance.",
+  "derivation": "Variance ratio = Q - (mean difference)^2/target variance. These bounds imply ratio in [0.5000995,2] and original pooled SMD<0.1. This is an investigator-chosen sensitivity guard, not a biological cutoff or a test of distribution equality.",
+  "procedure": "One zero-objective continuous LP, 60 seconds internal and 90 seconds external. Independently validate primal constraints. Calculate coordinatewise minimum Q under exact strata. Do not change bounds, round solutions, simulate, or claim binary feasibility.",
+  "interpretation": "Infeasibility excludes only this stricter program. Feasibility leaves binary feasibility, diversity, cell-type balance and random-reference validity unresolved.",
+  "references": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/3472075/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC2943670/"
+  ],
+  "hashes": {
+    "results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "scripts\\pcdr_distribution_feasibility.py": "92586c702a13bea67ad1bf273db8b7b302023ba4e4a18c9345930a6383f822b5",
+    "scripts\\pcdr_fullpool_relaxation.py": "bca7871e564efac74ef40cbbb0c982b15492587d9a5582723d67c4cb002c580c",
+    "scripts\\pcdr_bounded_process.py": "20e40bf3f714e454b40cf6a02a50081f725973bfe6ab53bad6dbf073d29dc037"
+  }
+}

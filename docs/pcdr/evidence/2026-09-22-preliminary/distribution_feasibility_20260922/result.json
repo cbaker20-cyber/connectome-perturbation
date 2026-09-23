@@ -1,0 +1,18 @@
+{
+  "recorded_utc": "2026-09-23T00:53:23.332717+00:00",
+  "status": 2,
+  "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+  "pool_size": 126935,
+  "coordinatewise_minimum_Q": {
+    "in_degree": 0.5166003302994262,
+    "out_degree": 0.973721594168483,
+    "in_strength": 0.6391940639039142,
+    "out_strength": 0.6613953911224503,
+    "baseline_hz": 0.62788169177783,
+    "strong_out_mass": 0.21437761540848052
+  },
+  "warnings": [
+    "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+  ],
+  "binary_sets_accepted": 0
+}

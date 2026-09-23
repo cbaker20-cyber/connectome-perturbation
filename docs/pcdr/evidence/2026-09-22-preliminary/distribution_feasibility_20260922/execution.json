@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_distribution_feasibility.py",
+    "--worker"
+  ],
+  "pid": 26728,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 11.625,
+  "deadline_seconds": 90,
+  "cleanup": null
+}
