@@ -1,0 +1,27 @@
+{
+  "kind": "necessary_outer",
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "solver_seconds": 1.4070000000065193,
+  "pool_count": 126935,
+  "warnings": [
+    "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+  ],
+  "scipy": "1.17.1",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "actual_control_sets_accepted": 0,
+  "fractional_validation": {
+    "stratum_mass_error": 0.0,
+    "bound_error": 0.0,
+    "maximum_scaled_feature_violation": 3.107931920143146e-16,
+    "fractional_count": 5,
+    "weighted_means": [
+      5.662223764469528,
+      4.950056157411597,
+      7.687844154577318,
+      6.31856349304405,
+      1.896103625401189,
+      2.9414710462129996
+    ]
+  }
+}

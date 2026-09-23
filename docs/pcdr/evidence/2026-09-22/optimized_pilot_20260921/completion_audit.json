@@ -1,0 +1,91 @@
+{
+  "checked_utc": "2026-09-21T20:59:56.744402+00:00",
+  "trials_verified": 35,
+  "paired_inputs_verified": 30,
+  "delivered_input_pairs_equal": 30,
+  "lesion_summaries_verified": 6,
+  "checks": [
+    {
+      "condition": "mode",
+      "MN9_in_support": true,
+      "motor_cells_in_support": 13,
+      "footprint_rows": 127400,
+      "footprint_sha256": "56f2a2ca0cf5b3bb0c32e8f44239f0173114f08dc4c0c127c3269cf938a40deb"
+    },
+    {
+      "condition": "optimized_000",
+      "MN9_in_support": false,
+      "motor_cells_in_support": 5,
+      "footprint_rows": 127400,
+      "footprint_sha256": "191735809d729965b4cbd1f056d09b560dc594c2562d35f6a630624e27699161"
+    },
+    {
+      "condition": "optimized_001",
+      "MN9_in_support": false,
+      "motor_cells_in_support": 4,
+      "footprint_rows": 127400,
+      "footprint_sha256": "53012021c2ef6fb8ecfcac0fcfc979e5b4d37ae83a522ee63c95953a728c929a"
+    },
+    {
+      "condition": "optimized_002",
+      "MN9_in_support": false,
+      "motor_cells_in_support": 3,
+      "footprint_rows": 127400,
+      "footprint_sha256": "495a85b6e2ab7f16d0e992d29438a7158333bf930cc31610e30a1d2acd921052"
+    },
+    {
+      "condition": "optimized_003",
+      "MN9_in_support": false,
+      "motor_cells_in_support": 3,
+      "footprint_rows": 127400,
+      "footprint_sha256": "cd342471506dcc52b0b77b663b19214ec0d9187b525deb92495398a93c08b294"
+    },
+    {
+      "condition": "optimized_004",
+      "MN9_in_support": false,
+      "motor_cells_in_support": 4,
+      "footprint_rows": 127400,
+      "footprint_sha256": "ab491e52fb42f5cd948656c3612d94afa9fb23898829316e5cda52c4fa69afcc"
+    }
+  ],
+  "reference_p_values": "absent",
+  "source_manifests": {
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_baseline_630901\\manifest.json": "fa5407deec63760c19c10dab82698122355c3734fc35fc9c7a28c5f9a9447c8a",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_mode_630901\\manifest.json": "690f5723bd77fb918e8daad363fb4fc4e0dca6096e321d9868e9c1e07d2395ca",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_000_630901\\manifest.json": "36de4a65bcfbdbb2fc588abb007febe20fd3c7314e7f69402a9efaad66203f55",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_001_630901\\manifest.json": "f48cdb81f803d51ec506cd3addd208d16d044d2a90c7bde39ba39e632f12c2d7",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_002_630901\\manifest.json": "4e50dae6e26886a1a3733e290ad288b44fdb501c3d08cf6ab66f26309792c3fa",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_003_630901\\manifest.json": "24539ad669d1c07dd6b1fa9112911f48714fb4f8ce76511cad18207d836dbdab",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_004_630901\\manifest.json": "cdcc8bf53ae3a7ee157e416eefd7e6ad6f261c29963a95b0bcdbbd1a309e00ed",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_baseline_630902\\manifest.json": "f885b225b9a68e899a9e167e454788a5a3b6c75d93dacb8537a83090f9e60c2d",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_mode_630902\\manifest.json": "b26d3b381680e795dbaa1c56f95c22ada66ba9fb21a0bb880be8d57ab525eb63",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_000_630902\\manifest.json": "82384c166b983c2a6202ae872f9c71beb74b3bf10644d30584ab9d66960482c1",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_001_630902\\manifest.json": "f620a3f3f182f79cd6a68caebb34c0bbacc7bb0a29d04f522a3306736b85ea76",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_002_630902\\manifest.json": "13eca87dfb3c98967863ed3281e13bbf7512c3cfdd1ca63c703d7a14348f1044",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_003_630902\\manifest.json": "5a47992522c01ca5b3580cf40363b7f9eda34f211a924c2701bf120f5e1ad32a",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_004_630902\\manifest.json": "89164752b5c088818e9331325b1c509aa586e61ef6110b49aa2eb6c6d3c4f25a",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_baseline_630903\\manifest.json": "31f7a3fdddc0e84157a1a6843c0cffa59b83328f4fe30c17dfcd3ed61f023e58",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_mode_630903\\manifest.json": "d9b048c419b1a5dbc40854051583496fb3e2767a281d5ea71ba796bb4db97131",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_000_630903\\manifest.json": "ff82bd14ab24a308c6e59b7c1db113cf7b7e321c9801de8a41c9b5d4e81ebb2e",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_001_630903\\manifest.json": "4293221e4d545f264bce990fde5669b5a4173869d93bfc2a218033425ec3da15",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_002_630903\\manifest.json": "495f5731307fcdfd608908be2a6fa7a029e648f8ae44e9b5cfcc00e2b78a8704",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_003_630903\\manifest.json": "0bd46629e3e9bf085c3128e0ada6b821a0df23aa0e1942fd220efed0b4f979a1",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_004_630903\\manifest.json": "2b413bfdede384411388f3cd602e90a204c4833701e6aedca8cc8a66924bee2d",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_baseline_630904\\manifest.json": "2db974e31527b8f9dbb789a0ba491a6732ffe7e8b2fd4a931ac918844506f22d",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_mode_630904\\manifest.json": "8e08e1e7a696b4f8d4989a723f3d90ee8d99d2629f82080d3def0b743adff9f1",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_000_630904\\manifest.json": "638a480d26fe07ac172ce83ba8b322c2ba03a40f0b41d0d8844a0c9808313065",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_001_630904\\manifest.json": "e16ab0734dccaa4ded93394285046a8638b9a3d1b40a25b6b29c638659992d88",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_002_630904\\manifest.json": "3ef53d6d3be9f8118d983c2d56533401665227b57a4261a369aed470ddefaa02",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_003_630904\\manifest.json": "618b11a8fe7dcd8c2094cf270604649ef06be45635b06dbc669ccff9e253453a",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_004_630904\\manifest.json": "44cf6c093533816786fc7714d753517af91d241b9b91d75671e7630a08bfcedb",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_baseline_630905\\manifest.json": "088b64259d82f63dc83112a414fd1972fa6bfedd934c9222b855896faf81ede2",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_mode_630905\\manifest.json": "28bb75f7e8ba17e2443077287834c604f4d147de1105c3b3454a34c08204cae3",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_000_630905\\manifest.json": "b92308b91d20ee83ded309f95f417a33e3b32b1b944e6a171981b7ba007574aa",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_001_630905\\manifest.json": "7dc7023fb2e5242db833884b2ad6c50d8751591828295dc2455c5c8a820aede5",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_002_630905\\manifest.json": "875367765325eee2d7a816fb0e4d41865ee4d82ae7ac6f40bb9a9e7d273d00fc",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_003_630905\\manifest.json": "1faa05a27af4937a155bcac10e1cfb1f23fca66ae1c14efd62ce8d5bd22002db",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\optimized_pilot_20260921\\trials\\default_optimized_004_630905\\manifest.json": "27ec6e40fa48a77e8f68597c1b5cc465145b30f60149dda30524b3b3b689c752"
+  },
+  "command": ".venv/Scripts/python.exe scripts/pcdr_verify_optimized.py",
+  "code_sha256": "4b65c8aee5688f78b7c0946448179b0d49162300a53d4328a77e0db77e6a80eb"
+}

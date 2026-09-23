@@ -1,0 +1,39 @@
+{
+  "recorded_utc": "2026-09-22T19:41:05.731948+00:00",
+  "authorization_context": "User requested continued research and local tests. This continuation selects a bounded descriptive follow-up, not a confirmatory study or cluster dispatch.",
+  "question": "Does the previously selected eigen-set retain larger A and F than each of the nine fixed motor-count-balanced optimized comparison sets under five fresh input seeds?",
+  "scope": "Conditional descriptive composition sensitivity. Does not isolate a causal effect of motor count or establish superiority over a random reference ensemble.",
+  "selection": "All nine independently verified assignments 3 through 11 retained. Exact original eigen-support. No rematching, favorable subset, mode substitution or altered thresholds.",
+  "audit_objections": "Degree variance up to 19.117 times target despite pooled SMD<=0.1; ECDF gap up to .294118; all nine share47cells; MN9 identity and detailed cell types unmatched. These limitations are known before new outcomes.",
+  "seeds": [
+    631201,
+    631202,
+    631203,
+    631204,
+    631205
+  ],
+  "trials": 55,
+  "deadline_epoch": 1790107865.7319486,
+  "budget": "30 minutes maximum from preparation, one serial NumPy worker, BLAS1, existing >=4GiB free RAM and >=10GiB free disk guards. Stop on deadline, STOP or failure. No automatic extension.",
+  "estimates_minutes": {
+    "median_trial_times55": 13.586058933346067,
+    "p95_trial_times55": 14.992203375429257
+  },
+  "model": "Unchanged v630 LIF, one second, dt .1ms, 21 sugar inputs at150Hz, fixed_binomial_tape_v1, output-only lesions; matching scheduled inputs required. Delivered inputs can vary by state.",
+  "primary_description": "For every set average signed paired per-neuron changes over all five seeds first; then A=mean absolute response inside own support and F=inside share of whole-model absolute response. Show both, and each mode-minus-comparator difference. Do not average single-seed A/F in place of these estimands.",
+  "uncertainty": "Existing per-set 2000 paired-seed bootstrap(seed630700). Added mode-minus-comparator percentile intervals use2000 shared multinomial whole-seed resamples(seed631250); same resampled seeds for mode and comparator. No p-values, no reference ranking significance, no population generalization. Five seeds are exploratory; sets/neurons are not independent replicates. Undefined F stays undefined.",
+  "secondary": "MN9 and total/per-neuron motor DeltaHz; off-support absolute response; all50 per-seed paired summaries. All ten full mean footprints and all sets reported regardless of ordering.",
+  "completion": "No complete-study conclusions until55/55 trials,50 paired inputs, source/output hashes and all ten full footprints independently checked. Incomplete study stays incomplete.",
+  "source_hashes": {
+    "scripts\\pcdr_motor_composition_pilot.py": "45c7d41af07a4c2dfa6cdb04835e9e5c2d04f21fc9b7e4c5d091637c28f2b28f",
+    "scripts\\pcdr_optimized_pilot.py": "42159d5ec8bf1a80195a86220f3538ebe1d59b16141270bc684a31841bf9eaa0",
+    "scripts\\pcdr_local_queue.py": "03bde1bf925f55d816230678295fbdb5204405b0a2f3e173816cd856b88ab667",
+    "scripts\\pcdr_verify_motor_pilot.py": "fa2adf1c8b3c5e120f2e9e34cefc11bec9d0a95ec4a4fcdc01412c690367ab37",
+    "results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "results\\pcdr\\fullpool_relaxation_20260922\\binary_completion\\members.parquet": "88abc8d7a1ea01151afc6f3306d7cb3833ad89e471a8aab50d149bfe46c26c8a",
+    "results\\pcdr\\fullpool_relaxation_20260922\\binary_completion\\verification.json": "ee7d4bdc04e4d6249670e0612bc85a861f07368c0cc9b0997b7ee1e9f14d075d",
+    "results\\pcdr\\motor_set_audit_20260922\\summary.json": "fa716f13aea427b94ab82ccbff95bf707238ee774e53680686d87e9dea549aa5",
+    "results\\pcdr\\motor_set_audit_20260922\\protocol.json": "22cc756668ee58f759991c760ad399d3b23bc3c8e3ae315e075cbaebe80f1e92"
+  }
+}

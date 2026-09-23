@@ -1,0 +1,28 @@
+{
+  "recorded_utc": "2026-09-22T17:54:57.379036+00:00",
+  "purpose": "Joint baseline-only feasibility diagnosis following stopped full-pool MILP.",
+  "fixed": "51-cell target, full eligible pool, exact model-sign/recruitment/annotated-motor mass; six log1p features; exclude targets and sugar inputs.",
+  "conservative": "Relax binary memberships to [0,1]; same sufficient mean tolerances 0.099 sqrt(target population variance/2). Infeasibility rules out this sufficient program only.",
+  "necessary_outer": "Relax binary memberships to [0,1]; abs(mean difference) <= 0.1 sqrt((target variance+Vmax)/2), using the existing nonnegative-feature order-statistic upper variance bound. Every original-SMD-valid binary set is included. Numerical infeasibility would rule those sets out, subject to solver accuracy; fractional feasibility leaves binary feasibility unresolved.",
+  "objective": "Zero; feasibility only. No rounding or automatic integer solve.",
+  "budget": "Exactly two serial LPs, each 60-second internal solver limit and 90-second external worker deadline, including startup/loading. Cleanup may take up to 30 additional seconds. No simulation.",
+  "interpretation": "Fractional weights are diagnostics, never neuronal control sets or a reference distribution. No p-values. No acceptance threshold is relaxed.",
+  "references": [
+    "https://arxiv.org/abs/1404.3584",
+    "https://docs.scipy.org/doc/scipy/reference/optimize.linprog-highs.html"
+  ],
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_fullpool_relaxation.py"
+  ],
+  "hashes": {
+    "results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "scripts\\pcdr_fullpool_relaxation.py": "bca7871e564efac74ef40cbbb0c982b15492587d9a5582723d67c4cb002c580c",
+    "scripts\\pcdr_bounded_process.py": "20e40bf3f714e454b40cf6a02a50081f725973bfe6ab53bad6dbf073d29dc037",
+    "scripts\\pcdr_fullpool_bounds.py": "5cec33a0c23912951e9d6d1f3895505d6815fd7df327c5f68eb036fff49b220c",
+    "scripts\\pcdr_matching_audit.py": "60fc8e9e955c1deef8b13ae9034a4b4efa5ace315b97dc611856695051dcb353",
+    "eigencircuits\\common.py": "dca5bdaefc5ed4cce04da93c319208588f51496f908844045a3384ee6449d413",
+    "eigencircuits\\controls.py": "56c15ef2dd3fda9f798610fa02ffb7c7ec489b99d3d2587b5518a92939f7fe85"
+  }
+}

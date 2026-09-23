@@ -1,0 +1,52 @@
+[
+  {
+    "trial": "baseline_0",
+    "seed": 630101,
+    "recruited_noninput": 366,
+    "mn9_hz": 93.0,
+    "motor_total_hz": 1109.0,
+    "motor_mean_hz": 13.047058823529412,
+    "wall_seconds": 16.67195779999929,
+    "peak_rss_bytes": 2504929280
+  },
+  {
+    "trial": "baseline_1",
+    "seed": 630102,
+    "recruited_noninput": 347,
+    "mn9_hz": 81.0,
+    "motor_total_hz": 1094.0,
+    "motor_mean_hz": 12.870588235294118,
+    "wall_seconds": 14.195064199999251,
+    "peak_rss_bytes": 2833186816
+  },
+  {
+    "trial": "baseline_2",
+    "seed": 630103,
+    "recruited_noninput": 368,
+    "mn9_hz": 82.0,
+    "motor_total_hz": 1198.0,
+    "motor_mean_hz": 14.094117647058823,
+    "wall_seconds": 15.211398999999801,
+    "peak_rss_bytes": 2834010112
+  },
+  {
+    "trial": "baseline_3",
+    "seed": 630104,
+    "recruited_noninput": 357,
+    "mn9_hz": 86.0,
+    "motor_total_hz": 1148.0,
+    "motor_mean_hz": 13.505882352941176,
+    "wall_seconds": 14.858083400000396,
+    "peak_rss_bytes": 2833629184
+  },
+  {
+    "trial": "baseline_4",
+    "seed": 630105,
+    "recruited_noninput": 363,
+    "mn9_hz": 82.0,
+    "motor_total_hz": 1105.0,
+    "motor_mean_hz": 13.0,
+    "wall_seconds": 14.48836670000128,
+    "peak_rss_bytes": 2833809408
+  }
+]

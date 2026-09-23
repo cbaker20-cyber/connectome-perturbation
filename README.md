@@ -1,5 +1,15 @@
 # Connectome perturbation
 
+The September P/D/C/R workflow starts with [the research protocol](docs/pcdr/PLAN.md),
+[the lab notebook](docs/pcdr/LAB_NOTEBOOK.md), and [the separate code guide](docs/pcdr/CODE_GUIDE.md).
+It adds seeded trials, recruitment/correlation checks, individual lesions and gated CCR confirmation.
+Earlier class-level hypotheses below remain historical context for that workflow.
+
+The latest completed results and limitations are indexed in [the September research overview](docs/pcdr/README.md).
+Use [the recorded local environment](docs/pcdr/environment-local.txt) for that study;
+the older root requirements describe a different Brian2 version. Full trial archives remain local,
+while selected results and exact-source hashes are retained in `docs/pcdr/evidence/2026-09-22`.
+
 Whole-brain *Drosophila* LIF simulation (Brian2) on FlyWire connectivity, with
 **output-lesioning** and a motor-population readout.
 

@@ -1,0 +1,227 @@
+{
+  "seed": 630500,
+  "created_utc": "2026-09-20T01:35:44.620804+00:00",
+  "cells": [
+    {
+      "root_id": "720575940636346487",
+      "role": "excitatory",
+      "cluster": 144,
+      "rate_bin": 0,
+      "baseline_hz": 0.6,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940612357618",
+      "role": "excitatory",
+      "cluster": 136,
+      "rate_bin": 0,
+      "baseline_hz": 11.8,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940620805046",
+      "role": "excitatory",
+      "cluster": 138,
+      "rate_bin": 0,
+      "baseline_hz": 9.4,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940612692633",
+      "role": "excitatory",
+      "cluster": 37,
+      "rate_bin": 2,
+      "baseline_hz": 55.8,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940632722515",
+      "role": "excitatory",
+      "cluster": 145,
+      "rate_bin": 0,
+      "baseline_hz": 1.6,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940615153494",
+      "role": "excitatory",
+      "cluster": 101,
+      "rate_bin": 0,
+      "baseline_hz": 4.6,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940622624214",
+      "role": "excitatory",
+      "cluster": 58,
+      "rate_bin": 0,
+      "baseline_hz": 4.4,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940631662648",
+      "role": "excitatory",
+      "cluster": 149,
+      "rate_bin": 0,
+      "baseline_hz": 11.6,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940633316563",
+      "role": "excitatory",
+      "cluster": 72,
+      "rate_bin": 0,
+      "baseline_hz": 14.2,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940619473624",
+      "role": "excitatory",
+      "cluster": 37,
+      "rate_bin": 1,
+      "baseline_hz": 29.8,
+      "model_sign": "excitatory",
+      "classical_fast": "excitatory",
+      "shiu_2024": "excitatory"
+    },
+    {
+      "root_id": "720575940606866377",
+      "role": "inhibitory",
+      "cluster": 34,
+      "rate_bin": 2,
+      "baseline_hz": 71.8,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940622027222",
+      "role": "inhibitory",
+      "cluster": 159,
+      "rate_bin": 0,
+      "baseline_hz": 4.2,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940617373268",
+      "role": "inhibitory",
+      "cluster": 46,
+      "rate_bin": 0,
+      "baseline_hz": 1.8,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940635839077",
+      "role": "inhibitory",
+      "cluster": 8,
+      "rate_bin": 0,
+      "baseline_hz": 1.8,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940652580086",
+      "role": "inhibitory",
+      "cluster": 86,
+      "rate_bin": 2,
+      "baseline_hz": 99.4,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940621422518",
+      "role": "inhibitory",
+      "cluster": 136,
+      "rate_bin": 1,
+      "baseline_hz": 16.8,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940612479205",
+      "role": "inhibitory",
+      "cluster": 99,
+      "rate_bin": 0,
+      "baseline_hz": 9.4,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940632648612",
+      "role": "inhibitory",
+      "cluster": 33,
+      "rate_bin": 2,
+      "baseline_hz": 94.8,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940629239934",
+      "role": "inhibitory",
+      "cluster": 103,
+      "rate_bin": 1,
+      "baseline_hz": 10.6,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940605513649",
+      "role": "inhibitory",
+      "cluster": 150,
+      "rate_bin": 0,
+      "baseline_hz": 5.0,
+      "model_sign": "inhibitory",
+      "classical_fast": "inhibitory",
+      "shiu_2024": "inhibitory"
+    },
+    {
+      "root_id": "720575940645521262",
+      "role": "outside_block",
+      "cluster": 126,
+      "baseline_hz": 61.0
+    },
+    {
+      "root_id": "720575940628826128",
+      "role": "outside_block",
+      "cluster": 119,
+      "baseline_hz": 38.0
+    },
+    {
+      "root_id": "720575940633286335",
+      "role": "silent_control",
+      "baseline_hz": 0.0
+    }
+  ],
+  "n_trials": 5,
+  "outside_block_available": 2,
+  "selection_basis": "baseline only; ACh/GABA labels agree with model sign; repeated recruitment",
+  "features_sha256": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8"
+}
