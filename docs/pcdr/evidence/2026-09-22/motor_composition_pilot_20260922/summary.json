@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "phase": "motor_composition_pilot",
+  "n_ei_cells": 0,
+  "selection_sha256": "f14685b5521105fa47a22eb2c950e5bb198a4923166b05f6524644700104a726",
+  "jobs_sha256": "3f3b11d39cd0afa7d2b0940aede8e705c626a270b3aef5004cd53c668a089cf0",
+  "n_seeds": 5,
+  "primary": [],
+  "sensitivity_interpretation": "descriptive; own-network baselines, fixed support; no new matched-control significance",
+  "finished_utc": "2026-09-22T19:58:22.334764+00:00"
+}

@@ -1,0 +1,158 @@
+{
+  "verified_utc": "2026-09-22T17:57:28.683578+00:00",
+  "verified_witnesses": [
+    {
+      "assignment": 3,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.09472609096511925,
+      "smd": {
+        "in_degree": 0.09472609096511925,
+        "out_degree": 0.014057298957887224,
+        "in_strength": 0.01020619005086643,
+        "out_strength": 0.023401871802044498,
+        "baseline_hz": 0.07757632386743428,
+        "strong_out_mass": 0.004846493982140651
+      }
+    },
+    {
+      "assignment": 4,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.09067465965068912,
+      "smd": {
+        "in_degree": 0.09067465965068912,
+        "out_degree": 0.029140701447194467,
+        "in_strength": 0.013864010819506436,
+        "out_strength": 0.003278909242102956,
+        "baseline_hz": 0.07270263932070073,
+        "strong_out_mass": 0.02193630147663437
+      }
+    },
+    {
+      "assignment": 5,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.08071178836064272,
+      "smd": {
+        "in_degree": 0.08071178836064272,
+        "out_degree": 0.01610336916338901,
+        "in_strength": 6.502088477247703e-06,
+        "out_strength": 0.01526428099281019,
+        "baseline_hz": 0.06410192814466033,
+        "strong_out_mass": 0.02193630147663437
+      }
+    },
+    {
+      "assignment": 6,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.08285480972453926,
+      "smd": {
+        "in_degree": 0.038026799653459904,
+        "out_degree": 0.029175710884773456,
+        "in_strength": 0.030619768036439083,
+        "out_strength": 0.08285480972453926,
+        "baseline_hz": 0.07757632386743428,
+        "strong_out_mass": 0.03223152145025767
+      }
+    },
+    {
+      "assignment": 7,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.07270263932070073,
+      "smd": {
+        "in_degree": 0.03419768655372886,
+        "out_degree": 0.01472127565302407,
+        "in_strength": 0.027041609247122234,
+        "out_strength": 0.06372956432364166,
+        "baseline_hz": 0.07270263932070073,
+        "strong_out_mass": 0.005612844627897759
+      }
+    },
+    {
+      "assignment": 8,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.07504982602923246,
+      "smd": {
+        "in_degree": 0.024676214155936474,
+        "out_degree": 0.02720022375949633,
+        "in_strength": 0.040671773226125744,
+        "out_strength": 0.07504982602923246,
+        "baseline_hz": 0.06410192814466033,
+        "strong_out_mass": 0.005612844627897759
+      }
+    },
+    {
+      "assignment": 9,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.08916155850508023,
+      "smd": {
+        "in_degree": 0.04145373386025056,
+        "out_degree": 0.05183541877666058,
+        "in_strength": 0.08916155850508023,
+        "out_strength": 0.06866180828225257,
+        "baseline_hz": 0.07757632386743428,
+        "strong_out_mass": 0.0048464939821407805
+      }
+    },
+    {
+      "assignment": 10,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.08583860702632355,
+      "smd": {
+        "in_degree": 0.044903614755510926,
+        "out_degree": 0.037722047100918005,
+        "in_strength": 0.08583860702632355,
+        "out_strength": 0.049364021368755305,
+        "baseline_hz": 0.07270263932070073,
+        "strong_out_mass": 0.021936301476634112
+      }
+    },
+    {
+      "assignment": 11,
+      "size": 51,
+      "motor_count": 13,
+      "maximum_smd": 0.09858248943241436,
+      "smd": {
+        "in_degree": 0.053591855139455115,
+        "out_degree": 0.04989945814443994,
+        "in_strength": 0.09858248943241436,
+        "out_strength": 0.06080295521164766,
+        "baseline_hz": 0.06410192814466033,
+        "strong_out_mass": 0.021936301476634112
+      }
+    }
+  ],
+  "pairwise_shared_cells_min": 48,
+  "pairwise_shared_cells_max": 50,
+  "all_set_intersection": 47,
+  "claim": "Original six-feature pooled-SMD matching with exact annotated motor/sign/recruitment counts is feasible for this target. These witnesses do not establish sampling validity or lesion effects.",
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_verify_fractional_completion.py"
+  ],
+  "verifier_sha256": "035ca0e42357597187fe183c5c184cca8578ea733abbff9de1a7999c1374396e",
+  "evidence_hashes": {
+    "execution.json": "a8925a1a1678c1183b1ff73bb7537833cfc4a42c117973c976430107a735fd86",
+    "protocol.json": "8838a7a1345e3bf95434ba32f3bb9dede338917677b793d3d20e772f7374b589",
+    "binary_completion\\assignments.csv": "46e3b84fc95b9400548e369dd689fccef36867ba6163154ee1149716d4adcca0",
+    "binary_completion\\members.parquet": "88abc8d7a1ea01151afc6f3306d7cb3833ad89e471a8aab50d149bfe46c26c8a",
+    "binary_completion\\protocol.json": "844dcf8b634fcf704cd22d8a89a6e93cfbdefa6c38863d33cb0ee16efbb1d345",
+    "binary_completion\\summary.json": "75a1df25f8f0c7c395469d3b864475a38f7f0ee7aef37ffa2d1c6ca4028a7986",
+    "conservative\\fractional_weights.parquet": "76cb1a1ecef975946d85ec604c06c788ae5c18ae9ca56d0b74ef6de40e61940a",
+    "conservative\\process.json": "c41dc05e9aba1b26fac5f9a3a5a7fcbaf06348d96a011fba292d46baacf62bcd",
+    "conservative\\result.json": "60c20014e24f4f2b5c7775e981421be56615cb52d24a2913438a2ab7db631aa8",
+    "conservative\\stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "conservative\\stdout.txt": "f1d722ff7bc65c7565a4ad4cbb2a7c3c0def2081bf21b10efe0bb24edbd13c49",
+    "necessary_outer\\fractional_weights.parquet": "6c3f1c89e98821213e446c476dd3dea1f99aa23eda085c93874e635d3db2d9b9",
+    "necessary_outer\\process.json": "a85cba9c62779de3d92784f4e85be497a7da7b47b269a6f2ec94cc2acbe690ab",
+    "necessary_outer\\result.json": "37316fe45dca052d4c2551c31080b01faf5bb08af111f878821e0ebc2e0e4a3e",
+    "necessary_outer\\stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "necessary_outer\\stdout.txt": "6fecae42e24e1a21d2ae1b4618ad5e6b1e68fd98913dbda080cfab9a0aec8071"
+  }
+}

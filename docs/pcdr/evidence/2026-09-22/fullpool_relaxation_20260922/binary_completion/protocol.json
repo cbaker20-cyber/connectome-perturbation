@@ -1,0 +1,13 @@
+{
+  "recorded_utc": "2026-09-22T17:56:38.187007+00:00",
+  "reason": "Both LPs returned feasible; conservative solution has seven fractional memberships. Separately declared small enumeration following that baseline-only result.",
+  "procedure": "Use conservative LP only. Fix weights within 1e-7 of 0/1 to those endpoints. Enumerate ALL binary assignments of remaining variables, at most 12 (4096 assignments). No search if cap exceeded. Keep exact stratum counts, exclusions and size; compute original pooled population-variance SMD <=0.1 on all six log1p features. Also report stricter sufficient constraints separately. Retain all valid sets.",
+  "scope": "Baseline-only existence witnesses. No rounding is accepted without full validation. No random sampling, p-values, lesions or automatic larger optimization. Failure says nothing about other binary solutions.",
+  "hashes": {
+    "results\\pcdr\\fullpool_relaxation_20260922\\conservative\\fractional_weights.parquet": "76cb1a1ecef975946d85ec604c06c788ae5c18ae9ca56d0b74ef6de40e61940a",
+    "results\\pcdr\\fullpool_relaxation_20260922\\protocol.json": "8838a7a1345e3bf95434ba32f3bb9dede338917677b793d3d20e772f7374b589",
+    "results\\pcdr\\fullpool_relaxation_20260922\\conservative\\result.json": "60c20014e24f4f2b5c7775e981421be56615cb52d24a2913438a2ab7db631aa8",
+    "scripts\\pcdr_fractional_completion.py": "feaf73f4534fdd821c04397717bf569015315c6f5f7d4241f5c5fc09a4cf54f5",
+    "scripts\\pcdr_fullpool_relaxation.py": "bca7871e564efac74ef40cbbb0c982b15492587d9a5582723d67c4cb002c580c"
+  }
+}

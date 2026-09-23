@@ -1,0 +1,175 @@
+{
+  "completed_utc": "2026-09-22T18:09:25.955202+00:00",
+  "sets": 9,
+  "largest_ecdf_gap": {
+    "condition": "motor_006",
+    "feature": "in_degree",
+    "smd": 0.038026799653459904,
+    "ecdf_gap": 0.29411764705882354,
+    "variance_ratio": 14.961136322333003,
+    "target_q0": 4.882801922586371,
+    "target_q25": 5.37989735354046,
+    "target_q50": 5.501258210544727,
+    "target_q75": 5.632987891512191,
+    "target_q100": 6.184148890937483,
+    "sample_q0": 1.0986122886681098,
+    "sample_q25": 5.075154283602347,
+    "sample_q50": 5.3981627015177525,
+    "sample_q75": 5.8050941412952195,
+    "sample_q100": 8.073402968986406
+  },
+  "variance_ratio_min": 0.9230016193895515,
+  "variance_ratio_max": 19.116997858224728,
+  "class_distances": [
+    {
+      "condition": "motor_003",
+      "field": "super_class",
+      "total_variation": 0.11764705882352942
+    },
+    {
+      "condition": "motor_003",
+      "field": "cell_type",
+      "total_variation": 0.803921568627451
+    },
+    {
+      "condition": "motor_003",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_004",
+      "field": "super_class",
+      "total_variation": 0.11764705882352942
+    },
+    {
+      "condition": "motor_004",
+      "field": "cell_type",
+      "total_variation": 0.803921568627451
+    },
+    {
+      "condition": "motor_004",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_005",
+      "field": "super_class",
+      "total_variation": 0.11764705882352942
+    },
+    {
+      "condition": "motor_005",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274509
+    },
+    {
+      "condition": "motor_005",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_006",
+      "field": "super_class",
+      "total_variation": 0.11764705882352941
+    },
+    {
+      "condition": "motor_006",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274509
+    },
+    {
+      "condition": "motor_006",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_007",
+      "field": "super_class",
+      "total_variation": 0.11764705882352941
+    },
+    {
+      "condition": "motor_007",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274509
+    },
+    {
+      "condition": "motor_007",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_008",
+      "field": "super_class",
+      "total_variation": 0.11764705882352941
+    },
+    {
+      "condition": "motor_008",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274508
+    },
+    {
+      "condition": "motor_008",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_009",
+      "field": "super_class",
+      "total_variation": 0.11764705882352941
+    },
+    {
+      "condition": "motor_009",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274509
+    },
+    {
+      "condition": "motor_009",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_010",
+      "field": "super_class",
+      "total_variation": 0.11764705882352941
+    },
+    {
+      "condition": "motor_010",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274509
+    },
+    {
+      "condition": "motor_010",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    },
+    {
+      "condition": "motor_011",
+      "field": "super_class",
+      "total_variation": 0.11764705882352941
+    },
+    {
+      "condition": "motor_011",
+      "field": "cell_type",
+      "total_variation": 0.8039215686274508
+    },
+    {
+      "condition": "motor_011",
+      "field": "known_nt",
+      "total_variation": 0.019607843137254923
+    }
+  ],
+  "mn9_in_mode": true,
+  "mn9_in_any_comparison": false,
+  "all_set_intersection": 47,
+  "pairwise_shared_range": [
+    48,
+    50
+  ],
+  "selection_changed": false,
+  "outputs": {
+    "annotated_members.csv": "481bdf77be2c91ff2816a1c7021765b023c3ea807b01d997757872fa9216fcc1",
+    "composition.csv": "b7d9bbc8fb2c62819bc47656ff11cba766597b00746bb70657b4d4a2bce8c65b",
+    "composition_distances.csv": "1cc7f102a8f6b9eece4775a070e08bd3312240991bb4c8b8ae5227725d95d167",
+    "distributions.csv": "72aabd42847a18b844f6345b64e6507493e3a0216be0c99d05c2fe5cd90d9264",
+    "protocol.json": "22cc756668ee58f759991c760ad399d3b23bc3c8e3ae315e075cbaebe80f1e92"
+  }
+}

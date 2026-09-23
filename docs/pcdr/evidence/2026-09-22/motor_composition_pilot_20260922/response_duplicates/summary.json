@@ -1,0 +1,60 @@
+{
+  "completed_utc": "2026-09-22T20:00:00.257079+00:00",
+  "distinct_membership_sets": 9,
+  "distinct_five_seed_spike_trajectories": 3,
+  "groups": [
+    {
+      "conditions": [
+        "motor_003",
+        "motor_006",
+        "motor_009"
+      ],
+      "varying_membership_ids": [
+        "720575940625585596",
+        "720575940627712019",
+        "720575940631759663",
+        "720575940633753569"
+      ],
+      "shared_cells_within_group": 49,
+      "exact_spike_and_rate_equality_all_five_seeds": true,
+      "varying_cells_all_silent_baseline_and_group_lesions": true
+    },
+    {
+      "conditions": [
+        "motor_004",
+        "motor_007",
+        "motor_010"
+      ],
+      "varying_membership_ids": [
+        "720575940625585596",
+        "720575940627712019",
+        "720575940631759663",
+        "720575940633753569"
+      ],
+      "shared_cells_within_group": 49,
+      "exact_spike_and_rate_equality_all_five_seeds": true,
+      "varying_cells_all_silent_baseline_and_group_lesions": true
+    },
+    {
+      "conditions": [
+        "motor_005",
+        "motor_008",
+        "motor_011"
+      ],
+      "varying_membership_ids": [
+        "720575940625585596",
+        "720575940627712019",
+        "720575940631759663",
+        "720575940633753569"
+      ],
+      "shared_cells_within_group": 49,
+      "exact_spike_and_rate_equality_all_five_seeds": true,
+      "varying_cells_all_silent_baseline_and_group_lesions": true
+    }
+  ],
+  "claim": "Observed trajectory duplication only; no claim of equivalence in new seeds, input contexts or model variants.",
+  "outputs": {
+    "protocol.json": "1dd18fc62ab4befce14331b1096df70bd6af1f8fad9cf77367fbf486c8dbe9dd",
+    "varying_cell_rates.csv": "be1e5b3fc2c0d16f0460f8444681304241b997e602edea8fdb82ff736cc67a0a"
+  }
+}

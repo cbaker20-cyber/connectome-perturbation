@@ -1,0 +1,73 @@
+{
+  "recorded_utc": "2026-09-21T19:56:48.193683+00:00",
+  "authorization": "User asked whether to start testing after approving the matching audit.",
+  "question": "Descriptively compare the selected mode lesion with five optimized matched comparison lesions under sugar drive.",
+  "claim_status": "descriptive_optimized_comparisons_not_confirmation",
+  "primary_readouts": "A = mean absolute mean paired DeltaHz inside own support; F = own-support share of total absolute mean paired DeltaHz. Zero total response makes F undefined.",
+  "secondary": "MN9, motor total and per-neuron DeltaHz, signed and off-support effects. Model readouts, not behavior.",
+  "analysis": "Show all six lesion sets and all five paired seeds. Paired-seed bootstrap intervals describe seed variability. No Monte Carlo reference p-values, no significance claim, no stopping on effect direction.",
+  "selection": "Frozen rank-33 exploratory support and five audit witness sets; seed 630610 optimization objectives. No substitution, rematching or extra eigenpairs.",
+  "seeds": [
+    630901,
+    630902,
+    630903,
+    630904,
+    630905
+  ],
+  "trials": 35,
+  "deadline_epoch": 1790041426.172948,
+  "simulation": "Unchanged NumPy LIF, output-only lesions, 21 sugar inputs at 150 Hz, 1 second, dt 0.1 ms, paired fixed_binomial_tape_v1.",
+  "resources": "One serial simulation process, BLAS threads 1, >=4 GiB free RAM, >=10 GiB free disk; original Monday deadline. Stop on failure, STOP or deadline; retain incomplete work without calling it complete.",
+  "estimated_hours_median_prior": 0.14133772430553412,
+  "estimated_hours_p95_prior": 0.1695513364027889,
+  "balances": [
+    {
+      "in_degree": 0.04337902908397175,
+      "out_degree": 0.035455063320343747,
+      "in_strength": 0.06670712058111511,
+      "out_strength": 0.00037228584255463677,
+      "baseline_hz": 0.06824632235583868,
+      "strong_out_mass": 0.07334921578320837
+    },
+    {
+      "in_degree": 0.04564439871638841,
+      "out_degree": 0.049538531313124294,
+      "in_strength": 0.06943369704900883,
+      "out_strength": 0.002599954784984892,
+      "baseline_hz": 0.07206922974968805,
+      "strong_out_mass": 0.06755998902723287
+    },
+    {
+      "in_degree": 0.04681544151548588,
+      "out_degree": 0.03236383771115598,
+      "in_strength": 0.06951297152465288,
+      "out_strength": 0.04632273120795385,
+      "baseline_hz": 0.07198719303635207,
+      "strong_out_mass": 0.06888153206626063
+    },
+    {
+      "in_degree": 0.04214664033164127,
+      "out_degree": 0.03813425551563483,
+      "in_strength": 0.06756263678572157,
+      "out_strength": 0.06840532687601182,
+      "baseline_hz": 0.07067456547437273,
+      "strong_out_mass": 0.06980490790609285
+    },
+    {
+      "in_degree": 0.044099518032534576,
+      "out_degree": 0.03937393116015884,
+      "in_strength": 0.06516413689639912,
+      "out_strength": 0.004415677410994773,
+      "baseline_hz": 0.0709003836386184,
+      "strong_out_mass": 0.07176535798169145
+    }
+  ],
+  "limitations": "Optimized sets are not uniform random draws; overlap allowed and recorded. Five seeds and five comparators are exploratory. Confirmation sampling remains unresolved.",
+  "inputs": {
+    "results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "results\\pcdr\\matching_audit_20260921\\witness\\members.parquet": "a92c16f01584c9be57ff09479475de9953ea9bd5c66d8256f3b2970089ddce58",
+    "results\\pcdr\\matching_audit_20260921\\witness\\protocol.json": "1e707e19cdddcc20d4fc728e8974c17b4f2e35e144c9d31ec9ec74b228e0cc45",
+    "scripts\\pcdr_optimized_pilot.py": "42159d5ec8bf1a80195a86220f3538ebe1d59b16141270bc684a31841bf9eaa0"
+  }
+}

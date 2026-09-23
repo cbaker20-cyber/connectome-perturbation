@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-09-22T18:09:24.608026+00:00",
+  "purpose": "Baseline distribution and annotation audit before any new motor-balanced lesions.",
+  "method": "Include all nine verified sets. Six log1p features: original SMD, ECDF gap, population variance ratio, min/quartiles/max. Composition: super_class, cell_type, top_nt, known_nt, annotation_available, model_sign and recruited. Missing labels are unavailable. Show complete counts; categorical total variation is descriptive.",
+  "fixed": "No new cutoff, exclusion, set ranking for selection, significance test or rematching. All nine sets retained irrespective of audit differences.",
+  "interpretation": "Matching mean and exact motor counts does not ensure matching distributions, motor identities or detailed cell types. These sets remain optimized and overlap.",
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_motor_set_audit.py"
+  ],
+  "hashes": {
+    "results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "results\\pcdr\\fullpool_relaxation_20260922\\binary_completion\\members.parquet": "88abc8d7a1ea01151afc6f3306d7cb3833ad89e471a8aab50d149bfe46c26c8a",
+    "results\\pcdr\\fullpool_relaxation_20260922\\binary_completion\\verification.json": "ee7d4bdc04e4d6249670e0612bc85a861f07368c0cc9b0997b7ee1e9f14d075d",
+    "scripts\\pcdr_motor_set_audit.py": "ed99bf6d50e54f69e0e760aa91e21332ed0c0c6d7041a80008ee05b715bce80c",
+    "scripts\\pcdr_composition_audit.py": "d3a907f6d9ff6f7bfdd147ed9bb07701c4e63a62d181803198fbb36d797fc3b7",
+    "eigencircuits\\controls.py": "56c15ef2dd3fda9f798610fa02ffb7c7ec489b99d3d2587b5518a92939f7fe85"
+  }
+}

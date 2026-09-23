@@ -1,0 +1,13 @@
+{
+  "recorded_utc": "2026-09-22T19:59:45.563178+00:00",
+  "trigger": "Completed verified results show identical summaries for three groups of comparisons.",
+  "purpose": "Post-result diagnostic: distinguish repeated trajectories from merely equal aggregate readouts. Not a prespecified test.",
+  "method": "Group conditions by the ordered tuple of five spike digests. Within each group verify complete spike tables and all-neuron rate tables equal for each seed; compare support identities; inspect rates of cells whose membership varies, in baseline and all group lesions.",
+  "limits": "No reclassification, exclusion or extra simulation. Silence/equality applies only to these five seeds and this model condition.",
+  "hashes": {
+    "results\\pcdr\\motor_composition_pilot_20260922\\jobs.json": "3f3b11d39cd0afa7d2b0940aede8e705c626a270b3aef5004cd53c668a089cf0",
+    "results\\pcdr\\motor_composition_pilot_20260922\\completion_audit.json": "fa2282fb07cdc6cb379f18298caab999c047082af14fa46d29f868211ee90e3a",
+    "results\\pcdr\\motor_composition_pilot_20260922\\analysis\\results.json": "5b6222da26a00e44d9b11223d0a615bddbc11983689f022cd7ac41216bdd3878",
+    "scripts\\pcdr_motor_response_duplicates.py": "98975ea37a64877745fb0377a18fd9bf22e3ebc86f1be259884f55268ef8996c"
+  }
+}

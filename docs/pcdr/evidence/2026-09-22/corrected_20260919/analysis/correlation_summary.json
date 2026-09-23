@@ -1,0 +1,32 @@
+[
+  {
+    "analysis": "bins_10ms_min_1",
+    "n_neurons": 387,
+    "n_clusters": 170,
+    "largest_cluster": 26,
+    "within_group_mean_r": 0.4191227665315345,
+    "split_trial_ARI": 0.527745460595959,
+    "split_common_cells": 366
+  },
+  {
+    "analysis": "bins_5ms_min_1",
+    "n_neurons": 387,
+    "n_clusters": 286,
+    "largest_cluster": 8,
+    "within_group_mean_r": 0.48923093401159046
+  },
+  {
+    "analysis": "bins_20ms_min_1",
+    "n_neurons": 387,
+    "n_clusters": 114,
+    "largest_cluster": 72,
+    "within_group_mean_r": 0.4281414593968508
+  },
+  {
+    "analysis": "bins_10ms_min_5",
+    "n_neurons": 351,
+    "n_clusters": 151,
+    "largest_cluster": 26,
+    "within_group_mean_r": 0.4193842364652692
+  }
+]

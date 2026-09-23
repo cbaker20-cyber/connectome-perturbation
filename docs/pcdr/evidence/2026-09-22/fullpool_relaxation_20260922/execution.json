@@ -1,0 +1,35 @@
+{
+  "completed_utc": "2026-09-22T17:55:05.446840+00:00",
+  "workers": {
+    "conservative": {
+      "command": [
+        "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_fullpool_relaxation.py",
+        "--worker",
+        "conservative"
+      ],
+      "pid": 17812,
+      "timed_out": false,
+      "returncode": 0,
+      "elapsed_seconds": 4.25,
+      "deadline_seconds": 90,
+      "cleanup": null
+    },
+    "necessary_outer": {
+      "command": [
+        "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_fullpool_relaxation.py",
+        "--worker",
+        "necessary_outer"
+      ],
+      "pid": 7800,
+      "timed_out": false,
+      "returncode": 0,
+      "elapsed_seconds": 3.7969999999913853,
+      "deadline_seconds": 90,
+      "cleanup": null
+    }
+  },
+  "no_simulations": true,
+  "accepted_control_sets": 0
+}
