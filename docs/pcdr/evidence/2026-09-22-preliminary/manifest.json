@@ -1,0 +1,72 @@
+{
+  "created_utc": "2026-09-23T01:11:36.546963+00:00",
+  "files": [
+    {
+      "file": "distribution_feasibility_20260922/protocol.json",
+      "source": "results/pcdr/distribution_feasibility_20260922/protocol.json",
+      "sha256": "30144649404e5a535eebffc39af2f2bc9b23f688e8b6f3e3ff4ceb6bfa331e10",
+      "bytes": 2053
+    },
+    {
+      "file": "distribution_feasibility_20260922/result.json",
+      "source": "results/pcdr/distribution_feasibility_20260922/result.json",
+      "sha256": "086c54021fc55b5fcca62c2213f751b8f648be5cda8d3879799a09743de810f9",
+      "bytes": 637
+    },
+    {
+      "file": "distribution_feasibility_20260922/execution.json",
+      "source": "results/pcdr/distribution_feasibility_20260922/execution.json",
+      "sha256": "dfe3f1aba21376539090ec870638297076f3ac2e957affa88651102500588bd9",
+      "bytes": 335
+    },
+    {
+      "file": "ccr_notebook_validation_20260922_final/protocol.json",
+      "source": "results/pcdr/ccr_notebook_validation_20260922_final/protocol.json",
+      "sha256": "6847440a404d5c435b92cc69f5b1cc235b5f87388dfb4573db1bd4922baec69e",
+      "bytes": 944
+    },
+    {
+      "file": "ccr_notebook_validation_20260922_final/executions.json",
+      "source": "results/pcdr/ccr_notebook_validation_20260922_final/executions.json",
+      "sha256": "fa9d6d8a503aff92f7de3a9f696f22188642734a26c4a05ddba053c0b476a763",
+      "bytes": 7762
+    },
+    {
+      "file": "ccr_notebook_validation_20260922_final/smoke_certificate.json",
+      "source": "results/pcdr/ccr_notebook_validation_20260922_final/smoke_certificate.json",
+      "sha256": "99bc37a72ebac3913a5299f6293cde6e7b6488ee8741547838103ed8c7d377b7",
+      "bytes": 990
+    },
+    {
+      "file": "ccr_notebook_validation_20260922_final/validation.json",
+      "source": "results/pcdr/ccr_notebook_validation_20260922_final/validation.json",
+      "sha256": "414a9c00248519307774f54a29c29279a49bad2e9593c9e305f8954fe6f774f7",
+      "bytes": 992
+    },
+    {
+      "file": "ccr_release_verification_20260922/verification.json",
+      "source": "results/pcdr/ccr_release_verification_20260922/verification.json",
+      "sha256": "5a1534701446f2060af8552250b24a143933af573fc6159999e254305f06d845",
+      "bytes": 1073
+    },
+    {
+      "file": "release/archive.json",
+      "source": "exports/ccr_notebook_20260922_release/archive.json",
+      "sha256": "7337fb64a60ed06138c9d61f69a327162cbef1e7d139797ea911abb5c52808b4",
+      "bytes": 243
+    },
+    {
+      "file": "release/transfer_manifest.json",
+      "source": "exports/ccr_notebook_20260922_release/connectome/transfer_manifest.json",
+      "sha256": "66fea753b7d986b9526399504a20a94661dca8286509942716517962a21329ef",
+      "bytes": 7683
+    },
+    {
+      "file": "release/requirements-ccr.txt",
+      "source": "exports/ccr_notebook_20260922_release/connectome/requirements-ccr.txt",
+      "sha256": "23b6e4507ac427f7dd651e327da069298ced46bf38a6b8e927980efce73c2a22",
+      "bytes": 567
+    }
+  ],
+  "scope": "Completed preliminary and local deployment checks. Raw data and trial outputs stay local. No CCR results."
+}

@@ -16,3 +16,7 @@ Afternoon update: joint motor/sign/recruitment plus original six-feature mean-ba
 - scripts/pcdr_backend_input_check.py was created with Codex assistance. It reads benchmark manifests, checks completed status and equal seed, schedule digest, drive, duration, timestep, support and model variant across NumPy/Cython, and returns a machine-readable list or an error. It modifies no benchmark or simulation files.
 - Test: tests/test_pcdr_backend_input_check.py constructs all60 synthetic pairs, verifies acceptance, then alters one schedule digest and requires rejection. This validates the guard, not real backend equivalence.
 - Current scripts/pcdr_array.sh remains a submission template. Cluster account/partition, transfer/environment setup, integration of certificates into automated dispatch and scheduler fault tests are still pending. No automatic large dispatch is enabled by this checklist.
+
+## 22 September evening update
+
+Use CCR_NOTEBOOK_GUIDE.md and the uploadable ZIP workflow for the user's OnDemand request. The helper now has a tested local four-trial smoke workflow and failure/resume checks, and a prepared 350-job descriptive sensitivity study. The old shell array remains an optional template. The stricter distribution guard was numerically infeasible; do not treat the optimized controls as a confirmatory reference distribution. Actual CCR environment and scheduler validation remain pending. See PRELIMINARY_CLOSEOUT_20260922.md.

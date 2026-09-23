@@ -7,3 +7,4 @@
 # Research scripts retain their recorded bytes; do not normalize frozen hashes.
 /scripts/pcdr*.py -text whitespace=cr-at-eol
 /scripts/pcdr_array.sh text eol=lf
+/scripts/pcdr_ccr_smoke.sh text eol=lf

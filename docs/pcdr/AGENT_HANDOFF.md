@@ -30,3 +30,11 @@ Updated 21 September 2026 late evening. Read this first in a new chat, then insp
 - Four-week outline in FOUR_WEEK_WORKPLAN.md. Full details docs/pcdr/{PLAN,CODE_GUIDE,PROCESS_DETAILS,LAB_NOTEBOOK}. No code/data changes needed just to read results. No committing/pushing unless requested. New chat can resume from this file without full transcript.
 
 - Latest motor joint check:0witnesses; first MILP infeasible under restricted candidates/conservative bounds. Do not call original matching impossible. Next direct/fullpool feasibility needed before lesion design.
+
+## Latest: 22 September evening preliminary closeout
+
+Read PRELIMINARY_CLOSEOUT_20260922.md and CCR_NOTEBOOK_GUIDE.md first. The user requested an ipynb ZIP for OnDemand, account smuldoon / UB-HPC / general-compute. Final upload archive: exports/ccr_notebook_20260922_release/Connectome_CCR_Notebook.zip (95,169,881 bytes). SHA256 and completed evidence are in evidence/2026-09-22-preliminary. Suggested allocation: 4 cores, 16000 MB, 4 hours, no GPU; two processes maximum.
+
+The stricter distribution LP reported infeasible; do not loosen criteria silently or call it a global hypothesis rejection. The notebook prepares 350 descriptive sensitivity jobs after four smoke checks, with five weight settings, seven fixed conditions, ten shared seeds. No CCR work or sensitivity study has run. Local actual smoke and failure/resume checks passed; final ZIP code/data/notebook code match the tested predecessor, with only a library prose correction. Full suite 231 passed/3 skipped plus a new passing collector test (232 distinct). Linux install, CCR and scheduler validation remain pending.
+
+User authorized commits as configured Copeland Baker. Prior two research commits were pushed to main. Preserve the unrelated staged docs/MANUS_HANDOFF.md and unrelated untracked PastDocumentation/, REFERENCE.md and docs/codebase_guide/.

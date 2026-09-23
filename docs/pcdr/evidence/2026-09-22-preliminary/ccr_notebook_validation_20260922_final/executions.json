@@ -1,0 +1,205 @@
+{
+  "verify": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "verify"
+    ],
+    "pid": 12284,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 0.45300000003771856,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "initialize": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "initialize"
+    ],
+    "pid": 31692,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 0.7339999999967404,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "prepare": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "prepare",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke"
+    ],
+    "pid": 14664,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 1.2349999999860302,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "missing_all": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "collect",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke"
+    ],
+    "pid": 27540,
+    "timed_out": false,
+    "returncode": 1,
+    "elapsed_seconds": 1.125,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "worker_0": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "worker",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke",
+      "--index",
+      "0"
+    ],
+    "pid": 7772,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 19.98399999999674,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "worker_1": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "worker",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke",
+      "--index",
+      "1"
+    ],
+    "pid": 17032,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 18.18699999997625,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "worker_2": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "worker",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke",
+      "--index",
+      "2"
+    ],
+    "pid": 20168,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 14.094000000040978,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "missing_last": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "collect",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke"
+    ],
+    "pid": 31820,
+    "timed_out": false,
+    "returncode": 1,
+    "elapsed_seconds": 2.655999999959022,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "resume": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "worker",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke",
+      "--index",
+      "0"
+    ],
+    "pid": 29928,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 2.547000000020489,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "locked": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "worker",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke",
+      "--index",
+      "0"
+    ],
+    "pid": 23964,
+    "timed_out": false,
+    "returncode": 1,
+    "elapsed_seconds": 1.0160000000032596,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "worker_3": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "worker",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke",
+      "--index",
+      "3"
+    ],
+    "pid": 14000,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 17.51600000000326,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "collect": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "collect",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\smoke"
+    ],
+    "pid": 16508,
+    "timed_out": false,
+    "returncode": 0,
+    "elapsed_seconds": 2.7179999999934807,
+    "deadline_seconds": 180,
+    "cleanup": null
+  },
+  "corrupt": {
+    "command": [
+      "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\scripts\\pcdr_ccr_transfer.py",
+      "collect",
+      "--study",
+      "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\ccr_notebook_validation_20260922_final\\extracted\\connectome\\results\\corrupt_copy"
+    ],
+    "pid": 16212,
+    "timed_out": false,
+    "returncode": 1,
+    "elapsed_seconds": 1.1709999999729916,
+    "deadline_seconds": 180,
+    "cleanup": null
+  }
+}

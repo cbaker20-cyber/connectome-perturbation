@@ -1,0 +1,24 @@
+{
+  "finished_utc": "2026-09-23T01:08:49.239525+00:00",
+  "passed": true,
+  "archive": {
+    "archive": "Connectome_CCR_Notebook.zip",
+    "sha256": "6553ab7ca076ce53fd59115e8e7f547bb3e559cbb6b6a1ef3a37cf649919c444",
+    "bytes": 95169881,
+    "manifest_sha256": "66fea753b7d986b9526399504a20a94661dca8286509942716517962a21329ef"
+  },
+  "payload_files": 53,
+  "changed_payload_files": [
+    "START_HERE.md"
+  ],
+  "change": "Corrected library prose: statsmodels was installed; psutil was absent. Notebook markdown corrected likewise.",
+  "identical": [
+    "all Python and shell scripts",
+    "three model datasets",
+    "sensitivity design",
+    "requirements",
+    "notebook code cells"
+  ],
+  "execution_evidence_sha256": "414a9c00248519307774f54a29c29279a49bad2e9593c9e305f8954fe6f774f7",
+  "limits": "The predecessor ZIP underwent four real local trials and failure/resume checks. The final ZIP was extracted and hash/CRC checked; unchanged simulation code was not rerun solely for prose changes. Linux installation and CCR remain untested."
+}
