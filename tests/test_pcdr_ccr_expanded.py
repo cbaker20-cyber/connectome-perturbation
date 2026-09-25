@@ -77,3 +77,58 @@ def test_calibration_chooses_measured_throughput_and_retains_job_indices(tmp_pat
     indices=[i for wave in result['waves'] for i in wave['indices']]
     assert len(indices)==len(set(indices))==53
     assert not (study/'controller.lock').exists()
+
+
+def test_completed_study_needs_no_new_calibration_or_worker(tmp_path,monkeypatch):
+    from scripts import pcdr_ccr_capacity as capacity,pcdr_ccr_sensitivity as sensitivity
+    from scripts import pcdr_ccr_transfer as transfer
+    study=tmp_path/'study';study.mkdir();smoke=tmp_path/'smoke';smoke.mkdir()
+    jobs=[{'index':0,'trial_id':'finished'}]
+    plan={'jobs':jobs}
+    transfer.write(study/'jobs.json',plan)
+    transfer.write(study/'trials/finished/manifest.json',{'status':'complete'})
+    monkeypatch.setattr(capacity,'load_plan',lambda _:plan)
+    monkeypatch.setattr(sensitivity,'load_plan',lambda _:plan)
+    monkeypatch.setattr(capacity,'allocation',lambda:(32,128000))
+    monkeypatch.setenv('SLURM_JOB_ID','123')
+    monkeypatch.setattr(transfer,'checked_trial',lambda *args:{'peak_rss_bytes':3_000_000_000})
+    monkeypatch.setattr(sensitivity,'validated',lambda *args:{'peak_rss_bytes':3_000_000_000})
+    def no_process(*args,**kwargs):raise AssertionError('Completed trial spawned a process')
+    monkeypatch.setattr(capacity,'run_bounded',no_process)
+    monkeypatch.setattr(sensitivity,'run_bounded',no_process)
+    capacity.calibrate(study,smoke)
+    assert transfer.read(study/'capacity.json')['waves']==[]
+    sensitivity.run(study,workers=1,hours=.01)
+    assert transfer.read(study/'progress.json')['results'][0]['reused'] is True
+
+
+def test_notebook_install_targets_simulation_environment(tmp_path,monkeypatch):
+    import os,sys,shutil,subprocess
+    from types import SimpleNamespace
+    nb=read(ROOT/'notebooks/CCR_Expanded_Study.ipynb')
+    setup=next(''.join(c['source']) for c in nb['cells'] if c['cell_type']=='code' and ''.join(c['source']).startswith('BASE_PYTHON ='))
+    (tmp_path/'requirements-ccr.txt').write_text('numpy==1.26.4\n')
+    monkeypatch.setenv('PYTHONPATH','foreign-packages')
+    monkeypatch.setenv('PIP_TARGET','foreign-target')
+    calls=[]
+    def run(args,**kwargs):calls.append((args,kwargs));return SimpleNamespace(returncode=0)
+    fake=SimpleNamespace(run=run)
+    namespace={'ROOT':tmp_path,'Path':Path,'os':os,'sys':sys,'shutil':shutil,'subprocess':fake}
+    exec(compile(setup,'<setup>','exec'),namespace)
+    installs=[(args,kw) for args,kw in calls if 'install' in args]
+    assert len(installs)==1
+    args,kw=installs[0]
+    assert '.ccr-venv' in args[0] and args[1:4]==['-m','pip','install']
+    assert 'PYTHONPATH' not in kw['env'] and 'PIP_TARGET' not in kw['env']
+    assert kw['env']['PIP_CONFIG_FILE']==os.devnull
+    assert '--force-reinstall' not in args
+    assert any(args[-1]=='environment' for args,kw in calls)
+
+
+def test_environment_preflight_rejects_foreign_import(monkeypatch):
+    from scripts import pcdr_ccr_transfer as transfer
+    from types import SimpleNamespace
+    monkeypatch.setattr(transfer,'verify',lambda:{'packages':transfer.package_versions(),'dependency_versions':{}})
+    monkeypatch.setattr(transfer.importlib,'import_module',lambda _:SimpleNamespace(__file__='C:/foreign/numpy/__init__.py'))
+    with pytest.raises(ValueError,match='outside the simulation environment'):
+        transfer.check_environment()

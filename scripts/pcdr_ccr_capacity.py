@@ -82,9 +82,12 @@ def calibrate(study,smoke):
             write(study/'capacity_progress.json',{'waves':waves,'updated_utc':utc()})
             print(f'Calibration: {n} workers, {n/seconds:.3f} trials/s',flush=True)
         safe=[w for w in waves if w['workers']<=ceiling(cpus,memory,peak)]
-        if not safe:raise ValueError('No successful safe calibration wave')
-        best=max(w['trials_per_second'] for w in safe)
-        chosen=min(w['workers'] for w in safe if w['trials_per_second']>=.9*best)
+        if pending:
+            if not safe:raise ValueError('No successful safe calibration wave')
+            best=max(w['trials_per_second'] for w in safe)
+            chosen=min(w['workers'] for w in safe if w['trials_per_second']>=.9*best)
+        else:
+            chosen=1  # No trials remain; permit verification/collection without benchmarking again.
         write(study/'capacity.json',{'created_utc':utc(),'jobs_sha256':digest(study/'jobs.json'),
             'slurm_job_id':os.environ['SLURM_JOB_ID'],'cpus':cpus,'memory_mb':memory,
             'peak_rss_bytes':peak,'waves':waves,'selected_workers':chosen,

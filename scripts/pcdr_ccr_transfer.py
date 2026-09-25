@@ -154,13 +154,27 @@ def initialize():
                     'Record exact files in the transfer snapshot'],cwd=ROOT,check=True,capture_output=True)
 
 
-def prepare(study):
+def check_environment():
+    import importlib
     transfer=verify()
     versions=package_versions()
     if versions!=transfer['packages']:
         raise ValueError('Package versions differ; document and build a new amended snapshot')
     if any(importlib.metadata.version(name)!=version for name,version in transfer['dependency_versions'].items()):
         raise ValueError('Dependency versions differ from transfer snapshot')
+    # Metadata alone does not catch a broken native wheel or a module-path collision.
+    imported={}
+    for name in ['numpy','scipy','pandas','pyarrow','brian2','matplotlib','joblib','statsmodels']:
+        module=importlib.import_module(name)
+        path=Path(module.__file__).resolve()
+        if not path.is_relative_to(Path(sys.prefix).resolve()):
+            raise ValueError(f'{name} imported outside the simulation environment: {path}')
+        imported[name]=str(path)
+    return {'python':sys.executable,'prefix':sys.prefix,'imports':imported}
+
+
+def prepare(study):
+    check_environment()
     from eigencircuits.common import provenance, MN9
     study=Path(study); study.mkdir(parents=True,exist_ok=False)
     jobs=[{'trial_id':name,'seed':631301,'context':context,'lesion_ids':lesion}
@@ -261,7 +275,7 @@ def collect(study):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action',choices=['build','verify','initialize','prepare','worker','collect'])
+    parser.add_argument('action',choices=['build','verify','environment','initialize','prepare','worker','collect'])
     parser.add_argument('--out'); parser.add_argument('--study'); parser.add_argument('--index',type=int)
     parser.add_argument('--expanded',action='store_true')
     args=parser.parse_args()
@@ -269,6 +283,7 @@ def main():
         if not args.out: parser.error('--out required')
         build(args.out,args.expanded)
     elif args.action=='verify': print(json.dumps({'verified_files':len(verify()['files'])}))
+    elif args.action=='environment': print(json.dumps(check_environment(),indent=2))
     elif args.action=='initialize': initialize()
     else:
         if not args.study: parser.error('--study required')
