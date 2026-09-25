@@ -97,6 +97,11 @@ def run(study,workers=2,hours=3):
     end=time.monotonic()+hours*3600
     results=[]
     def execute(job):
+        directory=study/'trials'/job['trial_id']
+        manifest=directory/'manifest.json'
+        if manifest.exists() and read(manifest).get('status')=='complete':
+            validated(directory,job,plan)
+            return {'index':job['index'],'status':'complete','reused':True}
         remaining=end-time.monotonic()
         if (study/'STOP').exists() or remaining<30: return {'index':job['index'],'status':'not_started'}
         result=run_bounded([sys.executable,str(Path(__file__)), 'worker','--study',str(study),

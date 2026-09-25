@@ -369,3 +369,15 @@ The user clarified that only necessary, finished work should be committed. The p
 The updated ZIP is 95170865 bytes, SHA256 a5285c904ec826633844c8c6204100b3c2420bee9784a5beefd1ef59644e1fa0. ZIP integrity and every payload hash passed. Notebook code cells and the helper's runtime AST are unchanged; its packaging function only stops copying the unused runbook. All remaining source/data bytes were preserved and 13 focused tests passed. A text-payload scan found no Codex/OpenAI/AI-generated attribution phrases. No simulations were rerun for this presentation change.
 
 Five superseded CCR export directories and the old expanded staging directory were moved under exports/_superseded. Bulk deletion was blocked by tool policy, so this is organization rather than disk-space reclamation. Completed trial evidence and dated research PDFs remain intact. Future delivery updates should use one current artifact instead of accumulating draft exports.
+
+## 25 September — CCR installation and restart checks
+
+James confirmed that the required packages can be installed from CCR Jupyter without administrator access. Reviewed the notebook setup and fixed the Python-path override, which was being overwritten. Installation now explicitly targets the simulation environment, clears inherited Python and pip destination settings, checks dependencies and imports, and offers an optional forced reinstall. The notebook kernel and shared packages are left alone. Added useful controller failure output. These changes were made with Codex assistance.
+
+Fixed restart handling: completed trials are validated and reused without launching worker processes, and calibration accepts a study with no pending jobs. Corrupted outputs still fail validation. Added tests for completed-study restart, the actual notebook setup cell with conflicting environment settings, and imports coming from outside the selected environment. All 16 focused tests passed.
+
+Replaced the current upload ZIP only after extracting and checking the exact candidate archive. Its version/import checks passed. Four fresh whole-brain trials passed baseline replay, no-input silence and paired scheduled-input checks. Baseline and replay each produced 13,793 spikes and MN9 at 87 Hz; the no-input trial produced zero spikes. The extracted package prepared all 3,390 planned jobs. These are technical checks, not new evidence for the hypothesis. Installation on Linux, actual CCR execution and concurrency measurements remain to be done there.
+
+Clarified the guide and notebook: the 21 sugar-input cells were stimulated, not lesioned. The four eligible mode supports were not four matches to correlation clusters. No model equations, lesion definitions or scientific comparisons changed.
+
+Updated exports/ccr_expanded_20260922/Connectome_CCR_Notebook.zip in place (95,172,473 bytes; SHA256 d3f536eb681a7d9c14d058beb2db972ca7337f06939ac9f481357fe352e1c668). Notebook syntax, ZIP integrity and payload checks passed; the text scan found no Codex/OpenAI/AI-generated presentation markers. Assistance provenance remains here. The temporary extraction was cleaned up after validation.
