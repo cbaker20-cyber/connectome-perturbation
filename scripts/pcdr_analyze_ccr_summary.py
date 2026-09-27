@@ -38,6 +38,53 @@ def check_metrics(row, size):
     require(abs(row['on_signed_mean_hz']) <= a + 1e-8, 'Signed mean exceeds absolute mean')
 
 
+def mean_interval(values, seed=630727, n=10000):
+    values = np.asarray(values, dtype=float)
+    require(values.ndim == 1 and len(values) >= 2 and np.isfinite(values).all(), 'Invalid paired contrast')
+    weights = np.random.default_rng(seed).multinomial(
+        len(values), np.full(len(values), 1 / len(values)), size=n) / len(values)
+    low, high = np.quantile(weights @ values, [.025, .975])
+    return {'mean_hz': float(values.mean()), 'low_hz': float(low), 'high_hz': float(high)}
+
+
+def secondary_analysis(seeds, out):
+    """Post-result scalar diagnostics; none replaces the primary vector footprint."""
+    mn9, counts, influence = [], [], []
+    for variant, group in seeds.groupby('variant', sort=True):
+        wide = group.pivot(index='seed', columns='condition', values='mn9_delta_hz').sort_index()
+        incremental = wide['mode'] - wide['mode_without_mn9']
+        contrasts = {
+            'adding_mn9_to_other_50': incremental,
+            'mn9_by_other_50_interaction': incremental - wide['mn9_only'],
+        }
+        if variant == 'default':
+            singles = sorted(c for c in wide if c.startswith('mode_cell_')) + ['mn9_only']
+            require(len(singles) == 51, 'Incomplete single-cell map')
+            contrasts['joint_minus_sum_of_51_singles'] = wide['mode'] - wide[singles].sum(axis=1)
+        for name, values in contrasts.items():
+            mn9.append({'variant': variant, 'contrast': name, 'n_pairs': len(values),
+                        **mean_interval(values), 'bootstrap_seed': 630727, 'replicates': 10000})
+        mode = group[group.condition == 'mode'].set_index('seed').sort_index()
+        for c in ['motor_003', 'motor_004', 'motor_005']:
+            comp = group[group.condition == c].set_index('seed').sort_index()
+            require(mode.index.equals(comp.index), 'Unpaired comparison')
+            counts.append({'variant': variant, 'comparison': c, 'n_pairs': len(mode),
+                'A_mode_greater': int((mode.A > comp.A).sum()),
+                'F_mode_greater': int((mode.F > comp.F).sum()),
+                'A_mode_equal': int(np.isclose(mode.A, comp.A).sum()),
+                'F_mode_equal': int(np.isclose(mode.F, comp.F).sum())})
+        for c, frame in group.groupby('condition'):
+            total = frame.total_absolute_sum_hz
+            largest = frame.loc[total.idxmax()]
+            influence.append({'variant': variant, 'condition': c,
+                'largest_seed': int(largest.seed), 'largest_total_hz': float(total.max()),
+                'median_total_hz': float(total.median()),
+                'largest_share_of_sum_of_seed_totals': float(total.max()/total.sum()) if total.sum() else None})
+    pd.DataFrame(mn9).to_csv(out/'mn9_paired_contrasts.csv', index=False)
+    pd.DataFrame(counts).to_csv(out/'paired_seed_orderings.csv', index=False)
+    pd.DataFrame(influence).to_csv(out/'seed_influence.csv', index=False)
+
+
 def analyze(archive, out):
     prefix = 'results/expanded_sensitivity/'
     with zipfile.ZipFile(archive) as z:
@@ -127,6 +174,7 @@ def analyze(archive, out):
     contrasts.to_csv(out/'mode_comparisons.csv',index=False)
     singles.to_csv(out/'individual_lesions.csv',index=False)
     distributions.to_csv(out/'seed_response_ranges.csv',index=False)
+    secondary_analysis(seeds, out)
     plot(summaries, seeds, out)
     print(json.dumps({k:v for k,v in facts.items() if k!='payload_sha256'},indent=2))
 
