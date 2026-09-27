@@ -1,5 +1,7 @@
 # CCR run, 27 September 2026
 
+The subsequent skeptical review and the prepared read-only CCR diagnostic are recorded in [Review and next steps](REVIEW_AND_NEXT_STEPS.md). That diagnostic has not yet run on the remote study; it adds no new simulation result to the findings below.
+
 ## Collected results
 
 The returned bundle contains all 104 planned condition-by-network summaries and 3,120 paired seed readouts. Its design matches the frozen 3,390-job plan exactly. Output hashes match the completed collection record; the 53 reused trial indices match the calibration waves. The CCR smoke certificate passed. The remote collector reports that its trial-file and paired-input checks passed. Locally, source hashes, bundle hashes, coverage, metric identities and signed averages were checked. The underlying neuron-level rates and spikes are still on CCR, so the local audit does not independently reproduce the raw-output checks or bootstrap intervals.
