@@ -1,0 +1,14 @@
+{
+  "CCR_followup_full.tar": {
+    "bytes": 26183680,
+    "sha256": "4d58a3688ff14b42a93878fde4912bf8ead83d778d49997373c76657840d70e1"
+  },
+  "CCR_followup_results.zip": {
+    "bytes": 1858346,
+    "sha256": "e88ec63a5ebc31d10c6dc59eb31ef03b3f27a2bbe7877832eca281253f297fb5"
+  },
+  "followup_20260927_controller.log": {
+    "bytes": 3767,
+    "sha256": "1840a930a1600146352032fd8ad8704282e739eaa0bc0cad3f48e740ead21cb5"
+  }
+}

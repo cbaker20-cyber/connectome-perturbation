@@ -1,5 +1,31 @@
 # CCR run, 27 September 2026
 
+## Completed follow-up: replay, time steps and active cells
+
+The 101-trial follow-up completed on CCR between 20:52:19 and 21:00:28 UTC, about eight minutes, using 16 workers. Downloaded the results ZIP, full trial archive and controller log. Independently checked all 101 trials locally: source and output hashes, source-trial identity, process completion, neuron IDs, sparse rate counts against full spikes, population traces, input schedules, delivered-event membership, time grids and refractory spacing. Recalculated all reported trial rows, all 36 paired time-step rows and the active-29 summary. All 25 replays match the original ordered spikes and delivered inputs exactly, including the cases with large responses. Reproducibility at one time step is therefore established for those selected replays; convergence across steps is not.
+
+The time-step tests retain the same scheduled physical input events. These are selected large-response and near-median trials at weight 1.2/inhibitory multiplier 0.8, not a new sample of all input seeds. Paired total absolute rate changes are:
+
+| Lesion and seed | 0.1 ms | 0.05 ms | 0.025 ms |
+| --- | ---: | ---: | ---: |
+| Mode, 631423 | 70,958 | 8,282 | 8,036 |
+| Mode without MN9, 631404 | 535,544 | 8,066 | 7,585 |
+| MN9 alone, 631430 | 479,264 | 1,018 | 269,342 |
+| Comparison 004, 631427 | 737,966 | 5,738 | 5,935 |
+| Comparison 005, 631427 | 697,625 | 6,157 | 6,037 |
+
+Values are summed Hz over the full neuron universe after pairing each lesion with its baseline at the same step. The five displayed rows are the large-response cases selected in advance of this follow-up. All 12 selected lesion/seed combinations, including the near-median cases and comparison 003, are retained in checked_step_pairs.csv and the figure. The new time-step A/F values use a common fixed 51-cell support; they should not be substituted for historical single-cell or comparator-own-support A/F values.
+
+![Paired responses at three time steps](evidence/2026-09-27/followup/verified/step_comparison.png)
+
+Four of the five displayed responses become much smaller at both finer steps. MN9-only seed 631430 is different: its lesion spike count is 492,991, 21,270 and 286,773 at the three steps, with 11,948, 499 and 11,818 recruited non-input cells. The large response at 0.025 ms occurs mainly in the second half of the trial. It is not valid to say that all large responses disappear as the step decreases or that 0.025 ms is converged. These results demonstrate step sensitivity in the selected trajectories. They do not yet establish a physiological mechanism, a dynamical transition or which result best approximates the continuous-time model.
+
+At default, lesioning the 29 cells active in at least one original baseline produces a mean response close to, but different from, the full 51-cell lesion. On the same fixed 51-cell support, A is 22.68105 versus 22.50327 Hz and F is 0.231308 versus 0.230290. MN9 changes by -82.3333 versus -82.4667 Hz. The absolute sum of the difference between the mean response vectors is 79 summed Hz, or 1.5852% of the full-mode response; their signed cosine is 0.999896. This is a descriptive comparison at the original 0.1 ms default setting, not proof of equivalence at other inputs or steps.
+
+Retrospective paired seed-bootstrap intervals for active29 minus full51 are A = 0.17778 [0.02092, 0.33529] Hz and F = 0.001018 [0.000086, 0.002033], using 2,000 resamples with seed 630727 and the same row weights for both conditions. These small differences and their conditional intervals do not establish a minimum biological effect or an equivalence margin. The cells were selected using these same default baselines; no held-out claim is made. Comparator imbalance remains unresolved.
+
+The next numerical check should examine the remaining inconsistent MN9-only case and paired baselines at 0.0125 and 0.00625 ms, retaining ordinary comparison trials. Separately, default-setting mode and comparator conclusions need a time-step check; the current finer-step tests cover only the high-weight/low-inhibition setting. Do not replace the full grid's results with this selected subset or discard the 0.1 ms seeds after seeing their finer-step behavior. A larger reference-set experiment should wait until the time-step choice and comparison design have been justified. No further CCR simulations were launched during this local review.
+
 ## Local checks of the downloaded trials
 
 Downloaded CCR_saved_trials.tar, 3,718,430,720 bytes, SHA256 9dd4266f8535f9bec4acafcbd7f86fa53c078adad4d204a5b3051f91a50843eb. Checked archive paths before extraction and matched its jobs.json to the earlier returned summary. The archive contains all 3,390 planned trials. No additional simulations were run.
