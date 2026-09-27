@@ -1,0 +1,24 @@
+{
+  "archive_sha256": "a63b1c344a4e73801fb575ca73033e584cf9ff706f254ac4eaaa6d0286d6abc8",
+  "payload_sha256": {
+    "results/expanded_sensitivity/results.json": "a3dcd08a1662005095c3166e41ecacfdbbea1593cfe94b5a7e6addaeae7de8b4",
+    "results/expanded_sensitivity/per_seed.csv": "d6491c97e33dbdb16538bae8d03faf23f0a50f8933e6f03548bd327ed6859b5d",
+    "results/expanded_sensitivity/jobs.json": "c56efa57852bdf4a7ea2bacb0ec1944d36c3d038c7a2d1acc1bf529bbae1d174",
+    "results/expanded_sensitivity/capacity.json": "80556abcca5f1ecc8146aaf3cf96ba0ab0303e7438a671bfe4d52da13d522a5b",
+    "results/expanded_sensitivity/progress.json": "d5c150fd7950d8deace04e45e33aca57a4ca0c1c5a9c7fb9a785dd2484a1ea71",
+    "results/expanded_sensitivity/controller.log": "c423d0507e925f9ec312e96d36e75d9fc8a39b5334004b9edf94f3e94002fbd5",
+    "results/expanded_sensitivity/collection_environment.json": "87e548367a3fe6adaa9789dfbfdec15911818435909d0ba24db9aaba2287b98e",
+    "results/smoke/smoke_certificate.json": "43789c80fcba79a4858385b88c573787438915ff9d3bdbacae31a083a374a81c",
+    "results/installed-libraries.txt": "d98078f31e1cedf1694be7afdbd15415c6d7a1923f31eed131c1650f839b2157"
+  },
+  "trials": 3390,
+  "summaries": 104,
+  "paired_readouts": 3120,
+  "selected_workers": 24,
+  "collection_seconds": 1194.258107,
+  "capacity_certificate_to_controller_finish_seconds": 8044.617909,
+  "A_positive_comparisons": 27,
+  "F_positive_comparisons": 26,
+  "zero_response_single_cells": 22,
+  "limits": "Remote collector reports raw-output checks passed. This local audit checks supplied hashes, design, coverage and summary arithmetic; raw spikes/rates and bootstrap intervals cannot be independently recomputed from this bundle."
+}

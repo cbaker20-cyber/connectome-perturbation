@@ -221,3 +221,10 @@ These scripts and the notebook were created with Codex assistance. They prepare 
 ## Expanded CCR package
 
 `pcdr_build_ccr_expanded.py` records a separate amendment and creates the larger notebook. It preserves the original design. `pcdr_ccr_sensitivity.py` now takes variants and seeds from the frozen design, restricts the extra individual-cell conditions to the default network, and requires a capacity certificate above two workers. `pcdr_ccr_capacity.py` benchmarks real pending jobs under allocated CPU/memory limits and chooses concurrency using throughput only. Completed calibration jobs are preserved. The capacity certificate is rejected after the study or Slurm allocation changes. Tests in test_pcdr_ccr_expanded.py verify the job grid, complete single-cell coverage and allocation safeguards with fixtures; actual CCR scaling remains untested.
+
+
+## CCR summary analysis, 27 September
+
+scripts/pcdr_analyze_ccr_summary.py reads the returned ZIP without unpacking arbitrary paths. It checks hashes linking the result files to the collection record and study, compares the job list with the frozen design, verifies expected condition/seed coverage and checks arithmetic identities in A and F. It distinguishes the footprint of the mean rate-change vector from the mean of per-seed footprints. Those operations are not interchangeable. Original scientific records and small derived tables are saved with one figure. It cannot reconstruct raw-neuron bootstrap contrasts from aggregate summaries and does not pretend to do so.
+
+scripts/pcdr_collect_existing.py is a separate collection-only entry point for the observed CCR CPU change. It leaves deployed source and trial metadata untouched, checks that other environment fields match, and records simulation and analysis environments separately. Its temporary in-process loader binding applies only to the existing collector and is restored even after an error; simulation workers keep the strict original loader.

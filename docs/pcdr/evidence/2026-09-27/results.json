@@ -1,0 +1,2333 @@
+{
+  "finished_utc": "2026-09-27T16:14:07.333447+00:00",
+  "claim_status": "descriptive; no p-values; no biological replication",
+  "jobs_sha256": "c56efa57852bdf4a7ea2bacb0ec1944d36c3d038c7a2d1acc1bf529bbae1d174",
+  "rows": [
+    {
+      "variant": "w080_i080",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 21.8437908496732,
+      "F": 0.2436874302755437,
+      "on_absolute_sum_hz": 1114.0333333333333,
+      "off_absolute_sum_hz": 3457.533333333334,
+      "on_signed_mean_hz": -12.041176470588235,
+      "total_absolute_sum_hz": 4571.5666666666675,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        21.51565359477124,
+        22.165392156862744
+      ],
+      "F_95pct": [
+        0.24168393251526074,
+        0.24533451762736339
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -82.2
+    },
+    {
+      "variant": "w080_i080",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 20.719333333333335,
+      "F": 0.2255582892435426,
+      "on_absolute_sum_hz": 1035.9666666666667,
+      "off_absolute_sum_hz": 3556.933333333333,
+      "on_signed_mean_hz": -10.472666666666667,
+      "total_absolute_sum_hz": 4592.9,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        20.33665,
+        21.07268333333333
+      ],
+      "F_95pct": [
+        0.22360196693850407,
+        0.22723560912867188
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -81.83333333333333
+    },
+    {
+      "variant": "w080_i080",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 0.26666666666666666,
+      "F": 0.0017233950883239985,
+      "on_absolute_sum_hz": 0.26666666666666666,
+      "off_absolute_sum_hz": 154.46666666666664,
+      "on_signed_mean_hz": -0.26666666666666666,
+      "total_absolute_sum_hz": 154.73333333333332,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333344,
+        2.9333333333333336
+      ],
+      "F_95pct": [
+        0.0002123004716598896,
+        0.015622946610963822
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.26666666666666666
+    },
+    {
+      "variant": "w080_i080",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 8.943137254901961,
+      "F": 0.19827561223011156,
+      "on_absolute_sum_hz": 456.09999999999997,
+      "off_absolute_sum_hz": 1844.2333333333336,
+      "on_signed_mean_hz": -7.684313725490195,
+      "total_absolute_sum_hz": 2300.3333333333335,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        8.71307189542484,
+        9.198039215686274
+      ],
+      "F_95pct": [
+        0.1949872785555502,
+        0.2008645417931084
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.26666666666666666
+    },
+    {
+      "variant": "w080_i080",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 10.524183006535948,
+      "F": 0.21291619284373098,
+      "on_absolute_sum_hz": 536.7333333333333,
+      "off_absolute_sum_hz": 1984.1333333333334,
+      "on_signed_mean_hz": -9.896732026143791,
+      "total_absolute_sum_hz": 2520.866666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        10.273202614379084,
+        10.808496732026144
+      ],
+      "F_95pct": [
+        0.2098577300241799,
+        0.21520784010910954
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -1.7
+    },
+    {
+      "variant": "w080_i080",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 10.150980392156864,
+      "F": 0.20551806272330292,
+      "on_absolute_sum_hz": 517.7,
+      "off_absolute_sum_hz": 2001.3,
+      "on_signed_mean_hz": -9.459477124183008,
+      "total_absolute_sum_hz": 2519.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        9.915686274509806,
+        10.415049019607842
+      ],
+      "F_95pct": [
+        0.20298143707273342,
+        0.20769526886232276
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -1.4666666666666666
+    },
+    {
+      "variant": "w080_i100",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 19.634640522875817,
+      "F": 0.25696054195998597,
+      "on_absolute_sum_hz": 1001.3666666666667,
+      "off_absolute_sum_hz": 2895.6,
+      "on_signed_mean_hz": -7.327450980392157,
+      "total_absolute_sum_hz": 3896.9666666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        19.196715686274516,
+        20.097581699346406
+      ],
+      "F_95pct": [
+        0.25401836216425666,
+        0.2591681133341706
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -69.73333333333333
+    },
+    {
+      "variant": "w080_i100",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 18.647333333333332,
+      "F": 0.23930973118187573,
+      "on_absolute_sum_hz": 932.3666666666667,
+      "off_absolute_sum_hz": 2963.7,
+      "on_signed_mean_hz": -6.107333333333332,
+      "total_absolute_sum_hz": 3896.0666666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        18.24128333333333,
+        19.055366666666668
+      ],
+      "F_95pct": [
+        0.23661043078701235,
+        0.24186170907755486
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -69.7
+    },
+    {
+      "variant": "w080_i100",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 1.2666666666666666,
+      "F": 0.007664380798709157,
+      "on_absolute_sum_hz": 1.2666666666666666,
+      "off_absolute_sum_hz": 163.99999999999997,
+      "on_signed_mean_hz": -1.2666666666666666,
+      "total_absolute_sum_hz": 165.26666666666665,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.09999999999999987,
+        4.4
+      ],
+      "F_95pct": [
+        0.0005338745979133533,
+        0.018600045866143736
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -1.2666666666666666
+    },
+    {
+      "variant": "w080_i100",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 5.175163398692811,
+      "F": 0.14986278035393208,
+      "on_absolute_sum_hz": 263.93333333333334,
+      "off_absolute_sum_hz": 1497.2333333333331,
+      "on_signed_mean_hz": -5.022222222222222,
+      "total_absolute_sum_hz": 1761.1666666666665,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        4.816225490196079,
+        5.605294117647059
+      ],
+      "F_95pct": [
+        0.14350390022667978,
+        0.1557652736064419
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -16.933333333333334
+    },
+    {
+      "variant": "w080_i100",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 6.488888888888889,
+      "F": 0.16997962572979267,
+      "on_absolute_sum_hz": 330.93333333333334,
+      "off_absolute_sum_hz": 1615.9666666666667,
+      "on_signed_mean_hz": -6.3241830065359474,
+      "total_absolute_sum_hz": 1946.9,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        6.145016339869279,
+        6.898692810457517
+      ],
+      "F_95pct": [
+        0.16473139083931967,
+        0.17468108253896006
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -17.766666666666666
+    },
+    {
+      "variant": "w080_i100",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 6.328758169934639,
+      "F": 0.16450620954452014,
+      "on_absolute_sum_hz": 322.7666666666666,
+      "off_absolute_sum_hz": 1639.2666666666662,
+      "on_signed_mean_hz": -6.181045751633986,
+      "total_absolute_sum_hz": 1962.0333333333328,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        5.952271241830064,
+        6.744444444444444
+      ],
+      "F_95pct": [
+        0.1592405049990238,
+        0.1691165780299355
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -18.866666666666667
+    },
+    {
+      "variant": "w080_i120",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 12.315686274509805,
+      "F": 0.250268956448978,
+      "on_absolute_sum_hz": 628.1,
+      "off_absolute_sum_hz": 1881.6,
+      "on_signed_mean_hz": -0.8843137254901957,
+      "total_absolute_sum_hz": 2509.7,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        11.874477124183002,
+        12.736078431372544
+      ],
+      "F_95pct": [
+        0.24670375036327669,
+        0.2534881883587131
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -39.96666666666667
+    },
+    {
+      "variant": "w080_i120",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 11.692666666666666,
+      "F": 0.23480507657705899,
+      "on_absolute_sum_hz": 584.6333333333333,
+      "off_absolute_sum_hz": 1905.2333333333336,
+      "on_signed_mean_hz": -0.13266666666666757,
+      "total_absolute_sum_hz": 2489.866666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        11.289933333333332,
+        12.088749999999997
+      ],
+      "F_95pct": [
+        0.23192095488048026,
+        0.23744386561820643
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -40.0
+    },
+    {
+      "variant": "w080_i120",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 0.8333333333333334,
+      "F": 0.0054019014693171994,
+      "on_absolute_sum_hz": 0.8333333333333334,
+      "off_absolute_sum_hz": 153.43333333333334,
+      "on_signed_mean_hz": -0.8333333333333334,
+      "total_absolute_sum_hz": 154.26666666666668,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333344,
+        2.7008333333333288
+      ],
+      "F_95pct": [
+        0.0002530729679880756,
+        0.01378201174655605
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.8333333333333334
+    },
+    {
+      "variant": "w080_i120",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 4.635294117647059,
+      "F": 0.16325215229501405,
+      "on_absolute_sum_hz": 236.4,
+      "off_absolute_sum_hz": 1211.6666666666665,
+      "on_signed_mean_hz": -4.437908496732026,
+      "total_absolute_sum_hz": 1448.0666666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        4.339199346405228,
+        4.9478431372549005
+      ],
+      "F_95pct": [
+        0.1552582190947954,
+        0.17045482306991463
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -21.233333333333334
+    },
+    {
+      "variant": "w080_i120",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 5.120915032679739,
+      "F": 0.17768454473296294,
+      "on_absolute_sum_hz": 261.1666666666667,
+      "off_absolute_sum_hz": 1208.6666666666665,
+      "on_signed_mean_hz": -4.886928104575164,
+      "total_absolute_sum_hz": 1469.8333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        4.822222222222223,
+        5.441862745098039
+      ],
+      "F_95pct": [
+        0.1692757708142926,
+        0.18541372977429
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -20.1
+    },
+    {
+      "variant": "w080_i120",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 5.103267973856209,
+      "F": 0.17586773881118095,
+      "on_absolute_sum_hz": 260.26666666666665,
+      "off_absolute_sum_hz": 1219.6333333333332,
+      "on_signed_mean_hz": -4.926797385620914,
+      "total_absolute_sum_hz": 1479.8999999999999,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        4.814983660130719,
+        5.41766339869281
+      ],
+      "F_95pct": [
+        0.16776464284190817,
+        0.18346263464891402
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -21.033333333333335
+    },
+    {
+      "variant": "w100_i080",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 24.175816993464053,
+      "F": 0.20184442443589534,
+      "on_absolute_sum_hz": 1232.9666666666667,
+      "off_absolute_sum_hz": 4875.533333333333,
+      "on_signed_mean_hz": -14.626797385620913,
+      "total_absolute_sum_hz": 6108.5,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        23.879705882352944,
+        24.50787581699347
+      ],
+      "F_95pct": [
+        0.20006164532284856,
+        0.20345659507020125
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -94.96666666666667
+    },
+    {
+      "variant": "w100_i080",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 22.882,
+      "F": 0.18708812323189383,
+      "on_absolute_sum_hz": 1144.1000000000001,
+      "off_absolute_sum_hz": 4971.199999999999,
+      "on_signed_mean_hz": -13.15933333333333,
+      "total_absolute_sum_hz": 6115.299999999999,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        22.611333333333338,
+        23.15070000000001
+      ],
+      "F_95pct": [
+        0.1859383561689856,
+        0.18795246283556383
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -95.66666666666667
+    },
+    {
+      "variant": "w100_i080",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 0.5666666666666667,
+      "F": 0.0032542113323124045,
+      "on_absolute_sum_hz": 0.5666666666666667,
+      "off_absolute_sum_hz": 173.56666666666666,
+      "on_signed_mean_hz": -0.5666666666666667,
+      "total_absolute_sum_hz": 174.13333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333344,
+        2.8
+      ],
+      "F_95pct": [
+        0.00017320819390915593,
+        0.011532380725328058
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.5666666666666667
+    },
+    {
+      "variant": "w100_i080",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 16.02418300653595,
+      "F": 0.1953888331022171,
+      "on_absolute_sum_hz": 817.2333333333333,
+      "off_absolute_sum_hz": 3365.366666666667,
+      "on_signed_mean_hz": -13.807189542483659,
+      "total_absolute_sum_hz": 4182.6,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        15.789542483660126,
+        16.281062091503262
+      ],
+      "F_95pct": [
+        0.1926363627271757,
+        0.19760602510229625
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -2.533333333333333
+    },
+    {
+      "variant": "w100_i080",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 16.61830065359477,
+      "F": 0.1947949466393926,
+      "on_absolute_sum_hz": 847.5333333333332,
+      "off_absolute_sum_hz": 3503.3666666666663,
+      "on_signed_mean_hz": -15.90065359477124,
+      "total_absolute_sum_hz": 4350.9,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        16.322875816993463,
+        16.938594771241828
+      ],
+      "F_95pct": [
+        0.19231403182942344,
+        0.19682479649801918
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -4.8
+    },
+    {
+      "variant": "w100_i080",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 16.696732026143792,
+      "F": 0.19322582597119686,
+      "on_absolute_sum_hz": 851.5333333333333,
+      "off_absolute_sum_hz": 3555.400000000001,
+      "on_signed_mean_hz": -15.816993464052285,
+      "total_absolute_sum_hz": 4406.933333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        16.412287581699346,
+        16.986601307189538
+      ],
+      "F_95pct": [
+        0.19074031178106884,
+        0.195115112788528
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -3.933333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 22.503267973856207,
+      "F": 0.23029022052479145,
+      "on_absolute_sum_hz": 1147.6666666666665,
+      "off_absolute_sum_hz": 3835.9,
+      "on_signed_mean_hz": -10.648366013071897,
+      "total_absolute_sum_hz": 4983.566666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        22.199313725490192,
+        22.832042483660132
+      ],
+      "F_95pct": [
+        0.22898884498699248,
+        0.23120310523990553
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -82.46666666666667
+    },
+    {
+      "variant": "default",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 21.276,
+      "F": 0.21377614929632188,
+      "on_absolute_sum_hz": 1063.8,
+      "off_absolute_sum_hz": 3912.4333333333325,
+      "on_signed_mean_hz": -9.266666666666666,
+      "total_absolute_sum_hz": 4976.233333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        20.95861666666667,
+        21.633350000000004
+      ],
+      "F_95pct": [
+        0.2120933827713344,
+        0.21511881217451714
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -82.4
+    },
+    {
+      "variant": "default",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 1.4666666666666666,
+      "F": 0.008309726156751652,
+      "on_absolute_sum_hz": 1.4666666666666666,
+      "off_absolute_sum_hz": 175.03333333333333,
+      "on_signed_mean_hz": 1.4666666666666666,
+      "total_absolute_sum_hz": 176.5,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.1333333333333333,
+        3.1674999999999955
+      ],
+      "F_95pct": [
+        0.000542183715816613,
+        0.014872298026403833
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 1.4666666666666666
+    },
+    {
+      "variant": "default",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 12.078431372549021,
+      "F": 0.1956383654456913,
+      "on_absolute_sum_hz": 616.0000000000001,
+      "off_absolute_sum_hz": 2532.6666666666674,
+      "on_signed_mean_hz": -10.729411764705883,
+      "total_absolute_sum_hz": 3148.6666666666674,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        11.72071895424837,
+        12.400669934640522
+      ],
+      "F_95pct": [
+        0.19192052130554582,
+        0.19855500125361902
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -4.866666666666666
+    },
+    {
+      "variant": "default",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 12.539869281045748,
+      "F": 0.20003336322121892,
+      "on_absolute_sum_hz": 639.5333333333332,
+      "off_absolute_sum_hz": 2557.600000000001,
+      "on_signed_mean_hz": -12.311111111111112,
+      "total_absolute_sum_hz": 3197.133333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        12.185604575163401,
+        12.9268137254902
+      ],
+      "F_95pct": [
+        0.19692669825238937,
+        0.20304408213224065
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -4.133333333333334
+    },
+    {
+      "variant": "default",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 12.48627450980392,
+      "F": 0.1973533331267239,
+      "on_absolute_sum_hz": 636.8,
+      "off_absolute_sum_hz": 2589.8999999999996,
+      "on_signed_mean_hz": -12.186928104575163,
+      "total_absolute_sum_hz": 3226.7,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        12.154248366013075,
+        12.876519607843141
+      ],
+      "F_95pct": [
+        0.19429511892210247,
+        0.1998230106781521
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -5.1
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_00",
+      "n_pairs": 30,
+      "A": 1.6,
+      "F": 0.0007888249794576829,
+      "on_absolute_sum_hz": 1.6,
+      "off_absolute_sum_hz": 2026.7333333333336,
+      "on_signed_mean_hz": -1.6,
+      "total_absolute_sum_hz": 2028.3333333333335,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.2333333333333332,
+        3.134166666666662
+      ],
+      "F_95pct": [
+        0.00011612251282855516,
+        0.0015335712652232206
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -14.8
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_01",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_02",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_03",
+      "n_pairs": 30,
+      "A": 0.06666666666666667,
+      "F": 0.0005271481286241432,
+      "on_absolute_sum_hz": 0.06666666666666667,
+      "off_absolute_sum_hz": 126.40000000000003,
+      "on_signed_mean_hz": 0.06666666666666667,
+      "total_absolute_sum_hz": 126.4666666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        8.309325449928907e-17,
+        1.1
+      ],
+      "F_95pct": [
+        4.503409029441835e-19,
+        0.005772544981914042
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.16666666666666666
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_04",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_05",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_06",
+      "n_pairs": 30,
+      "A": 0.5,
+      "F": 0.0033609679587721262,
+      "on_absolute_sum_hz": 0.5,
+      "off_absolute_sum_hz": 148.26666666666668,
+      "on_signed_mean_hz": -0.5,
+      "total_absolute_sum_hz": 148.76666666666668,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0333333333333333,
+        1.6666666666666663
+      ],
+      "F_95pct": [
+        0.0001701147049628934,
+        0.007816590920681907
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.9666666666666667
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_07",
+      "n_pairs": 30,
+      "A": 13.4,
+      "F": 0.006099318757681045,
+      "on_absolute_sum_hz": 13.4,
+      "off_absolute_sum_hz": 2183.5666666666666,
+      "on_signed_mean_hz": 13.4,
+      "total_absolute_sum_hz": 2196.9666666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        12.4,
+        14.533333333333333
+      ],
+      "F_95pct": [
+        0.005574814397224547,
+        0.006615333181197902
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 20.933333333333334
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_08",
+      "n_pairs": 30,
+      "A": 4.1,
+      "F": 0.005448746345353061,
+      "on_absolute_sum_hz": 4.1,
+      "off_absolute_sum_hz": 748.3666666666666,
+      "on_signed_mean_hz": -4.1,
+      "total_absolute_sum_hz": 752.4666666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        2.165833333333333,
+        5.934166666666663
+      ],
+      "F_95pct": [
+        0.002877183330219694,
+        0.007394109691928551
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -8.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_09",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_10",
+      "n_pairs": 30,
+      "A": 2.1,
+      "F": 0.010935601458080193,
+      "on_absolute_sum_hz": 2.1,
+      "off_absolute_sum_hz": 189.93333333333337,
+      "on_signed_mean_hz": -2.1,
+      "total_absolute_sum_hz": 192.03333333333336,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.09999999999999983,
+        6.499999999999999
+      ],
+      "F_95pct": [
+        0.00042391425870418574,
+        0.023452922934145356
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.3
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_11",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_12",
+      "n_pairs": 30,
+      "A": 4.966666666666667,
+      "F": 0.011100350145273037,
+      "on_absolute_sum_hz": 4.966666666666667,
+      "off_absolute_sum_hz": 442.46666666666675,
+      "on_signed_mean_hz": 4.966666666666667,
+      "total_absolute_sum_hz": 447.4333333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        4.033333333333334,
+        5.833333333333333
+      ],
+      "F_95pct": [
+        0.007907571628293648,
+        0.01357596218920006
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.4666666666666667
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_13",
+      "n_pairs": 30,
+      "A": 5.333333333333333,
+      "F": 0.006618955032474249,
+      "on_absolute_sum_hz": 5.333333333333333,
+      "off_absolute_sum_hz": 800.4333333333332,
+      "on_signed_mean_hz": -5.333333333333333,
+      "total_absolute_sum_hz": 805.7666666666665,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        3.266666666666666,
+        7.2674999999999965
+      ],
+      "F_95pct": [
+        0.004345880683899831,
+        0.008243447691751718
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -4.533333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_14",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_15",
+      "n_pairs": 30,
+      "A": 0.9333333333333333,
+      "F": 0.004294478527607362,
+      "on_absolute_sum_hz": 0.9333333333333333,
+      "off_absolute_sum_hz": 216.39999999999998,
+      "on_signed_mean_hz": -0.9333333333333333,
+      "total_absolute_sum_hz": 217.33333333333331,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333351,
+        2.5333333333333337
+      ],
+      "F_95pct": [
+        0.00014808390654240942,
+        0.008770713759730875
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -1.2
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_16",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_17",
+      "n_pairs": 30,
+      "A": 0.16666666666666666,
+      "F": 0.00040384460059769,
+      "on_absolute_sum_hz": 0.16666666666666666,
+      "off_absolute_sum_hz": 412.5333333333333,
+      "on_signed_mean_hz": 0.16666666666666666,
+      "total_absolute_sum_hz": 412.7,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        1.1102230246251565e-16,
+        1.2666666666666666
+      ],
+      "F_95pct": [
+        2.7214508251182097e-19,
+        0.0028821577452300493
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -3.5
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_18",
+      "n_pairs": 30,
+      "A": 4.033333333333333,
+      "F": 0.009361702127659575,
+      "on_absolute_sum_hz": 4.033333333333333,
+      "off_absolute_sum_hz": 426.79999999999995,
+      "on_signed_mean_hz": 4.033333333333333,
+      "total_absolute_sum_hz": 430.8333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        3.1000000000000005,
+        4.933333333333334
+      ],
+      "F_95pct": [
+        0.0065035459905320005,
+        0.011635597215397721
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.03333333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_19",
+      "n_pairs": 30,
+      "A": 2.0,
+      "F": 0.0039034545572831946,
+      "on_absolute_sum_hz": 2.0,
+      "off_absolute_sum_hz": 510.3666666666668,
+      "on_signed_mean_hz": 2.0,
+      "total_absolute_sum_hz": 512.3666666666668,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.8333333333333335,
+        3.066666666666667
+      ],
+      "F_95pct": [
+        0.0016046762123938625,
+        0.005229126532464612
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 3.066666666666667
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_20",
+      "n_pairs": 30,
+      "A": 0.4666666666666667,
+      "F": 0.0030567685589519646,
+      "on_absolute_sum_hz": 0.4666666666666667,
+      "off_absolute_sum_hz": 152.20000000000002,
+      "on_signed_mean_hz": 0.4666666666666667,
+      "total_absolute_sum_hz": 152.66666666666669,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333334,
+        2.2666666666666666
+      ],
+      "F_95pct": [
+        0.00016865428621721498,
+        0.011950453353588008
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.6
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_21",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_22",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_23",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_24",
+      "n_pairs": 30,
+      "A": 6.066666666666666,
+      "F": 0.0031343643440223195,
+      "on_absolute_sum_hz": 6.066666666666666,
+      "off_absolute_sum_hz": 1929.4666666666667,
+      "on_signed_mean_hz": -6.066666666666666,
+      "total_absolute_sum_hz": 1935.5333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        4.5,
+        7.566666666666667
+      ],
+      "F_95pct": [
+        0.0023638457951405565,
+        0.003840435581064315
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -25.333333333333332
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_25",
+      "n_pairs": 30,
+      "A": 0.3,
+      "F": 0.002146434533746721,
+      "on_absolute_sum_hz": 0.3,
+      "off_absolute_sum_hz": 139.46666666666664,
+      "on_signed_mean_hz": -0.3,
+      "total_absolute_sum_hz": 139.76666666666665,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.033333333333333284,
+        1.4999999999999998
+      ],
+      "F_95pct": [
+        0.00015598306037198668,
+        0.00723388896075992
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.16666666666666666
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_26",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_27",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_28",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_29",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_30",
+      "n_pairs": 30,
+      "A": 1.3,
+      "F": 0.009918616480162767,
+      "on_absolute_sum_hz": 1.3,
+      "off_absolute_sum_hz": 129.76666666666665,
+      "on_signed_mean_hz": 1.3,
+      "total_absolute_sum_hz": 131.06666666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.16666666666666669,
+        2.5999999999999996
+      ],
+      "F_95pct": [
+        0.0009166333119111243,
+        0.014110004396537344
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.26666666666666666
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_31",
+      "n_pairs": 30,
+      "A": 0.13333333333333333,
+      "F": 0.000848716316571186,
+      "on_absolute_sum_hz": 0.13333333333333333,
+      "off_absolute_sum_hz": 156.96666666666667,
+      "on_signed_mean_hz": -0.13333333333333333,
+      "total_absolute_sum_hz": 157.1,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333327,
+        1.6341666666666628
+      ],
+      "F_95pct": [
+        0.00015659070796644539,
+        0.007872249407296689
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.7
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_32",
+      "n_pairs": 30,
+      "A": 0.6333333333333333,
+      "F": 0.005076142131979695,
+      "on_absolute_sum_hz": 0.6333333333333333,
+      "off_absolute_sum_hz": 124.13333333333334,
+      "on_signed_mean_hz": 0.6333333333333333,
+      "total_absolute_sum_hz": 124.76666666666668,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333335,
+        1.6666666666666663
+      ],
+      "F_95pct": [
+        0.0001944982580848959,
+        0.009383481159373529
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.7
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_33",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_34",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_35",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_36",
+      "n_pairs": 30,
+      "A": 0.7,
+      "F": 0.004673937235699977,
+      "on_absolute_sum_hz": 0.7,
+      "off_absolute_sum_hz": 149.0666666666667,
+      "on_signed_mean_hz": 0.7,
+      "total_absolute_sum_hz": 149.76666666666668,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.03333333333333339,
+        1.6333333333333333
+      ],
+      "F_95pct": [
+        0.00020768431983385276,
+        0.00804030627778585
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.7333333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_37",
+      "n_pairs": 30,
+      "A": 1.3,
+      "F": 0.010028284906145539,
+      "on_absolute_sum_hz": 1.3,
+      "off_absolute_sum_hz": 128.33333333333331,
+      "on_signed_mean_hz": -1.3,
+      "total_absolute_sum_hz": 129.63333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.09999999999999998,
+        2.866666666666667
+      ],
+      "F_95pct": [
+        0.0005593697298057739,
+        0.01393430947067041
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.9333333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_38",
+      "n_pairs": 30,
+      "A": 0.1,
+      "F": 0.0006448839208942391,
+      "on_absolute_sum_hz": 0.1,
+      "off_absolute_sum_hz": 154.96666666666667,
+      "on_signed_mean_hz": -0.1,
+      "total_absolute_sum_hz": 155.06666666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.06666666666666729,
+        5.668333333333324
+      ],
+      "F_95pct": [
+        0.0003962697972101742,
+        0.024391291393349127
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.23333333333333334
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_39",
+      "n_pairs": 30,
+      "A": 0.26666666666666666,
+      "F": 0.0014961660744342623,
+      "on_absolute_sum_hz": 0.26666666666666666,
+      "off_absolute_sum_hz": 177.96666666666664,
+      "on_signed_mean_hz": 0.26666666666666666,
+      "total_absolute_sum_hz": 178.23333333333332,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0333333333333333,
+        1.9
+      ],
+      "F_95pct": [
+        0.00014890596800256419,
+        0.007934776552215334
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.03333333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_40",
+      "n_pairs": 30,
+      "A": 0.3333333333333333,
+      "F": 0.0026075619295958274,
+      "on_absolute_sum_hz": 0.3333333333333333,
+      "off_absolute_sum_hz": 127.50000000000001,
+      "on_signed_mean_hz": -0.3333333333333333,
+      "total_absolute_sum_hz": 127.83333333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.033333333333333284,
+        1.3000000000000003
+      ],
+      "F_95pct": [
+        0.00016058389519150272,
+        0.006802332261029409
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.6333333333333333
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_41",
+      "n_pairs": 30,
+      "A": 8.2,
+      "F": 0.016517827167125493,
+      "on_absolute_sum_hz": 8.2,
+      "off_absolute_sum_hz": 488.23333333333335,
+      "on_signed_mean_hz": 8.2,
+      "total_absolute_sum_hz": 496.43333333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        6.533333333333332,
+        9.733333333333333
+      ],
+      "F_95pct": [
+        0.012590160860104747,
+        0.0179792065246721
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -1.1
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_42",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_43",
+      "n_pairs": 30,
+      "A": 0.2,
+      "F": 0.001303497718878992,
+      "on_absolute_sum_hz": 0.2,
+      "off_absolute_sum_hz": 153.23333333333335,
+      "on_signed_mean_hz": -0.2,
+      "total_absolute_sum_hz": 153.43333333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.033333333333333305,
+        1.9666666666666663
+      ],
+      "F_95pct": [
+        0.00015947758712904237,
+        0.008837668513720448
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.2
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_44",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_45",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_46",
+      "n_pairs": 30,
+      "A": 0.23333333333333334,
+      "F": 0.0017726006583945303,
+      "on_absolute_sum_hz": 0.23333333333333334,
+      "off_absolute_sum_hz": 131.4,
+      "on_signed_mean_hz": -0.23333333333333334,
+      "total_absolute_sum_hz": 131.63333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        2.0816681711721685e-17,
+        0.6333333333333333
+      ],
+      "F_95pct": [
+        1.3020300430511938e-19,
+        0.00370947047025845
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -0.6666666666666666
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_47",
+      "n_pairs": 30,
+      "A": 37.3,
+      "F": 0.019645710072157162,
+      "on_absolute_sum_hz": 37.3,
+      "off_absolute_sum_hz": 1861.3333333333335,
+      "on_signed_mean_hz": 37.3,
+      "total_absolute_sum_hz": 1898.6333333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        35.7,
+        38.96666666666667
+      ],
+      "F_95pct": [
+        0.01848929291045363,
+        0.020384526626803443
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.3
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_48",
+      "n_pairs": 30,
+      "A": 3.4,
+      "F": 0.017394270122783082,
+      "on_absolute_sum_hz": 3.4,
+      "off_absolute_sum_hz": 192.06666666666666,
+      "on_signed_mean_hz": -3.4,
+      "total_absolute_sum_hz": 195.46666666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        1.4666666666666666,
+        5.3999999999999995
+      ],
+      "F_95pct": [
+        0.007194930750232703,
+        0.019734152046783623
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.43333333333333335
+    },
+    {
+      "variant": "default",
+      "condition": "mode_cell_49",
+      "n_pairs": 30,
+      "A": 0.0,
+      "F": null,
+      "on_absolute_sum_hz": 0.0,
+      "off_absolute_sum_hz": 0.0,
+      "on_signed_mean_hz": 0.0,
+      "total_absolute_sum_hz": 0.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0,
+        0.0
+      ],
+      "F_95pct": null,
+      "zero_response_bootstraps": 2000,
+      "mn9_delta_hz": 0.0
+    },
+    {
+      "variant": "w100_i120",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 20.203267973856207,
+      "F": 0.24092939149954395,
+      "on_absolute_sum_hz": 1030.3666666666666,
+      "off_absolute_sum_hz": 3246.2666666666673,
+      "on_signed_mean_hz": -7.513071895424836,
+      "total_absolute_sum_hz": 4276.633333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        19.8528431372549,
+        20.520277777777775
+      ],
+      "F_95pct": [
+        0.23816419731960795,
+        0.24326452286035996
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -67.9
+    },
+    {
+      "variant": "w100_i120",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 19.093999999999998,
+      "F": 0.22576856377108623,
+      "on_absolute_sum_hz": 954.6999999999998,
+      "off_absolute_sum_hz": 3273.9666666666662,
+      "on_signed_mean_hz": -6.379333333333334,
+      "total_absolute_sum_hz": 4228.666666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        18.797283333333333,
+        19.4
+      ],
+      "F_95pct": [
+        0.2233858567866251,
+        0.22761943018686223
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -67.9
+    },
+    {
+      "variant": "w100_i120",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 1.1666666666666667,
+      "F": 0.009239704329461456,
+      "on_absolute_sum_hz": 1.1666666666666667,
+      "off_absolute_sum_hz": 125.10000000000001,
+      "on_signed_mean_hz": -1.1666666666666667,
+      "total_absolute_sum_hz": 126.26666666666668,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.06666666666666662,
+        3.1
+      ],
+      "F_95pct": [
+        0.0003447547918173047,
+        0.017274916823647506
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -1.1666666666666667
+    },
+    {
+      "variant": "w100_i120",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 9.338562091503269,
+      "F": 0.18120481927710838,
+      "on_absolute_sum_hz": 476.26666666666665,
+      "off_absolute_sum_hz": 2152.0666666666675,
+      "on_signed_mean_hz": -9.058823529411764,
+      "total_absolute_sum_hz": 2628.333333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        8.899967320261439,
+        9.788905228758171
+      ],
+      "F_95pct": [
+        0.17764711850798165,
+        0.1845118040843779
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -13.0
+    },
+    {
+      "variant": "w100_i120",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 10.139869281045751,
+      "F": 0.1881305781916958,
+      "on_absolute_sum_hz": 517.1333333333333,
+      "off_absolute_sum_hz": 2231.6666666666665,
+      "on_signed_mean_hz": -10.125490196078431,
+      "total_absolute_sum_hz": 2748.7999999999997,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        9.667826797385624,
+        10.58826797385621
+      ],
+      "F_95pct": [
+        0.18334293880123062,
+        0.1921937670350964
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -13.2
+    },
+    {
+      "variant": "w100_i120",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 10.064705882352941,
+      "F": 0.187196849053622,
+      "on_absolute_sum_hz": 513.3,
+      "off_absolute_sum_hz": 2228.7333333333336,
+      "on_signed_mean_hz": -10.058169934640523,
+      "total_absolute_sum_hz": 2742.0333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        9.624133986928104,
+        10.524950980392155
+      ],
+      "F_95pct": [
+        0.18345283626351902,
+        0.19104269617491948
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -13.333333333333334
+    },
+    {
+      "variant": "w120_i080",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 27.979084967320258,
+      "F": 0.1446934795320649,
+      "on_absolute_sum_hz": 1426.9333333333332,
+      "off_absolute_sum_hz": 8434.833333333334,
+      "on_signed_mean_hz": -17.20915032679739,
+      "total_absolute_sum_hz": 9861.766666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        27.5763888888889,
+        28.354264705882343
+      ],
+      "F_95pct": [
+        0.10104217492751882,
+        0.18454669088332717
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -109.36666666666666
+    },
+    {
+      "variant": "w120_i080",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 26.39333333333333,
+      "F": 0.052177374077110227,
+      "on_absolute_sum_hz": 1319.6666666666665,
+      "off_absolute_sum_hz": 23972.266666666663,
+      "on_signed_mean_hz": -15.449333333333334,
+      "total_absolute_sum_hz": 25291.93333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        25.99131666666666,
+        26.823999999999998
+      ],
+      "F_95pct": [
+        0.02186681775586272,
+        0.16979400040474135
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -109.46666666666667
+    },
+    {
+      "variant": "w120_i080",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 0.06666666666666667,
+      "F": 4.155654183081501e-06,
+      "on_absolute_sum_hz": 0.06666666666666667,
+      "off_absolute_sum_hz": 16042.333333333332,
+      "on_signed_mean_hz": 0.06666666666666667,
+      "total_absolute_sum_hz": 16042.4,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.0666666666666664,
+        3.9
+      ],
+      "F_95pct": [
+        3.129707445533774e-06,
+        0.011592888976540228
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.06666666666666667
+    },
+    {
+      "variant": "w120_i080",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 18.6640522875817,
+      "F": 0.17352624830611985,
+      "on_absolute_sum_hz": 951.8666666666667,
+      "off_absolute_sum_hz": 4533.566666666667,
+      "on_signed_mean_hz": -16.72941176470588,
+      "total_absolute_sum_hz": 5485.433333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        18.320898692810456,
+        19.040620915032683
+      ],
+      "F_95pct": [
+        0.17121842456697992,
+        0.175453727935186
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -7.5
+    },
+    {
+      "variant": "w120_i080",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 20.69607843137255,
+      "F": 0.03534020457475126,
+      "on_absolute_sum_hz": 1055.5,
+      "off_absolute_sum_hz": 28811.333333333332,
+      "on_signed_mean_hz": -18.586274509803925,
+      "total_absolute_sum_hz": 29866.833333333332,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        19.252875816993463,
+        23.175980392156863
+      ],
+      "F_95pct": [
+        0.014788795940467055,
+        0.1768125715997146
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -12.366666666666667
+    },
+    {
+      "variant": "w120_i080",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 20.759477124183007,
+      "F": 0.033861010158729485,
+      "on_absolute_sum_hz": 1058.7333333333333,
+      "off_absolute_sum_hz": 30208.3,
+      "on_signed_mean_hz": -18.56078431372549,
+      "total_absolute_sum_hz": 31267.033333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        19.333937908496733,
+        23.165816993464052
+      ],
+      "F_95pct": [
+        0.014685014832877713,
+        0.17387454989836945
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -12.466666666666667
+    },
+    {
+      "variant": "w120_i100",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 25.177124183006537,
+      "F": 0.2064605687701658,
+      "on_absolute_sum_hz": 1284.0333333333333,
+      "off_absolute_sum_hz": 4935.233333333334,
+      "on_signed_mean_hz": -11.7078431372549,
+      "total_absolute_sum_hz": 6219.266666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        24.74704248366013,
+        25.585637254901958
+      ],
+      "F_95pct": [
+        0.20472632871441546,
+        0.20790228811094136
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -91.33333333333333
+    },
+    {
+      "variant": "w120_i100",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 23.807333333333336,
+      "F": 0.19168236689693674,
+      "on_absolute_sum_hz": 1190.3666666666668,
+      "off_absolute_sum_hz": 5019.733333333333,
+      "on_signed_mean_hz": -10.119333333333334,
+      "total_absolute_sum_hz": 6210.099999999999,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        23.380649999999996,
+        24.21006666666667
+      ],
+      "F_95pct": [
+        0.19007011166270532,
+        0.19302622446579185
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -91.4
+    },
+    {
+      "variant": "w120_i100",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 0.03333333333333333,
+      "F": 0.00022386389075442135,
+      "on_absolute_sum_hz": 0.03333333333333333,
+      "off_absolute_sum_hz": 148.86666666666665,
+      "on_signed_mean_hz": 0.03333333333333333,
+      "total_absolute_sum_hz": 148.89999999999998,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.06666666666666647,
+        3.1
+      ],
+      "F_95pct": [
+        0.0002741805144492646,
+        0.013305240806062093
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.03333333333333333
+    },
+    {
+      "variant": "w120_i100",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 15.018954248366013,
+      "F": 0.1805247859219106,
+      "on_absolute_sum_hz": 765.9666666666667,
+      "off_absolute_sum_hz": 3477.0333333333333,
+      "on_signed_mean_hz": -13.493464052287582,
+      "total_absolute_sum_hz": 4243.0,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        14.590816993464053,
+        15.497450980392156
+      ],
+      "F_95pct": [
+        0.1773031017358377,
+        0.18349055760325808
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -5.166666666666667
+    },
+    {
+      "variant": "w120_i100",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 15.420261437908499,
+      "F": 0.18010473602247395,
+      "on_absolute_sum_hz": 786.4333333333334,
+      "off_absolute_sum_hz": 3580.1000000000004,
+      "on_signed_mean_hz": -15.085620915032683,
+      "total_absolute_sum_hz": 4366.533333333334,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        15.04704248366013,
+        15.815098039215684
+      ],
+      "F_95pct": [
+        0.17659907398582425,
+        0.1831997091676937
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -8.433333333333334
+    },
+    {
+      "variant": "w120_i100",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 15.37254901960784,
+      "F": 0.17928332405918174,
+      "on_absolute_sum_hz": 783.9999999999999,
+      "off_absolute_sum_hz": 3588.966666666667,
+      "on_signed_mean_hz": -14.952941176470587,
+      "total_absolute_sum_hz": 4372.966666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        14.99800653594771,
+        15.784967320261439
+      ],
+      "F_95pct": [
+        0.17607084971539408,
+        0.18198155473048042
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -7.366666666666666
+    },
+    {
+      "variant": "w120_i120",
+      "condition": "mode",
+      "n_pairs": 30,
+      "A": 22.125490196078434,
+      "F": 0.22508278035612178,
+      "on_absolute_sum_hz": 1128.4,
+      "off_absolute_sum_hz": 3884.8666666666663,
+      "on_signed_mean_hz": -9.07058823529412,
+      "total_absolute_sum_hz": 5013.266666666666,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        21.70385620915033,
+        22.573202614379085
+      ],
+      "F_95pct": [
+        0.2226914659526647,
+        0.22719621441064944
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -73.3
+    },
+    {
+      "variant": "w120_i120",
+      "condition": "mode_without_mn9",
+      "n_pairs": 30,
+      "A": 21.074666666666662,
+      "F": 0.21120145379717659,
+      "on_absolute_sum_hz": 1053.7333333333331,
+      "off_absolute_sum_hz": 3935.4999999999995,
+      "on_signed_mean_hz": -7.944,
+      "total_absolute_sum_hz": 4989.233333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        20.702516666666668,
+        21.477399999999996
+      ],
+      "F_95pct": [
+        0.2090189713182062,
+        0.21301834252525992
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -73.3
+    },
+    {
+      "variant": "w120_i120",
+      "condition": "mn9_only",
+      "n_pairs": 30,
+      "A": 0.3333333333333333,
+      "F": 0.0021910604732690623,
+      "on_absolute_sum_hz": 0.3333333333333333,
+      "off_absolute_sum_hz": 151.79999999999998,
+      "on_signed_mean_hz": 0.3333333333333333,
+      "total_absolute_sum_hz": 152.13333333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        0.033333333333333326,
+        3.067499999999996
+      ],
+      "F_95pct": [
+        0.0001509228154352913,
+        0.01314085987199876
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": 0.3333333333333333
+    },
+    {
+      "variant": "w120_i120",
+      "condition": "motor_003",
+      "n_pairs": 30,
+      "A": 13.801307189542486,
+      "F": 0.19012290100391666,
+      "on_absolute_sum_hz": 703.8666666666668,
+      "off_absolute_sum_hz": 2998.3,
+      "on_signed_mean_hz": -12.717647058823527,
+      "total_absolute_sum_hz": 3702.166666666667,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        13.352254901960782,
+        14.26535947712418
+      ],
+      "F_95pct": [
+        0.1859641934541966,
+        0.19357884466921035
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -10.8
+    },
+    {
+      "variant": "w120_i120",
+      "condition": "motor_004",
+      "n_pairs": 30,
+      "A": 13.969934640522876,
+      "F": 0.19394060376194322,
+      "on_absolute_sum_hz": 712.4666666666667,
+      "off_absolute_sum_hz": 2961.1666666666665,
+      "on_signed_mean_hz": -13.696732026143792,
+      "total_absolute_sum_hz": 3673.633333333333,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        13.49673202614379,
+        14.466029411764705
+      ],
+      "F_95pct": [
+        0.19008818528129656,
+        0.19719949726093666
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -8.5
+    },
+    {
+      "variant": "w120_i120",
+      "condition": "motor_005",
+      "n_pairs": 30,
+      "A": 14.043790849673202,
+      "F": 0.19202480852927245,
+      "on_absolute_sum_hz": 716.2333333333333,
+      "off_absolute_sum_hz": 3013.666666666667,
+      "on_signed_mean_hz": -13.7640522875817,
+      "total_absolute_sum_hz": 3729.9,
+      "seed": 630700,
+      "replicates": 2000,
+      "A_95pct": [
+        13.594117647058823,
+        14.521013071895428
+      ],
+      "F_95pct": [
+        0.18814144031399527,
+        0.19532867517123761
+      ],
+      "zero_response_bootstraps": 0,
+      "mn9_delta_hz": -8.333333333333334
+    }
+  ]
+}
