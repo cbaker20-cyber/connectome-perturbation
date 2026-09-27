@@ -1,5 +1,7 @@
 # Review after the CCR results, 27 September 2026
 
+Completed locally on 27 September: downloaded the existing `results/expanded_sensitivity` directory, checked all 3,390 trials and reproduced the collected results and intervals. The helper now accepts the original upload ZIP through `--snapshot-archive` and reads trials with bounded local worker processes. No new CCR allocation or simulation was needed. The remote notebook instructions below describe an available alternative and are no longer the next required step. Findings are in CCR_RESULTS_20260927.md. The original review below is retained as the sequence of questions before the raw files arrived.
+
 The defensible result is that one selected 51-cell set produces a larger within-set rate response than three chosen comparison sets across this parameter grid. It also produces a large MN9 decrease without having to lesion MN9 itself. This is useful evidence about a selected perturbation in this model. It does not yet establish that eigenmodes identify independent circuits, or explain the effect beyond connectivity and recruitment.
 
 This is a skeptical scientific review, not an official STS score. STS evaluates the research report, application and the student's scientific potential; its public description does not supply a numerical project rubric. [Society for Science](https://www.societyforscience.org/regeneron-sts/judging-and-awards/).

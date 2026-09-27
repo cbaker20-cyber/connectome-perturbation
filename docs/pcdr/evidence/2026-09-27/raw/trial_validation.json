@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "started_utc": "2026-09-27T17:29:20.090527+00:00",
+  "jobs_sha256": "c56efa57852bdf4a7ea2bacb0ec1944d36c3d038c7a2d1acc1bf529bbae1d174",
+  "script_sha256": "20bd72709c57175d1e138150503fef898404ffc209d841cf60220d164da4d079",
+  "simulation_environment": {
+    "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+    "executable": "/user/cbaker4/connectome/.ccr-venv/bin/python",
+    "platform": "Linux-6.8.0-138-generic-x86_64-Intel-R-_Xeon-R-_Gold_6330_CPU_@_2.00GHz-with-glibc2.38",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "analysis_environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "completed_trials": 3390,
+  "workers": 8,
+  "scope": "Read-only arithmetic and event checks. Analysis platform may differ; no simulations run.",
+  "sparse_rates": "Absent neuron_index rows mean zero. All neurons are listed in neurons.csv. Rates and deltas are Hz.",
+  "finished_utc": "2026-09-27T17:35:05.047338+00:00",
+  "outputs": {
+    "baseline_rates.parquet": "f47dc4f62762010b0ca39b15e5cb6318254479d4cdf399554b4d4ad8d081e807",
+    "neurons.csv": "399d81d30d06fd81d5fad66668313a4d6ea33e34300c98319ac8f45573e5c89f",
+    "paired_deltas.parquet": "e569c1e3785337341214201f9321acc88eb395ba96c7e278df3679610ae498f5",
+    "population_10ms.csv": "b6871f7da3711dfe3192f5746df758a6113728d020b33157c7b47124f201003a",
+    "trial_diagnostics.csv": "5decd4592a9c3582c04714288acfddfb1e707456c78095fc0cc78f102344b8af"
+  }
+}
