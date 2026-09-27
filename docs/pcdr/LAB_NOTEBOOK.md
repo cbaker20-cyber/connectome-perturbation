@@ -381,3 +381,30 @@ Replaced the current upload ZIP only after extracting and checking the exact can
 Clarified the guide and notebook: the 21 sugar-input cells were stimulated, not lesioned. The four eligible mode supports were not four matches to correlation clusters. No model equations, lesion definitions or scientific comparisons changed.
 
 Updated exports/ccr_expanded_20260922/Connectome_CCR_Notebook.zip in place (95,172,473 bytes; SHA256 d3f536eb681a7d9c14d058beb2db972ca7337f06939ac9f481357fe352e1c668). Notebook syntax, ZIP integrity and payload checks passed; the text scan found no Codex/OpenAI/AI-generated presentation markers. Assistance provenance remains here. The temporary extraction was cleaned up after validation.
+
+## 26 September — local checks while CCR upload is unavailable
+
+The user asked to run more locally while waiting for upload permissions. Ran the full software suite: 240 passed, three skipped, 40 dependency deprecation warnings, 26.75 seconds. Checked saved output hashes for all 55 motor-composition trials and 210 seed-replication trials: all 1,590 file hashes matched. This verifies saved evidence integrity, not the biological hypothesis.
+
+Recorded the existing expanded design and upload hashes in results/pcdr/local_expanded_20260926/protocol.json before any new simulations. Extracted the current upload into one execution snapshot in that research directory. File verification, package/import checks, snapshot initialization and smoke-plan preparation passed. No new upload or report export was created. Work used Codex assistance.
+
+The PC has eight physical cores, 16 logical processors and about 16 GB RAM. Only about 2.4 GB was free after the tests, below the measured single-worker peak. No whole-brain simulation was started under that condition and no user applications were closed. Asked for a runtime preference and enough memory to start one worker. Windows trials must retain their own environment record; they cannot silently be mixed with CCR Linux trials under the current provenance checks.
+
+## 26 September — CCR environment troubleshooting
+
+Recorded from the user's terminal and notebook outputs, not direct access to the CCR filesystem. The shared /projects/academic/smuldoon quota was full (1.0 TB of 1.0 TB); this was a storage problem, not missing submission permission. The upload was extracted under /user/cbaker4/connectome. The latest home quota showed 1.1 GB used of 25 GB.
+
+The classic notebook kernel was Python 3.9.6 under ccrsoft/2023.01. That release's module search offered Python 3.9.6 and 3.10.4-bare, not the required 3.11. The terminal successfully loaded ccrsoft/2024.04, then gcccore/13.2.0 and python/3.11.5. Its interpreter was /cvmfs/soft.ccr.buffalo.edu/versions/2024.04/easybuild/x86_64/software/x86-64-v4/Compiler/gcccore/13.2.0/python/3.11.5/bin/python. The notebook kernel stayed on 3.9.6; simulations use the separate .ccr-venv Python 3.11 environment. The original setup guidance had not established that a suitable interpreter existed in the application's default release.
+
+Loading modules in a terminal does not change an existing notebook process. Saved the interpreter path and PATH, LD_LIBRARY_PATH, LIBRARY_PATH, CPATH and PKG_CONFIG_PATH to ccr_python.json in the remote project. The user amended the notebook setup to read those settings before creating RUN_ENV and removed inherited PYTHONHOME. Package pins were retained. This configuration is specific to the observed CCR environment and should be rechecked on another architecture or software release.
+
+Package installation and pip check then succeeded, but importing Brian2 imported Matplotlib, which inherited MPLBACKEND=module://matplotlib_inline.backend_inline from Jupyter. The separate simulation environment could not use that backend. Added RUN_ENV["MPLBACKEND"] = "Agg" immediately after copying the environment. The user's subsequent output confirms that all eight checked libraries imported from .ccr-venv and dependency checks passed. No forced reinstall or package-version change was needed. The missing results/smoke/jobs.json error was downstream of the failed import check, not an independent simulation defect.
+
+Job 26284681 then completed baseline (33.5 seconds) and replay (32.4 seconds), each with 13,793 spikes and MN9 at 87 Hz. The supplied output did not yet include the complete four-trial smoke certificate or concurrency calibration, so neither is recorded here as passed. At the latest supplied scheduler check, the job had 7:40:59 remaining. End-to-end completion cannot be estimated reliably until throughput calibration is available; collection and validation also need time. These troubleshooting changes were guided with Codex assistance. This entry records the remote fixes; it does not claim they have been incorporated into the local upload ZIP. The user requested that the unrelated Run-button/UI issue be omitted.
+
+
+## 27 September — downloaded CCR controller records
+
+Received controller.log and progress.json from the completed CCR allocation. Audited all 3,390 indices: no duplicates or omissions, all marked complete. All 3,337 fresh workers returned zero without timeout; 53 trials were reported reused. Every fresh worker command matched its recorded index. The log lists each completion count once, in order. Last update was 1:26:30 a.m. Eastern on 27 September. Median worker wall time was 58.57 seconds; overlapping durations do not establish total study runtime.
+
+Saved a compact audit with hashes of both original downloads in docs/pcdr/evidence/2026-09-27/controller_audit.json. The original files remain under results/pcdr/results_ccr_20260927. Created CCR_RESULTS_20260927.md to distinguish execution completion from scientific validation and record the next analysis sequence before seeing outcomes. No additional simulations were started. Raw trial outputs, collection results and the CCR capacity/smoke certificates have not yet been supplied. Next step is the existing collector in a fresh allocation using the same source and simulation environment, without launching the trial controller. Documentation and audit used Codex assistance.
