@@ -1,0 +1,31 @@
+{
+  "status": "complete",
+  "trials_checked": 101,
+  "exact_replays": 25,
+  "paired_step_rows_reproduced": 36,
+  "plan_sha256": "5861f24e6485b4b36ada05b193026d2ee85edd257c9517e4f732c1be840ea82b",
+  "script_sha256": "c96881c9c5c8f9d74652afbada17c6b3a6f1bfd53d23d24c16cdb59d24b16390",
+  "analysis_environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "outputs": {
+    "checked_active29.json": "d7ac701d530c0b0821f03931df159086f10e4289f0e03f900e6567ff07da3852",
+    "checked_activity.csv": "7cf87bf28ce9bd68ca6d75d147e4b982a9bb8322e3535a27eaf80e92a8bbd73d",
+    "checked_step_pairs.csv": "688e3989b8e1a255f1cf941c1b2eae583be38fd1db3faec5b07555487a5a9d82",
+    "step_comparison.png": "130a3df37b14b7ebc8a6f446dc0c6273355ce3f2e474bf5b58253ff0858bc737"
+  }
+}

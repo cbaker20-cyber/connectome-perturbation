@@ -1,0 +1,9 @@
+{
+  "status": "initial_archive_checks_passed",
+  "archive_sha256": "e88ec63a5ebc31d10c6dc59eb31ef03b3f27a2bbe7877832eca281253f297fb5",
+  "completed_trials": 101,
+  "exact_replay_flags_passed": 25,
+  "included_output_hashes_checked": true,
+  "process_records_checked": 101,
+  "limitation": "Full spike and delivered-event files are excluded from the summary archive and have not been independently checked locally. Rate summaries have not yet been independently recalculated."
+}

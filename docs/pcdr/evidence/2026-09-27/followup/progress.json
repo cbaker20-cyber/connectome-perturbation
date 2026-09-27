@@ -1,0 +1,43 @@
+{
+  "status": "complete",
+  "started_utc": "2026-09-27T20:52:19.731723+00:00",
+  "completed": 101,
+  "workers": 16,
+  "analysis_environment": {
+    "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+    "executable": "/user/cbaker4/connectome/.ccr-venv/bin/python",
+    "platform": "Linux-6.8.0-138-generic-x86_64-Intel-R-_Xeon-R-_Gold_6448Y-with-glibc2.38",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "simulation_environment_original": {
+    "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+    "executable": "/user/cbaker4/connectome/.ccr-venv/bin/python",
+    "platform": "Linux-6.8.0-138-generic-x86_64-Intel-R-_Xeon-R-_Gold_6330_CPU_@_2.00GHz-with-glibc2.38",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "stage": "active29",
+  "finished_utc": "2026-09-27T21:00:28.207275+00:00",
+  "interpretation": "Time-step results require review; completion does not certify convergence."
+}

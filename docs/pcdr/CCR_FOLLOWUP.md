@@ -1,5 +1,7 @@
 # Running the follow-up
 
+Completed-run update: all 101 trials finished and the full files passed the local checks. All 25 replays matched. Smaller time steps changed several large responses, with the MN9-only case still inconsistent across steps. This package's planned run is complete; the instructions below are retained for reproducibility, not a request to rerun it. See CCR_RESULTS_20260927.md for the verified findings and remaining questions.
+
 This package adds 101 trials to the existing study without changing its files. The stages are 25 exact replays, 46 trials at 0.05 and 0.025 ms, and 30 lesions of the 29 mode cells active in at least one default baseline. Selection and IDs are recorded in CCR_FOLLOWUP_PLAN.json. This is a follow-up to observed results, not a new confirmation of the eigencircuit claim.
 
 For each of the six lesion conditions at weight 1.2/inhibitory multiplier 0.8, the plan selects the seed with the largest total rate change and the seed nearest the median total change, breaking ties by smallest seed. It includes the paired baselines and removes duplicate trial selections. Two default replay trials are also included. Each finer-step trial uses the original physical input times, with zero input on the intervening finer ticks. It does not generate a new Bernoulli input sequence or interpolate the old input into repeated jumps. Delivered inputs remain voltage dependent.

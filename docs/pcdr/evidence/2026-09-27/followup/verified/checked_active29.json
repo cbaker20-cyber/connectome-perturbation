@@ -1,0 +1,47 @@
+{
+  "fixed_51_support": {
+    "A": 22.681045751633988,
+    "F": 0.2313081153141143,
+    "on_absolute_sum_hz": 1156.7333333333333,
+    "off_absolute_sum_hz": 3844.1000000000004,
+    "on_signed_mean_hz": -10.674509803921568,
+    "total_absolute_sum_hz": 5000.833333333334
+  },
+  "full_mode_fixed_51_support": {
+    "A": 22.503267973856207,
+    "F": 0.23029022052479145,
+    "on_absolute_sum_hz": 1147.6666666666665,
+    "off_absolute_sum_hz": 3835.9,
+    "on_signed_mean_hz": -10.648366013071897,
+    "total_absolute_sum_hz": 4983.566666666667
+  },
+  "mean_vector_difference_l1_hz": 78.99999999999997,
+  "mn9_change_hz": -82.33333333333333,
+  "spatial": {
+    "difference_total_abs_hz": 78.99999999999997,
+    "difference_mode_abs_hz": 13.066666666666682,
+    "difference_relative_to_first_l1": 0.01585210057054184,
+    "signed_cosine": 0.9998964501135886,
+    "first_total_abs_hz": 4983.566666666667,
+    "second_total_abs_hz": 5000.833333333334
+  },
+  "paired_intervals": {
+    "A": {
+      "difference": 0.1777777777777807,
+      "interval": [
+        0.02091503267973831,
+        0.3352941176470595
+      ]
+    },
+    "F": {
+      "difference": 0.0010178947893228485,
+      "interval": [
+        8.61505377451853e-05,
+        0.0020327094545969987
+      ]
+    }
+  },
+  "bootstrap_seed": 630727,
+  "replicates": 2000,
+  "interpretation": "Retrospective marginal intervals on the same 30 seeds and fixed 51-cell support; no equivalence margin."
+}
