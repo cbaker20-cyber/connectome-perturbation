@@ -1,0 +1,46 @@
+{
+  "started_utc": "2026-09-27T15:54:13.140009+00:00",
+  "status": "complete",
+  "jobs_sha256": "c56efa57852bdf4a7ea2bacb0ec1944d36c3d038c7a2d1acc1bf529bbae1d174",
+  "collector_sha256": "5be9359cec6260480cd3c7f9a307007db3aef4e540382e2c36f930cd3a308c09",
+  "simulation_environment": {
+    "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+    "executable": "/user/cbaker4/connectome/.ccr-venv/bin/python",
+    "platform": "Linux-6.8.0-138-generic-x86_64-Intel-R-_Xeon-R-_Gold_6330_CPU_@_2.00GHz-with-glibc2.38",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "analysis_environment": {
+    "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+    "executable": "/user/cbaker4/connectome/.ccr-venv/bin/python",
+    "platform": "Linux-6.8.0-138-generic-x86_64-Intel-R-_Xeon-R-_Gold_6448Y-with-glibc2.38",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "scope": "Collection only. Original trial provenance and output checks remain enforced.",
+  "finished_utc": "2026-09-27T16:14:07.398116+00:00",
+  "outputs": {
+    "results.json": "a3dcd08a1662005095c3166e41ecacfdbbea1593cfe94b5a7e6addaeae7de8b4",
+    "per_seed.csv": "d6491c97e33dbdb16538bae8d03faf23f0a50f8933e6f03548bd327ed6859b5d"
+  }
+}

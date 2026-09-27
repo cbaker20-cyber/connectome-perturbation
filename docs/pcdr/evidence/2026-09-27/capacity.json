@@ -1,0 +1,106 @@
+{
+  "created_utc": "2026-09-27T03:12:25.772036+00:00",
+  "jobs_sha256": "c56efa57852bdf4a7ea2bacb0ec1944d36c3d038c7a2d1acc1bf529bbae1d174",
+  "slurm_job_id": "26284681",
+  "cpus": 32,
+  "memory_mb": 128000,
+  "peak_rss_bytes": 2787037184,
+  "waves": [
+    {
+      "workers": 1,
+      "wall_seconds": 36.836289601022145,
+      "trials_per_second": 0.027147142419367117,
+      "peak_worker_rss_bytes": 2717233152,
+      "indices": [
+        1237
+      ]
+    },
+    {
+      "workers": 4,
+      "wall_seconds": 38.946345859993016,
+      "trials_per_second": 0.10270539922742619,
+      "peak_worker_rss_bytes": 2787037184,
+      "indices": [
+        1025,
+        3220,
+        3078,
+        188
+      ]
+    },
+    {
+      "workers": 8,
+      "wall_seconds": 43.35886726400349,
+      "trials_per_second": 0.1845066650678302,
+      "peak_worker_rss_bytes": 2786246656,
+      "indices": [
+        220,
+        1274,
+        1895,
+        1344,
+        897,
+        823,
+        130,
+        3022
+      ]
+    },
+    {
+      "workers": 16,
+      "wall_seconds": 54.1378329610161,
+      "trials_per_second": 0.2955419366623222,
+      "peak_worker_rss_bytes": 2786353152,
+      "indices": [
+        2379,
+        2811,
+        1033,
+        3362,
+        3025,
+        3190,
+        491,
+        2330,
+        2722,
+        1538,
+        1969,
+        603,
+        1191,
+        1424,
+        1458,
+        50
+      ]
+    },
+    {
+      "workers": 24,
+      "wall_seconds": 62.48124900899711,
+      "trials_per_second": 0.3841152406627478,
+      "peak_worker_rss_bytes": 2784038912,
+      "indices": [
+        1535,
+        1614,
+        684,
+        3149,
+        806,
+        2090,
+        500,
+        1552,
+        2068,
+        152,
+        3311,
+        642,
+        1159,
+        2663,
+        1285,
+        3295,
+        1117,
+        2878,
+        476,
+        3302,
+        2303,
+        1976,
+        2353,
+        1188
+      ]
+    }
+  ],
+  "selected_workers": 24,
+  "selection": "Smallest tested concurrency within 90% of the best observed throughput. Hardware-only choice; no outcome-based scientific selection.",
+  "limits": "Short mixed-condition waves, not a precise scaling law or guarantee against all later memory peaks."
+}
