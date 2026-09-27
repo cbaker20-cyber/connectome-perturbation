@@ -3,6 +3,9 @@ import argparse
 from contextlib import ExitStack
 import csv
 import json
+import hashlib
+import zipfile
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 import sys
 
@@ -86,16 +89,71 @@ def inspect_trial(directory, manifest, ids):
     }
 
 
-def run(study, out):
+def verify_local_snapshot(archive_path, plan):
+    with zipfile.ZipFile(archive_path) as archive:
+        names = archive.namelist()
+        if len(names) != len(set(names)):
+            raise ValueError('Duplicate snapshot archive entries')
+        data = archive.read('connectome/transfer_manifest.json')
+        if hashlib.sha256(data).hexdigest() != plan['transfer_sha256']:
+            raise ValueError('Snapshot does not match the recorded transfer')
+        manifest = json.loads(data)
+        for relative, expected in manifest['files'].items():
+            h = hashlib.sha256()
+            with archive.open('connectome/' + relative) as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                    h.update(chunk)
+            if h.hexdigest() != expected:
+                raise ValueError(f'Changed snapshot file: {relative}')
+        for relative, expected in plan['provenance']['inputs'].items():
+            if digest(ROOT / relative) != expected:
+                raise ValueError(f'Local input differs from simulation: {relative}')
+        # These local functions define the neuron order and sensory membership.
+        for relative in ['eigencircuits/common.py', 'perturbation/baseline.py']:
+            if digest(ROOT / relative) != plan['provenance']['sources'][relative]:
+                raise ValueError(f'Local input reader changed: {relative}')
+
+
+def initialize_reader(study, plan, ids):
+    global _study, _plan, _ids
+    _study, _plan, _ids = Path(study), plan, ids
+
+
+def read_trial(job):
+    directory = _study / 'trials' / job['trial_id']
+    manifest = validated(directory, job, _plan)
+    return manifest, inspect_trial(directory, manifest, _ids)
+
+
+def checked_trials(study, plan, ids, workers):
+    if workers == 1:
+        initialize_reader(study, plan, ids)
+        for job in plan['jobs']:
+            yield job, read_trial(job)
+    else:
+        with ProcessPoolExecutor(max_workers=workers, initializer=initialize_reader,
+                                 initargs=(study, plan, ids)) as pool:
+            # Bound queued results: each contains a full neuron-rate vector.
+            for start in range(0, len(plan['jobs']), workers * 2):
+                batch = plan['jobs'][start:start + workers * 2]
+                yield from zip(batch, pool.map(read_trial, batch))
+
+
+def run(study, out, snapshot_archive=None, workers=1):
+    if not 1 <= workers <= 8:
+        raise ValueError('Use 1 to 8 local readers')
     study, out = Path(study).resolve(), Path(out).resolve()
     if out == study or study in out.parents:
         raise ValueError('Keep diagnostic outputs outside the frozen study')
     if list(study.glob('*.lock')):
         raise ValueError('Study has locks; check the original workers before reading it')
-    verify()
     plan = read(study / 'jobs.json')
-    if digest(ROOT / 'transfer_manifest.json') != plan['transfer_sha256']:
-        raise ValueError('Changed transfer manifest')
+    if snapshot_archive is None:
+        verify()
+        if digest(ROOT / 'transfer_manifest.json') != plan['transfer_sha256']:
+            raise ValueError('Changed transfer manifest')
+    else:
+        verify_local_snapshot(snapshot_archive, plan)
     if plan['jobs'] != planned_jobs(plan['conditions'], plan['variants'], plan['design']['seeds']):
         raise ValueError('Jobs differ from the recorded design')
     ids = neuron_ids()
@@ -107,7 +165,7 @@ def run(study, out):
     out.mkdir(parents=True, exist_ok=False)
     audit = {'status': 'running', 'started_utc': utc(), 'jobs_sha256': digest(study / 'jobs.json'),
              'script_sha256': digest(Path(__file__)), 'simulation_environment': plan['provenance']['environment'],
-             'analysis_environment': environment(), 'completed_trials': 0,
+             'analysis_environment': environment(), 'completed_trials': 0, 'workers': workers,
              'scope': 'Read-only arithmetic and event checks. Analysis platform may differ; no simulations run.',
              'sparse_rates': 'Absent neuron_index rows mean zero. All neurons are listed in neurons.csv. Rates and deltas are Hz.'}
     write(out / 'audit.json', audit)
@@ -123,12 +181,10 @@ def run(study, out):
             traces = csv.writer(stack.enter_context((out / 'population_10ms.csv').open('w', newline='', encoding='utf-8')))
             traces.writerow(['trial_id'] + [f'bin_{i:03d}' for i in range(100)])
             baseline = base_manifest = group = None
-            for job in plan['jobs']:
-                directory = study / 'trials' / job['trial_id']
-                manifest = validated(directory, job, plan)
+            for job, (manifest, inspected) in checked_trials(study, plan, ids, workers):
                 if set(manifest['input_ids']) != inputs:
                     raise ValueError('Input membership differs from the sugar protocol')
-                rates, trace, row = inspect_trial(directory, manifest, ids)
+                rates, trace, row = inspected
                 key = (job['variant']['name'], job['seed'])
                 if job['condition'] == 'baseline':
                     baseline, base_manifest, group = rates, manifest, key
@@ -163,5 +219,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--study', required=True)
     parser.add_argument('--out', required=True)
+    parser.add_argument('--snapshot-archive', help='Original upload ZIP for local analysis outside the deployed snapshot')
+    parser.add_argument('--workers', type=int, default=1)
     args = parser.parse_args()
-    run(args.study, args.out)
+    run(args.study, args.out, args.snapshot_archive, args.workers)

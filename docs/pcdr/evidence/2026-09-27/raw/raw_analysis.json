@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "jobs_sha256": "c56efa57852bdf4a7ea2bacb0ec1944d36c3d038c7a2d1acc1bf529bbae1d174",
+  "diagnostic_audit_sha256": "23ebff2e694c95de18e34b89cbef14d3d89fea5e5831237dde9a42d5b743b184",
+  "script_sha256": "ab0e6a6bd7245e87fc962d9b0fd7b43840c81bc9152174d5fc297c6bc05db638",
+  "reproduced_summary_rows": 104,
+  "reproduced_seed_rows": 3120,
+  "reproduced_interval_rows": 104,
+  "zero_rate_cells": 22,
+  "interpretation": "Retrospective paired intervals, conditional on this model and these chosen comparison sets. No reference-set p-values or biological replication.",
+  "outputs": {
+    "activity_summary.csv": "daa4405dd48173c2a11c10379f0fea596fde013bb041a5323d97b3aea327d369",
+    "paired_activity.csv": "2b6aabc7b33423aa33f68a6f7323d3a0c1f5f442d75b6ad4fbde723ac7f842aa",
+    "paired_footprint_contrasts.csv": "b1e757670969e5cb4966bca5182346d31532cd5a557a64a42f5472bc71e72894",
+    "population_traces.png": "64f72416e452265072971cac9a07a36f07276e31c143000b05ca60846517d56e",
+    "spatial_comparisons.csv": "6d91bc4541bcda17cd64073f0d758dafdd795cb89a64335b49dabf2d9571733d",
+    "zero_rate_cells.csv": "877ab33f1de2fbc3173f75c06eeda8389921294bca5018a4ccb89bb8bf399399"
+  }
+}

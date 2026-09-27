@@ -8,6 +8,59 @@ from eigencircuits.common import fingerprint
 IDS = ['720575940660219265', '720575940660219266', '720575940660219267']
 
 
+def test_local_snapshot_hash_checks(tmp_path, monkeypatch):
+    import hashlib
+    import zipfile
+    monkeypatch.setattr(diagnostic, 'ROOT', tmp_path)
+    h = lambda data: hashlib.sha256(data).hexdigest()
+    paths = ['input.csv', 'eigencircuits/common.py', 'perturbation/baseline.py']
+    for name in paths:
+        path = tmp_path / name
+        path.parent.mkdir(exist_ok=True)
+        path.write_bytes(b'original')
+    manifest = json.dumps({'files': {name: h(b'original') for name in paths}}).encode()
+    plan = {'transfer_sha256': h(manifest), 'provenance': {'inputs': {'input.csv': h(b'original')}, 'sources': {name: h(b'original') for name in paths[1:]}}}
+    archive = tmp_path / 'upload.zip'
+    def write_archive(content):
+        with zipfile.ZipFile(archive, 'w') as z:
+            z.writestr('connectome/transfer_manifest.json', manifest)
+            for name in paths: z.writestr('connectome/' + name, content)
+    write_archive(b'original')
+    diagnostic.verify_local_snapshot(archive, plan)
+    (tmp_path / 'input.csv').write_bytes(b'changed')
+    with pytest.raises(ValueError, match='Local input differs'):
+        diagnostic.verify_local_snapshot(archive, plan)
+    (tmp_path / 'input.csv').write_bytes(b'original')
+    write_archive(b'changed')
+    with pytest.raises(ValueError, match='Changed snapshot file'):
+        diagnostic.verify_local_snapshot(archive, plan)
+
+
+def test_process_readers_match_serial_and_propagate_errors(tmp_path):
+    variant = dict(name='default', weight_scale=1., inhibitory_scale=1., strong_fraction=None)
+    jobs = diagnostic.planned_jobs([{'name': 'baseline', 'ids': []}], [variant], [1, 2])
+    provenance = {'inputs': {}, 'sources': {}, 'environment': {}}
+    plan = {'jobs': jobs, 'provenance': provenance}
+    (tmp_path / 'trials').mkdir()
+    for job in jobs:
+        path = tmp_path / 'trials' / job['trial_id']
+        m = fixture_trial(path, name=job['trial_id'])
+        for name in ['source_snapshot.zip', 'environment.json']:
+            (path / name).write_bytes(b'fixture')
+        m.update({key: job[key] for key in ['trial_id', 'seed', 'context', 'lesion_ids']})
+        m.update({key: value for key, value in variant.items() if key != 'name'})
+        m.update(status='complete', provenance=provenance, backend='numpy', input_hz=150., input_protocol='fixed_binomial_tape_v1',
+                 outputs={p.name: diagnostic.digest(p) for p in path.iterdir()})
+        (path / 'manifest.json').write_text(json.dumps(m))
+    serial = list(diagnostic.checked_trials(tmp_path, plan, IDS, 1))
+    parallel = list(diagnostic.checked_trials(tmp_path, plan, IDS, 2))
+    for (j, (m, (rates, trace, row))), (jj, (mm, (rr, tt, rrow))) in zip(serial, parallel):
+        assert j == jj and m == mm and row == rrow
+        np.testing.assert_array_equal(rates, rr)
+        np.testing.assert_array_equal(trace, tt)
+    (tmp_path / 'trials' / jobs[1]['trial_id'] / 'environment.json').write_bytes(b'changed')
+    with pytest.raises(ValueError, match='Corrupt output'):
+        list(diagnostic.checked_trials(tmp_path, plan, IDS, 2))
 def fixture_trial(path, times=(0., .0022, .9999), cells=(0, 0, 1), name='test'):
     path.mkdir(exist_ok=True)
     spikes = pd.DataFrame({'t': times, 'flywire_id': [IDS[i] for i in cells], 'trial': [name]*len(times), 'exp_name': ['sugar']*len(times)})

@@ -1,8 +1,43 @@
 # CCR run, 27 September 2026
 
-The subsequent skeptical review and the prepared read-only CCR diagnostic are recorded in [Review and next steps](REVIEW_AND_NEXT_STEPS.md). That diagnostic has not yet run on the remote study; it adds no new simulation result to the findings below.
+## Local checks of the downloaded trials
 
-## Collected results
+Downloaded CCR_saved_trials.tar, 3,718,430,720 bytes, SHA256 9dd4266f8535f9bec4acafcbd7f86fa53c078adad4d204a5b3051f91a50843eb. Checked archive paths before extraction and matched its jobs.json to the earlier returned summary. The archive contains all 3,390 planned trials. No additional simulations were run.
+
+All 3,390 trials passed the local checks of file hashes, recorded settings, input membership, scheduled and delivered events, paired input tapes, spike/rate agreement, neuron IDs, time grid and refractory intervals. The original upload archive and the local input readers also match the recorded study. The eight-reader check took 344.96 seconds after extraction. The Linux simulation environment and Windows reading environment remain recorded separately. A partial serial check was stopped to change reading concurrency and retained with an interrupted status.
+
+Reconstructed all 104 mean-vector summaries, all 3,120 per-seed results and all 104 pairs of original bootstrap intervals from the raw rates. They agree with the returned collection within the recorded floating-point tolerances. This replaces the earlier limitation that only the summary had been checked locally. Passing these checks does not establish time-step convergence or physiological accuracy.
+
+The large responses are increases in the lesion trials, not unusually active paired baselines. At weight 1.2/inhibitory multiplier 0.8:
+
+| Lesion | Seed | Baseline spikes | Lesion spikes | Baseline recruited | Lesion recruited |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Comparison 004 | 631427 | 20,858 | 739,680 | 500 | 13,097 |
+| Comparison 005 | 631427 | 20,858 | 700,297 | 500 | 13,070 |
+| Mode without MN9 | 631404 | 21,055 | 543,275 | 477 | 11,926 |
+| MN9 alone | 631430 | 21,429 | 492,991 | 523 | 11,948 |
+| Comparison 005 | 631405 | 21,042 | 96,252 | 503 | 12,316 |
+| Mode | 631423 | 21,064 | 80,768 | 500 | 11,038 |
+
+Recruitment excludes the 21 input cells; spike counts include them. Population traces show sharp increases at different times during the one-second trials. All these trials remain included. The highest single non-input rate among the listed trials is 306 Hz; the minimum observed non-input interval is 2.4 ms, above the model's 2.2 ms refractory time. These observations rule out the tested count, input and timing inconsistencies. They do not distinguish a model response from a time-step-sensitive response or establish a biological mechanism.
+
+![Population spike counts from every seed at default and weight 1.2/inhibition 0.8](evidence/2026-09-27/raw/population_traces.png)
+
+Each panel includes all 30 seeds, with their median in dark blue. Orange identifies the largest paired total rate change for that condition, or largest spike count for baseline. The vertical axis is linear below 100 and logarithmic above it. Trials with large responses have not been removed or averaged away. The complete nine-setting activity table and all paired activity rows are retained in the evidence folder.
+
+The 22 zero-rate-effect single-cell lesions are now explained more narrowly: every one of these cells was silent in all 30 default baselines. All 660 corresponding lesions have exactly the same ordered spike times and neuron IDs as baseline, not just the same rates. Trial labels differ by design. In this outgoing-weight lesion model, a baseline-silent cell sends no spike-triggered output along those connections during the observed trajectory. This result therefore gives no evidence for its general lack of a role. Eight of these cells fire in at least one full-mode lesion trial, with maxima of 1–4 Hz. We cannot replace the 51-cell lesion with a 29-cell lesion without testing that counterfactual.
+
+Full mode versus other-50 can now be compared on the same neuron universe. At default, the sum of absolute differences between their mean response vectors is 76.867 summed Hz, or 1.542% of the full-mode response's 4,983.567 summed Hz. Their signed cosine is 0.999893. The difference within the fixed 51-cell support is 10.667 summed Hz. This supports a close descriptive resemblance at default; no equivalence margin was specified. At weight 1.2/inhibition 0.8, the corresponding whole-network difference is 15,608.567 summed Hz, or 158.27% of the full-mode response, with only 11.933 summed Hz inside the mode. Similar MN9 responses do not guarantee similar responses elsewhere. Across the other eight settings, the relative difference ranges from 1.03% to 1.95%.
+
+The sum of all 51 single-lesion mean response vectors also differs from the full-mode response at default. Their vector difference has absolute sum 3,682.167 summed Hz, compared with 4,983.567 for the full-mode response; signed cosine is 0.844387. This extends the earlier MN9-only observation of non-additivity to the network. It does not identify pairwise mechanisms, and the ratio is not a percentage of variance explained.
+
+Added retrospective paired intervals for the original A and F contrasts. Each of 2,000 resamples uses the same seed weights for mode and comparison, with generator seed 630700. For each resample, signed neuron changes are averaged before taking absolute values and calculating A/F. At default, mode-minus-comparison F is 0.03465 [0.03138, 0.03835] for 003, 0.03026 [0.02744, 0.03290] for 004 and 0.03294 [0.03029, 0.03594] for 005. Across the grid, all 27 A intervals are positive. Twenty-four F intervals are positive; all three at weight 1.2/inhibition 0.8 include zero. Those three F contrasts are -0.02883 [-0.07324, 0.01208], 0.10935 [-0.07289, 0.16768] and 0.11083 [-0.05169, 0.16763]. These are marginal, descriptive seed-bootstrap intervals, not multiplicity-adjusted or reference-set tests. Residual comparator imbalance is unchanged.
+
+Next work should target reproducibility of the abrupt increases, followed by a controlled time-step check using the same physical input times. The existing checks justify retaining and studying these trials, not dropping them. Before a larger eigencircuit claim, the comparison-set design still needs to isolate the proposed explanation. The protocol and remaining limitations are in [Review and next steps](REVIEW_AND_NEXT_STEPS.md). No new simulation was started during this analysis.
+
+## Earlier analysis of the returned summary
+
+The following records the conclusions and limits before the raw trial download. The local checks above resolve the earlier data-access limitations; the model and comparison-set limitations remain.
 
 The returned bundle contains all 104 planned condition-by-network summaries and 3,120 paired seed readouts. Its design matches the frozen 3,390-job plan exactly. Output hashes match the completed collection record; the 53 reused trial indices match the calibration waves. The CCR smoke certificate passed. The remote collector reports that its trial-file and paired-input checks passed. Locally, source hashes, bundle hashes, coverage, metric identities and signed averages were checked. The underlying neuron-level rates and spikes are still on CCR, so the local audit does not independently reproduce the raw-output checks or bootstrap intervals.
 
