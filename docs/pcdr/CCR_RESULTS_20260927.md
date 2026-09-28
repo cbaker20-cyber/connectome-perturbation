@@ -1,6 +1,37 @@
 # CCR run, 27 September 2026
 
-## Completed follow-up: replay, time steps and active cells
+## Completed 530-trial time-step comparison
+
+The next run completed on CCR from 22:01:05 to 23:07:35 UTC on 27 September, about 66.5 minutes with 16 workers. The downloaded ZIP contains the full trial records. Local checks reproduced all 530 trial summaries, 444 paired rows and 26 mean rows. All four exact replays matched ordered spikes and delivered events. Checks included the frozen plan and sources, output hashes, process completion, original input schedules, delivered-event membership, neuron IDs, spike counts, time grids, refractory spacing and population traces. Evidence and archive hash are in evidence/2026-09-27/resolution/. The original files remain unchanged.
+
+At default, the full-mode averages remain close across the three tested steps:
+
+| Step (ms) | A (Hz) | F | Total absolute mean response (summed Hz) |
+| --- | ---: | ---: | ---: |
+| 0.1 | 22.50327 | 0.230290 | 4983.57 |
+| 0.05 | 22.28235 | 0.230280 | 4934.87 |
+| 0.025 | 22.30915 | 0.230822 | 4929.20 |
+
+These use 30 paired seeds and the full 51-cell support. Signed responses are averaged across seeds before absolute values are taken. At both new steps, full-mode A and F exceed all three previously selected comparators. This ordering is descriptive: it does not repair their matching limitations or introduce independent modes, flies or input conditions.
+
+Similar aggregate values do not imply identical affected neurons. Between 0.05 and 0.025 ms, the absolute difference between full-mode mean response vectors is 162.87 summed Hz, 3.30% of the latter response. Corresponding differences for the three comparators are 5.02–6.69%. MN9-only is a different case: its mean vector changes by 184.57 summed Hz, 112.18% of its small 0.025 ms response. Its own-support A changes from 1.10 to 0.06667 Hz. Do not extend the full-mode average stability to every condition or trajectory. No convergence tolerance was specified before observing these results.
+
+Active29 remains close on the common 51-cell support: A/F are 22.24510/0.230426 at 0.05 ms and 22.10131/0.231315 at 0.025 ms. Its own 29-cell-support A values are 38.93218 and 38.68046 Hz; those must not be compared directly with full-mode A on 51 cells. Membership was fixed using the original baselines and these same seeds, so this remains a retrospective comparison.
+
+At weight 1.2/inhibitory multiplier 0.8, the additional steps reveal another non-monotonic response. Paired total absolute rate changes for two instructive selected cases are:
+
+| Lesion and seed | 0.1 ms | 0.05 ms | 0.025 ms | 0.0125 ms | 0.00625 ms |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| MN9 alone, 631430 | 479264 | 1018 | 269342 | 1035 | 1237 |
+| Mode without MN9, 631405 | 7882 | 8397 | 7968 | 622302 | 7919 |
+
+The second case was the previously selected near-median example. At 0.0125 ms its lesion produces 629557 spikes and recruits 11989 non-input cells. This is retained, not discarded as an outlier. The MN9-only response is much smaller at the two newest steps, but a different lesion becomes large at an intermediate step. These observations rule out a simple claim that each successive smaller step consistently removes the large responses. Neither selecting the smallest result nor pooling time steps as replicate trials is justified.
+
+The saved schedules preserve physical external-event times; state-dependent delivered jumps can still differ. Brian2 documents that spike timing and propagation remain tied to the network clock even when subthreshold equations are integrated exactly. That provides a reason to examine threshold, delay and refractory timing, not a diagnosis of this particular response. See [Brian2 2.9.0 integration documentation](https://brian2.readthedocs.io/en/2.9.0/user/numerical_integration.html) and [clock and scheduling documentation](https://brian2.readthedocs.io/en/2.9.0/user/running.html).
+
+Next work should separate two questions. For the default-setting claim, inspect baseline-only comparator balance and recruitment at the finer step before deciding whether a defensible new comparison is feasible; freeze any new selection and use unused seeds for its later test. For the high-weight cases, first use the downloaded population and delivered-event records to locate when paired trajectories separate. A later targeted simulation should record the relevant voltage/current and scheduling behavior, with comparisons fixed before execution. Another broad grid is not yet justified. Numerical robustness at default is more supported than before, but independent eigencircuit-specific prediction and high-weight numerical convergence remain unresolved.
+
+## Earlier 101-trial follow-up: replay, time steps and active cells
 
 The 101-trial follow-up completed on CCR between 20:52:19 and 21:00:28 UTC, about eight minutes, using 16 workers. Downloaded the results ZIP, full trial archive and controller log. Independently checked all 101 trials locally: source and output hashes, source-trial identity, process completion, neuron IDs, sparse rate counts against full spikes, population traces, input schedules, delivered-event membership, time grids and refractory spacing. Recalculated all reported trial rows, all 36 paired time-step rows and the active-29 summary. All 25 replays match the original ordered spikes and delivered inputs exactly, including the cases with large responses. Reproducibility at one time step is therefore established for those selected replays; convergence across steps is not.
 

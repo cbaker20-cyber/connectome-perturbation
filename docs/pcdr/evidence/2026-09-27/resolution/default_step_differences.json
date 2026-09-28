@@ -1,0 +1,37 @@
+[
+  {
+    "condition": "active29",
+    "mean_vector_l1_difference_hz": 164.16666666666666,
+    "relative_to_0025_response": 0.0336899566305939
+  },
+  {
+    "condition": "mn9_only",
+    "mean_vector_l1_difference_hz": 184.56666666666666,
+    "relative_to_0025_response": 1.1217585089141004
+  },
+  {
+    "condition": "mode",
+    "mean_vector_l1_difference_hz": 162.86666666666665,
+    "relative_to_0025_response": 0.03304119667829803
+  },
+  {
+    "condition": "mode_without_mn9",
+    "mean_vector_l1_difference_hz": 137.83333333333337,
+    "relative_to_0025_response": 0.02798987355481548
+  },
+  {
+    "condition": "motor_003",
+    "mean_vector_l1_difference_hz": 211.76666666666665,
+    "relative_to_0025_response": 0.06692017612235869
+  },
+  {
+    "condition": "motor_004",
+    "mean_vector_l1_difference_hz": 162.09999999999997,
+    "relative_to_0025_response": 0.05020233720113967
+  },
+  {
+    "condition": "motor_005",
+    "mean_vector_l1_difference_hz": 183.63333333333335,
+    "relative_to_0025_response": 0.05611465357426611
+  }
+]
