@@ -1,5 +1,27 @@
 # CCR run, 27 September 2026
 
+## Local event and comparator review
+
+Reviewed all 12 previously selected high-weight lesion/seed pairs at all five steps (60 pairs), retaining every case. Rechecked hashes for each input table read. Compared exact neuron/time events on the common 0.00625 ms grid and retained all 100 population bins per trial. Evidence: evidence/2026-09-27/event_review/. No simulations or comparison-set changes were made.
+
+The following times describe selected trajectories, not a biological onset definition. The cumulative-excess crossing was set at 1000 additional spikes for this review before calculating the table; it is measured only at 10 ms bin ends and is not a convergence, exclusion or significance criterion.
+
+| Lesion/seed/step | First spike-event difference (ms) | First bin end with 1000 cumulative excess spikes (ms) | Peak excess bin start (ms) |
+| --- | ---: | ---: | ---: |
+| MN9 alone, 631430, 0.1 ms | 26.5 | 370 | 530 |
+| MN9 alone, 631430, 0.025 ms | 25.975 | 620 | 810 |
+| Mode without MN9, 631405, 0.0125 ms | 13.2125 | 200 | 760 |
+
+The first event difference occurs long before the large increase in population activity. First difference includes a shifted spike time as well as an added or missing spike; it does not identify a causal neuron. All seven inspected trajectories with more than 50000 lesion spikes have identical delivered external-event records to their same-step baselines. The only delivered-event difference among the 60 pairs occurs in comparison 004, seed 631401, at 0.1 ms, starting at 856 ms; that lesion has 18423 spikes versus 20768 in its baseline. Thus changed delivered input is not an explanation for the seven large trajectories. Equality within a pair does not assert equality across different time steps. Saved spikes and input jumps do not expose membrane voltage or recurrent drive, so these observations cannot determine the mechanism of divergence.
+
+Recomputed baseline rates and any-spike recruitment from all 30 default baselines at each of 0.1, 0.05 and 0.025 ms. Static anatomy and model-sign features are unchanged. The mode and each fixed comparator have 29 recruited cells at the two coarser steps. At 0.025 ms the mode has 30, while each comparator still has 29: neuron 720575940620301588 emits one spike in one baseline, giving a mean of 0.03333 Hz. This illustrates the sensitivity of an any-spike category. It does not justify silently replacing the original recruitment rule or changing active29 membership. Exact sign/recruitment/motor strata no longer match at that step, even though baseline-rate pooled SMDs remain below 0.1 (0.07397–0.08847).
+
+The three comparisons also retain incoming-degree variance ratios of 13.00–13.09 on the log1p scale and ECDF gaps of 0.27451. Similar means therefore remain insufficient evidence of similar feature distributions. [Austin (2009)](https://doi.org/10.1002/sim.3697) supports examining distributional spread and higher moments alongside standardized mean differences; its observational-data setting does not provide a fly-model acceptance threshold.
+
+The eligible pool itself constrains diversity. At every tested step, the target requires eight recruited excitatory motor cells, and only eight eligible alternatives exist after excluding the target and sugar inputs. All eight must therefore be shared by any set satisfying these strata. Three recruited inhibitory motor cells are required from four alternatives, giving only four possible active motor memberships under these constraints. This is a necessary combinatorial limitation, not a solution of simultaneous degree/strength/distribution matching. More optimized sets would not produce many independent motor alternatives.
+
+Next decision: keep the existing comparisons descriptive and retain the original membership records. Do not launch a larger batch of nominally matched sets yet. A defensible prospective design needs an explicit choice between conditional comparisons with forced motor overlap, a question limited to nonmotor members, or additional modes and input conditions. Each changes the scope and needs a recorded selection rule before new outcomes. For numerical diagnosis, a small targeted follow-up should first reproduce the mode-without-MN9 seed 631405 at 0.0125 and 0.00625 ms with paired baselines, then record voltage, recurrent drive and scheduling information for a prespecified set of cells. Recording must first be shown not to alter spikes. The current evidence does not justify declaring a dynamical transition or choosing a preferred step from response size.
+
 ## Completed 530-trial time-step comparison
 
 The next run completed on CCR from 22:01:05 to 23:07:35 UTC on 27 September, about 66.5 minutes with 16 workers. The downloaded ZIP contains the full trial records. Local checks reproduced all 530 trial summaries, 444 paired rows and 26 mean rows. All four exact replays matched ordered spikes and delivered events. Checks included the frozen plan and sources, output hashes, process completion, original input schedules, delivered-event membership, neuron IDs, spike counts, time grids, refractory spacing and population traces. Evidence and archive hash are in evidence/2026-09-27/resolution/. The original files remain unchanged.

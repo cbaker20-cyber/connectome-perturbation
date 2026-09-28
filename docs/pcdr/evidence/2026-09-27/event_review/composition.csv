@@ -1,0 +1,13 @@
+dt_ms,condition,recruited_cells,motor_cells,strata_match
+0.1,mode,29,13,True
+0.1,motor_003,29,13,True
+0.1,motor_004,29,13,True
+0.1,motor_005,29,13,True
+0.05,mode,29,13,True
+0.05,motor_003,29,13,True
+0.05,motor_004,29,13,True
+0.05,motor_005,29,13,True
+0.025,mode,30,13,True
+0.025,motor_003,29,13,False
+0.025,motor_004,29,13,False
+0.025,motor_005,29,13,False

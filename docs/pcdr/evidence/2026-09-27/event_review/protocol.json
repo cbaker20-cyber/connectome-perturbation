@@ -1,0 +1,7 @@
+{
+  "recorded_utc": "2026-09-28T01:22:41.908465+00:00",
+  "method": "All 12 previously selected lesion/seed pairs at all five steps. Compare first distinct neuron/time event, 10 ms counts, peak excess bin and first cumulative excess of 1000 spikes. The 1000 crossing is descriptive, chosen for timing this review, not a biological onset or exclusion rule. Refresh fixed-comparator baseline means and any-spike recruitment using all 30 default seeds at each of three steps. No membership selection or optimizer.",
+  "script_sha256": "8c723bb9eb1f7e310405d9c4d3b4eb230d6fa51b0874d2adca648f81912d60c2",
+  "plan_sha256": "b8f1999eeaac834870f8d27bed1931a031323bb577000620785dd7cb930eb36a",
+  "features_sha256": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8"
+}
