@@ -1,5 +1,19 @@
 # CCR run, 27 September 2026
 
+## Source-partition check and broader tests, 29 September
+
+Partitioned the presynaptic sources in the same 577 target cells' 20 ms pre-first-spike windows. Fixed mutually exclusive groups before calculation: stimulated inputs, early large-only cells, later large-only cells, other cells active in any saved run, and cells silent in all four runs. Group membership uses the known outcomes and is descriptive. The windows and target membership were unchanged.
+
+Used a second calculation method: count delayed spike arrivals within each incoming edge's half-open time interval with sorted tick lookup, then sum signed scaled weights. This does not use the prior sparse matrix multiplication. All 2308 target/run pairs reproduce the previous positive and negative raw and accepted sums within the declared 1e-9 mV tolerance; the maximum discrepancy is 9.94760e-14 mV. This independently checks event counting and window boundaries but still shares the same input data, model weights and group definitions.
+
+In the coarse lesion, early large-only sources supply 34827.870 of the 38637.390 mV positive arrival sum (90.1403%) and -5299.008 of the -6829.944 mV negative sum. Other-active sources supply 3809.520 and -1530.936 mV. These are sums across different target-specific windows, not current measurements or a common-time total. Later-large-only and all-silent groups necessarily contribute zero in these windows given their definitions and the positive delay; that is not an independent discovery. Stimulated inputs have no direct arrivals in these target windows, which does not exclude indirect effects of stimulation.
+
+Positive early-group arrivals reach 567 of 577 targets. Ten targets, including the first eight cells in recruitment order, receive none in their pre-spike windows. All ten receive positive arrivals from other-active sources. The first target (720575940627371834, first spike 81.8125 ms) receives positive increments summing to 50.490 mV and negative increments summing to -13.992 mV from other-active cells in its preceding 20 ms. A signed sum cannot be compared directly with the spike threshold because decay, ordering and the earlier state matter.
+
+The 90% fraction is consistent with propagation among already recruited members of this outcome-defined group. It does not explain the first recruitments. The ten exceptions separate an initiation question from later propagation without selecting a causal neuron or intervention. Next, examine the timing and source identity of arrivals to those ten targets, together with a validated reconstruction of their state; do not infer a trigger from the aggregate fraction alone.
+
+Ran the complete local test suite: 323 passed, 3 skipped, 106 warnings in 24.26 seconds. The three skips are symlink tests that this environment does not support. This establishes the tested code behavior, not scientific correctness of every inference. New tests compare delayed-window counts against explicitly enumerated events, including boundaries and 200 reproducible random examples. Evidence is in evidence/2026-09-29/source_inputs/; no simulations or new upload were needed.
+
 ## Reconstructed inputs to the 577 early recruited cells
 
 Extended the previously validated incoming-event calculation to all 577 fixed early large-only cells across the four saved runs. Processed eight postsynaptic cells at a time using sparse presynaptic spike matrices, avoiding a whole-brain dense time array. All four calculations completed locally without new simulation. Input table and manifest hashes were checked against the verified recordings, and the cohort and connectivity hashes were recorded before calculation.

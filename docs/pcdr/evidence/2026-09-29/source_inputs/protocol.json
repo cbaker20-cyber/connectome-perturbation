@@ -1,0 +1,10 @@
+{
+  "recorded_utc": "2026-09-29T05:01:43.234851+00:00",
+  "script_sha256": "0d85847b46080360685d22b6af8785d5603e8d755ccd1a751614012d131e8da7",
+  "cohort_sha256": "db0cc351b1dd923d55269b6ef0d96da6878bd900284e198c4ed1393da1939bbc",
+  "groups_sha256": "abc277fef836361fa6819a07424574a12bccd449d76d5b0cea92cdbf2435a16b",
+  "previous_sha256": "eb306ba3f246cf0c79d3c6f264cc71660f3f73a85c281fb4f2fa6c4ba72c726e",
+  "connectivity_sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+  "method": "Same 577 targets and same physical 20 ms pre-first-spike windows in all four runs. Fixed mutually exclusive source groups: stimulated inputs; large-only recruited before 180 ms; large-only recruited at/after 180 ms; other cells active in any saved run; cells silent in all runs. Groups are outcome-defined. Count delayed spikes per incoming edge using sorted tick lookup, independently of the prior sparse-matrix calculation. Preserve sign, weight scaling and outgoing lesions. Require all per-target signed sums to reproduce the previous raw and accepted values within 1e-9 mV. All targets are nonrefractory before first spike in coarse lesion and silent in the other runs.",
+  "limits": "An arrival from an earlier recruited cell demonstrates temporal connectivity, not that it caused target recruitment. Source groups condition on all four outcomes; no independent enrichment or causal test."
+}

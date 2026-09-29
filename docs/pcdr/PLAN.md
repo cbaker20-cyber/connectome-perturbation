@@ -1,5 +1,7 @@
 # P/D/C/R study
 
+Source-partition update: independent delayed-arrival counting reproduces all 2308 target/run pairs. Early large-only sources supply 90.14% of positive sums, but ten targets including the earliest eight have no such positive arrivals in their pre-spike windows. Next examine those targets through source timing and validated state reconstruction; no causal trigger or intervention is established. Full local suite: 323 passed, 3 unsupported-symlink skips.
+
 29 September signed-input extension: all 577 early large-only cells were reconstructed locally in all four runs. Positive and negative incoming magnitudes both rise overall before coarse-lesion first spikes, with the increase dominated by positive sums. This is outcome-conditioned description, not a causal test. Next record and examine presynaptic source partitions before choosing any intervention. See current research record and early_drive evidence.
 
 Recruitment review: 11530 non-input cells fire only in the large-response lesion, contributing 608713 spikes; none was recorded. Of these, 577 first fire before the declared descriptive split at 180 ms. Next test whether incoming synaptic-event increments can be reconstructed from saved spikes and connectivity, using the ten recorded cells for validation before extending to this group. No triggering neuron or pathway has been established.
