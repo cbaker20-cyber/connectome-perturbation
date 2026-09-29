@@ -1,0 +1,9 @@
+{
+  "recorded_utc": "2026-09-29T04:24:14.013852+00:00",
+  "script_sha256": "1944349154dc69fe13a88debd0e2af04188cccb6681aefcc2f6444747d740079",
+  "cohort_sha256": "db0cc351b1dd923d55269b6ef0d96da6878bd900284e198c4ed1393da1939bbc",
+  "validation_sha256": "e4cd9478629ee325d26c1f8f4c5b12d82fda8025767447ae34410dbe67f6ed77",
+  "connectivity_sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+  "method": "All 577 fixed early large-only cells, all four runs, batches of eight. Separate positive and negative signed weights before accumulation, preserving inhibitory scale, delay, outgoing lesion and reconstructed refractory masking. Report raw arrivals and accepted arrivals. Windows: 0\u2013180 ms, 180\u20131000 ms and the same physical 20 ms interval immediately preceding each cell first spike in the coarse lesion, exclusive of that spike. This anchor uses known outcomes and is not independent selection. No p-values, rankings or intervention selection.",
+  "limits": "Reconstructed increments, not measured voltage or current. Raw arrivals are computed from actual saved presynaptic spikes, not a simulation without refractory gating. Signed components are model-defined, not measured transmitter release. Masked comparisons after firing are influenced by postsynaptic refractory state."
+}

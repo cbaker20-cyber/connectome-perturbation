@@ -274,3 +274,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Reconstructing incoming events
 
 `scripts/pcdr_input_reconstruction.py` multiplies selected postsynaptic weight rows by a sparse spike raster, shifts arrivals by the exact synaptic delay, and masks writes using eligibility reconstructed from postsynaptic spikes. The after-threshold mask matters because newly spiking cells already reject writes to g. It compares the result with after_synapses g minus before_thresholds g, retains unmasked errors as a diagnostic and fails if any recorded flag or declared-tolerance comparison disagrees. This test validates ten non-input cells; it does not reconstruct full voltage or infer causality.
+
+## Inputs to early recruited cells
+
+`scripts/pcdr_early_drive.py` processes the fixed 577-cell cohort in batches of eight. It separates weight signs before reconstructing delayed arrivals and saves raw versus refractory-accepted sums in fixed windows and matched physical pre-first-spike windows. It reuses the validated increment and mask helpers. Dense arrays are limited to a small postsynaptic batch; the full presynaptic raster stays sparse. Group sums across cell-specific windows are descriptive, not a common-time network total or a voltage estimate.

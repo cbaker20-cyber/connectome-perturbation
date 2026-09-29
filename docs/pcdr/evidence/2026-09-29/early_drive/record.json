@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "completed_utc": "2026-09-29T04:24:20.708697+00:00",
+  "cells": 577,
+  "rows": 6924,
+  "outputs": {
+    "cell_inputs.csv": "eb306ba3f246cf0c79d3c6f264cc71660f3f73a85c281fb4f2fa6c4ba72c726e",
+    "group_sums.csv": "22d19152ec63402bd39b94c552d82d055c5c7a4c2903cbfbd539a6eb8036d3b7",
+    "protocol.json": "6e8191bda64bbd7983d46f93984ba6349f9de1f72ae17f19045b1371031eee60"
+  }
+}
