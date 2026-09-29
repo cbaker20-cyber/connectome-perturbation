@@ -1,6 +1,6 @@
 # Explaining the study
 
-A short meeting guide, current through 29 September 2026. Read the [overview](RESEARCH_OVERVIEW.md) for the full sequence.
+A short meeting guide, current through 29 September 2026. Read the [overview](RESEARCH_OVERVIEW.md) for the full sequence and the [detailed preparation guide for James and Dr. Muldoon](MEETING_DETAIL_GUIDE.md) for mathematical explanations, possible questions and evidence links.
 
 ## What can I present today?
 
