@@ -1,5 +1,7 @@
 # Recorded replay: process and decisions
 
+Completed locally on 28 September, 23:10–23:21 EDT (29 September 03:10–03:21 UTC). All four recorded trials match the saved spikes and delivered inputs exactly. State-array, clock, index and selected-cell threshold checks also passed. Initial available memory was 7.073 GB; measured worker peak memory ranged from 2.744 to 2.883 GB. See evidence/2026-09-28/observed_replay_check.json. The resource refusal and preparation notes below remain as the historical record.
+
 27 September 2026. Implementation and small-network checks are complete. The four whole-brain trials have not run: the local launcher measured 3.20 GB free and refused to start. No new simulation output or mechanistic result is claimed.
 
 ## Why this case

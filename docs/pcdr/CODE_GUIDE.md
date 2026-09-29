@@ -258,3 +258,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Recorded replay
 
 `scripts/pcdr_observed_sim.py` adds two read-only state monitors to a separate copy of the saved simulator. Explicit scheduling slots distinguish the voltage used for spike detection from the state after synaptic events. It returns v and g in mV and refractory eligibility; g is not an amperage. `scripts/pcdr_observed_replay.py` runs four fixed serial trials only when enough memory is free, compares full events with the downloaded references, saves traces and stops on a mismatch. The frozen plan and detailed process record are OBSERVED_REPLAY_PLAN.json and OBSERVED_REPLAY.md. Small-network tests passed; whole-brain recording remains unrun because the local memory check refused startup.
+
+## Checking recorded replay outputs
+
+`scripts/pcdr_check_observed.py` reads the four completed runs, rechecks event equality and file hashes, and verifies that state arrays use the planned indices, slots and physical sampling times. It checks recorded spike decisions against voltage above -45 mV and refractory eligibility for all selected neurons. It also reports the first exact stored voltage and drive differences within each baseline/lesion pair. This is a descriptive comparison of selected traces, not identification of the cause of the population increase. All four full-network checks passed on 28 September; see the dated verification record.
