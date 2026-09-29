@@ -1,0 +1,137 @@
+{
+  "checked_utc": "2026-09-29T21:12:36.774544+00:00",
+  "records": [
+    {
+      "path": "results\\pcdr\\fine_benchmark_20260929\\chunked\\complete.json",
+      "completed_utc": "2026-09-29T21:06:32.471821+00:00",
+      "elapsed_seconds": 3.5780000000086147,
+      "ticks": 200,
+      "spikes": 83,
+      "duration_s": 0.02,
+      "dt_ms": 0.1,
+      "outputs": {
+        "delivered.parquet": "8b93a3eec0fb22ead3bd88509ef69dc1f6d2f4014058378d1c1675905b93d78d",
+        "external.parquet": "8b93a3eec0fb22ead3bd88509ef69dc1f6d2f4014058378d1c1675905b93d78d",
+        "spikes.parquet": "b7045d5aeeb847dc6941a20332058e9d90aaa590280c39ef59bae8d4dc02d603"
+      }
+    },
+    {
+      "path": "results\\pcdr\\fine_benchmark_20260929\\fine\\complete.json",
+      "completed_utc": "2026-09-29T21:06:50.695694+00:00",
+      "elapsed_seconds": 17.093999999997322,
+      "ticks": 10000,
+      "spikes": 3,
+      "duration_s": 0.001,
+      "dt_ms": 0.0001,
+      "outputs": {
+        "delivered.parquet": "9c5a5e945bd9dd3f6320398aa810dd914abf9395044ee561d45dbf389418d3d6",
+        "external.parquet": "9c5a5e945bd9dd3f6320398aa810dd914abf9395044ee561d45dbf389418d3d6",
+        "spikes.parquet": "0db042a7919a5d1554abbd4aac5f1e9144b0ea6909ce6d4023c6daac43111516"
+      }
+    },
+    {
+      "path": "results\\pcdr\\fine_benchmark_20260929\\reference\\complete.json",
+      "completed_utc": "2026-09-29T21:06:27.663986+00:00",
+      "elapsed_seconds": 3.1089999999967404,
+      "ticks": 200,
+      "spikes": 83,
+      "duration_s": 0.02,
+      "dt_ms": 0.1,
+      "outputs": {
+        "delivered.parquet": "6997526f81d38625d6a0727fd1e7da40e6b6edee4a0ac795a130bf72d6e9337a",
+        "external.parquet": "8b93a3eec0fb22ead3bd88509ef69dc1f6d2f4014058378d1c1675905b93d78d",
+        "spikes.parquet": "b7045d5aeeb847dc6941a20332058e9d90aaa590280c39ef59bae8d4dc02d603"
+      }
+    },
+    {
+      "path": "results\\pcdr\\fine_ramp_20260929\\0p0001\\complete.json",
+      "completed_utc": "2026-09-29T21:12:17.288501+00:00",
+      "dt_ms": 0.0001,
+      "duration_s": 0.01,
+      "chunk_ms": 1.0,
+      "elapsed_seconds": 126.125,
+      "peak_rss_bytes": 2674610176,
+      "spikes": 26,
+      "external_events": 23,
+      "delivered_events": 23,
+      "outputs": {
+        "delivered.parquet": "6ab793c1768250443f42ad87a8fa7eaeaa584e3da2cf5b21ab8c0965b6ac94c3",
+        "external.parquet": "6ab793c1768250443f42ad87a8fa7eaeaa584e3da2cf5b21ab8c0965b6ac94c3",
+        "spikes.parquet": "5965183d23658d6fd467f3adc2c4636ca394f557da50b69089683a31f38b46bc"
+      },
+      "limits": "Ten milliseconds of baseline only; includes initialization; not a full-run runtime prediction or convergence result."
+    },
+    {
+      "path": "results\\pcdr\\fine_ramp_20260929\\0p0002\\complete.json",
+      "completed_utc": "2026-09-29T21:10:10.035369+00:00",
+      "dt_ms": 0.0002,
+      "duration_s": 0.01,
+      "chunk_ms": 1.0,
+      "elapsed_seconds": 66.53199999999197,
+      "peak_rss_bytes": 2675011584,
+      "spikes": 26,
+      "external_events": 23,
+      "delivered_events": 23,
+      "outputs": {
+        "delivered.parquet": "df4a1e56a08df90be7cd8fb41568754ced0e0109fbf94dceb40205aa322e9995",
+        "external.parquet": "df4a1e56a08df90be7cd8fb41568754ced0e0109fbf94dceb40205aa322e9995",
+        "spikes.parquet": "24dfff7c840bbc9c8011d128c41fa78922575b799b19a0f615a385196fcd66c4"
+      },
+      "limits": "Ten milliseconds of baseline only; includes initialization; not a full-run runtime prediction or convergence result."
+    },
+    {
+      "path": "results\\pcdr\\fine_ramp_20260929\\0p0004\\complete.json",
+      "completed_utc": "2026-09-29T21:09:02.252537+00:00",
+      "dt_ms": 0.0004,
+      "duration_s": 0.01,
+      "chunk_ms": 1.0,
+      "elapsed_seconds": 34.937000000005355,
+      "peak_rss_bytes": 2674999296,
+      "spikes": 26,
+      "external_events": 23,
+      "delivered_events": 23,
+      "outputs": {
+        "delivered.parquet": "8732a84b3ca96f9b878f44fd922662237dfa2ea1cce5faec51b5e1267578256f",
+        "external.parquet": "8732a84b3ca96f9b878f44fd922662237dfa2ea1cce5faec51b5e1267578256f",
+        "spikes.parquet": "27bafd141b29fcd5b81ec3b28a92230d716f407f50c2227739acc7b99ae651dd"
+      },
+      "limits": "Ten milliseconds of baseline only; includes initialization; not a full-run runtime prediction or convergence result."
+    },
+    {
+      "path": "results\\pcdr\\fine_ramp_20260929\\0p0008\\complete.json",
+      "completed_utc": "2026-09-29T21:08:26.145862+00:00",
+      "dt_ms": 0.0008,
+      "duration_s": 0.01,
+      "chunk_ms": 1.0,
+      "elapsed_seconds": 19.577999999994063,
+      "peak_rss_bytes": 2674925568,
+      "spikes": 26,
+      "external_events": 23,
+      "delivered_events": 23,
+      "outputs": {
+        "delivered.parquet": "2faf8755a33b12b7036c85abd647bb8d18e5921448e14cbc57765d997eb9b125",
+        "external.parquet": "2faf8755a33b12b7036c85abd647bb8d18e5921448e14cbc57765d997eb9b125",
+        "spikes.parquet": "2502c7899ceff246b29a2875105446c88e8d2cf8b3ed2da256b68fb31ca8ef0b"
+      },
+      "limits": "Ten milliseconds of baseline only; includes initialization; not a full-run runtime prediction or convergence result."
+    }
+  ],
+  "source_record_hashes": {
+    "results\\pcdr\\fine_benchmark_20260929\\chunked_process.json": "a5465bda0457bddb6c6f9563bba8934592b9236aeef381118f77ffb63cb08ebc",
+    "results\\pcdr\\fine_benchmark_20260929\\comparison.json": "6da93651fecf13b93f8897a7b9b7b1e188a1adbe13d60c798592c89290309187",
+    "results\\pcdr\\fine_benchmark_20260929\\fine_process.json": "444821b4724cbcfb793c6165e1c39997009fbd6493d8fd6d2169962b5f0d6442",
+    "results\\pcdr\\fine_benchmark_20260929\\protocol.json": "570db78bba6c420512b5382706e3e54cd4d0dcdcc9a9f6a491e9a28947ffc864",
+    "results\\pcdr\\fine_benchmark_20260929\\reference_process.json": "0cdc4f041e874752fff6822a558145719c4431d057f3f852173569c23a4df651",
+    "results\\pcdr\\fine_ramp_20260929\\0p0001_process.json": "d325a3fd98c67f60e701e2604cec4134a4eef32f0a09abf5134e34ac5a04c4ef",
+    "results\\pcdr\\fine_ramp_20260929\\0p0002_process.json": "bd6c4099b9129e513a0d241c56f37b53c52e8e36c8469779695df782464053e5",
+    "results\\pcdr\\fine_ramp_20260929\\0p0004_process.json": "6bfac45d4834b6db7e8287500e1dba57b6c0ee2fde537c328471d4b3f2ba6996",
+    "results\\pcdr\\fine_ramp_20260929\\0p0008_process.json": "d307c86fa0a67850ad8292b11d8a3d648865513130ac99859b67504162f9e3b0",
+    "results\\pcdr\\fine_ramp_20260929\\protocol.json": "dc97ab4a8b9063d143d560ddf0636e4135d05cb9951d537db4952af84943b1df"
+  },
+  "checks": "All saved output hashes match; all four ramp schedules match in physical time; delivered events equal schedules in these short runs. Reference/chunked full-network comparison recorded separately.",
+  "tests": {
+    "full_suite_before_five_extra_cases": "348 passed, 3 skipped, 183 warnings, 34.43 seconds",
+    "final_focused": "23 passed, 97 warnings, 11.51 seconds"
+  },
+  "scope": "Implementation and short-prefix resource measurements only; no new one-second convergence outcome."
+}
