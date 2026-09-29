@@ -270,3 +270,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Recruitment timing
 
 `scripts/pcdr_recruitment_timing.py` verifies the four spike files and builds counts and first times using string neuron IDs. It excludes stimulated inputs, retains the union of active cells and defines the large-only group using all three comparison runs. It saves all early members rather than choosing a causal candidate. The existing signed-graph loader checks index/ID correspondence; zeroed lesion columns remove silenced outgoing edges before descriptive directed counts. Those counts measure anatomical connectivity, not realized input. The protocol explicitly records the outcome-informed 180 ms split and missing annotation handling.
+
+## Reconstructing incoming events
+
+`scripts/pcdr_input_reconstruction.py` multiplies selected postsynaptic weight rows by a sparse spike raster, shifts arrivals by the exact synaptic delay, and masks writes using eligibility reconstructed from postsynaptic spikes. The after-threshold mask matters because newly spiking cells already reject writes to g. It compares the result with after_synapses g minus before_thresholds g, retains unmasked errors as a diagnostic and fails if any recorded flag or declared-tolerance comparison disagrees. This test validates ten non-input cells; it does not reconstruct full voltage or infer causality.
