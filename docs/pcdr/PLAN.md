@@ -1,5 +1,7 @@
 # P/D/C/R study
 
+29 September signed-input extension: all 577 early large-only cells were reconstructed locally in all four runs. Positive and negative incoming magnitudes both rise overall before coarse-lesion first spikes, with the increase dominated by positive sums. This is outcome-conditioned description, not a causal test. Next record and examine presynaptic source partitions before choosing any intervention. See current research record and early_drive evidence.
+
 Recruitment review: 11530 non-input cells fire only in the large-response lesion, contributing 608713 spikes; none was recorded. Of these, 577 first fire before the declared descriptive split at 180 ms. Next test whether incoming synaptic-event increments can be reconstructed from saved spikes and connectivity, using the ten recorded cells for validation before extending to this group. No triggering neuron or pathway has been established.
 
 State-trace review: the ten monitored cells have 23 fewer spikes at the step where the full network has 611598 more. Their early differences do not explain the widespread later increase, and baseline states also diverge across steps. Next inspect unmonitored-cell recruitment timing from the existing four spike files, then freeze any expanded recording selection before new state runs. No causal intervention is selected yet.

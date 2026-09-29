@@ -1,5 +1,28 @@
 # CCR run, 27 September 2026
 
+## Reconstructed inputs to the 577 early recruited cells
+
+Extended the previously validated incoming-event calculation to all 577 fixed early large-only cells across the four saved runs. Processed eight postsynaptic cells at a time using sparse presynaptic spike matrices, avoiding a whole-brain dense time array. All four calculations completed locally without new simulation. Input table and manifest hashes were checked against the verified recordings, and the cohort and connectivity hashes were recorded before calculation.
+
+Separated positive and negative model weights before accumulation, so simultaneous opposite-sign arrivals remain visible rather than cancelling in the reported components. Preserved the delay, outgoing lesion, weight scales and reconstructed refractory mask. These quantities are sums of event increments in mV, not membrane voltage, measured current, time-integrated conductance or a voltage threshold test. They omit decay and the ordering-dependent evolution of state within each window.
+
+The recorded windows are 0–180 ms, 180–1000 ms, and a cell-specific 20 ms interval ending immediately before that cell's first coarse-lesion spike. The same physical interval is used in every comparison run. Cells and first-spike anchors are selected from the known large response; the analysis is retrospective. Summing these overlapping cell-specific windows is a descriptive sum over postsynaptic cells, not total input delivered during one common network interval.
+
+| Condition in the cell-specific pre-spike windows | Positive increments, summed mV | Negative increments, summed mV |
+| --- | ---: | ---: |
+| Baseline, 0.0125 ms | 341.550 | -528.264 |
+| Baseline, 0.00625 ms | 373.230 | -778.536 |
+| Lesion, 0.0125 ms | 38637.390 | -6829.944 |
+| Lesion, 0.00625 ms | 1802.130 | -1176.648 |
+
+All these windows precede the coarse-lesion first spike; the cells remain silent throughout the other three runs. Accepted and raw increments therefore agree in these windows. Later windows differ because firing introduces refractory suppression; raw increments still use the observed presynaptic spikes and are not the result of simulating a network without refractory suppression.
+
+A post-calculation descriptive count, using 1e-9 mV to disregard rounding-sized differences, found larger positive increments for 576 of 577 cells in the coarse lesion versus the finer lesion over those same windows. Net signed sums are greater for 574 cells and lower for three. Only 21 cells have less-negative sums; overall the negative magnitude also increases. This pattern does not support a blanket statement that inhibition disappeared. It remains compatible with multiple timing and recurrent-feedback explanations. Because the group and windows condition on subsequent recruitment, neither the counts nor the summed increments are an independent test of causality or predictive accuracy. No p-values were computed.
+
+Evidence: evidence/2026-09-29/early_drive/ contains 6924 cell/run/window rows, group sums, the prior protocol and output hashes. Five focused tests passed, including a known example where simultaneous positive and negative arrivals cancel in the net but remain present in separated components. Validation against independently recorded state still covers the original ten cells; the 577-cell values are reconstructed, not newly measured.
+
+Next useful local question is where the additional arrivals originate before each first spike. Partition presynaptic sources using an explicitly recorded rule and distinguish neurons already active in comparison runs from newly recruited neurons. That can describe temporal propagation, but intervention selection should wait until a specific, testable pathway hypothesis is supported. No new cell lesion or recording membership was chosen in this step.
+
 ## Incoming-event reconstruction test, 29 September
 
 The saved spikes and signed connectivity reproduce the net synaptic-stage changes in g for all ten recorded cells in all four runs. All 4.8 million cell/tick comparisons pass the absolute tolerance of 1e-9 mV, declared before calculation. The largest absolute difference is 5.68434e-14 mV, consistent with floating-point summation/subtraction differences. Reconstructed after-threshold refractory eligibility matches every recorded flag exactly. This validates net event increments in these cases, not full voltage reconstruction, a causal explanation or time-step convergence.
