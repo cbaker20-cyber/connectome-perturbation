@@ -278,3 +278,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Inputs to early recruited cells
 
 `scripts/pcdr_early_drive.py` processes the fixed 577-cell cohort in batches of eight. It separates weight signs before reconstructing delayed arrivals and saves raw versus refractory-accepted sums in fixed windows and matched physical pre-first-spike windows. It reuses the validated increment and mask helpers. Dense arrays are limited to a small postsynaptic batch; the full presynaptic raster stays sparse. Group sums across cell-specific windows are descriptive, not a common-time network total or a voltage estimate.
+
+## Presynaptic source partitions
+
+`scripts/pcdr_source_inputs.py` assigns each source neuron to one fixed recruitment group, then counts spikes arriving within each target's pre-first-spike window using binary searches in sorted source spike ticks. Summing per-edge signed weights provides an independent check of the earlier sparse-matrix calculation. Half-open windows include arrivals at the start and exclude arrivals at the first spike. Every target's sums must agree before a completion record is written. Counts represent edge-events: one presynaptic spike can contribute to several targets and must not be described as several independent source spikes.

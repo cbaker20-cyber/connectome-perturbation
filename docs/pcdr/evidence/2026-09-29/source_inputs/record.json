@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "completed_utc": "2026-09-29T05:01:50.707080+00:00",
+  "target_run_pairs": 2308,
+  "max_independent_sum_error_mV": 9.947598300641403e-14,
+  "outputs": {
+    "cell_sources.csv": "6634e294130abd7dc7ddaa04c52fa5f67e761b101543e3851d11d0dbc561fa95",
+    "group_sums.csv": "82012fcedf7fdaf40d509e7857911c647db30a610084ae0ae2c005a42dc90251",
+    "protocol.json": "94025eca6e6a77b80b595468d80614a557202401d3baac82fcdc3364076fa8ba"
+  }
+}
