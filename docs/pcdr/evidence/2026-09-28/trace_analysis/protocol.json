@@ -1,0 +1,29 @@
+{
+  "recorded_utc": "2026-09-29T03:49:29.714700+00:00",
+  "script_sha256": "922ce8a1842f8ccc503986ab1bfcb41f44493c7fd8bf48fea7ec7226880c5dff",
+  "verification_sha256": "55689ec06223d0785cd1aeac0518f41fdf524c590ba3e91b302c402f3614ca46",
+  "windows_ms": [
+    [
+      0,
+      25
+    ],
+    [
+      25,
+      100
+    ],
+    [
+      100,
+      200
+    ],
+    [
+      200,
+      500
+    ],
+    [
+      500,
+      1000
+    ]
+  ],
+  "method": "Retain all ten cells and four runs. Compare the same schedule slot at shared physical times by taking every second finer sample, with no interpolation or lag fitting. Full-population counts use 10 ms bins; selected-cell state summaries use the five fixed windows. Report per-cell voltage/drive differences, refractory disagreement and signed net synaptic-stage drive increments. No significance tests, new exclusions or causal cell rankings.",
+  "limits": "Windows follow previously seen response timing; this is retrospective. Cross-step state differences can include spike/reset phase differences. g is voltage-valued drive, not current. Net increments do not separate excitation from inhibition."
+}

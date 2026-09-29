@@ -262,3 +262,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Checking recorded replay outputs
 
 `scripts/pcdr_check_observed.py` reads the four completed runs, rechecks event equality and file hashes, and verifies that state arrays use the planned indices, slots and physical sampling times. It checks recorded spike decisions against voltage above -45 mV and refractory eligibility for all selected neurons. It also reports the first exact stored voltage and drive differences within each baseline/lesion pair. This is a descriptive comparison of selected traces, not identification of the cause of the population increase. All four full-network checks passed on 28 September; see the dated verification record.
+
+## Comparing state traces
+
+`scripts/pcdr_trace_analysis.py` verifies the recorded files, aligns finer samples to the coarser physical clock without interpolation, and summarizes every monitored cell in five declared windows. It separates voltage/drive differences from refractory disagreement and saves population counts alongside selected-cell coverage. Positive and negative net g jumps are descriptive slot differences, not separately resolved excitatory/inhibitory currents. The window-coverage check compares the sum of all windows with the original selected-cell spike count. It preserves original traces and writes one new derived evidence directory and figure.
