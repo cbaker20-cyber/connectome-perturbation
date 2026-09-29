@@ -1,5 +1,26 @@
 # CCR run, 27 September 2026
 
+## Recruitment outside the recorded cells
+
+Reviewed all four complete spike files with original neuron IDs preserved as strings. The 21 stimulated input cells are excluded from recruitment counts. Defined a descriptive large-only group: neurons that spike in the 0.0125 ms lesion but remain silent for the entire second in both baselines and the 0.00625 ms lesion. This definition uses the outcomes of all four trials; it is not a biological class, independent sample or prospective predictor.
+
+There are 11530 large-only cells producing 608713 spikes. None belongs to the ten-cell state recording. The first large-only spike occurs at 81.8125 ms; 577 such cells first fire before 180 ms. The 180 ms split was recorded before this calculation but chosen using the previously observed response timing. It is a descriptive division, not an estimated physiological transition. All 577 early cells are retained, including cells with only one spike; the earliest cell, 720575940627371834, fires once, so earliest recruitment should not be mistaken for sustained drive.
+
+| Run | Recruited non-input cells |
+| --- | ---: |
+| Baseline, 0.0125 ms | 485 |
+| Lesion, 0.0125 ms | 11989 |
+| Baseline, 0.00625 ms | 504 |
+| Lesion, 0.00625 ms | 395 |
+
+![Cumulative recruitment in the four saved runs](evidence/2026-09-28/recruitment_timing/recruitment.png)
+
+Among large-only cells, 9094 have central annotations and 1324 have unavailable superclass labels. Among the 577 early cells, 429 are central, 130 are unavailable, 16 are descending and two have visual categories. Model signs classify 310 early cells as excitatory and 267 as inhibitory. These are inherited model signs and available annotations, not independently measured transmitter identities. No category-enrichment test was performed and missing labels were not interpreted as a cell type.
+
+The static graph was checked for index/ID agreement and loaded as W[post,pre]. Outgoing edges from the lesion were set to zero before counting surviving directed connections. Early-to-later large-only connections comprise 34813 positive and 27518 negative edges; reverse connections comprise 48279 positive and 23810 negative edges. These are edge counts, not synapse totals or realized drive. They establish that both directions and both model signs are represented. They do not identify which connections transmitted the relevant events, demonstrate enrichment relative to matched groups, or establish the cause of recruitment. All within-group counts are retained in connections.csv.
+
+Next, try reconstructing incoming synaptic-event increments from saved spikes, exact delays and signed connectivity, validating against the existing ten recorded cells before applying the method to the newly identified group. If that validation fails, retain the discrepancy and investigate its scheduling or arithmetic cause rather than treating reconstructed drive as measured state. This can potentially avoid an unnecessarily large new recording run. No intervention, new recording membership, altered recruitment criterion or simulation was introduced in this review. Evidence, complete per-cell counts and first-spike times are in evidence/2026-09-28/recruitment_timing/.
+
 ## Local state-trace analysis
 
 Compared all ten recorded cells in all four runs. Analysis choices were recorded before the first calculation: use the same schedule slot at shared physical times, select every second 0.00625 ms sample without interpolation or time-shift fitting, retain every cell, and summarize 0–25, 25–100, 100–200, 200–500 and 500–1000 ms. These windows were chosen with knowledge of the earlier population timing; this is retrospective, not a new prospective test. All source manifests and output hashes were checked. The coverage calculation below was added after seeing that the selected-cell summaries did not reflect the population increase; it is explicitly descriptive.

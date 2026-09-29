@@ -266,3 +266,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Comparing state traces
 
 `scripts/pcdr_trace_analysis.py` verifies the recorded files, aligns finer samples to the coarser physical clock without interpolation, and summarizes every monitored cell in five declared windows. It separates voltage/drive differences from refractory disagreement and saves population counts alongside selected-cell coverage. Positive and negative net g jumps are descriptive slot differences, not separately resolved excitatory/inhibitory currents. The window-coverage check compares the sum of all windows with the original selected-cell spike count. It preserves original traces and writes one new derived evidence directory and figure.
+
+## Recruitment timing
+
+`scripts/pcdr_recruitment_timing.py` verifies the four spike files and builds counts and first times using string neuron IDs. It excludes stimulated inputs, retains the union of active cells and defines the large-only group using all three comparison runs. It saves all early members rather than choosing a causal candidate. The existing signed-graph loader checks index/ID correspondence; zeroed lesion columns remove silenced outgoing edges before descriptive directed counts. Those counts measure anatomical connectivity, not realized input. The protocol explicitly records the outcome-informed 180 ms split and missing annotation handling.

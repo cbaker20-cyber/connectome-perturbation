@@ -1,0 +1,8 @@
+{
+  "recorded_utc": "2026-09-29T03:54:52.405329+00:00",
+  "script_sha256": "e0632942cf6b521cef314b1a54ad42eaafff6947f3e9926a73b8b86966902cfc",
+  "features_sha256": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+  "connectivity_sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+  "verification_sha256": "55689ec06223d0785cd1aeac0518f41fdf524c590ba3e91b302c402f3614ca46",
+  "rules": "Exclude the 21 stimulated inputs from recruitment summaries. Retain union of spiking cells. Define large-only cells as active in the 0.0125 ms lesion and silent throughout all other three one-second runs. This uses full outcomes and is descriptive, not a cell type. Record first spikes and full counts in every run. Use 10 ms first-recruitment bins. Split large-only cells by first spike before 180 ms versus at/after 180 ms; 180 ms is an outcome-informed description before the previously observed sharp rise, not an independently estimated transition. Report all early cells, annotation counts and static directed edge counts among early and later large-only cells after zeroing lesioned outgoing edges. No rankings for intervention, enrichment test or causal path claims."
+}

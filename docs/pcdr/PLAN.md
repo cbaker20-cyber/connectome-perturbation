@@ -1,5 +1,7 @@
 # P/D/C/R study
 
+Recruitment review: 11530 non-input cells fire only in the large-response lesion, contributing 608713 spikes; none was recorded. Of these, 577 first fire before the declared descriptive split at 180 ms. Next test whether incoming synaptic-event increments can be reconstructed from saved spikes and connectivity, using the ten recorded cells for validation before extending to this group. No triggering neuron or pathway has been established.
+
 State-trace review: the ten monitored cells have 23 fewer spikes at the step where the full network has 611598 more. Their early differences do not explain the widespread later increase, and baseline states also diverge across steps. Next inspect unmonitored-cell recruitment timing from the existing four spike files, then freeze any expanded recording selection before new state runs. No causal intervention is selected yet.
 
 28 September: all four observed replays completed locally and passed exact event matching and independent state/threshold checks. Full traces are available in results/pcdr/observed_replay_20260928. The recorder preserves both the large and small trajectories; the cause of their time-step difference remains unresolved. Further inspection of these traces can now proceed locally. Earlier preparation and memory-refusal entries below are retained.
