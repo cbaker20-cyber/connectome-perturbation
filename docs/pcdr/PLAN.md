@@ -1,5 +1,7 @@
 # P/D/C/R study
 
+State-trace review: the ten monitored cells have 23 fewer spikes at the step where the full network has 611598 more. Their early differences do not explain the widespread later increase, and baseline states also diverge across steps. Next inspect unmonitored-cell recruitment timing from the existing four spike files, then freeze any expanded recording selection before new state runs. No causal intervention is selected yet.
+
 28 September: all four observed replays completed locally and passed exact event matching and independent state/threshold checks. Full traces are available in results/pcdr/observed_replay_20260928. The recorder preserves both the large and small trajectories; the cause of their time-step difference remains unresolved. Further inspection of these traces can now proceed locally. Earlier preparation and memory-refusal entries below are retained.
 
 Recorded-replay preparation: four fixed trials and ten monitored cells are specified in OBSERVED_REPLAY_PLAN.json. Small-network event preservation passed at both steps. The full local run was refused at 3.20 GB available versus the 6 GB requirement; no state results exist yet. See OBSERVED_REPLAY.md for the complete process and restart command.

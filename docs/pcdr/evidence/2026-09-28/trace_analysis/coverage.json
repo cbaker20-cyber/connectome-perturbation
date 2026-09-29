@@ -1,0 +1,34 @@
+[
+  {
+    "condition": "baseline",
+    "dt_ms": 0.0125,
+    "total_spikes": 21193,
+    "recorded_cell_spikes": 761,
+    "recorded_spike_fraction": 0.035908082857547305,
+    "distinct_spiking_cells_including_inputs": 506
+  },
+  {
+    "condition": "mode_without_mn9",
+    "dt_ms": 0.0125,
+    "total_spikes": 629557,
+    "recorded_cell_spikes": 646,
+    "recorded_spike_fraction": 0.001026118365771487,
+    "distinct_spiking_cells_including_inputs": 12010
+  },
+  {
+    "condition": "baseline",
+    "dt_ms": 0.00625,
+    "total_spikes": 21380,
+    "recorded_cell_spikes": 766,
+    "recorded_spike_fraction": 0.03582787652011225,
+    "distinct_spiking_cells_including_inputs": 525
+  },
+  {
+    "condition": "mode_without_mn9",
+    "dt_ms": 0.00625,
+    "total_spikes": 17959,
+    "recorded_cell_spikes": 669,
+    "recorded_spike_fraction": 0.03725151734506375,
+    "distinct_spiking_cells_including_inputs": 416
+  }
+]

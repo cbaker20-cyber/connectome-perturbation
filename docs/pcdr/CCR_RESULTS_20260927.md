@@ -1,5 +1,23 @@
 # CCR run, 27 September 2026
 
+## Local state-trace analysis
+
+Compared all ten recorded cells in all four runs. Analysis choices were recorded before the first calculation: use the same schedule slot at shared physical times, select every second 0.00625 ms sample without interpolation or time-shift fitting, retain every cell, and summarize 0–25, 25–100, 100–200, 200–500 and 500–1000 ms. These windows were chosen with knowledge of the earlier population timing; this is retrospective, not a new prospective test. All source manifests and output hashes were checked. The coverage calculation below was added after seeing that the selected-cell summaries did not reflect the population increase; it is explicitly descriptive.
+
+The decisive limitation is recording coverage. In the lesion run, the full network has 629557 spikes at 0.0125 ms versus 17959 at 0.00625 ms, a difference of 611598. The ten monitored cells contribute 646 versus 669 spikes: their difference is -23, opposite in sign to the population difference. Thus the remaining neurons contribute a net increase of 611621 spikes. Only about 0.103% of the large-response spikes come from monitored cells. The large-response run has 12010 distinct spiking neurons including inputs, versus 416 in the finer-step lesion. These values count activity, not independent biological observations.
+
+![Population counts for both recorded pairs](evidence/2026-09-28/trace_analysis/population.png)
+
+The panels use different vertical scales. Baseline activity stays at a few hundred spikes per 10 ms despite differences between traces. The coarser-step lesion rises around 200 ms toward roughly 8000 spikes per 10 ms; the finer-step lesion does not. This supports a statement about these saved population trajectories, not proof of a dynamical transition or identification of an initiating cell.
+
+Individual states also differ across steps in baselines without a population increase. Over 100–200 ms, the mean absolute voltage difference across the ten cells is 3.963 mV for baseline and 3.373 mV for the lesion; corresponding drive differences are 24.360 and 19.410 mV. Refractory-flag disagreement fractions are 0.269 and 0.241. These are descriptive sample averages over selected cells and times, not independent observations or uncertainty estimates. Differences can reflect shifted spikes and resets. Therefore observing a large state difference, or refractory disagreement, is not sufficient to explain the lesion's population increase.
+
+The cell-window table also records the signed net change in g between before-threshold and after-synapse slots. This is voltage-valued synaptic drive accumulated in that slot, not current in amperes, and positive/negative net changes do not separately measure excitation/inhibition: simultaneous inputs can cancel, with cancellation depending on the bin width. No inhibitory-failure claim is made from these summaries.
+
+Conclusion for this step: the recording is verified, but the ten cells selected for early spike differences do not represent the later widespread increase. Do not choose an intervention on those cells solely from the first state differences. Next, use the full saved spike files to identify which additional cells join the population increase and when, retaining comparison with both baselines and the finer-step lesion. Record a selection rule before choosing any expanded state-recording targets, and label it as outcome-informed. Connectivity and state evidence would then be needed to specify a pathway intervention. No further simulation, preferred time step, causal cell label or new matching rule was introduced here.
+
+Evidence: evidence/2026-09-28/trace_analysis/ contains the protocol, hashes, all cell-window summaries, aligned comparisons, population bins, coverage counts and one reviewed figure.
+
 ## Recorded replay completed locally, 28 September
 
 The four planned one-second runs completed from 23:10:35 to 23:21:25 EDT, about 10 minutes 50 seconds. The UTC dates in manifests are 29 September. The plan, ten selected recording cells and original simulator files were unchanged. Memory available at startup was 7.073 GB, exceeding the existing 6 GB requirement; one worker ran at a time. All four matched the complete ordered saved spike sequences and delivered events exactly.

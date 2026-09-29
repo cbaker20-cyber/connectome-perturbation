@@ -1,0 +1,12 @@
+{
+  "completed_utc": "2026-09-29T03:49:31.265131+00:00",
+  "status": "complete",
+  "outputs": {
+    "cell_windows.csv": "ada8a46c59c616542693a8e6a87d65a61e72291dcad5bc12342f153b30741f97",
+    "coverage.json": "2a775f36d483a08bc172e633bfb750a1234cf51ff2c896ed2f9b132c1e3f1f3b",
+    "population.csv": "fa97904864c214d9abf99637ef5b01b476b27f6934512e6e4976711cd652c5f9",
+    "population.png": "57b85b41ab69c4994391430d37dad4b47d86317d0b9d319a563841d532760988",
+    "protocol.json": "8e3db291ad9c5cb51bd29d9224b91d33098c8f007571b18afe94f6d341bf2b3b",
+    "step_differences.csv": "250a397fe0031fae494dc35dacd5a9aa5763a119423bee8978c0a13874babf33"
+  }
+}
