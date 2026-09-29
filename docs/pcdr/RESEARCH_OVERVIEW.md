@@ -59,7 +59,7 @@ The main hypothesis is not confirmed beyond degree/strength, recruitment and com
 
 ## 6. Verification and stopping point
 
-Latest full suite: 323 passed, three unsupported-symlink skips, 106 warnings. Rechecked 30 derived-output hashes across six recent evidence records; all matched. [Verification scope and hashes](evidence/2026-09-29/record_review.json) distinguish that check from rerunning archived simulations. The original raw-data and exact-replay checks remain separately recorded. A hash establishes file identity, not scientific validity; a passing test establishes its tested behavior, not every interpretation.
+The consolidation pass had 323 tests pass; after adding the candidate-review tests, the latest full suite has 330 passed, three unsupported-symlink skips and 106 warnings. Rechecked 30 derived-output hashes across six recent evidence records; all matched. [Verification scope and hashes](evidence/2026-09-29/record_review.json) distinguish that check from rerunning archived simulations. The original raw-data and exact-replay checks remain separately recorded. A hash establishes file identity, not scientific validity; a passing test establishes its tested behavior, not every interpretation.
 
 Current local verification is sufficient to organize and explain the work. No additional computation is needed just to increase a test count. The next numerical question is validated state reconstruction and source timing for the ten early targets without positive early-group arrivals. The separate research-design question is whether to narrow the claim to conditional lesion sensitivity or create a new adequately controlled multi-mode test. Neither has been silently decided in this consolidation.
 
@@ -68,3 +68,28 @@ Current local verification is sufficient to organize and explain the work. No ad
 Use this overview for sequence and status, the short guide for questions, the detailed results for numbers, and the notebook for what changed and when. Frozen JSON plans and evidence manifests identify the actual executed jobs. The code guide explains purpose; executable scripts remain the implementation. Large full spike/state archives stay under results/pcdr rather than being copied into every export. Some local evidence links will only open in this workspace; a fresh Git clone does not contain every raw archive.
 
 This overview preserves failures and historical decisions rather than rewriting them as one smooth confirmation. It does not establish that every choice was optimal. Missing justifications and unresolved comparisons remain explicit research limitations.
+
+## 8. Candidate review for the meeting, 29 September
+
+This retrospective review was specified before its calculations, after lesion outcomes were known. It leaves the original candidate and thresholds unchanged. The [protocol](evidence/2026-09-29/candidate_review/protocol.json), [completion record](evidence/2026-09-29/candidate_review/record.json) and [script](../../scripts/pcdr_candidate_review.py) retain the checks and hashes. Original selection features and model inputs match their recorded hashes. Reconstructing the first 40 stable complete modes reproduces their 75% supports, recruited power, five-spike counts, eligibility and selected membership. Numerical stability across solver starts is inherited from the original run; new solver starts were not performed.
+
+Ranks are zero based. Active means at least one pooled spike; qualifying means at least five across the five original selection trials. Whole-vector recruited power includes active cells outside the displayed support.
+
+| Rank | Support cells | Active | Qualifying | Active in all five trials | Whole-vector recruited power | Annotated motor cells |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 32 | 819 | 17 | 17 | 13 | 0.011168 | 1 |
+| 33, selected | 51 | 29 | 29 | 28 | 0.537935 | 13 |
+| 35 | 813 | 28 | 27 | 22 | 0.033242 | 4 |
+| 39 | 724 | 16 | 15 | 13 | 0.030324 | 4 |
+
+The selected candidate is smaller and has substantially more weight on recruited cells. This explains the recorded selection rule's preference; it is not new independent evidence of dynamical superiority. Recomputed normalized eigenpair residuals range from 2.65e-15 to 3.14e-14 against the actual signed matrix. All four are complex-pair modes. Their raw eigenvalues are structural quantities, not measured firing frequencies. The three other candidates were not subjected to the selected-mode lesion comparison series.
+
+The selected support shares no cells with ranks 32 or 39 and only three with rank 35. The other candidates overlap substantially: ranks 32 and 35 share 506 support cells, including 15 active cells. Four eligible modes therefore do not mean four independent neuron groups. Missing superclass labels number 246, 9, 200 and 201 respectively; no biological interpretation is assigned to missing labels. Exact [candidate measurements](evidence/2026-09-29/candidate_review/candidates.csv) and [pairwise overlaps](evidence/2026-09-29/candidate_review/overlap.csv) are retained.
+
+The sensitivity review crosses support fractions 50%, 75% and 90% with pooled-spike thresholds 1, 5 and 10 for every screened mode, retaining the requirement of ten qualifying cells and sensory exclusion. These are deliberately broad descriptive checks, not newly accepted thresholds or a comprehensive stability analysis. All 360 rows are saved in [the sensitivity table](evidence/2026-09-29/candidate_review/sensitivity.csv).
+
+At 75%, the same four modes qualify at all three spike thresholds, and rank 33 remains selected. At 90%, seven or eight modes qualify and rank 33 still wins; its support expands to 140 cells, 63 qualifying at five spikes. At 50%, no mode qualifies under any tested spike threshold. Rank 33 shrinks to 15 cells, with nine qualifying at five spikes. Thus the selection survives these recruitment-threshold changes but is not independent of the support rule. No lesion response was measured for the 15- or 140-cell variants; the 51-cell results must not be transferred to them.
+
+The literature supports investigating this question without guaranteeing our result. Pospisil et al. describe eigenmodes of a linear recurrent model and propose sparse structural modes for interrogation; our thresholded spiking model and outgoing-weight lesions are a different test. Their reported 75% anatomical localization of one example concerns synapses in a neuropil, not a justification for our 75%-squared-loading support cutoff. [Pospisil et al.](https://www.nature.com/articles/s41586-024-07982-0). Shiu et al. use a connectome-based integrate-and-fire model with zero basal firing; that makes stimulus-dependent recruitment relevant, but does not validate our specific candidate or lesions. [Shiu et al.](https://www.nature.com/articles/s41586-024-07763-9).
+
+For the meeting, present this as a selected-candidate result with explicit design limits. A and F share the same within-support numerator and are not independent confirmations. The strongest further comparison would require a question fixed before new outcomes, comparable recruitment and lesion sizes, and a reasoned treatment of motor identity and forced overlap. Simply simulating the three much larger supports would characterize them but would not isolate eigenmode membership. Further numerical diagnosis of the high-weight response remains a separate question; it should not replace the default-setting candidate result or be presented as a physiological transition.
