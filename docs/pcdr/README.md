@@ -4,6 +4,10 @@ This directory records the research question, code purposes, decisions and resul
 
 The question is whether concentrated eigenvector supports of the signed v630 connectivity matrix predict localized responses to output lesions beyond degree/strength, strong connections and recruitment. P/D/C/R are overlapping explanations. A and F describe simulated rate changes; MN9 firing is not feeding behavior.
 
+## Current starting points
+
+Start with the [short explanation guide](EXPLAINING_THE_STUDY.md) and the [unified experiment overview](RESEARCH_OVERVIEW.md). These separate completed stages, exploratory follow-ups, remaining questions and evidence. The [detailed results](CCR_RESULTS_20260927.md) are current through 29 September. Older entries describe their dates.
+
 ## Reading order
 
 1. [Plan and paper notes](PLAN.md): definitions, original procedure and dated amendments.
@@ -14,7 +18,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 6. [Baseline distribution audit](MOTOR_SET_AUDIT_20260922.md): remaining differences before those sets were simulated.
 7. [Motor-composition pilot](MOTOR_COMPOSITION_RESULTS_20260922.md): all ten lesion conditions, five fresh seeds and paired contrasts.
 
-These comparisons are optimized, strongly overlapping and imperfectly balanced in their distributions. Neither more seeds nor more such sets establishes a calibrated random-control test. The original 199-control confirmation and CCR validation remain pending.
+These comparisons are optimized, strongly overlapping and imperfectly balanced in their distributions. Neither more seeds nor more such sets establishes a calibrated random-control test. The original 199-control confirmation remains uncompleted. CCR sensitivity and numerical follow-ups have since completed; see the current overview.
 
 The motor-composition pilot completed all 55 trials: the eigen-set had A = 22.604 Hz and F = 0.2324, exceeding all nine comparisons on both. The nine comparison memberships produced only three distinct observed five-seed spike trajectories; substitutions within each repeated group involved cells that were silent in these runs. This is a substantive limit on comparison diversity.
 

@@ -1,0 +1,36 @@
+{
+  "checked_utc": "2026-09-29T05:06:20.978868+00:00",
+  "scope": "Current derived-output hash chains only; original simulation verification remains in the linked checkers. Not a rerun of all archived experiments.",
+  "records": [
+    {
+      "record": "2026-09-27/resolution/full_check.json",
+      "record_sha256": "9c3f0dd0dedac80d08baa4a9a6e81971c38d2bf563eb37bae802928ace1552e6",
+      "output_hashes_verified": 4
+    },
+    {
+      "record": "2026-09-27/event_review/record.json",
+      "record_sha256": "46a0242817cdeaf54a75fefe683c84e1cc0c6c0562365127951a1f7ce56aa0f4",
+      "output_hashes_verified": 7
+    },
+    {
+      "record": "2026-09-28/trace_analysis/record.json",
+      "record_sha256": "0955848d4816da35299366f59f0b4da65f5963303445f3ed04d390af086cc3ae",
+      "output_hashes_verified": 6
+    },
+    {
+      "record": "2026-09-28/recruitment_timing/summary.json",
+      "record_sha256": "3c80d9a464fcb914e00b7af27f03518a7189225194d0ee4d107eef9d6ea94ca5",
+      "output_hashes_verified": 7
+    },
+    {
+      "record": "2026-09-29/early_drive/record.json",
+      "record_sha256": "b79955e76ca4386e47979f34d53905a3dc72d0258d9aa1f2175a53ae5f59ba61",
+      "output_hashes_verified": 3
+    },
+    {
+      "record": "2026-09-29/source_inputs/record.json",
+      "record_sha256": "0c120700b8ac4bb23e677c891c2b8a6ccb98acc62c3cdc60fbfc487b4c382476",
+      "output_hashes_verified": 3
+    }
+  ]
+}
