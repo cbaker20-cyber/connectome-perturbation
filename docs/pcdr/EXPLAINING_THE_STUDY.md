@@ -2,6 +2,10 @@
 
 A short meeting guide, current through 29 September 2026. Read the [overview](RESEARCH_OVERVIEW.md) for the full sequence.
 
+## What can I present today?
+
+The defensible result is a reproducible simulated response for one exploratory structural candidate. In a separate 30-seed replication, its 51 cells had A = 22.544 Hz and contained 23.12% of the absolute mean response. This exceeded the five fixed comparisons, but about 77% remained outside, and the comparisons do not isolate eigenmode membership from other properties. The study has identified a candidate worth investigating, not established an independent circuit or confirmed the main hypothesis. [Replication numbers](SEED_REPLICATION_RESULTS_20260922.md), [comparison limitations](MOTOR_SET_AUDIT_20260922.md).
+
 ## What is the question?
 
 Can a small neuron set identified from a connectome eigenvector predict where a simulated brain responds to an outgoing-connection lesion, beyond connectivity and baseline activity? P/D/C/R organize overlapping explanations: eigenmode information, degree/strength, strong connections and recruitment. We have not isolated an eigenmode-specific effect. [Original question](PLAN.md#question).
@@ -21,6 +25,12 @@ Average each neuron's signed lesion-minus-baseline rate changes across paired se
 ## Did the original test succeed?
 
 The original first-20-mode screen found no eligible support under sugar stimulation. A separately declared deeper exploratory search found four eligible candidates among the first 40 stable complete modes and selected rank 33, with 51 cells. The four were not matches to correlation clusters. The subsequent comparisons concern the exploratory candidate. [History](LAB_NOTEBOOK.md), [experiment sequence](RESEARCH_OVERVIEW.md#3-experiment-sequence-and-why-each-stage-exists).
+
+## How well have the four candidates been examined?
+
+Today's review reproduced the original supports and recruitment values for all 40 screened modes. The four eligible supports have 819, 51, 813 and 724 cells; respectively 17, 29, 27 and 15 meet the original five-pooled-spike rule. The selected 51-cell support has 28 cells active in all five selection trials. The other three candidate lesions have not been tested in this comparison series, so we cannot rank their dynamical effects.
+
+Rank 33 stays selected at 75% and 90% support across pooled-spike thresholds 1, 5 and 10. At 50% no mode qualifies: rank 33's smaller 15-cell support has only nine qualifying cells, below the rule's ten. Selection is therefore not independent of the support convention. All four saved eigenpairs pass the matrix-residual check; this verifies the structural calculation, not biological identity. [Complete candidate review and tables](RESEARCH_OVERVIEW.md#8-candidate-review-for-the-meeting-29-september).
 
 ## What is the strongest finding?
 

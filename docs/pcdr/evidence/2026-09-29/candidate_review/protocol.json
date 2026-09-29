@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-29",
+  "status": "Retrospective candidate review; written before these new calculations, after the original selection and lesion outcomes were known.",
+  "question": "How distinct are the four eligible candidates, and how dependent is the selection on support and pooled recruitment conventions?",
+  "inputs": "Saved exploratory80 eigenpairs, mode table and membership; original five-selection-trial features; existing signed connectivity.",
+  "checks": [
+    "Verify original feature and connectivity hashes; unique exact neuron IDs; reconstruct every original first-40 stable complete mode support and recruitment value.",
+    "Recompute residuals for all four eligible candidates against the signed matrix, without solving new eigenpairs.",
+    "For all first 40 stable complete modes, examine support fractions 0.50, 0.75 and 0.90 crossed with pooled spike thresholds 1, 5 and 10, retaining at least ten qualifying cells and sensory exclusion. Preserve original ranking by whole-vector recruited power, magnitude and rank.",
+    "Report all four original candidates, their annotations, model signs, pooled recruitment, number active in all five selection trials, and pairwise support and active-support overlaps. Retain missing annotations explicitly."
+  ],
+  "interpretation": "No new significance tests, biological cutoff, candidate substitution or lesion simulation. Same-data sensitivity cannot establish independent selection or outcome generalization. Existing two-solver stability flags are inherited, not independently rerun."
+}

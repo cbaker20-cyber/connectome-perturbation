@@ -1,0 +1,193 @@
+{
+  "completed_utc": "2026-09-29T16:26:22.783774+00:00",
+  "candidates": [
+    {
+      "mode_rank": 32,
+      "support_size": 819,
+      "baseline_active": 17,
+      "five_spikes": 17,
+      "active_all_five": 13,
+      "recruited_power": 0.011168465399756841,
+      "support_power": 0.7501049262158984,
+      "active_support_power": 0.007798449914632984,
+      "excitatory": 476,
+      "inhibitory": 343,
+      "motor": 1,
+      "missing_superclass": 246,
+      "lambda_real": 78.38160234733618,
+      "lambda_imag": 557.4246132118482,
+      "recomputed_residual": 4.000859620249942e-15
+    },
+    {
+      "mode_rank": 33,
+      "support_size": 51,
+      "baseline_active": 29,
+      "five_spikes": 29,
+      "active_all_five": 28,
+      "recruited_power": 0.5379352784507679,
+      "support_power": 0.7522233686652715,
+      "active_support_power": 0.43237338141984244,
+      "excitatory": 26,
+      "inhibitory": 25,
+      "motor": 13,
+      "missing_superclass": 9,
+      "lambda_real": 556.2316151540927,
+      "lambda_imag": 57.24693636933014,
+      "recomputed_residual": 2.6459676669776766e-15
+    },
+    {
+      "mode_rank": 35,
+      "support_size": 813,
+      "baseline_active": 28,
+      "five_spikes": 27,
+      "active_all_five": 22,
+      "recruited_power": 0.033241684729898704,
+      "support_power": 0.7500366213724723,
+      "active_support_power": 0.02514648451352207,
+      "excitatory": 510,
+      "inhibitory": 303,
+      "motor": 4,
+      "missing_superclass": 200,
+      "lambda_real": 196.51507098401865,
+      "lambda_imag": 516.3718445173046,
+      "recomputed_residual": 3.430694039109832e-15
+    },
+    {
+      "mode_rank": 39,
+      "support_size": 724,
+      "baseline_active": 16,
+      "five_spikes": 15,
+      "active_all_five": 13,
+      "recruited_power": 0.030323601157888465,
+      "support_power": 0.7501758043986594,
+      "active_support_power": 0.0228670141700141,
+      "excitatory": 446,
+      "inhibitory": 278,
+      "motor": 4,
+      "missing_superclass": 201,
+      "lambda_real": 116.95712885593537,
+      "lambda_imag": 492.8871815030095,
+      "recomputed_residual": 3.143600097574343e-14
+    }
+  ],
+  "sensitivity_choices": [
+    {
+      "fraction": 0.5,
+      "spike_threshold": 1,
+      "eligible_ranks": [],
+      "selected_rank": null
+    },
+    {
+      "fraction": 0.5,
+      "spike_threshold": 5,
+      "eligible_ranks": [],
+      "selected_rank": null
+    },
+    {
+      "fraction": 0.5,
+      "spike_threshold": 10,
+      "eligible_ranks": [],
+      "selected_rank": null
+    },
+    {
+      "fraction": 0.75,
+      "spike_threshold": 1,
+      "eligible_ranks": [
+        33,
+        35,
+        39,
+        32
+      ],
+      "selected_rank": 33
+    },
+    {
+      "fraction": 0.75,
+      "spike_threshold": 5,
+      "eligible_ranks": [
+        33,
+        35,
+        39,
+        32
+      ],
+      "selected_rank": 33
+    },
+    {
+      "fraction": 0.75,
+      "spike_threshold": 10,
+      "eligible_ranks": [
+        33,
+        35,
+        39,
+        32
+      ],
+      "selected_rank": 33
+    },
+    {
+      "fraction": 0.9,
+      "spike_threshold": 1,
+      "eligible_ranks": [
+        33,
+        35,
+        39,
+        32,
+        26,
+        27,
+        21,
+        16
+      ],
+      "selected_rank": 33
+    },
+    {
+      "fraction": 0.9,
+      "spike_threshold": 5,
+      "eligible_ranks": [
+        33,
+        35,
+        39,
+        32,
+        26,
+        27,
+        21
+      ],
+      "selected_rank": 33
+    },
+    {
+      "fraction": 0.9,
+      "spike_threshold": 10,
+      "eligible_ranks": [
+        33,
+        35,
+        39,
+        32,
+        26,
+        27,
+        21
+      ],
+      "selected_rank": 33
+    }
+  ],
+  "mode_checks": 40,
+  "sensitivity_rows": 360,
+  "original_selection_reproduced": true,
+  "source_hashes": {
+    "docs\\pcdr\\evidence\\2026-09-29\\candidate_review\\protocol.json": "be6518e9bcf6f492226c1be237c9e0c54fd1df336e6d8e01987e2bed44364a59",
+    "scripts\\pcdr_candidate_review.py": "8dbe1d679e79e4c1e03926ea12dcd47576e0b7f4ce433fe1553d9d66b9f68420",
+    "results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "results\\pcdr\\exploratory80_20260921\\modes\\manifest.json": "3c56187083923d94d997540281dd8af3fd37208fcf7934c4a8c4c932b9620b44",
+    "results\\pcdr\\exploratory80_20260921\\modes\\modes.parquet": "408957f5ee74edbfc52b88d5687564af18be6ba76b97c5470d1c51d26a83912e",
+    "results\\pcdr\\exploratory80_20260921\\modes\\membership.parquet": "50b05cec5f687fc4639c21fe0213957b6fb7f052174a15ba0083bb409af249bb",
+    "results\\pcdr\\exploratory80_20260921\\modes\\eigenpairs.npz": "bc2a1b27fa7175e8629aac6a319f86d60f485b9a58305c8e3690bca7802ddcf9",
+    "results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa"
+  },
+  "model_input_hashes": {
+    "2023_03_23_completeness_630_final.csv": "479ed718404e7b1d898ee9a353410f481e6ed7694c30f579a7c2699f1c708a5d",
+    "2023_03_23_connectivity_630_final.parquet": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+    "flywire_annotations.tsv": "6155dcc6263b463aeeffa22ee857e14e339b93d0e81dd260277e8f928bc192ea"
+  },
+  "output_hashes": {
+    "sensitivity.csv": "31ec6d1a2868658c10d59c8acb262b2e89170dc0e85c71bb14f251cd786c9616",
+    "candidates.csv": "1eecc4537ed2ebc7481df04eb794b0914ad41e9794aafd5adff2831bf5b37d03",
+    "overlap.csv": "5f89f5e2c8a7dcccc7dc6853184ea82cf24e5a873e54e606cebdb31acb8d63bb"
+  },
+  "limits": "Retrospective same-selection-data review. No new lesion outcomes or solver starts. Stability flags inherited."
+}

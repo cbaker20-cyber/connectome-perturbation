@@ -1,5 +1,7 @@
 # CCR run, 27 September 2026
 
+Local follow-up on 29 September: the [candidate review](RESEARCH_OVERVIEW.md#8-candidate-review-for-the-meeting-29-september) now checks all four eligible structural candidates and selection-threshold sensitivity. It uses saved structural and original baseline data, not additional CCR simulations. The original 51-cell lesion remains the tested candidate; no outcomes are inferred for the other modes or altered supports.
+
 ## Source-partition check and broader tests, 29 September
 
 Partitioned the presynaptic sources in the same 577 target cells' 20 ms pre-first-spike windows. Fixed mutually exclusive groups before calculation: stimulated inputs, early large-only cells, later large-only cells, other cells active in any saved run, and cells silent in all four runs. Group membership uses the known outcomes and is descriptive. The windows and target membership were unchanged.
