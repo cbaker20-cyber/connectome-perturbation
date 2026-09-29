@@ -1,0 +1,175 @@
+{
+  "checked_utc": "2026-09-29T03:21:36.622116+00:00",
+  "status": "complete",
+  "rows": [
+    {
+      "trial": "finer_0p0125_w120_i080_baseline_631405",
+      "spikes": 21193,
+      "exact_replay": true,
+      "state_samples_per_slot": 80000,
+      "recorded_cells": 10,
+      "peak_rss_bytes": 2743898112,
+      "started_utc": "2026-09-29T03:10:37.424754+00:00",
+      "finished_utc": "2026-09-29T03:12:36.846904+00:00",
+      "manifest_sha256": "0c66e7058b8843c0dd33adc27b6b4099ee968495ab50ea20b5a6cb2c6b70087d"
+    },
+    {
+      "trial": "finer_0p0125_w120_i080_mode_without_mn9_631405",
+      "spikes": 629557,
+      "exact_replay": true,
+      "state_samples_per_slot": 80000,
+      "recorded_cells": 10,
+      "peak_rss_bytes": 2779930624,
+      "started_utc": "2026-09-29T03:12:38.296952+00:00",
+      "finished_utc": "2026-09-29T03:14:37.739960+00:00",
+      "manifest_sha256": "9b1b24e47d26045ec8d263996af2064e59a9e9c8728bd207631fec960cbd65d2"
+    },
+    {
+      "trial": "finer_0p00625_w120_i080_baseline_631405",
+      "spikes": 21380,
+      "exact_replay": true,
+      "state_samples_per_slot": 160000,
+      "recorded_cells": 10,
+      "peak_rss_bytes": 2883375104,
+      "started_utc": "2026-09-29T03:14:39.148897+00:00",
+      "finished_utc": "2026-09-29T03:18:02.125653+00:00",
+      "manifest_sha256": "dca296cdd1c95a0754dfe2c91d94234262758fecd425122950f770ba4be8f734"
+    },
+    {
+      "trial": "finer_0p00625_w120_i080_mode_without_mn9_631405",
+      "spikes": 17959,
+      "exact_replay": true,
+      "state_samples_per_slot": 160000,
+      "recorded_cells": 10,
+      "peak_rss_bytes": 2872688640,
+      "started_utc": "2026-09-29T03:18:03.456118+00:00",
+      "finished_utc": "2026-09-29T03:21:25.622452+00:00",
+      "manifest_sha256": "044474df4a3c0cbaf20ad091800a8cbd34654d2e01b9e408bbf0e41dd4424278"
+    }
+  ],
+  "first_state_differences": [
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940612611301",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940612906518",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940618574749",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940625705930",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940628972048",
+      "before_thresholds_v_mV_first_exact_difference_ms": 15.006250000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 15.0
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940630579574",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940630996055",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940636053678",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940636828334",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.00625,
+      "root_id": "720575940660219265",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.5625,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.55625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940612611301",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940612906518",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940618574749",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940625705930",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940628972048",
+      "before_thresholds_v_mV_first_exact_difference_ms": 15.025,
+      "after_synapses_g_mV_first_exact_difference_ms": 15.012500000000001
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940630579574",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940630996055",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940636053678",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940636828334",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    },
+    {
+      "dt_ms": 0.0125,
+      "root_id": "720575940660219265",
+      "before_thresholds_v_mV_first_exact_difference_ms": 12.575000000000001,
+      "after_synapses_g_mV_first_exact_difference_ms": 12.5625
+    }
+  ],
+  "plan_sha256": "16d011c82c38ab43d043ebee2c51b9a0ad1159e14e9fffd74dd0f442ab8a8660",
+  "checker_sha256": "c54fca713d4e44308c8c36934cb56ec0a4d7860f32502127ec8f1007bbad64de",
+  "limit": "First state differences use exact stored floats and selected cells, not a physiological threshold or causal attribution. Exact events and threshold-state agreement do not establish a mechanism or time-step convergence."
+}

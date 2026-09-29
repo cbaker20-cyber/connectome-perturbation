@@ -1,5 +1,7 @@
 # P/D/C/R study
 
+28 September: all four observed replays completed locally and passed exact event matching and independent state/threshold checks. Full traces are available in results/pcdr/observed_replay_20260928. The recorder preserves both the large and small trajectories; the cause of their time-step difference remains unresolved. Further inspection of these traces can now proceed locally. Earlier preparation and memory-refusal entries below are retained.
+
 Recorded-replay preparation: four fixed trials and ten monitored cells are specified in OBSERVED_REPLAY_PLAN.json. Small-network event preservation passed at both steps. The full local run was refused at 3.20 GB available versus the 6 GB requirement; no state results exist yet. See OBSERVED_REPLAY.md for the complete process and restart command.
 
 Local event/comparator update: reviewed 60 selected pairs and 90 default baselines. None of the seven large trajectories differs from its paired baseline in delivered external input. At 0.025 ms one additional mode cell fires once, breaking exact recruitment balance against the old comparators. Every exactly stratified new set would share all eight eligible active excitatory motor alternatives; only four active motor memberships are possible overall. Do not scale a new comparator batch before deciding its conditional scope. Next numerical work should validate non-perturbing voltage/current recording on the two-step seed-631405 case. See the current research record for limits and timing.

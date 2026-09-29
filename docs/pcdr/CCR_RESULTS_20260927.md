@@ -1,5 +1,22 @@
 # CCR run, 27 September 2026
 
+## Recorded replay completed locally, 28 September
+
+The four planned one-second runs completed from 23:10:35 to 23:21:25 EDT, about 10 minutes 50 seconds. The UTC dates in manifests are 29 September. The plan, ten selected recording cells and original simulator files were unchanged. Memory available at startup was 7.073 GB, exceeding the existing 6 GB requirement; one worker ran at a time. All four matched the complete ordered saved spike sequences and delivered events exactly.
+
+| Time step (ms) | Baseline spikes | Mode-without-MN9 spikes |
+| --- | ---: | ---: |
+| 0.0125 | 21193 | 629557 |
+| 0.00625 | 21380 | 17959 |
+
+These are total spike counts, not the paired total-absolute-rate endpoint. The large response at 0.0125 ms and the smaller response at 0.00625 ms both survive the added recording. This establishes that the new recorder preserves those event outputs in these four cases; it does not establish time-step convergence or identify why the trajectories separate.
+
+A separate local checker revalidated file hashes, reference identities, exact events, recorded indices, array dimensions, finite values and physical sampling times. For every selected neuron it reconstructed spike ticks from the before-threshold voltage (> -45 mV) and refractory-eligibility flag; these matched its saved spikes at both steps in both conditions. Each of two recording slots contains 80000 samples per cell at 0.0125 ms or 160000 at 0.00625 ms. Actual schedules are saved with the trials. Measured worker peak RSS ranged from 2.744 to 2.883 GB. Full traces stay under results/pcdr/observed_replay_20260928; the compact verification record is evidence/2026-09-28/observed_replay_check.json.
+
+For selected neuron 720575940612611301, the first exact stored synaptic-drive difference between lesion and baseline is at 12.5625 ms with the 0.0125 ms step, followed by a voltage difference at 12.575 ms. At 0.00625 ms these times are 12.55625 and 12.5625 ms. These comparisons use exact stored floats, without a physiological tolerance. They describe early effects of the lesion in selected cells; they do not attribute the later population increase to that neuron or that first difference. The ten cells were selected from known spike differences, not independently of outcomes.
+
+The next analysis can use these saved states locally to examine the period between early differences and later population growth. No further simulation is needed merely to inspect them. Evidence is still limited to ten selected cells and this one seed/lesion case. A claim about a particular recurrent pathway would need additional structural and temporal evidence and a separately specified intervention.
+
 ## Local event and comparator review
 
 Reviewed all 12 previously selected high-weight lesion/seed pairs at all five steps (60 pairs), retaining every case. Rechecked hashes for each input table read. Compared exact neuron/time events on the common 0.00625 ms grid and retained all 100 population bins per trial. Evidence: evidence/2026-09-27/event_review/. No simulations or comparison-set changes were made.
