@@ -1,0 +1,23 @@
+{
+  "completed_utc": "2026-09-29T03:54:56.290243+00:00",
+  "large_only_cells": 11530,
+  "early_large_only_cells": 577,
+  "large_only_spikes": 608713,
+  "large_only_recorded_cells": 0,
+  "recruited_by_run": {
+    "baseline_coarse": 485,
+    "lesion_coarse": 11989,
+    "baseline_fine": 504,
+    "lesion_fine": 395
+  },
+  "first_large_only_ms": 81.81250000000001,
+  "outputs": {
+    "active_cells.csv": "abc277fef836361fa6819a07424574a12bccd449d76d5b0cea92cdbf2435a16b",
+    "annotations.csv": "4bcbb91b782e31ca4ee05a98a9593dd48b9b84239a644caff36fe0bfb34e200d",
+    "connections.csv": "ba78d2dc00919e84d26a8b60bc385ddfe89b93751b2bd11625a3d34e3b27656b",
+    "early_large_only.csv": "db0cc351b1dd923d55269b6ef0d96da6878bd900284e198c4ed1393da1939bbc",
+    "protocol.json": "cc5a32da3dccdfece961d93ae99575c9a856c02bd6df930ca670e589cc84a27a",
+    "recruitment.png": "724b7bfe64dec1d568f208ff67955a27765ef096ab1af77c96f57cb396c9f2e0",
+    "recruitment_bins.csv": "ca9fd493cbdb476349607a5e4f8608fd63cf88bd97ad16da7d80401fffdbd7b0"
+  }
+}
