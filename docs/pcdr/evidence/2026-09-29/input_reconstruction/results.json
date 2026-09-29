@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "trial": "finer_0p0125_w120_i080_baseline_631405",
+      "samples": 800000,
+      "eligibility_mismatches": 0,
+      "max_absolute_error_mV": 5.684341886080802e-14,
+      "samples_exceeding_tolerance": 0,
+      "ungated_max_absolute_error_mV": 185.13
+    },
+    {
+      "trial": "finer_0p0125_w120_i080_mode_without_mn9_631405",
+      "samples": 800000,
+      "eligibility_mismatches": 0,
+      "max_absolute_error_mV": 4.263256414560601e-14,
+      "samples_exceeding_tolerance": 0,
+      "ungated_max_absolute_error_mV": 92.40000000000002
+    },
+    {
+      "trial": "finer_0p00625_w120_i080_baseline_631405",
+      "samples": 1600000,
+      "eligibility_mismatches": 0,
+      "max_absolute_error_mV": 5.684341886080802e-14,
+      "samples_exceeding_tolerance": 0,
+      "ungated_max_absolute_error_mV": 185.13
+    },
+    {
+      "trial": "finer_0p00625_w120_i080_mode_without_mn9_631405",
+      "samples": 1600000,
+      "eligibility_mismatches": 0,
+      "max_absolute_error_mV": 4.263256414560601e-14,
+      "samples_exceeding_tolerance": 0,
+      "ungated_max_absolute_error_mV": 92.40000000000002
+    }
+  ],
+  "completed_utc": "2026-09-29T04:03:01.986323+00:00"
+}

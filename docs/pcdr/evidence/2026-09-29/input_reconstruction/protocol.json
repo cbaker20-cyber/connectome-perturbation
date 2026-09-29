@@ -1,0 +1,8 @@
+{
+  "recorded_utc": "2026-09-29T04:03:00.212436+00:00",
+  "script_sha256": "44eac9086833aa5fcec98957da926cd28891c4e7b9e4e28d3b1016d73c48c84f",
+  "connectivity_sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+  "absolute_tolerance_mV": 1e-09,
+  "method": "Read all four verified spike files. Multiply selected postsynaptic rows of signed connectivity by sparse presynaptic spike counts, apply 0.275 mV, weight scale 1.2 and inhibitory scale 0.8, remove outgoing lesion columns, and delay 1.8 ms. Reconstruct non-input after-threshold eligibility from spike ticks and the 2.2 ms refractory interval, including the spike tick and excluding the recovery tick. Compare eligibility exactly and predicted masked increments against after_synapses g minus before_thresholds g at every tick. Ungated errors are a diagnostic, not the specified accepted model.",
+  "limit": "Validates event increments for ten non-input cells in four cases, not voltages, causal pathways or convergence. No new simulation."
+}

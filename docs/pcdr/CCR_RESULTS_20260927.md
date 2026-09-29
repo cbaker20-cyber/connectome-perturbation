@@ -1,5 +1,15 @@
 # CCR run, 27 September 2026
 
+## Incoming-event reconstruction test, 29 September
+
+The saved spikes and signed connectivity reproduce the net synaptic-stage changes in g for all ten recorded cells in all four runs. All 4.8 million cell/tick comparisons pass the absolute tolerance of 1e-9 mV, declared before calculation. The largest absolute difference is 5.68434e-14 mV, consistent with floating-point summation/subtraction differences. Reconstructed after-threshold refractory eligibility matches every recorded flag exactly. This validates net event increments in these cases, not full voltage reconstruction, a causal explanation or time-step convergence.
+
+The calculation applies the original 0.275 mV per signed connectivity unit, inhibitory multiplier 0.8 and overall multiplier 1.2, removes outgoing lesion columns, and shifts presynaptic spikes by the 1.8 ms delay. Both tested steps divide that delay and the 2.2 ms refractory interval exactly. Sparse neuron-by-tick spike matrices avoid allocating a dense whole-brain time series. Input IDs, clock alignment, duplicate spikes and reference hashes are checked. No simulation was run.
+
+Refractory masking is essential. The model marks g as unless refractory, so incoming synaptic writes are suppressed during that interval. The required flag is the one after threshold detection: a neuron that spikes at this tick is already ineligible for these writes. The mask is reconstructed from each postsynaptic spike, including its spike tick and ending before its recovery tick. Inspected the installed Brian2 state-updater code, which uses an integer-timestep >= comparison for recovery, and validated the resulting boundaries against the recorded flags. Omitting the mask produces maximum errors of 185.13 mV in baselines and 92.4 mV in lesions. This comparison demonstrates an implementation requirement, not evidence that refractory masking causes the large population response. [Brian2 2.9.0 refractoriness documentation](https://brian2.readthedocs.io/en/2.9.0/user/refractoriness.html) describes clamped variables and their protection from incoming writes.
+
+Four focused tests passed, including signed simultaneous inputs, delayed arrivals, events beyond the recording interval and refractory boundaries. The full results and protocol are in evidence/2026-09-29/input_reconstruction/. The test stops here: reconstruction has not yet been extended to the 577 early recruited cells, and their voltage states have not been reconstructed. That extension can now be attempted locally in bounded batches, keeping computed event increments distinct from independently recorded state.
+
 ## Recruitment outside the recorded cells
 
 Reviewed all four complete spike files with original neuron IDs preserved as strings. The 21 stimulated input cells are excluded from recruitment counts. Defined a descriptive large-only group: neurons that spike in the 0.0125 ms lesion but remain silent for the entire second in both baselines and the 0.00625 ms lesion. This definition uses the outcomes of all four trials; it is not a biological class, independent sample or prospective predictor.
