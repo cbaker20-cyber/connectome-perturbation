@@ -8,6 +8,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 Start with the [short explanation guide](EXPLAINING_THE_STUDY.md) and the [unified experiment overview](RESEARCH_OVERVIEW.md). These separate completed stages, exploratory follow-ups, remaining questions and evidence. The [detailed results](CCR_RESULTS_20260927.md) are current through 29 September. Older entries describe their dates.
 
+The [detailed meeting preparation](MEETING_DETAIL_GUIDE.md) explains the mathematics, choices, candidate evidence and limitations for discussion with James and Dr. Muldoon. It links answers to the underlying records and distinguishes proposed work from completed tests.
+
 ## Reading order
 
 1. [Plan and paper notes](PLAN.md): definitions, original procedure and dated amendments.
