@@ -290,3 +290,7 @@ The full downloaded CCR study has now been checked locally. `--snapshot-archive`
 ## Fine-step input recording
 
 `scripts/pcdr_fine_sim.py` maps saved external times to exact fine-grid ticks and records input voltage in consecutive bounded windows. It preserves the before/after synaptic-slot delivery measurement while releasing each window's state monitors. The network and delayed-event queues continue between windows. `pcdr_fine_benchmark.py` checks old/new full-network event agreement on a short prefix; `pcdr_fine_ramp.py` measures runtime and peak resident memory at four fine steps. Neither benchmark reports one-second lesion results. They write protocols before workers run, retain failed-worker logs and refuse occupied output directories.
+
+## Full-duration fine-step package
+
+scripts/pcdr_fine_ccr.py coordinates the fixed study, reuses the established resolution worker's input/output checks with the windowed simulator, measures concurrent throughput, preserves attempts and collects numerical agreement. scripts/pcdr_build_fine_ccr.py validates and packages the required prior evidence and data; scripts/pcdr_fine_run_all.sh loads the separate simulation environment and runs tests before execution. The notebook delegates to this shell so its Python kernel need not match the simulation interpreter. CCR_FINE_RUN.md describes resources, criteria, restart behavior and the differences between a result archive existing and a study actually completing. The tests exercise failures and known-answer summaries as well as successful simulation comparisons.
