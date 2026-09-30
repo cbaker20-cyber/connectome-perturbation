@@ -1,0 +1,13 @@
+{
+  "final_archive_sha256": "febd84bee15037b4e0dffeb644956c42d2e314f25e234bb2dbe22ff7c8f77667",
+  "repository_tests": "363 passed, 3 skipped, 183 warnings in 30.23 seconds",
+  "extracted_package_tests": ".................................                                        [100%]\n33 passed, 97 warnings in 10.62s",
+  "package_hashes_verified": true,
+  "notebook_code_parsed": true,
+  "shell_syntax_checked": true,
+  "replay_manifest_sha256": "e9d40530b26fc900cdb09dba0d5f8f0c90bf82557206207fa181aebd4a4be0c3",
+  "replayed_source_zip_sha256": "f380d0e1577220ac3dc69079bc35fc6888e7cd7ced6168b50a590d434e190233",
+  "limits": "Linux module setup, cluster concurrency, and full-duration fine-step trials are not locally verified.",
+  "tested_archive_sha256": "104e10ca43d75044d146aebd05779d3d0af51d90a94c538dae1f00dc50ff62c5",
+  "post_test_change": "Removed one extra trailing blank line from pcdr_fine_ccr.py; AST equality verified. Rebuilt ZIP and rechecked all packaged hashes and CRCs. No executable behavior changed."
+}
