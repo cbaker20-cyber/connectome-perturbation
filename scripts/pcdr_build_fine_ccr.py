@@ -91,7 +91,7 @@ def main():
     byid={j['trial_id']:j for j in original['jobs']}
     names=sorted({j['source_trial'] for j in plan['jobs']})
     files={}
-    code=['model.py','scripts/pcdr_fine_ccr.py','scripts/pcdr_fine_sim.py','scripts/pcdr_resolution.py',
+    code=['scripts/pcdr_repair_notebook.py','model.py','scripts/pcdr_fine_ccr.py','scripts/pcdr_fine_sim.py','scripts/pcdr_resolution.py',
           'scripts/pcdr_followup_sim.py','scripts/pcdr_ccr_capacity.py','scripts/pcdr_ccr_transfer.py',
           'scripts/pcdr_ccr_sensitivity.py','scripts/pcdr_bounded_process.py',
           'eigencircuits/__init__.py','eigencircuits/common.py','eigencircuits/readouts.py','eigencircuits/memory.py',
@@ -106,7 +106,9 @@ def main():
     files['requirements-ccr.txt']=(ROOT/'docs/pcdr/requirements-ccr.txt').read_bytes()
     files['START_HERE.md']=(ROOT/'docs/pcdr/CCR_FINE_RUN.md').read_bytes()
     files['run_all.sh']=(ROOT/'scripts/pcdr_fine_run_all.sh').read_bytes().replace(b'\r\n',b'\n')
-    files['CCR_Fine_Steps.ipynb']=(json.dumps(notebook(),indent=1)+'\n').encode()
+    document=notebook()
+    files['CCR_Fine_Steps.ipynb']=(json.dumps(document,indent=1)+'\n').encode()
+    files['notebook_content.json']=(json.dumps([[c['cell_type'], ''.join(c['source'])] for c in document['cells']],indent=2)+'\n').encode()
     files['fine_plan.json']=(json.dumps(plan,indent=2)+'\n').encode()
     import hashlib
     manifest={name:hashlib.sha256(data).hexdigest() for name,data in files.items()}
@@ -120,7 +122,7 @@ def main():
         for name,expected in manifest.items():assert hashlib.sha256(z.read('connectome_fine/'+name)).hexdigest()==expected
     temporary.replace(destination)
     write(ROOT/'docs/pcdr/CCR_FINE_PLAN.json',plan)
-    write(ROOT/'docs/pcdr/evidence/2026-09-30/fine_package.json',{
+    write(ROOT/'docs/pcdr/evidence/2026-10-01/fine_package.json',{
         'archive_sha256':digest(destination),'archive_bytes':destination.stat().st_size,
         'files':len(files),'original_trials':len(names),'planned_trials':len(plan['jobs']),
         'verification':'All ZIP member hashes and CRCs checked; all included original trials validated against saved manifests.',

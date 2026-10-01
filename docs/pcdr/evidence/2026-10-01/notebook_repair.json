@@ -1,0 +1,6 @@
+{
+  "tests": "35 passed, 97 warnings in 12.65 seconds",
+  "archive_crc_and_hashes_verified": true,
+  "canonical_notebook_matches": true,
+  "limits": "Remote repair and Linux flock have not been executed here; the lock is simulated in the Windows repair test."
+}
