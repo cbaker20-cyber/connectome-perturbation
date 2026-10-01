@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "894866d7b7278da6dd470e139084ab1ef1f30d26623b5be36de8dee858fd347a",
+  "archive_bytes": 208942022,
+  "files": 1105,
+  "original_trials": 154,
+  "planned_trials": 620,
+  "verification": "All ZIP member hashes and CRCs checked; all included original trials validated against saved manifests.",
+  "limits": "CCR module setup and full-duration execution have not run here."
+}

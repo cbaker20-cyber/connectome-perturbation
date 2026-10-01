@@ -123,7 +123,7 @@ def test_result_archive_retains_evidence_not_lock(tmp_path,monkeypatch):
     import scripts.pcdr_fine_ccr as fine
     import zipfile
     monkeypatch.setattr(fine,'ROOT',tmp_path)
-    for name in ['fine_plan.json','package_manifest.json','requirements-ccr.txt','run_all.sh','CCR_Fine_Steps.ipynb','START_HERE.md','model.py']:
+    for name in ['fine_plan.json','package_manifest.json','requirements-ccr.txt','notebook_content.json','run_all.sh','CCR_Fine_Steps.ipynb','START_HERE.md','model.py']:
         (tmp_path/name).write_text('test')
     out=tmp_path/'fine_results';out.mkdir()
     (out/'controller.lock').write_text('owned lock')
@@ -134,3 +134,47 @@ def test_result_archive_retains_evidence_not_lock(tmp_path,monkeypatch):
         assert 'controller.lock' not in z.namelist()
         assert 'progress.json' in z.namelist()
         assert 'package/run_all.sh' in z.namelist()
+
+
+def test_notebook_saves_allowed_but_source_changes_rejected(tmp_path,monkeypatch):
+    import scripts.pcdr_fine_ccr as fine
+    monkeypatch.setattr(fine,'ROOT',tmp_path)
+    notebook={'cells':[{'cell_type':'code','source':['x=1\n'],'outputs':[],'execution_count':None,'metadata':{}}]}
+    write(tmp_path/'CCR_Fine_Steps.ipynb',notebook)
+    write(tmp_path/'notebook_content.json',fine.notebook_content(notebook))
+    write(tmp_path/'package_manifest.json',{name:digest(tmp_path/name) for name in ['CCR_Fine_Steps.ipynb','notebook_content.json']})
+    fine.verify_package()
+    notebook['cells'][0].update(outputs=[{'output_type':'stream','text':'saved output'}],execution_count=1,metadata={'trusted':True})
+    write(tmp_path/'CCR_Fine_Steps.ipynb',notebook)
+    fine.verify_package()
+    notebook['cells'][0]['source']='x=2\n'
+    write(tmp_path/'CCR_Fine_Steps.ipynb',notebook)
+    with pytest.raises(ValueError,match='cell source changed'):fine.verify_package()
+    write(tmp_path/'notebook_content.json',fine.notebook_content(notebook))
+    with pytest.raises(ValueError,match='Changed package file'):fine.verify_package()
+
+
+def test_repair_released_zip_with_saved_notebook(tmp_path,monkeypatch):
+    import json,sys,types,zipfile
+    from scripts import pcdr_repair_notebook as repair
+    monkeypatch.setitem(sys.modules,'fcntl',types.SimpleNamespace(LOCK_EX=1,LOCK_NB=2,flock=lambda *a:None))
+    root=tmp_path/'package';root.mkdir()
+    (root/'scripts').mkdir()
+    old='def verify_package():\n    pass\n\n\ndef checked():\n    pass\n'
+    (root/'scripts/pcdr_fine_ccr.py').write_text(old)
+    document={'cells':[{'cell_type':'code','source':['x=1\n'],'outputs':[]}]}
+    write(root/'CCR_Fine_Steps.ipynb',document)
+    write(root/'package_manifest.json',{name:digest(root/name) for name in ['scripts/pcdr_fine_ccr.py','CCR_Fine_Steps.ipynb']})
+    upload=tmp_path/'upload.zip'
+    with zipfile.ZipFile(upload,'w') as z:
+        for name in ['scripts/pcdr_fine_ccr.py','CCR_Fine_Steps.ipynb','package_manifest.json']:z.write(root/name,'connectome_fine/'+name)
+    monkeypatch.setattr(repair,'EXPECTED_ZIP',digest(upload))
+    document['cells'][0]['outputs']=[{'text':'finished'}]
+    write(root/'CCR_Fine_Steps.ipynb',document)
+    repair.repair(root,upload)
+    assert (root/'fine_results/repair_20261001/package_manifest.json').is_file()
+    assert 'def notebook_content' in (root/'scripts/pcdr_fine_ccr.py').read_text()
+    import scripts.pcdr_fine_ccr as fine
+    monkeypatch.setattr(fine,'ROOT',root)
+    fine.verify_package()
+    with pytest.raises(ValueError,match='already changed'):repair.repair(root,upload)

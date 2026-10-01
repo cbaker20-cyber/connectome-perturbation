@@ -23,11 +23,21 @@ from scripts import pcdr_resolution as resolution
 from scripts.pcdr_fine_sim import simulate, input_tape
 
 
+def notebook_content(document):
+    return [[cell['cell_type'], ''.join(cell['source'])] for cell in document['cells']]
+
+
 def verify_package():
     manifest = read(ROOT / 'package_manifest.json')
     for name, expected in manifest.items():
+        if name == 'CCR_Fine_Steps.ipynb':
+            continue
         if digest(ROOT / name) != expected:
             raise ValueError('Changed package file: ' + name)
+    if 'notebook_content.json' not in manifest:
+        raise ValueError('Missing frozen notebook source record')
+    if notebook_content(read(ROOT / 'CCR_Fine_Steps.ipynb')) != read(ROOT / 'notebook_content.json'):
+        raise ValueError('Notebook cell source changed; saved outputs and metadata are allowed')
 
 
 def checked(directory, spec):
@@ -109,7 +119,7 @@ def archive(out):
         for path in sorted(out.rglob('*')):
             if path.is_file() and path.name != 'controller.lock':
                 z.write(path,path.relative_to(out))
-        for name in ['fine_plan.json','package_manifest.json','requirements-ccr.txt','run_all.sh','CCR_Fine_Steps.ipynb','START_HERE.md']:
+        for name in ['fine_plan.json','package_manifest.json','requirements-ccr.txt','notebook_content.json','run_all.sh','CCR_Fine_Steps.ipynb','START_HERE.md']:
             z.write(ROOT/name,'package/'+name)
         for folder in ['scripts','eigencircuits']:
             for path in sorted((ROOT/folder).glob('*.py')):
