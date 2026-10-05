@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "trials_read": 316,
+  "annotations_sha256": "6155dcc6263b463aeeffa22ee857e14e339b93d0e81dd260277e8f928bc192ea",
+  "outputs": {
+    "altered_neurons.csv": "31da300341a454d20573ec3c7a57677b1b03cc1846eb098ac788488a12901454",
+    "altered_trials.csv": "ff1dc7ffc11f749d6f3d3838ec90c9eda6eb1c7a112dc0beded444b054f58399",
+    "altered_weight_activity.png": "eeb985362f3582695f4c046d34a94559af82de8952b2fdf9da2d723962c76cd0",
+    "burst_phases.csv": "5c1b4c0b8a446708bbce2c1b08476dc137663d2e0670c06a0c95585a5cd17e24",
+    "burst_phase_neurons.csv": "ba4ad7f6bf083da99cd7d7b69b2e353b7480c25bfdb7a7ad370889600ca31089",
+    "contributors.csv": "1cfddd016fe4537004ccd72903513ba31a4f1f8302066f28dc39e062cbe5cd06",
+    "distances.csv": "21e684bed5ddd2c6fc2be5269db6f65313154305401ec0ce390a31f8d6f0a092",
+    "inputs.csv": "935294fa7e9059c50cd6fe7811c4e463439aba2d6c057b4fad5779196cc3e68e",
+    "protocol.json": "6c163cf99099ba34b705b5e83d4ea5196818a55111c6680bee5c129c55e24d96",
+    "response_summary.json": "464e0f574e79e256837dd543f54adba922ae6e29edfb2e3c053d79bd19519a0d",
+    "seed_comparison.png": "5e44746390f98698f07fe5c85380683c8f92cf567d5e2e84d98cab7665f192f4",
+    "temporal.csv": "546b3b09d041a87bce19e2ae657831b80932e3469126add8e3b808418c1db11c"
+  }
+}

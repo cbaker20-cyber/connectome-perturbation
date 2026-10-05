@@ -1,0 +1,59 @@
+{
+  "status": "proposed_not_implemented_or_run",
+  "selection": "Ten largest positive spike-count excesses in [650,700) ms at 0.0004 versus 0.0001 ms; ties by root ID. Plus MN9 and saved input cells.",
+  "seed": 631430,
+  "variant": "w120_i080",
+  "condition": "mn9_only",
+  "dt_ms": [
+    0.0004,
+    0.0002
+  ],
+  "duration_ms": 750,
+  "record_window_ms": [
+    600,
+    750
+  ],
+  "record_ids": [
+    "720575940611875570",
+    "720575940612326373",
+    "720575940612670570",
+    "720575940616885538",
+    "720575940617000768",
+    "720575940617937543",
+    "720575940620900446",
+    "720575940621502051",
+    "720575940621754367",
+    "720575940623862015",
+    "720575940624963786",
+    "720575940628853239",
+    "720575940629176663",
+    "720575940629377132",
+    "720575940629393207",
+    "720575940629667639",
+    "720575940630233916",
+    "720575940630797113",
+    "720575940632425919",
+    "720575940632889389",
+    "720575940633143833",
+    "720575940633434208",
+    "720575940637568838",
+    "720575940638202345",
+    "720575940639198653",
+    "720575940639283278",
+    "720575940639332736",
+    "720575940639935616",
+    "720575940640649691",
+    "720575940643476128",
+    "720575940643551392",
+    "720575940660219265"
+  ],
+  "source_trial": "w120_i080_mn9_only_631430",
+  "requirements": [
+    "Replay from time zero with the unchanged original tape, weights and lesion.",
+    "Record voltage, synaptic drive and refractory state with explicit scheduling and bounded memory.",
+    "First validate recorder on known small networks.",
+    "Both instrumented spike and delivered-input prefixes must match the corresponding archived trajectories exactly. A mismatch invalidates interpretation.",
+    "Record measured runtime and memory before final CCR resource choices."
+  ],
+  "purpose": "Observe state preceding broad recruitment, not prove selected cells initiate it."
+}

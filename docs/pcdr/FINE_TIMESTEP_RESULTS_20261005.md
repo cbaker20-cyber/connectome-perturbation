@@ -1,5 +1,7 @@
 # Completed smaller-step study — 5 October 2026
 
+The [subsequent local analysis](FINE_DIFFERENCES_20261005.md) completes the spike-based follow-ups proposed below. It does not change this study's agreement decision.
+
 The study completed all 620 planned trials. The selected 51-neuron group's average lesion effect remained similar across 0.0008, 0.0004, 0.0002 and 0.0001 ms. The full, previously declared agreement criteria failed. Stable averages do not establish stable individual trajectories, a uniquely defined functional circuit, or biological validity.
 
 This follows the [29 September meeting feedback](MEETING_REFLECTION_20260929.md), [local implementation checks](FINE_TIMESTEP_TESTS_20260929.md), and the frozen [run design](CCR_FINE_RUN.md) and [plan](CCR_FINE_PLAN.json). Memberships, input schedules, seeds and tolerances were retained. No candidate was selected again from these results.

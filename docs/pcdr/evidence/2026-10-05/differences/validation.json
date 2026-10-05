@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "normalized_response_comparisons": 120,
+  "contributor_total_checks": 4,
+  "phase_total_checks": 4,
+  "phase_boundary_tolerance_changes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "focused_tests_passed": 19,
+  "figure_review": "Both complete figures viewed; final plot hashes equal initially viewed plots.",
+  "files": {
+    "altered_trials.csv": "ff1dc7ffc11f749d6f3d3838ec90c9eda6eb1c7a112dc0beded444b054f58399",
+    "altered_weight_activity.png": "eeb985362f3582695f4c046d34a94559af82de8952b2fdf9da2d723962c76cd0",
+    "before_burst_contributors.csv": "bfa486ab3267e253dbdb0025c279d3cef5179f1e406aa48b04b6a12c213e9a7a",
+    "burst_phases.csv": "5c1b4c0b8a446708bbce2c1b08476dc137663d2e0670c06a0c95585a5cd17e24",
+    "complete.json": "1d6d88a7e60eeec0c8af19ffb7ea6c8eeeccc47e0dce4d6a87496cca1cf5e516",
+    "diagnostic_proposal.json": "d373ef9cdb56fa950be17d29f825eb9555570250e394e3f87a8715cf8aac2a5c",
+    "largest_contributors.csv": "b235ef56259cf23bf601e6df9592d25e0ec47c0513ad25802a37b1dad697353b",
+    "protocol.json": "6c163cf99099ba34b705b5e83d4ea5196818a55111c6680bee5c129c55e24d96",
+    "response_summary.json": "464e0f574e79e256837dd543f54adba922ae6e29edfb2e3c053d79bd19519a0d",
+    "seed_comparison.png": "5e44746390f98698f07fe5c85380683c8f92cf567d5e2e84d98cab7665f192f4",
+    "temporal_summary.csv": "6f13b8761dc9959a1c6c4770115a59c72267747dd52bd74a21b39c76fb05f64a"
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "condition": "mode",
+    "same_seed_step_L1_hz": {
+      "min": 0.0,
+      "q25": 559.25,
+      "median": 693.5,
+      "q75": 811.25,
+      "max": 1309.0
+    },
+    "different_seed_L1_hz": {
+      "min": 742.0,
+      "q25": 904.5,
+      "median": 1009.0,
+      "q75": 1169.5,
+      "max": 1895.0
+    },
+    "median_ratio": 0.6873141724479683
+  },
+  {
+    "condition": "motor_003",
+    "same_seed_step_L1_hz": {
+      "min": 30.0,
+      "q25": 647.0,
+      "median": 748.0,
+      "q75": 997.75,
+      "max": 1263.0
+    },
+    "different_seed_L1_hz": {
+      "min": 802.0,
+      "q25": 1044.5,
+      "median": 1177.0,
+      "q75": 1363.0,
+      "max": 2312.0
+    },
+    "median_ratio": 0.6355140186915887
+  },
+  {
+    "condition": "motor_004",
+    "same_seed_step_L1_hz": {
+      "min": 212.0,
+      "q25": 686.5,
+      "median": 813.5,
+      "q75": 939.0,
+      "max": 1607.0
+    },
+    "different_seed_L1_hz": {
+      "min": 764.0,
+      "q25": 998.5,
+      "median": 1114.0,
+      "q75": 1262.0,
+      "max": 1741.0
+    },
+    "median_ratio": 0.7302513464991023
+  },
+  {
+    "condition": "motor_005",
+    "same_seed_step_L1_hz": {
+      "min": 126.0,
+      "q25": 652.0,
+      "median": 710.0,
+      "q75": 853.25,
+      "max": 1211.0
+    },
+    "different_seed_L1_hz": {
+      "min": 829.0,
+      "q25": 1002.0,
+      "median": 1119.0,
+      "q75": 1256.0,
+      "max": 1836.0
+    },
+    "median_ratio": 0.6344950848972297
+  }
+]
