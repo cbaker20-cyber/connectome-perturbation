@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "trials_checked": 620,
+  "exact_replays": 4,
+  "pairs_reproduced": 488,
+  "mean_rows_reproduced": 24,
+  "archive_sha256": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b",
+  "plan_sha256": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+  "script_sha256": "241fd1688ad12485c00211dfc00ff02f1c976cca1d752e3cee829f30c3357164",
+  "analysis_environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "simulation_environments": [
+    {
+      "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+      "executable": "/user/cbaker4/connectome_fine/.fine-venv/bin/python",
+      "platform": "Linux-7.0.0-31-generic-x86_64-Intel-R-_Xeon-R-_Gold_6448Y-with-glibc2.38",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.17.1",
+        "pandas": "3.0.3",
+        "pyarrow": "24.0.0",
+        "brian2": "2.9.0",
+        "Cython": "3.2.5",
+        "matplotlib": "3.11.0",
+        "psutil": null,
+        "pytest": "9.1.1",
+        "statsmodels": "0.14.6"
+      }
+    }
+  ],
+  "agreement_rows_reproduced": 366,
+  "outputs": {
+    "checked_activity.csv": "f39d6c01bcd8141ba03c04abe81f8145d770d3eb9f2d492cd278515132371b20",
+    "checked_agreement.csv": "d8e36e50a4071cfba4ff18623c21d10a449c95e7f6dce0c7b0d2488bd84d9707",
+    "checked_agreement.json": "5867bcc9add8f7585f0d480fbb81a70ea81a48e97bd0535faf2bb902cea6f49f",
+    "checked_means.json": "3df02187be12ccb4e25c4c02288aa5946083fafd9321b1884a7c1ffaf546c2d4",
+    "checked_pairs.csv": "5561b9c24da32940156d7c2e113fe9d6da675ca4ca48778e24137ca820559dcd"
+  }
+}
