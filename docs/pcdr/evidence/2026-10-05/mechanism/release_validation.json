@@ -1,0 +1,43 @@
+{
+  "upload": "exports/CCR_Diagnostic.zip",
+  "upload_sha256": "b638e57cdcf9d9b3421ae2d0a36a626391d7cd8c32fe83df45a31d8b9bdc4f47",
+  "bytes": 89206352,
+  "repository_tests": {
+    "passed": 396,
+    "skipped": 3,
+    "warnings": 245,
+    "seconds": 39.09,
+    "note": "Before adding three controller-only tests."
+  },
+  "controller_tests_after_additions": {
+    "passed": 6,
+    "seconds": 0.58
+  },
+  "final_extracted_upload_tests": {
+    "passed": 34,
+    "warnings": 163,
+    "seconds": 15.37
+  },
+  "archive_crc": "passed",
+  "packaged_hashes": "passed",
+  "notebook_code_syntax": "passed",
+  "bash_syntax": "passed",
+  "full_diagnostic_runs": "not started",
+  "model_audit": {
+    "MN9_outgoing_positive_rows": 83,
+    "MN9_outgoing_negative_rows": 0,
+    "MN9_synapses": 116,
+    "targets_model_inhibitory": 40,
+    "targets_model_excitatory": 43,
+    "excitatory_scale": 1.2,
+    "inhibitory_absolute_scale": 0.96
+  },
+  "compact_evidence_hashes": {
+    "checks.json": "6fcbd4c73f9b722d6f94acffed2653e8f579fcd0bec6d1b02b73dad709c0622e",
+    "diagnostic_plan.json": "41ffb574292d7ecf0d5581bb68cd8515067e10079a6196c2bf65d9083cd5aa3a",
+    "prefix_0.0002.json": "b7afaf4415a7681c2d64d5adffc1d6f7b89d688af735a2ce9341c5b66e6c7f24",
+    "prefix_0.0004.json": "f0544083bfe266549592a94301b6e1558671fd591ae7de34b63ae9c4c1b2bad6",
+    "recurrent_delivery.csv": "7e3dc5a59b18e4ff33048cbd1eb5ef2b2f8079cdf04fb29d6e6e5a43b9701fee",
+    "upstream_review.json": "1c67863b926cb7f62d826233ce88bb837392d515020ab00eeb3e3b9c52af44ec"
+  }
+}

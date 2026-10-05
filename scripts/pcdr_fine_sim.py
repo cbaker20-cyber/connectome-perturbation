@@ -35,7 +35,7 @@ def input_tape(events, input_ids, dt_ms, duration_s=1.):
 
 def simulate(seed, inputs, lesion, *, tape, duration_s=1., dt_ms=.1, backend="numpy",
              weight_scale=1., inhibitory_scale=1., strong_fraction=None,
-             completeness=COMP, connectivity=CON, return_delivered=False, chunk_ms=10.):
+             completeness=COMP, connectivity=CON, return_delivered=False, chunk_ms=10., recorder=None):
     """Replay state-independent Bernoulli input; retain Shiu voltage gating."""
     ticks_for(duration_s * 1000, dt_ms)
     chunk_ticks = ticks_for(chunk_ms, dt_ms)
@@ -81,17 +81,28 @@ def simulate(seed, inputs, lesion, *, tape, duration_s=1., dt_ms=.1, backend="nu
     external = external.sort_values(["tick", "neuron_index"]).reset_index(drop=True)
     model.silence(lesion, syn)
     network = b.Network(neu, syn, monitor, *pois)
+    if recorder is not None:
+        recorder.setup(network, neu, dt_ms, duration_s)
     pieces = []
     for start in range(0, ticks, chunk_ticks):
         length = min(chunk_ticks, ticks - start)
         extra = []
+        diagnostic = []
         if inputs:
             before = b.StateMonitor(neu, 'v', record=inputs, when='before_synapses')
             after = b.StateMonitor(neu, 'v', record=inputs, when='after_synapses')
             extra = [before, after]
             network.add(*extra)
         try:
+            if recorder is not None:
+                diagnostic = recorder.monitors(start, length)
+                if diagnostic:
+                    network.add(*diagnostic)
             network.run(length * dt_ms * b.ms)
+            if diagnostic:
+                recorder.save(start, length, diagnostic)
+            if recorder is not None:
+                recorder.progress(start+length)
             if inputs:
                 jumps = np.asarray((after.v - before.v) / (params['w_syn'] * params['f_poi']))
                 if not np.allclose(jumps, np.rint(jumps), atol=1e-10) or np.any(jumps < -.5) or np.any(jumps > 1.5):
@@ -106,6 +117,9 @@ def simulate(seed, inputs, lesion, *, tape, duration_s=1., dt_ms=.1, backend="nu
                 pieces.append(pd.DataFrame({'neuron_index': np.asarray(inputs, dtype=np.int64)[source],
                                             'tick': event_ticks}))
         finally:
+            if diagnostic:
+                network.remove(*diagnostic)
+                del diagnostic
             if extra:
                 network.remove(*extra)
                 del before, after, extra

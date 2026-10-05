@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Burst mechanism review and tested recorder](BURST_MECHANISM_REVIEW_20261005.md): code/literature review, validated recurrent-input reconstruction, exact full-network prefix replays and the next two-run CCR package. Recurrent amplification is supported; the initiating cause remains unresolved.
+
 [Local analysis of remaining differences, 5 October](FINE_DIFFERENCES_20261005.md) compares time-step differences with variation across seeds, identifies contributing cells, and locates broad recruitment in the burst case. It proposes a two-run diagnostic; that new simulation has not been implemented or run.
 
 [Completed fine-step results, 5 October](FINE_TIMESTEP_RESULTS_20261005.md): all 620 trials checked locally. Selected-group averages remain similar down to 0.0001 ms, but the declared full agreement criteria fail. This is the newest numerical result.

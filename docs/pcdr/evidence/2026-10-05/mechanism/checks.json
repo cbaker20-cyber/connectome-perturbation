@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "prefix_checks": [
+    {
+      "dt_ms": 0.0004,
+      "max_absolute_drive_error_mV": 7.105427357601002e-15,
+      "neurons": 32,
+      "ticks": 50000
+    },
+    {
+      "dt_ms": 0.0002,
+      "max_absolute_drive_error_mV": 5.329070518200751e-15,
+      "neurons": 32,
+      "ticks": 100000
+    }
+  ],
+  "script_sha256": "ad8f3777c1c55aca422061915ff44069a407713cc2a6b94c6348136631d14474",
+  "plan_sha256": "41ffb574292d7ecf0d5581bb68cd8515067e10079a6196c2bf65d9083cd5aa3a",
+  "interpretation": "Reconstructed weighted arrivals conditional on observed spikes, not a causal intervention or membrane-state measurement.",
+  "output_sha256": "7e3dc5a59b18e4ff33048cbd1eb5ef2b2f8079cdf04fb29d6e6e5a43b9701fee"
+}

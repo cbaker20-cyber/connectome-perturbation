@@ -1,0 +1,20 @@
+{
+  "url": "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/main/model.py",
+  "retrieved_date": "2026-10-05",
+  "sha256": "fc45837d7122c6ce2a7f3f2f23c515992e4b232aadb919efabb72337fac88e4e",
+  "matched_parameter_expressions": {
+    "v_0": true,
+    "v_rst": true,
+    "v_th": true,
+    "t_mbr": true,
+    "tau": true,
+    "t_rfc": true,
+    "t_dly": true,
+    "w_syn": true,
+    "r_poi": true,
+    "f_poi": true,
+    "eq_th": true,
+    "eq_rst": true
+  },
+  "notes": "Upstream main is mutable; saved source bytes and hash identify this review. Equation refractory flags and linear integrator also reviewed directly."
+}

@@ -69,7 +69,7 @@ The paired baseline at 0.0004 ms does not show a comparable burst in this second
 
 ## Decision about another simulation
 
-A focused diagnostic replay is warranted if we want to explain this burst. Another broad smaller-step sweep is not the useful next experiment. The existing records show spikes and input delivery, but not the voltage or synaptic drive preceding threshold crossings. No analysis of those files can recover the missing state uniquely.
+A focused diagnostic replay is warranted if we want to explain this burst. Another broad smaller-step sweep is not the useful next experiment. The existing records show spikes and input delivery, but do not directly measure voltage or synaptic drive preceding threshold crossings. With the known model and complete event history, model-predicted inputs and states can be reconstructed and checked against recording. The [subsequent code review and local tests](BURST_MECHANISM_REVIEW_20261005.md) demonstrate recurrent-input reconstruction and correct the earlier overly broad statement that reconstruction was impossible.
 
 Proposed diagnostic: replay seed 631430 with the same altered weights, MN9-only lesion and original input tape at 0.0004 and 0.0002 ms, from time zero to 750 ms. Use the existing completed trajectories as exact prefix checks. Recording must not change spikes or delivered inputs; if it does, reject the instrumented run before interpreting voltages. Do not initialize at 600 ms without a validated complete state checkpoint, including delayed synaptic events.
 

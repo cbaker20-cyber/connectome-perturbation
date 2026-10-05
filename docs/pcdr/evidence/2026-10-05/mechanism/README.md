@@ -1,0 +1,3 @@
+# Mechanism review and diagnostic validation
+
+The prefix manifests identify the actual executed source files and measured outputs. Those source bytes are saved locally under results/pcdr/diagnostic_prefix_20261005/source. The replay worker body was unchanged while stricter controller file-coverage verification was added during the prefixes; archived source hashes match the pre-change bytes recorded by both workers. The tested upload includes the stricter controller. Recurrent delivery is reconstructed conditional on observed spikes and is not a causal intervention. Full state arrays and downloaded evidence remain local. See [the review](../../../BURST_MECHANISM_REVIEW_20261005.md).
