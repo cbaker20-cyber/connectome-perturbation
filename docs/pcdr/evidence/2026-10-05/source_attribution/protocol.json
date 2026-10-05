@@ -1,0 +1,35 @@
+{
+  "status": "post-result descriptive attribution",
+  "windows_ms": [
+    [
+      600,
+      650
+    ],
+    [
+      650,
+      700
+    ]
+  ],
+  "target_ids": [
+    "720575940612326373",
+    "720575940623862015",
+    "720575940629377132",
+    "720575940629393207",
+    "720575940629667639",
+    "720575940633434208",
+    "720575940639283278",
+    "720575940639935616",
+    "720575940643476128",
+    "720575940643551392"
+  ],
+  "steps_ms": [
+    0.0008,
+    0.0004,
+    0.0002,
+    0.0001
+  ],
+  "restriction": "Conditional on observed spikes; source ranking does not identify a causal initiating cell.",
+  "archive_sha256": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b",
+  "script_sha256": "bb44561aaca14f8acc7c68cd51d424cbfaa8db6ce048175348d926bacf056085",
+  "gating_source_sha256": "8d3ea61184dc6143f96467b42a785a12e4bb5696ab07b01c4f8d88844ef8f074"
+}

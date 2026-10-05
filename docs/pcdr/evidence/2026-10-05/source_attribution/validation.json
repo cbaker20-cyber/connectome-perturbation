@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "aggregate_checks": 32,
+  "unit_tests_passed": 10,
+  "prefix_duration_ms": 10,
+  "prefix_steps_ms": [
+    0.0004,
+    0.0002
+  ],
+  "exact_prefixes": true,
+  "recording_cells": 34,
+  "upload_sha256": "7f2480e87ae2891f46c108b274ec70b51f5e21427dd2ba8915bcecc9189041d1",
+  "upload_bytes": 89206528,
+  "upload_python_sources": "All identical to earlier extracted upload with 34 passing tests; only plan and directions changed.",
+  "current_replay_runs": "750 ms diagnostics not started",
+  "files": {
+    "complete.json": "4e5bb036740e4084ed17317ddd8944af9412771c53817fd97d5cb34c5dba93c0",
+    "diagnostic_plan.json": "a6b58c9d366aa0d3cff9cbeaad161b623e1ce09e302e3456264ef5bb0f0667f7",
+    "leading_sources.csv": "a50c91e83a89c282cb7701a9ca2e1fa4f22adc91758c5ca589f6a1c9e076f1df",
+    "leading_source_spikes.json": "77ba304f1a795fe8766a79e562c4ac0b61fe5899381c567199a8f9b3ba5f5bec",
+    "prefix_0.0002.json": "820c8a6a6a286d24c6d917887f06309f444522ae19b275a0beb40bc3ec416cb7",
+    "prefix_0.0004.json": "d77c1f3ae317ed37dcb8eb3da9febaebc5e518a42c0f109d887304314ff74dfe",
+    "protocol.json": "ec6b87d8445690101b40c21d32f2eb80b8f16cf3b36c7fb29171ca668e3cccbf",
+    "totals.csv": "c296d40ecc3ba104d7fcc6bf779e6008bda21bb2e680f2d1857db8b76d0dd341"
+  }
+}

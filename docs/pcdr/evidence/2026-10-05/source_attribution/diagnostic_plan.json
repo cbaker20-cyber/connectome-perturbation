@@ -1,0 +1,113 @@
+{
+  "status": "implemented_pending_full_replays",
+  "selection": "Ten largest positive spike-count excesses in [650,700) ms at 0.0004 versus 0.0001 ms; ties by root ID. Plus MN9 and saved input cells.",
+  "seed": 631430,
+  "variant": "w120_i080",
+  "condition": "mn9_only",
+  "dt_ms": [
+    0.0004,
+    0.0002
+  ],
+  "duration_ms": 750,
+  "record_window_ms": [
+    600,
+    750
+  ],
+  "record_ids": [
+    "720575940611875570",
+    "720575940612326373",
+    "720575940612670570",
+    "720575940616885538",
+    "720575940617000768",
+    "720575940617937543",
+    "720575940620900446",
+    "720575940621502051",
+    "720575940621754367",
+    "720575940623862015",
+    "720575940624963786",
+    "720575940628455942",
+    "720575940628695043",
+    "720575940628853239",
+    "720575940629176663",
+    "720575940629377132",
+    "720575940629393207",
+    "720575940629667639",
+    "720575940630233916",
+    "720575940630797113",
+    "720575940632425919",
+    "720575940632889389",
+    "720575940633143833",
+    "720575940633434208",
+    "720575940637568838",
+    "720575940638202345",
+    "720575940639198653",
+    "720575940639283278",
+    "720575940639332736",
+    "720575940639935616",
+    "720575940640649691",
+    "720575940643476128",
+    "720575940643551392",
+    "720575940660219265"
+  ],
+  "source_trial": "w120_i080_mn9_only_631430",
+  "requirements": [
+    "Replay from time zero with the unchanged original tape, weights and lesion.",
+    "Record voltage, synaptic drive and refractory state with explicit scheduling and bounded memory.",
+    "First validate recorder on known small networks.",
+    "Both instrumented spike and delivered-input prefixes must match the corresponding archived trajectories exactly. A mismatch invalidates interpretation.",
+    "Record measured runtime and memory before final CCR resource choices."
+  ],
+  "purpose": "Observe state preceding broad recruitment, not prove selected cells initiate it.",
+  "input_ids": [
+    "720575940624963786",
+    "720575940630233916",
+    "720575940637568838",
+    "720575940638202345",
+    "720575940617000768",
+    "720575940630797113",
+    "720575940632889389",
+    "720575940621754367",
+    "720575940621502051",
+    "720575940640649691",
+    "720575940639332736",
+    "720575940616885538",
+    "720575940639198653",
+    "720575940620900446",
+    "720575940617937543",
+    "720575940632425919",
+    "720575940633143833",
+    "720575940612670570",
+    "720575940628853239",
+    "720575940629176663",
+    "720575940611875570"
+  ],
+  "lesion_ids": [
+    "720575940660219265"
+  ],
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.17.1",
+    "pandas": "3.0.3",
+    "pyarrow": "24.0.0",
+    "brian2": "2.9.0",
+    "Cython": "3.2.5",
+    "matplotlib": "3.11.0",
+    "psutil": null,
+    "pytest": "9.1.1",
+    "statsmodels": "0.14.6"
+  },
+  "model_files": {
+    "model.py": "c74b2f9750a3c0d36c4a06ba4596fce1be41db5ab57a6be701648c95c5bbdbed",
+    "2023_03_23_completeness_630_final.csv": "479ed718404e7b1d898ee9a353410f481e6ed7694c30f579a7c2699f1c708a5d",
+    "2023_03_23_connectivity_630_final.parquet": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3"
+  },
+  "reference_files": {
+    "input_events.parquet": "ebebb879c2c7261ea9f5c329090e86c7ff1cb538b59fb396d40b3e04bcada718",
+    "reference/0.0002/delivered_events.parquet": "d28bce1941cfa0ca4ab0ea60519c56b83099a96c15499aa3a24bb444991cc79a",
+    "reference/0.0002/spikes.parquet": "ed3a94769237a8f99b141a74f9d9f5ee4137e91097ac62e4aa69034b24619ef9",
+    "reference/0.0004/delivered_events.parquet": "155dd433c19d6f21a6fdc13a4940182e30749d370b639b70fc67696a90b37f7f",
+    "reference/0.0004/spikes.parquet": "f12a55a792dfa55b1f9d394a902bd827623606ce61db76cf24b2b2c3f500de9f"
+  },
+  "archive_sha256": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b",
+  "recording_amendment": "5 October, before full diagnostic execution: add two CRE011 source cells identified by saved-event attribution, supplying 64.84% of accepted excitation to the original ten non-input targets in 650-700 ms. Original targets and simulation settings unchanged."
+}

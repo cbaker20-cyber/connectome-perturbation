@@ -1,5 +1,7 @@
 # Code and literature review of the burst
 
+Later on 5 October: [source attribution below](#follow-up-tracing-the-input-sources) identifies two CRE011 cells supplying much of the increased drive. The current upload records 34 cells, adding those two before full diagnostic execution. References to 32 cells below describe the original validation.
+
 5 October 2026. The best supported working explanation is amplification of small changes in recurrent event timing in the altered-weight network. Refractory gating provides a concrete route for amplification: a shifted postsynaptic spike can change whether a subsequent recurrent input is accepted. We have demonstrated that rule in the implementation and reconstructed its input accounting, but have not identified the event that initiates this particular burst. It would be premature to call this a demonstrated coding error, numerical convergence, chaos, or biological activity.
 
 ## What the implementation actually does
@@ -58,3 +60,22 @@ The one current upload is `exports/CCR_Diagnostic.zip`. Use [the run directions]
 `scripts/pcdr_state_recorder.py` handles bounded recording. `pcdr_burst_diagnostic.py` handles replay, reference checks and collection. `pcdr_recurrent_delivery.py` reconstructs arrival acceptance from saved spikes and checks it against the measured prefixes. `pcdr_build_burst_diagnostic.py` builds the self-contained upload. The optional hook in the fine simulator does nothing when no recorder is supplied.
 
 Full records are in `results/pcdr/diagnostic_prefix_20261005`, `results/pcdr/recurrent_delivery_20261005`, and `results/pcdr/mechanism_review_20261005`. The compact [evidence directory](evidence/2026-10-05/mechanism) records source hashes, prefix results, recurrent accounting and release checks. The original fine-step archive remains unchanged. This work narrows mechanisms; it has not established a unique cause or repaired the separate limitations of the eigencircuit comparison groups.
+
+## Follow-up: tracing the input sources
+
+Attributed recurrent arrivals to their presynaptic cells in two windows, 600–650 and 650–700 ms, for the original ten non-input recording targets at all four steps. This uses the previously validated refractory accounting and the original fixed 32-cell plan, rather than the subsequently amended recording plan. Archive, spike and connectivity hashes were checked. All 32 accepted/attempted aggregate comparisons agree with the previous reconstruction. Root IDs remain strings; source-cell labels come from the supplied annotation table.
+
+At 650–700 ms, the burst version sends 14938.11 mV of summed excitatory increments toward those ten cells, of which 12649.56 mV is accepted (84.68%). At the finest step only 1.32 mV arrives, all accepted. These are sums over connection events, not membrane voltages. The increased drive is therefore primarily associated with additional arriving events in this window, not simply a greater acceptance fraction for an unchanged input stream. This does not exclude an earlier role for refractory gating in producing the changed spike history.
+
+Two sources, both annotated CRE011, contribute 8201.82 mV, or 64.84% of accepted excitation to these ten targets in 650–700 ms. In 600–650 ms they contribute 2754.51 mV, or 77.60%. The percentages refer only to the selected targets, not all excitation in the brain.
+
+| Source root ID | Full-second spikes at 0.0008 ms | At 0.0004 ms | At 0.0002 ms | At 0.0001 ms |
+| --- | ---: | ---: | ---: | ---: |
+| 720575940628455942 | 0 | 69 | 0 | 0 |
+| 720575940628695043 | 11 | 79 | 9 | 10 |
+
+Cell 720575940628455942 first fires at 647.9524 ms in the burst version; it remains silent for the entire second in the other versions. Cell 720575940628695043 fires at 613.3504, 631.4560 and 647.8732 ms in the burst version, then more frequently. Its firing already differs before the first cell is recruited. The two have reciprocal excitatory connections, with anatomical counts of three in the first-to-second direction and one in reverse. These small direct connections are not by themselves an explanation of the large response. Other incoming pathways and recurrent loops may matter.
+
+This is a useful narrowing of the mechanism: an upstream change in activity supplies much of the drive to the selected pre-burst cells. It does not establish that either CRE011 cell is the initiating cause or that silencing it would eliminate the burst without introducing other changes. A counterfactual intervention has not been run. No causal label is assigned from temporal precedence alone.
+
+Amended the unrun diagnostic plan to record both sources, for 34 total cells. This lets us inspect their voltage, recurrent drive and refractory state during the existing 600–750 ms window. The original 32 targets, input tape, lesion, weights, steps and trial duration remain unchanged. The selection is explicitly based on observed results. The original plan and validations remain preserved, and the new recording plan and prefix validations are recorded in [source-attribution evidence](evidence/2026-10-05/source_attribution). The 750 ms runs are still pending; the one current upload remains `exports/CCR_Diagnostic.zip`, now with this amendment.

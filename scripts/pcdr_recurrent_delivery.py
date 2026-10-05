@@ -24,7 +24,7 @@ def accepted(arrivals, postsynaptic_spikes, refractory_ticks):
 
 def run(out):
     out=Path(out);out.mkdir(parents=True,exist_ok=False)
-    plan=read(ROOT/'results/pcdr/diagnostic_inputs_20261005/diagnostic_plan.json')
+    plan=read(ROOT/'docs/pcdr/evidence/2026-10-05/mechanism/diagnostic_plan.json')
     ids=neuron_ids();lookup={v:i for i,v in enumerate(ids)}
     con_path=ROOT/'2023_03_23_connectivity_630_final.parquet'
     if digest(con_path)!=plan['model_files'][con_path.name]:raise ValueError('Connectivity changed')
@@ -78,7 +78,7 @@ def run(out):
             checks.append(dict(dt_ms=dt,max_absolute_drive_error_mV=error,neurons=len(targets),ticks=prefix_ticks))
     pd.DataFrame(rows).to_csv(out/'recurrent_delivery.csv',index=False)
     write(out/'checks.json',{'status':'complete','prefix_checks':checks,
-        'script_sha256':digest(Path(__file__)),'plan_sha256':digest(ROOT/'results/pcdr/diagnostic_inputs_20261005/diagnostic_plan.json'),
+        'script_sha256':digest(Path(__file__)),'plan_sha256':digest(ROOT/'docs/pcdr/evidence/2026-10-05/mechanism/diagnostic_plan.json'),
         'interpretation':'Reconstructed weighted arrivals conditional on observed spikes, not a causal intervention or membrane-state measurement.',
         'output_sha256':digest(out/'recurrent_delivery.csv')})
 

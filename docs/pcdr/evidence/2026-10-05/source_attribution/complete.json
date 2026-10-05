@@ -1,0 +1,12 @@
+{
+  "status": "complete",
+  "aggregate_checks": 32,
+  "annotation_sha256": "6155dcc6263b463aeeffa22ee857e14e339b93d0e81dd260277e8f928bc192ea",
+  "outputs": {
+    "edge_arrivals.csv": "cdae794d87baa52018813bf35be0de316c5eb3072d7b1644bfb7dd67be19bddf",
+    "leading_source_spikes.json": "77ba304f1a795fe8766a79e562c4ac0b61fe5899381c567199a8f9b3ba5f5bec",
+    "protocol.json": "ec6b87d8445690101b40c21d32f2eb80b8f16cf3b36c7fb29171ca668e3cccbf",
+    "source_arrivals.csv": "d9fa051af542f091173609de7a26b1d9545eed787ac3c9991e9ff21bf583fb50",
+    "totals.csv": "c296d40ecc3ba104d7fcc6bf779e6008bda21bb2e680f2d1857db8b76d0dd341"
+  }
+}
