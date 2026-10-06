@@ -21,4 +21,4 @@ Installation update, 25 September: James confirmed that pip installation is avai
 
 The 21 sugar-input neurons are stimulated, not frozen or lesioned. The exploratory mode screen tested support, recruitment and numerical eligibility, not agreement with the correlation clusters. The prepared runs do not require a change to that scientific procedure based on the email.
 
-This is an explicit exploratory amendment after the user asked to use CCR more substantially. The original 350-job design is retained in the repository. More computation does not fix the distributional mismatch of the optimized controls. Report all conditions, individual cells and variants, conditional seed intervals, and no random-reference p-values. Single-cell effects are not additive in this recurrent model.
+This exploratory amendment expands the CCR workload. The original 350-job design is retained in the repository. More computation does not fix the distributional mismatch of the optimized controls. Report all conditions, individual cells and variants, conditional seed intervals, and no random-reference p-values. Single-cell effects are not additive in this recurrent model.

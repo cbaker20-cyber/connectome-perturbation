@@ -8,7 +8,7 @@ The earlier restricted-pool infeasibility result remains valid for its narrower 
 
 ## Notes on the method and stopping decision
 
-- User requested continued testing for methodical refinement. Selected a baseline-only full-pool test because the previous nearest-64 candidate restriction could itself cause failure. This tests candidate coverage while retaining the earlier conservative sufficient mean bounds and exact sign, recruitment and annotated motor counts.
+- Selected a baseline-only full-pool test because the previous nearest-64 candidate restriction could itself cause failure. This tests candidate coverage while retaining the earlier conservative sufficient mean bounds and exact sign, recruitment and annotated motor counts.
 - Created scripts/pcdr_fullpool_motor_witness.py with Codex assistance. It replaces nearest-neighbor selection with all eligible cells in the target strata. It excludes the focal support and sugar inputs, uses binary variables, and sends a sparse constraint matrix to HiGHS. Seed 631101; one solve; requested 60-second solver limit and one thread. No automatic lesion stage follows.
 - Wrote protocol.json before loading the features or solving. It hashes the code, baseline feature table and fixed mode selection. The inputs match the earlier frozen evidence.
 - SciPy warned that threads is not a recognized wrapper option and passed it to HiGHS verbatim. This warning was not a scientific failure. Environment thread counts were also set to one.
@@ -17,7 +17,7 @@ The earlier restricted-pool infeasibility result remains valid for its narrower 
 
 ## Separate code guide for the bounds check
 
-- Created scripts/pcdr_fullpool_bounds.py after the stopped attempt. Its protocol was saved before the new calculation. The purpose is to check necessary conditions cheaply, without another optimizer.
+- Created scripts/pcdr_fullpool_bounds.py after the stopped attempt. Its protocol was saved before the new calculation. The purpose is to check necessary conditions algebraically, without another optimizer.
 - For each nonnegative log1p feature, mean_bounds sorts values within each required stratum. Selecting the required number of smallest values gives the minimum possible mean L; selecting the largest gives maximum U. These are exact for one feature at a time.
 - The same calculation on squared values gives an upper bound Q on the second moment. Since the mean is at least L and values are nonnegative, variance is at most Q minus L squared. Different sets can attain these extrema, so combining them gives a conservative upper bound.
 - smd_lower_bounds computes the distance of the target mean from the interval [L, U], then divides it by the largest permitted pooled standard deviation under that variance bound. A value above 0.1 would rule out the original matching criterion for that feature. Zero means this bound cannot rule it out.

@@ -79,7 +79,7 @@ The batch retains NumPy execution and the tested windowed recorder. Changing to 
 
 Python 3.11; NumPy, SciPy, pandas, PyArrow, Brian2, Cython, matplotlib, joblib, pytest and statsmodels, plus their pinned dependencies in requirements-ccr.txt. psutil and NetworkX are not required by this run. Installed versions are saved in the results.
 
-CCR documents resource selection and Slurm limits at https://docs.ccr.buffalo.edu/en/latest/hpc/jobs/ and OnDemand at https://docs.ccr.buffalo.edu/en/latest/portals/ood/. The module sequence above was previously verified in this user's CCR terminal; local packaging does not re-test remote module availability.
+CCR documents resource selection and Slurm limits at https://docs.ccr.buffalo.edu/en/latest/hpc/jobs/ and OnDemand at https://docs.ccr.buffalo.edu/en/latest/portals/ood/. The module sequence above was previously verified in the CCR terminal; local packaging does not re-test remote module availability.
 
 Brian2 linear/exact integration solves the linear subthreshold equations, while network scheduling still uses the clock: https://brian2.readthedocs.io/en/2.9.0/user/numerical_integration.html and https://brian2.readthedocs.io/en/2.9.0/user/running.html#scheduling. Reducing this clock step addresses event timing; it does not add biological detail to the model.
 

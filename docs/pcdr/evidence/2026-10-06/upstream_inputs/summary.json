@@ -1,0 +1,125 @@
+{
+  "archive_sha256": "99027297d3982591eae3eb5876ba99641166070942ec51e1c75b629445aa6ba2",
+  "script_sha256": "fc1aebaaff95a1ff39ca8b8198b7304970d8422a9d16db86342580fba82a3006",
+  "kernel_sha256": "75359b3fbf2bd4a0bbd7dd6a80a174472ab0dd40210ef2528d2f045761f8e5e6",
+  "targets": [
+    "720575940638633806",
+    "720575940629910636",
+    "720575940611439473"
+  ],
+  "recorded_checks": [
+    "720575940628455942",
+    "720575940639283278"
+  ],
+  "results": [
+    {
+      "dt_ms": 0.0004,
+      "target_id": "720575940638633806",
+      "evaluation_ms": 640.1388000000001,
+      "voltage_mV": -44.99999118708843,
+      "previous_tick_voltage_mV": -45.000141656645454,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 10,
+      "distance_below_threshold_mV": -8.812911566735693e-06
+    },
+    {
+      "dt_ms": 0.0004,
+      "target_id": "720575940629910636",
+      "evaluation_ms": 641.9756,
+      "voltage_mV": -44.999894074230475,
+      "previous_tick_voltage_mV": -45.000147883182066,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 8,
+      "distance_below_threshold_mV": -0.00010592576952461741
+    },
+    {
+      "dt_ms": 0.0004,
+      "target_id": "720575940611439473",
+      "evaluation_ms": 639.9664,
+      "voltage_mV": -44.99981437777704,
+      "previous_tick_voltage_mV": -45.00003480661254,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 11,
+      "distance_below_threshold_mV": -0.00018562222295770425
+    },
+    {
+      "dt_ms": 0.0004,
+      "target_id": "720575940628455942",
+      "evaluation_ms": 647.9524,
+      "voltage_mV": -44.99905606997196,
+      "previous_tick_voltage_mV": -45.00165023447696,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 18,
+      "distance_below_threshold_mV": -0.0009439300280433827,
+      "recorded_voltage_mV": -44.99905606992914,
+      "absolute_error_mV": 4.281730525690364e-11
+    },
+    {
+      "dt_ms": 0.0004,
+      "target_id": "720575940639283278",
+      "evaluation_ms": 645.3312000000001,
+      "voltage_mV": -44.999909922646545,
+      "previous_tick_voltage_mV": -45.00065274644002,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 18,
+      "distance_below_threshold_mV": -9.007735345534229e-05,
+      "recorded_voltage_mV": -44.999909922587605,
+      "absolute_error_mV": 5.893951993130031e-11
+    },
+    {
+      "dt_ms": 0.0002,
+      "target_id": "720575940638633806",
+      "evaluation_ms": 640.1388000000001,
+      "voltage_mV": -49.955751236587986,
+      "previous_tick_voltage_mV": -49.95573107061918,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 0,
+      "distance_below_threshold_mV": 4.955751236587986
+    },
+    {
+      "dt_ms": 0.0002,
+      "target_id": "720575940629910636",
+      "evaluation_ms": 641.9756,
+      "voltage_mV": -50.312123164423284,
+      "previous_tick_voltage_mV": -50.312106444392356,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 0,
+      "distance_below_threshold_mV": 5.312123164423284
+    },
+    {
+      "dt_ms": 0.0002,
+      "target_id": "720575940611439473",
+      "evaluation_ms": 639.9664,
+      "voltage_mV": -49.68964893388936,
+      "previous_tick_voltage_mV": -49.68962621028976,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 0,
+      "distance_below_threshold_mV": 4.689648933889359
+    },
+    {
+      "dt_ms": 0.0002,
+      "target_id": "720575940628455942",
+      "evaluation_ms": 647.9524,
+      "voltage_mV": -55.58999931916608,
+      "previous_tick_voltage_mV": -55.58999917999596,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 0,
+      "distance_below_threshold_mV": 10.589999319166083,
+      "recorded_voltage_mV": -55.58999931892555,
+      "absolute_error_mV": 2.405329269095091e-10
+    },
+    {
+      "dt_ms": 0.0002,
+      "target_id": "720575940639283278",
+      "evaluation_ms": 645.3312000000001,
+      "voltage_mV": -51.94055798377951,
+      "previous_tick_voltage_mV": -51.94056042501289,
+      "spikes_before_evaluation": 0,
+      "total_spikes_through_750_ms": 0,
+      "distance_below_threshold_mV": 6.940557983779513,
+      "recorded_voltage_mV": -51.940557983487516,
+      "absolute_error_mV": 2.9199753726061317e-10
+    }
+  ],
+  "interpretation": "Conditional voltage reconstruction from the model initial state, before any postsynaptic reset. Not an independent network simulation or causal intervention."
+}

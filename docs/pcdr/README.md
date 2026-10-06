@@ -6,6 +6,10 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Time-zero upstream-input checks, 6 October](UPSTREAM_INPUT_CHECKS_20261006.md): the three newly traced cells' first crossings can be reconstructed from saved inputs before any reset, avoiding an additional recording run. Two shared earlier sources account for most of their positive voltage differences. This is conditional reconstruction of the selected case.
+
+[STS requirements checked on 6 October](STS_REQUIREMENTS_20261006.md): verified dates, report requirements and assistance rules. The working records are not a student-written submission.
+
 [Incoming events and first-spike explanation, 6 October UTC](DIAGNOSTIC_EVENT_RESULTS_20261006.md): recorded arrivals, state updates and resets agree with independent calculations. Two upstream spikes account for most of the positive voltage contribution at one candidate cell's first crossing; the earliest network divergence remains unresolved.
 
 [Returned diagnostic recordings, 5 October](DIAGNOSTIC_RESULTS_20261005.md): both instrumented replays completed and matched the original spike/input prefixes exactly. All recorded output hashes and threshold/spike comparisons passed. The source cells already differ at the start of recording; the initiating cause remains unresolved.
@@ -58,6 +62,6 @@ Code and documentation were prepared with Codex assistance. Git commits use Cope
 
 Latest continuation: [preliminary closeout](PRELIMINARY_CLOSEOUT_20260922.md), [OnDemand notebook guide](CCR_NOTEBOOK_GUIDE.md), and [frozen descriptive follow-up](CCR_SENSITIVITY_DESIGN.json). The 350 follow-up trials are prepared, not run; confirmation remains unresolved.
 
-The user requested a more substantial CCR workload. Use [the expanded notebook guide](CCR_EXPANDED_GUIDE.md) and [expanded design](CCR_EXPANDED_DESIGN.json): 3390 trials, 32 requested cores, 128000 MB, 8 hours, measured concurrency up to 24. The original smaller package is retained as history.
+For the expanded CCR workload, use [the expanded notebook guide](CCR_EXPANDED_GUIDE.md) and [expanded design](CCR_EXPANDED_DESIGN.json): 3390 trials, 32 requested cores, 128000 MB, 8 hours, measured concurrency up to 24. The original smaller package is retained as history.
 
 30 September follow-up: [CCR fine-step instructions](CCR_FINE_RUN.md) and [fixed job plan](CCR_FINE_PLAN.json). The single upload is exports/CCR_Fine_Steps.zip; four exact replays precede 616 fine-step trials. No fine-step scientific result is implied by local package validation.

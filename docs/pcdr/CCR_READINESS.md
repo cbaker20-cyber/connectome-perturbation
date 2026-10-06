@@ -19,4 +19,4 @@ Afternoon update: joint motor/sign/recruitment plus original six-feature mean-ba
 
 ## 22 September evening update
 
-Use CCR_NOTEBOOK_GUIDE.md and the uploadable ZIP workflow for the user's OnDemand request. The helper now has a tested local four-trial smoke workflow and failure/resume checks, and a prepared 350-job descriptive sensitivity study. The old shell array remains an optional template. The stricter distribution guard was numerically infeasible; do not treat the optimized controls as a confirmatory reference distribution. Actual CCR environment and scheduler validation remain pending. See PRELIMINARY_CLOSEOUT_20260922.md.
+Use CCR_NOTEBOOK_GUIDE.md and the uploadable ZIP workflow for OnDemand. The helper now has a tested local four-trial smoke workflow and failure/resume checks, and a prepared 350-job descriptive sensitivity study. The old shell array remains an optional template. The stricter distribution guard was numerically infeasible; do not treat the optimized controls as a confirmatory reference distribution. Actual CCR environment and scheduler validation remain pending. See PRELIMINARY_CLOSEOUT_20260922.md.

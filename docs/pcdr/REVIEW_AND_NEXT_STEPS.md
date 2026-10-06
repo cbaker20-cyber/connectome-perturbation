@@ -4,7 +4,7 @@ Completed locally on 27 September: downloaded the existing `results/expanded_sen
 
 The defensible result is that one selected 51-cell set produces a larger within-set rate response than three chosen comparison sets across this parameter grid. It also produces a large MN9 decrease without having to lesion MN9 itself. This is useful evidence about a selected perturbation in this model. It does not yet establish that eigenmodes identify independent circuits, or explain the effect beyond connectivity and recruitment.
 
-This is a skeptical scientific review, not an official STS score. STS evaluates the research report, application and the student's scientific potential; its public description does not supply a numerical project rubric. [Society for Science](https://www.societyforscience.org/regeneron-sts/judging-and-awards/).
+This review examines the scientific claims and their limitations; it is not an official STS score. STS evaluates the research report, application and the student's scientific potential; its public description does not supply a numerical project rubric. [Society for Science](https://www.societyforscience.org/regeneron-sts/judging-and-awards/).
 
 | Question a reviewer could ask | What the evidence currently supports | What would resolve the objection |
 | --- | --- | --- |

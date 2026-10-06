@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "final_script_sha256": "a972f11e616e46efc46a309be0f5d73c85b54a7e2d629133ae577a50b71f51e9",
+  "results_unchanged_after_adding_history_output": true,
+  "source_table_identical": true,
+  "earlier_summary_preserved": true,
+  "csv_voltage_sum_checks": 10
+}

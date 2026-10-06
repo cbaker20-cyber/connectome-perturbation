@@ -47,7 +47,7 @@ Do concentrated eigenvector supports of the materialization-630 Shiu matrix pred
 
 ## Where the procedure came from
 
-The user reports that James and Dr. Muldoon suggested a slower sequence: pairwise spike correlations, a sorted matrix, clustering, and individual E/I lesions. The implementation keeps that sequence. The exact bin widths, clustering cut, sampling algorithm, seed lists, statistical definitions, and numerical checks below are choices made during this review; they are not attributed to the meeting.
+James and Dr. Muldoon suggested a slower sequence: pairwise spike correlations, a sorted matrix, clustering, and individual E/I lesions. The implementation keeps that sequence. The exact bin widths, clustering cut, sampling algorithm, seed lists, statistical definitions, and numerical checks below are choices made during this review; they are not attributed to the meeting.
 
 ### Notes on Pospisil et al. 2024
 
@@ -63,7 +63,7 @@ The user reports that James and Dr. Muldoon suggested a slower sequence: pairwis
 
 - [A Drosophila computational brain model reveals sensorimotor processing](https://pmc.ncbi.nlm.nih.gov/articles/PMC11446845/), Nature 634:210–219. DOI: 10.1038/s41586-024-07763-9.
 - Supplies the LIF model and sensorimotor setting.
-- Zero basal firing motivates checking recruitment. The undriven condition is a sanity check on an assumption, not a new biological finding.
+- Zero basal firing motivates checking recruitment. The undriven condition checks the zero-background-activity assumption, not a new biological finding.
 - Sensory drive can recruit inhibitory cells. Zero basal firing does not prohibit all disinhibition in a driven network.
 - Preserve the local model equations, thresholds, delays, refractory periods, and outgoing-only silence operation.
 - The original reset statement includes a local `w = 0`. A small runtime check did not find that it erased synaptic weights. Do not rewrite the model just because a static audit flags that string.

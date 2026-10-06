@@ -4,14 +4,14 @@ Recorded 20 September 2026. This adds explanations to the dated notebook; it doe
 
 ## What question is being tested?
 
-The user's current wording is:
+The research question at this stage was:
 
 > Do Pospisil-style 75%-power eigen-sets of Shiu's signed connectivity matrix W, computed de novo on FlyWire v630, predict output-lesion footprints in the sugar-evoked LIF model after controlling for degree, strong-synapse mass, and recruitment?
 
 - Yes, this is still the structural prediction being investigated. W is the actual signed v630 model matrix, not the paper's v783 matrix or the Jacobian of the LIF equations.
 - Every firing-rate response begins with lesion Hz minus paired baseline Hz. This is the measured quantity. Choosing an endpoint specifies which parts of that vector are summarized.
 - The previously approved primary endpoints are A, mean absolute paired change within the support, and F, its share of the whole-network absolute change. MN9 and motor firing are secondary in that plan.
-- The user's latest wording called MN9/motor primary. Asked for clarification on 20 September; the user then delegated the choice after requesting a comparison. Chose the approved localization-primary hierarchy before any mode-lesion results. Running the frozen single-cell trials does not depend on that choice.
+- The initial wording placed MN9/motor response first. After comparing endpoint choices on 20 September, localization was fixed as primary before any mode-lesion results. Running the frozen single-cell trials does not depend on that choice.
 - MN9 is a focused simulation readout. Its firing change is not a direct measurement of feeding behavior.
 - On-mode/off-mode here means response inside/outside a valid support. It does not mean that an extra off-mode lesion condition was run. Each matched control is evaluated against its own support.
 - Single-cell lesions can identify simulated effects of those particular targets. They cannot answer the controlled eigen-set question by themselves.
@@ -173,7 +173,7 @@ Completed-extension export: 46-page Word/PDF edition preserved separately. Visua
 
 ### 21 September 2026 optimized comparison pilot launched
 
-- User asked whether to start testing after the matching feasibility result. Prepared and launched scripts/pcdr_optimized_pilot.py. Amendment and exact IDs were frozen before any trial in results/pcdr/optimized_pilot_20260921/amendment.json and jobs.json.
+- After the matching feasibility result, prepared and launched scripts/pcdr_optimized_pilot.py. Amendment and exact IDs were frozen before any trial in results/pcdr/optimized_pilot_20260921/amendment.json and jobs.json.
 - Five validated optimized sets remain unchanged; support remains the exploratory rank-33 51-cell support. Baseline plus six lesions across fresh seeds 630901–630905 gives 35 trials. Each support is scored against itself. Same NumPy model, sugar drive, timestep and paired input tape.
 - Rechecked hashes, exact stratum counts, exclusions, distinct IDs/sets and all six SMDs at preparation. Checked that these seeds had not appeared in prior trial manifests. Single-cell study completion gate passed.
 - This is a descriptive optimized-comparison pilot. The plan phase is optimized_matching_pilot, so the existing collector does not call its mode reference-test branch or single-cell significance branch. Primary reference results must remain an empty list. The supervisor generates all-set findings automatically and adds the inference limitation.
@@ -227,7 +227,7 @@ Completed-extension export: 46-page Word/PDF edition preserved separately. Visua
 
 ### 22 September full-pool method refinement
 
-- User requested methodical refinement. Created pcdr_fullpool_motor_witness.py: one full eligible-pool solve, fixed seed 631101, unchanged conservative bounds and exact motor/sign/recruitment counts; protocol before solving. No lesions. Requested 60-second HiGHS limit and one thread. SciPy passed the threads option through with a warning. Solver exceeded requested time without returning; worker PID 10944 used 145.44 CPU seconds at 12:36:23 EDT. Verified command line before Stop-Process -Id 10944. Parent exited 1. Saved terminal_stop.json: unresolved, not infeasible. Cause of overrun unestablished.
+- Created pcdr_fullpool_motor_witness.py: one full eligible-pool solve, fixed seed 631101, unchanged conservative bounds and exact motor/sign/recruitment counts; protocol before solving. No lesions. Requested 60-second HiGHS limit and one thread. SciPy passed the threads option through with a warning. Solver exceeded requested time without returning; worker PID 10944 used 145.44 CPU seconds at 12:36:23 EDT. Verified command line before Stop-Process -Id 10944. Parent exited 1. Saved terminal_stop.json: unresolved, not infeasible. Cause of overrun unestablished.
 - Added full-pool coordinatewise bounds after a separate recorded protocol. Bounds use fixed-count order statistics of log1p features and second moments. Full pool 126,935; all six SMD lower bounds zero, so none rules out matching. Joint feasibility is still unresolved. No criterion relaxation or mode substitution.
 - Commands: .venv/Scripts/python.exe scripts/pcdr_fullpool_motor_witness.py; .venv/Scripts/python.exe scripts/pcdr_fullpool_bounds.py; .venv/Scripts/python.exe scripts/pcdr_verify_fullpool.py. Verification checked original frozen hashes and independently counted pool. New bound tests plus matching/composition/backend-guard tests: six passed in 0.77 seconds. Exhaustive toy enumeration and zero-variance cases tested. Witness-verifier branch unexercised because no candidate returned.
 - New code created with Codex assistance. Evidence: results/pcdr/fullpool_motor_20260922. No running Python worker remains. Next numerical work needs an external wall-clock watchdog before any further large solve, then a declared bounded relaxation/formulation check. No CCR run or simulator-suite rerun was justified by this analysis-only change.
