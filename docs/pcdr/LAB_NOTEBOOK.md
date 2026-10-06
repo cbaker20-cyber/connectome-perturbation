@@ -759,3 +759,14 @@ Added pcdr_source_resets.py and boundary/failure tests. Archive and connectivity
 An initial pytest invocation from the repository root also discovered copied tests in an earlier package-validation results directory and stopped with three import-name conflicts during collection. Preserved those validation files and reran with the intended repository tests directory explicitly selected. No implementation failure was inferred from the collection conflict.
 
 Repository test run: 417 passed, 3 skipped, 245 dependency deprecation warnings in 35.63 seconds. Command: .venv/Scripts/python.exe -m pytest tests -q.
+
+
+## 6 October — two-connection intervention preparation and shorter notes
+
+Prepared removal of the two directed connections from CRE011 cell 720575940628695043 to 720575940629667639 and 720575940623862015. This is narrower than silencing all 749 outgoing connections. Their counts are 286 and 237, or 523/7287 = 7.18% of total absolute outgoing count. At the selected settings the drive increments are 94.38 and 78.21 mV. Checked the complete connectivity table: exactly two rows change; 14,687,176 stay identical; original SHA-256 stays unchanged. Reading and checking took 5.30 seconds locally. Saved the hashes and numerical check under evidence/2026-10-06/edge_intervention.
+
+Added an isolated connectivity helper instead of modifying the simulator whose source is recorded in completed replays. It validates missing, repeated, zero-weight and invalid requests and creates a temporary copy for simulation. Nine tests passed in 3.36 seconds, with 26 Brian2/pyparsing deprecation warnings. These include a three-cell transmission check, identical scheduled/delivered stimulation and cleanup after an intentional failure. No full-network intervention ran. The previous full repository suite had 417 passes and 3 skips; this turn ran the nine new tests, not another full suite.
+
+Recorded a proposed two-step, matched-stimulation pathway comparison through 750 ms in SOURCE_RESET_CHECKS_20261006.md. It tests contribution of the two connections from time zero and does not isolate a late event, establish the first divergence, or test eigencircuit specificity. Kept the proposed endpoints descriptive because this case and these edges were selected after observing the results. No CCR allocation, upload export or new simulation result is implied.
+
+Shortened repeated method/limitation prose in the current result note and consolidated obsolete preparation instructions in the index into a historical section. Preserved dated evidence, earlier records and assistance attribution. A fresh attempt to open the Shiu paper on PMC returned a browser challenge, so no new literature claim was added; the existing source notes remain the basis for the model description.

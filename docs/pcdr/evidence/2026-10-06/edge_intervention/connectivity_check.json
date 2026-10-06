@@ -1,0 +1,23 @@
+{
+  "source_id": "720575940628695043",
+  "edges": [
+    {
+      "target_id": "720575940629667639",
+      "signed_count": 286.0,
+      "scaled_weight_mV": 94.38000000000001
+    },
+    {
+      "target_id": "720575940623862015",
+      "signed_count": 237.0,
+      "scaled_weight_mV": 78.21000000000001
+    }
+  ],
+  "outgoing_edges": 749,
+  "outgoing_absolute_count": 7287.0,
+  "removed_absolute_count": 523.0,
+  "connectivity_sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+  "helper_sha256": "4a4f9785a220e084ea1370af751ecfc06bd70ecb0fa337b663b7289db13074f5",
+  "changed_rows": 2,
+  "unchanged_rows": 14687176,
+  "read_and_check_seconds": 5.295513899996877
+}
