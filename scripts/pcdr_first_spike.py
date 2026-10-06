@@ -20,17 +20,20 @@ def kernel(lag):
     return (-1/3)*(np.exp(-lag/5)-np.exp(-lag/20))
 
 
-def run(archive,events_dir,out):
+def run(archive,events_dir,out,root='720575940628455942'):
     validation=json.loads((ROOT/'docs/pcdr/evidence/2026-10-05/diagnostic_return/validation.json').read_text())
     if digest(archive)!=validation['archive_sha256']:raise ValueError('Changed archive')
-    root='720575940628455942';dt=.0004
+    if root not in ['720575940628455942','720575940639283278']:
+        raise ValueError('Choose a recorded first-spike target covered by selected_events.csv')
+    dt=.0004
     events_path=events_dir/'selected_events.csv'
     events=pd.read_csv(events_path,dtype={'source_id':str,'target_id':str})
     with zipfile.ZipFile(archive) as z:
         plan=json.loads(z.read('diagnostic_plan.json'));i=plan['record_ids'].index(root)
         spikes=pd.read_parquet(io.BytesIO(z.read(f'{dt}/spikes.parquet')))
         times=spikes.loc[spikes.flywire_id.eq(root),'t'].to_numpy()*1000
-        if not len(times) or times[0]<=600:raise ValueError('Cell must be silent before recording')
+        if not len(times) or not 600<times[0]<650:
+            raise ValueError('First spike must fall inside the saved event interval, 600–650 ms')
         tick=round(times[0]/dt); t=tick*dt
         start=(tick//round(10/dt))*round(10/dt)
         with np.load(io.BytesIO(z.read(f'{dt}/state/{round(600/dt):010d}_before_thresholds.npz')),allow_pickle=False) as a:
@@ -57,4 +60,5 @@ def run(archive,events_dir,out):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('archive',type=Path);p.add_argument('events_dir',type=Path);p.add_argument('out',type=Path)
-    a=p.parse_args();run(a.archive,a.events_dir,a.out)
+    p.add_argument('--root',default='720575940628455942')
+    a=p.parse_args();run(a.archive,a.events_dir,a.out,a.root)

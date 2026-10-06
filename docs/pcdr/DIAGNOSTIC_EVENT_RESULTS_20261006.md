@@ -37,6 +37,20 @@ The earlier state of source 720575940623387786 was not recorded. Source 72057594
 
 The next local task is to follow the recorded upstream cell's first crossing and distinguish inputs before versus after that event. Any additional recording should then target a specific missing interval or cell. Removing a connection from a calculation while holding all other spike trains fixed would be a conditional single-cell calculation; it would not establish that a whole-network lesion prevents the burst. A network intervention would need its own planned comparison. There is still no converged eigencircuit result from this diagnostic alone.
 
+## Follow-up: the upstream cell's first crossing
+
+Continued the same decomposition for recorded cell 720575940639283278. Its first spike is at 645.3312 ms. Three earlier spikes supply the largest positive contributions at this crossing:
+
+| Source | Source spike (ms) | Arrival (ms) | Voltage contribution (mV) |
+| --- | ---: | ---: | ---: |
+| 720575940638633806 | 640.1388 | 641.9388 | 2.184520 |
+| 720575940629910636 | 641.9756 | 643.7756 | 2.181501 |
+| 720575940611439473 | 639.9664 | 641.7664 | 1.982269 |
+
+All three are silent in the finer-step replay through 750 ms. Including every signed input reconstructs −44.999909922642 mV versus recorded −44.999909922588 mV, an error of 5.48 × 10⁻¹¹ mV. The three source cells' voltages were not recorded, so this is where the current state-based tracing stops. Their saved spikes and connectivity still permit checking their incoming event histories locally. Any subsequent state recording should be selected after that review, rather than adding cells one at a time without a defined stopping point.
+
+The extended first-spike script permits either of the two analyzed recorded cells, and rejects crossings outside the saved 600–650-ms event interval. Evidence is preserved separately in [upstream_first_spike](evidence/2026-10-06/upstream_first_spike/summary.json); the earlier decomposition is unchanged. This remains retrospective tracing of the same seed and parameter setting.
+
 ## Reproduction and evidence
 
 `scripts/pcdr_diagnostic_events.py` produces the recorded-update checks, incoming-source totals, selected event times and source spike histories. Its descriptive windows overlap (600–650 and 640–650 ms); do not add those windows together. Selection of the additional upstream cells was made after inspecting these returned data. No significance test is attached to that selection.

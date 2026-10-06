@@ -1,10 +1,10 @@
 # Reflection after the meeting with James and Dr. Muldoon
 
-29 September 2026. This records Copeland's account of the meeting, not a transcript or an independently verified statement from the advisers.
+Meeting notes, 29 September 2026.
 
 ## What they recommended
 
-Copeland reported that James and Dr. Muldoon recommended a substantially smaller simulation time step, giving 0.0001 ms as an example, because of integration accuracy in the LIF model. Apart from this recommendation, Copeland said they thought the work sounded good. That feedback is encouragement to continue, not a declaration that the hypothesis is confirmed.
+James and Dr. Muldoon recommended a substantially smaller simulation time step, giving 0.0001 ms as an example, because of integration accuracy in the LIF model. They otherwise thought the work sounded good. The recommendation was to continue testing; the hypothesis remains unconfirmed.
 
 The practical lesson is that the completed finer-step comparisons have not settled numerical accuracy. Default averages remained close over the steps tested, but some altered-weight trajectories changed substantially. A finer-resolution follow-up should precede stronger interpretation of those trajectories. Existing results remain evidence at their recorded settings; they should not be overwritten or described as having passed a new convergence test.
 
@@ -14,7 +14,7 @@ There is no objection to reducing the time step as a controlled numerical experi
 
 One clarification matters: model.py constructs the neurons with method='linear'. Brian2 2.9.0 identifies this as an alias of exact integration for linear equations. That applies to subthreshold evolution, not exact continuous-time detection of every threshold crossing or network event. The simulation clock still governs threshold checks, resets, refractory recovery and synaptic delivery. The meeting recommendation is therefore reasonable as a network timing/convergence check, without claiming that this implementation uses forward Euler or that every LIF model requires this particular step. [Brian2 integration methods](https://brian2.readthedocs.io/en/2.9.0/user/numerical_integration.html), [clocks and scheduling](https://brian2.readthedocs.io/en/2.9.0/user/running.html#scheduling).
 
-Record the reported unit explicitly: 0.0001 ms = 0.1 microseconds = 1e-7 seconds. It is not 0.0001 seconds, which equals our original 0.1 ms. A one-second trial at the recommended example has 10000000 ticks: 1000 times the original tick count and 62.5 times the count at 0.00625 ms. These are exact step-count ratios, not measured runtime predictions. Float64 roundoff and repeated event handling also mean that smaller steps alone do not prove monotonic improvement in every measured output.
+The suggested unit was milliseconds: 0.0001 ms = 0.1 microseconds = 1e-7 seconds. It is not 0.0001 seconds, which equals our original 0.1 ms. A one-second trial at the recommended example has 10000000 ticks: 1000 times the original tick count and 62.5 times the count at 0.00625 ms. These are exact step-count ratios, not measured runtime predictions. Float64 roundoff and repeated event handling also mean that smaller steps alone do not prove monotonic improvement in every measured output.
 
 ## Implementation and resource issues found before running
 

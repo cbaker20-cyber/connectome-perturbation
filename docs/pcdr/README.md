@@ -16,7 +16,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 [Completed fine-step results, 5 October](FINE_TIMESTEP_RESULTS_20261005.md): all 620 trials checked locally. Selected-group averages remain similar down to 0.0001 ms, but the declared full agreement criteria fail.
 
-After the meeting: [reflection and finer-step follow-up](MEETING_REFLECTION_20260929.md) records the recommendation from James and Dr. Muldoon as reported by Copeland, the implementation implications and proposed next work.
+After the meeting: [reflection and finer-step follow-up](MEETING_REFLECTION_20260929.md) records James and Dr. Muldoon’s recommendation, the implementation implications and proposed next work.
 
 [Fine-step implementation and local tests](FINE_TIMESTEP_TESTS_20260929.md) records the new recording approach, event-preservation checks and measured resource costs. The full-duration study has now completed; see the newer result below.
 

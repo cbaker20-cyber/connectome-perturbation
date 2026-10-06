@@ -17,7 +17,7 @@ Code and research review in this session were assisted by OpenAI Codex. These no
 
 ### Why these checks come first
 
-- James's suggested order, as reported by the user: pairwise correlations, sorted matrix, clusters, then individual E/I lesions.
+- James's suggested order: pairwise correlations, sorted matrix, clusters, then individual E/I lesions.
 - Need to establish that neurons fire before treating them as lesion targets.
 - Need to establish that a repeated seed repeats the stimulation and spikes before interpreting differences between runs.
 - Need explicit trial records because an empty spike file otherwise loses evidence that a trial occurred.
@@ -603,7 +603,7 @@ Checked all 42 local references in the detailed guide, including heading anchors
 
 ## 29 September — meeting feedback and finer-step proposal
 
-Copeland reported that James and Dr. Muldoon recommended a substantially smaller time step, for example 0.0001 ms, for LIF/integration accuracy, and otherwise thought the work sounded good. Recorded this as reported feedback, without inventing quotations or treating it as confirmation of the result. Created MEETING_REFLECTION_20260929.md and linked the updated plan and index.
+James and Dr. Muldoon recommended a substantially smaller time step, for example 0.0001 ms, for LIF/integration accuracy, and otherwise thought the work sounded good. The meeting recommendation was recorded separately from the numerical results; it does not confirm the hypothesis. Created MEETING_REFLECTION_20260929.md and linked the updated plan and index.
 
 Checked model.py, the completed resolution runner, recorded simulator and Brian2 2.9.0 documentation. The subthreshold method is linear/exact, but network events remain clock-dependent. No objection to a controlled reduction in step size; retained uncertainty about convergence and exact mechanism. Explicitly distinguished 0.0001 ms from 0.0001 seconds. The current resolution runner rejects the new step. Two full 21-cell float64 input-voltage traces alone would require 3.36 GB at ten million ticks, excluding network and temporary memory. This arithmetic is not a benchmark. Initial inspection referenced a nonexistent script name and used an unsupported Windows glob; corrected to scripts/pcdr_resolution.py. No simulation files changed.
 
@@ -709,7 +709,7 @@ Opened CCR_Burst_Diagnostic.ipynb in that allocation and selected Cell > Run All
 
 ## 5 October 2026 — returned diagnostic archive
 
-User reported the completed run and download. Initially found only a growing .crdownload; did not rename or interpret it. The notebook showed both workers reaching 750 ms and the results link. Read-only terminal inspection reported controller completion at 22:58:04.710961 UTC and archive size 1388458755 bytes. After the browser finalized CCR_diagnostic_results.zip, independently validated its contents locally. No simulation was restarted. Browser policy prevented opening its internal downloads page; used ordinary file size observations and the existing CCR notebook instead.
+The run had completed, and the results download was in progress. Initially found only a growing .crdownload; did not rename or interpret it. The notebook showed both workers reaching 750 ms and the results link. Read-only terminal inspection reported controller completion at 22:58:04.710961 UTC and archive size 1388458755 bytes. After the browser finalized CCR_diagnostic_results.zip, independently validated its contents locally. No simulation was restarted. Browser policy prevented opening its internal downloads page; used ordinary file size observations and the existing CCR notebook instead.
 
 Created pcdr_check_diagnostic.py to compare the returned plan and source bytes with the uploaded package, verify all recorded output hashes, reproduce exact spike/input prefix comparisons against the references, and check recorded array dimensions, IDs, ticks, finite values and threshold crossings. All checks passed: 49 outputs per run, 90 state files, 34 neuron threshold/spike comparisons at each step. Tests reject duplicate ZIP members, changed plans and partial controllers (3 passed). Tested with isolated generated fixtures; tests do not require downloading the research archive. The real-data reference and threshold comparisons provide separate checks of the successful path. Initial inspection summaries remain under results/pcdr/diagnostic_review_20261005; the final compact evidence, with first-sample voltage and drive added, is under docs/pcdr/evidence/2026-10-05/diagnostic_return.
 
@@ -728,3 +728,9 @@ Inspected presynaptic sources for the two CRE011-labelled candidates and followe
 Reconstructed its first-crossing voltage by summing the exact linear contributions of all arrivals and the recorded initial state. Predicted -44.999056069971 mV versus recorded -44.999056069929 mV; absolute error 4.16e-11 mV. Kept inhibition in the signed sum. Noted feedback from this cell reaches 720575940639283278 only after that upstream cell's first spike, so it cannot explain that first spike. Documented calculation, assumptions, upstream missing states and next local tracing step in DIAGNOSTIC_EVENT_RESULTS_20261006.md. No new simulation or parameter change. Initial aggregate pass remains in results/pcdr/diagnostic_events_20261006; final evidence adds event times and source histories without changing the checks. No original research evidence was overwritten.
 
 Final combined verification: 23 relevant tests passed (arrival/refractory checks, diagnostic controller and return validation, linear updates, and first-crossing decomposition).
+
+## 6 October UTC — direct wording and the next upstream crossing
+
+Revised the meeting reflection, plan, index and matching notebook entries to describe the events directly: James and Dr. Muldoon recommended a smaller time step. Removed phrasing such as “Copeland reported.” Kept meeting recommendations separate from numerical findings and preserved the original dates, factual content and assistance record.
+
+Extended the first-crossing decomposition to recorded upstream cell 720575940639283278, with an explicit 600–650-ms coverage check and restriction to the two supported recorded targets. Its first spike at 645.3312 ms is reconstructed within 5.48e-11 mV. The largest three positive contributions are 2.184520, 2.181501 and 1.982269 mV, from 720575940638633806, 720575940629910636 and 720575940611439473. Their first spikes occur at 640.1388, 641.9756 and 639.9664 ms respectively, and all three are silent in the finer replay through 750 ms. Their voltages are outside the recorded cell set. Stored the new decomposition separately; no earlier evidence was replaced. The immediate next step is local review of incoming events to these three cells, followed by a defined decision about additional state recording or intervention. No CCR run was launched.
