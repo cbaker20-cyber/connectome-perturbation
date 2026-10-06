@@ -41,6 +41,23 @@ This is a selected-case pathway test, not a random-control comparison or a test 
 
 Code: `scripts/pcdr_edge_intervention.py`. [Connectivity check](evidence/2026-10-06/edge_intervention/connectivity_check.json).
 
+## Runner and reference measurements
+
+`pcdr_pathway_trial.py` now runs either the unchanged reference or the two-connection intervention. It checks the saved model, data, references and package versions, uses the original stimulation, and refuses to overwrite a trial directory. Full trials last 750 ms. Both conditions must reproduce delivered stimulation; reference trials must also reproduce the saved spikes exactly. Returned event files are retained if a comparison fails.
+
+The measurement window is [650,730) ms, with boundaries applied in integer simulation ticks. A newly recruited cell must have no spike before 650 ms. Input cells are excluded from both counts.
+
+| Existing reference | Non-input spikes in window | Newly recruited non-input cells |
+| --- | ---: | ---: |
+| 0.0004 ms | 15,093 | 7,623 |
+| 0.0002 ms | 1,435 | 4 |
+
+These are reference measurements, not intervention outcomes. Their source hashes and three selected cells' complete spike histories are in [reference_endpoints.json](evidence/2026-10-06/pathway_preparation/reference_endpoints.json).
+
+The final runner passed two local whole-brain checks through 2 ms: reference at 0.0004 ms and intervention at 0.0002 ms. Delivered stimulation matched in both, and reference spikes matched exactly. Times were 11.54 and 21.16 seconds; peak memory was 2.67 and 3.65 GB. These checks precede the burst and do not test its suppression. Short-run timing includes startup and cannot be scaled directly into a full-run estimate. The prior CCR diagnostic timings (about 74 and 147 minutes) are more relevant, although recording overhead and altered activity can change runtime. The full repository suite passed 429 tests, with 3 skipped. [Local verification](evidence/2026-10-06/pathway_preparation/local_checks.json).
+
+The next cluster work consists of two reference trials and two intervention trials, one of each at each time step. Four CPU cores and 32 GB RAM allow four independent workers with headroom above measured memory; no GPU is used. Eight hours is a requested allowance, not a measured runtime. The runner is tested locally; a new Run All upload package and controller still need to be assembled and validated before submission. No full intervention has started.
+
 The model and event-order rationale are covered by the previously checked [Shiu methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC11446845/) and [Brian2 refractory documentation](https://brian2.readthedocs.io/en/2.9.0/user/refractoriness.html), with the actual implementation additionally checked against saved states. See the [prior source review](UPSTREAM_INPUT_CHECKS_20261006.md) for the distinction between exact subthreshold integration and network trajectory agreement.
 
 Code: `scripts/pcdr_source_resets.py`. Evidence: [12 comparisons and provenance](evidence/2026-10-06/source_resets/summary.json) and [complete signed source contributions](evidence/2026-10-06/source_resets/contributions.csv).

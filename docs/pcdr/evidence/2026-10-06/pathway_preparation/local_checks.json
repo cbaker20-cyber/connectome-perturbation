@@ -1,0 +1,45 @@
+[
+  {
+    "condition": "reference",
+    "dt_ms": 0.0004,
+    "duration_ms": 2,
+    "elapsed_seconds": 11.539500800077803,
+    "peak_rss_bytes": 2674622464,
+    "exact_reference_spikes": true,
+    "exact_delivered_input": true,
+    "sources": {
+      "model.py": "c74b2f9750a3c0d36c4a06ba4596fce1be41db5ab57a6be701648c95c5bbdbed",
+      "scripts/pcdr_edge_intervention.py": "f744443db46711dcb6aa458cbb236a1e41d6afdce55280d4b2c533a78400c4a5",
+      "scripts/pcdr_fine_sim.py": "8b648a4ad4498127275a7c2bb56e1b748812a7f38b7387be088257d20ece480c",
+      "scripts/pcdr_pathway_trial.py": "0a854aee0501481a90a62d6f2ebea7b29554c908815794c72aaab2d9dbb6140a"
+    },
+    "outputs": {
+      "delivered_events.parquet": "ca90a565de2e03290ac686a6939d7b8dc69679b1dfa92bc6375228c837d3af31",
+      "scheduled_events.parquet": "ca90a565de2e03290ac686a6939d7b8dc69679b1dfa92bc6375228c837d3af31",
+      "spikes.parquet": "afa9ce3a6af4450b4d648a6578b6d9e4dc0d151681b85778c7c737a002fe4c30"
+    },
+    "manifest_sha256": "8e219540c156600449746ba89a5c355ac9d68f240f847149901fd9459ca67e85"
+  },
+  {
+    "condition": "two_edges",
+    "dt_ms": 0.0002,
+    "duration_ms": 2,
+    "elapsed_seconds": 21.15957120002713,
+    "peak_rss_bytes": 3652550656,
+    "exact_reference_spikes": null,
+    "exact_delivered_input": true,
+    "sources": {
+      "model.py": "c74b2f9750a3c0d36c4a06ba4596fce1be41db5ab57a6be701648c95c5bbdbed",
+      "scripts/pcdr_edge_intervention.py": "f744443db46711dcb6aa458cbb236a1e41d6afdce55280d4b2c533a78400c4a5",
+      "scripts/pcdr_fine_sim.py": "8b648a4ad4498127275a7c2bb56e1b748812a7f38b7387be088257d20ece480c",
+      "scripts/pcdr_pathway_trial.py": "0a854aee0501481a90a62d6f2ebea7b29554c908815794c72aaab2d9dbb6140a"
+    },
+    "outputs": {
+      "delivered_events.parquet": "ff031c200f0fb6266ffe1e3404aeffaae19157209df1d0de224dfed1f1cf6b85",
+      "removed_edges.csv": "ab824935ca59a7ce06bf0bdc638ba18cc682d6f8efc32925e764c8a8c5c4cb43",
+      "scheduled_events.parquet": "ff031c200f0fb6266ffe1e3404aeffaae19157209df1d0de224dfed1f1cf6b85",
+      "spikes.parquet": "3d2e3c13694a33440e4f2e550377299e5d5c1bea0e734294318b1befb2dd6bde"
+    },
+    "manifest_sha256": "f9226178995ff142f70f8348390f2ecc57fe4945952308158646450da446ae77"
+  }
+]

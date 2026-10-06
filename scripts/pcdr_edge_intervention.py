@@ -46,4 +46,5 @@ def connectivity_without(path, pairs):
     with TemporaryDirectory(prefix='pcdr_edges_') as directory:
         target = Path(directory)/'connectivity.parquet'
         frame.to_parquet(target, index=False)
+        del frame
         yield target, removed
