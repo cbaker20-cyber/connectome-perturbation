@@ -1,0 +1,47 @@
+{
+  "upload_sha256": "f1da39cd5deed199401054335833a8ef9f7b68ed63722b12e9943b99ac082674",
+  "upload_bytes": 89211224,
+  "package_tests_passed": 15,
+  "full_repository_tests_passed": 434,
+  "full_repository_tests_skipped": 3,
+  "duration_ms": 2,
+  "workers": 2,
+  "restart_reused_all_four": true,
+  "corrupted_output_rejected": true,
+  "result_zip_crc_passed": true,
+  "trials": [
+    {
+      "dt_ms": 0.0004,
+      "condition": "reference",
+      "elapsed_seconds": 13.032344899955206,
+      "peak_rss_bytes": 2675224576,
+      "exact_delivered_input": true,
+      "exact_reference_spikes": true
+    },
+    {
+      "dt_ms": 0.0004,
+      "condition": "two_edges",
+      "elapsed_seconds": 22.092976899934,
+      "peak_rss_bytes": 3652939776,
+      "exact_delivered_input": true,
+      "exact_reference_spikes": null
+    },
+    {
+      "dt_ms": 0.0002,
+      "condition": "reference",
+      "elapsed_seconds": 22.48536660009995,
+      "peak_rss_bytes": 2733457408,
+      "exact_delivered_input": true,
+      "exact_reference_spikes": true
+    },
+    {
+      "dt_ms": 0.0002,
+      "condition": "two_edges",
+      "elapsed_seconds": 26.733896000077948,
+      "peak_rss_bytes": 3652698112,
+      "exact_delivered_input": true,
+      "exact_reference_spikes": null
+    }
+  ],
+  "limits": "Windows local setup checks only. CCR module loading and full 750-ms intervention not run."
+}

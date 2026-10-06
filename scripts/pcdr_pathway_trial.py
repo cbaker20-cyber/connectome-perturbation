@@ -24,6 +24,21 @@ SOURCE = '720575940628695043'
 TARGETS = ['720575940629667639', '720575940623862015']
 
 
+class TrialProgress:
+    def __init__(self, path):
+        self.path = path
+
+    def setup(self, network, neurons, dt_ms, duration_s):
+        self.dt_ms = dt_ms
+        self.duration_ms = duration_s*1000
+
+    def monitors(self, start, length):
+        return []
+
+    def progress(self, tick):
+        write(self.path, dict(simulated_ms=tick*self.dt_ms, duration_ms=self.duration_ms))
+
+
 def endpoints(spikes, input_ids, dt_ms):
     noninput = spikes.loc[~spikes.flywire_id.isin(input_ids)].copy()
     ticks = np.rint(noninput.t.to_numpy()*1000/dt_ms).astype(np.int64)
@@ -73,7 +88,8 @@ def worker(plan_path, out, dt, condition, duration_ms):
             spikes, scheduled, delivered = simulate(plan['seed'], [lookup[v] for v in plan['input_ids']],
                 [lookup[v] for v in plan['lesion_ids']], tape=tape, duration_s=duration_ms/1000,
                 dt_ms=dt, weight_scale=1.2, inhibitory_scale=.8,
-                connectivity=connectivity, return_delivered=True)
+                connectivity=connectivity, return_delivered=True,
+                recorder=TrialProgress(out/'simulation_progress.json'))
         for frame in [spikes, scheduled, delivered]:
             frame['flywire_id'] = pd.Series([ids[i] for i in frame.pop('neuron_index')], dtype='string')
         # Keep returned events even if a comparison fails, so the failure can be examined.

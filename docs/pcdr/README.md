@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Current CCR upload: two-connection test](CCR_PATHWAY_RUN.md). Use `exports/CCR_Pathway.zip`; open the notebook and Run All. Four 750-ms trials compare the unchanged reference with the two-connection intervention at two steps. The package has local setup checks; the full intervention has not run.
+
 [Shared source cells, inputs and resets, 6 October](SOURCE_RESET_CHECKS_20261006.md): 12 reconstructed voltages match recordings across previous resets. A previously identified CRE011 source supplies the largest positive contributions at the four coarser crossings. This explains recorded downstream states, not the initiating divergence or a network intervention.
 
 [Time-zero upstream-input checks, 6 October](UPSTREAM_INPUT_CHECKS_20261006.md): the three newly traced cells' first crossings can be reconstructed from saved inputs before any reset, avoiding an additional recording run. Two shared earlier sources account for most of their positive voltage differences. This is conditional reconstruction of the selected case.
