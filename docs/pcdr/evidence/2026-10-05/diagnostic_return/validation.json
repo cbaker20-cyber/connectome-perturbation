@@ -1,0 +1,31 @@
+{
+  "archive": "C:\\Users\\Baker\\Drosophila_Data\\CCR_diagnostic_results.zip",
+  "archive_sha256": "99027297d3982591eae3eb5876ba99641166070942ec51e1c75b629445aa6ba2",
+  "archive_bytes": 1388458755,
+  "plan_sha256": "a6b58c9d366aa0d3cff9cbeaad161b623e1ce09e302e3456264ef5bb0f0667f7",
+  "trials": [
+    {
+      "dt_ms": 0.0004,
+      "spikes": 44820,
+      "started_utc": "2026-10-05T20:31:08.903790+00:00",
+      "finished_utc": "2026-10-05T21:45:04.323669+00:00",
+      "peak_rss_bytes": 3104247808,
+      "verified_output_files": 49,
+      "threshold_spike_matches": 34,
+      "exact_spike_prefix": true,
+      "exact_delivery_prefix": true
+    },
+    {
+      "dt_ms": 0.0002,
+      "spikes": 16180,
+      "started_utc": "2026-10-05T20:31:08.901874+00:00",
+      "finished_utc": "2026-10-05T22:58:02.166053+00:00",
+      "peak_rss_bytes": 3512311808,
+      "verified_output_files": 49,
+      "threshold_spike_matches": 34,
+      "exact_spike_prefix": true,
+      "exact_delivery_prefix": true
+    }
+  ],
+  "scope": "Recorded states cover 600\u2013750 ms, 34 selected cells. No causal intervention performed."
+}

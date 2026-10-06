@@ -6,11 +6,13 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Returned diagnostic recordings, 5 October](DIAGNOSTIC_RESULTS_20261005.md): both instrumented replays completed and matched the original spike/input prefixes exactly. All recorded output hashes and threshold/spike comparisons passed. The source cells already differ at the start of recording; the initiating cause remains unresolved.
+
 [Burst mechanism review and tested recorder](BURST_MECHANISM_REVIEW_20261005.md): code/literature review, validated recurrent-input reconstruction, exact full-network prefix replays and the next two-run CCR package. Recurrent amplification is supported; the initiating cause remains unresolved.
 
-[Local analysis of remaining differences, 5 October](FINE_DIFFERENCES_20261005.md) compares time-step differences with variation across seeds, identifies contributing cells, and locates broad recruitment in the burst case. It proposes a two-run diagnostic; that new simulation has not been implemented or run.
+[Local analysis of remaining differences, 5 October](FINE_DIFFERENCES_20261005.md) compares time-step differences with variation across seeds, identifies contributing cells, and locates broad recruitment in the burst case. Its proposed diagnostic has since completed; see the returned recordings above.
 
-[Completed fine-step results, 5 October](FINE_TIMESTEP_RESULTS_20261005.md): all 620 trials checked locally. Selected-group averages remain similar down to 0.0001 ms, but the declared full agreement criteria fail. This is the newest numerical result.
+[Completed fine-step results, 5 October](FINE_TIMESTEP_RESULTS_20261005.md): all 620 trials checked locally. Selected-group averages remain similar down to 0.0001 ms, but the declared full agreement criteria fail.
 
 After the meeting: [reflection and finer-step follow-up](MEETING_REFLECTION_20260929.md) records the recommendation from James and Dr. Muldoon as reported by Copeland, the implementation implications and proposed next work.
 
