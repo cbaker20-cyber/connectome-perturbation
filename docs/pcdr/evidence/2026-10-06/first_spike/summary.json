@@ -1,0 +1,13 @@
+{
+  "root_id": "720575940628455942",
+  "dt_ms": 0.0004,
+  "first_spike_ms": 647.9524,
+  "recorded_voltage_mV": -44.99905606992914,
+  "initial_state_only_voltage_mV": -52.239221221720214,
+  "reconstructed_voltage_mV": -44.99905606997074,
+  "absolute_error_mV": 4.1602277178753866e-11,
+  "script_sha256": "f87c2f5206d3f59ec2d819bda25e46f9fb54d9609fc70b2783707d4eb9ddfd6a",
+  "events_sha256": "e0a9c23a4dcedde1b3cad65e443e34a951e7a1850f29ffd7347daf03c2905bb8",
+  "archive_sha256": "99027297d3982591eae3eb5876ba99641166070942ec51e1c75b629445aa6ba2",
+  "interpretation": "Linear decomposition before the first spike, conditional on observed arrivals. No network intervention or claim of first divergence."
+}

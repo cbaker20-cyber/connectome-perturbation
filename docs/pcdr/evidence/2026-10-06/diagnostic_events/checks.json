@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "archive_sha256": "99027297d3982591eae3eb5876ba99641166070942ec51e1c75b629445aa6ba2",
+  "checks": [
+    {
+      "dt_ms": 0.0004,
+      "neurons": 13,
+      "recorded_ticks": 375000,
+      "maximum_errors_mV": {
+        "arrivals": 1.1368683772161603e-13,
+        "voltage_update": 4.263256414560601e-14,
+        "drive_update": 5.684341886080802e-14,
+        "reset_v": 0.0,
+        "reset_g": 0.0
+      }
+    },
+    {
+      "dt_ms": 0.0002,
+      "neurons": 13,
+      "recorded_ticks": 750000,
+      "maximum_errors_mV": {
+        "arrivals": 5.684341886080802e-14,
+        "voltage_update": 4.263256414560601e-14,
+        "drive_update": 5.684341886080802e-14,
+        "reset_v": 0.0,
+        "reset_g": 0.0
+      }
+    }
+  ],
+  "script_sha256": "ae57a5cc92adf5de491cbef3c723a24d52d1be640b2639bec0a2e9d3a5854ddf",
+  "gating_script_sha256": "8d3ea61184dc6143f96467b42a785a12e4bb5696ab07b01c4f8d88844ef8f074",
+  "selection": "All 13 recorded non-input cells. Overlapping descriptive windows; do not sum across windows.",
+  "limitation": "Conditional reconstruction using observed spikes. Does not establish the first divergence or causal necessity."
+}

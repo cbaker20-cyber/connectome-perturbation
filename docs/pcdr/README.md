@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Incoming events and first-spike explanation, 6 October UTC](DIAGNOSTIC_EVENT_RESULTS_20261006.md): recorded arrivals, state updates and resets agree with independent calculations. Two upstream spikes account for most of the positive voltage contribution at one candidate cell's first crossing; the earliest network divergence remains unresolved.
+
 [Returned diagnostic recordings, 5 October](DIAGNOSTIC_RESULTS_20261005.md): both instrumented replays completed and matched the original spike/input prefixes exactly. All recorded output hashes and threshold/spike comparisons passed. The source cells already differ at the start of recording; the initiating cause remains unresolved.
 
 [Burst mechanism review and tested recorder](BURST_MECHANISM_REVIEW_20261005.md): code/literature review, validated recurrent-input reconstruction, exact full-network prefix replays and the next two-run CCR package. Recurrent amplification is supported; the initiating cause remains unresolved.
