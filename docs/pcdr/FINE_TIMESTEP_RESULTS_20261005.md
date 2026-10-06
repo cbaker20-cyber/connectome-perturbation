@@ -31,6 +31,24 @@ At 0.0001 ms, motor_003, motor_004 and motor_005 had A values of 12.140, 12.548 
 
 ## Where agreement failed
 
+### Component check added 6 October
+
+Rechecked all 366 saved comparison rows against their recorded hashes and split the existing decision into its parts. No tolerance changed. For the selected group at the final halving (0.0002 to 0.0001 ms), the pass counts are:
+
+| Requirement | Passing individual pairs |
+| --- | ---: |
+| Internal response amplitude A | 24/30 |
+| Response concentration F | 28/30 |
+| Full neuronwise response | 1/30 |
+| Population activity in 10-ms bins, both baseline and lesion | 1/30 |
+| All requirements together | 1/30 |
+
+The median individual full-response difference is 13.73%; the median population difference is 15.41%. Both exceed the declared 5% tolerance. These comparisons allow differences; they do not require identical spike times. At the preceding halving, no selected-group pair passes either of these two requirements. The complete group rule requires at least 29 of 30 joint passes as well as a passing mean response. None of the 18 condition-by-halving groups passes the full rule.
+
+The observations are usable as results at the stated model settings and steps. They support approximate stability of the tested average summaries, not convergence of individual responses or a continuous-time limit. They also do not validate biological circuit function or resolve imperfect comparison-group matching. Failed convergence does not make every saved number meaningless; it limits the claims those numbers support. Explaining the altered-weight burst will not automatically resolve the separate default-network agreement failures.
+
+`pcdr_agreement_breakdown.py` reproduces every saved individual pass/fail decision from the component thresholds and joins each comparison to its finer-step amplitude. Tests cover inclusive boundaries, undefined F, missing matches, duplicate rows and conflicting saved decisions. [Component counts and input hashes](evidence/2026-10-06/agreement_breakdown/components.json). The original study tables below remain unchanged.
+
 The rules required both final halvings to pass. For each adjacent comparison, A had to differ by at most the larger of 1 Hz and 5% of finer-step A; F by at most 0.01; and the full response vector by at most 5% in relative L1 distance. Both baseline and lesion population time courses also had a 5% relative L1 tolerance. A group required a passing mean response and at least 95% of individual paired trials passing the response and population conditions together. Undefined F failed. These were chosen practical tolerances, not published biological standards.
 
 The selected group's mean response vector differed by 2.95%, 2.91% and 2.21% across successive halvings. All three mean comparisons passed. Individual joint passes were only 0/30, 0/30 and 1/30. None of the 18 condition-by-halving groups met the complete criteria.
