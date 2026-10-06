@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Shared source cells, inputs and resets, 6 October](SOURCE_RESET_CHECKS_20261006.md): 12 reconstructed voltages match recordings across previous resets. A previously identified CRE011 source supplies the largest positive contributions at the four coarser crossings. This explains recorded downstream states, not the initiating divergence or a network intervention.
+
 [Time-zero upstream-input checks, 6 October](UPSTREAM_INPUT_CHECKS_20261006.md): the three newly traced cells' first crossings can be reconstructed from saved inputs before any reset, avoiding an additional recording run. Two shared earlier sources account for most of their positive voltage differences. This is conditional reconstruction of the selected case.
 
 [STS requirements checked on 6 October](STS_REQUIREMENTS_20261006.md): verified dates, report requirements and assistance rules. The working records are not a student-written submission.
