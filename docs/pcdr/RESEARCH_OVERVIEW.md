@@ -1,5 +1,7 @@
 # Research overview: hypothesis, experiments and current evidence
 
+7 October update: the [two-connection intervention](PATHWAY_RESULTS_20261007.md) suppresses the selected coarser-step burst, but changes activity long before it. Both unchanged references reproduce exactly. This is a selected-case model result; the earlier convergence failures remain unresolved.
+
 5 October update: the [completed 620-trial fine-step study](FINE_TIMESTEP_RESULTS_20261005.md) reached 0.0001 ms. Selected-group average A was 22.508 Hz and F was 0.22977 at that step. Individual paired trajectories did not meet the predeclared agreement rules. The earlier history below remains dated; the new report supersedes statements that this follow-up is pending.
 
 Current through 29 September 2026. This is the reading map for the study, not a replacement for dated protocols or an STS submission. Read [the short explanation guide](EXPLAINING_THE_STUDY.md) first for meeting preparation. The [lab notebook](LAB_NOTEBOOK.md) records changes and execution; the [code guide](CODE_GUIDE.md) explains implementation; [the detailed results record](CCR_RESULTS_20260927.md) contains current estimates and follow-ups. Older statements that work was pending describe their dates, not today's status.

@@ -1,5 +1,7 @@
 # Explaining the study
 
+7 October update: the [two-connection intervention](PATHWAY_RESULTS_20261007.md) suppresses the selected coarser-step burst, but changes activity long before it. Both unchanged references reproduce exactly. This is a selected-case model result; the earlier convergence failures remain unresolved.
+
 5 October update: the [completed 620-trial fine-step study](FINE_TIMESTEP_RESULTS_20261005.md) reached 0.0001 ms. Selected-group average A was 22.508 Hz and F was 0.22977 at that step. Individual paired trajectories did not meet the predeclared agreement rules. The earlier history below remains dated; the new report supersedes statements that this follow-up is pending.
 
 A short meeting guide, current through 29 September 2026. Read the [overview](RESEARCH_OVERVIEW.md) for the full sequence and the [detailed preparation guide for James and Dr. Muldoon](MEETING_DETAIL_GUIDE.md) for mathematical explanations, possible questions and evidence links.

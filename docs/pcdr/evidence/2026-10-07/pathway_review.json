@@ -1,0 +1,77 @@
+{
+  "archive_sha256": "926b934aaa8fd535c3cc5f08881202d90f8b2ace4b0822af735e3ec81562df2d",
+  "package_sha256": "f1da39cd5deed199401054335833a8ef9f7b68ed63722b12e9943b99ac082674",
+  "checked_files": 54,
+  "checks_passed": true,
+  "results": [
+    {
+      "trial": "reference_0.0004",
+      "dt_ms": 0.0004,
+      "condition": "reference",
+      "noninput_spikes_650_730": 15093,
+      "newly_recruited_noninput_650_730": 7623,
+      "total_spikes": 44820,
+      "elapsed_seconds": 7137.337481203023,
+      "peak_rss_bytes": 3002798080
+    },
+    {
+      "trial": "two_edges_0.0004",
+      "dt_ms": 0.0004,
+      "condition": "two_edges",
+      "noninput_spikes_650_730": 1381,
+      "newly_recruited_noninput_650_730": 0,
+      "total_spikes": 15708,
+      "elapsed_seconds": 7105.377157170908,
+      "peak_rss_bytes": 3682578432
+    },
+    {
+      "trial": "reference_0.0002",
+      "dt_ms": 0.0002,
+      "condition": "reference",
+      "noninput_spikes_650_730": 1435,
+      "newly_recruited_noninput_650_730": 4,
+      "total_spikes": 16180,
+      "elapsed_seconds": 13325.068119416013,
+      "peak_rss_bytes": 3318083584
+    },
+    {
+      "trial": "two_edges_0.0002",
+      "dt_ms": 0.0002,
+      "condition": "two_edges",
+      "noninput_spikes_650_730": 1436,
+      "newly_recruited_noninput_650_730": 2,
+      "total_spikes": 16271,
+      "elapsed_seconds": 13413.93503151799,
+      "peak_rss_bytes": 4014026752
+    }
+  ],
+  "comparisons": [
+    {
+      "dt_ms": 0.0004,
+      "first_changed_spike_ms": 105.376,
+      "first_changed_events": [
+        {
+          "tick": 263440,
+          "id": "720575940629667639",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 9951,
+      "absolute_count_difference": 29586
+    },
+    {
+      "dt_ms": 0.0002,
+      "first_changed_spike_ms": 105.7838,
+      "first_changed_events": [
+        {
+          "tick": 528919,
+          "id": "720575940629667639",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 357,
+      "absolute_count_difference": 705
+    }
+  ],
+  "finished_utc": "2026-10-06T21:47:10.308716+00:00"
+}

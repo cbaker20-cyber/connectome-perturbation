@@ -6,7 +6,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
-[Current CCR upload: two-connection test](CCR_PATHWAY_RUN.md). Use `exports/CCR_Pathway.zip`; open the notebook and Run All. Four 750-ms trials compare the unchanged reference with the two-connection intervention at two steps. The package has local setup checks; the full intervention has not run.
+[Completed two-connection intervention, reviewed 7 October](PATHWAY_RESULTS_20261007.md): all four trials verified. Removing the pair from time zero reduces late-window spikes from 15,093 to 1,381 at 0.0004 ms, with no new recruitment. At 0.0002 ms the counts are 1,435 and 1,436. Early activity also changes, so a late triggering role is unresolved. This does not establish convergence. The existing [CCR package instructions](CCR_PATHWAY_RUN.md) describe the completed run; no rerun is needed.
 
 [Shared source cells, inputs and resets, 6 October](SOURCE_RESET_CHECKS_20261006.md): 12 reconstructed voltages match recordings across previous resets. A previously identified CRE011 source supplies the largest positive contributions at the four coarser crossings. This explains recorded downstream states, not the initiating divergence or a network intervention.
 
