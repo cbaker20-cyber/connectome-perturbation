@@ -163,7 +163,7 @@ def review(archive, package, reference):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive', type=Path, default=ROOT/'CCR_pathway_results.zip')
-    parser.add_argument('--package', type=Path, default=ROOT/'exports/CCR_Pathway.zip')
+    parser.add_argument('--package', type=Path, default=ROOT/'results/pcdr/pathway_package_validation_20261006/original_upload.zip')
     parser.add_argument('--reference', type=Path, default=ROOT/'results/pcdr/diagnostic_inputs_20261005')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()

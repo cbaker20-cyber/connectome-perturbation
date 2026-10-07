@@ -25,10 +25,21 @@ def verify(path, plan, dt, condition, duration):
                     plan_sha256=digest(plan), exact_delivered_input=True)
     if any(m.get(k) != v for k,v in expected.items()):
         raise ValueError('Incomplete or different trial: '+str(path))
-    if condition == 'reference' and m.get('exact_reference_spikes') is not True:
+    if condition in ['reference', 'late_reference'] and m.get('exact_reference_spikes') is not True:
         raise ValueError('Reference did not reproduce saved spikes')
     required = {'spikes.parquet','scheduled_events.parquet','delivered_events.parquet','simulation_progress.json'}
     if condition == 'two_edges': required.add('removed_edges.csv')
+    if condition.startswith('late_'):
+        required.add('switch.json')
+        switch_ms = 600 if duration == 750 else 1
+        if m.get('exact_pre_switch_spikes') is not True or m.get('switch_ms') != switch_ms:
+            raise ValueError('Earlier spike history did not match')
+        switch = read(path/'switch.json')
+        if switch['switch_ms'] != switch_ms or switch['remove'] != (condition == 'late_edges'):
+            raise ValueError('Wrong switch record')
+        expected_weights = [0., 0.] if condition == 'late_edges' else switch['weights_before_mv']
+        if switch['weights_after_mv'] != expected_weights:
+            raise ValueError('Wrong switched weights')
     if duration == 750: required.add('endpoints.json')
     if set(m['outputs']) != required:
         raise ValueError('Missing or unexpected trial outputs')
@@ -45,7 +56,8 @@ def verify(path, plan, dt, condition, duration):
     return m
 
 
-def run(plan, out, hours=7., duration=750, workers=4):
+def run(plan, out, hours=7., duration=750, workers=4, late=False):
+    jobs = [(dt, c) for dt in [.0004, .0002] for c in ['late_reference','late_edges']] if late else JOBS
     plan, out = Path(plan).resolve(), Path(out).resolve()
     if not 0 < hours <= 7 or duration not in [2,750] or workers not in [1,2,4]:
         raise ValueError('Invalid deadline, duration or workers')
@@ -56,7 +68,7 @@ def run(plan, out, hours=7., duration=750, workers=4):
     completed = []
     try:
         pending = []
-        for dt, condition in JOBS:
+        for dt, condition in jobs:
             directory = out/name(dt,condition)
             if directory.exists():
                 verify(directory,plan,dt,condition,duration)
@@ -91,13 +103,14 @@ def run(plan, out, hours=7., duration=750, workers=4):
                 progress('running' if not errors else 'finishing_other_trials_after_failure')
         if errors:
             raise RuntimeError('; '.join(errors))
-        trials = [verify(out/name(dt,c),plan,dt,c,duration) for dt,c in JOBS]
+        trials = [verify(out/name(dt,c),plan,dt,c,duration) for dt,c in jobs]
         results = [dict(dt_ms=dt,condition=c,**read(out/name(dt,c)/'endpoints.json'))
-                   for dt,c in JOBS] if duration == 750 else []
+                   for dt,c in jobs] if duration == 750 else []
         write(out/'summary.json',dict(status='complete', duration_ms=duration, results=results,
                                     trials=trials, interpretation='Selected-case intervention; not a convergence or eigencircuit-specific test.'))
         progress('collecting')
-        target = out.parent/('CCR_pathway_results.zip' if duration == 750 else 'pathway_setup_results.zip')
+        filename = 'CCR_late_pathway_results.zip' if late else 'CCR_pathway_results.zip'
+        target = out.parent/(filename if duration == 750 else 'pathway_setup_results.zip')
         temporary = target.with_suffix('.zip.tmp')
         with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED) as archive:
             for path in sorted(out.rglob('*')):
@@ -123,4 +136,5 @@ if __name__ == '__main__':
     parser.add_argument('--plan',type=Path,required=True); parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--hours',type=float,default=7); parser.add_argument('--duration-ms',type=int,default=750)
     parser.add_argument('--workers',type=int,default=4)
-    args=parser.parse_args();run(args.plan,args.out,args.hours,args.duration_ms,args.workers)
+    parser.add_argument('--late',action='store_true')
+    args=parser.parse_args();run(args.plan,args.out,args.hours,args.duration_ms,args.workers,args.late)

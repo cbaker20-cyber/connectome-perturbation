@@ -18,6 +18,7 @@ from eigencircuits.memory import peak_rss
 from scripts.pcdr_burst_diagnostic import exact_prefix
 from scripts.pcdr_ccr_transfer import read, write, digest
 from scripts.pcdr_edge_intervention import connectivity_without
+from scripts.pcdr_late_switch import LateSwitch
 from scripts.pcdr_fine_sim import simulate, input_tape
 
 SOURCE = '720575940628695043'
@@ -51,7 +52,7 @@ def endpoints(spikes, input_ids, dt_ms):
 
 
 def worker(plan_path, out, dt, condition, duration_ms):
-    if dt not in [.0004, .0002] or condition not in ['reference', 'two_edges'] or duration_ms not in [2, 750]:
+    if dt not in [.0004, .0002] or condition not in ['reference', 'two_edges', 'late_reference', 'late_edges'] or duration_ms not in [2, 750]:
         raise ValueError('Use the declared time steps, conditions and 2-ms timing check or 750-ms trial')
     plan_path, out = Path(plan_path), Path(out)
     plan = read(plan_path)
@@ -82,6 +83,11 @@ def worker(plan_path, out, dt, condition, duration_ms):
         con = ROOT/'2023_03_23_connectivity_630_final.parquet'
         context = (connectivity_without(con, [(lookup[SOURCE], lookup[v]) for v in TARGETS])
                    if condition == 'two_edges' else nullcontext((con, None)))
+        late = condition.startswith('late_')
+        switch_ms = 600 if duration_ms == 750 else 1
+        recorder = (LateSwitch([(lookup[SOURCE], lookup[v]) for v in TARGETS], switch_ms,
+                               condition == 'late_edges', out) if late else
+                    TrialProgress(out/'simulation_progress.json'))
         with context as (connectivity, removed):
             if removed is not None:
                 removed.to_csv(out/'removed_edges.csv', index=False)
@@ -89,7 +95,7 @@ def worker(plan_path, out, dt, condition, duration_ms):
                 [lookup[v] for v in plan['lesion_ids']], tape=tape, duration_s=duration_ms/1000,
                 dt_ms=dt, weight_scale=1.2, inhibitory_scale=.8,
                 connectivity=connectivity, return_delivered=True,
-                recorder=TrialProgress(out/'simulation_progress.json'))
+                recorder=recorder, chunk_ms=1 if duration_ms == 2 and late else 10)
         for frame in [spikes, scheduled, delivered]:
             frame['flywire_id'] = pd.Series([ids[i] for i in frame.pop('neuron_index')], dtype='string')
         # Keep returned events even if a comparison fails, so the failure can be examined.
@@ -100,13 +106,19 @@ def worker(plan_path, out, dt, condition, duration_ms):
         exact_prefix(scheduled, expected, duration_ms, dt)
         ref = plan_path.parent/'reference'/str(dt)
         exact_prefix(delivered, pd.read_parquet(ref/'delivered_events.parquet'), duration_ms, dt)
-        if condition == 'reference':
+        if late:
+            if not recorder.applied:
+                raise RuntimeError('Requested switch was not applied')
+            exact_prefix(spikes.loc[spikes.t < switch_ms/1000].reset_index(drop=True),
+                         pd.read_parquet(ref/'spikes.parquet'), switch_ms, dt, True)
+            record.update(exact_pre_switch_spikes=True, switch_ms=switch_ms)
+        if condition in ['reference', 'late_reference']:
             exact_prefix(spikes, pd.read_parquet(ref/'spikes.parquet'), duration_ms, dt, True)
         if duration_ms == 750:
             write(out/'endpoints.json', endpoints(spikes, plan['input_ids'], dt))
         record.update(status='complete', finished_utc=now(), elapsed_seconds=time.perf_counter()-started,
                       peak_rss_bytes=peak_rss(), exact_delivered_input=True,
-                      exact_reference_spikes=True if condition == 'reference' else None,
+                      exact_reference_spikes=True if condition in ['reference', 'late_reference'] else None,
                       outputs={p.name: digest(p) for p in out.iterdir() if p.name != 'manifest.json'})
         write(out/'manifest.json', record)
     except BaseException as error:
@@ -120,7 +132,7 @@ if __name__ == '__main__':
     parser.add_argument('--plan', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--dt', type=float, required=True)
-    parser.add_argument('--condition', choices=['reference', 'two_edges'], required=True)
+    parser.add_argument('--condition', choices=['reference', 'two_edges', 'late_reference', 'late_edges'], required=True)
     parser.add_argument('--duration-ms', type=int, choices=[2, 750], default=750)
     args = parser.parse_args()
     worker(args.plan, args.out, args.dt, args.condition, args.duration_ms)
