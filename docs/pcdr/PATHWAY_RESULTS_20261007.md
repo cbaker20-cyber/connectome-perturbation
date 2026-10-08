@@ -1,5 +1,7 @@
 # Two-connection intervention: results reviewed 7 October
 
+Update: the late-switch comparison has also completed. See the final section below for verified results; the earlier sections preserve the time-zero experiment and its original follow-up proposal.
+
 Removing two selected connections from the start of the simulation prevented the broad late recruitment seen in the 0.0004-ms reference. This is an intervention result in one selected model case. It does not establish a biological circuit, explain the first difference between time steps, or resolve the failed convergence criteria.
 
 ## What was compared
@@ -39,7 +41,7 @@ All four trials reached 750 ms with successful process exits and empty stderr. S
 
 Spike checks cover exact string IDs, valid times, time order, the time grid, duplicate neuron/time events and non-input refractory spacing. Stimulated cells have zero refractory duration in this model and are excluded from the 2.2-ms spacing check. Saved endpoints, selected-cell histories and summary manifests agree with the underlying files. Deliberately altered spike bytes and a missing archived source are rejected by the reviewer.
 
-The two coarser trials took about 1.97–1.98 hours each; the finer trials about 3.70–3.73 hours each. They ran concurrently and finished on 6 October at 21:47 UTC (5:47 p.m. Eastern). Per-worker peak memory was 3.00–4.01 GB. The requested four cores and 32 GB were sufficient.
+The two coarser trials took about 1.97â€“1.98 hours each; the finer trials about 3.70â€“3.73 hours each. They ran concurrently and finished on 6 October at 21:47 UTC (5:47 p.m. Eastern). Per-worker peak memory was 3.00â€“4.01 GB. The requested four cores and 32 GB were sufficient.
 
 Ten new reviewer tests passed. The complete `tests` directory passed 444 tests, with three skipped and 255 dependency deprecation warnings. Test success verifies implementation behavior; it does not establish convergence or physiological validity.
 
@@ -62,3 +64,31 @@ Brian2 also distinguishes refractory duration from clamping selected state varia
 The original model and eigencircuit papers still motivate the broader question, but do not validate this selected intervention: [Shiu et al.](https://doi.org/10.1038/s41586-024-07763-9), [Pospisil et al.](https://doi.org/10.1038/s41586-024-07982-0). This follow-up explains a limitation encountered while testing that question; it is not an eigencircuit-specific test.
 
 Evidence: [independent review](evidence/2026-10-07/pathway_review.json), [additional time-window counts](evidence/2026-10-07/pathway_timecourse.json), [failure checks](evidence/2026-10-07/pathway_failure_checks.json), and [review code](../../scripts/pcdr_review_pathway.py).
+
+
+## Second experiment: removal at 600 ms
+
+The four late-switch trials finished on 7 October at 19:59:37 UTC (3:59 p.m. Eastern), about 2 hours 28 minutes after controller launch. Retrieved the result ZIP through OnDemand Files after the compute session ended. It contains 57 members, passes CRC checks and has SHA-256 `650315b319875f910b625a4090d64f2d565b777b7ba2b2bbb181f77ffa10bcff`. Source bytes and inventory match the late-switch upload, SHA-256 `5cb352017aa8142a8ee37b3b889eff1c3f1fce44b3019bf0634c321b94c1db89`.
+
+All four spike histories before 600 ms exactly match the original saved reference at their respective steps. Both no-change switches also reproduce the entire 750-ms reference exactly. Scheduled and delivered external input matches the original tape in every trial. The switch records identify the intended connections and their original scaled weights, 94.38 and 78.21 mV. The intervention sets those weights to zero at 600 ms; the no-change controls retain them. The reviewer independently checks these values against the original connectivity and ID/index mapping. All output hashes, packages, process exits, progress records, spike-format checks and recalculated endpoints pass. Worker stderr is empty.
+
+| Step (ms) | Condition | Non-input spikes in [650,730) ms | Newly recruited cells |
+|---|---|---:|---:|
+| 0.0004 | No-change switch | 15,093 | 7,623 |
+| 0.0004 | Pair removed at 600 ms | 1,442 | 1 |
+| 0.0002 | No-change switch | 1,435 | 4 |
+| 0.0002 | Pair removed at 600 ms | 1,459 | 6 |
+
+The coarser spike count decreases by 13,651 (90.45%). The finer count increases by 24 (1.67%). As before, these are single selected-case contrasts with no sampling inference. The default-network convergence failures remain unchanged.
+
+The first changed spike is the missing target-720575940629667639 spike at 616.7112 ms in the coarser comparison and 603.6980 ms in the finer comparison. Both targets retain their earlier spikes but have no spikes after 600 ms in either intervention. The source's first post-switch spike is unchanged at 613.3504 or 600.2258 ms. In the coarser run, its subsequent history changes: 630.746 and 731.5688 ms replace the reference's longer sequence. This supports an effect propagated through the recurrent network; it does not isolate every feedback route.
+
+The additional [730,750)-ms check gives 15,250 versus 256 spikes (1,850 versus zero newly recruited cells) at 0.0004 ms. At 0.0002 ms it gives 322 versus 319 spikes (two versus zero new cells). No comparable burst appears during the final 20 recorded milliseconds. Later activity remains unobserved. Full-run per-neuron counts change for 9,845 cells in the coarser comparison and 199 in the finer comparison; sums of absolute count differences are 29,041 and 232. These supplementary descriptions do not replace the declared window.
+
+This comparison addresses the principal limitation of time-zero removal: suppression does not require altering the trajectory before 600 ms. Under this seed, parameter setting and step, disabling the pair after the identical earlier spike history prevents the broad observed recruitment. It remains a joint intervention. It neither identifies which individual connection matters nor shows that the pair alone can generate the burst. The cutoff and connections were selected from the prior trajectories, and the untreated finer-step run lacks the burst. The result concerns a step-sensitive simulated outcome, not a demonstrated biological mechanism or eigenmode-specific effect.
+
+The next comparison should remove each connection separately at 600 ms, retain the same two steps and endpoints, and include unchanged-switch references. That distinguishes whether either removal alone suppresses recruitment or whether joint removal is required in this case. The previous result is not a reason to relax convergence thresholds or expand to a broad seed sweep before resolving this distinction. No new cluster job or upload has been prepared for separate-edge removal yet.
+
+Validation of the extended reviewer: 12 focused tests passed. They include wrong timing, wrong targets/order, floating-point indices, altered scaled weights, incorrect removal flags/outcomes and duplicate original connections. A deliberately changed switch time was rejected even after updating its recorded hash and summary; this checks scientific specification beyond file integrity. The original time-zero review still reproduces its saved JSON exactly. Full-network simulations were not rerun locally.
+
+Reproduce the new review with `.venv/Scripts/python.exe scripts/pcdr_review_pathway.py --late --archive CCR_late_pathway_results.zip --package exports/CCR_Pathway.zip --out <new-output.json>`. The additional time-course calculation follows the same integer-tick method documented above and saves post-600-ms histories for the source and two targets. Evidence: [late review](evidence/2026-10-07/late_review.json), [late time-course checks](evidence/2026-10-07/late_timecourse.json). Per-worker runtime was 74.6–75.0 minutes at 0.0004 ms and 148.2–148.3 minutes at 0.0002 ms; peak memory was 2.99–3.35 GB. Differences from the earlier node's runtime should not be attributed to the scientific intervention without a controlled performance comparison.

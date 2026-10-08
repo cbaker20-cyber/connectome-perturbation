@@ -1,6 +1,6 @@
 # Explaining the study
 
-7 October update: the [two-connection intervention](PATHWAY_RESULTS_20261007.md) suppresses the selected coarser-step burst, but changes activity long before it. Both unchanged references reproduce exactly. This is a selected-case model result; the earlier convergence failures remain unresolved.
+7 October update: the [late-switch experiment](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms) preserves earlier spikes exactly and suppresses the selected coarser-step burst by removing the pair at 600 ms. This resolves the earlier-history limitation of time-zero removal. Individual connection contributions, generalization and convergence remain unresolved.
 
 5 October update: the [completed 620-trial fine-step study](FINE_TIMESTEP_RESULTS_20261005.md) reached 0.0001 ms. Selected-group average A was 22.508 Hz and F was 0.22977 at that step. Individual paired trajectories did not meet the predeclared agreement rules. The earlier history below remains dated; the new report supersedes statements that this follow-up is pending.
 

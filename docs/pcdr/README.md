@@ -6,7 +6,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
-[Next CCR run: remove the pair at 600 ms](CCR_PATHWAY_RUN.md). The current `exports/CCR_Pathway.zip` extracts to `connectome_late_pathway`; use its new notebook. Four trials preserve the earlier trajectory and compare late removal against a no-change switch. Full results are pending.
+[Completed 600-ms intervention](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms): earlier spikes match exactly, while late removal reduces coarser-window spikes to 1,442 and new recruitment to one cell. Both no-change references reproduce fully. Separate-edge contributions and convergence remain unresolved. The current upload describes this completed run; do not rerun it.
 
 [Completed two-connection intervention, reviewed 7 October](PATHWAY_RESULTS_20261007.md): all four trials verified. Removing the pair from time zero reduces late-window spikes from 15,093 to 1,381 at 0.0004 ms, with no new recruitment. At 0.0002 ms the counts are 1,435 and 1,436. Early activity also changes, so a late triggering role is unresolved. This does not establish convergence. The existing [CCR package instructions](CCR_PATHWAY_RUN.md) describe the completed run; no rerun is needed.
 
@@ -26,7 +26,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 [Completed fine-step results, 5 October](FINE_TIMESTEP_RESULTS_20261005.md): all 620 trials checked locally. Selected-group averages remain similar down to 0.0001 ms, but the declared full agreement criteria fail.
 
-After the meeting: [reflection and finer-step follow-up](MEETING_REFLECTION_20260929.md) records James and Dr. Muldoon’s recommendation, the implementation implications and proposed next work.
+After the meeting: [reflection and finer-step follow-up](MEETING_REFLECTION_20260929.md) records James and Dr. Muldoonâ€™s recommendation, the implementation implications and proposed next work.
 
 [Fine-step implementation and local tests](FINE_TIMESTEP_TESTS_20260929.md) records the new recording approach, event-preservation checks and measured resource costs. The full-duration study has now completed; see the newer result below.
 
