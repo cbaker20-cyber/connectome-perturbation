@@ -52,7 +52,7 @@ def endpoints(spikes, input_ids, dt_ms):
 
 
 def worker(plan_path, out, dt, condition, duration_ms):
-    if dt not in [.0004, .0002] or condition not in ['reference', 'two_edges', 'late_reference', 'late_edges'] or duration_ms not in [2, 750]:
+    if dt not in [.0004, .0002] or condition not in ['reference', 'two_edges', 'late_reference', 'late_edges', 'late_g', 'late_h'] or duration_ms not in [2, 750]:
         raise ValueError('Use the declared time steps, conditions and 2-ms timing check or 750-ms trial')
     plan_path, out = Path(plan_path), Path(out)
     plan = read(plan_path)
@@ -85,8 +85,9 @@ def worker(plan_path, out, dt, condition, duration_ms):
                    if condition == 'two_edges' else nullcontext((con, None)))
         late = condition.startswith('late_')
         switch_ms = 600 if duration_ms == 750 else 1
-        recorder = (LateSwitch([(lookup[SOURCE], lookup[v]) for v in TARGETS], switch_ms,
-                               condition == 'late_edges', out) if late else
+        targets = TARGETS[:1] if condition == 'late_g' else TARGETS[1:] if condition == 'late_h' else TARGETS
+        recorder = (LateSwitch([(lookup[SOURCE], lookup[v]) for v in targets], switch_ms,
+                               condition != 'late_reference', out) if late else
                     TrialProgress(out/'simulation_progress.json'))
         with context as (connectivity, removed):
             if removed is not None:
@@ -132,7 +133,7 @@ if __name__ == '__main__':
     parser.add_argument('--plan', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--dt', type=float, required=True)
-    parser.add_argument('--condition', choices=['reference', 'two_edges', 'late_reference', 'late_edges'], required=True)
+    parser.add_argument('--condition', choices=['reference', 'two_edges', 'late_reference', 'late_edges', 'late_g', 'late_h'], required=True)
     parser.add_argument('--duration-ms', type=int, choices=[2, 750], default=750)
     args = parser.parse_args()
     worker(args.plan, args.out, args.dt, args.condition, args.duration_ms)

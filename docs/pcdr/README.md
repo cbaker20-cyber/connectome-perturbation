@@ -6,7 +6,9 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
-[Completed 600-ms intervention](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms): earlier spikes match exactly, while late removal reduces coarser-window spikes to 1,442 and new recruitment to one cell. Both no-change references reproduce fully. Separate-edge contributions and convergence remain unresolved. The current upload describes this completed run; do not rerun it.
+[Next upload: separate G and H connections](CCR_PATHWAY_RUN.md). The current CCR_Pathway.zip extracts to connectome_separate_pathway and runs eight trials. It repeats reference and joint removal alongside each single removal. Full results are pending.
+
+[Completed 600-ms intervention](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms): earlier spikes match exactly, while late removal reduces coarser-window spikes to 1,442 and new recruitment to one cell. Both no-change references reproduce fully. Separate-edge contributions and convergence remain unresolved. The completed late-pair upload is retained locally with its dated validation evidence.
 
 [Completed two-connection intervention, reviewed 7 October](PATHWAY_RESULTS_20261007.md): all four trials verified. Removing the pair from time zero reduces late-window spikes from 15,093 to 1,381 at 0.0004 ms, with no new recruitment. At 0.0002 ms the counts are 1,435 and 1,436. Early activity also changes, so a late triggering role is unresolved. This does not establish convergence. The existing [CCR package instructions](CCR_PATHWAY_RUN.md) describe the completed run; no rerun is needed.
 

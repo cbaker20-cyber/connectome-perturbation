@@ -1,0 +1,97 @@
+{
+  "upload_sha256": "d7f578079ab04e1155148a61646933585f755d5af83383ef4bea1695a5ca6197",
+  "upload_bytes": 89216138,
+  "full_tests_passed": 457,
+  "skipped": 3,
+  "packaged_tests_passed": 26,
+  "trials": [
+    {
+      "condition": "late_reference",
+      "dt_ms": 0.0004,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 21.46230110002216,
+      "peak_rss_bytes": 2618257408,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": true,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_edges",
+      "dt_ms": 0.0004,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 21.449720000033267,
+      "peak_rss_bytes": 2663464960,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": null,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_g",
+      "dt_ms": 0.0004,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 20.29573030001484,
+      "peak_rss_bytes": 2674909184,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": null,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_h",
+      "dt_ms": 0.0004,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 20.032345399959013,
+      "peak_rss_bytes": 2674958336,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": null,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_reference",
+      "dt_ms": 0.0002,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 36.33237389998976,
+      "peak_rss_bytes": 2675367936,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": true,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_edges",
+      "dt_ms": 0.0002,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 36.22110299998894,
+      "peak_rss_bytes": 2734313472,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": null,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_g",
+      "dt_ms": 0.0002,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 35.35400349996053,
+      "peak_rss_bytes": 2734387200,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": null,
+      "exact_delivered_input": true
+    },
+    {
+      "condition": "late_h",
+      "dt_ms": 0.0002,
+      "duration_ms": 2,
+      "switch_ms": 1,
+      "elapsed_seconds": 35.187774699996226,
+      "peak_rss_bytes": 2676011008,
+      "exact_pre_switch_spikes": true,
+      "exact_reference_spikes": null,
+      "exact_delivered_input": true
+    }
+  ]
+}

@@ -6,7 +6,8 @@ from scripts.pcdr_fine_sim import simulate, input_tape
 from scripts.pcdr_late_switch import LateSwitch
 
 
-def test_switch_preserves_prefix_input_and_other_connection(tmp_path):
+@pytest.mark.parametrize('target', [1,2])
+def test_switch_preserves_prefix_input_and_other_connection(tmp_path,target):
     comp, con = tmp_path/'comp.csv', tmp_path/'con.parquet'
     pd.DataFrame({'Completed': [1, 1, 1]}, index=[101, 102, 103]).to_csv(comp)
     pd.DataFrame({'Presynaptic_Index': [0, 0], 'Postsynaptic_Index': [1, 2],
@@ -16,7 +17,7 @@ def test_switch_preserves_prefix_input_and_other_connection(tmp_path):
                 connectivity=con, chunk_ms=1, return_delivered=True)
     original = simulate(42, [0], [], **args)
     for remove in [False, True]:
-        recorder = LateSwitch([(0,1)], 1, remove, tmp_path)
+        recorder = LateSwitch([(0,target)], 1, remove, tmp_path)
         actual = simulate(42, [0], [], recorder=recorder, **args)
         assert recorder.applied
         for a,b in zip(original[1:], actual[1:]):
@@ -24,10 +25,10 @@ def test_switch_preserves_prefix_input_and_other_connection(tmp_path):
         pd.testing.assert_frame_equal(original[0].loc[original[0].t < .001],
                                       actual[0].loc[actual[0].t < .001])
         if remove:
-            assert 1 in set(original[0].neuron_index)
-            assert 1 not in set(actual[0].neuron_index)
-            pd.testing.assert_frame_equal(original[0].loc[original[0].neuron_index.eq(2)].reset_index(drop=True),
-                                          actual[0].loc[actual[0].neuron_index.eq(2)].reset_index(drop=True))
+            assert target in set(original[0].neuron_index)
+            assert target not in set(actual[0].neuron_index)
+            pd.testing.assert_frame_equal(original[0].loc[original[0].neuron_index.eq(3-target)].reset_index(drop=True),
+                                          actual[0].loc[actual[0].neuron_index.eq(3-target)].reset_index(drop=True))
         else:
             pd.testing.assert_frame_equal(original[0],actual[0])
 
@@ -63,4 +64,3 @@ def test_missed_boundary(tmp_path):
     recorder=LateSwitch([(0,1)],1,True,tmp_path)
     recorder.switch_tick=10
     with pytest.raises(ValueError,match='boundary'): recorder.monitors(0,20)
-

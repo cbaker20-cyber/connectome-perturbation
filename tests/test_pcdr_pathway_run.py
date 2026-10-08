@@ -10,17 +10,18 @@ def test_existing_lock_is_not_removed(tmp_path):
     assert lock.read_text()=='another worker'
 
 
-def test_worker_failure_is_recorded_and_owned_lock_released(tmp_path,monkeypatch):
+@pytest.mark.parametrize('separate,total', [(False,4),(True,8)])
+def test_worker_failure_is_recorded_and_owned_lock_released(tmp_path,monkeypatch,separate,total):
     def failed(command,directory,*args,**kwargs):
         Path(directory).mkdir(parents=True)
         return {'returncode':1,'timed_out':False}
     monkeypatch.setattr(runner,'run_bounded',failed)
     out=tmp_path/'out'
     with pytest.raises(RuntimeError,match='Trial failed'):
-        runner.run(tmp_path/'plan',out,duration=2)
+        runner.run(tmp_path/'plan',out,duration=2,separate=separate)
     assert not (out/'.controller.lock').exists()
     assert json.loads((out/'progress.json').read_text())['status']=='failed'
-    assert len(list((out/'logs').glob('*/process.json')))==4
+    assert len(list((out/'logs').glob('*/process.json')))==total
     assert not (tmp_path/'pathway_setup_results.zip').exists()
 
 

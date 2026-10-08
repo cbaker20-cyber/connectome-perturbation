@@ -1,7 +1,8 @@
-"""Run and verify the four declared pathway trials, then collect one result ZIP."""
+"""Run and verify the declared pathway trials, then collect one result ZIP."""
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
+import math
 from pathlib import Path
 import sys
 import zipfile
@@ -35,9 +36,13 @@ def verify(path, plan, dt, condition, duration):
         if m.get('exact_pre_switch_spikes') is not True or m.get('switch_ms') != switch_ms:
             raise ValueError('Earlier spike history did not match')
         switch = read(path/'switch.json')
-        if switch['switch_ms'] != switch_ms or switch['remove'] != (condition == 'late_edges'):
+        if switch['switch_ms'] != switch_ms or switch['remove'] != (condition != 'late_reference'):
             raise ValueError('Wrong switch record')
-        expected_weights = [0., 0.] if condition == 'late_edges' else switch['weights_before_mv']
+        indices = [[83946,88354]] if condition == 'late_g' else [[83946,59867]] if condition == 'late_h' else [[83946,88354],[83946,59867]]
+        before = [94.38] if condition == 'late_g' else [78.21] if condition == 'late_h' else [94.38,78.21]
+        if switch['pairs'] != indices or len(switch['weights_before_mv']) != len(before) or any(not math.isfinite(a) or abs(a-b)>1e-10 for a,b in zip(switch['weights_before_mv'],before)):
+            raise ValueError('Wrong selected connections or starting weights')
+        expected_weights = [0.]*len(before) if condition != 'late_reference' else switch['weights_before_mv']
         if switch['weights_after_mv'] != expected_weights:
             raise ValueError('Wrong switched weights')
     if duration == 750: required.add('endpoints.json')
@@ -56,10 +61,12 @@ def verify(path, plan, dt, condition, duration):
     return m
 
 
-def run(plan, out, hours=7., duration=750, workers=4, late=False):
+def run(plan, out, hours=7., duration=750, workers=4, late=False, separate=False):
     jobs = [(dt, c) for dt in [.0004, .0002] for c in ['late_reference','late_edges']] if late else JOBS
+    if separate:
+        jobs = [(dt,c) for dt in [.0004,.0002] for c in ['late_reference','late_edges','late_g','late_h']]
     plan, out = Path(plan).resolve(), Path(out).resolve()
-    if not 0 < hours <= 7 or duration not in [2,750] or workers not in [1,2,4]:
+    if not 0 < hours <= 7 or duration not in [2,750] or workers not in [1,2,4,8]:
         raise ValueError('Invalid deadline, duration or workers')
     out.mkdir(parents=True, exist_ok=True)
     lock = out/'.controller.lock'
@@ -78,7 +85,7 @@ def run(plan, out, hours=7., duration=750, workers=4, late=False):
                     raise FileExistsError('Preserve and review previous attempt logs before retrying')
                 pending.append((dt,condition))
         def progress(status):
-            write(out/'progress.json', dict(status=status, completed=sorted(completed), total=4,
+            write(out/'progress.json', dict(status=status, completed=sorted(completed), total=len(jobs),
                                            duration_ms=duration, updated_utc=now()))
         progress('running')
         def launch(job):
@@ -111,6 +118,8 @@ def run(plan, out, hours=7., duration=750, workers=4, late=False):
         progress('collecting')
         filename = 'CCR_late_pathway_results.zip' if late else 'CCR_pathway_results.zip'
         target = out.parent/(filename if duration == 750 else 'pathway_setup_results.zip')
+        if separate and duration == 750:
+            target = out.parent/'CCR_separate_pathway_results.zip'
         temporary = target.with_suffix('.zip.tmp')
         with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED) as archive:
             for path in sorted(out.rglob('*')):
@@ -137,4 +146,5 @@ if __name__ == '__main__':
     parser.add_argument('--hours',type=float,default=7); parser.add_argument('--duration-ms',type=int,default=750)
     parser.add_argument('--workers',type=int,default=4)
     parser.add_argument('--late',action='store_true')
-    args=parser.parse_args();run(args.plan,args.out,args.hours,args.duration_ms,args.workers,args.late)
+    parser.add_argument('--separate',action='store_true')
+    args=parser.parse_args();run(args.plan,args.out,args.hours,args.duration_ms,args.workers,args.late,args.separate)

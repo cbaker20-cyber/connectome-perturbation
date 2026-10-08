@@ -29,7 +29,7 @@ def build():
     files['diagnostic_plan.json']=(inputs/'diagnostic_plan.json').read_bytes()
     files['requirements-ccr.txt']=(ROOT/'docs/pcdr/requirements-ccr.txt').read_bytes()
     files['START_HERE.md']=(ROOT/'docs/pcdr/CCR_PATHWAY_RUN.md').read_bytes()
-    files['run_all.sh']=(ROOT/'scripts/pcdr_pathway_run_all.sh').read_text(encoding='utf-8').replace('\r\n','\n').replace('pathway_results','late_pathway_results').replace('--workers 4','--workers 4 --late').encode()
+    files['run_all.sh']=(ROOT/'scripts/pcdr_pathway_run_all.sh').read_text(encoding='utf-8').replace('\r\n','\n').replace('pathway_results','separate_pathway_results').replace('--workers 4','--workers 8 --separate').encode()
     manifest={name:hashlib.sha256(data).hexdigest() for name,data in files.items()}
     files['package_manifest.json']=(json.dumps(manifest,indent=2)+'\n').encode()
     cells=[]
@@ -37,13 +37,13 @@ def build():
         cell=dict(cell_type=kind,metadata={},source=text.splitlines(True),id=f'cell-{len(cells)}')
         if kind=='code':cell.update(outputs=[],execution_count=None)
         cells.append(cell)
-    add('markdown','# Two connections removed at 600 ms\nRequest 4 cores, 32000 MB RAM, 8 hours, no GPU. Open here and Run All once. Four trials run through 750 ms; two no-change references and two late removals. Read START_HERE.md for the comparison and restart limits. After reconnecting, use only the last status cell.\n')
+    add('markdown','# Separate connections removed at 600 ms\nRequest 8 cores, 64000 MB RAM, 8 hours, no GPU. Open here and Run All once. Eight trials run through 750 ms: no-change, both connections, G only and H only at each step. Read START_HERE.md for the comparison and restart limits. After reconnecting, use only the last status cell.\n')
     add('code','''from pathlib import Path
 import os, subprocess
 ROOT=Path.cwd().resolve()
-assert (ROOT/'package_manifest.json').is_file(), 'Open in the extracted connectome_late_pathway folder.'
+assert (ROOT/'package_manifest.json').is_file(), 'Open in the extracted connectome_separate_pathway folder.'
 assert os.environ.get('SLURM_JOB_ID'), 'Launch a CCR compute session first.'
-assert int(os.environ.get('SLURM_CPUS_PER_TASK', '4')) >= 4, 'Request four CPU cores.'
+assert int(os.environ.get('SLURM_CPUS_PER_TASK', '8')) >= 8, 'Request eight CPU cores.'
 with (ROOT/'run_all.log').open('a') as log:
     process=subprocess.Popen(['bash','-lc','bash run_all.sh'],cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
 print('Started process',process.pid,'. Setup and simulation logs: run_all.log',flush=True)
@@ -55,27 +55,27 @@ from IPython.display import FileLink, display
 ROOT=Path.cwd().resolve()
 last=None
 while True:
-    status=ROOT/'late_pathway_results/progress.json'
+    status=ROOT/'separate_pathway_results/progress.json'
     state=json.loads(status.read_text()) if status.exists() else {'status':'setting up'}
-    clocks={p.parent.name:json.loads(p.read_text())['simulated_ms'] for p in (ROOT/'late_pathway_results').glob('*/simulation_progress.json')}
+    clocks={p.parent.name:json.loads(p.read_text())['simulated_ms'] for p in (ROOT/'separate_pathway_results').glob('*/simulation_progress.json')}
     current=(state,clocks)
     if current!=last:print(state, '\\nSimulated ms of 750:',clocks,flush=True);last=current
     if state['status']=='complete':
-        display(FileLink('CCR_late_pathway_results.zip'));break
+        display(FileLink('CCR_separate_pathway_results.zip'));break
     if state['status']=='failed':raise RuntimeError(state)
     if 'process' in globals() and process.poll() is not None and process.returncode:
         print((ROOT/'run_all.log').read_text()[-6000:])
         raise RuntimeError('Launch stopped; inspect run_all.log. An existing run may still be active.')
     time.sleep(30)
 ''')
-    files['CCR_Late_Pathway.ipynb']=(json.dumps(dict(cells=cells,metadata={'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'}},nbformat=4,nbformat_minor=5),indent=1)+'\n').encode()
+    files['CCR_Separate_Pathway.ipynb']=(json.dumps(dict(cells=cells,metadata={'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'}},nbformat=4,nbformat_minor=5),indent=1)+'\n').encode()
     target=ROOT/'exports/CCR_Pathway.zip';temporary=target.with_suffix('.zip.tmp')
     with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED) as archive:
-        for name,data in sorted(files.items()):archive.writestr('connectome_late_pathway/'+name,data)
+        for name,data in sorted(files.items()):archive.writestr('connectome_separate_pathway/'+name,data)
     with zipfile.ZipFile(temporary) as archive:
         if archive.testzip() is not None:raise ValueError('Upload CRC failure')
         for name,h in manifest.items():
-            if hashlib.sha256(archive.read('connectome_late_pathway/'+name)).hexdigest()!=h:raise ValueError('Upload hash failure')
+            if hashlib.sha256(archive.read('connectome_separate_pathway/'+name)).hexdigest()!=h:raise ValueError('Upload hash failure')
         for cell in cells:
             if cell['cell_type']=='code':compile(''.join(cell['source']),'notebook','exec')
     temporary.replace(target)
