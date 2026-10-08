@@ -1,5 +1,7 @@
 # Returning to the eigencircuit question — 8 October
 
+Subsequent work: the proposed [bounded distribution-matching study](DISTRIBUTION_MATCHING_20261008.md) has now completed. The proposal below records the earlier decision; use the linked results for current status.
+
 Three local analyses are complete. The selected group's response ordering persists across the four tested fine steps and all 30 paired seeds against the existing three comparisons. Those comparisons share 50 of 51 cells. A new baseline-only search found twelve valid comparison sets with substantially less overlap with the old family, but considerable internal overlap and distributional imbalance remain. No new CCR simulation or upload was created.
 
 The original question is still whether concentrated eigenvector support predicts localized outgoing-lesion responses beyond degree/strength, strong connections and recruitment. The [separate G/H intervention](SEPARATE_PATHWAY_RESULTS_20261008.md) answered a selected burst-mechanism question; it did not answer this predictive question. The work below returns to that distinction.

@@ -1,0 +1,37 @@
+{
+  "finished_utc": "2026-10-08T16:24:43.803901+00:00",
+  "workers": {
+    "unconstrained_overlap": {
+      "command": [
+        "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_distribution_match.py",
+        "--out",
+        "results\\pcdr\\distribution_match_20261008",
+        "--worker",
+        "unconstrained_overlap"
+      ],
+      "pid": 12536,
+      "timed_out": false,
+      "returncode": 0,
+      "elapsed_seconds": 9.170999999972992,
+      "deadline_seconds": 100,
+      "cleanup": null
+    },
+    "cap_30": {
+      "command": [
+        "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_distribution_match.py",
+        "--out",
+        "results\\pcdr\\distribution_match_20261008",
+        "--worker",
+        "cap_30"
+      ],
+      "pid": 30060,
+      "timed_out": false,
+      "returncode": 0,
+      "elapsed_seconds": 18.04700000002049,
+      "deadline_seconds": 100,
+      "cleanup": null
+    }
+  }
+}

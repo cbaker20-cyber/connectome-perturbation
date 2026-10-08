@@ -1,5 +1,7 @@
 # Research overview: hypothesis, experiments and current evidence
 
+[Distribution-matching continuation, 8 October](DISTRIBUTION_MATCHING_20261008.md): two verified unsimulated candidates reduce distribution mismatch, with a measured tradeoff under a 30-cell overlap cap. Exact motor strata force at least a 5/51 distribution gap even in the full eligible pool. No CCR simulation was launched.
+
 8 October research continuation: [fine-step contrast audit and comparison-design work](RESEARCH_CONTINUATION_20261008.md) confirm persistent ordering against the fixed alternatives and identify a different feasible comparison family. Remaining distribution imbalance and overlap prevent an eigencircuit-specific conclusion; no new simulation was launched.
 
 8 October update: the [verified eight-trial separate-connection experiment](SEPARATE_PATHWAY_RESULTS_20261008.md) shows that either G-only or H-only removal at 600 ms interrupts broad recruitment in the selected coarser-step case. Repeated reference and joint trials reproduce exactly. This resolves the individual-versus-joint comparison; generalization, convergence and eigencircuit specificity remain unresolved.

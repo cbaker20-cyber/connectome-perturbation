@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Distribution-matching continuation, 8 October](DISTRIBUTION_MATCHING_20261008.md): two verified unsimulated candidates reduce distribution mismatch, with a measured tradeoff under a 30-cell overlap cap. Exact motor strata force at least a 5/51 distribution gap even in the full eligible pool. No CCR simulation was launched.
+
 [Return to the eigencircuit question, 8 October](RESEARCH_CONTINUATION_20261008.md): mode A and F exceed the three fixed comparisons for every seed at every tested fine step. A new baseline-only search found twelve lower-overlap comparison witnesses, independently verified, but within-family overlap and distribution imbalance remain. No new simulations were launched.
 
 [Completed separate G/H experiment, reviewed 8 October](SEPARATE_PATHWAY_RESULTS_20261008.md): all eight trials verified. Either single removal reduces coarser-window recruitment from 7,623 cells to one. Repeated references and joint removals match the prior experiment exactly. The [package instructions](CCR_PATHWAY_RUN.md) are retained for provenance; do not launch a duplicate. Numerical convergence and eigencircuit specificity remain unresolved.
