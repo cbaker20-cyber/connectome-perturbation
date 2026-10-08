@@ -1,0 +1,13 @@
+{
+  "source": "results\\pcdr\\diverse_comparisons_20261008",
+  "files": {
+    "protocol.json": "dc33e17ded0ff1325806f2b09b44349b48b8d7a831b5946a802713cb554b34cb",
+    "solver.json": "d0bb00e1e0050bff6c8515dbff4261e0917c4ff15016b3ef6199bd2fa1385306",
+    "complete.json": "9f5f3802e95263f9483a4aabbece462bf562146046448705d8d57b710301f8c7",
+    "process.json": "3d01b22abbcc85bf63bf011cc1bb30f169da1054da2f3acd9df28c661c2371a7",
+    "assignments.csv": "38b804dfbea777ed1895adbe1ebe1c1ee5eac756070dde9b77a05436c3b17437",
+    "members.csv": "14b1879f7df89d0aeca3221829aa05b0c80a3c4c9a160e59eab0955e7da9823a",
+    "verification.json": "a782813ba93ad61f44f54c39371f1ea2bcb1576dd7b3e8f4e36da4421990a1aa"
+  },
+  "omitted": "Full fractional vector and worker logs remain in the local search directory; the original completion record includes the vector hash."
+}

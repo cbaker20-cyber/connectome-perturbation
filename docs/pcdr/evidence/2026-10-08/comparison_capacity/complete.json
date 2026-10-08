@@ -1,0 +1,195 @@
+{
+  "status": "complete",
+  "eligible_count": 126935,
+  "strata": [
+    {
+      "model_sign": "excitatory",
+      "recruited": false,
+      "motor": false,
+      "pool_size": 86275,
+      "required": 7,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_004": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_005": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        }
+      }
+    },
+    {
+      "model_sign": "excitatory",
+      "recruited": false,
+      "motor": true,
+      "pool_size": 52,
+      "required": 2,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_004": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_005": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        }
+      }
+    },
+    {
+      "model_sign": "excitatory",
+      "recruited": true,
+      "motor": false,
+      "pool_size": 161,
+      "required": 9,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_004": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_005": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        }
+      }
+    },
+    {
+      "model_sign": "excitatory",
+      "recruited": true,
+      "motor": true,
+      "pool_size": 8,
+      "required": 8,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 8,
+          "minimum_between_two_sets": 8
+        },
+        "motor_004": {
+          "minimum_with_reference": 8,
+          "minimum_between_two_sets": 8
+        },
+        "motor_005": {
+          "minimum_with_reference": 8,
+          "minimum_between_two_sets": 8
+        }
+      }
+    },
+    {
+      "model_sign": "inhibitory",
+      "recruited": false,
+      "motor": false,
+      "pool_size": 40250,
+      "required": 13,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_004": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_005": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        }
+      }
+    },
+    {
+      "model_sign": "inhibitory",
+      "recruited": true,
+      "motor": false,
+      "pool_size": 185,
+      "required": 9,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_004": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        },
+        "motor_005": {
+          "minimum_with_reference": 0,
+          "minimum_between_two_sets": 0
+        }
+      }
+    },
+    {
+      "model_sign": "inhibitory",
+      "recruited": true,
+      "motor": true,
+      "pool_size": 4,
+      "required": 3,
+      "comparisons": {
+        "motor_003": {
+          "minimum_with_reference": 2,
+          "minimum_between_two_sets": 2
+        },
+        "motor_004": {
+          "minimum_with_reference": 2,
+          "minimum_between_two_sets": 2
+        },
+        "motor_005": {
+          "minimum_with_reference": 2,
+          "minimum_between_two_sets": 2
+        }
+      }
+    }
+  ],
+  "forced_ids_from_exhausted_strata": [
+    "720575940607193986",
+    "720575940614386070",
+    "720575940620025620",
+    "720575940622810153",
+    "720575940625612474",
+    "720575940628998659",
+    "720575940629561347",
+    "720575940636165624"
+  ],
+  "lower_bound_with_each_comparison": {
+    "motor_003": 10,
+    "motor_004": 10,
+    "motor_005": 10
+  },
+  "lower_bound_between_any_two": 10,
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\exploratory80_20260921\\controls\\manifest.json": "a88775e5edb762cd1e872aa0db7285c0d0b93c2a5d302d6b9c9894e1854f47c6",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_fullpool_relaxation.py": "bca7871e564efac74ef40cbbb0c982b15492587d9a5582723d67c4cb002c580c"
+  },
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "protocol_sha256": "d71e37e4abdb404f1f40a93a8688990430f09215850865880332d9a462648f69",
+  "limitation": "Bounds use strata only; six-feature balance and distribution matching remain untested here. No candidate set is accepted."
+}

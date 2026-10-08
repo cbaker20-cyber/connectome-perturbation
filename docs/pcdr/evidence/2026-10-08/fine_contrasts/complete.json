@@ -1,0 +1,115 @@
+{
+  "status": "complete",
+  "analysis": "Retrospective descriptive fixed-comparator contrasts; no new acceptance criterion.",
+  "seeds": [
+    631401,
+    631402,
+    631403,
+    631404,
+    631405,
+    631406,
+    631407,
+    631408,
+    631409,
+    631410,
+    631411,
+    631412,
+    631413,
+    631414,
+    631415,
+    631416,
+    631417,
+    631418,
+    631419,
+    631420,
+    631421,
+    631422,
+    631423,
+    631424,
+    631425,
+    631426,
+    631427,
+    631428,
+    631429,
+    631430
+  ],
+  "steps_ms": [
+    0.0008,
+    0.0004,
+    0.0002,
+    0.0001
+  ],
+  "memberships": [
+    {
+      "first": "mode",
+      "second": "motor_003",
+      "shared": 0,
+      "union": 102
+    },
+    {
+      "first": "mode",
+      "second": "motor_004",
+      "shared": 0,
+      "union": 102
+    },
+    {
+      "first": "mode",
+      "second": "motor_005",
+      "shared": 0,
+      "union": 102
+    },
+    {
+      "first": "motor_003",
+      "second": "motor_004",
+      "shared": 50,
+      "union": 52
+    },
+    {
+      "first": "motor_003",
+      "second": "motor_005",
+      "shared": 50,
+      "union": 52
+    },
+    {
+      "first": "motor_004",
+      "second": "motor_005",
+      "shared": 50,
+      "union": 52
+    }
+  ],
+  "original_agreement_groups": 18,
+  "original_groups_passing": 0,
+  "original_final_decision": false,
+  "archive_sha256": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_verified_20261005\\full_check.json": "1c8bb0c7ca1524928c371cd1db96bb073d4d9142ba66a190019dc96045862acf",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_verified_20261005\\checked_pairs.csv": "5561b9c24da32940156d7c2e113fe9d6da675ca4ca48778e24137ca820559dcd",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_verified_20261005\\checked_means.json": "3df02187be12ccb4e25c4c02288aa5946083fafd9321b1884a7c1ffaf546c2d4",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_verified_20261005\\checked_agreement.json": "5867bcc9add8f7585f0d480fbb81a70ea81a48e97bd0535faf2bb902cea6f49f"
+  },
+  "script_sha256": "f8db7956020a7fa3e4ef13c0ad6aa3f61f332b5abe5e4cdef77e465f71afe36d",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "outputs": {
+    "aggregate_contrasts.csv": "3c5a7bb0c2cdf96391826b90488e689a8a9d46f1885f2c6a9ca3a2bffad2acfa",
+    "contrast_changes.csv": "2dc246c4521df21d32f51d63537c75bddb10beb4901ba6a0e44b2ebbf3a829a5",
+    "paired_contrasts.csv": "2f5f0b87bb0edd2316ffe9980d5ee8dfce06e27d83daa32cb725cc12bfc79242",
+    "step_envelopes.csv": "c575ddb4dec34a4d363058ac275f96928e02f0bd40df523cf4d9893920174f1b"
+  }
+}

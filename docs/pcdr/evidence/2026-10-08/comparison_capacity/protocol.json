@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-10-08T14:20:42.224110+00:00",
+  "question": "How much overlap is forced by exact sign/recruitment/motor counts alone?",
+  "method": "For pool N, required k and reference membership r: max(0,k-(N-r)); between any two size-k subsets: max(0,2k-N). Sum across disjoint strata.",
+  "limitation": "Ignoring six-feature balance enlarges the feasible set. These are lower bounds on required overlap, not proofs that balanced low-overlap sets exist.",
+  "no_new_sets": true,
+  "no_simulation": true,
+  "no_outcome_file_loaded": true,
+  "plan_sha256": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+  "script_sha256": "11e144c23264520e8d659ee55ff1d82a364a9aa28e2d81861fee2e132a7ac333"
+}

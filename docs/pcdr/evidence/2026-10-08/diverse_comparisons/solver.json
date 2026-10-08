@@ -1,0 +1,9 @@
+{
+  "status": 0,
+  "success": true,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "objective": 21.20221193919326,
+  "warnings": [
+    "Unrecognized options detected: {'threads': 1}. These will be passed to HiGHS verbatim."
+  ]
+}

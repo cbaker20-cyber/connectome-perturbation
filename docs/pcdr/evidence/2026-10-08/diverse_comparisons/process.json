@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_diverse_comparisons.py",
+    "--worker",
+    "--out",
+    "results\\pcdr\\diverse_comparisons_20261008"
+  ],
+  "pid": 30400,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 4.75,
+  "deadline_seconds": 90,
+  "cleanup": null
+}

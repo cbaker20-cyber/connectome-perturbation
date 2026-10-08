@@ -1,0 +1,460 @@
+{
+  "status": "verified",
+  "candidates": [
+    {
+      "assignment": 0,
+      "old_union_overlap": 21,
+      "maximum_smd": 0.06768379429603426,
+      "features": {
+        "in_degree": {
+          "smd": 0.03457197964385111,
+          "variance_ratio": 6.96380613175916,
+          "ecdf_gap": 0.3333333333333333
+        },
+        "out_degree": {
+          "smd": 0.03784337541138211,
+          "variance_ratio": 3.3081466034374007,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.055358209534007045,
+          "variance_ratio": 2.905151662192018,
+          "ecdf_gap": 0.23529411764705882
+        },
+        "out_strength": {
+          "smd": 0.06485955085029713,
+          "variance_ratio": 1.6173935896349467,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.06768379429603426,
+          "variance_ratio": 0.926942879326954,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "strong_out_mass": {
+          "smd": 0.0658902702230998,
+          "variance_ratio": 0.9804833471849872,
+          "ecdf_gap": 0.11764705882352944
+        }
+      }
+    },
+    {
+      "assignment": 1,
+      "old_union_overlap": 22,
+      "maximum_smd": 0.09290857943788618,
+      "features": {
+        "in_degree": {
+          "smd": 0.08190712721822789,
+          "variance_ratio": 6.899593279306831,
+          "ecdf_gap": 0.3137254901960784
+        },
+        "out_degree": {
+          "smd": 0.09290857943788618,
+          "variance_ratio": 3.2410777267268696,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "in_strength": {
+          "smd": 0.012821201974651052,
+          "variance_ratio": 2.8992596181885393,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "out_strength": {
+          "smd": 0.013296743598421578,
+          "variance_ratio": 1.5544080034217438,
+          "ecdf_gap": 0.17647058823529416
+        },
+        "baseline_hz": {
+          "smd": 0.06768379429603426,
+          "variance_ratio": 0.926942879326954,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "strong_out_mass": {
+          "smd": 0.0760943830452841,
+          "variance_ratio": 0.9625165493110818,
+          "ecdf_gap": 0.11764705882352944
+        }
+      }
+    },
+    {
+      "assignment": 2,
+      "old_union_overlap": 22,
+      "maximum_smd": 0.06768379429603426,
+      "features": {
+        "in_degree": {
+          "smd": 0.06681150633560685,
+          "variance_ratio": 7.017200403213272,
+          "ecdf_gap": 0.3137254901960784
+        },
+        "out_degree": {
+          "smd": 0.0427744790549206,
+          "variance_ratio": 3.3297506157172165,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.029252428008456868,
+          "variance_ratio": 2.9452806462289893,
+          "ecdf_gap": 0.23529411764705882
+        },
+        "out_strength": {
+          "smd": 0.0654147359607544,
+          "variance_ratio": 1.616131947805987,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.06768379429603426,
+          "variance_ratio": 0.926942879326954,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "strong_out_mass": {
+          "smd": 0.032309546434703955,
+          "variance_ratio": 0.9663238277785033,
+          "ecdf_gap": 0.13725490196078433
+        }
+      }
+    },
+    {
+      "assignment": 3,
+      "old_union_overlap": 21,
+      "maximum_smd": 0.07621939496888729,
+      "features": {
+        "in_degree": {
+          "smd": 0.008952518305300436,
+          "variance_ratio": 7.122326715306445,
+          "ecdf_gap": 0.3529411764705882
+        },
+        "out_degree": {
+          "smd": 0.014909056318766637,
+          "variance_ratio": 3.3155597278728535,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.07268379267928309,
+          "variance_ratio": 2.9764146900059703,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "out_strength": {
+          "smd": 0.06932471165899837,
+          "variance_ratio": 1.6116729045579667,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.06534700381878768,
+          "variance_ratio": 0.930163228650528,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "strong_out_mass": {
+          "smd": 0.07621939496888729,
+          "variance_ratio": 0.9912496747473916,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    },
+    {
+      "assignment": 4,
+      "old_union_overlap": 22,
+      "maximum_smd": 0.08644623939288164,
+      "features": {
+        "in_degree": {
+          "smd": 0.05568350830467254,
+          "variance_ratio": 7.067670880461048,
+          "ecdf_gap": 0.3333333333333333
+        },
+        "out_degree": {
+          "smd": 0.06970161907922107,
+          "variance_ratio": 3.2538567992308796,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "in_strength": {
+          "smd": 0.030531230899357782,
+          "variance_ratio": 2.9735110039962,
+          "ecdf_gap": 0.23529411764705882
+        },
+        "out_strength": {
+          "smd": 0.01775771743334154,
+          "variance_ratio": 1.5492815563046758,
+          "ecdf_gap": 0.17647058823529416
+        },
+        "baseline_hz": {
+          "smd": 0.06534700381878768,
+          "variance_ratio": 0.930163228650528,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "strong_out_mass": {
+          "smd": 0.08644623939288164,
+          "variance_ratio": 0.9730771724079527,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    },
+    {
+      "assignment": 5,
+      "old_union_overlap": 22,
+      "maximum_smd": 0.06988168376941828,
+      "features": {
+        "in_degree": {
+          "smd": 0.04094635219098343,
+          "variance_ratio": 7.182321465378437,
+          "ecdf_gap": 0.3333333333333333
+        },
+        "out_degree": {
+          "smd": 0.019892074896447415,
+          "variance_ratio": 3.3376612601889355,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.046715774977872083,
+          "variance_ratio": 3.018366740364327,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "out_strength": {
+          "smd": 0.06988168376941828,
+          "variance_ratio": 1.6104050655323014,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.06534700381878768,
+          "variance_ratio": 0.930163228650528,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "strong_out_mass": {
+          "smd": 0.042758905953449375,
+          "variance_ratio": 0.9777932786929923,
+          "ecdf_gap": 0.11764705882352944
+        }
+      }
+    },
+    {
+      "assignment": 12,
+      "old_union_overlap": 20,
+      "maximum_smd": 0.07760103492534842,
+      "features": {
+        "in_degree": {
+          "smd": 0.032463328504897776,
+          "variance_ratio": 6.957958582642823,
+          "ecdf_gap": 0.3333333333333333
+        },
+        "out_degree": {
+          "smd": 0.039378224575856775,
+          "variance_ratio": 3.310170103935375,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.056876210133158564,
+          "variance_ratio": 2.9041968687072344,
+          "ecdf_gap": 0.23529411764705882
+        },
+        "out_strength": {
+          "smd": 0.062015317871306076,
+          "variance_ratio": 1.6208036971276096,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.07760103492534842,
+          "variance_ratio": 0.9092180577816056,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "strong_out_mass": {
+          "smd": 0.07491059198168,
+          "variance_ratio": 0.985482275037871,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    },
+    {
+      "assignment": 13,
+      "old_union_overlap": 21,
+      "maximum_smd": 0.09444633232683528,
+      "features": {
+        "in_degree": {
+          "smd": 0.079803485458664,
+          "variance_ratio": 6.894539529875727,
+          "ecdf_gap": 0.3137254901960784
+        },
+        "out_degree": {
+          "smd": 0.09444633232683528,
+          "variance_ratio": 3.2427397526577533,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "in_strength": {
+          "smd": 0.014334683972267614,
+          "variance_ratio": 2.8985558870830106,
+          "ecdf_gap": 0.21568627450980393
+        },
+        "out_strength": {
+          "smd": 0.01045234022299719,
+          "variance_ratio": 1.5574385219559366,
+          "ecdf_gap": 0.17647058823529416
+        },
+        "baseline_hz": {
+          "smd": 0.07760103492534842,
+          "variance_ratio": 0.9092180577816056,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "strong_out_mass": {
+          "smd": 0.08514629594217288,
+          "variance_ratio": 0.967337520373074,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    },
+    {
+      "assignment": 14,
+      "old_union_overlap": 21,
+      "maximum_smd": 0.07760103492534842,
+      "features": {
+        "in_degree": {
+          "smd": 0.06471940100633151,
+          "variance_ratio": 7.01190108557089,
+          "ecdf_gap": 0.3137254901960784
+        },
+        "out_degree": {
+          "smd": 0.04430453768969747,
+          "variance_ratio": 3.3317406010120196,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.030758895886535017,
+          "variance_ratio": 2.9444790149052147,
+          "ecdf_gap": 0.23529411764705882
+        },
+        "out_strength": {
+          "smd": 0.0625693991981359,
+          "variance_ratio": 1.6195460139610072,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.07760103492534842,
+          "variance_ratio": 0.9092180577816056,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "strong_out_mass": {
+          "smd": 0.04139812454285051,
+          "variance_ratio": 0.9719310339933251,
+          "ecdf_gap": 0.11764705882352944
+        }
+      }
+    },
+    {
+      "assignment": 15,
+      "old_union_overlap": 20,
+      "maximum_smd": 0.08520670122040387,
+      "features": {
+        "in_degree": {
+          "smd": 0.0068553919967387755,
+          "variance_ratio": 7.116048006592909,
+          "ecdf_gap": 0.3529411764705882
+        },
+        "out_degree": {
+          "smd": 0.01644767936366381,
+          "variance_ratio": 3.3177357065604363,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.07419113650158607,
+          "variance_ratio": 2.9753537648667887,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "out_strength": {
+          "smd": 0.06647400149222593,
+          "variance_ratio": 1.61511522456254,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.07524399760300514,
+          "variance_ratio": 0.9124804468370588,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "strong_out_mass": {
+          "smd": 0.08520670122040387,
+          "variance_ratio": 0.9960584094322164,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    },
+    {
+      "assignment": 16,
+      "old_union_overlap": 21,
+      "maximum_smd": 0.09546616993631922,
+      "features": {
+        "in_degree": {
+          "smd": 0.053594852837386395,
+          "variance_ratio": 7.062185971432746,
+          "ecdf_gap": 0.3333333333333333
+        },
+        "out_degree": {
+          "smd": 0.07124034464017108,
+          "variance_ratio": 3.255671303351371,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "in_strength": {
+          "smd": 0.032032488359797065,
+          "variance_ratio": 2.972701141236274,
+          "ecdf_gap": 0.23529411764705882
+        },
+        "out_strength": {
+          "smd": 0.014907707748055651,
+          "variance_ratio": 1.5523442873507787,
+          "ecdf_gap": 0.17647058823529416
+        },
+        "baseline_hz": {
+          "smd": 0.07524399760300514,
+          "variance_ratio": 0.9124804468370588,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "strong_out_mass": {
+          "smd": 0.09546616993631922,
+          "variance_ratio": 0.9777079503018857,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    },
+    {
+      "assignment": 17,
+      "old_union_overlap": 21,
+      "maximum_smd": 0.07524399760300514,
+      "features": {
+        "in_degree": {
+          "smd": 0.03886790081748164,
+          "variance_ratio": 7.176590988138856,
+          "ecdf_gap": 0.3333333333333333
+        },
+        "out_degree": {
+          "smd": 0.021425617959004595,
+          "variance_ratio": 3.339803723673345,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "in_strength": {
+          "smd": 0.04821082944874943,
+          "variance_ratio": 3.017458977386154,
+          "ecdf_gap": 0.2549019607843137
+        },
+        "out_strength": {
+          "smd": 0.06702985361162023,
+          "variance_ratio": 1.6138513441992313,
+          "ecdf_gap": 0.19607843137254904
+        },
+        "baseline_hz": {
+          "smd": 0.07524399760300514,
+          "variance_ratio": 0.9124804468370588,
+          "ecdf_gap": 0.23529411764705888
+        },
+        "strong_out_mass": {
+          "smd": 0.05180900364751329,
+          "variance_ratio": 0.9832102917397552,
+          "ecdf_gap": 0.11764705882352933
+        }
+      }
+    }
+  ],
+  "shared_by_all": 47,
+  "pairwise_overlap_min": 48,
+  "pairwise_overlap_max": 50,
+  "input_hashes": {
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\corrected_20260919\\analysis\\features.parquet": "372ef885e7c8e9509d6ed1a38fcad322b88ab24b1e6bda20abdee1ae75de5ca8",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\exploratory80_20260921\\modes\\selection.json": "3f548a16b7912d8d8ba5173221e8b1692fb5b2d13c54b1deff43bc73345909aa",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\diverse_comparisons_20261008\\complete.json": "9f5f3802e95263f9483a4aabbece462bf562146046448705d8d57b710301f8c7",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\diverse_comparisons_20261008\\members.csv": "14b1879f7df89d0aeca3221829aa05b0c80a3c4c9a160e59eab0955e7da9823a"
+  },
+  "script_sha256": "53b3d41ef30363c89f8be1b7c43b1f0e7c74da7e8b532cb90f28e15a495f8ac1",
+  "limitation": "Feature distributions are descriptions, not new retrospective rejection rules. No lesion outcomes or random-reference inference."
+}

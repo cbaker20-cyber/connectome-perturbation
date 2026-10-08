@@ -1,5 +1,7 @@
 # Explaining the study
 
+8 October research continuation: [fine-step contrast audit and comparison-design work](RESEARCH_CONTINUATION_20261008.md) confirm persistent ordering against the fixed alternatives and identify a different feasible comparison family. Remaining distribution imbalance and overlap prevent an eigencircuit-specific conclusion; no new simulation was launched.
+
 8 October update: the [verified eight-trial separate-connection experiment](SEPARATE_PATHWAY_RESULTS_20261008.md) shows that either G-only or H-only removal at 600 ms interrupts broad recruitment in the selected coarser-step case. Repeated reference and joint trials reproduce exactly. This resolves the individual-versus-joint comparison; generalization, convergence and eigencircuit specificity remain unresolved.
 
 7 October update: the [late-switch experiment](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms) preserves earlier spikes exactly and suppresses the selected coarser-step burst by removing the pair at 600 ms. This resolves the earlier-history limitation of time-zero removal. Individual connection contributions, generalization and convergence remain unresolved.

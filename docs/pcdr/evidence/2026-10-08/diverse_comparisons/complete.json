@@ -1,0 +1,60 @@
+{
+  "status": "complete",
+  "finished_utc": "2026-10-08T14:23:11.474766+00:00",
+  "fractional_validation": {
+    "stratum_mass_error": 0.0,
+    "bound_error": 0.0,
+    "maximum_scaled_feature_violation": 2.2467261247506293e-15,
+    "fractional_count": 9,
+    "weighted_means": [
+      5.517673137546916,
+      4.919046818744896,
+      8.248368347292914,
+      6.665363586057583,
+      2.0130669214323134,
+      3.7490639223416222
+    ]
+  },
+  "total_binary_assignments": 512,
+  "exact_count_assignments": 24,
+  "accepted_count": 12,
+  "accepted_overlaps": [
+    21,
+    22,
+    22,
+    21,
+    22,
+    22,
+    20,
+    21,
+    21,
+    20,
+    21,
+    21
+  ],
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "outputs": {
+    "assignments.csv": "38b804dfbea777ed1895adbe1ebe1c1ee5eac756070dde9b77a05436c3b17437",
+    "fractional_weights.parquet": "25fde93a2eca943254922e2dd40a05ff0f4d0644425c6bff366b87f8fb99ee7b",
+    "members.csv": "14b1879f7df89d0aeca3221829aa05b0c80a3c4c9a160e59eab0955e7da9823a",
+    "protocol.json": "dc33e17ded0ff1325806f2b09b44349b48b8d7a831b5946a802713cb554b34cb",
+    "solver.json": "d0bb00e1e0050bff6c8515dbff4261e0917c4ff15016b3ef6199bd2fa1385306"
+  },
+  "limitation": "Optimized existence witnesses, not random controls. Feature-distribution audit and independent verification precede any simulation."
+}
