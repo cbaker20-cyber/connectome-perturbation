@@ -1,0 +1,28 @@
+{
+  "status": "independently_verified",
+  "archive_sha256": "b042e45569de75f90486cef1fe5cacc1917ceb79014c8a9bb8cb9688eb151dca",
+  "archive_bytes": 1820538,
+  "focused_tests_passed": 25,
+  "installed_libraries_match_listed_pins": true,
+  "unrecorded_pins": [
+    "setuptools"
+  ],
+  "local_environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "packages": {
+      "numpy": "1.26.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "pytest": "9.1.1"
+    }
+  },
+  "analysis_sources": {
+    "scripts/pcdr_review_pathway.py": "bf34ab5ee7f904b3a9bbbf7241e54a3881be90bc94e3fe22505e8cac4cbdb26c",
+    "scripts/pcdr_compare_separate.py": "2136b21428c5fbc58f61f169aad78072fc15ea80ad56d2972c58d9806639389d"
+  },
+  "evidence": [
+    "separate_review.json",
+    "separate_comparison.json"
+  ],
+  "new_simulations_launched": false
+}

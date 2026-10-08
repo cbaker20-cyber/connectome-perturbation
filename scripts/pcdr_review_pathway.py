@@ -43,12 +43,16 @@ def spike_counts(frame, inputs, dt, valid_ids):
     return counts, events
 
 
-def validate_switch(switch, remove, ids, connections):
+def validate_switch(switch, remove, ids, connections, condition=None):
     require(switch['switch_ms'] == 600 and switch['remove'] is remove, 'Wrong switch specification')
     expected = [('720575940628695043', target) for target in
                 ['720575940629667639', '720575940623862015']]
+    if condition == 'late_g':
+        expected = expected[:1]
+    elif condition == 'late_h':
+        expected = expected[1:]
     pairs = switch['pairs']
-    require(len(pairs) == 2 and all(len(p) == 2 and all(type(i) is int and 0 <= i < len(ids)
+    require(len(pairs) == len(expected) and all(len(p) == 2 and all(type(i) is int and 0 <= i < len(ids)
                 for i in p) for p in pairs), 'Invalid switch indices')
     require([(ids[a], ids[b]) for a, b in pairs] == expected, 'Wrong switched connections')
     weights = []
@@ -58,17 +62,23 @@ def validate_switch(switch, remove, ids, connections):
         value = float(row['Excitatory x Connectivity'].iloc[0]) * .275 * 1.2
         weights.append(value * (.8 if value < 0 else 1))
     before, after = switch['weights_before_mv'], switch['weights_after_mv']
-    require(len(before) == len(after) == 2, 'Wrong switch weight count')
+    require(len(before) == len(after) == len(expected), 'Wrong switch weight count')
     require(np.allclose(before, weights, rtol=0, atol=1e-12), 'Wrong original scaled weights')
-    require(after == ([0., 0.] if remove else before), 'Wrong switch outcome')
+    require(after == ([0.] * len(expected) if remove else before), 'Wrong switch outcome')
 
 
-def review(archive, package, reference, late=False):
-    prefix = "connectome_late_pathway/" if late else "connectome_pathway/"
+def review(archive, package, reference, late=False, separate=False):
+    late = late or separate
+    prefix = ("connectome_separate_pathway/" if separate else
+              "connectome_late_pathway/" if late else "connectome_pathway/")
     conditions = ["late_reference", "late_edges"] if late else ["reference", "two_edges"]
+    if separate:
+        conditions += ['late_g', 'late_h']
+    expected_trials = {(dt, c) for dt in [.0004, .0002] for c in conditions}
     with zipfile.ZipFile(archive) as z, zipfile.ZipFile(package) as upload:
         names = z.namelist()
         require(len(names) == len(set(names)), 'Duplicate archive names')
+        require(len(upload.namelist()) == len(set(upload.namelist())), 'Duplicate upload names')
         require(z.testzip() is None and upload.testzip() is None, 'ZIP integrity failure')
         read = lambda name: json.loads(z.read(name))
         frame = lambda name: pd.read_parquet(io.BytesIO(z.read(name)))
@@ -86,7 +96,10 @@ def review(archive, package, reference, late=False):
         require(ids.is_unique, 'Duplicate neuron IDs')
         summary = read('summary.json')
         require(summary['status'] == 'complete' and summary['duration_ms'] == 750, 'Incomplete study')
-        require(len(summary['results']) == len(summary['trials']) == 4, 'Wrong trial count')
+        for key in ['results', 'trials']:
+            require(len(summary[key]) == len(expected_trials), 'Wrong trial count')
+            require({(v['dt_ms'], v['condition']) for v in summary[key]} == expected_trials,
+                    'Missing or duplicate condition in '+key)
         results, events_by_trial, manifests = [], {}, []
         source_names = {n.removeprefix('source/') for n in names if n.startswith('source/')}
         expected_sources = {n.removeprefix(prefix) for n in upload.namelist()
@@ -94,6 +107,7 @@ def review(archive, package, reference, late=False):
                             (n.startswith((prefix+'scripts/', prefix+'eigencircuits/'))
                              and n.endswith('.py'))}
         require(source_names == expected_sources, 'Archived source inventory differs from upload')
+        expected_names = {'diagnostic_plan.json', 'summary.json', 'installed-libraries.txt'} | {'source/'+n for n in source_names}
         tape = pd.read_parquet(reference/'input_events.parquet')
         tape = tape.loc[tape.tick < 7500].reset_index(drop=True)
         connections = pd.read_parquet(ROOT/'2023_03_23_connectivity_630_final.parquet')
@@ -119,6 +133,8 @@ def review(archive, package, reference, late=False):
                 if late:
                     required.add('switch.json')
                 require(set(m['outputs']) == required, 'Output inventory mismatch')
+                expected_names.update(trial+'/'+n for n in required | {'manifest.json'})
+                expected_names.update('logs/'+trial+'/'+n for n in ['process.json', 'stdout.txt', 'stderr.txt'])
                 for name, h in m['outputs'].items():
                     require(digest(z.read(trial+'/'+name)) == h, 'Output hash mismatch '+trial+'/'+name)
                 require(read(trial+'/simulation_progress.json')['simulated_ms'] == 750, 'Incomplete simulation')
@@ -137,6 +153,8 @@ def review(archive, package, reference, late=False):
                 spikes = frame(trial+'/spikes.parquet')
                 counts, events = spike_counts(spikes, plan['input_ids'], dt, set(ids))
                 saved = read(trial+'/endpoints.json')
+                require(set(saved['source_times_ms']) == {'720575940628695043',
+                        '720575940629667639', '720575940623862015'}, 'Wrong source-history inventory')
                 for key, value in counts.items():
                     require(saved[key] == value, 'Endpoint mismatch '+trial)
                 for neuron, times in saved['source_times_ms'].items():
@@ -152,7 +170,7 @@ def review(archive, package, reference, late=False):
                     require(m.get('exact_pre_switch_spikes') is True and m.get('switch_ms') == 600,
                             'Missing pre-switch verification')
                     switch = read(trial+'/switch.json')
-                    validate_switch(switch, condition == 'late_edges', ids, connections)
+                    validate_switch(switch, condition != 'late_reference', ids, connections, condition)
                 if condition in ['reference', 'late_reference']:
                     old = pd.read_parquet(reference/'reference'/str(dt)/'spikes.parquet')
                     pd.testing.assert_frame_equal(spikes, old.loc[old.t < .75].reset_index(drop=True),
@@ -175,18 +193,23 @@ def review(archive, package, reference, late=False):
                                     peak_rss_bytes=m['peak_rss_bytes']))
                 events_by_trial[trial] = events
                 manifests.append(m)
+        require(set(names) == expected_names, 'Unexpected archive inventory')
         comparisons = []
         for dt in [.0004, .0002]:
-            a, b = [events_by_trial[f'{c}_{dt}'] for c in conditions]
-            differences = a.merge(b, on=['tick','id'], how='outer', indicator=True)
-            differences = differences.loc[differences._merge.ne('both')]
-            earliest = differences.tick.min()
-            counts_a, counts_b = [v.set_index('id').index.value_counts() for v in [a,b]]
-            change = counts_b.subtract(counts_a, fill_value=0)
-            comparisons.append(dict(dt_ms=dt, first_changed_spike_ms=None if differences.empty else float(earliest*dt),
-                first_changed_events=differences.loc[differences.tick.eq(earliest)].to_dict('records'),
-                neurons_with_changed_total_count=int(change.ne(0).sum()),
-                absolute_count_difference=int(change.abs().sum())))
+            for condition in conditions[1:]:
+                a, b = [events_by_trial[f'{c}_{dt}'] for c in [conditions[0], condition]]
+                differences = a.merge(b, on=['tick','id'], how='outer', indicator=True)
+                differences = differences.loc[differences._merge.ne('both')]
+                earliest = differences.tick.min()
+                counts_a, counts_b = [v.set_index('id').index.value_counts() for v in [a,b]]
+                change = counts_b.subtract(counts_a, fill_value=0)
+                comparison = dict(dt_ms=dt, first_changed_spike_ms=None if differences.empty else float(earliest*dt),
+                    first_changed_events=differences.loc[differences.tick.eq(earliest)].to_dict('records'),
+                    neurons_with_changed_total_count=int(change.ne(0).sum()),
+                    absolute_count_difference=int(change.abs().sum()))
+                if separate:
+                    comparison.update(reference=conditions[0], condition=condition)
+                comparisons.append(comparison)
         return dict(archive_sha256=digest(Path(archive).read_bytes()),
                     package_sha256=digest(Path(package).read_bytes()), checked_files=len(names),
                     checks_passed=True, results=results, comparisons=comparisons,
@@ -199,9 +222,11 @@ if __name__ == '__main__':
     parser.add_argument('--package', type=Path, default=ROOT/'results/pcdr/pathway_package_validation_20261006/original_upload.zip')
     parser.add_argument('--reference', type=Path, default=ROOT/'results/pcdr/diagnostic_inputs_20261005')
     parser.add_argument('--out', type=Path, required=True)
-    parser.add_argument('--late', action='store_true')
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('--late', action='store_true')
+    modes.add_argument('--separate', action='store_true')
     args = parser.parse_args()
-    result = review(args.archive, args.package, args.reference, args.late)
+    result = review(args.archive, args.package, args.reference, args.late, args.separate)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open('x', encoding='utf-8') as stream:
         json.dump(result, stream, indent=2, allow_nan=False)

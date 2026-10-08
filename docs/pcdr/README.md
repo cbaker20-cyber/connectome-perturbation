@@ -6,7 +6,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
-[Next upload: separate G and H connections](CCR_PATHWAY_RUN.md). The current CCR_Pathway.zip extracts to connectome_separate_pathway and runs eight trials. It repeats reference and joint removal alongside each single removal. Full results are pending.
+[Completed separate G/H experiment, reviewed 8 October](SEPARATE_PATHWAY_RESULTS_20261008.md): all eight trials verified. Either single removal reduces coarser-window recruitment from 7,623 cells to one. Repeated references and joint removals match the prior experiment exactly. The [package instructions](CCR_PATHWAY_RUN.md) are retained for provenance; do not launch a duplicate. Numerical convergence and eigencircuit specificity remain unresolved.
 
 [Completed 600-ms intervention](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms): earlier spikes match exactly, while late removal reduces coarser-window spikes to 1,442 and new recruitment to one cell. Both no-change references reproduce fully. Separate-edge contributions and convergence remain unresolved. The completed late-pair upload is retained locally with its dated validation evidence.
 

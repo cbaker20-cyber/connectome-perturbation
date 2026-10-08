@@ -1,0 +1,181 @@
+{
+  "archive_sha256": "b042e45569de75f90486cef1fe5cacc1917ceb79014c8a9bb8cb9688eb151dca",
+  "package_sha256": "d7f578079ab04e1155148a61646933585f755d5af83383ef4bea1695a5ca6197",
+  "checked_files": 97,
+  "checks_passed": true,
+  "results": [
+    {
+      "trial": "late_reference_0.0004",
+      "dt_ms": 0.0004,
+      "condition": "late_reference",
+      "noninput_spikes_650_730": 15093,
+      "newly_recruited_noninput_650_730": 7623,
+      "total_spikes": 44820,
+      "elapsed_seconds": 5329.602308433037,
+      "peak_rss_bytes": 3008217088
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "dt_ms": 0.0004,
+      "condition": "late_edges",
+      "noninput_spikes_650_730": 1442,
+      "newly_recruited_noninput_650_730": 1,
+      "total_spikes": 16159,
+      "elapsed_seconds": 5505.17127849895,
+      "peak_rss_bytes": 3004137472
+    },
+    {
+      "trial": "late_g_0.0004",
+      "dt_ms": 0.0004,
+      "condition": "late_g",
+      "noninput_spikes_650_730": 1388,
+      "newly_recruited_noninput_650_730": 1,
+      "total_spikes": 16074,
+      "elapsed_seconds": 5310.685103766969,
+      "peak_rss_bytes": 3009523712
+    },
+    {
+      "trial": "late_h_0.0004",
+      "dt_ms": 0.0004,
+      "condition": "late_h",
+      "noninput_spikes_650_730": 1489,
+      "newly_recruited_noninput_650_730": 1,
+      "total_spikes": 16370,
+      "elapsed_seconds": 5719.494752013008,
+      "peak_rss_bytes": 3002949632
+    },
+    {
+      "trial": "late_reference_0.0002",
+      "dt_ms": 0.0002,
+      "condition": "late_reference",
+      "noninput_spikes_650_730": 1435,
+      "newly_recruited_noninput_650_730": 4,
+      "total_spikes": 16180,
+      "elapsed_seconds": 9880.224485968007,
+      "peak_rss_bytes": 3349008384
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "dt_ms": 0.0002,
+      "condition": "late_edges",
+      "noninput_spikes_650_730": 1459,
+      "newly_recruited_noninput_650_730": 6,
+      "total_spikes": 16202,
+      "elapsed_seconds": 9428.110028708004,
+      "peak_rss_bytes": 3353210880
+    },
+    {
+      "trial": "late_g_0.0002",
+      "dt_ms": 0.0002,
+      "condition": "late_g",
+      "noninput_spikes_650_730": 1388,
+      "newly_recruited_noninput_650_730": 6,
+      "total_spikes": 16170,
+      "elapsed_seconds": 9875.798894745996,
+      "peak_rss_bytes": 3358310400
+    },
+    {
+      "trial": "late_h_0.0002",
+      "dt_ms": 0.0002,
+      "condition": "late_h",
+      "noninput_spikes_650_730": 1388,
+      "newly_recruited_noninput_650_730": 6,
+      "total_spikes": 16170,
+      "elapsed_seconds": 9882.07200515503,
+      "peak_rss_bytes": 3352535040
+    }
+  ],
+  "comparisons": [
+    {
+      "dt_ms": 0.0004,
+      "first_changed_spike_ms": 616.7112000000001,
+      "first_changed_events": [
+        {
+          "tick": 1541778,
+          "id": "720575940629667639",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 9845,
+      "absolute_count_difference": 29041,
+      "reference": "late_reference",
+      "condition": "late_edges"
+    },
+    {
+      "dt_ms": 0.0004,
+      "first_changed_spike_ms": 616.7112000000001,
+      "first_changed_events": [
+        {
+          "tick": 1541778,
+          "id": "720575940629667639",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 9818,
+      "absolute_count_difference": 28978,
+      "reference": "late_reference",
+      "condition": "late_g"
+    },
+    {
+      "dt_ms": 0.0004,
+      "first_changed_spike_ms": 618.628,
+      "first_changed_events": [
+        {
+          "tick": 1546570,
+          "id": "720575940623862015",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 9839,
+      "absolute_count_difference": 29018,
+      "reference": "late_reference",
+      "condition": "late_h"
+    },
+    {
+      "dt_ms": 0.0002,
+      "first_changed_spike_ms": 603.698,
+      "first_changed_events": [
+        {
+          "tick": 3018490,
+          "id": "720575940629667639",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 199,
+      "absolute_count_difference": 232,
+      "reference": "late_reference",
+      "condition": "late_edges"
+    },
+    {
+      "dt_ms": 0.0002,
+      "first_changed_spike_ms": 603.698,
+      "first_changed_events": [
+        {
+          "tick": 3018490,
+          "id": "720575940629667639",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 194,
+      "absolute_count_difference": 238,
+      "reference": "late_reference",
+      "condition": "late_g"
+    },
+    {
+      "dt_ms": 0.0002,
+      "first_changed_spike_ms": 605.6464000000001,
+      "first_changed_events": [
+        {
+          "tick": 3028232,
+          "id": "720575940623862015",
+          "_merge": "left_only"
+        }
+      ],
+      "neurons_with_changed_total_count": 194,
+      "absolute_count_difference": 238,
+      "reference": "late_reference",
+      "condition": "late_h"
+    }
+  ],
+  "finished_utc": "2026-10-08T05:22:25.989230+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "status": "reviewer_prepared_results_unavailable",
+  "observed_date": "2026-10-08",
+  "remote_status": "unknown; existing terminal did not respond and OnDemand dashboard returned ERR_CONNECTION_TIMED_OUT",
+  "duplicate_launched": false,
+  "original_upload_sha256": "d7f578079ab04e1155148a61646933585f755d5af83383ef4bea1695a5ca6197",
+  "original_upload_bytes": 89216138,
+  "focused_tests": {
+    "passed": 21,
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_pcdr_review_pathway.py -q"
+  },
+  "regression_checks": [
+    "time-zero review exactly equals saved pathway_review.json",
+    "late-pair review exactly equals saved late_review.json"
+  ],
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "packages": {
+      "numpy": "1.26.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "pytest": "9.1.1"
+    }
+  },
+  "pending": [
+    "retrieve current progress and scheduler status",
+    "retrieve and hash returned archive",
+    "independent eight-trial review",
+    "exact repeated-joint comparison with prior late-pair archive",
+    "interpret observed singles and joint outcomes"
+  ]
+}

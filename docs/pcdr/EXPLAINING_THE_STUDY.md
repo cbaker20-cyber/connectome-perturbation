@@ -1,5 +1,7 @@
 # Explaining the study
 
+8 October update: the [verified eight-trial separate-connection experiment](SEPARATE_PATHWAY_RESULTS_20261008.md) shows that either G-only or H-only removal at 600 ms interrupts broad recruitment in the selected coarser-step case. Repeated reference and joint trials reproduce exactly. This resolves the individual-versus-joint comparison; generalization, convergence and eigencircuit specificity remain unresolved.
+
 7 October update: the [late-switch experiment](PATHWAY_RESULTS_20261007.md#second-experiment-removal-at-600-ms) preserves earlier spikes exactly and suppresses the selected coarser-step burst by removing the pair at 600 ms. This resolves the earlier-history limitation of time-zero removal. Individual connection contributions, generalization and convergence remain unresolved.
 
 5 October update: the [completed 620-trial fine-step study](FINE_TIMESTEP_RESULTS_20261005.md) reached 0.0001 ms. Selected-group average A was 22.508 Hz and F was 0.22977 at that step. Individual paired trajectories did not meet the predeclared agreement rules. The earlier history below remains dated; the new report supersedes statements that this follow-up is pending.

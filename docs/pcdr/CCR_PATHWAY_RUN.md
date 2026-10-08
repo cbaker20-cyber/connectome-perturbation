@@ -1,5 +1,7 @@
 # Separate connections removed at 600 ms
 
+Completed and independently verified on 8 October: [results and limitations](SEPARATE_PATHWAY_RESULTS_20261008.md). No rerun is needed. The instructions below describe the completed package.
+
 Upload `CCR_Pathway.zip` to your home directory and extract it into a new folder. Open `connectome_separate_pathway/CCR_Separate_Pathway.ipynb` in a compute session and select Run All. The notebook starts setup and eight simulations, shows progress, and links the results ZIP when collection finishes. No Git checkout or separate dataset upload is needed.
 
 Use account `smuldoon`, UB-HPC, `general-compute`, the permitted QoS, 8 CPU cores, 64000 MB RAM and 8 hours. Leave GPUs blank. Eight independent trials use the eight cores; extra cores would not speed up these single-threaded workers. The shell loads `ccrsoft/2024.04`, `gcccore/13.2.0` and `python/3.11.5` for simulation. The notebook kernel can stay on its existing Python version.
