@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_anchor_bound.py",
+    "--out",
+    "results\\pcdr\\anchor_bound_20261008",
+    "--worker"
+  ],
+  "pid": 13500,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 2.952999999979511,
+  "deadline_seconds": 40,
+  "cleanup": null
+}

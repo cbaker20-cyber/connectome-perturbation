@@ -1,5 +1,7 @@
 # Research overview: hypothesis, experiments and current evidence
 
+[Fixed-anchor alternatives and constraint review, 8 October](ANCHOR_FAMILY_20261008.md): both existing capped anchors fail partner construction under the thirty-cell overlap cap. Independent overlap bounds exceed 31 for each, supporting at least 32 shared cells under the recorded design. General joint feasibility remains unresolved.
+
 [Joint family construction, 8 October](JOINT_FAMILY_20261008.md): the declared two-set search reached its solver limit without an incumbent or reported bound. Feasibility remains unresolved; no retry or simulation was launched.
 
 [Saved comparison-family audit, 8 October](FAMILY_CAPACITY_20261008.md): exhaustive checks of all nineteen candidates show that the existing thirty-cell pairwise overlap cap permits only one set at CDF gap <=11/51; a three-set family requires allowing >=16/51. This is a saved-family limitation, not full-pool infeasibility. No new simulation was launched.

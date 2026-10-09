@@ -1,0 +1,29 @@
+{
+  "status": "verified",
+  "checks": {
+    "anchor_538": {
+      "exact_encoded_lp_bound": "40556679272670601356863781632021/1267650600228229401496703205376",
+      "bound_decimal": 31.993578723797178,
+      "exceeds_30": true,
+      "guarded_bound": 31.993096894428103,
+      "primal_violation": 3.552713678800501e-15,
+      "vector_sha256": "4a43ac3d53216f7744aa654568b4e7cf264a25c181b621dcb3384fc652c308a5"
+    },
+    "anchor_999": {
+      "exact_encoded_lp_bound": "1272208549887735267386366184711055/40564819207303340847894502572032",
+      "bound_decimal": 31.362362134198424,
+      "exceeds_30": true,
+      "guarded_bound": 31.362020152257767,
+      "primal_violation": 0,
+      "vector_sha256": "d5fb604bd5284f65beae243406f1a620ac8584d18b709d04e38b892e2eac5708"
+    }
+  },
+  "checked_utc": "2026-10-09T02:49:15.112331+00:00",
+  "checker_sha256": "76a53f8865176ace6be50a429fea14f757d31d067fed3b9ac4c4b6a43d81a2f8",
+  "inputs": {
+    "results\\pcdr\\anchor_bound_20261008\\protocol.json": "f52e86780e1b89f437cb54931d41d1d877257eb6b76efa49bc30cad00cf381ea",
+    "results\\pcdr\\anchor_bound_20261008\\result.json": "09541f859db493646243775d40505efe41314edddd3e75792315298ae62d54d4",
+    "results\\pcdr\\anchor_bound_20261008\\process.json": "cab29b0c56387714501b232136254308da90b88a1cc10ee0df455f4db2c20d03"
+  },
+  "scope": "Exact rational dual evaluation applies to saved floating-point LP coefficients; independent feature-row reconstruction agrees within 1e-14. The guarded numerical conclusion is for the recorded fixed-anchor design, not all pairs or full-pool biological feasibility."
+}

@@ -1,0 +1,121 @@
+{
+  "cases": {
+    "anchor_538": {
+      "primal_objective": 31.993578723793814,
+      "primal_maximum_violation": 2.6645352591003757e-15,
+      "certificate": {
+        "raw_lower_bound": 31.99357872379801,
+        "floating_guard": 0.00048182936990765195,
+        "guarded_lower_bound": 31.993096894428103,
+        "inequality_multipliers": [
+          -1444.743493481482,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -97.43053622245316,
+          0.0,
+          0.0,
+          -1810.2868742359187,
+          0.0,
+          -60.12200642591665,
+          0.0,
+          0.0,
+          -5.284848150272623,
+          0.0,
+          0.0,
+          0.0,
+          -2.349648418762598,
+          0.0,
+          -0.9944418073671315,
+          0.0,
+          0.0,
+          -0.3811719075887794,
+          0.0,
+          0.0,
+          0.0,
+          -0.3059757244586905
+        ],
+        "equality_multipliers": [
+          -85.14646821509821,
+          -73.52150732297899,
+          -96.85824554802755,
+          -0.0,
+          -77.87565677821055,
+          -90.44209657375198,
+          -84.00830977294777
+        ]
+      },
+      "excludes_overlap_cap_30": true,
+      "fractional_cells": 10
+    },
+    "anchor_999": {
+      "primal_objective": 31.362362134199238,
+      "primal_maximum_violation": 1.7763568394002505e-15,
+      "certificate": {
+        "raw_lower_bound": 31.362362134198293,
+        "floating_guard": 0.00034198194052464026,
+        "guarded_lower_bound": 31.362020152257767,
+        "inequality_multipliers": [
+          -1029.0459705961964,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -68.28170462100042,
+          0.0,
+          0.0,
+          -1284.7096672816042,
+          0.0,
+          -42.89159477615659,
+          0.0,
+          0.0,
+          -3.428001634284416,
+          0.0,
+          0.0,
+          0.0,
+          -1.2329582915236734,
+          0.0,
+          -1.1576772906473694,
+          0.0,
+          0.0,
+          -0.3027409410531856,
+          0.0,
+          0.0,
+          0.0,
+          -0.05188112497067765
+        ],
+        "equality_multipliers": [
+          -60.12550186106906,
+          -51.9473562939836,
+          -68.3191854791916,
+          -0.0,
+          -55.12189500953475,
+          -63.70724924198244,
+          -54.02934800633409
+        ]
+      },
+      "excludes_overlap_cap_30": true,
+      "fractional_cells": 10
+    }
+  },
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "completed_utc": "2026-10-09T02:48:07.801226+00:00",
+  "limitation": "Floating-point lower bounds with an explicit guard, not formal exact-arithmetic certificates. Only fixed anchors, frozen pool, old-reference caps and sufficient mean constraints."
+}

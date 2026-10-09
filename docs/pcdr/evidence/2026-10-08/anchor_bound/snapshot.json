@@ -1,0 +1,19 @@
+{
+  "source": "results\\pcdr\\anchor_bound_20261008",
+  "files": {
+    "process.json": "cab29b0c56387714501b232136254308da90b88a1cc10ee0df455f4db2c20d03",
+    "protocol.json": "f52e86780e1b89f437cb54931d41d1d877257eb6b76efa49bc30cad00cf381ea",
+    "result.json": "09541f859db493646243775d40505efe41314edddd3e75792315298ae62d54d4",
+    "verification.json": "76eb0c56707a8431c53cf251f1faed002df2b1aecf7f6a8bedbdc6d9a000f458"
+  },
+  "local_log_hashes": {
+    "results\\pcdr\\anchor_bound_20261008\\logs\\stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results\\pcdr\\anchor_bound_20261008\\logs\\stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "local_vector_hashes": {
+    "results\\pcdr\\anchor_bound_20261008\\anchor_538.npz": "4a43ac3d53216f7744aa654568b4e7cf264a25c181b621dcb3384fc652c308a5",
+    "results\\pcdr\\anchor_bound_20261008\\anchor_999.npz": "d5fb604bd5284f65beae243406f1a620ac8584d18b709d04e38b892e2eac5708"
+  },
+  "simulations_launched": false,
+  "tests_passed_total": 35
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_distribution_match.py",
+    "--out",
+    "results\\pcdr\\anchor_family_20261008\\anchor_999",
+    "--worker",
+    "cap_30"
+  ],
+  "pid": 23584,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 26.468999999924563,
+  "deadline_seconds": 100,
+  "cleanup": null
+}

@@ -58,3 +58,5 @@ Use unused output paths; the runner refuses an occupied study directory:
 ```
 
 Code, formulation review, tests, execution, status checks and documentation used Codex assistance. These checks support the recorded calculation and reporting logic; they do not certify that every aspect of the broader research is correct or that an eventual competition submission meets all requirements.
+
+The subsequent [fixed-anchor alternative and overlap-bound check](ANCHOR_FAMILY_20261008.md) is complete. Both existing capped anchors require overlap above 31 under the retained constraints, so neither extends at cap thirty. This resolves those conditional problems, not the general joint search above.
