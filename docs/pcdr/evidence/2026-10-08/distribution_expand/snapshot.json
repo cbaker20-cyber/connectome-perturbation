@@ -1,0 +1,39 @@
+{
+  "source": "results\\pcdr\\distribution_expand_20261008",
+  "files": {
+    "protocol.json": "c88764de29dace7f7ac8ab1676817cb8c45114e2b601da25ebcda35d2666ceec",
+    "execution.json": "314f63a0cfd872b9767f906116f77776ce4d60741bd7ef32c44a0c1dee18a1bf",
+    "verification.json": "bd501b8a3d25656dd88150041f93afd8b7085a5cf61384b4a853d2b7e55f6b83",
+    "unconstrained_overlap/candidate.json": "fe8be9314099ec086ffb056652456567daddf00941aaad6254a33843460ad668",
+    "unconstrained_overlap/result.json": "657be0cfcce3e2c445b08c676cd652cddd82c20a4ef2b59e019452a9a426775a",
+    "unconstrained_overlap/process.json": "6f8cbc1705429510837d08374fd37709fb76f6179562cef23ebad47bd27ef90a",
+    "cap_30/candidate.json": "b809148eacf15bea2b671c3ac432e31382f61dfc14c797e83096acceab708e85",
+    "cap_30/result.json": "b257889758cb14d98faf6cfe36123244754b499c1a8d78087c7f8cf20233a7ec",
+    "cap_30/process.json": "ffbc77b8ddf1ad94b4987494492dc4958ad35c2717178dd6b2607b2547fcbafd"
+  },
+  "local_vectors": {
+    "results\\pcdr\\distribution_expand_20261008\\cap_30\\solution.npy": "ef6c3a6cbdea7e1f3dff14f518bbc9807b6d981eea15bfe636c0f4d5f9d399e0",
+    "results\\pcdr\\distribution_expand_20261008\\unconstrained_overlap\\solution.npy": "065f7b4bafb17b791df9b39c2965dae96db243be35a739dd4714713d778a400f"
+  },
+  "pool_comparison": {
+    "previous_pool": 538,
+    "expanded_pool": 999,
+    "previous_pool_subset": true,
+    "unchanged_references": true,
+    "cases": {
+      "unconstrained_overlap": {
+        "shared_with_previous_candidate": 50,
+        "selected_outside_previous_pool": 1
+      },
+      "cap_30": {
+        "shared_with_previous_candidate": 47,
+        "selected_outside_previous_pool": 1
+      }
+    }
+  },
+  "focused_tests_passed": 30,
+  "dependency_warnings": 26,
+  "previous_verifier_regression": "Original candidates, bounds and pool sizes reproduced exactly; original evidence preserved.",
+  "simulations_launched": false,
+  "assistance": "Codex assisted implementation, checks and documentation."
+}

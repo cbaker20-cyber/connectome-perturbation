@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_distribution_match.py",
+    "--out",
+    "results\\pcdr\\distribution_expand_20261008",
+    "--worker",
+    "unconstrained_overlap"
+  ],
+  "pid": 30204,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 47.125,
+  "deadline_seconds": 100,
+  "cleanup": null
+}

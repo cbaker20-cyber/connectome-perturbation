@@ -62,11 +62,28 @@ The outgoing-degree bound has a direct explanation. There are exactly eight elig
 
 Thus searching harder cannot produce a zero-gap comparison under the existing exclusions and exact composition counts. The full-pool lower bound of 0.098 is below the observed optima of 0.157 and 0.216; additional improvement might be possible. The current calculations do not identify how much of that remaining difference comes from pool restriction, conservative mean bounds, overlap limits, or joint feature compatibility.
 
+## Completed pool expansion
+
+A separately recorded continuation increased the nearest-neighbor count from twenty to fifty per target. The pool grew from 538 to 999 cells and strictly contains the original pool. The original optimizer source, six features, sufficient mean constraints, exact strata, fifteen reference sets, overlap cap and 60/100-second budgets were unchanged. The two original optimized solutions were not added as new reference sets. The expansion protocol and source hashes were saved before either solve.
+
+| Search in 999-cell pool | Maximum CDF gap | Largest pooled SMD | Incoming-degree variance ratio | Worker time |
+|---|---:|---:|---:|---:|
+| No overlap cap | 8/51 = 0.156863 | 0.070704 | 3.438 | 47.125 s |
+| At most 30 shared cells | 10/51 = 0.196078 | 0.070955 | 4.741 | 52.594 s |
+
+Both workers finished successfully with empty stderr, matching primal/dual bounds and zero reported relative gap. Independent reconstruction and direct CDF/count checks pass. The expanded models have 1,000 variables; the capped model has 6,808 constraints and 3,928,485 nonzero entries. The original 538-cell study also reproduces its previous verification fields with the updated checker.
+
+The capped optimum improves by 1/51, establishing that the original restricted pool limited that objective. However, incoming-degree variance ratio worsens from 4.522 to 4.741 and baseline-rate CDF gap rises from 8/51 to 9/51. Optimizing the largest CDF discrepancy does not improve every feature measure. The uncapped optimum is unchanged; this does not establish a plateau across the full eligible pool.
+
+Each expanded candidate selects one cell outside the earlier pool. The uncapped candidate shares fifty members with its predecessor; the capped candidate shares forty-seven. The two expanded candidates share thirty-nine members with each other. Their overlaps with the fifteen frozen references still meet the stated conditions. They remain unsimulated, highly overlapping optimized candidates, not independent draws. The stratum-only bounds are unchanged, including the unavoidable 5/51 full-pool bound.
+
+The [expanded evidence snapshot](evidence/2026-10-08/distribution_expand/snapshot.json) records membership comparisons and hashes. Full evidence is retained in results/pcdr/distribution_expand_20261008. No earlier protocol or result was overwritten.
+
 ## Decision and next research step
 
 Retain both candidates as unsimulated, optimized design results. They show that mean and distribution matching can improve while changing more memberships, but they do not form a random reference ensemble. Two mutually overlapping candidates and persistent variance differences do not establish adequate control of degree/strength or recruitment.
 
-The next useful design check is a prospectively bounded expansion of the baseline-derived pool under the same objective and constraints, to test whether the 538-cell restriction is limiting. Record the expanded pool rule, solver budget and reporting of time-limited incumbents before execution. Do not silently relax exact motor counts, exclusions or the original mean-balance rule to obtain an attractive outcome. An alternative design allowing shared target motor identities would answer a different perturbation question and requires a separate amendment. Neither expansion nor altered matching design was run here.
+The bounded expansion is now complete. Retain both pool studies rather than selecting a candidate solely because its largest CDF gap improved. Further pool expansion is not automatically justified by the modest capped improvement, persistent variance imbalance and nearly unchanged memberships. Before another lesion experiment, the next design question is whether a family can achieve explicitly declared distribution and membership-diversity requirements simultaneously; that question remains proposed, with no acceptance thresholds or new runs chosen here. Allowing shared target motor identities would instead change the perturbation question and requires a separate design amendment.
 
 The persistent fine-step ordering remains a descriptive result; all eighteen original convergence-group criteria remain failed. These baseline-only results supply no new lesion response, no behavioral measurement, no convergence claim and no eigencircuit-specific confirmation. Any later simulation must use a frozen candidate selection and explicit scientific question, and should not treat an optimized comparison as a random sample.
 
@@ -85,3 +102,6 @@ Twenty-four focused tests pass, with 26 dependency deprecation warnings. Tests c
 The optimization has 539 variables and 4,441 constraints without the overlap cap (4,456 with it), with approximately 1.37 million nonzero matrix entries. Measured local runtimes stayed well inside the declared limits, so CCR was not needed for these design calculations.
 
 Full evidence is in results/pcdr/distribution_match_20261008. The [compact snapshot](evidence/2026-10-08/distribution_match/snapshot.json) links hashes to the declared [protocol](evidence/2026-10-08/distribution_match/protocol.json), both candidates, solver/process records, and [independent verification with full-pool bounds](evidence/2026-10-08/distribution_match/verification.json). Original solution vectors and logs remain locally preserved. Code, analysis and documentation used Codex assistance; this is not an independently student-written submission.
+
+
+Expansion reproduction uses `.venv/Scripts/python.exe scripts/pcdr_expand_distribution_pool.py --out <unused-directory>`, then the same independent verifier with `--study <directory> --out <new-verification.json>`. Thirty focused tests pass across `test_pcdr_expand_distribution_pool.py`, `test_pcdr_distribution_match.py` and `test_pcdr_verify_distribution_match.py` (26 dependency deprecation warnings). Added checks cover nested pools, deterministic exact-ID ties, stratum exclusions, invalid neighbor counts, duplicate IDs and ineligible reference members. No simulation suite was repeated because simulation code was unchanged. The expansion and its documentation also used Codex assistance.

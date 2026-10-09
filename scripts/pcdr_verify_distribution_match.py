@@ -90,11 +90,13 @@ def verify(study,out):
     if not set(restricted)<=set(eligible):raise ValueError('Ineligible pool member')
     # Rebuild the declared pool, including tie order, without the search loader.
     chosen=set(v for r in protocol['references'].values() for v in r)
+    neighbors=protocol.get('neighbors_per_target',20)
+    if type(neighbors) is not int or neighbors not in [20,50]:raise ValueError('Unsupported pool design')
     scale=values.std(axis=0);scale[scale==0]=1
     for i in ti:
         pool=np.array([j for j in eligible if groups[j]==groups[i]])
         distance=np.square((values[pool]-values[i])/scale).sum(axis=1)
-        nearest=sorted(zip(distance,frame.index[pool]),key=lambda v:(v[0],v[1]))[:20]
+        nearest=sorted(zip(distance,frame.index[pool]),key=lambda v:(v[0],v[1]))[:neighbors]
         chosen.update(v for _,v in nearest)
     if sorted(chosen)!=protocol['candidate_ids']:raise ValueError('Candidate pool reconstruction differs')
     records={}

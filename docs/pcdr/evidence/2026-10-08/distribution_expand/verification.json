@@ -1,0 +1,223 @@
+{
+  "status": "verified",
+  "candidate_pool_size": 999,
+  "full_eligible_pool_size": 126935,
+  "candidates": {
+    "unconstrained_overlap": {
+      "audit": {
+        "smd": [
+          0.04628126389331821,
+          0.03979667659915874,
+          0.05373926797217992,
+          0.051239236563139584,
+          0.070703598596765,
+          0.05572035144561732
+        ],
+        "ecdf_gaps": [
+          0.15686274509803924,
+          0.1568627450980392,
+          0.13725490196078433,
+          0.1568627450980392,
+          0.1568627450980392,
+          0.13725490196078438
+        ],
+        "maximum_ecdf_gap": 0.15686274509803924,
+        "variance_ratios": [
+          3.4377568372088283,
+          2.727232369315762,
+          1.9199806528450822,
+          1.5276751318922022,
+          0.926260282309242,
+          1.1029679399653287
+        ],
+        "overlaps": {
+          "motor_003": 34,
+          "motor_004": 35,
+          "motor_005": 35,
+          "new_0": 29,
+          "new_1": 30,
+          "new_2": 30,
+          "new_3": 29,
+          "new_4": 30,
+          "new_5": 30,
+          "new_12": 29,
+          "new_13": 30,
+          "new_14": 30,
+          "new_15": 29,
+          "new_16": 30,
+          "new_17": 30
+        }
+      },
+      "solver_reported_optimal": true,
+      "objective": 0.1568627450980799,
+      "worker_seconds": 47.125
+    },
+    "cap_30": {
+      "audit": {
+        "smd": [
+          0.04089674264512223,
+          0.011892412951921883,
+          0.053942858287684615,
+          0.04605368252295416,
+          0.0709552073368373,
+          0.06728496019429582
+        ],
+        "ecdf_gaps": [
+          0.19607843137254904,
+          0.196078431372549,
+          0.13725490196078433,
+          0.19607843137254904,
+          0.17647058823529416,
+          0.11764705882352944
+        ],
+        "maximum_ecdf_gap": 0.19607843137254904,
+        "variance_ratios": [
+          4.7412187649207596,
+          3.383789974092866,
+          2.3403703117205996,
+          1.689747437359141,
+          0.9256871263803701,
+          1.1230954019657637
+        ],
+        "overlaps": {
+          "motor_003": 29,
+          "motor_004": 30,
+          "motor_005": 30,
+          "new_0": 30,
+          "new_1": 30,
+          "new_2": 30,
+          "new_3": 30,
+          "new_4": 30,
+          "new_5": 30,
+          "new_12": 30,
+          "new_13": 30,
+          "new_14": 30,
+          "new_15": 30,
+          "new_16": 30,
+          "new_17": 30
+        }
+      },
+      "solver_reported_optimal": true,
+      "objective": 0.19607843137254893,
+      "worker_seconds": 52.59400000004098
+    }
+  },
+  "stratum_only_bounds": {
+    "restricted": {
+      "in_degree": {
+        "lower_bound": 0.0392156862745098,
+        "threshold": 5.081404364984463,
+        "target_cdf": 0.058823529411764705,
+        "min_candidate_cdf": 0.09803921568627451,
+        "max_candidate_cdf": 0.8823529411764706
+      },
+      "out_degree": {
+        "lower_bound": 0.09803921568627451,
+        "threshold": 3.044522437723423,
+        "target_cdf": 0.0196078431372549,
+        "min_candidate_cdf": 0.11764705882352941,
+        "max_candidate_cdf": 0.27450980392156865
+      },
+      "in_strength": {
+        "lower_bound": 0.0784313725490196,
+        "threshold": 7.3833681469923835,
+        "target_cdf": 0.0196078431372549,
+        "min_candidate_cdf": 0.09803921568627451,
+        "max_candidate_cdf": 0.9019607843137255
+      },
+      "out_strength": {
+        "lower_bound": 0.09803921568627451,
+        "threshold": 3.258096538021482,
+        "target_cdf": 0.0196078431372549,
+        "min_candidate_cdf": 0.11764705882352941,
+        "max_candidate_cdf": 0.29411764705882354
+      },
+      "baseline_hz": {
+        "lower_bound": 0.039215686274509776,
+        "threshold": 0.33647223662121295,
+        "target_cdf": 0.43137254901960786,
+        "min_candidate_cdf": 0.47058823529411764,
+        "max_candidate_cdf": 0.5686274509803921
+      },
+      "strong_out_mass": {
+        "lower_bound": 0.0,
+        "threshold": 0.0,
+        "target_cdf": 0.4117647058823529,
+        "min_candidate_cdf": 0.1568627450980392,
+        "max_candidate_cdf": 0.9607843137254902
+      }
+    },
+    "full_eligible": {
+      "in_degree": {
+        "lower_bound": 0.0392156862745098,
+        "threshold": 5.081404364984463,
+        "target_cdf": 0.058823529411764705,
+        "min_candidate_cdf": 0.09803921568627451,
+        "max_candidate_cdf": 0.9019607843137255
+      },
+      "out_degree": {
+        "lower_bound": 0.09803921568627451,
+        "threshold": 3.044522437723423,
+        "target_cdf": 0.0196078431372549,
+        "min_candidate_cdf": 0.11764705882352941,
+        "max_candidate_cdf": 0.6470588235294118
+      },
+      "in_strength": {
+        "lower_bound": 0.0784313725490196,
+        "threshold": 7.3833681469923835,
+        "target_cdf": 0.0196078431372549,
+        "min_candidate_cdf": 0.09803921568627451,
+        "max_candidate_cdf": 0.9019607843137255
+      },
+      "out_strength": {
+        "lower_bound": 0.09803921568627451,
+        "threshold": 3.258096538021482,
+        "target_cdf": 0.0196078431372549,
+        "min_candidate_cdf": 0.11764705882352941,
+        "max_candidate_cdf": 0.6470588235294118
+      },
+      "baseline_hz": {
+        "lower_bound": 0.039215686274509776,
+        "threshold": 0.33647223662121295,
+        "target_cdf": 0.43137254901960786,
+        "min_candidate_cdf": 0.47058823529411764,
+        "max_candidate_cdf": 0.7647058823529411
+      },
+      "strong_out_mass": {
+        "lower_bound": 0.0,
+        "threshold": 0.0,
+        "target_cdf": 0.4117647058823529,
+        "min_candidate_cdf": 0.1568627450980392,
+        "max_candidate_cdf": 0.9607843137254902
+      }
+    }
+  },
+  "limitation": "Solver optimality is numerical and restricted to the declared pool and constraints. Stratum bounds omit mean/overlap constraints. No simulated outcomes or random reference inference.",
+  "inputs": {
+    "results\\pcdr\\distribution_expand_20261008\\protocol.json": "c88764de29dace7f7ac8ab1676817cb8c45114e2b601da25ebcda35d2666ceec",
+    "results\\pcdr\\distribution_expand_20261008\\unconstrained_overlap\\candidate.json": "fe8be9314099ec086ffb056652456567daddf00941aaad6254a33843460ad668",
+    "results\\pcdr\\distribution_expand_20261008\\unconstrained_overlap\\result.json": "657be0cfcce3e2c445b08c676cd652cddd82c20a4ef2b59e019452a9a426775a",
+    "results\\pcdr\\distribution_expand_20261008\\unconstrained_overlap\\process.json": "6f8cbc1705429510837d08374fd37709fb76f6179562cef23ebad47bd27ef90a",
+    "results\\pcdr\\distribution_expand_20261008\\cap_30\\candidate.json": "b809148eacf15bea2b671c3ac432e31382f61dfc14c797e83096acceab708e85",
+    "results\\pcdr\\distribution_expand_20261008\\cap_30\\result.json": "b257889758cb14d98faf6cfe36123244754b499c1a8d78087c7f8cf20233a7ec",
+    "results\\pcdr\\distribution_expand_20261008\\cap_30\\process.json": "ffbc77b8ddf1ad94b4987494492dc4958ad35c2717178dd6b2607b2547fcbafd"
+  },
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "script_sha256": "160ea657cd9615a664eb911aca26b2069b5677c158afc37d5fe6f28fbf807e70"
+}
