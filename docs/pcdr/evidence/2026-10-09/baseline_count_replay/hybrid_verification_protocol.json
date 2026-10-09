@@ -1,0 +1,10 @@
+{
+  "recorded_utc": "2026-10-09T13:12:51.270208+00:00",
+  "selection": "Smallest and largest selected seed",
+  "inputs": {
+    "results\\pcdr\\baseline_count_replay_20261009\\verify_hybrid.py": "cea029e964af4dc504d2584f5cfdcfc06c138e2af46d48da1f3bc247ab88df4c",
+    "tests\\test_pcdr_local_replay.py": "0c660903fc29a45426d20570d41ae6caff027a6bcea4430a044272b288bafa66",
+    "results\\pcdr\\baseline_count_replay_20261009\\results.json": "94a3ad9e93df982ef63b4e1822bcb535369411bfba22fc0998aa40a6a769656c"
+  },
+  "deadline_seconds": 60
+}

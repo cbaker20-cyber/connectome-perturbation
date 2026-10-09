@@ -1,0 +1,4 @@
+{
+  "recorded_utc": "2026-10-09T13:13:04.229060+00:00",
+  "reason": "First verification failed before execution: python -m runpy interpreted the filename as a module. Retain failed logs; invoke run_path explicitly. No scientific code or input changed."
+}

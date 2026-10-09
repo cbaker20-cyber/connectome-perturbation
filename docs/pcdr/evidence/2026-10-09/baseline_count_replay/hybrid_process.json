@@ -1,0 +1,14 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "-m",
+    "runpy",
+    "results\\pcdr\\baseline_count_replay_20261009\\verify_hybrid.py"
+  ],
+  "pid": 28128,
+  "timed_out": false,
+  "returncode": 1,
+  "elapsed_seconds": 0.10899999993853271,
+  "deadline_seconds": 60,
+  "cleanup": null
+}

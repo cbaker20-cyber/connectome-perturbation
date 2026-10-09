@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "-c",
+    "import runpy; runpy.run_path('results/pcdr/baseline_count_replay_20261009/verify_hybrid.py')"
+  ],
+  "pid": 17716,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 3.077999999979511,
+  "deadline_seconds": 60,
+  "cleanup": null
+}

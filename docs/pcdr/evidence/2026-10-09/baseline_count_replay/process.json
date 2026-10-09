@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_baseline_count_replay.py",
+    "--out",
+    "results\\pcdr\\baseline_count_replay_20261009",
+    "--worker"
+  ],
+  "pid": 28192,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 19.781000000075437,
+  "deadline_seconds": 180,
+  "cleanup": null
+}

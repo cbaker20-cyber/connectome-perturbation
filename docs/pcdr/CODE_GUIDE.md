@@ -397,3 +397,7 @@ The separate-connection extension uses the same late-switch class with one selec
 ## Baseline prefix and endpoint analysis, 9 October 2026
 
 `pcdr_baseline_time.py` authenticates sixty spike files through the prior baseline-count snapshot, counts half-open prefixes using common integer ticks, and saves prefix/interval/suffix L1 plus a conservative bound under arbitrary suffix-spike deletion. Fixed endpoints and limits are recorded before results. Tests include boundary failures and exhaustive small-count bound checking. See BASELINE_TIME_20261009.md.
+
+## Baseline event and count replay, 9 October 2026
+
+`pcdr_baseline_events.py` selects the earliest non-input ordinal spike gap exceeding one coarse tick per seed and reuses `pcdr_local_replay.replay` on saved incoming histories. `pcdr_baseline_count_replay.py` preserves a separately recorded amendment selecting the first fixed 100-ms checkpoint with at least a two-spike gap, largest gap then root-ID tie break. Both verify native prefixes before comparing incoming histories at a fixed fine step, retain no-selection cases/failures, and bound the worker to 180 seconds. Separate dated scripts retain the executed selection/source provenance; do not run them as a new network experiment. BASELINE_REPLAY_20261009.md details interpretation and verification.

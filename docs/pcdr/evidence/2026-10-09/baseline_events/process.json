@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_baseline_events.py",
+    "--out",
+    "results\\pcdr\\baseline_events_20261009",
+    "--worker"
+  ],
+  "pid": 8596,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 18.06200000003446,
+  "deadline_seconds": 180,
+  "cleanup": null
+}

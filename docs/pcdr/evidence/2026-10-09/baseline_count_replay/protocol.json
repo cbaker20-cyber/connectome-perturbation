@@ -1,0 +1,16 @@
+{
+  "recorded_utc": "2026-10-09T13:11:09.203957+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_baseline_count_replay.py": "e0f228e9bfdde7ff92dcc09d73e6bd43e26d489842ac6f8c36c470c5e2f4fe08",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_local_replay.py": "54342e9a27d2892b726421888f6b2548f859d704440a2484d6c6a271597043d6",
+    "C:\\Users\\Baker\\Drosophila_Data\\CCR_fine_results.zip": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_counts\\summary.json": "3badfb9ac9ab3f3229c0fb36649e5e438dcd230e21718a96d624d5f42e11a2f6",
+    "C:\\Users\\Baker\\Drosophila_Data\\model.py": "c74b2f9750a3c0d36c4a06ba4596fce1be41db5ab57a6be701648c95c5bbdbed",
+    "C:\\Users\\Baker\\Drosophila_Data\\2023_03_23_connectivity_630_final.parquet": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3"
+  },
+  "selection": "Amendment after early timing selection changed no short-prefix counts. For every default seed, use original 100,200,...,1000-ms checkpoints. At earliest checkpoint with a non-input neuron having absolute coarse-minus-fine cumulative count gap >=2, choose largest gap then lowest root ID. Preserve no-selection seeds. Two spikes is a diagnostic selection rule, not a scientific acceptance threshold.",
+  "replay": "All selected targets from initial rest to their selected half-open checkpoint. Original saved incoming histories at both native steps; require every saved target tick to match before fixed-fine-grid comparison. Then use coarse saved incoming history at fine dt, compare with fine history. No network feedback replay.",
+  "budget": "One worker, 180-second external deadline, no automatic retry. Keep failed/missing native replays and do not interpret their hybrid.",
+  "limitations": "Exploratory selection on a two-spike checkpoint gap is not a scientific tolerance; results are selected for count disagreement. Short local histories condition on archived network spikes. They do not establish the first network cause, explain full-second count error, demonstrate chaos, or alter convergence criteria."
+}

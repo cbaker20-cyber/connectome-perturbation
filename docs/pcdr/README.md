@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Baseline local replays, 9 October](BASELINE_REPLAY_20261009.md): all 112 native target prefixes match saved ticks. Early timing selection changes no short-prefix counts; a recorded count-focused amendment selects 26 seeds. At a fixed fine step, each selected target retains its coarse count under coarse incoming history. This is a conditional local result, not a traced initiating network cause or convergence.
+
 [Baseline differences before the endpoint, 9 October](BASELINE_TIME_20261009.md): count disagreement is substantial by 600–900 ms. A conservative bound leaves at least 97.45% of pooled count L1 after arbitrary deletion of observed spikes in the final 1 ms. This bounds a narrow endpoint explanation; it does not establish convergence or identify the initiating mechanism.
 
 [Baseline count partition, 9 October](BASELINE_COUNTS_20261009.md): 96.43% of final-halving baseline count disagreement occurs in cells active at both steps. Existing timing-code checks were reviewed without repeating them; no new coding discrepancy identified. Count differences cannot be explained solely by moving spikes between internal time bins.

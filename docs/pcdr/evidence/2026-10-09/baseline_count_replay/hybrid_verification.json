@@ -1,0 +1,17 @@
+{
+  "verified_utc": "2026-10-09T13:13:07.269959+00:00",
+  "selection": "Smallest and largest seed with selection, fixed before this numerical verification.",
+  "method": "Independent sequential tick recurrence already used in prior known-answer tests; applied to these new hybrid histories.",
+  "checks": [
+    {
+      "seed": 631401,
+      "exact_ticks": true,
+      "spikes": 29
+    },
+    {
+      "seed": 631430,
+      "exact_ticks": true,
+      "spikes": 31
+    }
+  ]
+}
