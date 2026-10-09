@@ -1,0 +1,31 @@
+{
+  "status": "verified",
+  "all_360_original_relative_distances_reproduced": true,
+  "maximum_relative_error": 9.020562075079397e-17,
+  "all_120_prior_absolute_distances_reproduced": true,
+  "exact_component_identities": true,
+  "tests_passed": 6,
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "inputs": {
+    "results\\pcdr\\step_cancellation_20261009\\pairs.csv": "4dc93b7eca158173148de872f9d61936566aacc1d38df304cd6a545ad4973e5b",
+    "results\\pcdr\\fine_verified_20261005\\checked_pairs.csv": "5561b9c24da32940156d7c2e113fe9d6da675ca4ca48778e24137ca820559dcd",
+    "results\\pcdr\\fine_verified_20261005\\checked_agreement.csv": "d8e36e50a4071cfba4ff18623c21d10a449c95e7f6dce0c7b0d2488bd84d9707",
+    "results\\pcdr\\fine_differences_final_20261005\\distances.csv": "21e684bed5ddd2c6fc2be5269db6f65313154305401ec0ce390a31f8d6f0a092"
+  }
+}

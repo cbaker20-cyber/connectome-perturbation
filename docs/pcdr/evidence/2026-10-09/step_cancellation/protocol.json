@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-10-09T12:39:45.754945+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_step_cancellation.py": "2563c9d23e12e002bbddeaa5c5e630e6b2fdadfcd7dcd5e55abbb2e059f4a723",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_verified_20261005\\full_check.json": "1c8bb0c7ca1524928c371cd1db96bb073d4d9142ba66a190019dc96045862acf",
+    "C:\\Users\\Baker\\Drosophila_Data\\CCR_fine_results.zip": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b"
+  },
+  "design": "All 30 default seeds, four lesion conditions and three adjacent halvings. Read hash-verified full-neuron rates; define baseline and lesion cross-step differences coarse minus fine. Their difference equals paired-response disagreement. Decompose L1 into component budget minus same-sign cancellation. No new threshold, exclusions, inference or simulations.",
+  "limitations": "Algebraic attribution, not causal separation. Four comparisons reuse each seed baseline. Stable aggregate response may hide individual variation. Original agreement decisions unchanged."
+}

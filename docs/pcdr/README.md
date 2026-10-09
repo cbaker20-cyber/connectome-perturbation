@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Baseline/lesion step decomposition, 9 October](STEP_CANCELLATION_20261009.md): baseline cross-step disagreement is substantial; at the final halving its median L1 is 578.5 Hz versus 309.5 Hz for the selected lesion. Paired subtraction cancels about 19% of combined differences. All original convergence failures remain.
+
 [Overnight decision memo, 9 October](OVERNIGHT_DECISION_20261009.md): local replay independently generates resets and matches all twelve target prefixes through their first outside differences. All eighteen convergence groups still fail. Overnight deliverables complete; no new network run proposed for automatic launch.
 
 [Conditional downstream crossings, 9 October](DOWNSTREAM_CROSSINGS_20261009.md): all six endpoint checks pass using observed reset histories; free-running local replay remains pending. [Overnight progress](OVERNIGHT_PROGRESS_20261009.md) records the next bounded check. Convergence remains unestablished.

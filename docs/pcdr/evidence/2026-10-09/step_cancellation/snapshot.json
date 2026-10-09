@@ -1,0 +1,11 @@
+{
+  "source": "results\\pcdr\\step_cancellation_20261009",
+  "files": {
+    "pairs.csv": "4dc93b7eca158173148de872f9d61936566aacc1d38df304cd6a545ad4973e5b",
+    "protocol.json": "36e09fdd74a20235bbff0fcb207a537c5f52c114931d654c27873f537959bb41",
+    "summary.json": "889a1d5e11bf2eb92b4ed84fedd47cc4b5a9cafebb1324a5d220adde0c753e96",
+    "verification.json": "bc00c074a7bf8412aa8730d3bb374cb1b543df1c49be0a0cfae546143f2016d2"
+  },
+  "tests_passed": 6,
+  "simulations_launched": false
+}
