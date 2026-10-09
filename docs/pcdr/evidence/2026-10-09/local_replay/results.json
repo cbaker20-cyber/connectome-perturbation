@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "records": [
+    {
+      "trial": "late_g_0.0004",
+      "label": "reference",
+      "target_id": "720575940619397797",
+      "stop_ms": 618.936,
+      "exact_ticks": true,
+      "saved_spikes": 5,
+      "replayed_spikes": 5,
+      "symmetric_difference_ticks": [],
+      "output": "late_g_0.0004_reference.npz",
+      "sha256": "2261dff39d0f4bc2cea8a4334cc752179aa19fc24a395072bdaa1209093a9e12"
+    },
+    {
+      "trial": "late_g_0.0004",
+      "label": "intervention",
+      "target_id": "720575940619397797",
+      "stop_ms": 618.936,
+      "exact_ticks": true,
+      "saved_spikes": 4,
+      "replayed_spikes": 4,
+      "symmetric_difference_ticks": [],
+      "output": "late_g_0.0004_intervention.npz",
+      "sha256": "b99230b26a54645534ec3f1a701a1ea32e9d8e4bb8fde7d07d026a49d775a247"
+    },
+    {
+      "trial": "late_h_0.0004",
+      "label": "reference",
+      "target_id": "720575940635451546",
+      "stop_ms": 620.4536,
+      "exact_ticks": true,
+      "saved_spikes": 15,
+      "replayed_spikes": 15,
+      "symmetric_difference_ticks": [],
+      "output": "late_h_0.0004_reference.npz",
+      "sha256": "889954c24e675ca6dd598c6572a7a2e0769c41c5a917e1bef5baf74a679545d5"
+    },
+    {
+      "trial": "late_h_0.0004",
+      "label": "intervention",
+      "target_id": "720575940635451546",
+      "stop_ms": 620.4536,
+      "exact_ticks": true,
+      "saved_spikes": 14,
+      "replayed_spikes": 14,
+      "symmetric_difference_ticks": [],
+      "output": "late_h_0.0004_intervention.npz",
+      "sha256": "f82405b9df78652e857c4cfee76a72e8e7e1f826688506c35971cd4a0de01095"
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "label": "reference",
+      "target_id": "720575940619397797",
+      "stop_ms": 618.936,
+      "exact_ticks": true,
+      "saved_spikes": 5,
+      "replayed_spikes": 5,
+      "symmetric_difference_ticks": [],
+      "output": "late_edges_0.0004_reference.npz",
+      "sha256": "2261dff39d0f4bc2cea8a4334cc752179aa19fc24a395072bdaa1209093a9e12"
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "label": "intervention",
+      "target_id": "720575940619397797",
+      "stop_ms": 618.936,
+      "exact_ticks": true,
+      "saved_spikes": 4,
+      "replayed_spikes": 4,
+      "symmetric_difference_ticks": [],
+      "output": "late_edges_0.0004_intervention.npz",
+      "sha256": "b99230b26a54645534ec3f1a701a1ea32e9d8e4bb8fde7d07d026a49d775a247"
+    },
+    {
+      "trial": "late_g_0.0002",
+      "label": "reference",
+      "target_id": "720575940605420902",
+      "stop_ms": 606.9870000000001,
+      "exact_ticks": true,
+      "saved_spikes": 6,
+      "replayed_spikes": 6,
+      "symmetric_difference_ticks": [],
+      "output": "late_g_0.0002_reference.npz",
+      "sha256": "48e8b87da79eeb3fde71463eedbfb36860c807219ab75aca16c8f40540df11c0"
+    },
+    {
+      "trial": "late_g_0.0002",
+      "label": "intervention",
+      "target_id": "720575940605420902",
+      "stop_ms": 606.9870000000001,
+      "exact_ticks": true,
+      "saved_spikes": 5,
+      "replayed_spikes": 5,
+      "symmetric_difference_ticks": [],
+      "output": "late_g_0.0002_intervention.npz",
+      "sha256": "41dbcbaabb6f6d63e7941ea059f1caae90d47f64186ddd53a2d5f240d9f5774c"
+    },
+    {
+      "trial": "late_h_0.0002",
+      "label": "reference",
+      "target_id": "720575940629489260",
+      "stop_ms": 608.8404,
+      "exact_ticks": true,
+      "saved_spikes": 1,
+      "replayed_spikes": 1,
+      "symmetric_difference_ticks": [],
+      "output": "late_h_0.0002_reference.npz",
+      "sha256": "6fee6f28979e59d603b0b1d58c930ff70f1a068afea3079b258cc36ef558019e"
+    },
+    {
+      "trial": "late_h_0.0002",
+      "label": "intervention",
+      "target_id": "720575940629489260",
+      "stop_ms": 608.8404,
+      "exact_ticks": true,
+      "saved_spikes": 0,
+      "replayed_spikes": 0,
+      "symmetric_difference_ticks": [],
+      "output": "late_h_0.0002_intervention.npz",
+      "sha256": "cce6f09c25c0c42d6bbf47627a76bd12a179fea115cd8ec75fa08b794a269447"
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "label": "reference",
+      "target_id": "720575940605420902",
+      "stop_ms": 606.9870000000001,
+      "exact_ticks": true,
+      "saved_spikes": 6,
+      "replayed_spikes": 6,
+      "symmetric_difference_ticks": [],
+      "output": "late_edges_0.0002_reference.npz",
+      "sha256": "48e8b87da79eeb3fde71463eedbfb36860c807219ab75aca16c8f40540df11c0"
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "label": "intervention",
+      "target_id": "720575940605420902",
+      "stop_ms": 606.9870000000001,
+      "exact_ticks": true,
+      "saved_spikes": 5,
+      "replayed_spikes": 5,
+      "symmetric_difference_ticks": [],
+      "output": "late_edges_0.0002_intervention.npz",
+      "sha256": "41dbcbaabb6f6d63e7941ea059f1caae90d47f64186ddd53a2d5f240d9f5774c"
+    }
+  ],
+  "completed_utc": "2026-10-09T06:36:27.345879+00:00"
+}

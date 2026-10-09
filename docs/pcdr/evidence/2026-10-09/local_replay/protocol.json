@@ -1,0 +1,217 @@
+{
+  "recorded_utc": "2026-10-09T06:36:18.702276+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_local_replay.py": "54342e9a27d2892b726421888f6b2548f859d704440a2484d6c6a271597043d6",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\pathway_routes_20261008\\results.json": "81474b500581f946aa818edd7e42a3e7230d149fd1c3bc42b58284ec5a045c9a",
+    "C:\\Users\\Baker\\Drosophila_Data\\CCR_separate_pathway_results.zip": "b042e45569de75f90486cef1fe5cacc1917ceb79014c8a9bb8cb9688eb151dca"
+  },
+  "comparisons": {
+    "late_g_0.0004": [
+      {
+        "target": {
+          "id": "720575940619397797",
+          "tick": 1547340,
+          "direction": "reference_only",
+          "time_ms": 618.936
+        },
+        "edges": [
+          {
+            "source_id": "720575940629667639",
+            "connection_present": true,
+            "scaled_weight_mv": 0.33,
+            "arrivals_before_or_at_target_change": [
+              {
+                "source_id": "720575940629667639",
+                "emission_tick": 1541778,
+                "arrival_tick": 1546278,
+                "intervention_minus_reference_increment_mv": -0.33,
+                "direction": "reference_only"
+              }
+            ],
+            "earliest_arrival_to_change_ms": 0.4248
+          },
+          {
+            "source_id": "720575940623862015",
+            "connection_present": false,
+            "scaled_weight_mv": 0.0,
+            "arrivals_before_or_at_target_change": [],
+            "earliest_arrival_to_change_ms": null
+          }
+        ]
+      }
+    ],
+    "late_h_0.0004": [
+      {
+        "target": {
+          "id": "720575940635451546",
+          "tick": 1551134,
+          "direction": "reference_only",
+          "time_ms": 620.4536
+        },
+        "edges": [
+          {
+            "source_id": "720575940629667639",
+            "connection_present": true,
+            "scaled_weight_mv": 0.33,
+            "arrivals_before_or_at_target_change": [],
+            "earliest_arrival_to_change_ms": null
+          },
+          {
+            "source_id": "720575940623862015",
+            "connection_present": true,
+            "scaled_weight_mv": 0.33,
+            "arrivals_before_or_at_target_change": [
+              {
+                "source_id": "720575940623862015",
+                "emission_tick": 1546570,
+                "arrival_tick": 1551070,
+                "intervention_minus_reference_increment_mv": -0.33,
+                "direction": "reference_only"
+              }
+            ],
+            "earliest_arrival_to_change_ms": 0.0256
+          }
+        ]
+      }
+    ],
+    "late_edges_0.0004": [
+      {
+        "target": {
+          "id": "720575940619397797",
+          "tick": 1547340,
+          "direction": "reference_only",
+          "time_ms": 618.936
+        },
+        "edges": [
+          {
+            "source_id": "720575940629667639",
+            "connection_present": true,
+            "scaled_weight_mv": 0.33,
+            "arrivals_before_or_at_target_change": [
+              {
+                "source_id": "720575940629667639",
+                "emission_tick": 1541778,
+                "arrival_tick": 1546278,
+                "intervention_minus_reference_increment_mv": -0.33,
+                "direction": "reference_only"
+              }
+            ],
+            "earliest_arrival_to_change_ms": 0.4248
+          },
+          {
+            "source_id": "720575940623862015",
+            "connection_present": false,
+            "scaled_weight_mv": 0.0,
+            "arrivals_before_or_at_target_change": [],
+            "earliest_arrival_to_change_ms": null
+          }
+        ]
+      }
+    ],
+    "late_g_0.0002": [
+      {
+        "target": {
+          "id": "720575940605420902",
+          "tick": 3034935,
+          "direction": "reference_only",
+          "time_ms": 606.9870000000001
+        },
+        "edges": [
+          {
+            "source_id": "720575940629667639",
+            "connection_present": true,
+            "scaled_weight_mv": 8.25,
+            "arrivals_before_or_at_target_change": [
+              {
+                "source_id": "720575940629667639",
+                "emission_tick": 3018490,
+                "arrival_tick": 3027490,
+                "intervention_minus_reference_increment_mv": -8.25,
+                "direction": "reference_only"
+              }
+            ],
+            "earliest_arrival_to_change_ms": 1.489
+          },
+          {
+            "source_id": "720575940623862015",
+            "connection_present": true,
+            "scaled_weight_mv": 9.57,
+            "arrivals_before_or_at_target_change": [],
+            "earliest_arrival_to_change_ms": null
+          }
+        ]
+      }
+    ],
+    "late_h_0.0002": [
+      {
+        "target": {
+          "id": "720575940629489260",
+          "tick": 3044202,
+          "direction": "reference_only",
+          "time_ms": 608.8404
+        },
+        "edges": [
+          {
+            "source_id": "720575940629667639",
+            "connection_present": false,
+            "scaled_weight_mv": 0.0,
+            "arrivals_before_or_at_target_change": [],
+            "earliest_arrival_to_change_ms": null
+          },
+          {
+            "source_id": "720575940623862015",
+            "connection_present": true,
+            "scaled_weight_mv": 0.33,
+            "arrivals_before_or_at_target_change": [
+              {
+                "source_id": "720575940623862015",
+                "emission_tick": 3028232,
+                "arrival_tick": 3037232,
+                "intervention_minus_reference_increment_mv": -0.33,
+                "direction": "reference_only"
+              }
+            ],
+            "earliest_arrival_to_change_ms": 1.3940000000000001
+          }
+        ]
+      }
+    ],
+    "late_edges_0.0002": [
+      {
+        "target": {
+          "id": "720575940605420902",
+          "tick": 3034935,
+          "direction": "reference_only",
+          "time_ms": 606.9870000000001
+        },
+        "edges": [
+          {
+            "source_id": "720575940629667639",
+            "connection_present": true,
+            "scaled_weight_mv": 8.25,
+            "arrivals_before_or_at_target_change": [
+              {
+                "source_id": "720575940629667639",
+                "emission_tick": 3018490,
+                "arrival_tick": 3027490,
+                "intervention_minus_reference_increment_mv": -8.25,
+                "direction": "reference_only"
+              }
+            ],
+            "earliest_arrival_to_change_ms": 1.489
+          },
+          {
+            "source_id": "720575940623862015",
+            "connection_present": true,
+            "scaled_weight_mv": 9.57,
+            "arrivals_before_or_at_target_change": [],
+            "earliest_arrival_to_change_ms": null
+          }
+        ]
+      }
+    ]
+  },
+  "method": "Twelve local prefixes, four distinct targets at designated steps: generate thresholds and resets from initial rest using all archived presynaptic arrivals. Evaluate exact linear dynamics between event ticks; apply threshold before synapses, reset and reject refractory arrivals. Stop at first outside difference inclusive. No supplied postsynaptic reset times.",
+  "budget": "One local worker, 120-second external deadline; no retry or full-network simulation.",
+  "limitation": "Presynaptic inputs are observed network trajectories. Exact tick agreement is a replay implementation check, not convergence or a network counterfactual. Preserve mismatch outputs."
+}

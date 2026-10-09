@@ -15,3 +15,7 @@ Implement a separately declared bounded local replay generating its own threshol
 Then produce a morning decision memo explicitly separating: failed convergence (all eighteen groups), descriptive mean/order stability, selected-case mechanism evidence, comparison confounding, and proposed next experiments. Read FINE_TIMESTEP_RESULTS_20261005.md and existing agreement-breakdown evidence selectively. Do not loosen criteria or promise that smaller steps must converge. The altered-weight case is not the default-network convergence study.
 
 Keep unrelated staged docs/MANUS_HANDOFF.md and local handoffs untouched. Commit/push only finished verified research paths. This progress note is a dated research execution record, not new agent rules.
+
+## Second wake completed — overnight deliverables finished
+
+Implemented separately recorded local replay generating its own thresholds/resets. All twelve prefixes exactly match archived target ticks; six tests pass, including separate sequential recurrence and installed Brian2 schedule example. Worker 8.812 seconds, no timeout, empty stderr. Independent archive reread and vector hashes pass. See OVERNIGHT_DECISION_20261009.md for complete evidence, limitations, failed convergence audit and next-research decision. No full network or CCR simulation. Pause this automation now because bounded deliverables are complete; do not launch further work merely to fill the remaining night.

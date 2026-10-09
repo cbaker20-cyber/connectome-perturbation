@@ -1,0 +1,85 @@
+{
+  "status": "verified",
+  "checks": [
+    {
+      "trial": "late_g_0.0004",
+      "label": "reference",
+      "matched_ticks": 5
+    },
+    {
+      "trial": "late_g_0.0004",
+      "label": "intervention",
+      "matched_ticks": 4
+    },
+    {
+      "trial": "late_h_0.0004",
+      "label": "reference",
+      "matched_ticks": 15
+    },
+    {
+      "trial": "late_h_0.0004",
+      "label": "intervention",
+      "matched_ticks": 14
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "label": "reference",
+      "matched_ticks": 5
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "label": "intervention",
+      "matched_ticks": 4
+    },
+    {
+      "trial": "late_g_0.0002",
+      "label": "reference",
+      "matched_ticks": 6
+    },
+    {
+      "trial": "late_g_0.0002",
+      "label": "intervention",
+      "matched_ticks": 5
+    },
+    {
+      "trial": "late_h_0.0002",
+      "label": "reference",
+      "matched_ticks": 1
+    },
+    {
+      "trial": "late_h_0.0002",
+      "label": "intervention",
+      "matched_ticks": 0
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "label": "reference",
+      "matched_ticks": 6
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "label": "intervention",
+      "matched_ticks": 5
+    }
+  ],
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "tests_passed": 6,
+  "dependency_warnings": 26,
+  "method": "Re-extracted original archived target spikes and independently compared integer tick arrays and hashes. Tiny installed Brian2 schedule test also passed. Not a second full replay solver."
+}

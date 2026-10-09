@@ -1,0 +1,26 @@
+{
+  "source": "results\\pcdr\\local_replay_20261009",
+  "files": {
+    "process.json": "1c0467686feee05e47a552d5e98113e0d7a6af1b8d8ea5b18a49ae9969d08bd2",
+    "protocol.json": "2b8483781f9838b3a80217190e090f7c0c5fb3f499f91d915490f09d83a4ac24",
+    "results.json": "14d8c30c1a6a6a4af8431806f75bac578464e7f50b00c734557b75e0fe917be4",
+    "verification.json": "fbd7629935a3ee049c0ef035eb60debbd5f17035af491641db9eda99bfa5b842"
+  },
+  "arrays": {
+    "results\\pcdr\\local_replay_20261009\\late_edges_0.0002_intervention.npz": "41dbcbaabb6f6d63e7941ea059f1caae90d47f64186ddd53a2d5f240d9f5774c",
+    "results\\pcdr\\local_replay_20261009\\late_edges_0.0002_reference.npz": "48e8b87da79eeb3fde71463eedbfb36860c807219ab75aca16c8f40540df11c0",
+    "results\\pcdr\\local_replay_20261009\\late_edges_0.0004_intervention.npz": "b99230b26a54645534ec3f1a701a1ea32e9d8e4bb8fde7d07d026a49d775a247",
+    "results\\pcdr\\local_replay_20261009\\late_edges_0.0004_reference.npz": "2261dff39d0f4bc2cea8a4334cc752179aa19fc24a395072bdaa1209093a9e12",
+    "results\\pcdr\\local_replay_20261009\\late_g_0.0002_intervention.npz": "41dbcbaabb6f6d63e7941ea059f1caae90d47f64186ddd53a2d5f240d9f5774c",
+    "results\\pcdr\\local_replay_20261009\\late_g_0.0002_reference.npz": "48e8b87da79eeb3fde71463eedbfb36860c807219ab75aca16c8f40540df11c0",
+    "results\\pcdr\\local_replay_20261009\\late_g_0.0004_intervention.npz": "b99230b26a54645534ec3f1a701a1ea32e9d8e4bb8fde7d07d026a49d775a247",
+    "results\\pcdr\\local_replay_20261009\\late_g_0.0004_reference.npz": "2261dff39d0f4bc2cea8a4334cc752179aa19fc24a395072bdaa1209093a9e12",
+    "results\\pcdr\\local_replay_20261009\\late_h_0.0002_intervention.npz": "cce6f09c25c0c42d6bbf47627a76bd12a179fea115cd8ec75fa08b794a269447",
+    "results\\pcdr\\local_replay_20261009\\late_h_0.0002_reference.npz": "6fee6f28979e59d603b0b1d58c930ff70f1a068afea3079b258cc36ef558019e",
+    "results\\pcdr\\local_replay_20261009\\late_h_0.0004_intervention.npz": "f82405b9df78652e857c4cfee76a72e8e7e1f826688506c35971cd4a0de01095",
+    "results\\pcdr\\local_replay_20261009\\late_h_0.0004_reference.npz": "889954c24e675ca6dd598c6572a7a2e0769c41c5a917e1bef5baf74a679545d5"
+  },
+  "tests_passed": 6,
+  "dependency_warnings": 26,
+  "full_network_simulation": false
+}
