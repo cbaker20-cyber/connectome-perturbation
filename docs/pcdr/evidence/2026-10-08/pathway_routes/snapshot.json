@@ -1,0 +1,11 @@
+{
+  "source": "results\\pcdr\\pathway_routes_20261008",
+  "files": {
+    "complete.json": "4e0545217d50feea4ba61df0b38b29a0de024752092bcfbc5e80aeb95917318f",
+    "independent_check.json": "9314ee0256b699d1f7a0e424cea0dc8dcfbbbc022c30519147e7f0af98c5ad38",
+    "protocol.json": "07d67cf7cce0942eb84d6a341e6e793c1639c8d6c24e4082c2b41ab942a045fd",
+    "results.json": "81474b500581f946aa818edd7e42a3e7230d149fd1c3bc42b58284ec5a045c9a"
+  },
+  "tests_passed": 2,
+  "simulation": false
+}

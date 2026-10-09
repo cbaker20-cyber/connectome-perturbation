@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "trial": "late_g_0.0004",
+      "all_changed_incoming_emissions_before_first_outside_change": [
+        [
+          "720575940629667639",
+          1541778,
+          "reference_only"
+        ]
+      ],
+      "exactly_accounted_for_by_selected_target": true
+    },
+    {
+      "trial": "late_h_0.0004",
+      "all_changed_incoming_emissions_before_first_outside_change": [
+        [
+          "720575940623862015",
+          1546570,
+          "reference_only"
+        ]
+      ],
+      "exactly_accounted_for_by_selected_target": true
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "all_changed_incoming_emissions_before_first_outside_change": [
+        [
+          "720575940629667639",
+          1541778,
+          "reference_only"
+        ]
+      ],
+      "exactly_accounted_for_by_selected_target": true
+    },
+    {
+      "trial": "late_g_0.0002",
+      "all_changed_incoming_emissions_before_first_outside_change": [
+        [
+          "720575940629667639",
+          3018490,
+          "reference_only"
+        ]
+      ],
+      "exactly_accounted_for_by_selected_target": true
+    },
+    {
+      "trial": "late_h_0.0002",
+      "all_changed_incoming_emissions_before_first_outside_change": [
+        [
+          "720575940623862015",
+          3028232,
+          "reference_only"
+        ]
+      ],
+      "exactly_accounted_for_by_selected_target": true
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "all_changed_incoming_emissions_before_first_outside_change": [
+        [
+          "720575940629667639",
+          3018490,
+          "reference_only"
+        ]
+      ],
+      "exactly_accounted_for_by_selected_target": true
+    }
+  ],
+  "method": "Rejoined original connectivity by exact root IDs, independently differenced archived raw spike sets, inspected all incoming presynaptic changed emissions through the target deadline. No simulation or state claim.",
+  "inputs": {
+    "results\\pcdr\\pathway_routes_20261008\\results.json": "81474b500581f946aa818edd7e42a3e7230d149fd1c3bc42b58284ec5a045c9a"
+  }
+}

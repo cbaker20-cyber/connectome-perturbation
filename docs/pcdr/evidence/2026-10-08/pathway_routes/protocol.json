@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-10-09T03:49:06.650460+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\CCR_separate_pathway_results.zip": "b042e45569de75f90486cef1fe5cacc1917ceb79014c8a9bb8cb9688eb151dca",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\pathway_divergence_20261008\\results.json": "33b2b54441f87c8931788fb9af18f9040f8be29a5939c50fe08f1ec923a38ea8",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_pathway_routes.py": "93399c6729b18033cf66b36ff6f58d6736dd5bb2ff5227b6d785825ec4ed7e2b"
+  },
+  "question": "Are direct G/H connections and delayed unmatched emissions compatible with each earliest outside spike difference?",
+  "design": "All six saved earliest-outside targets; inspect both G and H edges, actual scaled signed weights and queued arrival ticks through the first changed event. Retain all unmatched upstream emissions before that deadline; no new intervention.",
+  "limitation": "Predicted synaptic increments from saved spikes and connectivity are not measured conductance or voltage; receptor/refractory/reset state and other inputs can alter effects. Delay compatibility is not sufficiency."
+}

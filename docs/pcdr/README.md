@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Direct routes to first outside changes, 8 October](PATHWAY_ROUTES_20261008.md): all six earliest outside differences have a compatible direct G/H connection; each has exactly one changed incoming presynaptic emission able to arrive beforehand. This localizes the first input difference, not the complete burst mechanism.
+
 [Early G/H divergence, 8 October](PATHWAY_DIVERGENCE_20261008.md): separate removals first change different outside neurons, then share many early changed neurons. Most early event differences preserve per-neuron window counts; the finer non-burst case has more early changed neurons. No common causal mediator is established.
 
 [Reference-cap ablation and amended pairs, 8 October](REFERENCE_ABLATION_20261008.md): all eight fractional diagnostics verified. Dropping old-reference caps permits two fixed-anchor pairs with thirty shared cells, but partner degree-variance ratios reach 9.14–10.43. These unsimulated witnesses answer the weaker amended design only.
