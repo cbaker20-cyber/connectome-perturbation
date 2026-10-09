@@ -1,0 +1,14 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-09T12:50:30.723787+00:00",
+  "tests_passed": 9,
+  "all_30_totals_match_prior_baseline": true,
+  "all_changed_cell_counts_match_saved_rates": true,
+  "separate_loop_partition_matches": true,
+  "outputs": {
+    "changed_cells.csv": "302e706428e47812e1a22bcb9d9c1bb2463c241de801987524ccb57e1a12db45",
+    "pairs.csv": "8f3383967af6690dd4bdeeb2e47815ae7a8d6bb730bd679ebe1957980d3ed5b6",
+    "protocol.json": "5d74a0e875c619c4f73a745ac17d4e604a15cb32f663c45b60176878a5f0d7af",
+    "summary.json": "3badfb9ac9ab3f3229c0fb36649e5e438dcd230e21718a96d624d5f42e11a2f6"
+  }
+}
