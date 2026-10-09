@@ -1,0 +1,1689 @@
+{
+  "status": "independently_verified",
+  "audits": {
+    "motor_003": {
+      "maximum_cdf_count": 14,
+      "maximum_smd": 0.0947260909651206,
+      "variance_ratios": [
+        13.094382085145384,
+        4.185372295156002,
+        4.9111871709896695,
+        1.8392082645804153,
+        0.9230016193895515,
+        1.2872996610291767
+      ]
+    },
+    "motor_004": {
+      "maximum_cdf_count": 14,
+      "maximum_smd": 0.09067465965069178,
+      "variance_ratios": [
+        13.081409638706193,
+        4.172551808591269,
+        4.910467478481982,
+        1.8330764924987486,
+        0.9310318090198705,
+        1.2781552106503817
+      ]
+    },
+    "motor_005": {
+      "maximum_cdf_count": 14,
+      "maximum_smd": 0.08071178836064405,
+      "variance_ratios": [
+        12.995603251879905,
+        4.187217225085222,
+        4.891472738033058,
+        1.8439311871256938,
+        0.9398503875686105,
+        1.2781552106503817
+      ]
+    },
+    "new_0": {
+      "maximum_cdf_count": 17,
+      "maximum_smd": 0.06768379429603426,
+      "variance_ratios": [
+        6.96380613175916,
+        3.3081466034374007,
+        2.905151662192018,
+        1.6173935896349467,
+        0.926942879326954,
+        0.9804833471849872
+      ]
+    },
+    "new_1": {
+      "maximum_cdf_count": 16,
+      "maximum_smd": 0.09290857943788618,
+      "variance_ratios": [
+        6.899593279306831,
+        3.2410777267268696,
+        2.8992596181885393,
+        1.5544080034217438,
+        0.926942879326954,
+        0.9625165493110818
+      ]
+    },
+    "new_2": {
+      "maximum_cdf_count": 16,
+      "maximum_smd": 0.06768379429603426,
+      "variance_ratios": [
+        7.017200403213272,
+        3.3297506157172165,
+        2.9452806462289893,
+        1.616131947805987,
+        0.926942879326954,
+        0.9663238277785033
+      ]
+    },
+    "new_3": {
+      "maximum_cdf_count": 18,
+      "maximum_smd": 0.07621939496888729,
+      "variance_ratios": [
+        7.122326715306445,
+        3.3155597278728535,
+        2.9764146900059703,
+        1.6116729045579667,
+        0.930163228650528,
+        0.9912496747473916
+      ]
+    },
+    "new_4": {
+      "maximum_cdf_count": 17,
+      "maximum_smd": 0.08644623939288164,
+      "variance_ratios": [
+        7.067670880461048,
+        3.2538567992308796,
+        2.9735110039962,
+        1.5492815563046758,
+        0.930163228650528,
+        0.9730771724079527
+      ]
+    },
+    "new_5": {
+      "maximum_cdf_count": 17,
+      "maximum_smd": 0.06988168376941828,
+      "variance_ratios": [
+        7.182321465378437,
+        3.3376612601889355,
+        3.018366740364327,
+        1.6104050655323014,
+        0.930163228650528,
+        0.9777932786929923
+      ]
+    },
+    "new_12": {
+      "maximum_cdf_count": 17,
+      "maximum_smd": 0.07760103492534842,
+      "variance_ratios": [
+        6.957958582642823,
+        3.310170103935375,
+        2.9041968687072344,
+        1.6208036971276096,
+        0.9092180577816056,
+        0.985482275037871
+      ]
+    },
+    "new_13": {
+      "maximum_cdf_count": 16,
+      "maximum_smd": 0.09444633232683528,
+      "variance_ratios": [
+        6.894539529875727,
+        3.2427397526577533,
+        2.8985558870830106,
+        1.5574385219559366,
+        0.9092180577816056,
+        0.967337520373074
+      ]
+    },
+    "new_14": {
+      "maximum_cdf_count": 16,
+      "maximum_smd": 0.07760103492534842,
+      "variance_ratios": [
+        7.01190108557089,
+        3.3317406010120196,
+        2.9444790149052147,
+        1.6195460139610072,
+        0.9092180577816056,
+        0.9719310339933251
+      ]
+    },
+    "new_15": {
+      "maximum_cdf_count": 18,
+      "maximum_smd": 0.08520670122040387,
+      "variance_ratios": [
+        7.116048006592909,
+        3.3177357065604363,
+        2.9753537648667887,
+        1.61511522456254,
+        0.9124804468370588,
+        0.9960584094322164
+      ]
+    },
+    "new_16": {
+      "maximum_cdf_count": 17,
+      "maximum_smd": 0.09546616993631922,
+      "variance_ratios": [
+        7.062185971432746,
+        3.255671303351371,
+        2.972701141236274,
+        1.5523442873507787,
+        0.9124804468370588,
+        0.9777079503018857
+      ]
+    },
+    "new_17": {
+      "maximum_cdf_count": 17,
+      "maximum_smd": 0.07524399760300514,
+      "variance_ratios": [
+        7.176590988138856,
+        3.339803723673345,
+        3.017458977386154,
+        1.6138513441992313,
+        0.9124804468370588,
+        0.9832102917397552
+      ]
+    },
+    "pool_538_unconstrained_overlap": {
+      "maximum_cdf_count": 8,
+      "maximum_smd": 0.070703598596765,
+      "variance_ratios": [
+        3.4375977337817147,
+        2.723704429696999,
+        1.9196569646064938,
+        1.5270140016670117,
+        0.926260282309242,
+        1.105952777297369
+      ]
+    },
+    "pool_538_cap_30": {
+      "maximum_cdf_count": 11,
+      "maximum_smd": 0.07009838419956213,
+      "variance_ratios": [
+        4.522469698645987,
+        3.3890998690179615,
+        2.2767156912371136,
+        1.7149911371015998,
+        0.9243666081017946,
+        1.1170326837212943
+      ]
+    },
+    "pool_999_unconstrained_overlap": {
+      "maximum_cdf_count": 8,
+      "maximum_smd": 0.070703598596765,
+      "variance_ratios": [
+        3.4377568372088283,
+        2.727232369315762,
+        1.9199806528450822,
+        1.5276751318922022,
+        0.926260282309242,
+        1.1029679399653287
+      ]
+    },
+    "pool_999_cap_30": {
+      "maximum_cdf_count": 10,
+      "maximum_smd": 0.0709552073368373,
+      "variance_ratios": [
+        4.7412187649207596,
+        3.383789974092866,
+        2.3403703117205996,
+        1.689747437359141,
+        0.9256871263803701,
+        1.1230954019657637
+      ]
+    }
+  },
+  "names": [
+    "motor_003",
+    "motor_004",
+    "motor_005",
+    "new_0",
+    "new_1",
+    "new_2",
+    "new_3",
+    "new_4",
+    "new_5",
+    "new_12",
+    "new_13",
+    "new_14",
+    "new_15",
+    "new_16",
+    "new_17",
+    "pool_538_unconstrained_overlap",
+    "pool_538_cap_30",
+    "pool_999_unconstrained_overlap",
+    "pool_999_cap_30"
+  ],
+  "overlaps": [
+    [
+      51,
+      50,
+      50,
+      21,
+      22,
+      22,
+      21,
+      22,
+      22,
+      20,
+      21,
+      21,
+      20,
+      21,
+      21,
+      34,
+      29,
+      34,
+      29
+    ],
+    [
+      50,
+      51,
+      50,
+      21,
+      22,
+      22,
+      21,
+      22,
+      22,
+      20,
+      21,
+      21,
+      20,
+      21,
+      21,
+      35,
+      30,
+      35,
+      30
+    ],
+    [
+      50,
+      50,
+      51,
+      21,
+      22,
+      22,
+      21,
+      22,
+      22,
+      20,
+      21,
+      21,
+      20,
+      21,
+      21,
+      35,
+      30,
+      35,
+      30
+    ],
+    [
+      21,
+      21,
+      21,
+      51,
+      50,
+      50,
+      50,
+      49,
+      49,
+      50,
+      49,
+      49,
+      49,
+      48,
+      48,
+      29,
+      30,
+      29,
+      30
+    ],
+    [
+      22,
+      22,
+      22,
+      50,
+      51,
+      50,
+      49,
+      50,
+      49,
+      49,
+      50,
+      49,
+      48,
+      49,
+      48,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      22,
+      22,
+      22,
+      50,
+      50,
+      51,
+      49,
+      49,
+      50,
+      49,
+      49,
+      50,
+      48,
+      48,
+      49,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      21,
+      21,
+      21,
+      50,
+      49,
+      49,
+      51,
+      50,
+      50,
+      49,
+      48,
+      48,
+      50,
+      49,
+      49,
+      29,
+      30,
+      29,
+      30
+    ],
+    [
+      22,
+      22,
+      22,
+      49,
+      50,
+      49,
+      50,
+      51,
+      50,
+      48,
+      49,
+      48,
+      49,
+      50,
+      49,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      22,
+      22,
+      22,
+      49,
+      49,
+      50,
+      50,
+      50,
+      51,
+      48,
+      48,
+      49,
+      49,
+      49,
+      50,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      20,
+      20,
+      20,
+      50,
+      49,
+      49,
+      49,
+      48,
+      48,
+      51,
+      50,
+      50,
+      50,
+      49,
+      49,
+      29,
+      30,
+      29,
+      30
+    ],
+    [
+      21,
+      21,
+      21,
+      49,
+      50,
+      49,
+      48,
+      49,
+      48,
+      50,
+      51,
+      50,
+      49,
+      50,
+      49,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      21,
+      21,
+      21,
+      49,
+      49,
+      50,
+      48,
+      48,
+      49,
+      50,
+      50,
+      51,
+      49,
+      49,
+      50,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      20,
+      20,
+      20,
+      49,
+      48,
+      48,
+      50,
+      49,
+      49,
+      50,
+      49,
+      49,
+      51,
+      50,
+      50,
+      29,
+      30,
+      29,
+      30
+    ],
+    [
+      21,
+      21,
+      21,
+      48,
+      49,
+      48,
+      49,
+      50,
+      49,
+      49,
+      50,
+      49,
+      50,
+      51,
+      50,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      21,
+      21,
+      21,
+      48,
+      48,
+      49,
+      49,
+      49,
+      50,
+      49,
+      49,
+      50,
+      50,
+      50,
+      51,
+      30,
+      30,
+      30,
+      30
+    ],
+    [
+      34,
+      35,
+      35,
+      29,
+      30,
+      30,
+      29,
+      30,
+      30,
+      29,
+      30,
+      30,
+      29,
+      30,
+      30,
+      51,
+      39,
+      50,
+      38
+    ],
+    [
+      29,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      39,
+      51,
+      39,
+      47
+    ],
+    [
+      34,
+      35,
+      35,
+      29,
+      30,
+      30,
+      29,
+      30,
+      30,
+      29,
+      30,
+      30,
+      29,
+      30,
+      30,
+      50,
+      39,
+      51,
+      39
+    ],
+    [
+      29,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      38,
+      47,
+      39,
+      51
+    ]
+  ],
+  "frontier": [
+    {
+      "maximum_cdf_count": 8,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "pool_538_unconstrained_overlap"
+      ]
+    },
+    {
+      "maximum_cdf_count": 8,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "pool_538_unconstrained_overlap",
+        "pool_999_unconstrained_overlap"
+      ]
+    },
+    {
+      "maximum_cdf_count": 10,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 10,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 38,
+      "witness": [
+        "pool_538_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 10,
+      "family_size_at_least": 3,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "pool_538_unconstrained_overlap",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 11,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "pool_538_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 11,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 38,
+      "witness": [
+        "pool_538_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 11,
+      "family_size_at_least": 3,
+      "minimum_overlap_cap": 47,
+      "witness": [
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 11,
+      "family_size_at_least": 4,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "motor_003"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 29,
+      "witness": [
+        "motor_003",
+        "pool_538_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 3,
+      "minimum_overlap_cap": 38,
+      "witness": [
+        "motor_003",
+        "pool_538_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 4,
+      "minimum_overlap_cap": 47,
+      "witness": [
+        "motor_003",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 5,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 6,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 14,
+      "family_size_at_least": 7,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "new_1"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 21,
+      "witness": [
+        "motor_003",
+        "new_13"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 3,
+      "minimum_overlap_cap": 30,
+      "witness": [
+        "motor_003",
+        "new_1",
+        "pool_538_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 4,
+      "minimum_overlap_cap": 38,
+      "witness": [
+        "motor_003",
+        "new_1",
+        "pool_538_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 5,
+      "minimum_overlap_cap": 47,
+      "witness": [
+        "motor_003",
+        "new_1",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 6,
+      "minimum_overlap_cap": 49,
+      "witness": [
+        "motor_003",
+        "new_2",
+        "new_13",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 7,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_1",
+        "new_2",
+        "new_13",
+        "new_14",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 8,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_1",
+        "new_2",
+        "new_13",
+        "new_14",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 9,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_1",
+        "new_2",
+        "new_13",
+        "new_14",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 10,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_1",
+        "new_2",
+        "new_13",
+        "new_14",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 16,
+      "family_size_at_least": 11,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_1",
+        "new_2",
+        "new_13",
+        "new_14",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "new_0"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 20,
+      "witness": [
+        "motor_003",
+        "new_12"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 3,
+      "minimum_overlap_cap": 30,
+      "witness": [
+        "motor_003",
+        "new_0",
+        "pool_538_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 4,
+      "minimum_overlap_cap": 38,
+      "witness": [
+        "motor_003",
+        "new_0",
+        "pool_538_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 5,
+      "minimum_overlap_cap": 47,
+      "witness": [
+        "motor_003",
+        "new_0",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 6,
+      "minimum_overlap_cap": 48,
+      "witness": [
+        "motor_003",
+        "new_4",
+        "new_12",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 7,
+      "minimum_overlap_cap": 49,
+      "witness": [
+        "motor_003",
+        "new_1",
+        "new_5",
+        "new_12",
+        "new_16",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 8,
+      "minimum_overlap_cap": 49,
+      "witness": [
+        "motor_003",
+        "new_1",
+        "new_5",
+        "new_12",
+        "new_16",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 9,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 10,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 11,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 12,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 13,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 14,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 15,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 16,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 17,
+      "family_size_at_least": 17,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 1,
+      "minimum_overlap_cap": 0,
+      "witness": [
+        "new_3"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 2,
+      "minimum_overlap_cap": 20,
+      "witness": [
+        "motor_003",
+        "new_15"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 3,
+      "minimum_overlap_cap": 30,
+      "witness": [
+        "motor_003",
+        "new_3",
+        "pool_538_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 4,
+      "minimum_overlap_cap": 38,
+      "witness": [
+        "motor_003",
+        "new_3",
+        "pool_538_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 5,
+      "minimum_overlap_cap": 47,
+      "witness": [
+        "motor_003",
+        "new_3",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 6,
+      "minimum_overlap_cap": 48,
+      "witness": [
+        "motor_003",
+        "new_3",
+        "new_13",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 7,
+      "minimum_overlap_cap": 49,
+      "witness": [
+        "motor_003",
+        "new_0",
+        "new_4",
+        "new_13",
+        "new_15",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 8,
+      "minimum_overlap_cap": 49,
+      "witness": [
+        "motor_003",
+        "new_0",
+        "new_4",
+        "new_13",
+        "new_15",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 9,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 10,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 11,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 12,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 13,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 14,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 15,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 16,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 17,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 18,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    },
+    {
+      "maximum_cdf_count": 18,
+      "family_size_at_least": 19,
+      "minimum_overlap_cap": 50,
+      "witness": [
+        "motor_003",
+        "motor_004",
+        "motor_005",
+        "new_0",
+        "new_1",
+        "new_2",
+        "new_3",
+        "new_4",
+        "new_5",
+        "new_12",
+        "new_13",
+        "new_14",
+        "new_15",
+        "new_16",
+        "new_17",
+        "pool_538_unconstrained_overlap",
+        "pool_538_cap_30",
+        "pool_999_unconstrained_overlap",
+        "pool_999_cap_30"
+      ]
+    }
+  ],
+  "checked_threshold_pairs": 2704,
+  "enumerated_subsets": 524288,
+  "capacity_at_cap_30": {
+    "8": 1,
+    "10": 1,
+    "11": 1,
+    "14": 2,
+    "16": 3,
+    "17": 3,
+    "18": 3
+  },
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "completed_utc": "2026-10-09T02:02:12.833716+00:00"
+}

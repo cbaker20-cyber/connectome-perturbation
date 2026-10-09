@@ -1,5 +1,7 @@
 # Research overview: hypothesis, experiments and current evidence
 
+[Saved comparison-family audit, 8 October](FAMILY_CAPACITY_20261008.md): exhaustive checks of all nineteen candidates show that the existing thirty-cell pairwise overlap cap permits only one set at CDF gap <=11/51; a three-set family requires allowing >=16/51. This is a saved-family limitation, not full-pool infeasibility. No new simulation was launched.
+
 [Distribution-matching continuation, 8 October](DISTRIBUTION_MATCHING_20261008.md): verified searches in nested 538- and 999-cell pools retain an uncapped gap of 8/51; expansion improves the capped gap from 11/51 to 10/51 while worsening incoming-degree variance balance. Candidates remain unsimulated and overlapping. Exact motor strata force at least a 5/51 gap even in the full eligible pool. No CCR simulation was launched.
 
 8 October research continuation: [fine-step contrast audit and comparison-design work](RESEARCH_CONTINUATION_20261008.md) confirm persistent ordering against the fixed alternatives and identify a different feasible comparison family. Remaining distribution imbalance and overlap prevent an eigencircuit-specific conclusion; no new simulation was launched.

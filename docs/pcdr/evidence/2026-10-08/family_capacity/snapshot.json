@@ -1,0 +1,16 @@
+{
+  "source": "results\\pcdr\\family_capacity_20261008",
+  "files": {
+    "protocol.json": "0f82a5cd74137468fd1c8189f8c93fcdd5e06527d6f871d1b217e70db5bd4d00",
+    "results.json": "a8bf932256cf49624812af9c451a3746607f68d2d0ca37dc10ed1f2c64d25ad7",
+    "complete.json": "4ebbb051928479537ab0d4d4f35120416fae1b7e45091ab6def5a549e228e5a8"
+  },
+  "additional_checks": [
+    "All 19 CDF maxima reproduced using raw-feature integer counts, without the sorted-CDF helper.",
+    "All pairwise overlaps reproduced by a pandas membership-incidence matrix product.",
+    "All saved frontier witnesses satisfy their stated gap, size and overlap requirements.",
+    "Frozen input hashes and snapshot copy hashes match."
+  ],
+  "tests_passed": 10,
+  "simulations_launched": false
+}

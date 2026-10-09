@@ -105,3 +105,5 @@ Full evidence is in results/pcdr/distribution_match_20261008. The [compact snaps
 
 
 Expansion reproduction uses `.venv/Scripts/python.exe scripts/pcdr_expand_distribution_pool.py --out <unused-directory>`, then the same independent verifier with `--study <directory> --out <new-verification.json>`. Thirty focused tests pass across `test_pcdr_expand_distribution_pool.py`, `test_pcdr_distribution_match.py` and `test_pcdr_verify_distribution_match.py` (26 dependency deprecation warnings). Added checks cover nested pools, deterministic exact-ID ties, stratum exclusions, invalid neighbor counts, duplicate IDs and ineligible reference members. No simulation suite was repeated because simulation code was unchanged. The expansion and its documentation also used Codex assistance.
+
+The subsequent [saved-family capacity audit](FAMILY_CAPACITY_20261008.md) is complete. Across all nineteen saved candidates, no pair simultaneously meets a CDF gap allowance of 11/51 and a thirty-cell overlap cap. This is an exhaustive audit of existing memberships; construction of a new family remains proposed.
