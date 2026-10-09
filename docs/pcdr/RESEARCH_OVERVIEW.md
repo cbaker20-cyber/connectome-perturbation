@@ -1,5 +1,7 @@
 # Research overview: hypothesis, experiments and current evidence
 
+[Early G/H divergence, 8 October](PATHWAY_DIVERGENCE_20261008.md): separate removals first change different outside neurons, then share many early changed neurons. Most early event differences preserve per-neuron window counts; the finer non-burst case has more early changed neurons. No common causal mediator is established.
+
 [Reference-cap ablation and amended pairs, 8 October](REFERENCE_ABLATION_20261008.md): all eight fractional diagnostics verified. Dropping old-reference caps permits two fixed-anchor pairs with thirty shared cells, but partner degree-variance ratios reach 9.14–10.43. These unsimulated witnesses answer the weaker amended design only.
 
 [Fixed-anchor alternatives and constraint review, 8 October](ANCHOR_FAMILY_20261008.md): both existing capped anchors fail partner construction under the thirty-cell overlap cap. Independent overlap bounds exceed 31 for each, supporting at least 32 shared cells under the recorded design. General joint feasibility remains unresolved.

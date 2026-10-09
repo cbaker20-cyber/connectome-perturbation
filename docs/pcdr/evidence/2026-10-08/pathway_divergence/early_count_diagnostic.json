@@ -1,0 +1,47 @@
+{
+  "purpose": "Post-result decomposition of pre-650 event differences into changed versus unchanged window counts; includes source and targets.",
+  "cases": {
+    "late_g_0.0004": {
+      "event_changed_neurons": 196,
+      "count_changed_neurons": 23,
+      "event_changed_but_same_count": 173,
+      "absolute_per_neuron_count_change": 24,
+      "net_spike_change": -14
+    },
+    "late_h_0.0004": {
+      "event_changed_neurons": 182,
+      "count_changed_neurons": 22,
+      "event_changed_but_same_count": 160,
+      "absolute_per_neuron_count_change": 23,
+      "net_spike_change": -15
+    },
+    "late_edges_0.0004": {
+      "event_changed_neurons": 230,
+      "count_changed_neurons": 32,
+      "event_changed_but_same_count": 198,
+      "absolute_per_neuron_count_change": 34,
+      "net_spike_change": -16
+    },
+    "late_g_0.0002": {
+      "event_changed_neurons": 306,
+      "count_changed_neurons": 15,
+      "event_changed_but_same_count": 291,
+      "absolute_per_neuron_count_change": 15,
+      "net_spike_change": 3
+    },
+    "late_h_0.0002": {
+      "event_changed_neurons": 301,
+      "count_changed_neurons": 15,
+      "event_changed_but_same_count": 286,
+      "absolute_per_neuron_count_change": 15,
+      "net_spike_change": 3
+    },
+    "late_edges_0.0002": {
+      "event_changed_neurons": 313,
+      "count_changed_neurons": 17,
+      "event_changed_but_same_count": 296,
+      "absolute_per_neuron_count_change": 17,
+      "net_spike_change": 1
+    }
+  }
+}

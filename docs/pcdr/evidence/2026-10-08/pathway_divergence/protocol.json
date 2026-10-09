@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-10-09T03:29:04.603163+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\CCR_separate_pathway_results.zip": "b042e45569de75f90486cef1fe5cacc1917ceb79014c8a9bb8cb9688eb151dca",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-08\\separate_review.json": "38cef82ae6784e5e607a6743de4e053726f09b3b701cb7fcc75c8790c47dc9c0",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_pathway_divergence.py": "dc0141f5215fb7f4604ac6f4619392fe09b8f278627e9e2d3668bdfe03e927ed"
+  },
+  "question": "When do each intervention and reference first differ outside the source and two targets, and which early changed neurons are shared?",
+  "design": "All six reference-versus-intervention comparisons. Exact neuron/tick symmetric difference; retain every changed event and first change per neuron. Summaries use fixed [600,610), [610,620), [620,650), [650,730), [730,750) ms windows and common changed-neuron sets before 650 ms. Recheck all pre-switch prefixes. No causal path inference from event order.",
+  "status": "Post-result descriptive analysis; original endpoints and convergence rules unchanged. No simulation."
+}
