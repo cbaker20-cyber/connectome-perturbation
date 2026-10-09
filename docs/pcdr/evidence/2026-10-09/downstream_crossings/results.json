@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "records": [
+    {
+      "trial": "late_g_0.0004",
+      "target_id": "720575940619397797",
+      "time_ms": 618.936,
+      "reference": {
+        "previous_voltage_mv": -45.00002736602623,
+        "crossing_voltage_mv": -44.9998676842076,
+        "ready": true,
+        "saved_spike_at_tick": true,
+        "last_reset_ms": 567.3676
+      },
+      "intervention": {
+        "previous_voltage_mv": -45.00666928126261,
+        "crossing_voltage_mv": -45.00651552921246,
+        "ready": true,
+        "saved_spike_at_tick": false,
+        "last_reset_ms": 567.3676
+      },
+      "crossing_check_passed": true
+    },
+    {
+      "trial": "late_h_0.0004",
+      "target_id": "720575940635451546",
+      "time_ms": 620.4536,
+      "reference": {
+        "previous_voltage_mv": -45.00021714881233,
+        "crossing_voltage_mv": -44.99977505680727,
+        "ready": true,
+        "saved_spike_at_tick": true,
+        "last_reset_ms": 564.9540000000001
+      },
+      "intervention": {
+        "previous_voltage_mv": -45.00063164134983,
+        "crossing_voltage_mv": -45.00019610754635,
+        "ready": true,
+        "saved_spike_at_tick": false,
+        "last_reset_ms": 564.9540000000001
+      },
+      "crossing_check_passed": true
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "target_id": "720575940619397797",
+      "time_ms": 618.936,
+      "reference": {
+        "previous_voltage_mv": -45.00002736602623,
+        "crossing_voltage_mv": -44.9998676842076,
+        "ready": true,
+        "saved_spike_at_tick": true,
+        "last_reset_ms": 567.3676
+      },
+      "intervention": {
+        "previous_voltage_mv": -45.00666928126261,
+        "crossing_voltage_mv": -45.00651552921246,
+        "ready": true,
+        "saved_spike_at_tick": false,
+        "last_reset_ms": 567.3676
+      },
+      "crossing_check_passed": true
+    },
+    {
+      "trial": "late_g_0.0002",
+      "target_id": "720575940605420902",
+      "time_ms": 606.9870000000001,
+      "reference": {
+        "previous_voltage_mv": -45.00004478718287,
+        "crossing_voltage_mv": -44.99997714836718,
+        "ready": true,
+        "saved_spike_at_tick": true,
+        "last_reset_ms": 564.0594
+      },
+      "intervention": {
+        "previous_voltage_mv": -45.51094983768743,
+        "crossing_voltage_mv": -45.51093834287529,
+        "ready": true,
+        "saved_spike_at_tick": false,
+        "last_reset_ms": 564.0594
+      },
+      "crossing_check_passed": true
+    },
+    {
+      "trial": "late_h_0.0002",
+      "target_id": "720575940629489260",
+      "time_ms": 608.8404,
+      "reference": {
+        "previous_voltage_mv": -45.000059097843156,
+        "crossing_voltage_mv": -44.999961305650196,
+        "ready": true,
+        "saved_spike_at_tick": true,
+        "last_reset_ms": null
+      },
+      "intervention": {
+        "previous_voltage_mv": -45.01941485318674,
+        "crossing_voltage_mv": -45.01931936455569,
+        "ready": true,
+        "saved_spike_at_tick": false,
+        "last_reset_ms": null
+      },
+      "crossing_check_passed": true
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "target_id": "720575940605420902",
+      "time_ms": 606.9870000000001,
+      "reference": {
+        "previous_voltage_mv": -45.00004478718287,
+        "crossing_voltage_mv": -44.99997714836718,
+        "ready": true,
+        "saved_spike_at_tick": true,
+        "last_reset_ms": 564.0594
+      },
+      "intervention": {
+        "previous_voltage_mv": -45.51094983768743,
+        "crossing_voltage_mv": -45.51093834287529,
+        "ready": true,
+        "saved_spike_at_tick": false,
+        "last_reset_ms": 564.0594
+      },
+      "crossing_check_passed": true
+    }
+  ],
+  "completed_utc": "2026-10-09T05:35:20.575657+00:00"
+}

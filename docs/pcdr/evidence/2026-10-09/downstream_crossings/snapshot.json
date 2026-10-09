@@ -1,0 +1,10 @@
+{
+  "source": "results\\pcdr\\downstream_crossings_20261009",
+  "files": {
+    "difference_check.json": "69a7a8af3dca4ae759c90c5860827dbbe3b3c9b999d83957435fe97907f27a2c",
+    "protocol.json": "9b14d3a18e0cc67d682bd4a6c4e8ced5f1566aa97e7bf9902d41ac8b6a350199",
+    "results.json": "731df7da40d4e09c7865107863d016234df623fa8063a753d5eb2af6362ec5a2"
+  },
+  "tests_passed": 12,
+  "full_network_simulation": false
+}

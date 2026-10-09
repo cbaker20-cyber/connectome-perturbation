@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Conditional downstream crossings, 9 October](DOWNSTREAM_CROSSINGS_20261009.md): all six endpoint checks pass using observed reset histories; free-running local replay remains pending. [Overnight progress](OVERNIGHT_PROGRESS_20261009.md) records the next bounded check. Convergence remains unestablished.
+
 [Direct routes to first outside changes, 8 October](PATHWAY_ROUTES_20261008.md): all six earliest outside differences have a compatible direct G/H connection; each has exactly one changed incoming presynaptic emission able to arrive beforehand. This localizes the first input difference, not the complete burst mechanism.
 
 [Early G/H divergence, 8 October](PATHWAY_DIVERGENCE_20261008.md): separate removals first change different outside neurons, then share many early changed neurons. Most early event differences preserve per-neuron window counts; the finer non-burst case has more early changed neurons. No common causal mediator is established.

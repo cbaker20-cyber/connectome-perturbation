@@ -1,0 +1,41 @@
+{
+  "method": "Independent two-state matrix exponential for each sole missing input; comparison to reconstructed voltage difference. Checks the difference, not absolute voltage or a free-running trajectory.",
+  "checks": [
+    {
+      "trial": "late_g_0.0004",
+      "matrix_exponential_voltage_difference_mv": -0.006647845004851609,
+      "reconstruction_difference_mv": -0.006647845004856379,
+      "error_mv": 4.769622197198231e-15
+    },
+    {
+      "trial": "late_h_0.0004",
+      "matrix_exponential_voltage_difference_mv": -0.0004210507390764398,
+      "reconstruction_difference_mv": -0.0004210507390780549,
+      "error_mv": 1.6150817662430317e-15
+    },
+    {
+      "trial": "late_edges_0.0004",
+      "matrix_exponential_voltage_difference_mv": -0.006647845004851609,
+      "reconstruction_difference_mv": -0.006647845004856379,
+      "error_mv": 4.769622197198231e-15
+    },
+    {
+      "trial": "late_g_0.0002",
+      "matrix_exponential_voltage_difference_mv": -0.5109611945081174,
+      "reconstruction_difference_mv": -0.5109611945081127,
+      "error_mv": 4.6629367034256575e-15
+    },
+    {
+      "trial": "late_h_0.0002",
+      "matrix_exponential_voltage_difference_mv": -0.019358058905497487,
+      "reconstruction_difference_mv": -0.019358058905496023,
+      "error_mv": 1.4641066137244252e-15
+    },
+    {
+      "trial": "late_edges_0.0002",
+      "matrix_exponential_voltage_difference_mv": -0.5109611945081174,
+      "reconstruction_difference_mv": -0.5109611945081127,
+      "error_mv": 4.6629367034256575e-15
+    }
+  ]
+}

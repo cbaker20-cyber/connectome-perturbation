@@ -1,0 +1,12 @@
+{
+  "recorded_utc": "2026-10-09T05:35:12.698414+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_downstream_crossings.py": "ab28fa1f2f824d8e15a98fa03a6252607d9050956835fb7356f9e3b5ab525d13",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_recurrent_delivery.py": "8d3ea61184dc6143f96467b42a785a12e4bb5696ab07b01c4f8d88844ef8f074",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_first_spike.py": "75359b3fbf2bd4a0bbd7dd6a80a174472ab0dd40210ef2528d2f045761f8e5e6",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\pathway_routes_20261008\\results.json": "81474b500581f946aa818edd7e42a3e7230d149fd1c3bc42b58284ec5a045c9a",
+    "C:\\Users\\Baker\\Drosophila_Data\\CCR_separate_pathway_results.zip": "b042e45569de75f90486cef1fe5cacc1917ceb79014c8a9bb8cb9688eb151dca"
+  },
+  "design": "Six first outside events; evaluate reference and intervention voltage at previous and crossing ticks using archived incoming spikes, observed resets, 1.8 ms delay, refractory gating and exact linear impulse kernel. Require reference prior tick <= -45 and crossing > -45; intervention crossing <= -45. Preserve failures. No free-running replay or fitted parameters.",
+  "limitation": "Conditional on observed spike/reset histories. Matching these crossings is not full-trajectory reproduction or convergence. No counterfactual network simulation."
+}
