@@ -1,0 +1,10 @@
+{
+  "recorded_utc": "2026-10-09T14:04:56.542031+00:00",
+  "selection": "Smallest/largest selected seed; both matching rules; both mixed histories, eight checks.",
+  "inputs": {
+    "results\\pcdr\\history_parts_20261009\\verify_sequential.py": "54a20c3f9ea51c674ad98f9dde9ce96ee3bebcdecdd270abc416218ad99d86be",
+    "tests\\test_pcdr_local_replay.py": "0c660903fc29a45426d20570d41ae6caff027a6bcea4430a044272b288bafa66",
+    "results\\pcdr\\history_parts_20261009\\results.json": "c52afb2ed06ad5b8ffa67dceb99731bad140838b61280c559c4cd09e8fd8117d"
+  },
+  "deadline_seconds": 60
+}

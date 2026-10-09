@@ -1,0 +1,16 @@
+{
+  "recorded_utc": "2026-10-09T14:03:06.814709+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_history_parts.py": "8109dfe2e86e44f31ca1609483cc3f83d869c41ca4aecee01679c7d401a68bfd",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_local_replay.py": "54342e9a27d2892b726421888f6b2548f859d704440a2484d6c6a271597043d6",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\results.json": "94a3ad9e93df982ef63b4e1822bcb535369411bfba22fc0998aa40a6a769656c",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\snapshot.json": "912f63f16ad855b69b89811a628af36e8fbec0cb948323bae47937ed0f46457e",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+    "C:\\Users\\Baker\\Drosophila_Data\\2023_03_23_connectivity_630_final.parquet": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_counts\\summary.json": "3badfb9ac9ab3f3229c0fb36649e5e438dcd230e21718a96d624d5f42e11a2f6"
+  },
+  "design": "Keep prior 26 count-selected cases and four absent cases. Within each presynaptic ID, pair first min(nc,nf) arrivals by order, then repeat pairing last min(nc,nf) as sensitivity. Paired timestamps and remaining surplus histories define a 2x2: cc=coarse paired/coarse surplus; cf=coarse paired/fine surplus; fc=fine paired/coarse surplus; ff=fine paired/fine surplus. All replay at .0001 ms through original checkpoint.",
+  "interpretation": "Timing contrasts hold per-source counts fixed; surplus contrasts change unmatched event counts AND their times. Surplus is matching-rule dependent, not proof of inserted/deleted physical spikes. Hybrids may duplicate same-source times or violate source refractoriness: retain and report duplicate events, never call them realizable network activity. No claim of a unique causal timing/count decomposition.",
+  "budget": "One local worker with 180-second deadline, no network simulation or automatic retry. Require both original endpoint histories to match prior validated replay exactly.",
+  "outputs": "Per-source partition, all spike lists and local input arrays. Report both rules including opposing/null effects, not only desired results."
+}

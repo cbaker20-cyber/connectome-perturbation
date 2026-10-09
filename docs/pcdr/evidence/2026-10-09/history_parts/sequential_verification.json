@@ -1,0 +1,53 @@
+{
+  "verified_utc": "2026-10-09T14:05:07.935502+00:00",
+  "checks": [
+    {
+      "seed": 631401,
+      "rule": "first",
+      "history": "cf",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631401,
+      "rule": "first",
+      "history": "fc",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631401,
+      "rule": "last",
+      "history": "cf",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631401,
+      "rule": "last",
+      "history": "fc",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631430,
+      "rule": "first",
+      "history": "cf",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631430,
+      "rule": "first",
+      "history": "fc",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631430,
+      "rule": "last",
+      "history": "cf",
+      "exact_ticks": true
+    },
+    {
+      "seed": 631430,
+      "rule": "last",
+      "history": "fc",
+      "exact_ticks": true
+    }
+  ]
+}

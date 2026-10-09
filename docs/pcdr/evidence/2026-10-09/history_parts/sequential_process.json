@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "-c",
+    "import runpy; runpy.run_path('results/pcdr/history_parts_20261009/verify_sequential.py')"
+  ],
+  "pid": 31688,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 11.420999999972992,
+  "deadline_seconds": 60,
+  "cleanup": null
+}

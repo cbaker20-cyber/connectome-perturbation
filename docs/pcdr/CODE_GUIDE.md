@@ -401,3 +401,7 @@ The separate-connection extension uses the same late-switch class with one selec
 ## Baseline event and count replay, 9 October 2026
 
 `pcdr_baseline_events.py` selects the earliest non-input ordinal spike gap exceeding one coarse tick per seed and reuses `pcdr_local_replay.replay` on saved incoming histories. `pcdr_baseline_count_replay.py` preserves a separately recorded amendment selecting the first fixed 100-ms checkpoint with at least a two-spike gap, largest gap then root-ID tie break. Both verify native prefixes before comparing incoming histories at a fixed fine step, retain no-selection cases/failures, and bound the worker to 180 seconds. Separate dated scripts retain the executed selection/source provenance; do not run them as a new network experiment. BASELINE_REPLAY_20261009.md details interpretation and verification.
+
+## Incoming-history pairing sensitivity, 9 October 2026
+
+`pcdr_history_parts.py` retains the prior 26 selected target/checkpoint cases and four absent seeds. It pairs arrivals within source IDs from the beginning and end, replays the two-by-two paired-time/surplus combinations at fixed fine dt, and requires reconstructed original histories to match prior verified target ticks. Seven selection/partition tests passed. Separate verification checks all input constructions and flags source refractory violations. HISTORY_PARTS_20261009.md explains why mixed histories cannot give a unique timing/count attribution.
