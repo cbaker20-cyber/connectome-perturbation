@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_joint_family.py",
+    "--out",
+    "results\\pcdr\\joint_family_20261008",
+    "--worker"
+  ],
+  "pid": 20540,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 64.375,
+  "deadline_seconds": 100,
+  "cleanup": null
+}

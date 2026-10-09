@@ -1,0 +1,18 @@
+{
+  "source": "results\\pcdr\\joint_family_20261008",
+  "files": {
+    "protocol.json": "c0702d716d6de9dcff10c89c6cd5dcdecb4d44bb5a18d36e6b96d63bee86f035",
+    "process.json": "8ab83423417837257070c6fc98b108037a3ecc78c7b99f5e827cfbbe34c28d9e",
+    "result.json": "fb17a9915d264afbdf337f758a86319054b3b9857bda3d6b27c2b30175beedce",
+    "verification.json": "c34ce547391dbdf7fce33e474e89142106bdfbf2c0598572e66a66d4b8974906"
+  },
+  "log_hashes": {
+    "results\\pcdr\\joint_family_20261008\\logs\\stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results\\pcdr\\joint_family_20261008\\logs\\stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests_passed": 37,
+  "worker_seconds": 64.375,
+  "research_outcome": "Unresolved: internal solver time limit without an incumbent or reported bound.",
+  "simulation": false,
+  "retries": 0
+}

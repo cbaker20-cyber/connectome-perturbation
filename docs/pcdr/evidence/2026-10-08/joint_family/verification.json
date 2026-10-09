@@ -1,0 +1,13 @@
+{
+  "status": "time_limit_without_incumbent",
+  "audits": [],
+  "pairwise_overlap": null,
+  "checked_utc": "2026-10-09T02:13:33.174769+00:00",
+  "inputs": {
+    "results\\pcdr\\joint_family_20261008\\protocol.json": "c0702d716d6de9dcff10c89c6cd5dcdecb4d44bb5a18d36e6b96d63bee86f035",
+    "results\\pcdr\\joint_family_20261008\\process.json": "8ab83423417837257070c6fc98b108037a3ecc78c7b99f5e827cfbbe34c28d9e",
+    "results\\pcdr\\joint_family_20261008\\result.json": "fb17a9915d264afbdf337f758a86319054b3b9857bda3d6b27c2b30175beedce"
+  },
+  "checker_sha256": "8a03b702596df36267f8183940c902a9d9bd333879936de1004175b4225f3ae5",
+  "limitation": "Algorithmically separate audit, with Codex assistance. No new lesion evidence; restricted design only."
+}

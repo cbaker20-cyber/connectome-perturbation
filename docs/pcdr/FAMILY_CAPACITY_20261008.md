@@ -64,3 +64,5 @@ Use the recorded local environment and an unused output directory:
 ```
 
 The runner rejects occupied output directories and verifies the earlier evidence before recording its protocol. Full records are in results/pcdr/family_capacity_20261008. The [compact snapshot](evidence/2026-10-08/family_capacity/snapshot.json) preserves hashes for the protocol, exact frontier witnesses, environment and completion record. Earlier frozen studies and the current upload artifact were preserved.
+
+The subsequent [joint two-set construction attempt](JOINT_FAMILY_20261008.md) is complete as a bounded computation, but found no incumbent before its internal time limit. Feasibility remains unresolved. Its unchanged constraints also cap each new set against all fifteen older references, which is stronger than this saved-family subset audit.
