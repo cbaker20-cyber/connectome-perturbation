@@ -393,3 +393,7 @@ The separate-connection extension uses the same late-switch class with one selec
 # Baseline count partition, 9 October 2026
 
 `pcdr_baseline_counts.py` reads all sixty default-baseline trials at the two finest saved steps, verifies archived hashes/specifications, reconstructs counts from spikes and checks saved rates. It partitions full-second count L1 by activity at one or both steps and saves every changed-cell count. `test_pcdr_baseline_counts.py` checks the mathematical partition and invalid inputs, including integer overflow hazards. See BASELINE_COUNTS_20261009.md for scope and interpretation.
+
+## Baseline prefix and endpoint analysis, 9 October 2026
+
+`pcdr_baseline_time.py` authenticates sixty spike files through the prior baseline-count snapshot, counts half-open prefixes using common integer ticks, and saves prefix/interval/suffix L1 plus a conservative bound under arbitrary suffix-spike deletion. Fixed endpoints and limits are recorded before results. Tests include boundary failures and exhaustive small-count bound checking. See BASELINE_TIME_20261009.md.

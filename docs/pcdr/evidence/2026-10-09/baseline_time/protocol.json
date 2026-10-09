@@ -1,0 +1,46 @@
+{
+  "recorded_utc": "2026-10-09T13:05:12.114218+00:00",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_baseline_time.py": "a9b2477b980103888a276fc5feb71739752c4934bf0dc3927d5102dc98a9fa82",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_counts\\snapshot.json": "71338c357375e0b717661f40890ba8c64a415a9575829fae03dc4061f6840b63",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_counts\\summary.json": "3badfb9ac9ab3f3229c0fb36649e5e438dcd230e21718a96d624d5f42e11a2f6",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e"
+  },
+  "endpoints_ms": [
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    950,
+    980,
+    990,
+    995,
+    999,
+    1000
+  ],
+  "window": "Half-open [0,end) prefixes; adjacent intervals; all 30 baseline pairs.",
+  "design": "Descriptive count L1, without dividing by prefix duration. Integer native ticks mapped to common 0.0001-ms grid. Also bound remaining final count L1 after arbitrary removal of observed spikes from the suffix: sum max(abs(final difference) - combined suffix counts, 0). No new scientific tolerance or seed selection.",
+  "limitations": "New descriptive windows selected before these results, after prior count findings. Truncation changes the endpoint. Bounds concern deletion of saved suffix spikes, not unobserved future spikes, causal attribution, or convergence."
+}

@@ -1,0 +1,12 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-09T13:05:40.227619+00:00",
+  "tests_passed": 9,
+  "all_450_rows_match_separate_grouped_counts": true,
+  "method": "Independent pandas value_counts and aligned series arithmetic; physical seconds rounded to seven decimals before endpoint comparison. Producer uses native integer ticks and bincount.",
+  "outputs": {
+    "protocol.json": "feecaa1016b2ebcb0e7df7d32928baff63191bfe7ff2a3804afe5e9f6c0cdff3",
+    "summary.json": "32a83f155a5002c0464161881462fa48f549aaf16ffe9005c73ae61c9e7a534c",
+    "windows.csv": "2766c0fc780ab0f6390f962e49c5c45315047b84783c2ef07b3eb96908867a98"
+  }
+}

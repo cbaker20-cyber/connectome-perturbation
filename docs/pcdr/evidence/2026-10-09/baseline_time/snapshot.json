@@ -1,0 +1,11 @@
+{
+  "source": "results\\pcdr\\baseline_time_20261009",
+  "files": {
+    "protocol.json": "feecaa1016b2ebcb0e7df7d32928baff63191bfe7ff2a3804afe5e9f6c0cdff3",
+    "summary.json": "32a83f155a5002c0464161881462fa48f549aaf16ffe9005c73ae61c9e7a534c",
+    "test_addendum.json": "0c2d1b9408b0e314a386540170b8d112646a5ab5600f40dd65842f7ff896bb55",
+    "verification.json": "fd3ffd5651b19185e234b1b3b0d3157c20c756046e420378b099a203d2247d7a",
+    "windows.csv": "2766c0fc780ab0f6390f962e49c5c45315047b84783c2ef07b3eb96908867a98"
+  },
+  "simulations_launched": false
+}

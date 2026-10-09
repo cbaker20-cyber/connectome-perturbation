@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Baseline differences before the endpoint, 9 October](BASELINE_TIME_20261009.md): count disagreement is substantial by 600–900 ms. A conservative bound leaves at least 97.45% of pooled count L1 after arbitrary deletion of observed spikes in the final 1 ms. This bounds a narrow endpoint explanation; it does not establish convergence or identify the initiating mechanism.
+
 [Baseline count partition, 9 October](BASELINE_COUNTS_20261009.md): 96.43% of final-halving baseline count disagreement occurs in cells active at both steps. Existing timing-code checks were reviewed without repeating them; no new coding discrepancy identified. Count differences cannot be explained solely by moving spikes between internal time bins.
 
 [Baseline/lesion step decomposition, 9 October](STEP_CANCELLATION_20261009.md): baseline cross-step disagreement is substantial; at the final halving its median L1 is 578.5 Hz versus 309.5 Hz for the selected lesion. Paired subtraction cancels about 19% of combined differences. All original convergence failures remain.

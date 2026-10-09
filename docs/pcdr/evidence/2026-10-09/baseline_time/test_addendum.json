@@ -1,0 +1,7 @@
+{
+  "recorded_utc": "2026-10-09T13:06:46.775509+00:00",
+  "tests_passed": 10,
+  "elapsed_seconds": 0.49,
+  "reason": "Added exhaustive small-count bound verification after nine initial passing tests; expanded test file passed.",
+  "test_sha256": "caeeaa2ca7874aad64efa79ab88513669d16d8896682a3b5c285fdb38635840e"
+}
