@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_distribution_match.py",
+    "--out",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_538",
+    "--worker",
+    "cap_30"
+  ],
+  "pid": 30760,
+  "timed_out": false,
+  "returncode": 0,
+  "elapsed_seconds": 63.60899999993853,
+  "deadline_seconds": 100,
+  "cleanup": null
+}

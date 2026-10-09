@@ -1,0 +1,284 @@
+{
+  "status": "verified",
+  "lp_checks": {
+    "anchor_538__neither": {
+      "bound_decimal": 20.132002289467785,
+      "exact_encoded_lp_bound": "6533208265226220830244839688568681/324518553658426726783156020576256",
+      "guarded_bound": 20.131933561652957,
+      "excludes_cap_30": false,
+      "primal_violation": 1.7763568394002505e-15,
+      "vector_sha256": "642f3ca08207269d07c88d048ede150bf39be7c9816ad402a9d37ffe484372b0"
+    },
+    "anchor_538__original_three": {
+      "bound_decimal": 21.305642868165396,
+      "exact_encoded_lp_bound": "3457038204170004183070212145044745/162259276829213363391578010288128",
+      "guarded_bound": 21.305540577376846,
+      "excludes_cap_30": false,
+      "primal_violation": 3.552713678800501e-15,
+      "vector_sha256": "837614880e91dc98e206d7ee41147859163f6d8179b292802ff8e2c18afd4f2a"
+    },
+    "anchor_538__newer_twelve": {
+      "bound_decimal": 22.022677091398783,
+      "exact_encoded_lp_bound": "3573383658693650563778096688832423/162259276829213363391578010288128",
+      "guarded_bound": 22.022597185030413,
+      "excludes_cap_30": false,
+      "primal_violation": 0,
+      "vector_sha256": "a23c3b001ef432d1224edd9e485ef780a028429970fed9f61c7b44ca84fc8c2e"
+    },
+    "anchor_538__both": {
+      "bound_decimal": 31.993578723797178,
+      "exact_encoded_lp_bound": "40556679272670601356863781632021/1267650600228229401496703205376",
+      "guarded_bound": 31.993096894428103,
+      "excludes_cap_30": true,
+      "primal_violation": 3.552713678800501e-15,
+      "vector_sha256": "4a43ac3d53216f7744aa654568b4e7cf264a25c181b621dcb3384fc652c308a5"
+    },
+    "anchor_999__neither": {
+      "bound_decimal": 20.19534392999036,
+      "exact_encoded_lp_bound": "204805118837342503497148319393725/10141204801825835211973625643008",
+      "guarded_bound": 20.195256159758216,
+      "excludes_cap_30": false,
+      "primal_violation": 1.7763568394002505e-15,
+      "vector_sha256": "5a3f2be6a10ec7bb50a3086a124fe1f0a111e919b874941c9bb6aab05670b99d"
+    },
+    "anchor_999__original_three": {
+      "bound_decimal": 21.222819370864457,
+      "exact_encoded_lp_bound": "107612478856046493768572768780909/5070602400912917605986812821504",
+      "guarded_bound": 21.22272138420465,
+      "excludes_cap_30": false,
+      "primal_violation": 3.552713678800501e-15,
+      "vector_sha256": "f06b19c479f4ed593517829e90fde390aba1a88255cd7db4e0fe0a1fbf92ac08"
+    },
+    "anchor_999__newer_twelve": {
+      "bound_decimal": 21.997463622168553,
+      "exact_encoded_lp_bound": "3569292539409997667426139791246255/162259276829213363391578010288128",
+      "guarded_bound": 21.99738531787287,
+      "excludes_cap_30": false,
+      "primal_violation": 8.881784197001252e-16,
+      "vector_sha256": "ab70209686b107aee20fc9cea927b4deb2725cadba713302962d4a2e4a69a90e"
+    },
+    "anchor_999__both": {
+      "bound_decimal": 31.362362134198424,
+      "exact_encoded_lp_bound": "1272208549887735267386366184711055/40564819207303340847894502572032",
+      "guarded_bound": 31.362020152257767,
+      "excludes_cap_30": true,
+      "primal_violation": 0,
+      "vector_sha256": "d5fb604bd5284f65beae243406f1a620ac8584d18b709d04e38b892e2eac5708"
+    }
+  },
+  "partners": {
+    "anchor_538": {
+      "status": "verified_feasible_pair_optimality_unresolved",
+      "worker_seconds": 63.60899999993853,
+      "conditional_amended_design": true,
+      "audit": {
+        "smd": [
+          0.02803035789494024,
+          0.003938045084899847,
+          0.04354945807728604,
+          0.040823278934361856,
+          0.06990301184569263,
+          0.023614093947333024
+        ],
+        "ecdf_gaps": [
+          0.19607843137254904,
+          0.1960784313725491,
+          0.1568627450980392,
+          0.1568627450980392,
+          0.17647058823529416,
+          0.13725490196078433
+        ],
+        "maximum_ecdf_gap": 0.1960784313725491,
+        "variance_ratios": [
+          9.140947875396822,
+          3.31620354182794,
+          3.4723940450129835,
+          1.5787425527542491,
+          0.9290559882331747,
+          1.0576872818577836
+        ],
+        "overlaps": {
+          "fixed_anchor": 30
+        }
+      },
+      "anchor_audit": {
+        "smd": [
+          0.04149637214904906,
+          0.02721510343995758,
+          0.053321935150349886,
+          0.057778786183374585,
+          0.07009838419956213,
+          0.06372621371470903
+        ],
+        "ecdf_gaps": [
+          0.21568627450980393,
+          0.196078431372549,
+          0.13725490196078433,
+          0.19607843137254904,
+          0.1568627450980392,
+          0.11764705882352944
+        ],
+        "maximum_ecdf_gap": 0.21568627450980393,
+        "variance_ratios": [
+          4.522469698645987,
+          3.3890998690179615,
+          2.2767156912371136,
+          1.7149911371015998,
+          0.9243666081017946,
+          1.1170326837212943
+        ],
+        "overlaps": {
+          "motor_003": 29,
+          "motor_004": 30,
+          "motor_005": 30,
+          "new_0": 30,
+          "new_1": 30,
+          "new_2": 30,
+          "new_3": 30,
+          "new_4": 30,
+          "new_5": 30,
+          "new_12": 30,
+          "new_13": 30,
+          "new_14": 30,
+          "new_15": 30,
+          "new_16": 30,
+          "new_17": 30
+        }
+      },
+      "old_reference_overlaps": {
+        "motor_003": 39,
+        "motor_004": 40,
+        "motor_005": 40,
+        "new_0": 30,
+        "new_1": 31,
+        "new_2": 31,
+        "new_3": 30,
+        "new_4": 31,
+        "new_5": 31,
+        "new_12": 29,
+        "new_13": 30,
+        "new_14": 30,
+        "new_15": 29,
+        "new_16": 30,
+        "new_17": 30
+      },
+      "pair_maximum_cdf_gap": 0.21568627450980393,
+      "conditional_pair_attains_fixed_anchor_floor": true
+    },
+    "anchor_999": {
+      "status": "verified_feasible_pair_optimality_unresolved",
+      "worker_seconds": 63.5,
+      "conditional_amended_design": true,
+      "audit": {
+        "smd": [
+          0.02520492513945564,
+          0.005372838851772243,
+          0.04383813766954478,
+          0.05810031744248279,
+          0.07045869964495684,
+          0.05186779210046051
+        ],
+        "ecdf_gaps": [
+          0.19607843137254904,
+          0.1960784313725491,
+          0.1764705882352941,
+          0.1568627450980392,
+          0.17647058823529416,
+          0.11764705882352944
+        ],
+        "maximum_ecdf_gap": 0.1960784313725491,
+        "variance_ratios": [
+          10.428070391439956,
+          3.566506428548513,
+          3.7882840163069185,
+          1.652115685930176,
+          0.9289070344663316,
+          1.086546886215317
+        ],
+        "overlaps": {
+          "fixed_anchor": 30
+        }
+      },
+      "anchor_audit": {
+        "smd": [
+          0.04089674264512223,
+          0.011892412951921883,
+          0.053942858287684615,
+          0.04605368252295416,
+          0.0709552073368373,
+          0.06728496019429582
+        ],
+        "ecdf_gaps": [
+          0.19607843137254904,
+          0.196078431372549,
+          0.13725490196078433,
+          0.19607843137254904,
+          0.17647058823529416,
+          0.11764705882352944
+        ],
+        "maximum_ecdf_gap": 0.19607843137254904,
+        "variance_ratios": [
+          4.7412187649207596,
+          3.383789974092866,
+          2.3403703117205996,
+          1.689747437359141,
+          0.9256871263803701,
+          1.1230954019657637
+        ],
+        "overlaps": {
+          "motor_003": 29,
+          "motor_004": 30,
+          "motor_005": 30,
+          "new_0": 30,
+          "new_1": 30,
+          "new_2": 30,
+          "new_3": 30,
+          "new_4": 30,
+          "new_5": 30,
+          "new_12": 30,
+          "new_13": 30,
+          "new_14": 30,
+          "new_15": 30,
+          "new_16": 30,
+          "new_17": 30
+        }
+      },
+      "old_reference_overlaps": {
+        "motor_003": 38,
+        "motor_004": 39,
+        "motor_005": 39,
+        "new_0": 30,
+        "new_1": 31,
+        "new_2": 31,
+        "new_3": 30,
+        "new_4": 31,
+        "new_5": 31,
+        "new_12": 29,
+        "new_13": 30,
+        "new_14": 30,
+        "new_15": 29,
+        "new_16": 30,
+        "new_17": 30
+      },
+      "pair_maximum_cdf_gap": 0.1960784313725491,
+      "conditional_pair_attains_fixed_anchor_floor": true
+    }
+  },
+  "checked_utc": "2026-10-09T03:10:16.472336+00:00",
+  "checker_sha256": "d1b075c827958183ed0a0522be505d9f9710c914096cd6f0df8722957834fa0a",
+  "inputs": {
+    "results\\pcdr\\reference_ablation_20261008\\execution.json": "3df2d85a4981faa19b251304a06bf66269c1b8389bcd248953427553ac6f746e",
+    "results\\pcdr\\reference_ablation_20261008\\lp_process.json": "d2eed9d9cafe4c8850bed829683894ef88f64affe97b1c76bcf32f8619883135",
+    "results\\pcdr\\reference_ablation_20261008\\lp_results.json": "76765c116a919bc3010a05133ade0e80843f7e6303e058627ee2b7a1503a4817",
+    "results\\pcdr\\reference_ablation_20261008\\protocol.json": "03b5dbbdfac49d90186555cd20387bdedfa4f39e0da0183d8cdb2bbb09b16d69",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_538\\protocol.json": "23de72ce05d2c7b2883a86ea3a5e2fb8f8fa229aa78de913beceab4710770d12",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_538\\cap_30\\candidate.json": "aa48e8cd2f2ab0392423c5707ee1636b049cd380107ebc361fe8bc498e14d4d0",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_538\\cap_30\\process.json": "36d3b8c1a0c98aa3122e9656d01e73c876455810a48e4b834403493ceb4d4893",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_538\\cap_30\\result.json": "4e898019126d5dc39b60d17647079c1440857106953a5c112cda50c0a2fdf13f",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_999\\protocol.json": "c4626ddd8cc162e39e8947cb2f894664580256a502cf4d5da9363c787eec71b5",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_999\\cap_30\\candidate.json": "4106b2e3691fb9190ab0ccc165a2c0f007975d7f83a5e50e2e504c97a3dfdeef",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_999\\cap_30\\process.json": "b4eb02c9125514e3757490beb90986e98d2a1af6ec6576aaf5d54dbe0639d9cb",
+    "results\\pcdr\\reference_ablation_20261008\\anchor_999\\cap_30\\result.json": "1d493b4bfcb659cb87d4fd2e118f17ebcd7de6552453d4ffcbbd0c97d2f13989"
+  },
+  "scope": "Complete declared eight-case diagnostic and two conditional amended searches; not exhaustive over all pools, anchors, matching rules or biological mechanisms. Exact rational arithmetic applies to saved floating-point LP coefficients."
+}

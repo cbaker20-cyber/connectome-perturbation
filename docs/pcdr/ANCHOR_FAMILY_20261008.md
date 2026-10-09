@@ -87,3 +87,5 @@ Reproduction uses the recorded local environment and unused output paths:
 ```
 
 No prior frozen optimizer, simulation source, result or upload was changed. Code, mathematical formulation, tests, analysis and documentation used Codex assistance; the separate implementations are not independent human review.
+
+The subsequent [reference-cap ablation](REFERENCE_ABLATION_20261008.md) is complete: both reference groups jointly cause the recorded fractional obstruction, while removing both admits verified integer partners. Those partners have substantial incoming-degree variance imbalance and remain unsimulated. The stronger design remains unresolved.

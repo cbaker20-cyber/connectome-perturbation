@@ -1,0 +1,32 @@
+{
+  "status": 1,
+  "success": false,
+  "message": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "objective": 0.19607843137250755,
+  "dimensions": {
+    "variables": 1000,
+    "constraints": 6794,
+    "matrix_nonzeros": 3927771
+  },
+  "dual_bound": 0.17319406062082665,
+  "mip_gap": 0.11671029083359727,
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Baker\\Drosophila_Data\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "brian2": "2.9.0",
+      "Cython": "3.2.5",
+      "matplotlib": "3.11.0",
+      "psutil": null,
+      "pytest": "9.1.1",
+      "statsmodels": "0.14.6"
+    }
+  },
+  "completed_utc": "2026-10-09T03:10:03.187000+00:00",
+  "candidate_verified": true
+}
