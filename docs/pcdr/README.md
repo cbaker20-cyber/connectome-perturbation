@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Numerical-study decision proposal, 10 October](NUMERICAL_DECISION_PROPOSAL_20261010.md): explicit possible twelve-trial feasibility gate, unchanged criteria, distinct alternative estimands, and recorded prior-duration evidence. Two further halvings are potentially expensive; no new study is implemented or launched.
+
 [CB4058 actual histories and timeline, 10 October](CB4058_HISTORY_20261010.md): inhibitory arrivals are retained in 19 other-run states versus six leading-run states; a deterministic smallest-seed example shows blocking versus acceptance with equal source counts. Actual-history evidence with reset/feedback confounding, not a source-removal counterfactual.
 
 [Actual count-gap states, 10 October](COUNT_CROSSINGS_20261010.md): all 26 other-run targets are ready but below threshold at first two-spike gaps; 17 are below rest. One model-inhibitory CB4058 source dominates inhibitory contributions in 16 cases across six targets. Conditional reconstruction, reset-history confounding and repeated targets prevent an initiating-cause claim.

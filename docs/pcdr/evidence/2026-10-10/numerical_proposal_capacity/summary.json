@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "dt_ms": 0.0001,
+      "n": 150,
+      "min_hours": 7.363545801944444,
+      "median_hours": 15.12143040375,
+      "max_hours": 15.407566186944445,
+      "sum_worker_hours": 2156.647061101389
+    },
+    {
+      "dt_ms": 0.0002,
+      "n": 150,
+      "min_hours": 7.356030400833333,
+      "median_hours": 7.539758549722222,
+      "max_hours": 7.720058795277778,
+      "sum_worker_hours": 1130.6272552880557
+    },
+    {
+      "dt_ms": 0.0004,
+      "n": 150,
+      "min_hours": 3.6890116466666667,
+      "median_hours": 3.7848842918055556,
+      "max_hours": 3.8992933108333334,
+      "sum_worker_hours": 567.5756390175001
+    },
+    {
+      "dt_ms": 0.0008,
+      "n": 150,
+      "min_hours": 1.8427307352777778,
+      "median_hours": 1.8955341883333332,
+      "max_hours": 1.9759519927777778,
+      "sum_worker_hours": 284.77825058750005
+    }
+  ],
+  "illustrative_proposed_steps_ms": [
+    5e-05,
+    2.5e-05
+  ],
+  "scaling_assumption": "Elapsed proportional to1/dt with otherwise unchanged execution conditions; not measured.",
+  "pilot_seeds": [
+    631401,
+    631402,
+    631403
+  ],
+  "pilot_new_trials": 12,
+  "pilot_scaled_worker_hours": 544.87026101,
+  "baseline_mode_30seed_new_trials": 120,
+  "baseline_mode_scaled_worker_hours": 5177.715058749999,
+  "all_five_condition_new_trials": 300,
+  "all_conditions_scaled_worker_hours": 12939.882366608335
+}

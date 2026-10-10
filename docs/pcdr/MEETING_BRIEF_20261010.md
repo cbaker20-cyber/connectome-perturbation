@@ -23,6 +23,8 @@ The L1 values above are sums of absolute neuronwise differences, not a typical c
 
 ## Decisions to ask for
 
+Bring the [concrete numerical-study proposal](NUMERICAL_DECISION_PROPOSAL_20261010.md). It specifies a possible twelve-trial feasibility gate and what expansion would require, alongside event-handling-reference and separately designed ensemble alternatives. Archived timing gives a roughly 545-worker-hour illustrative estimate even for that small two-halving pilot; this is not measured new-step performance or an approved allocation. No new run is prepared.
+
 **Concrete actual-history example:** In the smallest selected seed, CB4058 sends eleven arrivals before comparison in each run. Its latest arrival is blocked during target refractoriness in the coarse run and accepted after release in the fine run, contributing −28.2941 mV to the reconstructed fine target voltage. Both source timing and target reset history differ, so this is not a controlled causal test. The [two-run timeline and full-panel table](CB4058_HISTORY_20261010.md) make the proposed timing/reset interaction explainable without fabricated histories.
 
 **Connection to the original comparison problem:** CB4058 is lesioned in the mode but absent from all three fixed comparison lesions. Its large individual-lesion response was already reported at the older coarse timestep. This is a specific influential-cell alternative to eigencircuit specificity, not proof that this cell explains the combined effect. A new test would still need numerical validation and an explicit design; no such new experiment has run.

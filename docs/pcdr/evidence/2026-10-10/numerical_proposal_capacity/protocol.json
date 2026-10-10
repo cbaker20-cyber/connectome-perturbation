@@ -1,0 +1,9 @@
+{
+  "recorded_utc": "2026-10-10T13:09:31.698918+00:00",
+  "inputs": {
+    "CCR_fine_results.zip": "2e6adf875a9c0f9effc62e78b1700cd8eecae7161b15352a05e13d1c02c85c8b",
+    "results\\pcdr\\fine_verified_20261005\\full_check.json": "1c8bb0c7ca1524928c371cd1db96bb073d4d9142ba66a190019dc96045862acf"
+  },
+  "design": "All600 completed default fine-step trials. Compute manifest finished-minus-started elapsed seconds grouped by dt; no deletion of slow/fast trials. Use finest-step distribution only as an illustrative inverse-dt scaling estimate for two proposed halvings, not a measured future runtime.",
+  "limitations": "Concurrent node contention/setup and network activity affect runtime. Manifest elapsed differs from allocated CPU time; summed elapsed is worker-hours, not a new allocation guarantee. No simulation launch."
+}

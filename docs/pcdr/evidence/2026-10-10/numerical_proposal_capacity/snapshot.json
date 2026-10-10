@@ -1,0 +1,10 @@
+{
+  "source": "results\\pcdr\\numerical_proposal_capacity_20261010",
+  "files": {
+    "manifest_durations.csv": "ecd27e48bcc14466b9ba1316f5de48d69a8c6afce2665be25b85c9c2d46973f5",
+    "protocol.json": "f6ed004d087a8df37e2006bfd47f276481f82a12af8ab56f12290c99182dcded",
+    "summary.json": "9efba2f702d1ea67702715b38c4c34f4bcbc093f8819370434a8be5546a0f62a",
+    "verification.json": "114f1824f06ae7693c00af5490b4ca2585e80701c6e231f404e1b0d35ca38937"
+  },
+  "simulations_launched": false
+}

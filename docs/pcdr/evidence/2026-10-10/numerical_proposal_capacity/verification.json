@@ -1,0 +1,12 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-10T13:10:44.430794+00:00",
+  "all600_durations_match_separate_timestamp_method": true,
+  "all_four_medians_match_order_statistics": true,
+  "pilot_budget_matches_separate_sum": true,
+  "outputs": {
+    "manifest_durations.csv": "ecd27e48bcc14466b9ba1316f5de48d69a8c6afce2665be25b85c9c2d46973f5",
+    "protocol.json": "f6ed004d087a8df37e2006bfd47f276481f82a12af8ab56f12290c99182dcded",
+    "summary.json": "9efba2f702d1ea67702715b38c4c34f4bcbc093f8819370434a8be5546a0f62a"
+  }
+}
