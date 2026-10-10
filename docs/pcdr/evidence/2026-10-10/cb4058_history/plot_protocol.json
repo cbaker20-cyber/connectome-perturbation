@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-10-10T12:50:39.479704+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_cb4058_plot.py": "ff665379660f62c4e733e2559a265815084defa95cc40d77c5108b1a0f6d1fc8",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\count_crossings_20261010\\results.json": "0f0576d3b3713c95d9eeeec09479893a55103672296668dc6791a2960de7b7ec",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\results.json": "94a3ad9e93df982ef63b4e1822bcb535369411bfba22fc0998aa40a6a769656c",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\baseline_gating_20261010\\631401_events.parquet": "9bae0625e394f37d3a77188603267bd55c69123d8e625aee1d255c94a7250caa"
+  },
+  "selection": "Smallest prior selected seed, fixed before plotting. Show gap-25ms through gap+5ms using actual archived events; not a representative-case claim.",
+  "seed": 631401
+}

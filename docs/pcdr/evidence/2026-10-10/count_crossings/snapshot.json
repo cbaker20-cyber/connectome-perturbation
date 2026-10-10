@@ -1,0 +1,9 @@
+{
+  "source": "results\\pcdr\\count_crossings_20261010",
+  "files": {
+    "protocol.json": "189cd84bfd922ca883ade1709bdb6fe58dfd39d399302768f4edc15cb63c2e04",
+    "results.json": "0f0576d3b3713c95d9eeeec09479893a55103672296668dc6791a2960de7b7ec",
+    "verification.json": "7fede68cfc0cfe8dcb6b2f4e273c526492e240753d06d25fb87cb1ea5d4604e8"
+  },
+  "full_network_simulations_launched": false
+}

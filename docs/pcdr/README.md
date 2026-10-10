@@ -6,6 +6,10 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[CB4058 actual histories and timeline, 10 October](CB4058_HISTORY_20261010.md): inhibitory arrivals are retained in 19 other-run states versus six leading-run states; a deterministic smallest-seed example shows blocking versus acceptance with equal source counts. Actual-history evidence with reset/feedback confounding, not a source-removal counterfactual.
+
+[Actual count-gap states, 10 October](COUNT_CROSSINGS_20261010.md): all 26 other-run targets are ready but below threshold at first two-spike gaps; 17 are below rest. One model-inhibitory CB4058 source dominates inhibitory contributions in 16 cases across six targets. Conditional reconstruction, reset-history confounding and repeated targets prevent an initiating-cause claim.
+
 [Adviser meeting brief, 10 October](MEETING_BRIEF_20261010.md): short opening, completed evidence and limits, likely questions, and three decisions needed before more large runs. [Latest exact shared-event check](BASELINE_GATING_20261010.md) finds zero acceptance differences at only 1.54% incoming-event coverage; it cannot exclude shifted-event refractory effects.
 
 [Incoming-history sensitivity, 9 October](HISTORY_PARTS_20261009.md): constructed timing/surplus mixtures change target counts, but 21/26 cases depend on the event-pairing rule and many mixtures violate source refractory spacing. Stop this mixture branch; retain actual-history replay evidence without claiming a unique timing/count attribution.

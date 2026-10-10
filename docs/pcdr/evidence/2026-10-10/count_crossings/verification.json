@@ -1,0 +1,12 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-10T12:44:54.686289+00:00",
+  "method": "Chronological count walk and independent two-state matrix exponential with explicit refractory-interval exclusion; no impulse kernel/searchsorted.",
+  "state_checks": 78,
+  "maximum_voltage_error_mv": 4.973799150320701e-14,
+  "tests_passed": 3,
+  "outputs": {
+    "protocol.json": "189cd84bfd922ca883ade1709bdb6fe58dfd39d399302768f4edc15cb63c2e04",
+    "results.json": "0f0576d3b3713c95d9eeeec09479893a55103672296668dc6791a2960de7b7ec"
+  }
+}

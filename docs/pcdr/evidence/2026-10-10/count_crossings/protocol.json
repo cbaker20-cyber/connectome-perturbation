@@ -1,0 +1,13 @@
+{
+  "recorded_utc": "2026-10-10T12:44:18.850555+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_count_crossings.py": "71756df08ea7a40b02608cd161e24432c448ab7beeefdc81b97c06f2c7e102e9",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_first_spike.py": "75359b3fbf2bd4a0bbd7dd6a80a174472ab0dd40210ef2528d2f045761f8e5e6",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_recurrent_delivery.py": "8d3ea61184dc6143f96467b42a785a12e4bb5696ab07b01c4f8d88844ef8f074",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\results.json": "94a3ad9e93df982ef63b4e1822bcb535369411bfba22fc0998aa40a6a769656c",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\snapshot.json": "912f63f16ad855b69b89811a628af36e8fbec0cb948323bae47937ed0f46457e"
+  },
+  "selection": "Keep prior 26 targets and their prefix bounds, four absent cases. At union of actual target spikes, find first post-event absolute cumulative count difference >=2. Simultaneous events processed together. Leading run evaluated immediately before threshold at that event; other run evaluated at latest native tick no later than event, with lag reported (0 or .0001 ms).",
+  "method": "Analytical impulse response since last observed reset, accepted actual arrivals only, threshold before arrivals. Verify leading previous native tick <=threshold and event >threshold; compare other native state with saved spike/readiness. No fabricated arrivals, intervention or full-network simulation.",
+  "limitations": "Conditional reconstructed states, no direct recordings for these targets. State difference may be consequence of earlier resets; it does not locate the initiating cause. Event states are at most one fine tick apart. Two-spike criterion is exploratory selection, not new convergence threshold."
+}

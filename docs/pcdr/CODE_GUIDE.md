@@ -409,3 +409,11 @@ The separate-connection extension uses the same late-switch class with one selec
 ## Exact shared-event refractory check, 10 October 2026
 
 `pcdr_baseline_gating.py` reuses tested arrival acceptance on the prior selected native histories, joins source ID and physical tick exactly, and preserves unmatched events. It checks arrival reconstruction against verified arrays; no artificial history or ordinal pairing. Three focused tests and independent interval-membership verification support the computation. BASELINE_GATING_20261010.md explains the low-coverage negative result.
+
+## Actual count-gap crossing states, 10 October 2026
+
+`pcdr_count_crossings.py` selects the first cumulative two-spike gap for prior targets and conditionally reconstructs both native pre-threshold states from actual arrivals and saved resets. Fine-only comparison times retain the coarse tick lag. `pcdr_crossing_sources.py` groups each voltage contribution by source, preserving a failed sum-check attempt separately. Tests and independent matrix-exponential checks are recorded in COUNT_CROSSINGS_20261010.md; these are not free-running network interventions.
+
+## CB4058 actual histories, 10 October 2026
+
+`pcdr_cb4058_history.py` describes all52 target/native states for the source selected in the prior decomposition, retaining absent/contrary cases. It classifies latest actual arrivals relative to observed resets, checks contributions against the independently verified source table, and avoids event pairing. `pcdr_cb4058_plot.py` draws the smallest selected seed in a fixed gap-relative window from actual event tables. CB4058_HISTORY_20261010.md records interpretation and visual review.

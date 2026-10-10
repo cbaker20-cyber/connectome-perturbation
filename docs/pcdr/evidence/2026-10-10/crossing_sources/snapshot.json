@@ -1,0 +1,13 @@
+{
+  "source": "results\\pcdr\\crossing_sources_fixed_20261010",
+  "files": {
+    "failed_failed_source.py": "6305e997f57406af7a6854795029a79a257ed53f48073e6505ecfefa0fa2cc2a",
+    "failed_failure.json": "901589aaa8822d5ebc55ed97f7c8f8c253a9b98568f9382575c70a7a8278a88e",
+    "failed_protocol.json": "ad2d478ffc2b5a0b541715f933b9ca0974de2b53eca9e65316103fe5e501559a",
+    "protocol.json": "d98c5d4618834f203d41a112887f37cf4a437b07b7acba04ebee70f8e2c6c6d7",
+    "results.json": "8ab6290b672c3b49d6ad252a90eda5ec7ee2f837de5a50bd9d2e62258867bd7d",
+    "source_contributions.csv": "d8a7d4af03740ab85b32c1ddb47927f6cbce77a77561a6267238289de948d5b4",
+    "verification.json": "2baead81e1a084d8d2a3d3e08a515c0bfcc40a11d572cb0a26af8fbd79429c1d"
+  },
+  "full_network_simulations_launched": false
+}

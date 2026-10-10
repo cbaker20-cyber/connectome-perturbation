@@ -1,0 +1,20 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-10T12:47:05.141195+00:00",
+  "method": "Independent scalar event loop, saved refractory intervals and two-state matrix exponential grouped by source ID.",
+  "source_contributions_checked": 923,
+  "maximum_error_mv": 7.815970093361102e-14,
+  "annotation": {
+    "root_id": "720575940643867296",
+    "cell_type": "CB4058",
+    "top_nt": "gaba",
+    "top_nt_conf": "0.7146174437823823",
+    "path": "C:\\Users\\Baker\\Drosophila_Data\\flywire_annotations.tsv",
+    "sha256": "6155dcc6263b463aeeffa22ee857e14e339b93d0e81dd260277e8f928bc192ea"
+  },
+  "outputs": {
+    "protocol.json": "d98c5d4618834f203d41a112887f37cf4a437b07b7acba04ebee70f8e2c6c6d7",
+    "results.json": "8ab6290b672c3b49d6ad252a90eda5ec7ee2f837de5a50bd9d2e62258867bd7d",
+    "source_contributions.csv": "d8a7d4af03740ab85b32c1ddb47927f6cbce77a77561a6267238289de948d5b4"
+  }
+}

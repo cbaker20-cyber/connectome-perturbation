@@ -1,0 +1,1608 @@
+{
+  "status": "passed",
+  "completed_utc": "2026-10-10T12:44:18.916212+00:00",
+  "records": [
+    {
+      "seed": 631401,
+      "selected": true,
+      "target_id": "720575940630868793",
+      "gap": {
+        "tick": 2225294,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 2225294,
+          "last_reset_tick": 2184392,
+          "ready": true,
+          "voltage_mv": -44.99930931902489,
+          "excitatory_voltage_mv": 8.898659384085239,
+          "inhibitory_voltage_mv": -1.8979687031101302,
+          "accepted_since_reset": 11,
+          "blocked_since_reset": 12,
+          "accepted_exc_jump_mv": 145.20000000000002,
+          "accepted_inh_jump_magnitude_mv": 29.150000000000002,
+          "blocked_exc_jump_mv": 150.425,
+          "blocked_inh_jump_magnitude_mv": 267.85,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 2225294,
+          "last_reset_tick": 2138407,
+          "ready": true,
+          "voltage_mv": -56.55347559675419,
+          "excitatory_voltage_mv": 35.04773569528062,
+          "inhibitory_voltage_mv": -39.60121129203482,
+          "accepted_since_reset": 29,
+          "blocked_since_reset": 13,
+          "accepted_exc_jump_mv": 310.75,
+          "accepted_inh_jump_magnitude_mv": 298.925,
+          "blocked_exc_jump_mv": 433.95,
+          "blocked_inh_jump_magnitude_mv": 4.95,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 2225292,
+        "last_reset_tick": 2184392,
+        "ready": true,
+        "voltage_mv": -45.000108703873835,
+        "excitatory_voltage_mv": 8.897666608839069,
+        "inhibitory_voltage_mv": -1.897775312712903,
+        "accepted_since_reset": 11,
+        "blocked_since_reset": 12,
+        "accepted_exc_jump_mv": 145.20000000000002,
+        "accepted_inh_jump_magnitude_mv": 29.150000000000002,
+        "blocked_exc_jump_mv": 150.425,
+        "blocked_inh_jump_magnitude_mv": 267.85
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631402,
+      "selected": true,
+      "target_id": "720575940611548878",
+      "gap": {
+        "tick": 6898057,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 6898056,
+          "last_reset_tick": 6691848,
+          "ready": true,
+          "voltage_mv": -53.91754574665036,
+          "excitatory_voltage_mv": 22.42402616923975,
+          "inhibitory_voltage_mv": -24.341571915890107,
+          "accepted_since_reset": 38,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 185.35000000000002,
+          "accepted_inh_jump_magnitude_mv": 166.65,
+          "blocked_exc_jump_mv": 52.25,
+          "blocked_inh_jump_magnitude_mv": 3.8500000000000005,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 6898057,
+          "last_reset_tick": 6808955,
+          "ready": true,
+          "voltage_mv": -44.999872535787155,
+          "excitatory_voltage_mv": 8.24857498528303,
+          "inhibitory_voltage_mv": -1.2484475210701853,
+          "accepted_since_reset": 20,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 103.4,
+          "accepted_inh_jump_magnitude_mv": 12.100000000000001,
+          "blocked_exc_jump_mv": 28.600000000000005,
+          "blocked_inh_jump_magnitude_mv": 3.8500000000000005,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 6898056,
+        "last_reset_tick": 6808955,
+        "ready": true,
+        "voltage_mv": -45.000144758942724,
+        "excitatory_voltage_mv": 8.248277307101898,
+        "inhibitory_voltage_mv": -1.2484220660446201,
+        "accepted_since_reset": 20,
+        "blocked_since_reset": 6,
+        "accepted_exc_jump_mv": 103.4,
+        "accepted_inh_jump_magnitude_mv": 12.100000000000001,
+        "blocked_exc_jump_mv": 28.600000000000005,
+        "blocked_inh_jump_magnitude_mv": 3.8500000000000005
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631403,
+      "selected": false
+    },
+    {
+      "seed": 631404,
+      "selected": false
+    },
+    {
+      "seed": 631405,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 8673142,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 8673142,
+          "last_reset_tick": 8633162,
+          "ready": true,
+          "voltage_mv": -44.99966010501778,
+          "excitatory_voltage_mv": 7.54236578572255,
+          "inhibitory_voltage_mv": -0.5420258907403287,
+          "accepted_since_reset": 6,
+          "blocked_since_reset": 10,
+          "accepted_exc_jump_mv": 106.97500000000002,
+          "accepted_inh_jump_magnitude_mv": 12.100000000000001,
+          "blocked_exc_jump_mv": 215.32500000000002,
+          "blocked_inh_jump_magnitude_mv": 32.724999999999994,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 8673142,
+          "last_reset_tick": 8562917,
+          "ready": true,
+          "voltage_mv": -68.4203790901158,
+          "excitatory_voltage_mv": 41.52673108852665,
+          "inhibitory_voltage_mv": -57.94711017864246,
+          "accepted_since_reset": 15,
+          "blocked_since_reset": 12,
+          "accepted_exc_jump_mv": 313.225,
+          "accepted_inh_jump_magnitude_mv": 517.0,
+          "blocked_exc_jump_mv": 386.1,
+          "blocked_inh_jump_magnitude_mv": 48.400000000000006,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 8673140,
+        "last_reset_tick": 8633162,
+        "ready": true,
+        "voltage_mv": -45.00024548345232,
+        "excitatory_voltage_mv": 7.541687358141121,
+        "inhibitory_voltage_mv": -0.5419328415934375,
+        "accepted_since_reset": 6,
+        "blocked_since_reset": 10,
+        "accepted_exc_jump_mv": 106.97500000000002,
+        "accepted_inh_jump_magnitude_mv": 12.100000000000001,
+        "blocked_exc_jump_mv": 215.32500000000002,
+        "blocked_inh_jump_magnitude_mv": 32.724999999999994
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631406,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 1790022,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 1790022,
+          "last_reset_tick": 1754294,
+          "ready": true,
+          "voltage_mv": -44.99919057658452,
+          "excitatory_voltage_mv": 9.19692227288782,
+          "inhibitory_voltage_mv": -2.1961128494723385,
+          "accepted_since_reset": 6,
+          "blocked_since_reset": 4,
+          "accepted_exc_jump_mv": 213.40000000000003,
+          "accepted_inh_jump_magnitude_mv": 59.400000000000006,
+          "blocked_exc_jump_mv": 98.45,
+          "blocked_inh_jump_magnitude_mv": 3.575,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 1790022,
+          "last_reset_tick": 1699271,
+          "ready": true,
+          "voltage_mv": -68.63939942613919,
+          "excitatory_voltage_mv": 18.96273240031871,
+          "inhibitory_voltage_mv": -35.60213182645791,
+          "accepted_since_reset": 10,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 188.375,
+          "accepted_inh_jump_magnitude_mv": 243.375,
+          "blocked_exc_jump_mv": 108.35000000000001,
+          "blocked_inh_jump_magnitude_mv": 36.3,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 1790020,
+        "last_reset_tick": 1754294,
+        "ready": true,
+        "voltage_mv": -45.000372952240326,
+        "excitatory_voltage_mv": 9.195257797563045,
+        "inhibitory_voltage_mv": -2.195630749803373,
+        "accepted_since_reset": 6,
+        "blocked_since_reset": 4,
+        "accepted_exc_jump_mv": 213.40000000000003,
+        "accepted_inh_jump_magnitude_mv": 59.400000000000006,
+        "blocked_exc_jump_mv": 98.45,
+        "blocked_inh_jump_magnitude_mv": 3.575
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631407,
+      "selected": true,
+      "target_id": "720575940625045180",
+      "gap": {
+        "tick": 5693330,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 5693330,
+          "last_reset_tick": 5635890,
+          "ready": true,
+          "voltage_mv": -44.99975681252285,
+          "excitatory_voltage_mv": 7.699946843963938,
+          "inhibitory_voltage_mv": -0.6997036564867818,
+          "accepted_since_reset": 11,
+          "blocked_since_reset": 3,
+          "accepted_exc_jump_mv": 143.275,
+          "accepted_inh_jump_magnitude_mv": 10.450000000000001,
+          "blocked_exc_jump_mv": 0.55,
+          "blocked_inh_jump_magnitude_mv": 2.75,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 5693330,
+          "last_reset_tick": 5346014,
+          "ready": true,
+          "voltage_mv": -46.16343933018757,
+          "excitatory_voltage_mv": 16.987927954246768,
+          "inhibitory_voltage_mv": -11.151367284434338,
+          "accepted_since_reset": 30,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 162.8,
+          "accepted_inh_jump_magnitude_mv": 157.025,
+          "blocked_exc_jump_mv": 47.300000000000004,
+          "blocked_inh_jump_magnitude_mv": 13.750000000000002,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 5693328,
+        "last_reset_tick": 5635890,
+        "ready": true,
+        "voltage_mv": -45.000718206200304,
+        "excitatory_voltage_mv": 7.698917348428914,
+        "inhibitory_voltage_mv": -0.6996355546292174,
+        "accepted_since_reset": 11,
+        "blocked_since_reset": 3,
+        "accepted_exc_jump_mv": 143.275,
+        "accepted_inh_jump_magnitude_mv": 10.450000000000001,
+        "blocked_exc_jump_mv": 0.55,
+        "blocked_inh_jump_magnitude_mv": 2.75
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631408,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 4335489,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 4335488,
+          "last_reset_tick": 4274648,
+          "ready": true,
+          "voltage_mv": -70.24759265283292,
+          "excitatory_voltage_mv": 15.72653377983154,
+          "inhibitory_voltage_mv": -33.97412643266446,
+          "accepted_since_reset": 10,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 305.525,
+          "accepted_inh_jump_magnitude_mv": 312.67499999999995,
+          "blocked_exc_jump_mv": 152.35000000000002,
+          "blocked_inh_jump_magnitude_mv": 3.575,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 4335489,
+          "last_reset_tick": 4279846,
+          "ready": true,
+          "voltage_mv": -44.9993119392022,
+          "excitatory_voltage_mv": 8.376956778571754,
+          "inhibitory_voltage_mv": -1.3762687177739548,
+          "accepted_since_reset": 7,
+          "blocked_since_reset": 9,
+          "accepted_exc_jump_mv": 206.25,
+          "accepted_inh_jump_magnitude_mv": 30.25,
+          "blocked_exc_jump_mv": 161.70000000000002,
+          "blocked_inh_jump_magnitude_mv": 244.47500000000002,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 4335488,
+        "last_reset_tick": 4279846,
+        "ready": true,
+        "voltage_mv": -45.00001380095957,
+        "excitatory_voltage_mv": 8.37613897838094,
+        "inhibitory_voltage_mv": -1.3761527793405084,
+        "accepted_since_reset": 7,
+        "blocked_since_reset": 9,
+        "accepted_exc_jump_mv": 206.25,
+        "accepted_inh_jump_magnitude_mv": 30.25,
+        "blocked_exc_jump_mv": 161.70000000000002,
+        "blocked_inh_jump_magnitude_mv": 244.47500000000002
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631409,
+      "selected": true,
+      "target_id": "720575940660219265",
+      "gap": {
+        "tick": 4941740,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 4941740,
+          "last_reset_tick": 4904384,
+          "ready": true,
+          "voltage_mv": -44.99984858128855,
+          "excitatory_voltage_mv": 7.000151418711445,
+          "inhibitory_voltage_mv": 0.0,
+          "accepted_since_reset": 1,
+          "blocked_since_reset": 3,
+          "accepted_exc_jump_mv": 116.60000000000001,
+          "accepted_inh_jump_magnitude_mv": -0.0,
+          "blocked_exc_jump_mv": 3.0250000000000004,
+          "blocked_inh_jump_magnitude_mv": 123.47500000000002,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 4941740,
+          "last_reset_tick": 4846881,
+          "ready": true,
+          "voltage_mv": -57.0537328957391,
+          "excitatory_voltage_mv": 23.948909516392987,
+          "inhibitory_voltage_mv": -29.002642412132094,
+          "accepted_since_reset": 21,
+          "blocked_since_reset": 9,
+          "accepted_exc_jump_mv": 215.32500000000002,
+          "accepted_inh_jump_magnitude_mv": 201.85000000000005,
+          "blocked_exc_jump_mv": 180.95000000000002,
+          "blocked_inh_jump_magnitude_mv": 1.375,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 4941738,
+        "last_reset_tick": 4904384,
+        "ready": true,
+        "voltage_mv": -45.00065394304541,
+        "excitatory_voltage_mv": 6.999346056954594,
+        "inhibitory_voltage_mv": 0.0,
+        "accepted_since_reset": 1,
+        "blocked_since_reset": 3,
+        "accepted_exc_jump_mv": 116.60000000000001,
+        "accepted_inh_jump_magnitude_mv": -0.0,
+        "blocked_exc_jump_mv": 3.0250000000000004,
+        "blocked_inh_jump_magnitude_mv": 123.47500000000002
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631410,
+      "selected": false
+    },
+    {
+      "seed": 631411,
+      "selected": true,
+      "target_id": "720575940630683385",
+      "gap": {
+        "tick": 2494075,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 2494074,
+          "last_reset_tick": 1948504,
+          "ready": true,
+          "voltage_mv": -45.34084961574151,
+          "excitatory_voltage_mv": 16.10755008351674,
+          "inhibitory_voltage_mv": -9.448399699258257,
+          "accepted_since_reset": 52,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 244.20000000000002,
+          "accepted_inh_jump_magnitude_mv": 165.00000000000003,
+          "blocked_exc_jump_mv": 18.975,
+          "blocked_inh_jump_magnitude_mv": 2.75,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 2494075,
+          "last_reset_tick": 2093274,
+          "ready": true,
+          "voltage_mv": -44.999964772437906,
+          "excitatory_voltage_mv": 11.083080540323449,
+          "inhibitory_voltage_mv": -4.083045312761352,
+          "accepted_since_reset": 32,
+          "blocked_since_reset": 3,
+          "accepted_exc_jump_mv": 110.55000000000003,
+          "accepted_inh_jump_magnitude_mv": 34.37500000000001,
+          "blocked_exc_jump_mv": 18.700000000000003,
+          "blocked_inh_jump_magnitude_mv": 58.85000000000001,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 2494074,
+        "last_reset_tick": 2093274,
+        "ready": true,
+        "voltage_mv": -45.00019119295954,
+        "excitatory_voltage_mv": 11.082845410834308,
+        "inhibitory_voltage_mv": -4.083036603793847,
+        "accepted_since_reset": 32,
+        "blocked_since_reset": 3,
+        "accepted_exc_jump_mv": 110.55000000000003,
+        "accepted_inh_jump_magnitude_mv": 34.37500000000001,
+        "blocked_exc_jump_mv": 18.700000000000003,
+        "blocked_inh_jump_magnitude_mv": 58.85000000000001
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631412,
+      "selected": true,
+      "target_id": "720575940621586854",
+      "gap": {
+        "tick": 6852554,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 6852554,
+          "last_reset_tick": 6801436,
+          "ready": true,
+          "voltage_mv": -44.99985176399169,
+          "excitatory_voltage_mv": 7.610609022093608,
+          "inhibitory_voltage_mv": -0.6104607860852989,
+          "accepted_since_reset": 10,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 77.275,
+          "accepted_inh_jump_magnitude_mv": 9.625,
+          "blocked_exc_jump_mv": 6.875000000000001,
+          "blocked_inh_jump_magnitude_mv": 41.8,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 6852554,
+          "last_reset_tick": 6738834,
+          "ready": true,
+          "voltage_mv": -52.88156393761493,
+          "excitatory_voltage_mv": 14.70742791426849,
+          "inhibitory_voltage_mv": -15.588991851883419,
+          "accepted_since_reset": 28,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 103.40000000000002,
+          "accepted_inh_jump_magnitude_mv": 130.625,
+          "blocked_exc_jump_mv": 61.325,
+          "blocked_inh_jump_magnitude_mv": 5.5,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 6852552,
+        "last_reset_tick": 6801436,
+        "ready": true,
+        "voltage_mv": -45.00015592646882,
+        "excitatory_voltage_mv": 7.610240408898343,
+        "inhibitory_voltage_mv": -0.610396335367162,
+        "accepted_since_reset": 10,
+        "blocked_since_reset": 6,
+        "accepted_exc_jump_mv": 77.275,
+        "accepted_inh_jump_magnitude_mv": 9.625,
+        "blocked_exc_jump_mv": 6.875000000000001,
+        "blocked_inh_jump_magnitude_mv": 41.8
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631413,
+      "selected": true,
+      "target_id": "720575940607193986",
+      "gap": {
+        "tick": 6898806,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 6898806,
+          "last_reset_tick": 6579214,
+          "ready": true,
+          "voltage_mv": -53.27737654316882,
+          "excitatory_voltage_mv": 6.272918250569818,
+          "inhibitory_voltage_mv": -7.550294793738635,
+          "accepted_since_reset": 24,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 68.2,
+          "accepted_inh_jump_magnitude_mv": 81.4,
+          "blocked_exc_jump_mv": 28.05,
+          "blocked_inh_jump_magnitude_mv": 1.65,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 6898806,
+          "last_reset_tick": 6660957,
+          "ready": true,
+          "voltage_mv": -44.99991466441831,
+          "excitatory_voltage_mv": 7.671174858898981,
+          "inhibitory_voltage_mv": -0.6710895233172927,
+          "accepted_since_reset": 17,
+          "blocked_since_reset": 3,
+          "accepted_exc_jump_mv": 72.60000000000001,
+          "accepted_inh_jump_magnitude_mv": 5.2250000000000005,
+          "blocked_exc_jump_mv": 0.8250000000000001,
+          "blocked_inh_jump_magnitude_mv": 0.275,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 6898805,
+        "last_reset_tick": 6660957,
+        "ready": true,
+        "voltage_mv": -45.000002883630415,
+        "excitatory_voltage_mv": 7.6710882072079,
+        "inhibitory_voltage_mv": -0.6710910908383112,
+        "accepted_since_reset": 17,
+        "blocked_since_reset": 3,
+        "accepted_exc_jump_mv": 72.60000000000001,
+        "accepted_inh_jump_magnitude_mv": 5.2250000000000005,
+        "blocked_exc_jump_mv": 0.8250000000000001,
+        "blocked_inh_jump_magnitude_mv": 0.275
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631414,
+      "selected": true,
+      "target_id": "720575940615041430",
+      "gap": {
+        "tick": 2698144,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 2698144,
+          "last_reset_tick": 2631504,
+          "ready": true,
+          "voltage_mv": -44.99960091504544,
+          "excitatory_voltage_mv": 8.904375441913437,
+          "inhibitory_voltage_mv": -1.903976356958877,
+          "accepted_since_reset": 31,
+          "blocked_since_reset": 8,
+          "accepted_exc_jump_mv": 120.17500000000001,
+          "accepted_inh_jump_magnitude_mv": 31.075,
+          "blocked_exc_jump_mv": 9.075,
+          "blocked_inh_jump_magnitude_mv": 0.275,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 2698144,
+          "last_reset_tick": 2610128,
+          "ready": true,
+          "voltage_mv": -46.17406998273683,
+          "excitatory_voltage_mv": 6.2208737641025635,
+          "inhibitory_voltage_mv": -0.3949437468393948,
+          "accepted_since_reset": 23,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 51.70000000000002,
+          "accepted_inh_jump_magnitude_mv": 3.0250000000000004,
+          "blocked_exc_jump_mv": 50.324999999999996,
+          "blocked_inh_jump_magnitude_mv": 0.8250000000000001,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 2698142,
+        "last_reset_tick": 2631504,
+        "ready": true,
+        "voltage_mv": -45.000123771996286,
+        "excitatory_voltage_mv": 8.903641067066058,
+        "inhibitory_voltage_mv": -1.903764839062347,
+        "accepted_since_reset": 31,
+        "blocked_since_reset": 8,
+        "accepted_exc_jump_mv": 120.17500000000001,
+        "accepted_inh_jump_magnitude_mv": 31.075,
+        "blocked_exc_jump_mv": 9.075,
+        "blocked_inh_jump_magnitude_mv": 0.275
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631415,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 5410172,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 5410172,
+          "last_reset_tick": 5267162,
+          "ready": true,
+          "voltage_mv": -45.61060769649549,
+          "excitatory_voltage_mv": 76.48535584595729,
+          "inhibitory_voltage_mv": -70.09596354245278,
+          "accepted_since_reset": 27,
+          "blocked_since_reset": 1,
+          "accepted_exc_jump_mv": 601.9749999999999,
+          "accepted_inh_jump_magnitude_mv": 523.5999999999999,
+          "blocked_exc_jump_mv": 106.42500000000001,
+          "blocked_inh_jump_magnitude_mv": -0.0,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 5410172,
+          "last_reset_tick": 5288376,
+          "ready": true,
+          "voltage_mv": -44.99973355830867,
+          "excitatory_voltage_mv": 54.083899857429294,
+          "inhibitory_voltage_mv": -47.08363341573798,
+          "accepted_since_reset": 26,
+          "blocked_since_reset": 11,
+          "accepted_exc_jump_mv": 460.625,
+          "accepted_inh_jump_magnitude_mv": 324.775,
+          "blocked_exc_jump_mv": 266.475,
+          "blocked_inh_jump_magnitude_mv": 248.05,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 5410171,
+        "last_reset_tick": 5288376,
+        "ready": true,
+        "voltage_mv": -45.00021413617188,
+        "excitatory_voltage_mv": 54.08315593366632,
+        "inhibitory_voltage_mv": -47.0833700698382,
+        "accepted_since_reset": 26,
+        "blocked_since_reset": 11,
+        "accepted_exc_jump_mv": 460.625,
+        "accepted_inh_jump_magnitude_mv": 324.775,
+        "blocked_exc_jump_mv": 266.475,
+        "blocked_inh_jump_magnitude_mv": 248.05
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631416,
+      "selected": true,
+      "target_id": "720575940618574749",
+      "gap": {
+        "tick": 2971290,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 2971290,
+          "last_reset_tick": 2527362,
+          "ready": true,
+          "voltage_mv": -62.71085441434602,
+          "excitatory_voltage_mv": 12.652466632041486,
+          "inhibitory_voltage_mv": -23.3633210463875,
+          "accepted_since_reset": 109,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 144.10000000000002,
+          "accepted_inh_jump_magnitude_mv": 219.45000000000005,
+          "blocked_exc_jump_mv": 9.625,
+          "blocked_inh_jump_magnitude_mv": 0.275,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 2971290,
+          "last_reset_tick": 2870181,
+          "ready": true,
+          "voltage_mv": -44.99992613226775,
+          "excitatory_voltage_mv": 7.739628921275403,
+          "inhibitory_voltage_mv": -0.7395550535431554,
+          "accepted_since_reset": 19,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 62.7,
+          "accepted_inh_jump_magnitude_mv": 5.775,
+          "blocked_exc_jump_mv": 4.950000000000001,
+          "blocked_inh_jump_magnitude_mv": 100.37500000000001,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 2971289,
+        "last_reset_tick": 2870181,
+        "ready": true,
+        "voltage_mv": -45.0000189660488,
+        "excitatory_voltage_mv": 7.73952821164102,
+        "inhibitory_voltage_mv": -0.7395471776898221,
+        "accepted_since_reset": 19,
+        "blocked_since_reset": 7,
+        "accepted_exc_jump_mv": 62.7,
+        "accepted_inh_jump_magnitude_mv": 5.775,
+        "blocked_exc_jump_mv": 4.950000000000001,
+        "blocked_inh_jump_magnitude_mv": 100.37500000000001
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631417,
+      "selected": true,
+      "target_id": "720575940630931999",
+      "gap": {
+        "tick": 5347392,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 5347392,
+          "last_reset_tick": 5281950,
+          "ready": true,
+          "voltage_mv": -44.99988377650036,
+          "excitatory_voltage_mv": 7.09651076969144,
+          "inhibitory_voltage_mv": -0.09639454619180239,
+          "accepted_since_reset": 4,
+          "blocked_since_reset": 2,
+          "accepted_exc_jump_mv": 59.675000000000004,
+          "accepted_inh_jump_magnitude_mv": 3.3,
+          "blocked_exc_jump_mv": 0.0,
+          "blocked_inh_jump_magnitude_mv": 0.55,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 5347392,
+          "last_reset_tick": 1234265,
+          "ready": true,
+          "voltage_mv": -52.00000000125692,
+          "excitatory_voltage_mv": 2.4105541058542236e-10,
+          "inhibitory_voltage_mv": -1.4979766843360042e-09,
+          "accepted_since_reset": 3,
+          "blocked_since_reset": 0,
+          "accepted_exc_jump_mv": 0.55,
+          "accepted_inh_jump_magnitude_mv": 3.3000000000000003,
+          "blocked_exc_jump_mv": 0.0,
+          "blocked_inh_jump_magnitude_mv": -0.0,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 5347390,
+        "last_reset_tick": 5281950,
+        "ready": true,
+        "voltage_mv": -45.00006649150011,
+        "excitatory_voltage_mv": 7.096299944829178,
+        "inhibitory_voltage_mv": -0.09636643632928198,
+        "accepted_since_reset": 4,
+        "blocked_since_reset": 2,
+        "accepted_exc_jump_mv": 59.675000000000004,
+        "accepted_inh_jump_magnitude_mv": 3.3,
+        "blocked_exc_jump_mv": 0.0,
+        "blocked_inh_jump_magnitude_mv": 0.55
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631418,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 1727809,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 1727808,
+          "last_reset_tick": 1632096,
+          "ready": true,
+          "voltage_mv": -72.79376706108766,
+          "excitatory_voltage_mv": 46.56609054849664,
+          "inhibitory_voltage_mv": -67.35985760958431,
+          "accepted_since_reset": 20,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 427.9000000000001,
+          "accepted_inh_jump_magnitude_mv": 527.1750000000001,
+          "blocked_exc_jump_mv": 99.0,
+          "blocked_inh_jump_magnitude_mv": 1.375,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 1727809,
+          "last_reset_tick": 1682704,
+          "ready": true,
+          "voltage_mv": -44.999086497527685,
+          "excitatory_voltage_mv": 7.280023234955934,
+          "inhibitory_voltage_mv": -0.27910973248361537,
+          "accepted_since_reset": 8,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 237.60000000000002,
+          "accepted_inh_jump_magnitude_mv": 3.85,
+          "blocked_exc_jump_mv": 115.22500000000001,
+          "blocked_inh_jump_magnitude_mv": 7.9750000000000005,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 1727808,
+        "last_reset_tick": 1682704,
+        "ready": true,
+        "voltage_mv": -45.000077899094556,
+        "excitatory_voltage_mv": 7.279019842629946,
+        "inhibitory_voltage_mv": -0.2790977417245035,
+        "accepted_since_reset": 8,
+        "blocked_since_reset": 5,
+        "accepted_exc_jump_mv": 237.60000000000002,
+        "accepted_inh_jump_magnitude_mv": 3.85,
+        "blocked_exc_jump_mv": 115.22500000000001,
+        "blocked_inh_jump_magnitude_mv": 7.9750000000000005
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631419,
+      "selected": true,
+      "target_id": "720575940630868793",
+      "gap": {
+        "tick": 1312182,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 1312182,
+          "last_reset_tick": 1259884,
+          "ready": true,
+          "voltage_mv": -67.56937672548871,
+          "excitatory_voltage_mv": 8.483803473864764,
+          "inhibitory_voltage_mv": -24.053180199353474,
+          "accepted_since_reset": 9,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 141.90000000000003,
+          "accepted_inh_jump_magnitude_mv": 269.5,
+          "blocked_exc_jump_mv": 98.45000000000002,
+          "blocked_inh_jump_magnitude_mv": 3.8500000000000005,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 1312182,
+          "last_reset_tick": 1270868,
+          "ready": true,
+          "voltage_mv": -44.99961801456381,
+          "excitatory_voltage_mv": 7.081380360246872,
+          "inhibitory_voltage_mv": -0.08099837481067991,
+          "accepted_since_reset": 7,
+          "blocked_since_reset": 7,
+          "accepted_exc_jump_mv": 143.275,
+          "accepted_inh_jump_magnitude_mv": 1.6500000000000001,
+          "blocked_exc_jump_mv": 118.80000000000001,
+          "blocked_inh_jump_magnitude_mv": 52.25,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 1312181,
+        "last_reset_tick": 1270868,
+        "ready": true,
+        "voltage_mv": -45.000146018519054,
+        "excitatory_voltage_mv": 7.080846179106469,
+        "inhibitory_voltage_mv": -0.08099219762552201,
+        "accepted_since_reset": 7,
+        "blocked_since_reset": 7,
+        "accepted_exc_jump_mv": 143.275,
+        "accepted_inh_jump_magnitude_mv": 1.6500000000000001,
+        "blocked_exc_jump_mv": 118.80000000000001,
+        "blocked_inh_jump_magnitude_mv": 52.25
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631420,
+      "selected": true,
+      "target_id": "720575940629778554",
+      "gap": {
+        "tick": 3153563,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 3153562,
+          "last_reset_tick": 3003458,
+          "ready": true,
+          "voltage_mv": -56.32053163084,
+          "excitatory_voltage_mv": 4.399931317895103,
+          "inhibitory_voltage_mv": -8.720462948735108,
+          "accepted_since_reset": 19,
+          "blocked_since_reset": 4,
+          "accepted_exc_jump_mv": 61.875,
+          "accepted_inh_jump_magnitude_mv": 56.375,
+          "blocked_exc_jump_mv": 39.050000000000004,
+          "blocked_inh_jump_magnitude_mv": -0.0,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 3153563,
+          "last_reset_tick": 3112372,
+          "ready": true,
+          "voltage_mv": -44.99987183432547,
+          "excitatory_voltage_mv": 7.011059061086716,
+          "inhibitory_voltage_mv": -0.010930895412185242,
+          "accepted_since_reset": 9,
+          "blocked_since_reset": 8,
+          "accepted_exc_jump_mv": 147.95000000000002,
+          "accepted_inh_jump_magnitude_mv": 0.275,
+          "blocked_exc_jump_mv": 92.4,
+          "blocked_inh_jump_magnitude_mv": 1.1,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 3153562,
+        "last_reset_tick": 3112372,
+        "ready": true,
+        "voltage_mv": -45.00043059988052,
+        "excitatory_voltage_mv": 7.010499198823545,
+        "inhibitory_voltage_mv": -0.010929798704060101,
+        "accepted_since_reset": 9,
+        "blocked_since_reset": 8,
+        "accepted_exc_jump_mv": 147.95000000000002,
+        "accepted_inh_jump_magnitude_mv": 0.275,
+        "blocked_exc_jump_mv": 92.4,
+        "blocked_inh_jump_magnitude_mv": 1.1
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631421,
+      "selected": true,
+      "target_id": "720575940607272649",
+      "gap": {
+        "tick": 1724972,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 1724972,
+          "last_reset_tick": 1668944,
+          "ready": true,
+          "voltage_mv": -44.9995128892568,
+          "excitatory_voltage_mv": 7.314359901976997,
+          "inhibitory_voltage_mv": -0.3138727912337975,
+          "accepted_since_reset": 16,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 132.82500000000002,
+          "accepted_inh_jump_magnitude_mv": 8.8,
+          "blocked_exc_jump_mv": 7.700000000000001,
+          "blocked_inh_jump_magnitude_mv": 7.425000000000001,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 1724972,
+          "last_reset_tick": 1625744,
+          "ready": true,
+          "voltage_mv": -50.79383000365023,
+          "excitatory_voltage_mv": 5.603804448273676,
+          "inhibitory_voltage_mv": -4.397634451923906,
+          "accepted_since_reset": 23,
+          "blocked_since_reset": 3,
+          "accepted_exc_jump_mv": 75.9,
+          "accepted_inh_jump_magnitude_mv": 30.250000000000004,
+          "blocked_exc_jump_mv": 2.475,
+          "blocked_inh_jump_magnitude_mv": 0.275,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 1724970,
+        "last_reset_tick": 1668944,
+        "ready": true,
+        "voltage_mv": -45.000387642896435,
+        "excitatory_voltage_mv": 7.313413175134594,
+        "inhibitory_voltage_mv": -0.3138008180310296,
+        "accepted_since_reset": 16,
+        "blocked_since_reset": 5,
+        "accepted_exc_jump_mv": 132.82500000000002,
+        "accepted_inh_jump_magnitude_mv": 8.8,
+        "blocked_exc_jump_mv": 7.700000000000001,
+        "blocked_inh_jump_magnitude_mv": 7.425000000000001
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631422,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 2532747,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 2532746,
+          "last_reset_tick": 2391908,
+          "ready": true,
+          "voltage_mv": -62.42078696400459,
+          "excitatory_voltage_mv": 73.26463669772411,
+          "inhibitory_voltage_mv": -83.6854236617287,
+          "accepted_since_reset": 28,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 478.5,
+          "accepted_inh_jump_magnitude_mv": 556.3249999999999,
+          "blocked_exc_jump_mv": 53.9,
+          "blocked_inh_jump_magnitude_mv": 27.775000000000006,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 2532747,
+          "last_reset_tick": 2429309,
+          "ready": true,
+          "voltage_mv": -44.99981815726583,
+          "excitatory_voltage_mv": 49.66801177759508,
+          "inhibitory_voltage_mv": -42.66782993486092,
+          "accepted_since_reset": 22,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 476.57500000000005,
+          "accepted_inh_jump_magnitude_mv": 291.775,
+          "blocked_exc_jump_mv": 229.35000000000002,
+          "blocked_inh_jump_magnitude_mv": 30.250000000000004,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 2532746,
+        "last_reset_tick": 2429309,
+        "ready": true,
+        "voltage_mv": -45.000572798951076,
+        "excitatory_voltage_mv": 49.66704597135804,
+        "inhibitory_voltage_mv": -42.66761877030913,
+        "accepted_since_reset": 22,
+        "blocked_since_reset": 5,
+        "accepted_exc_jump_mv": 476.57500000000005,
+        "accepted_inh_jump_magnitude_mv": 291.775,
+        "blocked_exc_jump_mv": 229.35000000000002,
+        "blocked_inh_jump_magnitude_mv": 30.250000000000004
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631423,
+      "selected": false
+    },
+    {
+      "seed": 631424,
+      "selected": true,
+      "target_id": "720575940630868793",
+      "gap": {
+        "tick": 8664187,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 8664186,
+          "last_reset_tick": 8564870,
+          "ready": true,
+          "voltage_mv": -80.91613394859175,
+          "excitatory_voltage_mv": 1.556610867725786,
+          "inhibitory_voltage_mv": -30.472744816317537,
+          "accepted_since_reset": 12,
+          "blocked_since_reset": 10,
+          "accepted_exc_jump_mv": 10.999999999999998,
+          "accepted_inh_jump_magnitude_mv": 223.575,
+          "blocked_exc_jump_mv": 273.07500000000005,
+          "blocked_inh_jump_magnitude_mv": 210.375,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 8664187,
+          "last_reset_tick": 8604297,
+          "ready": true,
+          "voltage_mv": -44.99956623394776,
+          "excitatory_voltage_mv": 7.409168825522813,
+          "inhibitory_voltage_mv": -0.4087350594705744,
+          "accepted_since_reset": 7,
+          "blocked_since_reset": 9,
+          "accepted_exc_jump_mv": 138.05,
+          "accepted_inh_jump_magnitude_mv": 7.425000000000001,
+          "blocked_exc_jump_mv": 119.625,
+          "blocked_inh_jump_magnitude_mv": 234.025,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 8664186,
+        "last_reset_tick": 8604297,
+        "ready": true,
+        "voltage_mv": -45.00003453039284,
+        "excitatory_voltage_mv": 7.408674011799755,
+        "inhibitory_voltage_mv": -0.4087085421925934,
+        "accepted_since_reset": 7,
+        "blocked_since_reset": 9,
+        "accepted_exc_jump_mv": 138.05,
+        "accepted_inh_jump_magnitude_mv": 7.425000000000001,
+        "blocked_exc_jump_mv": 119.625,
+        "blocked_inh_jump_magnitude_mv": 234.025
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631425,
+      "selected": true,
+      "target_id": "720575940623211725",
+      "gap": {
+        "tick": 4985405,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 4985404,
+          "last_reset_tick": 4844590,
+          "ready": true,
+          "voltage_mv": -47.192805656310135,
+          "excitatory_voltage_mv": 10.974237619533415,
+          "inhibitory_voltage_mv": -6.167043275843548,
+          "accepted_since_reset": 34,
+          "blocked_since_reset": 2,
+          "accepted_exc_jump_mv": 75.9,
+          "accepted_inh_jump_magnitude_mv": 60.49999999999999,
+          "blocked_exc_jump_mv": 0.0,
+          "blocked_inh_jump_magnitude_mv": 5.5,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 4985405,
+          "last_reset_tick": 4918079,
+          "ready": true,
+          "voltage_mv": -44.999931242241736,
+          "excitatory_voltage_mv": 8.315110377286956,
+          "inhibitory_voltage_mv": -1.315041619528693,
+          "accepted_since_reset": 22,
+          "blocked_since_reset": 2,
+          "accepted_exc_jump_mv": 120.72500000000002,
+          "accepted_inh_jump_magnitude_mv": 29.975000000000005,
+          "blocked_exc_jump_mv": 7.15,
+          "blocked_inh_jump_magnitude_mv": -0.0,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 4985404,
+        "last_reset_tick": 4918079,
+        "ready": true,
+        "voltage_mv": -45.00020190170458,
+        "excitatory_voltage_mv": 8.314723542482207,
+        "inhibitory_voltage_mv": -1.3149254441867875,
+        "accepted_since_reset": 22,
+        "blocked_since_reset": 2,
+        "accepted_exc_jump_mv": 120.72500000000002,
+        "accepted_inh_jump_magnitude_mv": 29.975000000000005,
+        "blocked_exc_jump_mv": 7.15,
+        "blocked_inh_jump_magnitude_mv": -0.0
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631426,
+      "selected": true,
+      "target_id": "720575940611548878",
+      "gap": {
+        "tick": 1524974,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 1524974,
+          "last_reset_tick": 1185164,
+          "ready": true,
+          "voltage_mv": -44.999676723876135,
+          "excitatory_voltage_mv": 23.880049892321498,
+          "inhibitory_voltage_mv": -16.87972661619763,
+          "accepted_since_reset": 60,
+          "blocked_since_reset": 10,
+          "accepted_exc_jump_mv": 229.35000000000002,
+          "accepted_inh_jump_magnitude_mv": 181.225,
+          "blocked_exc_jump_mv": 91.025,
+          "blocked_inh_jump_magnitude_mv": 8.8,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 1524974,
+          "last_reset_tick": 1107998,
+          "ready": true,
+          "voltage_mv": -51.89941942622026,
+          "excitatory_voltage_mv": 22.233752891856426,
+          "inhibitory_voltage_mv": -22.13317231807669,
+          "accepted_since_reset": 60,
+          "blocked_since_reset": 6,
+          "accepted_exc_jump_mv": 231.27500000000003,
+          "accepted_inh_jump_magnitude_mv": 258.5,
+          "blocked_exc_jump_mv": 11.55,
+          "blocked_inh_jump_magnitude_mv": 4.675000000000001,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 1524972,
+        "last_reset_tick": 1185164,
+        "ready": true,
+        "voltage_mv": -45.00012670910939,
+        "excitatory_voltage_mv": 23.879703675454184,
+        "inhibitory_voltage_mv": -16.879830384563576,
+        "accepted_since_reset": 60,
+        "blocked_since_reset": 10,
+        "accepted_exc_jump_mv": 229.35000000000002,
+        "accepted_inh_jump_magnitude_mv": 181.225,
+        "blocked_exc_jump_mv": 91.025,
+        "blocked_inh_jump_magnitude_mv": 8.8
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631427,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 2473034,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 2473034,
+          "last_reset_tick": 2090092,
+          "ready": true,
+          "voltage_mv": -56.07370554769282,
+          "excitatory_voltage_mv": 11.831931644233167,
+          "inhibitory_voltage_mv": -15.905637191925987,
+          "accepted_since_reset": 27,
+          "blocked_since_reset": 4,
+          "accepted_exc_jump_mv": 173.8,
+          "accepted_inh_jump_magnitude_mv": 274.45,
+          "blocked_exc_jump_mv": 0.0,
+          "blocked_inh_jump_magnitude_mv": 29.975,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 2473034,
+          "last_reset_tick": 2128745,
+          "ready": true,
+          "voltage_mv": -44.999426088535834,
+          "excitatory_voltage_mv": 24.53964643709498,
+          "inhibitory_voltage_mv": -17.539072525630807,
+          "accepted_since_reset": 28,
+          "blocked_since_reset": 3,
+          "accepted_exc_jump_mv": 291.225,
+          "accepted_inh_jump_magnitude_mv": 252.45000000000002,
+          "blocked_exc_jump_mv": 0.275,
+          "blocked_inh_jump_magnitude_mv": 3.0250000000000004,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 2473033,
+        "last_reset_tick": 2128745,
+        "ready": true,
+        "voltage_mv": -45.00024480351977,
+        "excitatory_voltage_mv": 24.538898715849115,
+        "inhibitory_voltage_mv": -17.539143519368878,
+        "accepted_since_reset": 28,
+        "blocked_since_reset": 3,
+        "accepted_exc_jump_mv": 291.225,
+        "accepted_inh_jump_magnitude_mv": 252.45000000000002,
+        "blocked_exc_jump_mv": 0.275,
+        "blocked_inh_jump_magnitude_mv": 3.0250000000000004
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631428,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 4463521,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 4463520,
+          "last_reset_tick": 4003712,
+          "ready": true,
+          "voltage_mv": -54.695246224982775,
+          "excitatory_voltage_mv": 23.292735194421756,
+          "inhibitory_voltage_mv": -25.987981419404527,
+          "accepted_since_reset": 45,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 512.6,
+          "accepted_inh_jump_magnitude_mv": 532.675,
+          "blocked_exc_jump_mv": 221.925,
+          "blocked_inh_jump_magnitude_mv": 243.1,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 4463521,
+          "last_reset_tick": 4422692,
+          "ready": true,
+          "voltage_mv": -44.999960771293225,
+          "excitatory_voltage_mv": 7.01998021637552,
+          "inhibitory_voltage_mv": -0.01994098766874343,
+          "accepted_since_reset": 4,
+          "blocked_since_reset": 9,
+          "accepted_exc_jump_mv": 196.90000000000003,
+          "accepted_inh_jump_magnitude_mv": 0.275,
+          "blocked_exc_jump_mv": 158.95000000000002,
+          "blocked_inh_jump_magnitude_mv": 4.4,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 4463520,
+        "last_reset_tick": 4422692,
+        "ready": true,
+        "voltage_mv": -45.000766062039276,
+        "excitatory_voltage_mv": 7.01917406864265,
+        "inhibitory_voltage_mv": -0.019940130681921905,
+        "accepted_since_reset": 4,
+        "blocked_since_reset": 9,
+        "accepted_exc_jump_mv": 196.90000000000003,
+        "accepted_inh_jump_magnitude_mv": 0.275,
+        "blocked_exc_jump_mv": 158.95000000000002,
+        "blocked_inh_jump_magnitude_mv": 4.4
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631429,
+      "selected": true,
+      "target_id": "720575940618165019",
+      "gap": {
+        "tick": 4747147,
+        "coarse_minus_fine": -2,
+        "leader": "fine"
+      },
+      "states": {
+        "coarse": {
+          "tick": 4747146,
+          "last_reset_tick": 4658342,
+          "ready": true,
+          "voltage_mv": -50.1829805136838,
+          "excitatory_voltage_mv": 2.0593753182500256,
+          "inhibitory_voltage_mv": -0.2423558319338271,
+          "accepted_since_reset": 7,
+          "blocked_since_reset": 5,
+          "accepted_exc_jump_mv": 17.325000000000003,
+          "accepted_inh_jump_magnitude_mv": 1.9250000000000003,
+          "blocked_exc_jump_mv": 4.125,
+          "blocked_inh_jump_magnitude_mv": 14.3,
+          "lag_from_event_tick": 1,
+          "saved_spike": false,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 4747147,
+          "last_reset_tick": 4692999,
+          "ready": true,
+          "voltage_mv": -44.99991729651627,
+          "excitatory_voltage_mv": 10.080114673997539,
+          "inhibitory_voltage_mv": -3.080031970513813,
+          "accepted_since_reset": 10,
+          "blocked_since_reset": 4,
+          "accepted_exc_jump_mv": 118.80000000000001,
+          "accepted_inh_jump_magnitude_mv": 58.02500000000001,
+          "blocked_exc_jump_mv": 147.4,
+          "blocked_inh_jump_magnitude_mv": 1.375,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 4747146,
+        "last_reset_tick": 4692999,
+        "ready": true,
+        "voltage_mv": -45.00003599761712,
+        "excitatory_voltage_mv": 10.07978507929744,
+        "inhibitory_voltage_mv": -3.0798210769145644,
+        "accepted_since_reset": 10,
+        "blocked_since_reset": 4,
+        "accepted_exc_jump_mv": 118.80000000000001,
+        "accepted_inh_jump_magnitude_mv": 58.02500000000001,
+        "blocked_exc_jump_mv": 147.4,
+        "blocked_inh_jump_magnitude_mv": 1.375
+      },
+      "leading_crossing_check": true
+    },
+    {
+      "seed": 631430,
+      "selected": true,
+      "target_id": "720575940615671106",
+      "gap": {
+        "tick": 3924340,
+        "coarse_minus_fine": 2,
+        "leader": "coarse"
+      },
+      "states": {
+        "coarse": {
+          "tick": 3924340,
+          "last_reset_tick": 3839444,
+          "ready": true,
+          "voltage_mv": -44.99958188921252,
+          "excitatory_voltage_mv": 8.099334562387055,
+          "inhibitory_voltage_mv": -1.0989164515995773,
+          "accepted_since_reset": 24,
+          "blocked_since_reset": 8,
+          "accepted_exc_jump_mv": 133.375,
+          "accepted_inh_jump_magnitude_mv": 10.725000000000001,
+          "blocked_exc_jump_mv": 33.275,
+          "blocked_inh_jump_magnitude_mv": 2.2,
+          "lag_from_event_tick": 0,
+          "saved_spike": true,
+          "threshold_consistent": true
+        },
+        "fine": {
+          "tick": 3924340,
+          "last_reset_tick": 3748608,
+          "ready": true,
+          "voltage_mv": -45.299864956843216,
+          "excitatory_voltage_mv": 16.480663052488552,
+          "inhibitory_voltage_mv": -9.780528009331766,
+          "accepted_since_reset": 59,
+          "blocked_since_reset": 17,
+          "accepted_exc_jump_mv": 126.77500000000003,
+          "accepted_inh_jump_magnitude_mv": 65.72500000000002,
+          "blocked_exc_jump_mv": 56.37500000000001,
+          "blocked_inh_jump_magnitude_mv": 6.325,
+          "lag_from_event_tick": 0,
+          "saved_spike": false,
+          "threshold_consistent": true
+        }
+      },
+      "previous_leader_state": {
+        "tick": 3924338,
+        "last_reset_tick": 3839444,
+        "ready": true,
+        "voltage_mv": -45.00042611514414,
+        "excitatory_voltage_mv": 8.098442717222403,
+        "inhibitory_voltage_mv": -1.0988688323665436,
+        "accepted_since_reset": 24,
+        "blocked_since_reset": 8,
+        "accepted_exc_jump_mv": 133.375,
+        "accepted_inh_jump_magnitude_mv": 10.725000000000001,
+        "blocked_exc_jump_mv": 33.275,
+        "blocked_inh_jump_magnitude_mv": 2.2
+      },
+      "leading_crossing_check": true
+    }
+  ]
+}

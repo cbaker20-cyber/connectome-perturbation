@@ -1,0 +1,15 @@
+{
+  "source": "results\\pcdr\\cb4058_history_20261010",
+  "plot_source": "results\\pcdr\\cb4058_timeline_20261010",
+  "files": {
+    "complete.json": "32d4b218db0d0f7b90289664c810281374c0c8b658aac9af501e72bb685f7461",
+    "histories.csv": "c5321c48827f503ee181357c2a4a6340a648ba3bf7613c1b3dc6165002eaef31",
+    "plot_complete.json": "c32ba49528362f47395ab45d1eaf9308cfcc1b6792073c9e217e41fedff95fb6",
+    "plot_protocol.json": "6ad765b74b2c6f83b2a8d8050ffb15fb96ac2ecc248a432fd69f2de1fc03a886",
+    "protocol.json": "250bb519afe0899fa13c86d99c5b2f0a129b2d7e97a7ce929ee17e8cb2d970bc",
+    "timeline.png": "351badeb4f64afb14306b183ef3f197acee13c1e1f1dac11853f7eaeed1785c1",
+    "verification.json": "42d5f1e8dad342ce7a84f2d6026e3ad8b5d3d184d1e6a28e2a7b0d3f12693851"
+  },
+  "visual_review": "Timeline reviewed: labels readable, actual source arrival acceptance and target refractory shading correspond to saved history.",
+  "full_network_simulations_launched": false
+}

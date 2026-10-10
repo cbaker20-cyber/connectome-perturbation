@@ -1,0 +1,33 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-10T12:49:46.944262+00:00",
+  "method": "Independent direct event and reset-interval loop verifies all52 histories; voltage sums reproduce separately matrix-verified source decomposition.",
+  "states_checked": 52,
+  "source_more_negative_other": 17,
+  "source_equal_contribution": 7,
+  "source_more_negative_leading": 2,
+  "equal_source_arrival_counts_before_state": 18,
+  "status_table": {
+    "blocked_refractory": {
+      "leading": 4,
+      "other": 0
+    },
+    "cleared_by_reset": {
+      "leading": 10,
+      "other": 1
+    },
+    "no_arrival": {
+      "leading": 6,
+      "other": 6
+    },
+    "retained_since_reset": {
+      "leading": 6,
+      "other": 19
+    }
+  },
+  "outputs": {
+    "complete.json": "32d4b218db0d0f7b90289664c810281374c0c8b658aac9af501e72bb685f7461",
+    "histories.csv": "c5321c48827f503ee181357c2a4a6340a648ba3bf7613c1b3dc6165002eaef31",
+    "protocol.json": "250bb519afe0899fa13c86d99c5b2f0a129b2d7e97a7ce929ee17e8cb2d970bc"
+  }
+}

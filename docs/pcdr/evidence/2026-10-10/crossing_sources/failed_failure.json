@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "recorded_utc": "2026-10-10T12:46:11.389827+00:00",
+  "error": "ValueError: Source sum mismatch",
+  "reason": "Verification expression added +52 instead of resting voltage -52. Failure occurred before scientific results were written. Preserve source/protocol, correct expression, use fresh directory.",
+  "source_sha256": "6305e997f57406af7a6854795029a79a257ed53f48073e6505ecfefa0fa2cc2a"
+}

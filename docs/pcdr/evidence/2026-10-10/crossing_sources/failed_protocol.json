@@ -1,0 +1,12 @@
+{
+  "recorded_utc": "2026-10-10T12:45:57.509463+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_crossing_sources.py": "6305e997f57406af7a6854795029a79a257ed53f48073e6505ecfefa0fa2cc2a",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_first_spike.py": "75359b3fbf2bd4a0bbd7dd6a80a174472ab0dd40210ef2528d2f045761f8e5e6",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\count_crossings_20261010\\results.json": "0f0576d3b3713c95d9eeeec09479893a55103672296668dc6791a2960de7b7ec",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\count_crossings_20261010\\verification.json": "7fede68cfc0cfe8dcb6b2f4e273c526492e240753d06d25fb87cb1ea5d4604e8",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\baseline_gating_20261010\\verification.json": "b34f95fdd42382d50fd7c767a7f57a1c0536912bcbf9b42c32b45d740f578f79"
+  },
+  "design": "All 52 states at the previously selected first cumulative two-spike gaps. Group accepted since-reset voltage contributions by exact presynaptic ID. Preserve signed contributions, every source, no new event selection. Rank largest inhibitory contributor per state only for descriptive summaries.",
+  "limitations": "Conditional algebraic attribution after observed resets, not causal deletion effects. Histories may have unequal integration durations. Repeated targets/sources do not constitute independent evidence. Ranking is descriptive and no new intervention is authorized."
+}
