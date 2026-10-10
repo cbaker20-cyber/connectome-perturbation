@@ -1,10 +1,21 @@
 # Adviser meeting brief — 10 October 2026
 
-## Opening in about one minute
+## Brief recap for James
 
-“The original question is whether concentrated eigenvector support predicts localized lesion effects beyond connectivity and recruitment. The selected group still has a larger descriptive localized response than our fixed comparison groups, but the comparisons are imperfect and the numerical convergence criteria failed. All eighteen full agreement groups failed in the 620-trial fine-step study. Recent local analyses explain parts of the failure without repairing it: the baseline itself differs across steps, most count differences occur within the same active cells, and they are not confined to the recording endpoint. Replaying actual incoming histories reproduces selected cells' count differences even at a common target timestep. We have not traced the initiating network cause. I want to decide which numerical requirement is necessary for the scientific claim before another large run.”
+The question remains the one in [the eigencircuit study plan](PLAN.md#question):
 
-This is a suggested explanation of the evidence, not a claim of independent authorship of the analysis or software. Describe Codex assistance accurately.
+> Do concentrated eigenvector supports of the materialization-630 Shiu matrix predict localized firing-rate responses to output lesions, beyond connectivity, strong connections, and recruitment?
+
+The output-lesion footprint is the neuron-by-neuron lesion-minus-baseline firing-rate response. Localization and comparison groups test the question above; they are not replacement questions. The [29 September meeting record](MEETING_REFLECTION_20260929.md) says James and Dr. Muldoon recommended substantially smaller timesteps, with 0.0001 ms as an example. It does not attribute our later numerical tolerances or detailed job design to them.
+
+## New information since that recorded meeting
+
+1. **The recommended finer-step follow-up completed:** 620 trials reaching 0.0001 ms. Selected-support mean A/F remained similar, but all 18 full numerical agreement groups failed. Thus the footprint is not established numerically converged under the declared rule.
+2. **Saved-output diagnostics narrowed the issue:** differences occur in baseline as well as lesion runs, mostly within shared active cells, and are not confined to the last recording boundary. Selected local replays reproduce saved spikes. These findings do not identify a complete initiating cause or repair convergence.
+3. **Selected altered-case interventions completed:** the eight separate G/H connection trials were verified; either removal interrupts recruitment in the selected coarser-step case. This is a conditional mechanism result, not general eigencircuit evidence or convergence.
+4. **A further bounded pilot is active:** supplied CCR output shows 27 tests passed and a mode reference worker at 0.0001 ms. The new 0.00005/0.000025 ms work is gated by reference reproduction and capacity. No new scientific completion or convergence is confirmed.
+
+Discussion: What do these numerical results permit us to say about the original output-lesion footprint question, and which next experiment would most directly resolve its remaining uncertainty?
 
 ## Current CCR work — status reported during this meeting preparation
 
