@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Four-trial first wave ready, 10 October](FOUR_TRIAL_RUN_20261010.md): validated8-core/92-GB/72-hour package for one fixed seed, four full-duration trials. Concurrent capacity gate and dynamic allocation deadline; no launch yet. Separate from the later16-core allocation.
+
 [Verified smaller-step results, 10 October](SMALLER_STEP_RESULTS_20261010.md): four10-ms reference/capacity runs complete; both archived references match exactly. Zero of twelve full scientific trials started because the capacity screen exceeded the remaining budget. [Adviser summary](ADVISER_FOLLOWUP_20261010.md) and [email draft](EMAIL_DRAFT_20261010.txt) distinguish completed work from proposed continuation.
 
 [Meeting results table and explanation guide, 10 October](MEETING_RESULTS_TABLE_20261010.md): research-stage results with convergence status on every test, all eighteen agreement groups, numeric lesion/intervention tables and plain-language definitions.

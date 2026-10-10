@@ -425,3 +425,6 @@ The separate-connection extension uses the same late-switch class with one selec
 
 
 `pcdr_check_smaller_results.py` independently reads the four-prefix result ZIP, compares returned source bytes to the validated upload, checks output hashes and physical schedules, directly selects old reference prefixes by physical time, compares per-cell counts/timing, and recomputes the capacity refusal. It never executes archived code, refuses overwriting its dated output, and preserves failures. It is specific to this fixed result panel, not a general convergence certifier.
+
+
+`pcdr_four_trial.py` selects only seed631401 from the unchanged twelve-job plan, executes reference/concurrent calibration before a four-process scientific batch, and retains failed/partial workers under a common allocation deadline. Its result labels are single-seed checks, not full convergence. `pcdr_build_four_trial.py` verifies the preserved pilot ZIP and adds only the new execution wrapper, tests and protocol; the model/data/scientific plan remain unchanged. `pcdr_four_run_all.sh` is the guarded detached-launch entry.38extracted package tests pass, including real process cleanup failure cases.

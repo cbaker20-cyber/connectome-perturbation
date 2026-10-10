@@ -24,7 +24,7 @@ def main():
     out = root / 'results/pcdr/smaller_verified_20261010'
     out.mkdir(exist_ok=False)
     try:
-        with zipfile.ZipFile(archive) as z, zipfile.ZipFile(root / 'exports/CCR_Smaller_Pilot.zip') as upload:
+        with zipfile.ZipFile(archive) as z, zipfile.ZipFile(root / 'results/pcdr/four_trial_validation_20261010/source_pilot.zip') as upload:
             names = z.namelist()
             require(len(names) == len(set(names)), 'Duplicate ZIP member')
             require(z.testzip() is None, 'CRC failure')

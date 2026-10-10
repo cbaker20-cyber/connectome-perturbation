@@ -1096,3 +1096,8 @@ Pre-launch cleanup review added interruption-safe owned-child termination to the
 ## 10 October — independent smaller-pilot archive review
 
 Located the user-downloaded CCR_smaller_pilot_results.zip in repository root. Four prefixes completed normally by16:00:51UTC; twelve scientific trials not started. Checked46 returned package files against upload,12 parquet hashes, old reference spikes/inputs, physical schedules, grids/IDs/bounds and capacity arithmetic. Baseline per-cell counts agree across new steps but26 timestamps shift; only3non-input spikes per prefix. No full-duration convergence conclusion. Raw ZIP preserved. See SMALLER_STEP_RESULTS_20261010.md and evidence/2026-10-10/smaller_results/verification.json. Created concise adviser milestone and individual-run tables plus unsent email draft; updated stale status pointers. No new CCR launch, browser action, external message or deadline extension. Further full-duration pilot is proposed, with prospective concurrency/resource validation.
+
+
+## 10 October — four-trial allocation package
+
+User authorized8cores,92GB,72hours for the first fixed-seed four full trials, separate from Monday16core reservation. Created prospective execution wrapper with same archived simulator/plan,2reference and4concurrent capacity prefixes, four scientific workers,20GBaddress cap each,70hour/Slurm-minus15minute bound, owned-process cleanup and no-overwrite locks. Final38tests pass; package source/hash verification complete. No remote launch. Release and limits in FOUR_TRIAL_RUN_20261010.md and evidence/2026-10-10/four_trial/release.json. Adviser-facing share copies remove preparation attribution banners as requested; original technical attribution/provenance retained.
