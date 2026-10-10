@@ -417,3 +417,8 @@ The separate-connection extension uses the same late-switch class with one selec
 ## CB4058 actual histories, 10 October 2026
 
 `pcdr_cb4058_history.py` describes all52 target/native states for the source selected in the prior decomposition, retaining absent/contrary cases. It classifies latest actual arrivals relative to observed resets, checks contributions against the independently verified source table, and avoids event pairing. `pcdr_cb4058_plot.py` draws the smallest selected seed in a fixed gap-relative window from actual event tables. CB4058_HISTORY_20261010.md records interpretation and visual review.
+
+
+## Smaller-step pilot preparation (10 October 2026)
+
+`pcdr_build_smaller_pilot.py` copies archived fine-study simulator bytes and selected original/anchor records into a new self-contained package, checking their hashes and paired inputs. It does not rewrite the old plan. `pcdr_smaller_pilot.py` validates that package, checks the allocation/environment and deadline, reproduces two saved prefixes, measures two new-step prefixes, and gates the twelve scientific trials on remaining resources. Prefix output never substitutes for one-second convergence. Its owned-process wrapper records failures/timeouts and cleans only its own subprocess on interruption. `pcdr_smaller_run_all.sh` bounds installation and controller runtime and prevents duplicate launchers. `test_pcdr_smaller_pilot.py` covers numerical/input checks, reference boundaries, selection integrity, resource gates and process cleanup. Local tests do not establish remote execution; see SMALLER_STEP_PILOT_20261010.md for actual status and provenance.

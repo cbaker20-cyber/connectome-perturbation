@@ -1,0 +1,113 @@
+{
+  "recorded_utc": "2026-10-10T15:15:14.992637+00:00",
+  "status": "prepared_and_locally_verified_not_launched",
+  "release": {
+    "status": "package_locally_verified_not_launched",
+    "sha256": "33c0db11ab9315de5d343a9a73b90986c256cb7e2451a615093c69c057e24476",
+    "bytes": 92672641,
+    "all_package_members_checked": 96,
+    "anchor_checks": [
+      {
+        "trial": "fine_0p0001_default_baseline_631401",
+        "spikes": 13409,
+        "scheduled_events": 3114,
+        "input_digest": "947b874a1f0642db593a25db863d1d9fafa83f779c71426db44ca34f517f65b4",
+        "outputs_checked": 4
+      },
+      {
+        "trial": "fine_0p0001_default_mode_631401",
+        "spikes": 12554,
+        "scheduled_events": 3114,
+        "input_digest": "947b874a1f0642db593a25db863d1d9fafa83f779c71426db44ca34f517f65b4",
+        "outputs_checked": 4
+      },
+      {
+        "trial": "fine_0p0001_default_baseline_631402",
+        "spikes": 14697,
+        "scheduled_events": 3215,
+        "input_digest": "68ec43809259fe87f64b275dd4e8d65eabc89f96fc2222a86e3b60ee2fe6c834",
+        "outputs_checked": 4
+      },
+      {
+        "trial": "fine_0p0001_default_mode_631402",
+        "spikes": 13042,
+        "scheduled_events": 3215,
+        "input_digest": "68ec43809259fe87f64b275dd4e8d65eabc89f96fc2222a86e3b60ee2fe6c834",
+        "outputs_checked": 4
+      },
+      {
+        "trial": "fine_0p0001_default_baseline_631403",
+        "spikes": 13384,
+        "scheduled_events": 3125,
+        "input_digest": "ce434629d3484ce495a73482e054fe33ac6fc25ee2b7c015d104242563100383",
+        "outputs_checked": 4
+      },
+      {
+        "trial": "fine_0p0001_default_mode_631403",
+        "spikes": 12459,
+        "scheduled_events": 3125,
+        "input_digest": "ce434629d3484ce495a73482e054fe33ac6fc25ee2b7c015d104242563100383",
+        "outputs_checked": 4
+      }
+    ],
+    "panel_and_criteria_preserved": true,
+    "checks": "Separate zip/hash/pandas checks of packaged references, input identity/types/times and fixed trial panel. No simulation run.",
+    "remaining": "CCR Linux environment, quota/allocation, same-step prefix reproduction and capacity measurements.",
+    "final_revision_changed_members": [
+      "connectome_smaller_pilot/START_HERE.md",
+      "connectome_smaller_pilot/package_manifest.json",
+      "connectome_smaller_pilot/scripts/pcdr_smaller_pilot.py",
+      "connectome_smaller_pilot/tests/test_pcdr_smaller_pilot.py"
+    ],
+    "frozen_simulator_inputs_anchors_and_plan_identical_to_prior_verified_package": true,
+    "tests_passed": 27,
+    "test_seconds": 22.44,
+    "bash_syntax_checked": true
+  },
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "27",
+    "time": "22.429",
+    "timestamp": "2026-10-10T11:14:01.880584-04:00"
+  },
+  "failures_preserved": [
+    {
+      "status": "failed_validation",
+      "tests_passed": 22,
+      "tests_failed": 2,
+      "elapsed_seconds": 24.25,
+      "reason": "Tiny-network fixture used weight50, which did not make the downstream neuron spike in3ms; assertion expecting that spike was unsupported. Increase only the test fixture to200 to exercise synaptic output. Frozen scientific model/data and simulator unchanged.",
+      "preserved": [
+        "local_tests.xml",
+        "initial_test_source.py",
+        "candidate.zip",
+        "package.json"
+      ]
+    },
+    {
+      "status": "invocation_failed_before_verification",
+      "command": ".venv/Scripts/python.exe scripts/pcdr_smaller_pilot.py verify",
+      "cwd": "repository root",
+      "error": "FileNotFoundError: package_manifest.json absent at repository root",
+      "correction": "Run the same command with cwd extracted/connectome_smaller_pilot and the absolute venv Python path. No source or input change."
+    },
+    {
+      "status": "package_validation_failed_before_launch",
+      "error": "Changed variant or lesion support",
+      "reason": "New verifier compared ordered lists: original mode_ids retain eigenvector rank order while archived job lesions use sorted IDs. Actual sets were identical51cells.",
+      "correction": "Compare exact membership with duplicate/type checks, preserving both frozen orderings; added order/duplicate/wrong-cell/missing-job tests.",
+      "candidate_preserved": "validated_candidate.zip"
+    }
+  ],
+  "sources": {
+    "scripts/pcdr_smaller_pilot.py": "6d00d27fa4cd4c2becaceb6cbf69ccf5aba643957ae92d17b8ad82c590693410",
+    "scripts/pcdr_build_smaller_pilot.py": "bdaed5f409d78e44405df02545488b1ebda4fea4df5ee2cdb5d973fc818d844b",
+    "scripts/pcdr_smaller_run_all.sh": "1ba60569aa6a2ce51f30247b47712690a16166d3d4f043d9bc0cde7747710891",
+    "tests/test_pcdr_smaller_pilot.py": "825cbadd6c01815d17a870f67e6c8cd628bd47ed8f403b0414cafea83aba5211"
+  },
+  "local_evidence": "results\\pcdr\\smaller_pilot_validation_20261010",
+  "launch_blocker": "CCR password/OTP sign-in remains pending; no upload or cluster launch."
+}
