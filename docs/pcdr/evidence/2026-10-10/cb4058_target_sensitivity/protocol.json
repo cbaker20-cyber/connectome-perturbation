@@ -1,0 +1,8 @@
+{
+  "recorded_utc": "2026-10-10T12:53:08.489824+00:00",
+  "inputs": {
+    "docs\\pcdr\\evidence\\2026-10-10\\cb4058_history\\histories.csv": "c5321c48827f503ee181357c2a4a6340a648ba3bf7613c1b3dc6165002eaef31"
+  },
+  "design": "Keep all26 cases. Group by all15 unique target IDs; compare median other-minus-leading CB4058 contribution within target. Separately show exclusion of the most-repeated target, breaking any frequency tie by root ID. Descriptive sensitivity only, no independence or p-value claim.",
+  "reason": "Eight cases repeat one target; source-led inhibitory attribution in16cases spans only six targets. Record grouping before summaries."
+}

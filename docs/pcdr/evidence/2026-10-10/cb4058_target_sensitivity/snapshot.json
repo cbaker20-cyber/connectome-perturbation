@@ -1,0 +1,9 @@
+{
+  "source": "results\\pcdr\\cb4058_target_sensitivity_20261010",
+  "files": {
+    "protocol.json": "51b83ec4fb6e73241e52c29956ce3ba511f570154f9c24c424fe1c97f53d26b9",
+    "summary.json": "e8583dbea6aa0af143092cdfd9a8ea24236dd4c5e9aada37d5eb493569e48a9b",
+    "targets.csv": "6d0937c5513b20c39bcf6fa73bdc2fff4615302ff2e27314deea84d15e6a45da",
+    "verification.json": "afb281f2c50339b67994069f69e82f072e4c7fa1030a5625c6c4f0f3414b420a"
+  }
+}

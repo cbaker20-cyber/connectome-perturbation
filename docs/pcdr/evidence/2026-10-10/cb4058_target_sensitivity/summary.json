@@ -1,0 +1,12 @@
+{
+  "unique_targets": 15,
+  "targets_negative_median": 8,
+  "targets_zero_median": 6,
+  "targets_positive_median": 1,
+  "excluded_target": "720575940618165019",
+  "excluded_cases": 9,
+  "remaining_cases": 17,
+  "remaining_more_negative_other": 10,
+  "remaining_equal": 6,
+  "remaining_more_negative_leading": 1
+}

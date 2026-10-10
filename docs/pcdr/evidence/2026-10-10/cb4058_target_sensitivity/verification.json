@@ -1,0 +1,13 @@
+{
+  "status": "verified",
+  "verified_utc": "2026-10-10T12:53:37.273290+00:00",
+  "source": "results\\pcdr\\crossing_sources_fixed_20261010\\source_contributions.csv",
+  "source_sha256": "d8a7d4af03740ab85b32c1ddb47927f6cbce77a77561a6267238289de948d5b4",
+  "all_15_groups_match_separate_source_contribution_lookup": true,
+  "protocol_rationale_correction": "Eight repeat occurrences referred to the16 source-dominant cases. The full26case panel has nine occurrences of the most frequent target. Selection rule and computed summaries use the actual full-panel frequencies, so no results changed.",
+  "outputs": {
+    "protocol.json": "51b83ec4fb6e73241e52c29956ce3ba511f570154f9c24c424fe1c97f53d26b9",
+    "summary.json": "e8583dbea6aa0af143092cdfd9a8ea24236dd4c5e9aada37d5eb493569e48a9b",
+    "targets.csv": "6d0937c5513b20c39bcf6fa73bdc2fff4615302ff2e27314deea84d15e6a45da"
+  }
+}
