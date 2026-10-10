@@ -6,6 +6,12 @@ Do concentrated eigenvector supports of the materialization-630 Shiu matrix pred
 
 An output lesion removes outgoing connections; the footprint is the neuron-by-neuron firing-rate change from paired baseline. A summarizes absolute mean response inside the support, and F its fraction of the network response. Neither is a behavioral measurement.
 
+## Current execution update
+
+A separate four-trial first wave has now been launched in an 8-core, 92-GB, 72-hour allocation (job26428319). The uploaded package checksum passed and all38 implementation tests passed on CCR in64.57seconds, with52dependency deprecation warnings. This status comes from supplied terminal output. The controller's current reference/capacity phase and full-trial starts or completions have not yet been confirmed from progress.json.
+
+The assigned scientific work is seed631401, baseline and mode output lesion, at0.00005 and0.000025ms, each for one simulated second. The four trials start only after reference and concurrent capacity gates pass. This first wave supplies four of the twelve planned trials; the remaining eight belong to later work. No new convergence result is available. The earlier two-hour pilot and its completed short probes remain separate evidence.
+
 ## Work since the recorded 29 September meeting
 
 This is a dated summary of substantive research stages, not a count of assistant sessions. Local work uses saved outputs unless explicitly identified as a replay or simulation. Some branches were chosen after seeing results; they are diagnostic, not fresh confirmation.

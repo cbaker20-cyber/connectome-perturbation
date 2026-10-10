@@ -9,15 +9,17 @@ The question is still whether the eigenvector-selected groups predict localized 
 - The 620-trial finer-step study reached 0.0001 ms. The average footprint stayed fairly similar, but all 18 full agreement groups failed the declared criteria.
 - The pathway tests showed that removing either of two selected connections at 600 ms suppresses the burst in the selected coarser-step case. That helps explain that case, but does not resolve convergence.
 - Local checks found that the disagreement is not just at the recording endpoint. Selected neuron replays reproduce the saved spikes, and incoming activity carries some of the count differences.
-- The latest CCR run completed two reference checks and two 10-ms baseline probes at 0.00005 and 0.000025 ms. Both references matched exactly. The probes kept the same per-neuron spike counts and showed smaller timing differences, but they are too short to test the full footprint. The twelve planned one-second trials did not start because the runtime estimate exceeded the allowed window.
+- The earlier two-hour CCR run completed two reference checks and two 10-ms baseline probes at 0.00005 and 0.000025 ms. Both references matched exactly. The probes kept the same per-neuron spike counts and showed smaller timing differences, but they are too short to test the full footprint. The twelve planned one-second trials did not start because the runtime estimate exceeded the allowed window.
+
+I have now launched the setup for a four-trial first wave on a separate 8-core, 92-GB, 72-hour allocation: one fixed seed, baseline and mode lesion, at both smaller steps. All 38 implementation tests passed on CCR. Reference and concurrent capacity checks must pass before the full trials start; I do not yet have new full-duration results.
 
 My understanding from today's discussion was that testing smaller timesteps is a reasonable next step. I forgot to ask a few things:
 
-1. Would a fixed three-seed, full-duration baseline/lesion pilot at those two smaller steps be the most useful next test before committing to a larger run?
+1. After this first seed, would you recommend completing the remaining two seeds at the same steps before considering a larger study?
 2. If the mean footprint continues to agree but individual paired footprints still differ, what numerical evidence would you want before interpreting the original localization result? I would retain the failed criteria rather than relabel them as passed.
 3. If the next full-duration pilot still disagrees, would you prioritize an independently validated event-handling reference or a separately designed study of ensemble-average footprints?
 
-I've included the completed results, the unrun trials, and the limitations in the attached summary. The short probes give a planning estimate of about 474 serial worker-hours for all twelve full trials, so I also need to validate the parallel setup and actual full-run cost.
+I've included the completed results, the unrun trials, and the limitations in the attached summary. The short probes give a planning estimate of about 474 serial worker-hours for all twelve full trials, so the current first wave includes a concurrent capacity check before committing to the full runs.
 
 Thanks,
 Copeland
