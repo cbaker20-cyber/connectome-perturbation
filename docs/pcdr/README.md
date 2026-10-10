@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Completed pre-meeting block, 10 October](PREMEETING_SUMMARY_20261010.md): final findings, preserved failures and adviser decisions. The bounded saved-output work is complete; further numerical studies remain proposals.
+
 [Numerical-study decision proposal, 10 October](NUMERICAL_DECISION_PROPOSAL_20261010.md): explicit possible twelve-trial feasibility gate, unchanged criteria, distinct alternative estimands, and recorded prior-duration evidence. Two further halvings are potentially expensive; no new study is implemented or launched.
 
 [CB4058 actual histories and timeline, 10 October](CB4058_HISTORY_20261010.md): inhibitory arrivals are retained in 19 other-run states versus six leading-run states; a deterministic smallest-seed example shows blocking versus acceptance with equal source counts. Actual-history evidence with reset/feedback confounding, not a source-removal counterfactual.
@@ -16,7 +18,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 [Incoming-history sensitivity, 9 October](HISTORY_PARTS_20261009.md): constructed timing/surplus mixtures change target counts, but 21/26 cases depend on the event-pairing rule and many mixtures violate source refractory spacing. Stop this mixture branch; retain actual-history replay evidence without claiming a unique timing/count attribution.
 
-[Baseline local replays, 9 October](BASELINE_REPLAY_20261009.md): all 112 native target prefixes match saved ticks. Early timing selection changes no short-prefix counts; a recorded count-focused amendment selects 26 seeds. At a fixed fine step, each selected target retains its coarse count under coarse incoming history. This is a conditional local result, not a traced initiating network cause or convergence.
+[Baseline local replays, 9 October](BASELINE_REPLAY_20261009.md): all 112 native target prefixes match saved spike ticks. Early timing selection changes no short-prefix counts; a recorded count-focused amendment selects 26 seeds. At a fixed fine step, each selected target retains its coarse count under coarse incoming history. This is a conditional local result, not a traced initiating network cause or convergence.
 
 [Baseline differences before the endpoint, 9 October](BASELINE_TIME_20261009.md): count disagreement is substantial by 600–900 ms. A conservative bound leaves at least 97.45% of pooled count L1 after arbitrary deletion of observed spikes in the final 1 ms. This bounds a narrow endpoint explanation; it does not establish convergence or identify the initiating mechanism.
 
