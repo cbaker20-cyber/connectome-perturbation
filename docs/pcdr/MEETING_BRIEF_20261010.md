@@ -6,6 +6,14 @@
 
 This is a suggested explanation of the evidence, not a claim of independent authorship of the analysis or software. Describe Codex assistance accurately.
 
+## Current CCR work — status reported during this meeting preparation
+
+The user supplied CCR terminal output showing **27 tests passed, 52 dependency deprecation warnings, in 31.25 seconds**, followed by an active pilot controller (PID 638663) and a `reference_mode` worker (PID 674985) at **0.0001 ms** on **cpn-d02-23**. Installation and dependency checks passed. This is user-supplied terminal evidence; allocation ID/resources, progress JSON, reference agreement and result files have not yet been independently retrieved. The mode worker being active does not by itself certify the preceding reference outcome.
+
+The bounded pilot first checks saved baseline/mode reference reproduction, then measures 10 ms prefixes at **0.00005 and 0.000025 ms**. The prepared scientific panel is three original seeds, baseline/mode, two new steps: twelve one-second trials. Those trials may start only if the reproduction and resource/time gates pass. **No new scientific trial completion or convergence result is confirmed.** The authorized block ends at **12:30 p.m. Eastern / 16:30 UTC on 10 October**. All eighteen earlier full agreement groups remain failed. Short probes and passing software tests are not convergence evidence.
+
+Suggested spoken update: “We are now checking whether the finer-step pilot reproduces the archived reference and is computationally feasible. The software tests passed on CCR and a reference worker is active. We do not yet have new convergence results.”
+
 ## Evidence to bring
 
 Use the [full results table and explanation guide](MEETING_RESULTS_TABLE_20261010.md) for every research stage, all eighteen agreement groups, numeric lesion/intervention results and definitions of convergence and the readouts.
@@ -35,7 +43,7 @@ The L1 values above are sums of absolute neuronwise differences, not a typical c
 
 ## Decisions to ask for
 
-Bring the [concrete numerical-study proposal](NUMERICAL_DECISION_PROPOSAL_20261010.md). It specifies a possible twelve-trial feasibility gate and what expansion would require, alongside event-handling-reference and separately designed ensemble alternatives. Archived timing gives a roughly 545-worker-hour illustrative estimate even for that small two-halving pilot; this is not measured new-step performance or an approved allocation. No new run is prepared.
+Bring the [concrete numerical-study proposal](NUMERICAL_DECISION_PROPOSAL_20261010.md). It specifies a possible twelve-trial feasibility gate and what expansion would require, alongside event-handling-reference and separately designed ensemble alternatives. Archived timing gives a roughly 545-worker-hour illustrative estimate even for that small two-halving pilot; this is not measured new-step performance or an approved allocation. The bounded smaller-step package is now prepared and its CCR reference worker is active, as described above; the twelve scientific trials are not confirmed completed.
 
 1. **What numerical claim does the project need?** Should individual paired responses agree across resolution under the existing criteria, or is a separately declared distribution/ensemble question scientifically appropriate? We should retain the original failed result either way. Existing seeds can inform design, not become unacknowledged fresh confirmation.
 2. **What single next experiment would change that decision?** If paired convergence remains necessary, agree on a bounded solver/timestep diagnostic, fixed inputs and cases, required state/event records, resource cap and stop rule before CCR. A still smaller step alone has no guaranteed value. A different event-handling solver would require its own implementation validation and is not currently ready.
@@ -61,4 +69,4 @@ My recommendation for discussion: stop broad intervention and comparison sweeps 
 - [Baseline versus lesion](STEP_CANCELLATION_20261009.md), [shared active cells](BASELINE_COUNTS_20261009.md), and [endpoint bounds](BASELINE_TIME_20261009.md).
 - [Actual-history local replays](BASELINE_REPLAY_20261009.md), [limits of constructed mixtures](HISTORY_PARTS_20261009.md), and [latest narrow refractory check](BASELINE_GATING_20261010.md).
 
-No new full-network experiment, CCR launch, solver replacement or upload is prepared by this brief. The next experiments above are proposals for discussion, not completed evidence. This brief summarizes records through 10 October and does not certify competition compliance.
+The smaller-step reference/capacity pilot is now active on CCR. Solver replacement and broader experiments remain proposals, not completed evidence. This brief summarizes records through 10 October and does not certify competition compliance.

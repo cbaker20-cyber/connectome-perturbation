@@ -8,6 +8,7 @@ This is a consolidated table of research stages, with detailed numeric tables be
 
 | Main result to show | Number or outcome | Convergence status | One-sentence explanation |
 |---|---|---|---|
+| Smaller-step CCR pilot, current | 27 software tests passed; mode reference worker active at 0.0001 ms on cpn-d02-23 (user-supplied terminal output) | Pending; no new convergence result | New 0.00005/0.000025 ms probes and twelve scientific trials are planned behind reproduction/time gates; completion not confirmed. |
 | Selected group at finest tested step | A=22.508 Hz; F=22.977% | Full agreement failed | The response is more concentrated than the fixed comparators, but most remains outside the group. |
 | Full numerical study | 0/18 groups meet the full rule | FAILED | Smaller steps still change the detailed response more than the declared tolerances allow. |
 | Baseline disagreement | Median final-halving L1=578.5 summed Hz | Failed criteria unchanged | The unlesioned network also changes with resolution; this is not solely a lesion issue. |
