@@ -1,0 +1,237 @@
+{
+  "archive_sha256": "2f61b39cd9267a391a000ad15a295feb21305b836c7af7770309243bfa64c278",
+  "package_files_matched": 46,
+  "checked_output_hashes": {
+    "results/reference_baseline_0.0001/delivered.parquet": "7a52c1086ccca6357e0ea79afd00c657e688f9c6dce213c9c3ec9927232c15b7",
+    "results/reference_baseline_0.0001/scheduled.parquet": "7a52c1086ccca6357e0ea79afd00c657e688f9c6dce213c9c3ec9927232c15b7",
+    "results/reference_baseline_0.0001/spikes.parquet": "38374241d5725324da82d3e4c8bc125d318f11f970c974632590d701d4b5e4d9",
+    "results/reference_mode_0.0001/delivered.parquet": "7a52c1086ccca6357e0ea79afd00c657e688f9c6dce213c9c3ec9927232c15b7",
+    "results/reference_mode_0.0001/scheduled.parquet": "7a52c1086ccca6357e0ea79afd00c657e688f9c6dce213c9c3ec9927232c15b7",
+    "results/reference_mode_0.0001/spikes.parquet": "38374241d5725324da82d3e4c8bc125d318f11f970c974632590d701d4b5e4d9",
+    "results/probe_5e-05/delivered.parquet": "e118cacdc981e289014aa79b74befb3fba64b603b851beebea0793f60742b496",
+    "results/probe_5e-05/scheduled.parquet": "e118cacdc981e289014aa79b74befb3fba64b603b851beebea0793f60742b496",
+    "results/probe_5e-05/spikes.parquet": "573c77d51b337c2b1cd5def3b22df8defa24d78f13b11c23b589ac02ed37fd96",
+    "results/probe_2.5e-05/delivered.parquet": "4d7f75b5ca63fe931f619b711d973a679e2ead894f01b265ef0434430bf6fafb",
+    "results/probe_2.5e-05/scheduled.parquet": "4d7f75b5ca63fe931f619b711d973a679e2ead894f01b265ef0434430bf6fafb",
+    "results/probe_2.5e-05/spikes.parquet": "a777f38e9374be4b7c9e25c9c8d4adff7a1e6cef4941035469f499734dd7c5e0"
+  },
+  "progress": {
+    "status": "budget_insufficient",
+    "started_utc": "2026-10-10T15:29:01.348634+00:00",
+    "slurm_job_id": "26427313",
+    "host": "cpn-d02-23.core.ccr.buffalo.edu",
+    "cpus": 3,
+    "memory_mb": 32000,
+    "workers": 1,
+    "scientific_completed": 0,
+    "scientific_total": 12,
+    "probes_completed": 4,
+    "environment": {
+      "python": "3.11.5 (main, Apr 28 2024, 14:10:54) [GCC 13.2.0]",
+      "executable": "/user/cbaker4/connectome_smaller_pilot/.smaller-venv/bin/python",
+      "platform": "Linux-7.0.0-31-generic-x86_64-Intel-R-_Xeon-R-_Gold_6448Y-with-glibc2.38",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.17.1",
+        "pandas": "3.0.3",
+        "pyarrow": "24.0.0",
+        "brian2": "2.9.0",
+        "Cython": "3.2.5",
+        "matplotlib": "3.11.0",
+        "psutil": null,
+        "pytest": "9.1.1",
+        "statsmodels": "0.14.6"
+      }
+    },
+    "active": null,
+    "updated_utc": "2026-10-10T15:45:04.722489+00:00",
+    "finished_utc": "2026-10-10T16:00:51.455659+00:00",
+    "explanation": "References/probes completed. Twelve scientific trials remain unexecuted; cannot fit the declared resource screen."
+  },
+  "runs": [
+    {
+      "run": "reference_baseline_0.0001",
+      "dt_ms": 0.0001,
+      "duration_ms": 10,
+      "spikes": 26,
+      "cells": 18,
+      "non_input_spikes": 3,
+      "scheduled": 23,
+      "delivered": 23,
+      "seconds": 239.8260534019937,
+      "peak_gb": 2.71251456,
+      "exact_old_reference": true
+    },
+    {
+      "run": "reference_mode_0.0001",
+      "dt_ms": 0.0001,
+      "duration_ms": 10,
+      "spikes": 26,
+      "cells": 18,
+      "non_input_spikes": 3,
+      "scheduled": 23,
+      "delivered": 23,
+      "seconds": 241.92075374600245,
+      "peak_gb": 2.711547904,
+      "exact_old_reference": true
+    },
+    {
+      "run": "probe_5e-05",
+      "dt_ms": 5e-05,
+      "duration_ms": 10,
+      "spikes": 26,
+      "cells": 18,
+      "non_input_spikes": 3,
+      "scheduled": 23,
+      "delivered": 23,
+      "seconds": 477.3930700480123,
+      "peak_gb": 2.78663168,
+      "exact_old_reference": null
+    },
+    {
+      "run": "probe_2.5e-05",
+      "dt_ms": 2.5e-05,
+      "duration_ms": 10,
+      "spikes": 26,
+      "cells": 18,
+      "non_input_spikes": 3,
+      "scheduled": 23,
+      "delivered": 23,
+      "seconds": 945.2552850840002,
+      "peak_gb": 3.056500736,
+      "exact_old_reference": null
+    }
+  ],
+  "comparisons": [
+    {
+      "coarse": "reference_baseline_0.0001",
+      "fine": "probe_5e-05",
+      "count_l1": 0,
+      "changed_spike_times": 26,
+      "max_abs_time_difference_ms": 9.999999999940612e-05,
+      "mean_abs_time_difference_ms": 5.192307692296038e-05
+    },
+    {
+      "coarse": "probe_5e-05",
+      "fine": "probe_2.5e-05",
+      "count_l1": 0,
+      "changed_spike_times": 26,
+      "max_abs_time_difference_ms": 5.000000000143778e-05,
+      "mean_abs_time_difference_ms": 2.6923076923192774e-05
+    }
+  ],
+  "gate": {
+    "allowed": false,
+    "required_serial_seconds": 1707178.026158415,
+    "remaining_seconds": 1015.0,
+    "per_trial_seconds": {
+      "5e-05": 95478.61400960246,
+      "2.5e-05": 189051.05701680004
+    },
+    "worker_memory_screen_bytes": 16000000000,
+    "limits": "Twice short-prefix scaling is a scheduling screen, not a guaranteed runtime or full-duration memory measurement."
+  },
+  "twelve_jobs": [
+    {
+      "id": "smaller_5e-05_baseline_631401",
+      "seed": 631401,
+      "condition": "baseline",
+      "dt_ms": 5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_5e-05_mode_631401",
+      "seed": 631401,
+      "condition": "mode",
+      "dt_ms": 5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_5e-05_baseline_631402",
+      "seed": 631402,
+      "condition": "baseline",
+      "dt_ms": 5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_5e-05_mode_631402",
+      "seed": 631402,
+      "condition": "mode",
+      "dt_ms": 5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_5e-05_baseline_631403",
+      "seed": 631403,
+      "condition": "baseline",
+      "dt_ms": 5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_5e-05_mode_631403",
+      "seed": 631403,
+      "condition": "mode",
+      "dt_ms": 5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_2.5e-05_baseline_631401",
+      "seed": 631401,
+      "condition": "baseline",
+      "dt_ms": 2.5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_2.5e-05_mode_631401",
+      "seed": 631401,
+      "condition": "mode",
+      "dt_ms": 2.5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_2.5e-05_baseline_631402",
+      "seed": 631402,
+      "condition": "baseline",
+      "dt_ms": 2.5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_2.5e-05_mode_631402",
+      "seed": 631402,
+      "condition": "mode",
+      "dt_ms": 2.5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_2.5e-05_baseline_631403",
+      "seed": 631403,
+      "condition": "baseline",
+      "dt_ms": 2.5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    },
+    {
+      "id": "smaller_2.5e-05_mode_631403",
+      "seed": 631403,
+      "condition": "mode",
+      "dt_ms": 2.5e-05,
+      "status": "not_started",
+      "convergence": "not_evaluated"
+    }
+  ],
+  "limitations": [
+    "Ten-ms prefixes only; no new-step lesion trial.",
+    "No new one-second footprint or convergence result.",
+    "Source identity and saved-output agreement are not independent human review."
+  ]
+}

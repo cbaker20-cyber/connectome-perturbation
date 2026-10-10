@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "case": "changed_source",
+      "expected_rejection": "Source mismatch",
+      "passed": true,
+      "returncode": 1
+    },
+    {
+      "case": "changed_output",
+      "expected_rejection": "Output hash mismatch",
+      "passed": true,
+      "returncode": 1
+    },
+    {
+      "case": "existing_output",
+      "expected_rejection": "FileExistsError",
+      "passed": true,
+      "returncode": 1
+    }
+  ],
+  "note": "Intentional corrupted fixtures only; original result and verified output unchanged."
+}

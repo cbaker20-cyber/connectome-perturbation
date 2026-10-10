@@ -1,5 +1,7 @@
 # Adviser meeting brief — 10 October 2026
 
+**Later verified result:** the downloaded pilot ZIP contains four completed10-ms reference/capacity runs and zero completed full scientific trials. Both old references match exactly; the capacity gate declined the twelve-trial panel. Earlier pending/active statements below describe their observation time. Use [verified results](SMALLER_STEP_RESULTS_20261010.md) and [current adviser summary](ADVISER_FOLLOWUP_20261010.md).
+
 ## Brief recap for James
 
 The question remains the one in [the eigencircuit study plan](PLAN.md#question):

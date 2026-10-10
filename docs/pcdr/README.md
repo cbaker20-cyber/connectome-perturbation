@@ -6,7 +6,7 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
-[Authorized smaller-step pilot, 10 October](SMALLER_STEP_PILOT_20261010.md): new user-authorized two-hour block; package locally validated for0.00005/0.000025ms. Same-step reference and capacity gates precede twelve possible trials. CCR sign-in pending; nothing launched at the current checkpoint. Original convergence failures remain.
+[Verified smaller-step results, 10 October](SMALLER_STEP_RESULTS_20261010.md): four10-ms reference/capacity runs complete; both archived references match exactly. Zero of twelve full scientific trials started because the capacity screen exceeded the remaining budget. [Adviser summary](ADVISER_FOLLOWUP_20261010.md) and [email draft](EMAIL_DRAFT_20261010.txt) distinguish completed work from proposed continuation.
 
 [Meeting results table and explanation guide, 10 October](MEETING_RESULTS_TABLE_20261010.md): research-stage results with convergence status on every test, all eighteen agreement groups, numeric lesion/intervention tables and plain-language definitions.
 

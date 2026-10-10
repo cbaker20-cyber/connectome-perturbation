@@ -1,5 +1,7 @@
 # Meeting results and explanation guide — 10 October 2026
 
+**Later verified result:** the downloaded pilot ZIP contains four completed10-ms reference/capacity runs and zero completed full scientific trials. Both old references match exactly; the capacity gate declined the twelve-trial panel. Earlier pending/active statements below describe their observation time. Use [verified results](SMALLER_STEP_RESULTS_20261010.md) and [current adviser summary](ADVISER_FOLLOWUP_20261010.md).
+
 **Original eigencircuit question ([PLAN.md](PLAN.md#question)):** Do concentrated eigenvector supports of the materialization-630 Shiu matrix predict localized firing-rate responses to output lesions, beyond connectivity, strong connections, and recruitment?
 
 **Main finding:** the selected 51-cell group has a larger descriptive localized response than the fixed comparison groups under default settings. **Main unresolved problem:** the declared numerical convergence criteria failed, and the comparison groups do not isolate eigenvector membership from other influential features. The original eigencircuit hypothesis remains unresolved.

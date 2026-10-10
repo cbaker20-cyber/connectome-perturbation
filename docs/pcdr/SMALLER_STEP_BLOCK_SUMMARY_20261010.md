@@ -1,5 +1,7 @@
 # Smaller-step research block: final known status — 10 October 2026
 
+**Later verified result:** the downloaded pilot ZIP contains four completed10-ms reference/capacity runs and zero completed full scientific trials. Both old references match exactly; the capacity gate declined the twelve-trial panel. Earlier pending/active statements below describe their observation time. Use [verified results](SMALLER_STEP_RESULTS_20261010.md) and [current adviser summary](ADVISER_FOLLOWUP_20261010.md).
+
 The authorized block ended at16:30UTC (12:30Eastern). This record was saved at the first deadline wake,16:31UTC. No extension or new simulation is authorized by this summary.
 
 Completed locally: validated package, 27 extracted tests, independent archive/member/reference checks and recorded failure preservation. User-supplied CCR output reports 27 tests passed in31.25s and successful dependency checks. The last supplied process listing showed controller638663 and reference_mode worker674985 oncpn-d02-23 at0.0001ms.

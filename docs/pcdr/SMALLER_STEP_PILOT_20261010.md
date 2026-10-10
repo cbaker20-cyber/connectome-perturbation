@@ -1,5 +1,7 @@
 # Authorized smaller-step pilot — 10 October 2026
 
+**Later verified result:** the downloaded pilot ZIP contains four completed10-ms reference/capacity runs and zero completed full scientific trials. Both old references match exactly; the capacity gate declined the twelve-trial panel. Earlier pending/active statements below describe their observation time. Use [verified results](SMALLER_STEP_RESULTS_20261010.md) and [current adviser summary](ADVISER_FOLLOWUP_20261010.md).
+
 User authorized preparing and running the proposed pilot, with a two-hour work window ending16:30UTC October10. The earlier no-launch restriction is superseded for this pilot. This record precedes new simulation outcomes. Current status: preparation; no CCR launch yet.
 
 Keep original three seeds631401–631403, baseline and mode, new steps0.00005/0.000025ms and one-second scientific duration: twelve possible new scientific trials. Existing0.0001ms outputs are anchors. Keep signed-mean averaging and original convergence criteria. The first three seeds are previously inspected and are not independent confirmation. All18 old agreement groups remain failed.
