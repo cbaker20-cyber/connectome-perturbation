@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-10T12:35:20.150622+00:00",
+  "inputs": {
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_baseline_gating.py": "c8ab96ae15d081ba6cd27f95fcb16cbcd9c0652a2e93c5bb5bb8b5a9a2c83672",
+    "C:\\Users\\Baker\\Drosophila_Data\\scripts\\pcdr_recurrent_delivery.py": "8d3ea61184dc6143f96467b42a785a12e4bb5696ab07b01c4f8d88844ef8f074",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\results.json": "94a3ad9e93df982ef63b4e1822bcb535369411bfba22fc0998aa40a6a769656c",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_count_replay\\snapshot.json": "912f63f16ad855b69b89811a628af36e8fbec0cb948323bae47937ed0f46457e",
+    "C:\\Users\\Baker\\Drosophila_Data\\2023_03_23_connectivity_630_final.parquet": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+    "C:\\Users\\Baker\\Drosophila_Data\\results\\pcdr\\fine_download_20261005\\plan.json": "2dde2dad8eff8783e1d881580af2faec41ec9596d154070dde3693c6a159404e",
+    "C:\\Users\\Baker\\Drosophila_Data\\docs\\pcdr\\evidence\\2026-10-09\\baseline_counts\\summary.json": "3badfb9ac9ab3f3229c0fb36649e5e438dcd230e21718a96d624d5f42e11a2f6"
+  },
+  "design": "All prior 26 count-selected targets/checkpoints and four absent seeds. Reconstruct native arrival acceptance using saved target spikes and 2.2-ms refractory duration. Join only exact source-ID/common-tick matches; no ordinal pairing or mixed histories. Retain all unmatched events and shared-event acceptance changes.",
+  "limits": "Conditional model reconstruction, not direct state recording. Exact shared-event restriction omits shifted arrivals and may hide much of the divergence. First changed acceptance is not necessarily the initiating cause; target spikes define gating. No new scientific tolerance, network run, or causal intervention."
+}

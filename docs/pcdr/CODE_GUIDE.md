@@ -405,3 +405,7 @@ The separate-connection extension uses the same late-switch class with one selec
 ## Incoming-history pairing sensitivity, 9 October 2026
 
 `pcdr_history_parts.py` retains the prior 26 selected target/checkpoint cases and four absent seeds. It pairs arrivals within source IDs from the beginning and end, replays the two-by-two paired-time/surplus combinations at fixed fine dt, and requires reconstructed original histories to match prior verified target ticks. Seven selection/partition tests passed. Separate verification checks all input constructions and flags source refractory violations. HISTORY_PARTS_20261009.md explains why mixed histories cannot give a unique timing/count attribution.
+
+## Exact shared-event refractory check, 10 October 2026
+
+`pcdr_baseline_gating.py` reuses tested arrival acceptance on the prior selected native histories, joins source ID and physical tick exactly, and preserves unmatched events. It checks arrival reconstruction against verified arrays; no artificial history or ordinal pairing. Three focused tests and independent interval-membership verification support the computation. BASELINE_GATING_20261010.md explains the low-coverage negative result.

@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Adviser meeting brief, 10 October](MEETING_BRIEF_20261010.md): short opening, completed evidence and limits, likely questions, and three decisions needed before more large runs. [Latest exact shared-event check](BASELINE_GATING_20261010.md) finds zero acceptance differences at only 1.54% incoming-event coverage; it cannot exclude shifted-event refractory effects.
+
 [Incoming-history sensitivity, 9 October](HISTORY_PARTS_20261009.md): constructed timing/surplus mixtures change target counts, but 21/26 cases depend on the event-pairing rule and many mixtures violate source refractory spacing. Stop this mixture branch; retain actual-history replay evidence without claiming a unique timing/count attribution.
 
 [Baseline local replays, 9 October](BASELINE_REPLAY_20261009.md): all 112 native target prefixes match saved ticks. Early timing selection changes no short-prefix counts; a recorded count-focused amendment selects 26 seeds. At a fixed fine step, each selected target retains its coarse count under coarse incoming history. This is a conditional local result, not a traced initiating network cause or convergence.
