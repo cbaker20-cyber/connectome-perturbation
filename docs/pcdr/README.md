@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Meeting results table and explanation guide, 10 October](MEETING_RESULTS_TABLE_20261010.md): research-stage results with convergence status on every test, all eighteen agreement groups, numeric lesion/intervention tables and plain-language definitions.
+
 [Completed pre-meeting block, 10 October](PREMEETING_SUMMARY_20261010.md): final findings, preserved failures and adviser decisions. The bounded saved-output work is complete; further numerical studies remain proposals.
 
 [Numerical-study decision proposal, 10 October](NUMERICAL_DECISION_PROPOSAL_20261010.md): explicit possible twelve-trial feasibility gate, unchanged criteria, distinct alternative estimands, and recorded prior-duration evidence. Two further halvings are potentially expensive; no new study is implemented or launched.

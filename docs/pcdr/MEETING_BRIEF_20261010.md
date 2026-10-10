@@ -8,6 +8,8 @@ This is a suggested explanation of the evidence, not a claim of independent auth
 
 ## Evidence to bring
 
+Use the [full results table and explanation guide](MEETING_RESULTS_TABLE_20261010.md) for every research stage, all eighteen agreement groups, numeric lesion/intervention results and definitions of convergence and the readouts.
+
 | Question | Completed evidence | What it does not establish |
 |---|---|---|
 | Did finer steps establish convergence? | No. All 18 full groups failed. Final-halving selected-support joint agreement: 1/30 seeds versus required 29/30 plus the mean check; both final halvings must pass. | Stable means are not individual-response convergence. |

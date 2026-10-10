@@ -1081,3 +1081,7 @@ Resumed13:08UTC heartbeat after source-history and repeated-target checks were c
 ## 10 October 2026 — pre-meeting block completed
 
 Finished bounded source-history follow-up, sensitivity checks and numerical decision proposal before the14:43UTC limit. Final review clarified that112 native prefixes match saved spike ticks, not an archived continuous voltage trace; reorganized meeting brief and saved PREMEETING_SUMMARY_20261010.md. Checked17 relative links across brief/proposal/summary and compared proposal criteria with frozen plan. No new scientific computation during final editorial pass. Completion time 2026-10-10T13:22:48.633294+00:00. Pausing the research heartbeat on completion as instructed; no deadline extension. All18 failures retained. Codex assistance used.
+
+## 10 October 2026 — requested meeting results table
+
+User requested a results table covering the tests and explaining convergence and unfamiliar terms. Added MEETING_RESULTS_TABLE_20261010.md with stage-level summaries, convergence status for every research test, limits, glossary and direct meeting answers. Copied numeric tables from dated reports and generated all18 agreement rows directly from the previously verified checked_agreement.json; all remain failed. Checked source links and table column structure; no simulation or scientific reanalysis. Earlier frozen records unchanged; this guide distinguishes untested/not-applicable convergence from failed full criteria. Codex assistance used.
