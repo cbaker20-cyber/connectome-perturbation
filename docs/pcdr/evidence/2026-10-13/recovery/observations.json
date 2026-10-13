@@ -1,0 +1,31 @@
+{
+  "record_type": "transcribed CCR terminal observations, not downloaded raw result archive",
+  "observed_utc": "2026-10-13T03:52:18+00:00",
+  "old_result_archive": "CCR_four_trial_results.zip",
+  "old_result_archive_remote_sha256": "bc93c32c812c3400e13e33802d8dfe555466f113a07b0ad953c009bce3172138",
+  "old_status": "budget_insufficient",
+  "old_finished_utc": "2026-10-10T19:03:39.495832+00:00",
+  "old_completed_ids": [],
+  "old_gate": {
+    "allowed": false,
+    "per_trial_screen_seconds": {"5e-05": 185867.81022860087, "2.5e-05": 346400.4338286002},
+    "available_seconds": 249865.35260432097,
+    "workers": 4,
+    "worker_address_space_limit_bytes": 20000000000
+  },
+  "recovery_job": "26427314",
+  "recovery_step": "26427314.3",
+  "recovery_controller_pid": 255534,
+  "login_dispatch_pid": 1885034,
+  "host": "cpn-c04-18.core.ccr.buffalo.edu",
+  "cpu_affinity": 4,
+  "memory_mb": 256000,
+  "python": "3.11.5",
+  "source_sha256": "21f208a5ac117e1cb4b85f00fc1cc55a24c3f6e5f8a9252ab7db0980f92cf489",
+  "reference_baseline": {"complete": true, "exact_reference": true, "seconds": 300.73538083501626},
+  "reference_mode": {"complete": true, "exact_reference": true, "seconds": 301.17886948399246},
+  "phase": "capacity",
+  "capacity_pids": [255823, 255824],
+  "scientific_trials_started_at_observation": 0,
+  "original_criteria_unchanged": true
+}
