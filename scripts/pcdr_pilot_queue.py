@@ -80,6 +80,19 @@ def archive(out):
     temp.rename(target)
 
 
+def output_folder(task, dt, attempt):
+    if attempt == 'initial':
+        return ROOT/f'queued_pair_{task}_20261013'
+    if attempt != 'sapphire' or task != 0 or dt != .000025:
+        raise ValueError('Unplanned retry scope')
+    prior = read_json(ROOT/f'queued_pair_{task}_20261013/progress.json')
+    if prior['status'] != 'budget_insufficient' or prior['scientific_completed'] != 0:
+        raise ValueError('Retry requires preserved refusal with no completed science')
+    if (ROOT/f'queued_pair_{task}_20261013/logs/scientific').exists():
+        raise ValueError('Prior scientific launch requires separate review')
+    return ROOT/f'sapphire_pair_{task}_20261013'
+
+
 def main():
     import fcntl
     from scripts.pcdr_ccr_capacity import allocation
@@ -103,7 +116,8 @@ def main():
     if budget < 3600:
         raise ValueError('Insufficient allocation budget')
     deadline = time.monotonic()+budget
-    out = ROOT/f'queued_pair_{task}_20261013'
+    attempt = os.environ.get('PCDR_EXECUTION_ATTEMPT', 'initial')
+    out = output_folder(task, dt, attempt)
     with (ROOT/f'.queued_pair_{task}.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         out.mkdir(exist_ok=False)
@@ -111,6 +125,7 @@ def main():
                       job_id=job, array_job_id=os.environ['SLURM_ARRAY_JOB_ID'], task=task,
                       host=os.uname().nodename, cpus=cpus, memory_mb=memory,
                       seed=seed, dt_ms=dt, scientific_completed=0, environment=current,
+                      execution_attempt=attempt,
                       budget_seconds=budget, original_criteria_unchanged=True)
         def update(records):
             status.update(processes=records, updated_utc=now())

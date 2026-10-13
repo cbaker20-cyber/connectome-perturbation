@@ -51,6 +51,22 @@ def test_invalid_budget():
         queue.capacity([probe(), probe()], .000025, float('inf'))
 
 
+def test_retry_only_after_unstarted_refusal(tmp_path, monkeypatch):
+    monkeypatch.setattr(queue, 'ROOT', tmp_path)
+    prior = tmp_path/'queued_pair_0_20261013'
+    prior.mkdir()
+    queue.atomic_json(prior/'progress.json', dict(status='budget_insufficient', scientific_completed=0))
+    assert queue.output_folder(0, .000025, 'sapphire').name == 'sapphire_pair_0_20261013'
+    with pytest.raises(ValueError, match='scope'):
+        queue.output_folder(1, .00005, 'sapphire')
+    (prior/'logs/scientific').mkdir(parents=True)
+    with pytest.raises(ValueError, match='Prior scientific launch'):
+        queue.output_folder(0, .000025, 'sapphire')
+    queue.atomic_json(prior/'progress.json', dict(status='running', scientific_completed=0))
+    with pytest.raises(ValueError, match='preserved refusal'):
+        queue.output_folder(0, .000025, 'sapphire')
+
+
 def write_prefix(folder, dt=.0001):
     folder.mkdir(parents=True)
     files = {}

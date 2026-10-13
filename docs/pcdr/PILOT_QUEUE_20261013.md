@@ -29,3 +29,11 @@ Submitted2026-10-13 at08:46:59Eastern (12:46:59UTC), array26469967, tasks0–4, 
 The active recovery remained in scientific phase at12:47:06UTC. No new full trial has been claimed started from this array. Submission identity is saved remotely in `pilot_queue_submission_20261013.txt`. Do not resubmit or duplicate the array.
 
 Versioned controller commit6b0255175dfb4f95d16582073576b4e2da53c2a8. Local/remote controller SHA256f2105d2e328599f5cca44890c908f7adae54cd983bef9e65412d7131c6181757; launcher SHA25680254e8877a62a1a986fdbc9a21c1f60759b53fad1aed7c233ff81ec731b705a. Both remote hashes matched; Bash syntax and Slurm test-only validation passed before submission. Source was transferred from this exact repository commit. No package/data/source replacement occurred.
+
+## Finest-step hardware amendment
+
+At16:29UTC, task0 had stopped before scientific launch:298662.83742199885seconds (82.96hours) including the2x margin, versus250127.41637589107seconds available. Both archived references matched exactly. Its nodecpn-b04-04-01 reports Gold6230/Cascade Lake. The successful recovery calibration nodecpn-c04-18 reports Gold6330/Ice Lake. This difference motivates a hardware request; it does not isolate processor type from node load or prove that newer hardware will finish the finest step.
+
+General-compute is capped at72hours. Account associations were inspected; no lab-specific smuldoon faculty partition was found. Industry partitions list longer times but the account did not list industry QOS, so no unsupported longer request was made.
+
+Pending array tasks2and4 now require CPU-Gold-6448Y (Sapphire Rapids), verified by scontrol. Only pending jobs were changed. The stopped task0 gets a separately recorded retry using the same scientific workers, same72hour request, same2x gate and exact reference checks. New output sapphire_pair_0_20261013 preserves the refusal folder. Retry code requires prior budget_insufficient, zero scientific completions and no prior scientific-launch log directory, and retains the same per-task lock. All15controller tests pass, including these refusal/running/scope guards. A new versioned controller is uploaded under a separate filename so active and already-queued controllers are not replaced. This is an execution amendment, not a convergence result or a guarantee of successful capacity screening.
