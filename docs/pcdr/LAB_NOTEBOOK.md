@@ -1101,3 +1101,7 @@ Located the user-downloaded CCR_smaller_pilot_results.zip in repository root. Fo
 ## 10 October — four-trial allocation package
 
 User authorized8cores,92GB,72hours for the first fixed-seed four full trials, separate from Monday16core reservation. Created prospective execution wrapper with same archived simulator/plan,2reference and4concurrent capacity prefixes, four scientific workers,20GBaddress cap each,70hour/Slurm-minus15minute bound, owned-process cleanup and no-overwrite locks. Final38tests pass; package source/hash verification complete. No remote launch. Release and limits in FOUR_TRIAL_RUN_20261010.md and evidence/2026-10-10/four_trial/release.json. Adviser-facing share copies remove preparation attribution banners as requested; original technical attribution/provenance retained.
+
+## 13 October — remaining fixed-pilot queue
+
+User authorized running further work and requesting future compute. Added a separate tested array controller for the five unstarted baseline/mode pairs in the frozen twelve-trial pilot. Fourteen local tests passed; versioned remote source/launcher hashes matched, Bash syntax and Slurm scheduling validation passed. Array26469967 accepted for five4CPU/64000MB/72hour tasks, concurrencyone, excluding the active recovery node. All five were pending at12:47UTC; no start/completion claim. Current recovery pair remained running. Original scientific criteria and frozen sources unchanged. See PILOT_QUEUE_20261013.md for exact pair selection and scheduling limitations. Implementation used Codex assistance.

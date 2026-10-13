@@ -6,6 +6,8 @@ The question is whether concentrated eigenvector supports of the signed v630 con
 
 ## Current starting points
 
+[Remaining pilot queue, 13 October](PILOT_QUEUE_20261013.md): array26469967 accepted for the five remaining baseline/lesion pairs in the original twelve-trial pilot. All five pending at12:47UTC, with unknown start times; one new pair at a time,4CPUs/64000MB/72hours per task, reference and capacity checks before full simulations. The existing recovery pair is excluded.
+
 [Smaller-step recovery, 13 October UTC](RECOVERY_PAIR_20261013.md): the10October four-worker controller stopped at its capacity gate with zero full trials launched. A separate two-worker recovery is now executing on the existing16-core allocation; both archived references matched exactly, the capacity gate passed, and the full baseline/lesion pair at0.00005ms is running as of13October12:39UTC. The pair retains the frozen scientific plan and criteria; convergence is not established.
 
 [Four-trial first-wave protocol, 10 October](FOUR_TRIAL_RUN_20261010.md): original8-core/92-GB/72-hour package and execution design. Its all-four scheduling gate refused launch; use the recovery record above for current execution status.
