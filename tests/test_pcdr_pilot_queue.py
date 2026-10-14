@@ -105,7 +105,7 @@ def controller(tmp_path, monkeypatch):
         monkeypatch.setenv(name, value)
     monkeypatch.setitem(sys.modules, 'fcntl', SimpleNamespace(LOCK_EX=1, LOCK_NB=2, flock=lambda *a: None))
     monkeypatch.setattr(pcdr_ccr_capacity, 'allocation', lambda: (4, 64000))
-    monkeypatch.setattr(queue.subprocess, 'check_output', lambda *a, **k: '3-00:00:00')
+    monkeypatch.setattr(queue.subprocess, 'check_output', lambda *a, **k: '1234_0|3-00:00:00')
     monkeypatch.setattr(pcdr_fine_ccr, 'checked', lambda *a: None)
     calls = []
     def batch(commands, directory, deadline, update):
@@ -157,3 +157,19 @@ def test_failed_reference_preserved(controller, monkeypatch):
     status = json.loads((root/'queued_pair_0_20261013/progress.json').read_text())
     assert status['status'] == 'failed_or_interrupted' and status['scientific_completed'] == 0
     assert (root/'CCR_queued_pair_0_20261013.zip').exists()
+
+
+def test_allocation_uses_exact_array_identity(monkeypatch):
+    def query(command, **kwargs):
+        assert command == ['squeue', '-h', '-r', '-j', '1234_3', '-o', '%i|%L']
+        return '1234_3|2-23:59:58\n'
+    monkeypatch.setattr(queue.subprocess, 'check_output', query)
+    assert queue.allocation_seconds('1234', 3) == 259198
+
+
+@pytest.mark.parametrize('rows', ['', '1234_2|3-00:00:00',
+    '1234_3|3-00:00:00\n1234_4|3-00:00:00', '1234_3|INVALID', '1234_3|0:00'])
+def test_allocation_rejects_missing_wrong_multiple_or_invalid_rows(monkeypatch, rows):
+    monkeypatch.setattr(queue.subprocess, 'check_output', lambda *a, **k: rows)
+    with pytest.raises(ValueError):
+        queue.allocation_seconds('1234', 3)

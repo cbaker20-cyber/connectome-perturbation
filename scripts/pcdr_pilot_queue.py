@@ -93,10 +93,24 @@ def output_folder(task, dt, attempt):
     return ROOT/f'sapphire_pair_{task}_20261013'
 
 
+def allocation_seconds(array_job, task):
+    from scripts.pcdr_resolution import seconds_left
+    identity = f'{array_job}_{task}'
+    rows = subprocess.check_output(
+        ['squeue', '-h', '-r', '-j', identity, '-o', '%i|%L'],
+        text=True, timeout=20).strip().splitlines()
+    # Querying the numeric parent can return every remaining array task.
+    if len(rows) != 1 or rows[0].split('|')[0].strip() != identity:
+        raise ValueError(f'Expected one allocation row for {identity}: {rows!r}')
+    remaining = seconds_left(rows[0].split('|', 1)[1].strip())
+    if remaining <= 0:
+        raise ValueError('Allocation has no time remaining')
+    return remaining
+
+
 def main():
     import fcntl
     from scripts.pcdr_ccr_capacity import allocation
-    from scripts.pcdr_resolution import seconds_left
     from scripts.pcdr_fine_ccr import checked
     task = int(os.environ['SLURM_ARRAY_TASK_ID'])
     job = os.environ['SLURM_JOB_ID']
@@ -110,8 +124,7 @@ def main():
     current = environment()
     if sys.version_info[:3] != (3, 11, 5) or current['packages'] != plan['packages']:
         raise ValueError('Environment differs from frozen study')
-    remaining = seconds_left(subprocess.check_output(
-        ['squeue', '-h', '-j', job, '-o', '%L'], text=True, timeout=20))
+    remaining = allocation_seconds(os.environ['SLURM_ARRAY_JOB_ID'], task)
     budget = min(70*3600, remaining-1200)
     if budget < 3600:
         raise ValueError('Insufficient allocation budget')
