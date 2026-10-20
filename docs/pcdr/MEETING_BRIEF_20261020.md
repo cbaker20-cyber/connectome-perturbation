@@ -4,7 +4,7 @@
 
 My original question is unchanged: do concentrated eigenvector supports of the materialization-630 Shiu matrix predict localized firing-rate responses to output lesions, beyond connectivity, strong connections and recruitment? The output-lesion footprint is the cell-by-cell change in firing rate between matched lesion and baseline runs.
 
-Since the last update, I have ten completed full-duration trials at smaller timesteps downloaded and checked. These results do not establish numerical convergence. One of three available comparisons from0.0001 to0.00005ms passes all individual criteria; neither of the two available comparisons from0.00005 to0.000025ms passes. The last seed's finest-step pair is missing locally, and its current CCR status is unverified.
+Since the last update, I have ten completed full-duration trials at smaller timesteps downloaded and checked. These results do not establish numerical convergence. One of three available comparisons from0.0001 to0.00005ms passes all individual criteria; neither of the two available comparisons from0.00005 to0.000025ms passes. CCR's completion record now confirms that the last seed's finest-step pair finished on 18 October at 15:01 UTC, with both processes returning zero. All 12 trials have therefore finished remotely; ten are locally verified. The final archive has not yet transferred successfully, so its numerical comparison remains unevaluated.
 
 ## Evidence to show
 
