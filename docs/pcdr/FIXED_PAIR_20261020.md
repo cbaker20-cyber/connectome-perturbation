@@ -34,3 +34,8 @@ Job 26566063 accepted and observed RUNNING on cpn-d02-06, 4 CPUs, 64000 MB, CPU-
 Transferred source from commit 1e35c14 matched SHA256: controller 5e7ba43fa9770c6e5e803cc20c94c768af271abb98b2b11c951e8447bce0da98; launcher fa3ffa23577865133f030d8fb168d3f3e346e82c701667136da393f477f2f597. Bash syntax passed. The test-only scheduler estimate differed from actual immediate start, so it was not used as a promise.
 
 Remote directory /user/cbaker4/connectome_four_trial; progress fixed_pair_20261020/progress.json; log fixed_pair_26566063.log; eventual archive CCR_fixed_pair_20261020.zip. Submission ID saved in fixed_pair_submission_20261020.txt. Do not resubmit. Thirty-minute follow-ups are active. Screenshot capture timed out; the returned terminal state confirmed the Slurm record.
+
+
+## 20 October, 16:02 UTC monitor
+
+Remote measurements report both reference prefixes complete and exact_reference=true (baseline 240.1014 seconds; mode 243.1660 seconds). The controller has advanced to capacity. Probe workers 3607117 and 3607119 started at 15:31:31 UTC and remained running at the check. Progress updated 16:00:19 UTC reports no error and zero completed scientific trials. No capacity decision exists yet. Slurm confirms job26566063 RUNNING on cpn-d02-06,4CPUs,62.50G,71h26m59s remaining. Full scientific launch is not yet confirmed. No new job or changed criterion.
