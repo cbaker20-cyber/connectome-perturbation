@@ -25,3 +25,12 @@ After the one pair, download and independently reconstruct the saved readouts, c
 ## Implementation validation
 
 Separate controller scripts/pcdr_fixed_pair.py and launcher scripts/pcdr_fixed_pair.sh reuse frozen simulator and owned-process runner. Five extension tests passed, covering exact spec preservation, wrong/missing pair rejection, capacity boundary and invalid measurements, exact allocation identity, and unknown prefix rejection. Together with three saved-readout tests, eight passed in0.71seconds. The new-step three tests passed separately as recorded above. No new full network result exists yet.
+
+
+## CCR submission — 20 October, 11:27 Eastern
+
+Job 26566063 accepted and observed RUNNING on cpn-d02-06, 4 CPUs, 64000 MB, CPU-Gold-6448Y, no requeue. Allocation starts 20 October 11:27:20 and ends 23 October 11:27:20 Eastern. Controller additionally limits work to at most 70 hours and reserves allocation time. This is a launched batch job, not yet a confirmed full scientific launch. Initial log shows module loading; progress.json was not yet present at the immediate startup checks.
+
+Transferred source from commit 1e35c14 matched SHA256: controller 5e7ba43fa9770c6e5e803cc20c94c768af271abb98b2b11c951e8447bce0da98; launcher fa3ffa23577865133f030d8fb168d3f3e346e82c701667136da393f477f2f597. Bash syntax passed. The test-only scheduler estimate differed from actual immediate start, so it was not used as a promise.
+
+Remote directory /user/cbaker4/connectome_four_trial; progress fixed_pair_20261020/progress.json; log fixed_pair_26566063.log; eventual archive CCR_fixed_pair_20261020.zip. Submission ID saved in fixed_pair_submission_20261020.txt. Do not resubmit. Thirty-minute follow-ups are active. Screenshot capture timed out; the returned terminal state confirmed the Slurm record.
