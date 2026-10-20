@@ -1,0 +1,14 @@
+Subject: Smaller-timestep results and questions for our meeting
+
+Hi James and Dr. Muldoon,
+
+I followed up on the smaller-timestep idea. I now have ten completed full-duration baseline/lesion trials checked locally, with the last pair still missing from my local results. The question is still whether eigenvector supports predict localized output-lesion footprints beyond the comparison explanations.
+
+The results are mixed: one seed's differences decrease with smaller steps but remain above the tolerances; another passes one halving and fails the next. The available comparisons therefore do not establish convergence. The saved-input, output-hash, rate/count, reference-reproduction and refractory checks passed for the downloaded trials.
+
+The attached brief separates these new results from the earlier local replay and pathway experiments, which were diagnostic rather than convergence evidence.
+
+I forgot to ask: what level of numerical agreement do we need for the original footprint claim, and would one more fixed-case timestep comparison actually change our decision? With about a week remaining, I'd like to agree on a stopping rule and the strongest claim the completed evidence supports.
+
+Thanks,
+Copeland
