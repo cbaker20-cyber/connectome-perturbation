@@ -54,7 +54,7 @@ def test_later_memory_peak_can_prevent_launch():
     assert not scientific_gate(m,1e9,32000)['allowed']
 
 
-@pytest.mark.parametrize('dt',[.00005,.000025])
+@pytest.mark.parametrize('dt',[.00005,.000025,.0000125])
 def test_new_steps_preserve_physical_input_times_and_delay(dt):
     ids=['720575940643867296','720575940630868793']
     events=pd.DataFrame({'tick':[0,1,29],'flywire_id':[ids[0],ids[1],ids[0]]})
@@ -93,7 +93,7 @@ def test_reference_prefix_keeps_boundary_and_empty_cases(tmp_path):
     compare_prefix(spikes.iloc[:0],delivered.iloc[:0],tmp_path,.01,.0001)
 
 
-@pytest.mark.parametrize('dt',[.00005,.000025])
+@pytest.mark.parametrize('dt',[.00005,.000025,.0000125])
 def test_new_steps_against_unwindowed_tiny_network(tmp_path,dt):
     from scripts.pcdr_followup_sim import simulate as reference
     comp=tmp_path/'comp.csv';con=tmp_path/'con.parquet'
@@ -111,7 +111,7 @@ def test_new_steps_against_unwindowed_tiny_network(tmp_path,dt):
         pd.testing.assert_frame_equal(a.astype({'neuron_index':'int64'}),b.astype({'neuron_index':'int64'}),check_exact=True)
 
 
-@pytest.mark.parametrize('dt',[.00005,.000025])
+@pytest.mark.parametrize('dt',[.00005,.000025,.0000125])
 def test_linear_solution_new_steps(dt):
     import brian2 as b
     b.start_scope();b.prefs.codegen.target='numpy';b.defaultclock.dt=dt*b.ms

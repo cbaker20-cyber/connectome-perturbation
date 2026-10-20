@@ -1,5 +1,6 @@
 """Check saved reference prefixes, process exits and refractory intervals."""
 import io
+import argparse
 import json
 from pathlib import Path
 import zipfile
@@ -10,8 +11,8 @@ from pcdr_verify_downloaded_pairs import digest, require
 ROOT=Path(__file__).resolve().parents[1]
 
 
-def main():
-    folder=ROOT/'results/pcdr/pairs_verified_20261019'
+def main(folder=None):
+    folder=Path(folder) if folder is not None else ROOT/'results/pcdr/pairs_verified_20261019'
     prior=json.loads((folder/'verification.json').read_text())
     report=[]
     for record in prior['archives']:
@@ -52,4 +53,6 @@ def main():
 
 
 if __name__=='__main__':
-    main()
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--folder',type=Path)
+    main(parser.parse_args().folder)
