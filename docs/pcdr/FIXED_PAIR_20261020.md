@@ -39,3 +39,12 @@ Remote directory /user/cbaker4/connectome_four_trial; progress fixed_pair_202610
 ## 20 October, 16:02 UTC monitor
 
 Remote measurements report both reference prefixes complete and exact_reference=true (baseline 240.1014 seconds; mode 243.1660 seconds). The controller has advanced to capacity. Probe workers 3607117 and 3607119 started at 15:31:31 UTC and remained running at the check. Progress updated 16:00:19 UTC reports no error and zero completed scientific trials. No capacity decision exists yet. Slurm confirms job26566063 RUNNING on cpn-d02-06,4CPUs,62.50G,71h26m59s remaining. Full scientific launch is not yet confirmed. No new job or changed criterion.
+
+
+## Capacity refusal — 20 October, checked 16:32 UTC
+
+Job26566063 ended at16:02:56UTC with controller status `budget_insufficient`. Both capacity probes completed with returncode0. The unchanged screen required376747.813026seconds (104.6522hours), versus249867.894152seconds (69.4077hours) remaining. The screen is twice short-prefix scaling, not a measured full-duration runtime. Zero scientific trials launched or completed; no new convergence comparison can be calculated. Slurm accounting shows COMPLETED, exit0:0, elapsed00:35:37: this reflects successful controlled refusal, not completed science.
+
+Remote archive CCR_fixed_pair_20261020.zip exists (39960bytes approximately from UI39.96kB). Observed remote SHA256 c411a4d2c24a11e873a453a2b28639288b85091781cf67bce0cd48947ef3f10e. Browser download was attempted twice (including a timed-out downloadMedia); no new local file was observed at this check. Independent local archive verification remains outstanding. Earlier references were reported exact remotely; do not conflate that with independent local verification of this archive.
+
+No retry or criterion change. The authorized72hour configuration did not pass its capacity requirement. Monitoring is paused because the job ended and capacity prevents the authorized full-pair execution. A longer allocation or another execution design would require a separately documented decision; neither has been requested or launched. The original12-trial analysis and its failed finest comparisons are unchanged.
