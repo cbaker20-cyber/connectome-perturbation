@@ -43,4 +43,6 @@ Questions I forgot to ask: What level of numerical agreement is needed for the o
 
 ## Records
 
+Update21October: the separate checkpoint/restart simulator passed18 local tests in250.41seconds. Small-network baseline and lesion outputs matched the frozen uninterrupted simulator exactly after two fresh-process restarts at0.0001 and0.0000125ms. Corruption, changed inputs/configuration, interrupted pointer updates and conflicting ownership were tested. This is execution validation, not convergence evidence. Full-network equivalence, memory/storage measurements and the segment controller remain unfinished; no new scientific pair has started. See CHECKPOINT_VALIDATION_20261021.md for the preserved failed attempt, environment differences and remaining checks.
+
 Detailed numerical table and definitions: SMALLER_STEP_RESULTS_20261019.md. Local comparison data: results/pcdr/pairs_verified_20261020/comparisons.csv. Supplemental checks: supplement_20261020.json in the same folder. Earlier diagnostic context: MEETING_BRIEF_20261010.md and the records linked there. No new scientific simulation was launched for this brief.

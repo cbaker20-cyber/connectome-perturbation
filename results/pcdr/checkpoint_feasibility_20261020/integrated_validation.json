@@ -1,0 +1,36 @@
+{
+  "status": "local_validation_passed",
+  "tests": 18,
+  "failures": 0,
+  "seconds": 250.41,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "packages": {
+    "brian2": "2.9.0",
+    "numpy": "1.26.4",
+    "pandas": "3.0.3"
+  },
+  "sources": {
+    "scripts/pcdr_checkpoint_sim.py": "b0df11e0d000b6e758edbaba708220aa2c8544ae3a0d90b1010b0e83ec72f77c",
+    "tests/test_pcdr_checkpoint.py": "95f9514fb4b80fcae53ee2c61382aafc8380e45d45c7272ab1e7ec4598413be7",
+    "scripts/pcdr_fine_sim.py": "8b648a4ad4498127275a7c2bb56e1b748812a7f38b7387be088257d20ece480c",
+    "model.py": "c74b2f9750a3c0d36c4a06ba4596fce1be41db5ab57a6be701648c95c5bbdbed"
+  },
+  "evidence": {
+    "integrated_tests.log": "1e31d06cee74f64ed530c64a565e85935351044fa856859f023a2d3048fc14a3",
+    "integrated_tests.xml": "3ee0932e60d860f7a885e6c9042d9115cd12fd7791a7ad0bf6fb9e9dfaefa795",
+    "integrated_tests_v2.log": "a2ca4dcace184ff77b32edc2137cb753db8df058bd4fcf47c52b37303189dc56",
+    "integrated_tests_v2.xml": "bf6ec509851d64fd643a2f10b85871701b1e067b4e53a50a2a8aedaf94c72119",
+    "pointer_failure_tests.log": "ad059d86d5178ac0b925a57f6e34b3bacb4eba1aa9ec7193ab2a9630f3c6ce41",
+    "abrupt_exit_tests.log": "b8b861185cdc64618dce79aba8d54503e86452888da2a8da06ee4508639300bd",
+    "integrated_tests_v3.log": "b7933a43f40bd815509c6020e3ccab9208a6627f5069c1fb79fead70460369de",
+    "integrated_tests_v3.xml": "e59931c69f9ca27b8b457fbdcef50ea057ec953f3e15e2c7261691e5d2946066"
+  },
+  "preserved_initial_failure": "12 failed, 3 passed; Windows fsync read-only handle error; corrected before v2",
+  "limitations": [
+    "tiny actual-model network, not full-network capacity validation",
+    "CCR Python3.11.5 environment still requires equivalence checks",
+    "draft segment worker/controller not released",
+    "no new convergence result"
+  ]
+}
